@@ -46,12 +46,13 @@ type RatingInfo = {
 };
 
 const MAX_RATING = 5000; // max rating of Codeforces?
+const NO_RATING = -1;
 
 const blackRating: RatingInfo = {
   type: "Black",
   colorCode: "#000000",
-  lowerBound: -1,
-  upperBound: -1,
+  lowerBound: NO_RATING,
+  upperBound: NO_RATING,
   title: "No Data",
 };
 
@@ -136,7 +137,7 @@ const deepRedRating: RatingInfo = {
 };
 
 export const getColorCodeFromRating = (
-  rating: number | undefined | undefined
+  rating: number | undefined | null
 ): ColorCode => {
   if (rating === null || rating === undefined) {
     return blackRating.colorCode;
