@@ -1,5 +1,10 @@
 import React from "react";
-import { css } from "@emotion/react";
+import { css, jsx } from "@emotion/react";
+
+const circle = css({
+  fontSize: "30px",
+  color: "red",
+});
 
 type Props = {
   rating?: number;
@@ -7,5 +12,5 @@ type Props = {
 
 export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
   const { rating } = props;
-  return <span></span>;
+  return <div css={circle}>a</div>;
 };
