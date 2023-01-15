@@ -38,11 +38,11 @@ type Title =
   | "No Data"; // Black
 
 type RatingInfo = {
-  type: RatingColor;
-  colorCode: ColorCode;
-  lowerBound: number;
-  upperBound: number;
-  title: Title;
+  readonly type: RatingColor;
+  readonly colorCode: ColorCode;
+  readonly lowerBound: number;
+  readonly upperBound: number;
+  readonly title: Title;
 };
 
 const MAX_RATING = 5000; // max rating of Codeforces?
@@ -165,7 +165,7 @@ export const getColorCodeFromRating = (
 };
 
 // To Do
-export const calcFillRatio = (rating: number | undefined) => {
+export const calcFillPercent = (rating: number | undefined) => {
   if (rating == null) {
     return 1;
   } else if (rating <= grayRating.upperBound) {

@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <TopcoderLikeCircle />
+      <TopcoderLikeCircle displayPurpose="difficulty" rating={2300} />
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src="/vite.svg" className="logo" alt="Vite logo" />
