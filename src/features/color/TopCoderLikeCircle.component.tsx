@@ -1,6 +1,6 @@
 import React from "react";
 import { Tooltip } from "@mui/material";
-import { css } from "@emotion/react";
+import { css, useTheme, ThemeColor } from "@emotion/react";
 import {
   getColorCodeFromRating,
   calcFillPercent,
@@ -13,8 +13,8 @@ const circle = css({
   borderRadius: "50%", // circle shape
 });
 
-// rating means "A person's rating,
-// difficulty means the difficulty of a problem"
+// 'rating' means "A person's rating"
+// 'difficulty' means the "Difficulty of a problem"
 type DisplayPurpose = "rating" | "difficulty";
 type Props = {
   displayPurpose: DisplayPurpose;
@@ -33,6 +33,8 @@ export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
     height = "0.8rem", // default size
   } = props;
 
+  const theme = useTheme();
+
   const [color, fillPercent] = [
     getColorCodeFromRating(rating),
     calcFillPercent(rating),
@@ -42,8 +44,7 @@ export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
     displayPurpose === "rating"
       ? `Rating: ${rating ?? "?"}`
       : displayPurpose === "difficulty"
-      ? `Difficulty: ${rating ?? "?"},
-      Solved by ${solvedCount ?? "?"}`
+      ? `Difficulty: ${rating ?? "?"}, Solved by ${solvedCount ?? "?"}`
       : "";
 
   return (
@@ -52,7 +53,6 @@ export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
         css={[
           circle,
           {
-            color: color,
             borderColor: color,
             background: `border-box linear-gradient(to top,
              ${color} ${fillPercent * 100}%,

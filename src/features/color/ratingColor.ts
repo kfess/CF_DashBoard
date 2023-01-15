@@ -1,3 +1,5 @@
+import { Theme } from "@features/color/@types/theme";
+
 type RatingColor =
   | "Black"
   | "Gray"
@@ -11,6 +13,7 @@ type RatingColor =
   | "Red"
   | "DeepRed";
 
+// for theme color (base, purple, green)
 type ColorCode =
   | "#000000" // Black
   | "#CCCCCC" // Gray
@@ -23,6 +26,20 @@ type ColorCode =
   | "#FF7777" // LightRed
   | "#FF3333" // Red
   | "#AA0100"; // DeepRed
+
+// for therme color (dark)
+type DarkColorCode =
+  | "#202020" // Black
+  | "#CCCCCC" // Gray // need Change!
+  | "#76DEBB" // Green // need Change!
+  | "#76FF77" // Cyan // need Change!
+  | "#AAAAFF" // Blue // need Change!
+  | "#FF88FF" // Violet // need Change!
+  | "#FFCC87" // LightOrange // need Change!
+  | "#FFBB55" // DeepOrange // need Change!
+  | "#FF7777" // LightRed // need Change!
+  | "#FF3333" // Red // need Change!
+  | "#AA0100"; // DeepRed // need Change!
 
 type Title =
   | "Legendary Grandmaster" // DeepRed
@@ -40,6 +57,7 @@ type Title =
 type RatingInfo = {
   readonly type: RatingColor;
   readonly colorCode: ColorCode;
+  readonly darkColorCode: DarkColorCode;
   readonly lowerBound: number;
   readonly upperBound: number;
   readonly title: Title;
@@ -51,6 +69,7 @@ const NO_RATING = -1;
 const blackRating: RatingInfo = {
   type: "Black",
   colorCode: "#000000",
+  darkColorCode: "#202020",
   lowerBound: NO_RATING,
   upperBound: NO_RATING,
   title: "No Data",
@@ -59,6 +78,7 @@ const blackRating: RatingInfo = {
 const grayRating: RatingInfo = {
   type: "Gray",
   colorCode: "#CCCCCC",
+  darkColorCode: "#CCCCCC",
   lowerBound: 0,
   upperBound: 1199,
   title: "Newbie",
@@ -67,6 +87,7 @@ const grayRating: RatingInfo = {
 const greenRating: RatingInfo = {
   type: "Green",
   colorCode: "#76DEBB",
+  darkColorCode: "#76DEBB",
   lowerBound: 1200,
   upperBound: 1399,
   title: "Pupil",
@@ -75,6 +96,7 @@ const greenRating: RatingInfo = {
 const cyanRating: RatingInfo = {
   type: "Cyan",
   colorCode: "#76FF77",
+  darkColorCode: "#76FF77",
   lowerBound: 1400,
   upperBound: 1599,
   title: "Specialist",
@@ -83,6 +105,7 @@ const cyanRating: RatingInfo = {
 const blueRating: RatingInfo = {
   type: "Blue",
   colorCode: "#AAAAFF",
+  darkColorCode: "#AAAAFF",
   lowerBound: 1600,
   upperBound: 1899,
   title: "Expert",
@@ -91,6 +114,7 @@ const blueRating: RatingInfo = {
 const violetRating: RatingInfo = {
   type: "Violet",
   colorCode: "#FF88FF",
+  darkColorCode: "#FF88FF",
   lowerBound: 1900,
   upperBound: 2099,
   title: "Candidate Master",
@@ -99,6 +123,7 @@ const violetRating: RatingInfo = {
 const lightOrangeRating: RatingInfo = {
   type: "LightOrange",
   colorCode: "#FFCC87",
+  darkColorCode: "#FFCC87",
   lowerBound: 2100,
   upperBound: 2299,
   title: "Master",
@@ -107,6 +132,7 @@ const lightOrangeRating: RatingInfo = {
 const deepOrangeRating: RatingInfo = {
   type: "DeepOrange",
   colorCode: "#FFBB55",
+  darkColorCode: "#FFBB55",
   lowerBound: 2300,
   upperBound: 2399,
   title: "International Master",
@@ -115,6 +141,7 @@ const deepOrangeRating: RatingInfo = {
 const lightRedRating: RatingInfo = {
   type: "LightRed",
   colorCode: "#FF7777",
+  darkColorCode: "#FF7777",
   lowerBound: 2400,
   upperBound: 2599,
   title: "Grandmaster",
@@ -123,6 +150,7 @@ const lightRedRating: RatingInfo = {
 const redRating: RatingInfo = {
   type: "Red",
   colorCode: "#FF3333",
+  darkColorCode: "#FF3333",
   lowerBound: 2600,
   upperBound: 2999,
   title: "International Grandmaster",
@@ -131,36 +159,62 @@ const redRating: RatingInfo = {
 const deepRedRating: RatingInfo = {
   type: "DeepRed",
   colorCode: "#AA0100",
+  darkColorCode: "#AA0100",
   lowerBound: 3000,
   upperBound: MAX_RATING,
   title: "Legendary Grandmaster",
 };
 
+const isDarkThemeColor = (themeColor: Theme) => themeColor === "dark";
+
 export const getColorCodeFromRating = (
-  rating: number | undefined
-): ColorCode => {
+  rating: number | undefined,
+  themeColor: Theme = "base" // default theme
+): ColorCode | DarkColorCode => {
   if (rating == null) {
-    return blackRating.colorCode;
+    return !isDarkThemeColor(themeColor)
+      ? blackRating.colorCode
+      : blackRating.darkColorCode;
   } else if (rating <= grayRating.upperBound) {
-    return grayRating.colorCode;
+    return !isDarkThemeColor(themeColor)
+      ? grayRating.colorCode
+      : grayRating.darkColorCode;
   } else if (rating <= greenRating.upperBound) {
-    return greenRating.colorCode;
+    return !isDarkThemeColor(themeColor)
+      ? greenRating.colorCode
+      : greenRating.darkColorCode;
   } else if (rating <= cyanRating.upperBound) {
-    return cyanRating.colorCode;
+    return !isDarkThemeColor(themeColor)
+      ? cyanRating.colorCode
+      : cyanRating.darkColorCode;
   } else if (rating <= blueRating.upperBound) {
-    return blueRating.colorCode;
+    return !isDarkThemeColor(themeColor)
+      ? blueRating.colorCode
+      : blueRating.darkColorCode;
   } else if (rating <= violetRating.upperBound) {
-    return violetRating.colorCode;
+    return !isDarkThemeColor(themeColor)
+      ? violetRating.colorCode
+      : violetRating.darkColorCode;
   } else if (rating <= lightOrangeRating.upperBound) {
-    return lightOrangeRating.colorCode;
+    return !isDarkThemeColor(themeColor)
+      ? lightOrangeRating.colorCode
+      : lightOrangeRating.darkColorCode;
   } else if (rating <= deepOrangeRating.upperBound) {
-    return deepOrangeRating.colorCode;
+    return !isDarkThemeColor(themeColor)
+      ? deepOrangeRating.colorCode
+      : deepOrangeRating.darkColorCode;
   } else if (rating <= lightRedRating.upperBound) {
-    return lightRedRating.colorCode;
+    return !isDarkThemeColor(themeColor)
+      ? lightRedRating.colorCode
+      : lightRedRating.darkColorCode;
   } else if (rating <= redRating.upperBound) {
-    return redRating.colorCode;
+    return !isDarkThemeColor(themeColor)
+      ? redRating.colorCode
+      : redRating.darkColorCode;
   } else {
-    return deepRedRating.colorCode;
+    return !isDarkThemeColor(themeColor)
+      ? deepRedRating.colorCode
+      : deepRedRating.darkColorCode;
   }
 };
 
