@@ -1,21 +1,21 @@
-import { ThemeColor } from "@emotion/react";
+import { createTheme, Theme } from "@mui/material/styles";
 
-export const baseThemeColor: ThemeColor = {
+export const baseThemeColor = createTheme({
   themeColor: "base",
-  colors: { fontColor: "", lineColor: "", backgroundColor: "white" },
-};
+  colors: { fontColor: "red", lineColor: "", backgroundColor: "white" },
+});
 
-export const purpleThemeColor: ThemeColor = {
+export const purpleThemeColor = createTheme({
   themeColor: "purple",
   colors: { fontColor: "", lineColor: "", backgroundColor: "white" },
-};
+});
 
-export const greenThemeColor: ThemeColor = {
+export const greenThemeColor = createTheme({
   themeColor: "green",
   colors: { fontColor: "", lineColor: "", backgroundColor: "white" },
-};
+});
 
-export const darkThemeColor: ThemeColor = {
+export const darkThemeColor = createTheme({
   themeColor: "dark",
   colors: { fontColor: "", lineColor: "", backgroundColor: "dark" },
-};
+});

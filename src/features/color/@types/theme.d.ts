@@ -1,7 +1,7 @@
-// This file is required for the override of emotion Theme
-import "@emotion/react";
+// This file is required for the override of mui Theme
+import "@mui/material/styles";
 
-export type Theme = "base" | "purple" | "green" | "dark";
+export type ThemeColor = "base" | "purple" | "green" | "dark";
 type Colors = {
   fontColor: string;
   lineColor: string;
@@ -13,9 +13,14 @@ type Colors = {
   //   stageColor: string // add when needed
 };
 
-declare module "@emotion/react" {
-  export interface ThemeColor {
-    themeColor: Theme;
+declare module "@mui/material/styles" {
+  interface Theme {
+    themeColor: ThemeColor;
     colors: Colors;
+  }
+
+  interface ThemeOptions {
+    themeColor?: ThemeColor;
+    colors?: Colors;
   }
 }

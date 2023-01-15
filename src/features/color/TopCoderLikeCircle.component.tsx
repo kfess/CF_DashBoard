@@ -1,6 +1,7 @@
 import React from "react";
-import { Tooltip } from "@mui/material";
-import { css, useTheme, ThemeColor } from "@emotion/react";
+import Tooltip from "@mui/material/Tooltip";
+import { css } from "@emotion/react";
+import { useTheme } from "@mui/material/styles";
 import {
   getColorCodeFromRating,
   calcFillPercent,
@@ -34,9 +35,8 @@ export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
   } = props;
 
   const theme = useTheme();
-
   const [color, fillPercent] = [
-    getColorCodeFromRating(rating),
+    getColorCodeFromRating(rating, theme.themeColor),
     calcFillPercent(rating),
   ];
 
