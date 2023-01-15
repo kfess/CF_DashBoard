@@ -14,8 +14,8 @@ type RatingColor =
 type ColorCode =
   | "#000000" // Black
   | "#CCCCCC" // Gray
-  | "#76FF77" // Cyan
   | "#76DEBB" // Green
+  | "#76FF77" // Cyan
   | "#AAAAFF" // Blue
   | "#FF88FF" // Violet
   | "#FFCC87" // LightOrange
@@ -66,7 +66,7 @@ const grayRating: RatingInfo = {
 
 const greenRating: RatingInfo = {
   type: "Green",
-  colorCode: "#CCCCCC",
+  colorCode: "#76DEBB",
   lowerBound: 1200,
   upperBound: 1399,
   title: "Pupil",
@@ -74,7 +74,7 @@ const greenRating: RatingInfo = {
 
 const cyanRating: RatingInfo = {
   type: "Cyan",
-  colorCode: "#CCCCCC",
+  colorCode: "#76FF77",
   lowerBound: 1400,
   upperBound: 1599,
   title: "Specialist",
@@ -82,7 +82,7 @@ const cyanRating: RatingInfo = {
 
 const blueRating: RatingInfo = {
   type: "Blue",
-  colorCode: "#CCCCCC",
+  colorCode: "#AAAAFF",
   lowerBound: 1600,
   upperBound: 1899,
   title: "Expert",
@@ -90,7 +90,7 @@ const blueRating: RatingInfo = {
 
 const violetRating: RatingInfo = {
   type: "Violet",
-  colorCode: "#CCCCCC",
+  colorCode: "#FF88FF",
   lowerBound: 1900,
   upperBound: 2099,
   title: "Candidate Master",
@@ -98,7 +98,7 @@ const violetRating: RatingInfo = {
 
 const lightOrangeRating: RatingInfo = {
   type: "LightOrange",
-  colorCode: "#CCCCCC",
+  colorCode: "#FFCC87",
   lowerBound: 2100,
   upperBound: 2299,
   title: "Master",
@@ -106,7 +106,7 @@ const lightOrangeRating: RatingInfo = {
 
 const deepOrangeRating: RatingInfo = {
   type: "DeepOrange",
-  colorCode: "#CCCCCC",
+  colorCode: "#FFBB55",
   lowerBound: 2300,
   upperBound: 2399,
   title: "International Master",
@@ -114,7 +114,7 @@ const deepOrangeRating: RatingInfo = {
 
 const lightRedRating: RatingInfo = {
   type: "LightRed",
-  colorCode: "#CCCCCC",
+  colorCode: "#FF7777",
   lowerBound: 2400,
   upperBound: 2599,
   title: "Grandmaster",
@@ -122,7 +122,7 @@ const lightRedRating: RatingInfo = {
 
 const redRating: RatingInfo = {
   type: "Red",
-  colorCode: "#CCCCCC",
+  colorCode: "#FF3333",
   lowerBound: 2600,
   upperBound: 2999,
   title: "International Grandmaster",
@@ -130,16 +130,16 @@ const redRating: RatingInfo = {
 
 const deepRedRating: RatingInfo = {
   type: "DeepRed",
-  colorCode: "#CCCCCC",
+  colorCode: "#AA0100",
   lowerBound: 3000,
   upperBound: MAX_RATING,
   title: "Legendary Grandmaster",
 };
 
 export const getColorCodeFromRating = (
-  rating: number | undefined | null
+  rating: number | undefined
 ): ColorCode => {
-  if (rating === null || rating === undefined) {
+  if (rating == null) {
     return blackRating.colorCode;
   } else if (rating <= grayRating.upperBound) {
     return grayRating.colorCode;
@@ -147,7 +147,7 @@ export const getColorCodeFromRating = (
     return greenRating.colorCode;
   } else if (rating <= cyanRating.upperBound) {
     return cyanRating.colorCode;
-  } else if (rating <= blackRating.upperBound) {
+  } else if (rating <= blueRating.upperBound) {
     return blueRating.colorCode;
   } else if (rating <= violetRating.upperBound) {
     return violetRating.colorCode;
@@ -161,5 +161,30 @@ export const getColorCodeFromRating = (
     return redRating.colorCode;
   } else {
     return deepRedRating.colorCode;
+  }
+};
+
+// To Do
+export const calcFillRatio = (rating: number | undefined) => {
+  if (rating == null) {
+    return 1;
+  } else if (rating <= grayRating.upperBound) {
+    return (rating - 800) / 400;
+  } else if (rating < greenRating.upperBound) {
+    return 1 - (1400 - rating) / 200;
+  } else if (rating < cyanRating.upperBound) {
+    return 1 - (1600 - rating) / 200;
+  } else if (rating < blueRating.upperBound) {
+    return 1 - (1900 - rating) / 300;
+  } else if (rating < violetRating.upperBound) {
+    return 1 - (2100 - rating) / 200;
+  } else if (rating < lightOrangeRating.upperBound) {
+    return 1 - (2300 - rating) / 300;
+  } else if (rating < deepOrangeRating.upperBound) {
+    return 1 - (2400 - rating) / 300;
+  } else if (rating < deepRedRating.upperBound) {
+    return 1 - (2600 - rating) / 200;
+  } else {
+    return 1;
   }
 };

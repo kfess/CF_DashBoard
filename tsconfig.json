@@ -17,12 +17,12 @@
     "jsx": "react-jsx",
 
     // optional setting
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@features/*": ["src/features/*"],
-      "@pages/*": ["src/pages/*"],
-      "@helpers/*": ["src/helpers/*"],
-      "@stories/*": ["src/stories/*"]
+      "@features/*": ["features/*"],
+      "@pages/*": ["pages/*"],
+      "@helpers/*": ["helpers/*"],
+      "@stories/*": ["stories/*"]
     }
   },
   "include": ["src"],
