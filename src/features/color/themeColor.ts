@@ -1,21 +1,21 @@
-import { createTheme, Theme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
-export const baseThemeColor = createTheme({
+export const baseTheme = createTheme({
   themeColor: "base",
-  colors: { fontColor: "red", lineColor: "", backgroundColor: "white" },
+  colors: { fontColor: "green", lineColor: "", backgroundColor: "white" },
 });
 
-export const purpleThemeColor = createTheme({
+export const purpleTheme = createTheme({
   themeColor: "purple",
   colors: { fontColor: "", lineColor: "", backgroundColor: "white" },
 });
 
-export const greenThemeColor = createTheme({
+export const greenTheme = createTheme({
   themeColor: "green",
   colors: { fontColor: "", lineColor: "", backgroundColor: "white" },
 });
 
-export const darkThemeColor = createTheme({
+export const darkTheme = createTheme({
   themeColor: "dark",
-  colors: { fontColor: "", lineColor: "", backgroundColor: "dark" },
+  colors: { fontColor: "red", lineColor: "", backgroundColor: "dark" },
 });

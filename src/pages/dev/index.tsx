@@ -1,12 +1,13 @@
 import { ReactNode } from "react";
-import { ThemeProvider } from "@mui/material/styles";
-import { baseThemeColor } from "@features/color/themeColor";
-import { Button } from "@mui/material";
+import { ThemeContextProvider } from "@features/color/themeColor.hook";
+import { TopcoderLikeCircle } from "@features/color/TopCoderLikeCircle.component";
 
 export const DevContainer = ({ children }: { children: ReactNode }) => {
   return (
-    <>
-      <ThemeProvider theme={baseThemeColor}>{children}</ThemeProvider>
-    </>
+    <div>
+      <ThemeContextProvider>
+        <TopcoderLikeCircle displayPurpose="rating" rating={undefined} />
+      </ThemeContextProvider>
+    </div>
   );
 };

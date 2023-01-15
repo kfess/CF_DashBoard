@@ -1,4 +1,4 @@
-import { Theme } from "@features/color/@types/theme";
+import { ThemeColor } from "@features/color/@types/theme";
 
 type RatingColor =
   | "Black"
@@ -165,11 +165,11 @@ const deepRedRating: RatingInfo = {
   title: "Legendary Grandmaster",
 };
 
-const isDarkThemeColor = (themeColor: Theme) => themeColor === "dark";
+const isDarkThemeColor = (themeColor: ThemeColor) => themeColor === "dark";
 
 export const getColorCodeFromRating = (
   rating: number | undefined,
-  themeColor: Theme = "base" // default theme
+  themeColor: ThemeColor = "base" // default theme
 ): ColorCode | DarkColorCode => {
   if (rating == null) {
     return !isDarkThemeColor(themeColor)
