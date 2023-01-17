@@ -28,27 +28,49 @@ type OtherField =
   | "Tools"
   | "Setting"
   | "User Guide"
-  | "Faq"
+  | "FAQ"
   | "Feedback"
-  | "Send A Tip";
+  | "Send a Tip";
 
 type Field = MainField | SubField | OtherField;
 
-type Item = { field: Field[number]; link: string; icon: JSX.Element };
+export type Item = { field: Field[number]; link: string; icon: JSX.Element };
 
-export const listItems: Item[] = [
-  { field: "Contests", link: "/", icon: <RiBookLine /> },
-  { field: "Problems", link: "/problems", icon: <BsPencil /> },
-  { field: "Achievement", link: "/achievement", icon: <BsTrophy /> },
-  { field: "Recommend", link: "/recommend", icon: <FiThumbsUp /> },
-  { field: "Bookmark", link: "/bookmarl", icon: <AiOutlineStar /> },
-  { field: "Submission", link: "/submission", icon: <ImTable /> },
-  { field: "Ranking", link: "/ranking", icon: <IoPodiumOutline /> },
-  { field: "Custom Contest", link: "/custom-contest", icon: <BiCustomize /> },
-  { field: "Api", link: "/api", icon: <AiOutlineApi /> },
-  { field: "Links", link: "Tools", icon: <AiOutlineTool /> },
-  { field: "Setting", link: "/setting", icon: <FiSettings /> },
-  { field: "User Guide", link: "user-guide", icon: <BiHelpCircle /> },
-  { field: "Faq", link: "/faq", icon: <RiQuestionAnswerLine /> },
-  { field: "Send A Tip", link: "send-a-tip", icon: <AiOutlineHeart /> },
-];
+export const mainListItems: readonly Item[] = [
+  { field: "Contests", link: "/", icon: <RiBookLine size="20px" /> },
+  { field: "Problems", link: "/problems", icon: <BsPencil size="20px" /> },
+] as const;
+
+export const subListItems: readonly Item[] = [
+  {
+    field: "Achievement",
+    link: "/achievement",
+    icon: <BsTrophy size="20px" />,
+  },
+  { field: "Recommend", link: "/recommend", icon: <FiThumbsUp size="20px" /> },
+  { field: "Bookmark", link: "/bookmark", icon: <AiOutlineStar size="20px" /> },
+  { field: "Submission", link: "/submission", icon: <ImTable size="20px" /> },
+  { field: "Ranking", link: "/ranking", icon: <IoPodiumOutline size="20px" /> },
+  {
+    field: "Custom Contest",
+    link: "/custom-contest",
+    icon: <BiCustomize size="20px" />,
+  },
+] as const;
+
+export const otherListItems: readonly Item[] = [
+  { field: "Api", link: "/api", icon: <AiOutlineApi size="20px" /> },
+  { field: "Links", link: "Tools", icon: <AiOutlineTool size="20px" /> },
+  { field: "Setting", link: "/setting", icon: <FiSettings size="20px" /> },
+  {
+    field: "User Guide",
+    link: "user-guide",
+    icon: <BiHelpCircle size="20px" />,
+  },
+  { field: "FAQ", link: "/faq", icon: <RiQuestionAnswerLine size="20px" /> },
+  {
+    field: "Send a Tip",
+    link: "send-a-tip",
+    icon: <AiOutlineHeart size="20px" />,
+  },
+] as const;

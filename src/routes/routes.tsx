@@ -1,11 +1,13 @@
 import { createBrowserRouter, Outlet, Navigate } from "react-router-dom";
+import { SideBar } from "@features/layout/components/sidebar";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        <div>Layout (Header, Side Bar, Footer)</div>
+        <div>Layout (Header, Side Bar, Footer!)</div>
+        <SideBar />
         <Outlet />
       </>
     ),
