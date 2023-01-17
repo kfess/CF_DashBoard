@@ -12,6 +12,8 @@ export default defineConfig({
       "@pages": path.resolve(__dirname, "src/pages/"),
       "@helpers": path.resolve(__dirname, "src/helpers/"),
       "@stories": path.resolve(__dirname, "src/stories/"),
+      "@constants": path.resolve(__dirname, "src/constants/"),
+      "@routes": path.resolve(__dirname, "src/routes/"),
     },
   },
 });

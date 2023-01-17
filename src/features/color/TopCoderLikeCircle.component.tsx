@@ -1,7 +1,6 @@
 import React from "react";
-import Tooltip from "@mui/material/Tooltip";
 import { css } from "@emotion/react";
-// import { useTheme } from "@mui/material/styles";
+import Tooltip from "@mui/material/Tooltip";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import {
   getColorCodeFromRating,
@@ -50,22 +49,20 @@ export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
       : "";
 
   return (
-    <>
-      <Tooltip title={tooltipMsg}>
-        <span
-          css={[
-            circle,
-            {
-              borderColor: color,
-              background: `border-box linear-gradient(to top,
+    <Tooltip title={tooltipMsg}>
+      <span
+        css={[
+          circle,
+          {
+            borderColor: color,
+            background: `border-box linear-gradient(to top,
              ${color} ${fillPercent * 100}%,
              rgba(0,0,0,0) ${fillPercent * 100}%)`,
-              width: width,
-              height: height,
-            },
-          ]}
-        ></span>
-      </Tooltip>
-    </>
+            width: width,
+            height: height,
+          },
+        ]}
+      ></span>
+    </Tooltip>
   );
 };

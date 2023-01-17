@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material/styles";
 
 export const baseTheme = createTheme({
   themeColor: "base",
-  colors: { fontColor: "green", lineColor: "", backgroundColor: "white" },
+  colors: { fontColor: "", lineColor: "", backgroundColor: "white" },
 });
 
 export const purpleTheme = createTheme({
@@ -17,5 +17,5 @@ export const greenTheme = createTheme({
 
 export const darkTheme = createTheme({
   themeColor: "dark",
-  colors: { fontColor: "red", lineColor: "", backgroundColor: "dark" },
+  colors: { fontColor: "", lineColor: "", backgroundColor: "dark" },
 });
