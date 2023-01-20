@@ -8,30 +8,14 @@ import {
   ListItem,
   ListItemText,
   ListItemButton,
+  ListItemIcon,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
-  mainListItems,
-  subListItems,
-  otherListItems,
-  Item,
-} from "@features/layout/listItems";
-
-const SideBarItem: React.FC<Item> = (props: Item) => {
-  const { field, link, icon } = props;
-  return (
-    <React.Fragment key={field}>
-      <Link to={link}>
-        <ListItem key={field} disablePadding>
-          <ListItemButton>
-            {icon}
-            <ListItemText primary={field} />
-          </ListItemButton>
-        </ListItem>
-      </Link>
-    </React.Fragment>
-  );
-};
+  mainItems,
+  activityItems,
+  otherItems,
+} from "@features/layout/components/SideNavigationItems";
 
 export const SideBar: React.FC = () => {
   return (
@@ -41,34 +25,52 @@ export const SideBar: React.FC = () => {
           <Toolbar />
           <Divider />
           <List>
-            {mainListItems.map((item) => (
-              <SideBarItem
-                field={item.field}
-                link={item.link}
-                icon={item.icon}
-              />
+            {mainItems.map((item) => (
+              <NavLink
+                to={item.link}
+                css={{ color: "#000000", "&:hover": { color: "#000000" } }}
+              >
+                <ListItem key={item.field} disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.field} />
+                  </ListItemButton>
+                </ListItem>
+              </NavLink>
             ))}
           </List>
           <Toolbar />
           <Divider />
           <List>
-            {subListItems.map((item) => (
-              <SideBarItem
-                field={item.field}
-                link={item.link}
-                icon={item.icon}
-              />
+            {activityItems.map((item) => (
+              <NavLink
+                to={item.link}
+                css={{ color: "#000000", "&:hover": { color: "#000000" } }}
+              >
+                <ListItem key={item.field} disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.field} />
+                  </ListItemButton>
+                </ListItem>
+              </NavLink>
             ))}
           </List>
           <Toolbar />
           <Divider />
           <List>
-            {otherListItems.map((item) => (
-              <SideBarItem
-                field={item.field}
-                link={item.link}
-                icon={item.icon}
-              />
+            {otherItems.map((item) => (
+              <NavLink
+                to={item.link}
+                css={{ color: "#000000", "&:hover": { color: "#000000" } }}
+              >
+                <ListItem key={item.field} disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.field} />
+                  </ListItemButton>
+                </ListItem>
+              </NavLink>
             ))}
           </List>
         </Drawer>
