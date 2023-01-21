@@ -6,12 +6,12 @@ import {
   ListItemIcon,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import HomeIcon from "@mui/icons-material/Home";
 import LeaderboardOutlinedIcon from "@mui/icons-material/LeaderboardOutlined";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import CreateIcon from "@mui/icons-material/Create";
-import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
-import VerifiedIcon from "@mui/icons-material/Verified";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
@@ -74,8 +74,8 @@ export const mainItems: readonly Item[] = [
   {
     field: "Contests",
     link: "/",
-    selectedIcon: <LeaderboardIcon />,
-    notSelectedIcon: <LeaderboardOutlinedIcon />,
+    selectedIcon: <HomeIcon />,
+    notSelectedIcon: <HomeOutlinedIcon />,
   },
   {
     field: "Problems",
@@ -101,8 +101,8 @@ export const activityItems: readonly Item[] = [
   {
     field: "Achievement",
     link: "/achievement",
-    selectedIcon: <VerifiedIcon />,
-    notSelectedIcon: <VerifiedOutlinedIcon />,
+    selectedIcon: <EmojiEventsIcon />,
+    notSelectedIcon: <EmojiEventsOutlinedIcon />,
   },
   {
     field: "Submission",
@@ -113,8 +113,8 @@ export const activityItems: readonly Item[] = [
   {
     field: "Ranking",
     link: "/ranking",
-    selectedIcon: <EmojiEventsIcon />,
-    notSelectedIcon: <EmojiEventsOutlinedIcon />,
+    selectedIcon: <LeaderboardIcon />,
+    notSelectedIcon: <LeaderboardOutlinedIcon />,
   },
   {
     field: "Custom Contest",
@@ -187,7 +187,10 @@ export const SideNavigationItem: React.FC<Props> = (props: Props) => {
   return (
     <NavLink to={link}>
       <ListItem key={field} disablePadding>
-        <ListItemButton onClick={() => setSelected(field)}>
+        <ListItemButton
+          selected={isSelected}
+          onClick={() => setSelected(field)}
+        >
           <ListItemIcon>
             {isSelected ? selectedIcon : notSelectedIcon}
           </ListItemIcon>

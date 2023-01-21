@@ -1,19 +1,16 @@
 import reactLogo from "./assets/react.svg";
 import "./App.css";
-import { TopcoderLikeCircle } from "@features/color/TopCoderLikeCircle.component";
-import { DevContainer } from "@pages/dev";
+import { ThemeContextProvider } from "@features/color/themeColor.hook";
 import { RouterProvider } from "react-router-dom";
 import { router } from "@routes/routes";
 
 function App() {
   return (
     <div>
-      {/* <DevContainer>
-        <TopcoderLikeCircle displayPurpose="difficulty" rating={2300} />
-      </DevContainer> */}
-      <RouterProvider router={router} />
+      <ThemeContextProvider>
+        <RouterProvider router={router} />
+      </ThemeContextProvider>
       <div>
-        {/* {element} */}
         <a href="https://vitejs.dev" target="_blank">
           <img src="/vite.svg" className="logo" alt="Vite logo" />
         </a>

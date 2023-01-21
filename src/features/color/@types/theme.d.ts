@@ -6,7 +6,7 @@ type Colors = {
   fontColor: string;
   lineColor: string;
   backgroundColor: string;
-  //   mainColor: string // add when needed
+  mainColor: string; // add when needed
   //   subTextColor: string // add when needed
   //   titleBackgroudColor: string // add when needed
   //   accentColor: string // add when needed
