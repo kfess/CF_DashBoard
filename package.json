@@ -17,6 +17,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.4",
     "@tanstack/react-query": "^4.22.0",
+    "axios": "^1.2.3",
     "dayjs": "^1.11.7",
     "msw": "^0.49.3",
     "react": "^18.2.0",

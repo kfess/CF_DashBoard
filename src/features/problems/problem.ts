@@ -3,7 +3,8 @@ import { z } from "zod";
 // https://codeforces.com/apiHelp/objects#Problem
 
 const typeSchema = z.union([z.literal("PROGRAMMING"), z.literal("QUESTION")]);
-type ProblemType = z.infer<typeof typeSchema>;
+export const problemType = ["PROGRAMMING", "QUESTION"] as const;
+export type ProblemType = typeof problemType[number];
 
 const tagSchema = z.union([
   z.literal("implementation"),
@@ -54,4 +55,5 @@ export const problemSchema = z.object({
   rating: z.number().optional(),
   tags: z.array(tagSchema),
 });
-type Problem = z.infer<typeof problemSchema>;
+export const problemsSchema = z.array(problemSchema);
+export type Problem = z.infer<typeof problemSchema>;

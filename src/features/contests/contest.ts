@@ -9,7 +9,8 @@ const typeSchema = z.union([
   z.literal("ICPC"),
   z.literal("Other"),
 ]);
-type ContestType = z.infer<typeof typeSchema>;
+export const contestType = ["CF", "IOI", "ICPC", "Other"] as const;
+export type ContestType = typeof contestType[number];
 
 const phaseSchema = z.union([
   z.literal("BEFORE"),
@@ -18,7 +19,14 @@ const phaseSchema = z.union([
   z.literal("SYSTEM_TEST"),
   z.literal("FINISHED"),
 ]);
-type Phase = z.infer<typeof phaseSchema>;
+export const phase = [
+  "BEFORE",
+  "CODING",
+  "PENDING_SYSTEM_TEST",
+  "SYSTEM_TEST",
+  "FINISHED",
+] as const;
+export type Phase = typeof phase[number];
 
 const kindSchema = z
   .union([
@@ -31,9 +39,17 @@ const kindSchema = z
     z.literal("Training Contest"),
   ])
   .optional();
-type Kind = z.infer<typeof kindSchema>;
+export const kind = [
+  "Official ICPC Contest",
+  "Official School Contest",
+  "School/University/City/Region Championship",
+  "Training Camp Contest",
+  "Official International Personal Contest",
+  "Training Contest",
+] as const;
+export type Kind = typeof kind[number];
 
-const contestSchema = z.object({
+export const contestSchema = z.object({
   id: z.number(),
   name: z.string(),
   type: typeSchema,
@@ -53,4 +69,5 @@ const contestSchema = z.object({
   season: z.number().optional(),
   problems: z.array(problemSchema),
 });
+export const contestsSchema = z.array(contestSchema);
 export type Contest = z.infer<typeof contestSchema>;

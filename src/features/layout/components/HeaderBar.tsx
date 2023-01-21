@@ -3,11 +3,17 @@ import { AppBar, Box, IconButton, Toolbar } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import { SideNavigationBar } from "@features/layout/components/SideNavigationBar";
+import { useFetchContests } from "@features/contests/useFetchContest";
 
 export const HeaderBar: React.FC = () => {
   const { theme } = useThemeContext();
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
   const toggleSideBar = () => setIsOpenSideBar(!isOpenSideBar);
+
+  const { status, data } = useFetchContests();
+
+  if (status === "loading") return <div>Loading</div>;
+  if (status === "error") return <div>Error</div>;
 
   return (
     <div>
