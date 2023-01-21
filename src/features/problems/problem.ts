@@ -43,9 +43,46 @@ const tagSchema = z.union([
   z.literal("chinese remainder theorem"),
   z.literal("schedules"),
 ]);
-export type Tag = z.infer<typeof tagSchema>;
+const tag = [
+  "implementation",
+  "math",
+  "greedy",
+  "dp",
+  "data structures",
+  "brute force",
+  "constructive algorithms",
+  "graphs",
+  "sortings",
+  "binary search",
+  "dfs and similar",
+  "trees",
+  "strings",
+  "number theory",
+  "combinatorics",
+  "*special",
+  "geometry",
+  "bitmasks",
+  "two pointers",
+  "dsu",
+  "shortest paths",
+  "probabilities",
+  "divide and conquer",
+  "hashing",
+  "games",
+  "flows",
+  "interactive",
+  "matrices",
+  "fft",
+  "ternary search",
+  "expression parsing",
+  "meet-in-the-middle",
+  "2-sat",
+  "chinese remainder theorem",
+  "schedules",
+] as const;
+export type Tag = typeof tag[number];
 
-export const problemSchema = z.object({
+const problemSchema = z.object({
   contestId: z.number().optional(),
   problemsetName: z.string().optional(),
   index: z.string().optional(),

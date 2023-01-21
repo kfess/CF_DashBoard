@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { problemSchema } from "@features/problems/problem";
+import { problemsSchema } from "@features/problems/problem";
 
 // reference: https://codeforces.com/apiHelp/objects#Contest
 
@@ -9,7 +9,7 @@ const typeSchema = z.union([
   z.literal("ICPC"),
   z.literal("Other"),
 ]);
-export const contestType = ["CF", "IOI", "ICPC", "Other"] as const;
+const contestType = ["CF", "IOI", "ICPC", "Other"] as const;
 export type ContestType = typeof contestType[number];
 
 const phaseSchema = z.union([
@@ -19,7 +19,7 @@ const phaseSchema = z.union([
   z.literal("SYSTEM_TEST"),
   z.literal("FINISHED"),
 ]);
-export const phase = [
+const phase = [
   "BEFORE",
   "CODING",
   "PENDING_SYSTEM_TEST",
@@ -39,7 +39,7 @@ const kindSchema = z
     z.literal("Training Contest"),
   ])
   .optional();
-export const kind = [
+const kind = [
   "Official ICPC Contest",
   "Official School Contest",
   "School/University/City/Region Championship",
@@ -49,7 +49,7 @@ export const kind = [
 ] as const;
 export type Kind = typeof kind[number];
 
-export const contestSchema = z.object({
+const contestSchema = z.object({
   id: z.number(),
   name: z.string(),
   type: typeSchema,
@@ -67,7 +67,7 @@ export const contestSchema = z.object({
   country: z.string().optional(),
   city: z.string().optional(),
   season: z.number().optional(),
-  problems: z.array(problemSchema),
+  problems: problemsSchema,
 });
 export const contestsSchema = z.array(contestSchema);
 export type Contest = z.infer<typeof contestSchema>;

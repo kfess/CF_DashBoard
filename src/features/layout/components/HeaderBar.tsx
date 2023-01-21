@@ -17,6 +17,7 @@ export const HeaderBar: React.FC = () => {
 
   return (
     <div>
+      {data[0].durationSeconds}
       <Box sx={{ flexGrow: 1 }}>
         <AppBar css={{ backgroundColor: theme.colors.mainColor }}>
           <Toolbar>
