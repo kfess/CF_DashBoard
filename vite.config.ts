@@ -14,6 +14,7 @@ export default defineConfig({
       "@stories": path.resolve(__dirname, "src/stories/"),
       "@constants": path.resolve(__dirname, "src/constants/"),
       "@routes": path.resolve(__dirname, "src/routes/"),
+      "@mock": path.resolve(__dirname, "src/mock/"),
     },
   },
 });

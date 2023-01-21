@@ -1,12 +1,12 @@
 import React, { useState, Dispatch, SetStateAction } from "react";
 import { Drawer, Box, Toolbar, Divider, List } from "@mui/material";
+import type { Field } from "@features/layout/components/SideNavigationItems";
 import {
   mainItems,
   activityItems,
   otherItems,
   SideNavigationItem,
 } from "@features/layout/components/SideNavigationItems";
-import type { Field } from "@features/layout/components/SideNavigationItems";
 
 type Props = {
   isOpenSideBar: boolean;
