@@ -1,4 +1,11 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
+import {
+  ListItem,
+  ListItemText,
+  ListItemButton,
+  ListItemIcon,
+} from "@mui/material";
+import { NavLink } from "react-router-dom";
 import LeaderboardOutlinedIcon from "@mui/icons-material/LeaderboardOutlined";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
@@ -25,6 +32,8 @@ import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import FlagIcon from "@mui/icons-material/Flag";
+import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
@@ -40,7 +49,7 @@ const activityField = [
 type ActivityField = typeof activityField[number];
 
 const otherField = [
-  "Api",
+  "API",
   "Links",
   "Tools",
   "Setting",
@@ -52,68 +61,39 @@ const otherField = [
 ] as const;
 type OtherField = typeof otherField[number];
 
-type Field = MainField | ActivityField | OtherField;
+export type Field = MainField | ActivityField | OtherField;
 
-export type Item = { field: Field; link: string; icon: JSX.Element };
-
-type Props = {
-  isSelected: boolean;
-  filledIcon: JSX.Element;
-  outlinedIcon: JSX.Element;
-};
-
-// tab の select 状態に合わせて Icon の色を反転
-const SideNavigationIcon: React.FC<Props> = (props: Props) => {
-  const { isSelected, filledIcon, outlinedIcon } = props;
-  return (
-    <React.Fragment>{isSelected ? filledIcon : outlinedIcon}</React.Fragment>
-  );
+type Item = {
+  field: Field;
+  link: string;
+  selectedIcon: JSX.Element;
+  notSelectedIcon: JSX.Element;
 };
 
 export const mainItems: readonly Item[] = [
   {
     field: "Contests",
     link: "/",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<LeaderboardIcon />}
-        outlinedIcon={<LeaderboardOutlinedIcon />}
-      />
-    ),
+    selectedIcon: <LeaderboardIcon />,
+    notSelectedIcon: <LeaderboardOutlinedIcon />,
   },
   {
     field: "Problems",
     link: "/problems",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<CreateIcon />}
-        outlinedIcon={<CreateOutlinedIcon />}
-      />
-    ),
+    selectedIcon: <CreateIcon />,
+    notSelectedIcon: <CreateOutlinedIcon />,
   },
   {
     field: "Recommend",
     link: "/recommend",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<ThumbUpIcon />}
-        outlinedIcon={<ThumbUpAltOutlinedIcon />}
-      />
-    ),
+    selectedIcon: <ThumbUpIcon />,
+    notSelectedIcon: <ThumbUpAltOutlinedIcon />,
   },
   {
     field: "Bookmark",
     link: "/bookmark",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<StarIcon />}
-        outlinedIcon={<StarBorderOutlinedIcon />}
-      />
-    ),
+    selectedIcon: <StarIcon />,
+    notSelectedIcon: <StarBorderOutlinedIcon />,
   },
 ] as const;
 
@@ -121,114 +101,99 @@ export const activityItems: readonly Item[] = [
   {
     field: "Achievement",
     link: "/achievement",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<VerifiedIcon />}
-        outlinedIcon={<VerifiedOutlinedIcon />}
-      />
-    ),
+    selectedIcon: <VerifiedIcon />,
+    notSelectedIcon: <VerifiedOutlinedIcon />,
   },
   {
     field: "Submission",
     link: "/submission",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<SendIcon />}
-        outlinedIcon={<SendOutlinedIcon />}
-      />
-    ),
+    selectedIcon: <SendIcon />,
+    notSelectedIcon: <SendOutlinedIcon />,
   },
   {
     field: "Ranking",
     link: "/ranking",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<EmojiEventsIcon />}
-        outlinedIcon={<EmojiEventsOutlinedIcon />}
-      />
-    ),
+    selectedIcon: <EmojiEventsIcon />,
+    notSelectedIcon: <EmojiEventsOutlinedIcon />,
   },
   {
     field: "Custom Contest",
     link: "/custom-contest",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<WidgetsIcon />}
-        outlinedIcon={<WidgetsOutlinedIcon />}
-      />
-    ),
+    selectedIcon: <WidgetsIcon />,
+    notSelectedIcon: <WidgetsOutlinedIcon />,
   },
 ] as const;
 
 export const otherItems: readonly Item[] = [
   {
-    field: "Api",
+    field: "API",
     link: "/api",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<HubIcon />}
-        outlinedIcon={<HubOutlinedIcon />}
-      />
-    ),
+    selectedIcon: <HubIcon />,
+    notSelectedIcon: <HubOutlinedIcon />,
   },
   {
     field: "Links",
-    link: "Tools",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<BuildIcon />}
-        outlinedIcon={<BuildOutlinedIcon />}
-      />
-    ),
+    link: "/links",
+    selectedIcon: <BuildIcon />,
+    notSelectedIcon: <BuildOutlinedIcon />,
   },
   {
     field: "Setting",
     link: "/setting",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<SettingsIcon />}
-        outlinedIcon={<SettingsOutlinedIcon />}
-      />
-    ),
+    selectedIcon: <SettingsIcon />,
+    notSelectedIcon: <SettingsOutlinedIcon />,
   },
   {
     field: "User Guide",
-    link: "user-guide",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<HelpOutlinedIcon />}
-        outlinedIcon={<HelpOutlineIcon />}
-      />
-    ),
+    link: "/user-guide",
+    selectedIcon: <HelpOutlinedIcon />,
+    notSelectedIcon: <HelpOutlineIcon />,
   },
   {
     field: "FAQ",
     link: "/faq",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<QuestionAnswerIcon />}
-        outlinedIcon={<QuestionAnswerOutlinedIcon />}
-      />
-    ),
+    selectedIcon: <QuestionAnswerIcon />,
+    notSelectedIcon: <QuestionAnswerOutlinedIcon />,
+  },
+  {
+    field: "Feedback",
+    link: "/feedback",
+    selectedIcon: <FlagIcon />,
+    notSelectedIcon: <OutlinedFlagIcon />,
   },
   {
     field: "Send a Tip",
-    link: "send-a-tip",
-    icon: (
-      <SideNavigationIcon
-        isSelected={false}
-        filledIcon={<FavoriteIcon />}
-        outlinedIcon={<FavoriteBorderOutlinedIcon />}
-      />
-    ),
+    link: "/send-a-tip",
+    selectedIcon: <FavoriteIcon />,
+    notSelectedIcon: <FavoriteBorderOutlinedIcon />,
   },
 ] as const;
+
+type Props = Item & {
+  isSelected: boolean;
+  setSelected: Dispatch<SetStateAction<Field>>;
+};
+
+// tab の select 状態に合わせて Icon の色を反転
+export const SideNavigationItem: React.FC<Props> = (props: Props) => {
+  const {
+    field,
+    link,
+    selectedIcon,
+    notSelectedIcon,
+    isSelected,
+    setSelected,
+  } = props;
+  return (
+    <NavLink to={link}>
+      <ListItem key={field} disablePadding>
+        <ListItemButton onClick={() => setSelected(field)}>
+          <ListItemIcon>
+            {isSelected ? selectedIcon : notSelectedIcon}
+          </ListItemIcon>
+          <ListItemText primary={field} />
+        </ListItemButton>
+      </ListItem>
+    </NavLink>
+  );
+};
