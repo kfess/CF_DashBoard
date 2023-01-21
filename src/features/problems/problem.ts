@@ -42,7 +42,7 @@ const tagSchema = z.union([
   z.literal("chinese remainder theorem"),
   z.literal("schedules"),
 ]);
-type Tag = z.infer<typeof tagSchema>;
+export type Tag = z.infer<typeof tagSchema>;
 
 export const problemSchema = z.object({
   contestId: z.number().optional(),
