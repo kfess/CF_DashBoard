@@ -1,20 +1,20 @@
-import React, { useState,Dispatch,SetStateAction } from "react";
-import { Drawer,Box, Toolbar, Divider, List } from "@mui/material";
+import React, { useState, Dispatch, SetStateAction } from "react";
+import { Drawer, Box, Toolbar, Divider, List } from "@mui/material";
 import {
-type Field,
   mainItems,
   activityItems,
   otherItems,
   SideNavigationItem,
 } from "@features/layout/components/SideNavigationItems";
+import type { Field } from "@features/layout/components/SideNavigationItems";
 
 type Props = {
-  isOpenSideBar: boolean,
-  toggleSideBar: Dispatch<SetStateAction<boolean>>
-}
+  isOpenSideBar: boolean;
+  toggleSideBar: Dispatch<SetStateAction<boolean>>;
+};
 
 export const SideNavigationBar: React.FC<Props> = (props: Props) => {
-  const {isOpenSideBar, toggleSideBar} = props;
+  const { isOpenSideBar, toggleSideBar } = props;
   const [selectedItem, setSelectedItem] = useState<Field>("Contests");
 
   return (
@@ -39,13 +39,13 @@ export const SideNavigationBar: React.FC<Props> = (props: Props) => {
         <List>
           {activityItems.map((item) => (
             <SideNavigationItem
-            field={item.field}
-            link={item.link}
-            selectedIcon={item.selectedIcon}
-            notSelectedIcon={item.notSelectedIcon}
-            isSelected={selectedItem === item.field}
-            setSelected={setSelectedItem}
-          />
+              field={item.field}
+              link={item.link}
+              selectedIcon={item.selectedIcon}
+              notSelectedIcon={item.notSelectedIcon}
+              isSelected={selectedItem === item.field}
+              setSelected={setSelectedItem}
+            />
           ))}
         </List>
         <Toolbar />
@@ -53,13 +53,13 @@ export const SideNavigationBar: React.FC<Props> = (props: Props) => {
         <List>
           {otherItems.map((item) => (
             <SideNavigationItem
-            field={item.field}
-            link={item.link}
-            selectedIcon={item.selectedIcon}
-            notSelectedIcon={item.notSelectedIcon}
-            isSelected={selectedItem === item.field}
-            setSelected={setSelectedItem}
-          />
+              field={item.field}
+              link={item.link}
+              selectedIcon={item.selectedIcon}
+              notSelectedIcon={item.notSelectedIcon}
+              isSelected={selectedItem === item.field}
+              setSelected={setSelectedItem}
+            />
           ))}
         </List>
       </Drawer>
