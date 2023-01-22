@@ -5,7 +5,8 @@ export const baseTheme = createTheme({
   colors: {
     fontColor: "#4d5156", // google search, description color
     lineColor: "",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#ffffff", // totally white
+    foregroundColor: "#4d5156",
     mainColor: "white",
   },
 });
@@ -16,7 +17,8 @@ export const purpleTheme = createTheme({
   colors: {
     fontColor: "",
     lineColor: "",
-    backgroundColor: "#F7F3FA",
+    backgroundColor: "#F7F3FA", // image color of Heroku
+    foregroundColor: "#ffffff",
     mainColor: "#79589F",
   },
 });
@@ -27,6 +29,7 @@ export const greenTheme = createTheme({
     fontColor: "",
     lineColor: "",
     backgroundColor: "white",
+    foregroundColor: "",
     mainColor: "",
   },
 });
@@ -37,6 +40,7 @@ export const darkTheme = createTheme({
     fontColor: "",
     lineColor: "",
     backgroundColor: "dark",
+    foregroundColor: "",
     mainColor: "",
   },
 });

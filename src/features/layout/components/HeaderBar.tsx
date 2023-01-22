@@ -17,10 +17,12 @@ export const HeaderBar: React.FC = () => {
           <Toolbar>
             <IconButton
               edge="start"
-              color="default"
               aria-label="menu"
-              sx={{ mr: 2 }}
               onClick={toggleSideBar}
+              css={{
+                color: theme.colors.foregroundColor,
+                margin: theme.spacing(0, 1, 0, 0),
+              }}
             >
               <MenuIcon />
             </IconButton>

@@ -5,7 +5,8 @@ export type ThemeColor = "base" | "purple" | "green" | "dark";
 type Colors = {
   fontColor: string;
   lineColor: string;
-  backgroundColor: string;
+  backgroundColor: string; // image color of the theme
+  foregroundColor: string; // foregroundColor of the backgroundColor
   mainColor: string; // add when needed
   //   subTextColor: string // add when needed
   //   titleBackgroudColor: string // add when needed
