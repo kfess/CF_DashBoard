@@ -3,9 +3,9 @@ import { createTheme } from "@mui/material/styles";
 export const baseTheme = createTheme({
   themeColor: "base",
   colors: {
-    fontColor: "",
+    fontColor: "#4d5156", // google search, description color
     lineColor: "",
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     mainColor: "white",
   },
 });
