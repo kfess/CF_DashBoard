@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import TableCell from "@mui/material/TableCell";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { TopcoderLikeCircle } from "@features/color/TopCoderLikeCircle.component";
+import { LabelIcon } from "@features/bookmark/components/LabelIcon";
 import { CF_CONTEST_URL, CF_GYM_URL } from "@constants/url";
 import { useThemeContext } from "@features/color/themeColor.hook";
 
@@ -33,7 +34,7 @@ export const ProblemLinkCell: React.FC<Props> = (props: Props) => {
 
   return (
     <TableCell key={problemId + "_" + problemName}>
-      <Box css={{ display: "flex", alignItems: "center" }}>
+      <Box css={{ display: "inline-flex", alignItems: "center" }}>
         {showDifficulty && (
           <TopcoderLikeCircle
             displayPurpose="difficulty"
@@ -51,11 +52,13 @@ export const ProblemLinkCell: React.FC<Props> = (props: Props) => {
                 ? getColorCodeFromRating(difficulty)
                 : theme.colors.fontColor,
               textDecoration: "underline",
+              paddingRight: theme.spacing(1),
             }}
           >
             {problemId + ". " + problemName}
           </a>
         </div>
+        <LabelIcon />
       </Box>
     </TableCell>
   );
