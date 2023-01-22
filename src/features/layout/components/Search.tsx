@@ -12,11 +12,11 @@ export const Search: React.FC = () => {
       css={{
         position: "relative",
         marginLeft: theme.spacing(2),
-        width: "50%",
+        width: "30%",
         borderRadius: "5px",
-        backgroundColor: alpha(theme.colors.backgroundColor, 0.5),
+        backgroundColor: "#ffffff",
         "&:hover": {
-          backgroundColor: alpha(theme.colors.backgroundColor, 0.6),
+          backgroundColor: "#ffffff",
         },
         [theme.breakpoints.down("sm")]: {
           marginLeft: theme.spacing(2),
@@ -33,6 +33,7 @@ export const Search: React.FC = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          color: "#4d5156",
         }}
       >
         <SearchIcon />

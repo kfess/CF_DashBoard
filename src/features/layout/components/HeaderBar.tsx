@@ -13,7 +13,7 @@ export const HeaderBar: React.FC = () => {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar css={{ backgroundColor: theme.colors.mainColor }}>
+        <AppBar css={{ backgroundColor: theme.colors.backgroundColor }}>
           <Toolbar>
             <IconButton
               edge="start"

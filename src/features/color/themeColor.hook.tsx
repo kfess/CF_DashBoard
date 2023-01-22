@@ -29,7 +29,7 @@ const Context = createContext<{
 });
 
 export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<Theme>(baseTheme);
+  const [theme, setTheme] = useState<Theme>(purpleTheme);
 
   const setBaseTheme = useCallback(() => setTheme(baseTheme), [theme]);
   const setPurpleTheme = useCallback(() => setTheme(purpleTheme), [theme]);
