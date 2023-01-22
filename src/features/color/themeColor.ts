@@ -14,7 +14,7 @@ export const baseTheme = createTheme({
 export const purpleTheme = createTheme({
   themeColor: "purple",
   colors: {
-    fontColor: "#ffffff",
+    fontColor: "#4d5156",
     lineColor: "",
     backgroundColor: "#79589F", // image color of Heroku
     foregroundColor: "#ffffff",

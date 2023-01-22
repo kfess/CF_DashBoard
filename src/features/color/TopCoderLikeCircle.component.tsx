@@ -30,8 +30,8 @@ export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
     displayPurpose,
     rating,
     solvedCount,
-    width = "0.8rem", // default size
-    height = "0.8rem", // default size
+    width = "0.6rem", // default size
+    height = "0.6rem", // default size
   } = props;
 
   const { theme } = useThemeContext();
@@ -60,9 +60,10 @@ export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
              rgba(0,0,0,0) ${fillPercent * 100}%)`,
             width: width,
             height: height,
+            marginRight: theme.spacing(0.5),
           },
         ]}
-      ></span>
+      />
     </Tooltip>
   );
 };

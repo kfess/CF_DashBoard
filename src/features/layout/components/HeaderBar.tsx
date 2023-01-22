@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useThemeContext } from "@features/color/themeColor.hook";
@@ -26,15 +27,18 @@ export const HeaderBar: React.FC = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
-              css={{ color: theme.colors.fontColor }}
-            >
-              Codeforces Problems
-            </Typography>
+            <NavLink to="/">
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ display: { xs: "none", sm: "block" } }}
+                css={{ color: theme.colors.foregroundColor }}
+              >
+                Codeforces Problems
+              </Typography>
+            </NavLink>
+
             <Search />
           </Toolbar>
         </AppBar>
