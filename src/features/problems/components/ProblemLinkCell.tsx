@@ -7,12 +7,12 @@ import { CF_CONTEST_URL, CF_GYM_URL } from "@constants/url";
 import { useThemeContext } from "@features/color/themeColor.hook";
 
 type Props = {
-  showDifficulty: boolean;
-  contestId: number;
-  problemId: string;
-  problemName: string;
-  difficulty?: number;
-  solvedCount?: number;
+  readonly showDifficulty: boolean;
+  readonly contestId: number;
+  readonly problemId: string;
+  readonly problemName: string;
+  readonly difficulty?: number;
+  readonly solvedCount?: number;
 };
 
 export const ProblemLinkCell: React.FC<Props> = (props: Props) => {
