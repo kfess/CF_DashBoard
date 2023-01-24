@@ -12,6 +12,34 @@ const typeSchema = z.union([
 const contestType = ["CF", "IOI", "ICPC", "Other"] as const;
 export type ContestType = typeof contestType[number];
 
+const classificationSchema = z.union([
+  z.literal("Div. 1"),
+  z.literal("Div. 2"),
+  z.literal("Div. 1 + Div. 2"),
+  z.literal("Div. 3"),
+  z.literal("Div. 4"),
+  z.literal("ICPC"),
+  z.literal("Kotlin Heros"),
+  z.literal("Global"),
+  z.literal("Educational"),
+  z.literal("Others"),
+  z.literal("All"),
+]);
+export const classification = [
+  "Div. 1",
+  "Div. 2",
+  "Div. 1 + Div. 2",
+  "Div. 3",
+  "Div. 4",
+  "ICPC",
+  "Kotlin Heros",
+  "Global",
+  "Educational",
+  "Others",
+  "All",
+] as const;
+export type Classification = typeof classification[number];
+
 const phaseSchema = z.union([
   z.literal("BEFORE"),
   z.literal("CODING"),
@@ -68,6 +96,7 @@ const contestSchema = z.object({
   city: z.string().optional(),
   season: z.number().optional(),
   problems: problemsSchema,
+  classification: classificationSchema,
 });
 export const contestsSchema = z.array(contestSchema);
 export type Contest = z.infer<typeof contestSchema>;

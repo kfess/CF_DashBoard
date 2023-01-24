@@ -85,7 +85,7 @@ export type Tag = typeof tag[number];
 const problemSchema = z.object({
   contestId: z.number().optional(),
   problemsetName: z.string().optional(),
-  index: z.string().optional(),
+  index: z.string(),
   name: z.string(),
   type: typeSchema,
   points: z.number().optional(),

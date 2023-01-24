@@ -1,5 +1,6 @@
 import { createBrowserRouter, Outlet, Navigate } from "react-router-dom";
 import { HeaderBar } from "@features/layout/components/HeaderBar";
+import { ContestsPage } from "@pages/contests";
 import { ProblemLinkCell } from "@features/problems/components/ProblemLinkCell";
 
 export const router = createBrowserRouter([
@@ -7,20 +8,13 @@ export const router = createBrowserRouter([
     path: "/",
     element: (
       <>
-        <div>Layout (Header, Side Bar, Footer!)</div>
-        <ProblemLinkCell
-          showDifficulty={true}
-          contestId={1000}
-          problemId="A"
-          problemName="Test"
-          difficulty={1800}
-        />
+        <div>Layout (Header, Side Bar, Footer!!!!!!!!!!!!!!!)</div>
         <HeaderBar />
         <Outlet />
       </>
     ),
     children: [
-      { index: true, element: <div>contest</div> },
+      { index: true, element: <ContestsPage /> },
       { path: "/problems", element: <div>problems</div> },
       { path: "/achievement", element: <div>achievement</div> },
       { path: "/recommend", element: <div>recommend</div> },

@@ -1,6 +1,5 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import TableCell from "@mui/material/TableCell";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { TopcoderLikeCircle } from "@features/color/TopCoderLikeCircle.component";
 import { LabelIcon } from "@features/bookmark/components/LabelIcon";
@@ -33,33 +32,31 @@ export const ProblemLinkCell: React.FC<Props> = (props: Props) => {
   const { theme } = useThemeContext();
 
   return (
-    <TableCell key={problemId + "_" + problemName}>
-      <Box css={{ display: "inline-flex", alignItems: "center" }}>
-        {showDifficulty && (
-          <TopcoderLikeCircle
-            displayPurpose="difficulty"
-            rating={difficulty}
-            solvedCount={solvedCount}
-          />
-        )}
-        <div>
-          <a
-            href={problemUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            css={{
-              color: showDifficulty
-                ? getColorCodeFromRating(difficulty)
-                : theme.colors.fontColor,
-              textDecoration: "underline",
-              paddingRight: theme.spacing(1),
-            }}
-          >
-            {problemId + ". " + problemName}
-          </a>
-        </div>
-        <LabelIcon />
-      </Box>
-    </TableCell>
+    <Box css={{ display: "inline-flex", alignItems: "center" }}>
+      {showDifficulty && (
+        <TopcoderLikeCircle
+          displayPurpose="difficulty"
+          rating={difficulty}
+          solvedCount={solvedCount}
+        />
+      )}
+      <div>
+        <a
+          href={problemUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          css={{
+            color: showDifficulty
+              ? getColorCodeFromRating(difficulty)
+              : theme.colors.fontColor,
+            textDecoration: "underline",
+            paddingRight: theme.spacing(1),
+          }}
+        >
+          {problemId + ". " + problemName}
+        </a>
+      </div>
+      <LabelIcon />
+    </Box>
   );
 };

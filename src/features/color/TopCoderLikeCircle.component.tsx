@@ -12,6 +12,8 @@ const circle = css({
   borderWidth: "thin",
   display: "inline-block",
   borderRadius: "50%", // circle shape
+  width: "10px",
+  height: "10px",
 });
 
 // 'rating' means "A person's rating"
@@ -26,13 +28,7 @@ type Props = {
 };
 
 export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
-  const {
-    displayPurpose,
-    rating,
-    solvedCount,
-    width = "0.6rem", // default size
-    height = "0.6rem", // default size
-  } = props;
+  const { displayPurpose, rating, solvedCount } = props;
 
   const { theme } = useThemeContext();
 
@@ -58,8 +54,6 @@ export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
             background: `border-box linear-gradient(to top,
              ${color} ${fillPercent * 100}%,
              rgba(0,0,0,0) ${fillPercent * 100}%)`,
-            width: width,
-            height: height,
             marginRight: theme.spacing(0.5),
           },
         ]}
