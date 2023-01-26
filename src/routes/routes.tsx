@@ -8,7 +8,6 @@ export const router = createBrowserRouter([
     path: "/",
     element: (
       <>
-        <div>Layout (Header, Side Bar, Footer!!!!!!!!!!!!!!!)</div>
         <HeaderBar />
         <Outlet />
       </>

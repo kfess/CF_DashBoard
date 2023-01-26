@@ -11,7 +11,7 @@ import { FilterOptions } from "@features/contests/components/FilterOptions";
 export const ContestsPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchContests();
   const [tab, setTab] = useState<Classification>("All");
-  const contest = useMemo(() => filterContest(data ?? [], tab), [tab]);
+  const contest = filterContest(data ?? [], tab);
 
   if (isLoading) {
     return <span>Loading...</span>;

@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import { styled } from "@mui/material/styles";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import { Search } from "@features/layout/components/Search";
 import { SideNavigationBar } from "@features/layout/components/SideNavigationBar";
+
+// Without this offset, some part of the content to be invisible behind the header
+const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
 export const HeaderBar: React.FC = () => {
   const { theme } = useThemeContext();
@@ -12,9 +16,12 @@ export const HeaderBar: React.FC = () => {
   const toggleSideBar = () => setIsOpenSideBar(!isOpenSideBar);
 
   return (
-    <div>
+    <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar css={{ backgroundColor: theme.colors.backgroundColor }}>
+        <AppBar
+          css={{ backgroundColor: theme.colors.backgroundColor }}
+          position="fixed"
+        >
           <Toolbar>
             <IconButton
               edge="start"
@@ -42,6 +49,7 @@ export const HeaderBar: React.FC = () => {
             <Search />
           </Toolbar>
         </AppBar>
+        <Offset />
       </Box>
       {isOpenSideBar && (
         <SideNavigationBar
@@ -49,6 +57,6 @@ export const HeaderBar: React.FC = () => {
           toggleSideBar={toggleSideBar}
         />
       )}
-    </div>
+    </>
   );
 };
