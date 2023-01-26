@@ -8,3 +8,14 @@ export const filterContest = (
     ? contests
     : contests.filter((contest) => contest.classification === classification);
 };
+
+export const getProblemIdxes = (contests: Contest[]): string[] => {
+  const problemIdxes = contests.reduce((set, contest) => {
+    contest.problems.forEach((problem) => {
+      set.add(problem.index.replace(/\d/g, ""));
+    });
+    return set;
+  }, new Set<string>());
+
+  return Array.from(problemIdxes).sort();
+};

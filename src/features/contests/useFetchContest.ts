@@ -11,8 +11,12 @@ const fetchContests = async (): Promise<Contest[]> => {
 };
 
 export const useFetchContests = () => {
-  return useQuery<Contest[], Error>({
+  const { data, isError, error, isLoading } = useQuery<Contest[], Error>({
     queryKey: ["contests"],
     queryFn: fetchContests,
   });
+
+  const finishedContest = data?.filter((d) => d.phase === "FINISHED");
+
+  return { data, isError, error, isLoading };
 };

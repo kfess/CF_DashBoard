@@ -10,7 +10,7 @@ type Props = {
   problems: Problem[];
 };
 
-export const ContestTableRow: React.FC<Props> = (props: Props) => {
+export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
   const { contestId, contestName, problems } = props;
 
   return (
@@ -31,4 +31,4 @@ export const ContestTableRow: React.FC<Props> = (props: Props) => {
       ))}
     </TableRow>
   );
-};
+});
