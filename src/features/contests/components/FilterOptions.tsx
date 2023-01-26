@@ -1,10 +1,9 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { css } from "@emotion/react";
-import Menu, { MenuProps } from "@mui/material/Menu";
+import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
-import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import type { Classification } from "@features/contests/contest";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -45,7 +45,6 @@ export const HeaderBar: React.FC = () => {
                 Codeforces Problems
               </Typography>
             </NavLink>
-
             <Search />
           </Toolbar>
         </AppBar>
