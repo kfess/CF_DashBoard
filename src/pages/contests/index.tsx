@@ -13,7 +13,7 @@ export const ContestsPage: React.FC = () => {
     setReverse(!revserse);
   };
 
-  const contest = filterContest(data ?? [], tab);
+  const contest = filterContest(data ?? [], tab, revserse);
   const problemIdxes = getProblemIdxes(contest);
 
   if (isLoading) {

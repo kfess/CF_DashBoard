@@ -2,11 +2,20 @@ import type { Contest, Classification } from "@features/contests/contest";
 
 export const filterContest = (
   contests: Contest[],
-  classification: Classification
+  classification: Classification,
+  reverse: boolean
 ) => {
-  return classification === "All"
-    ? contests
-    : contests.filter((contest) => contest.classification === classification);
+  if (reverse) {
+    return classification === "All"
+      ? contests.sort((a, b) => a.startTimeSeconds - b.startTimeSeconds)
+      : contests
+          .filter((contest) => contest.classification === classification)
+          .sort((a, b) => a.startTimeSeconds - b.startTimeSeconds);
+  } else {
+    return classification === "All"
+      ? contests
+      : contests.filter((contest) => contest.classification === classification);
+  }
 };
 
 export const getProblemIdxes = (contests: Contest[]): string[] => {
