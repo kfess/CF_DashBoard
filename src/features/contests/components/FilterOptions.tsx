@@ -9,15 +9,21 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import type { Classification } from "@features/contests/contest";
 import { classification } from "@features/contests/contest";
 
-const buttonsCss = css({ display: "flex", justifyContent: "flex-start" });
+const buttonsCss = css({
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "flex-start",
+});
 
 type Props = {
   tab: Classification;
   setTab: Dispatch<SetStateAction<Classification>>;
+  reverse: boolean;
+  toggleOrder: (arg: boolean) => void;
 };
 
 export const FilterOptions: React.FC<Props> = (props: Props) => {
-  const { tab, setTab } = props;
+  const { tab, setTab, reverse, toggleOrder } = props;
 
   return (
     <>
@@ -25,12 +31,12 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
         <ContestTypeFilter tab={tab} setTab={setTab} />
         <PeriodFilter />
         <SolvedStatusFilter />
-        <OrderFilter />
       </div>
       <div css={buttonsCss}>
         <ShowDifficltySwitch />
         <ShowACStatusSwitch />
         <PinTableHeaderSwitch />
+        <OrderSwitch reverse={reverse} toggleOrder={toggleOrder} />
       </div>
     </>
   );
@@ -39,7 +45,7 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
 const ContestTypeFilter: React.FC<Pick<Props, "tab" | "setTab">> = ({
   tab,
   setTab,
-}: Props) => {
+}: Pick<Props, "tab" | "setTab">) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -109,20 +115,6 @@ const SolvedStatusFilter: React.FC = () => {
   );
 };
 
-const OrderFilter: React.FC = () => {
-  return (
-    <Button
-      variant="contained"
-      disableElevation
-      color="inherit"
-      css={{ marginRight: "10px" }}
-      endIcon={<KeyboardArrowDownIcon />}
-    >
-      Order
-    </Button>
-  );
-};
-
 const ShowDifficltySwitch: React.FC = () => {
   return (
     <FormControlLabel
@@ -144,8 +136,22 @@ const ShowACStatusSwitch: React.FC = () => {
 const PinTableHeaderSwitch: React.FC = () => {
   return (
     <FormControlLabel
-      control={<Switch defaultChecked />}
+      control={<Switch defaultChecked={false} />}
       label="Pin Table Header"
+    />
+  );
+};
+
+const OrderSwitch: React.FC<Pick<Props, "reverse" | "toggleOrder">> = (
+  props: Pick<Props, "reverse" | "toggleOrder">
+) => {
+  const { reverse, toggleOrder } = props;
+
+  return (
+    <FormControlLabel
+      control={<Switch defaultChecked={false} />}
+      label="Reverse Order"
+      onChange={() => toggleOrder(!reverse)}
     />
   );
 };

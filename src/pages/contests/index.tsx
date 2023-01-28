@@ -8,6 +8,10 @@ import { FilterOptions } from "@features/contests/components/FilterOptions";
 export const ContestsPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchContests();
   const [tab, setTab] = useState<Classification>("All");
+  const [revserse, setReverse] = useState<boolean>(false);
+  const toggleOrder = () => {
+    setReverse(!revserse);
+  };
 
   const contest = filterContest(data ?? [], tab);
   const problemIdxes = getProblemIdxes(contest);
@@ -21,7 +25,13 @@ export const ContestsPage: React.FC = () => {
 
   return (
     <>
-      <FilterOptions tab={tab} setTab={setTab} />
+      {String(revserse)}
+      <FilterOptions
+        tab={tab}
+        setTab={setTab}
+        reverse={revserse}
+        toggleOrder={toggleOrder}
+      />
       <ContestsTable contests={contest} problemIdxes={problemIdxes} />
     </>
   );
