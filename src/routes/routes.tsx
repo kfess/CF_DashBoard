@@ -1,7 +1,6 @@
 import { createBrowserRouter, Outlet, Navigate } from "react-router-dom";
 import { HeaderBar } from "@features/layout/components/HeaderBar";
 import { ContestsPage } from "@pages/contests";
-import { ProblemLinkCell } from "@features/problems/components/ProblemLinkCell";
 
 export const router = createBrowserRouter([
   {

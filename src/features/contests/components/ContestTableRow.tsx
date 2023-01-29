@@ -8,10 +8,11 @@ type Props = {
   contestId: number;
   contestName: string;
   problems: ReshapedProblem[];
+  showDifficulty: boolean;
 };
 
 export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
-  const { contestId, contestName, problems } = props;
+  const { contestId, contestName, problems, showDifficulty } = props;
 
   return (
     <TableRow key={contestId}>
@@ -23,7 +24,7 @@ export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
           {problem.indexedProblems.map((p) => (
             <div>
               <ProblemLinkCell
-                showDifficulty={true}
+                showDifficulty={showDifficulty}
                 contestId={contestId}
                 problemId={p.index}
                 problemName={p.name}

@@ -18,12 +18,14 @@ const buttonsCss = css({
 type Props = {
   tab: Classification;
   setTab: Dispatch<SetStateAction<Classification>>;
+  showDifficulty: boolean;
+  toggleShowDifficulty: (arg: boolean) => void;
   reverse: boolean;
   toggleOrder: (arg: boolean) => void;
 };
 
 export const FilterOptions: React.FC<Props> = (props: Props) => {
-  const { tab, setTab, reverse, toggleOrder } = props;
+  const { tab, setTab, showDifficulty, toggleShowDifficulty, reverse, toggleOrder } = props;
 
   return (
     <>
@@ -33,7 +35,10 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
         <SolvedStatusFilter />
       </div>
       <div css={buttonsCss}>
-        <ShowDifficltySwitch />
+        <ShowDifficltySwitch
+          showDifficulty={showDifficulty}
+          toggleShowDifficulty={toggleShowDifficulty}
+        />
         <ShowACStatusSwitch />
         <PinTableHeaderSwitch />
         <OrderSwitch reverse={reverse} toggleOrder={toggleOrder} />
@@ -115,11 +120,16 @@ const SolvedStatusFilter: React.FC = () => {
   );
 };
 
-const ShowDifficltySwitch: React.FC = () => {
+const ShowDifficltySwitch: React.FC<
+  Pick<Props, "showDifficulty" | "toggleShowDifficulty">
+> = (props: Pick<Props, "showDifficulty" | "toggleShowDifficulty">) => {
+  const { showDifficulty, toggleShowDifficulty } = props;
+
   return (
     <FormControlLabel
       control={<Switch defaultChecked />}
       label="Show Difficulty"
+      onChange={() => toggleShowDifficulty(!showDifficulty)}
     />
   );
 };
