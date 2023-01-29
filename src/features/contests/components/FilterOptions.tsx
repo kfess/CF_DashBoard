@@ -24,8 +24,15 @@ type Props = {
   toggleOrder: (arg: boolean) => void;
 };
 
-export const FilterOptions: React.FC<Props> = (props: Props) => {
-  const { tab, setTab, showDifficulty, toggleShowDifficulty, reverse, toggleOrder } = props;
+export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
+  const {
+    tab,
+    setTab,
+    showDifficulty,
+    toggleShowDifficulty,
+    reverse,
+    toggleOrder,
+  } = props;
 
   return (
     <>
@@ -45,7 +52,7 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
       </div>
     </>
   );
-};
+});
 
 const ContestTypeFilter: React.FC<Pick<Props, "tab" | "setTab">> = ({
   tab,

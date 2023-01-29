@@ -1,10 +1,19 @@
 import React from "react";
+import { useSetRecoilState } from "recoil";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { useThemeContext } from "@features/color/themeColor.hook";
+import { searchUserState } from "@features/layout/searchUser.atom";
 
 export const Search: React.FC = () => {
   const { theme } = useThemeContext();
+  const setSearchUserID = useSetRecoilState(searchUserState);
+
+  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      setSearchUserID(event.currentTarget.value);
+    }
+  };
 
   return (
     <div
@@ -41,6 +50,8 @@ export const Search: React.FC = () => {
       <InputBase
         placeholder="User ID..."
         inputProps={{ "aria-label": "search" }}
+        // onChange={onChange}
+        onKeyDown={onKeyDown}
         css={{
           padding: theme.spacing(0.5, 1, 0.5, 0),
           paddingLeft: `calc(1em + ${theme.spacing(4)})`,
