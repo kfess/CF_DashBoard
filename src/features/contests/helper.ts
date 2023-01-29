@@ -6,7 +6,7 @@ import type {
 } from "@features/contests/contest";
 import { groupBy } from "@helpers/index";
 
-export const reshapeContest = (
+export const reshapeContests = (
   contests: Contest[],
   classification: Classification,
   reverse: boolean

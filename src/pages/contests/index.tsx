@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFetchContests } from "@features/contests/useFetchContest";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
 import type { Classification } from "@features/contests/contest";
-import { reshapeContest, getProblemIdxes } from "@features/contests/helper";
+import { reshapeContests, getProblemIdxes } from "@features/contests/helper";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
 
 export const ContestsPage: React.FC = () => {
@@ -13,7 +13,7 @@ export const ContestsPage: React.FC = () => {
     setReverse(!reverse);
   };
 
-  const contest = reshapeContest(data ?? [], tab, reverse);
+  const contests = reshapeContests(data ?? [], tab, reverse);
   const problemIdxes = getProblemIdxes(data ?? []);
 
   if (isLoading) {
@@ -31,7 +31,7 @@ export const ContestsPage: React.FC = () => {
         reverse={reverse}
         toggleOrder={toggleOrder}
       />
-      <ContestsTable contests={contest} problemIdxes={problemIdxes} />
+      <ContestsTable contests={contests} problemIdxes={problemIdxes} />
     </>
   );
 };

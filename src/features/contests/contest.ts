@@ -1,5 +1,8 @@
 import { z } from "zod";
-import { problemsSchema } from "@features/problems/problem";
+import {
+  problemsSchema,
+  reshapedProblemSchema,
+} from "@features/problems/problem";
 
 // reference: https://codeforces.com/apiHelp/objects#Contest
 
@@ -101,6 +104,8 @@ const contestSchema = z.object({
 export const contestsSchema = z.array(contestSchema);
 export type Contest = z.infer<typeof contestSchema>;
 
+// need "reshape" for displaying contest table
+//by groupBying problems with the same index (A, A2)
 const reshapedContestSchema = z.object({
   id: z.number(),
   name: z.string(),
@@ -119,10 +124,7 @@ const reshapedContestSchema = z.object({
   country: z.string().optional(),
   city: z.string().optional(),
   season: z.number().optional(),
-  // problems: problemsSchema,
-  problems: z.array(
-    z.object({ index: z.string(), indexedProblems: problemsSchema })
-  ),
+  problems: z.array(reshapedProblemSchema),
   classification: classificationSchema,
 });
 export const reshapedContestsSchema = z.array(reshapedContestSchema);

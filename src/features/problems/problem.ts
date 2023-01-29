@@ -95,7 +95,7 @@ const problemSchema = z.object({
 export const problemsSchema = z.array(problemSchema);
 export type Problem = z.infer<typeof problemSchema>;
 
-const reshapedProblemSchema = z.object({
+export const reshapedProblemSchema = z.object({
   index: z.string(),
   indexedProblems: z.array(problemSchema),
 });
