@@ -2,6 +2,7 @@ import React from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import type { ReshapedProblem } from "@features/problems/problem";
+import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 
 type Props = {
@@ -17,7 +18,7 @@ export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
   return (
     <TableRow key={contestId}>
       <TableCell component="th" scope="row">
-        {contestName}
+        <ContestLink contestId={contestId} contestName={contestName} />
       </TableCell>
       {problems.map((problem) => (
         <TableCell key={problem.index}>
