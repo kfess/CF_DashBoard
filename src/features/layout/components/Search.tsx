@@ -50,7 +50,6 @@ export const Search: React.FC = () => {
       <InputBase
         placeholder="User ID..."
         inputProps={{ "aria-label": "search" }}
-        // onChange={onChange}
         onKeyDown={onKeyDown}
         css={{
           padding: theme.spacing(0.5, 1, 0.5, 0),

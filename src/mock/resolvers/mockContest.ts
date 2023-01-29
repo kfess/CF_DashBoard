@@ -1,199 +1,139 @@
 import { ResponseResolver, MockedRequest, restContext } from "msw";
 import type { Contest } from "@features/contests/contest";
 
+const range = (i: number, j: number): number[] => {
+  return Array.from({ length: j - i + 1 }, (_, index) => {
+    return index + i;
+  });
+};
+
 export const mockContest: ResponseResolver<MockedRequest, typeof restContext> =
   (req, res, ctx) => {
-    // const contests: Contest[] = Array.from({ length: 50 }, () => {
-    //   return {
-    //     id: 5,
-    //     name: "contest-5",
-    //     type: "CF",
-    //     classification: "Global",
-    //     phase: "BEFORE",
-    //     frozen: false,
-    //     durationSeconds: 18000,
-    //     startTimeSeconds: 1674381600,
-    //     problems: [
-    //       {
-    //         contestId: 1000,
-    //         name: "problem-A",
-    //         index: "A2",
-    //         rating: 800,
-    //         type: "PROGRAMMING",
-    //         tags: ["implementation"],
-    //       },
-    //       {
-    //         contestId: 1000,
-    //         name: "problem-B",
-    //         index: "B2",
-    //         rating: 1200,
-    //         type: "PROGRAMMING",
-    //         tags: ["implementation"],
-    //       },
-    //       {
-    //         contestId: 1000,
-    //         name: "problem-C",
-    //         index: "C2",
-    //         rating: 1800,
-    //         type: "PROGRAMMING",
-    //         tags: ["implementation"],
-    //       },
-    //       {
-    //         contestId: 1000,
-    //         name: "problem-D",
-    //         index: "D2",
-    //         rating: 2200,
-    //         type: "PROGRAMMING",
-    //         tags: ["implementation"],
-    //       },
-    //       {
-    //         contestId: 1000,
-    //         name: "problem-E",
-    //         index: "E2",
-    //         rating: 2600,
-    //         type: "PROGRAMMING",
-    //         tags: ["implementation"],
-    //       },
-    //       {
-    //         contestId: 1000,
-    //         name: "problem-F",
-    //         index: "F2",
-    //         rating: 3000,
-    //         type: "PROGRAMMING",
-    //         tags: ["implementation"],
-    //       },
-    //     ],
-    //   };
-    // });
-    const contests = [
-      {
-        id: 5,
-        name: "contest-5",
+    const globalContests: Contest[] = range(1, 10).map((n) => {
+      return {
+        id: n,
+        name: `Global-Contest-${n}`,
         type: "CF",
         classification: "Global",
-        phase: "BEFORE",
         frozen: false,
+        phase: "FINISHED",
         durationSeconds: 18000,
-        startTimeSeconds: 1674381600,
+        startTimeSeconds: 1674381600 + n,
         problems: [
           {
-            contestId: 1000,
-            name: "problem-A",
+            contestId: n,
+            name: `${n}-problem-A`,
             index: "A",
             rating: 800,
             type: "PROGRAMMING",
             tags: ["implementation"],
           },
           {
-            contestId: 1000,
-            name: "problem-A",
-            index: "A2",
-            rating: 800,
-            type: "PROGRAMMING",
-            tags: ["implementation"],
-          },
-          {
-            contestId: 1000,
-            name: "problem-B",
-            index: "B2",
+            contestId: n,
+            name: `${n}-problem-B`,
+            index: "B",
             rating: 1200,
             type: "PROGRAMMING",
             tags: ["implementation"],
           },
           {
-            contestId: 1000,
-            name: "problem-C",
-            index: "C2",
+            contestId: n,
+            name: `${n}-problem-C`,
+            index: "C",
             rating: 1800,
             type: "PROGRAMMING",
             tags: ["implementation"],
           },
           {
-            contestId: 1000,
-            name: "problem-D",
-            index: "D2",
+            contestId: n,
+            name: `${n}-problem-D`,
+            index: "D",
             rating: 2200,
             type: "PROGRAMMING",
             tags: ["implementation"],
           },
           {
-            contestId: 1000,
-            name: "problem-E",
-            index: "E2",
+            contestId: n,
+            name: `${n}-problem-E`,
+            index: "E",
             rating: 2600,
             type: "PROGRAMMING",
             tags: ["implementation"],
           },
           {
-            contestId: 1000,
-            name: "problem-F",
-            index: "F2",
+            contestId: n,
+            name: `${n}-problem-F`,
+            index: "F",
             rating: 3000,
             type: "PROGRAMMING",
             tags: ["implementation"],
           },
         ],
-      },
-      {
-        id: 5,
-        name: "contest-4",
+      };
+    });
+
+    const div1Contests: Contest[] = range(11, 20).map((n) => {
+      return {
+        id: n,
+        name: `div.1-Contest-${n}`,
         type: "CF",
         classification: "Global",
-        phase: "BEFORE",
         frozen: false,
+        phase: "FINISHED",
         durationSeconds: 18000,
-        startTimeSeconds: 1574381600,
+        startTimeSeconds: 1674381600 + n,
         problems: [
           {
-            contestId: 1000,
-            name: "problem-A",
-            index: "A2",
-            rating: 800,
+            contestId: n,
+            name: `${n}-problem-A`,
+            index: "A",
+            rating: 900,
             type: "PROGRAMMING",
             tags: ["implementation"],
           },
           {
-            contestId: 1000,
-            name: "problem-B",
-            index: "B2",
-            rating: 1200,
+            contestId: n,
+            name: `${n}-problem-B`,
+            index: "B",
+            rating: 1600,
             type: "PROGRAMMING",
             tags: ["implementation"],
           },
           {
-            contestId: 1000,
-            name: "problem-C",
-            index: "C2",
-            rating: 1800,
+            contestId: n,
+            name: `${n}-problem-C`,
+            index: "C",
+            rating: 1900,
             type: "PROGRAMMING",
             tags: ["implementation"],
           },
           {
-            contestId: 1000,
-            name: "problem-D",
-            index: "D2",
-            rating: 2200,
+            contestId: n,
+            name: `${n}-problem-D`,
+            index: "D",
+            rating: 2300,
             type: "PROGRAMMING",
             tags: ["implementation"],
           },
           {
-            contestId: 1000,
-            name: "problem-E",
-            index: "E2",
-            rating: 2600,
+            contestId: n,
+            name: `${n}-problem-E`,
+            index: "E",
+            rating: 2800,
             type: "PROGRAMMING",
             tags: ["implementation"],
           },
           {
-            contestId: 1000,
-            name: "problem-F",
-            index: "F2",
-            rating: 3000,
+            contestId: n,
+            name: `${n}-problem-F`,
+            index: "F",
+            rating: 3200,
             type: "PROGRAMMING",
             tags: ["implementation"],
           },
         ],
-      },
-    ];
-    return res(ctx.json(contests));
+      };
+    });
+
+    return res(ctx.json([...globalContests, ...div1Contests]));
   };

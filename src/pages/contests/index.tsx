@@ -4,9 +4,7 @@ import { ContestsTable } from "@features/contests/components/ContestsTable";
 import type { Classification } from "@features/contests/contest";
 import { reshapeContests, getProblemIdxes } from "@features/contests/helper";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
-
-import { useRecoilValue } from "recoil";
-import { searchUserState } from "@features/layout/searchUser.atom";
+import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 
 export const ContestsPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchContests();
@@ -25,7 +23,7 @@ export const ContestsPage: React.FC = () => {
   const contests = reshapeContests(data ?? [], tab, reverse);
   const problemIdxes = getProblemIdxes(data ?? []);
 
-  const searchUser = useRecoilValue(searchUserState)
+  const { solvedSet, attemptedSet } = useSolvedStatus();
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -36,7 +34,6 @@ export const ContestsPage: React.FC = () => {
 
   return (
     <>
-      {searchUser}
       <FilterOptions
         tab={tab}
         setTab={setTab}
@@ -49,6 +46,8 @@ export const ContestsPage: React.FC = () => {
         contests={contests}
         problemIdxes={problemIdxes}
         showDifficulty={showDifficulty}
+        solvedSet={solvedSet}
+        attemptedSet={attemptedSet}
       />
     </>
   );

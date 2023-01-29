@@ -10,20 +10,37 @@ type Props = {
   contestName: string;
   problems: ReshapedProblem[];
   showDifficulty: boolean;
+  solvedSet?: Set<string>;
+  attemptedSet?: Set<string>;
 };
 
 export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
-  const { contestId, contestName, problems, showDifficulty } = props;
+  const {
+    contestId,
+    contestName,
+    problems,
+    showDifficulty,
+    solvedSet,
+    attemptedSet,
+  } = props;
+
+  console.log(solvedSet);
 
   return (
-    <TableRow key={contestId}>
+    <TableRow key={contestId} hover>
       <TableCell component="th" scope="row">
         <ContestLink contestId={contestId} contestName={contestName} />
       </TableCell>
       {problems.map((problem) => (
         <TableCell key={problem.index}>
           {problem.indexedProblems.map((p) => (
-            <div>
+            <div
+              css={{
+                backgroundColor: solvedSet?.has(contestId + p.index)
+                  ? "black"
+                  : "",
+              }}
+            >
               <ProblemLink
                 showDifficulty={showDifficulty}
                 contestId={contestId}

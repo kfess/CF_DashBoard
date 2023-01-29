@@ -14,10 +14,13 @@ type Props = {
   contests: ReshapedContest[];
   problemIdxes: string[];
   showDifficulty: boolean;
+  solvedSet?: Set<string>;
+  attemptedSet?: Set<string>;
 };
 
 export const ContestsTable: React.FC<Props> = (props: Props) => {
-  const { contests, problemIdxes, showDifficulty } = props;
+  const { contests, problemIdxes, showDifficulty, solvedSet, attemptedSet } =
+    props;
 
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
@@ -47,30 +50,34 @@ export const ContestsTable: React.FC<Props> = (props: Props) => {
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">Contest</TableCell>
-              {problemIdxes.map((idx) => (
-                <TableCell align="center">{idx}</TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {[...contests]
-              .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-              .map((contest) => (
-                <ContestTableRow
-                  contestId={contest.id}
-                  contestName={contest.name}
-                  problems={contest.problems}
-                  showDifficulty={showDifficulty}
-                />
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <TableContainer component={Paper}>
+          <Table stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">Contest</TableCell>
+                {problemIdxes.map((idx) => (
+                  <TableCell align="center">{idx}</TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {[...contests]
+                .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
+                .map((contest) => (
+                  <ContestTableRow
+                    contestId={contest.id}
+                    contestName={contest.name}
+                    problems={contest.problems}
+                    showDifficulty={showDifficulty}
+                    solvedSet={solvedSet}
+                    attemptedSet={attemptedSet}
+                  />
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
       <TablePagination
         component="div"
         count={contestsLen}
