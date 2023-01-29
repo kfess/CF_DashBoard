@@ -5,11 +5,11 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
-import type { Contest } from "@features/contests/contest";
+import type { ReshapedContest } from "@features/contests/contest";
 import { ContestTableRow } from "@features/contests/components/ContestTableRow";
 
 type Props = {
-  contests: Contest[];
+  contests: ReshapedContest[];
   problemIdxes: string[];
 };
 

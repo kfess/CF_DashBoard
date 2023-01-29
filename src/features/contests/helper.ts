@@ -1,17 +1,35 @@
-import type { Contest, Classification } from "@features/contests/contest";
+import type { Problem } from "@features/problems/problem";
+import type {
+  Contest,
+  Classification,
+  ReshapedContest,
+} from "@features/contests/contest";
+import { groupBy } from "@helpers/index";
 
-export const filterContest = (
+export const reshapeContest = (
   contests: Contest[],
   classification: Classification,
   reverse: boolean
-) => {
+): ReshapedContest[] => {
+  const reshapedContests = contests.map((contest) => {
+    const reshapedProblems = groupBy(contest.problems, (problem: Problem) =>
+      problem.index.replace(/[0-9]/g, "")
+    ).map((indexedProblems) => {
+      return {
+        index: indexedProblems[0],
+        indexedProblems: indexedProblems[1],
+      };
+    });
+    return { ...contest, problems: reshapedProblems };
+  });
+
   return classification === "All"
-    ? contests.sort((a, b) => {
+    ? reshapedContests.sort((a, b) => {
         return reverse
           ? a.startTimeSeconds - b.startTimeSeconds
           : b.startTimeSeconds - a.startTimeSeconds;
       })
-    : contests
+    : reshapedContests
         .filter((contest) => contest.classification === classification)
         .sort((a, b) => {
           return reverse

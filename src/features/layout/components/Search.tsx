@@ -1,7 +1,6 @@
 import React from "react";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { alpha } from "@mui/material";
 import { useThemeContext } from "@features/color/themeColor.hook";
 
 export const Search: React.FC = () => {

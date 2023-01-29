@@ -79,6 +79,14 @@ export const mockContest: ResponseResolver<MockedRequest, typeof restContext> =
           {
             contestId: 1000,
             name: "problem-A",
+            index: "A",
+            rating: 800,
+            type: "PROGRAMMING",
+            tags: ["implementation"],
+          },
+          {
+            contestId: 1000,
+            name: "problem-A",
             index: "A2",
             rating: 800,
             type: "PROGRAMMING",

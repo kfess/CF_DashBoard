@@ -100,3 +100,30 @@ const contestSchema = z.object({
 });
 export const contestsSchema = z.array(contestSchema);
 export type Contest = z.infer<typeof contestSchema>;
+
+const reshapedContestSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  type: typeSchema,
+  phase: phaseSchema,
+  frozen: z.boolean(),
+  durationSeconds: z.number(),
+  startTimeSeconds: z.number(),
+  relativeTimeSeconds: z.number().optional(),
+  preparedBy: z.string().optional(),
+  websiteUrl: z.string().optional(),
+  description: z.string().optional(),
+  difficulty: z.number().optional(),
+  kind: kindSchema.optional(),
+  icpcRegion: z.string().optional(),
+  country: z.string().optional(),
+  city: z.string().optional(),
+  season: z.number().optional(),
+  // problems: problemsSchema,
+  problems: z.array(
+    z.object({ index: z.string(), indexedProblems: problemsSchema })
+  ),
+  classification: classificationSchema,
+});
+export const reshapedContestsSchema = z.array(reshapedContestSchema);
+export type ReshapedContest = z.infer<typeof reshapedContestSchema>;
