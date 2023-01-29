@@ -15,7 +15,7 @@ type Props = {
   readonly solvedCount?: number;
 };
 
-export const ProblemLinkCell: React.FC<Props> = (props: Props) => {
+export const ProblemLink: React.FC<Props> = (props: Props) => {
   const {
     showDifficulty,
     contestId,

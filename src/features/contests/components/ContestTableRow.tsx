@@ -2,7 +2,7 @@ import React from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import type { ReshapedProblem } from "@features/problems/problem";
-import { ProblemLinkCell } from "@features/problems/components/ProblemLinkCell";
+import { ProblemLink } from "@features/problems/components/ProblemLink";
 
 type Props = {
   contestId: number;
@@ -23,7 +23,7 @@ export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
         <TableCell key={problem.index}>
           {problem.indexedProblems.map((p) => (
             <div>
-              <ProblemLinkCell
+              <ProblemLink
                 showDifficulty={showDifficulty}
                 contestId={contestId}
                 problemId={p.index}
