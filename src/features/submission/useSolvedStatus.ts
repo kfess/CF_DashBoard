@@ -4,11 +4,9 @@ import { useFetchSubmissions } from "@features/submission/useFetchSubmission";
 
 export const useSolvedStatus = () => {
   const searchUser = useRecoilValue(searchUserState);
-
   const { data } = useFetchSubmissions({
     searchUser,
   });
-  console.log("data;", data);
 
   // AC
   const solvedSet = data?.result?.reduce((set, sub) => {

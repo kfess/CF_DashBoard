@@ -4,6 +4,7 @@ import TableCell from "@mui/material/TableCell";
 import type { ReshapedProblem } from "@features/problems/problem";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
+import { useThemeContext } from "@features/color/themeColor.hook";
 
 type Props = {
   contestId: number;
@@ -24,6 +25,8 @@ export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
     attemptedSet,
   } = props;
 
+  const { theme } = useThemeContext();
+
   console.log(solvedSet);
 
   return (
@@ -37,7 +40,7 @@ export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
             <div
               css={{
                 backgroundColor: solvedSet?.has(contestId + p.index)
-                  ? "black"
+                  ? theme.colors.acColor
                   : "",
               }}
             >

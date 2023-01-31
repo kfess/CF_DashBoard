@@ -5,6 +5,7 @@ import type { Classification } from "@features/contests/contest";
 import { reshapeContests, getProblemIdxes } from "@features/contests/helper";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
 import { useSolvedStatus } from "@features/submission/useSolvedStatus";
+import { LabelsChip } from "@features/bookmark/components/LabelIcon";
 
 export const ContestsPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchContests();
@@ -34,6 +35,9 @@ export const ContestsPage: React.FC = () => {
 
   return (
     <>
+      <div css={{ textAlign: "right" }}>
+        <LabelsChip />
+      </div>
       <FilterOptions
         tab={tab}
         setTab={setTab}
