@@ -56,7 +56,7 @@ export const ProblemLink: React.FC<Props> = (props: Props) => {
           {problemId + ". " + problemName}
         </a>
       </div>
-      <LabelIcon />
+      <LabelIcon contestId={contestId} index={problemId} name={problemName} />
     </Box>
   );
 };

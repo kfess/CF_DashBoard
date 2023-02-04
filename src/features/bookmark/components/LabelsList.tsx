@@ -1,12 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import { useRecoilState } from "recoil";
 import { labelsState } from "@features/bookmark/label.atom";
 import { LabelNameChip } from "./LabelIcon";
 
 export const LabelsList: React.FC = () => {
   const [labels, setLabels] = useRecoilState(labelsState);
+  const navigate = useNavigate();
 
   const editLabel = () => {};
   const deleteLabel = (id: number) => {
@@ -37,8 +40,23 @@ export const LabelsList: React.FC = () => {
                   mode="View"
                 />
               </Box>
-              <Box sx={{ width: "50%", textAlign: "left" }}>
+              <Box sx={{ width: "40%", textAlign: "left" }}>
                 {label.description}
+              </Box>
+              <Box
+                sx={{
+                  width: "10%",
+                  textAlign: "left",
+                }}
+              >
+                <Button
+                  onClick={() => {
+                    navigate(`/bookmark/labels/${label.name}`);
+                  }}
+                >
+                  <CreateOutlinedIcon />
+                  {label.problems.length}
+                </Button>
               </Box>
               <Box sx={{ width: "25%" }}>
                 <Button variant="text" onClick={editLabel}>

@@ -4,22 +4,20 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 const splitPath = (path: string): { to: string; name: string }[] =>
-  path
-    .slice(0, path.indexOf("?"))
-    .split("/")
-    .map((p, index) => {
-      if (index === 0) {
-        return { to: "/", name: "home" };
-      } else {
-        return {
-          to: path
-            .split("/")
-            .slice(0, index + 1)
-            .join("/"),
-          name: p,
-        };
-      }
-    });
+  // To Do, need the implementation for "?"
+  path.split("/").map((p, index) => {
+    if (index === 0) {
+      return { to: "/", name: "home" };
+    } else {
+      return {
+        to: path
+          .split("/")
+          .slice(0, index + 1)
+          .join("/"),
+        name: p,
+      };
+    }
+  });
 
 type Props = {
   path: string;
@@ -28,7 +26,7 @@ type Props = {
 export const CustomBreadcrumbs: React.FC<Props> = (props: Props) => {
   const { path } = props;
   const paths = splitPath(path);
-
+  console.log(paths, path);
   return (
     <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
       {paths.map((p) => (

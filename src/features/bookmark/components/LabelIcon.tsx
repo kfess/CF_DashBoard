@@ -1,12 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { z } from "zod";
 import { css } from "@emotion/react";
-import Chip from "@mui/material/Chip";
 import { alpha } from "@mui/material";
+import Chip from "@mui/material/Chip";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderOutlined from "@mui/icons-material/StarBorderOutlined";
 import { labelsState } from "@features/bookmark/label.atom";
+import { labelStateSchema } from "@features/bookmark/label.atom";
 
 const circleCss = css({
   cursor: "pointer",
@@ -20,11 +24,109 @@ const circleCss = css({
   "&:hover": { color: "#666" },
 });
 
-export const LabelIcon: React.FC = () => {
+type Props = {
+  contestId: number;
+  index: string;
+  name: string;
+};
+
+export const LabelIcon: React.FC<Props> = (props: Props) => {
+  const { contestId, index, name } = props;
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const [labels, setLabels] = useRecoilState(labelsState);
+
+  const addProblemToLabel = (
+    contestId: number,
+    index: string,
+    name: string,
+    labelId: number
+  ) => {
+    try {
+      const newProblem = { contestId, index, name };
+      setLabels((oldLabels) =>
+        oldLabels.map((label) => {
+          if (label.id === labelId) {
+            // this is ugly, Map is better
+            const alreadyAdded =
+              label.problems.filter(
+                (p) =>
+                  p.contestId === contestId &&
+                  p.index === index &&
+                  p.name === name
+              ).length > 0;
+
+            return labelStateSchema.parse({
+              ...label,
+              problems: alreadyAdded
+                ? [...label.problems]
+                : [...label.problems, newProblem],
+            });
+          } else {
+            return labelStateSchema.parse(label);
+          }
+        })
+      );
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        console.log(err);
+      }
+    }
+    setAnchorEl(null);
+  };
+
   return (
-    <span css={circleCss}>
-      <StarIcon fontSize="inherit" />
-    </span>
+    <div>
+      <div css={circleCss} id="label-button" onClick={handleClick}>
+        <StarIcon fontSize="inherit" />
+      </div>
+      <Menu
+        open={open}
+        onClose={handleClose}
+        id="label-menu"
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+      >
+        {labels.map((label) => (
+          <MenuItem
+            key={label.id}
+            onClick={() => addProblemToLabel(contestId, index, name, label.id)}
+            css={{ display: "block" }}
+          >
+            <div>
+              <span
+                css={{
+                  borderRadius: "50%",
+                  display: "inline-block",
+                  paddingTop: "10px",
+                  paddingLeft: "10px",
+                  marginRight: "5px",
+                  backgroundColor: label.color,
+                }}
+              ></span>
+              {label.name}
+            </div>
+            <div css={{ fontSize: "13px" }}>{label.description}</div>
+          </MenuItem>
+        ))}
+      </Menu>
+    </div>
   );
 };
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { labelsState } from "@features/bookmark/label.atom";
 import { LabelNameChip } from "./LabelIcon";
