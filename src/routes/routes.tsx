@@ -2,6 +2,8 @@ import { createBrowserRouter, Outlet, Navigate } from "react-router-dom";
 import { HeaderBar } from "@features/layout/components/HeaderBar";
 import { ContestsPage } from "@pages/contests";
 import { LabelsPage } from "@pages/bookmark/labels";
+import { LabelPage } from "@pages/bookmark/label/index";
+import { BookmarkPage } from "@pages/bookmark";
 
 export const router = createBrowserRouter([
   {
@@ -17,9 +19,9 @@ export const router = createBrowserRouter([
       { path: "/problems", element: <div>problems</div> },
       { path: "/achievement", element: <div>achievement</div> },
       { path: "/recommend", element: <div>recommend</div> },
-      { path: "bookmark", element: <div>bookmark</div> },
+      { path: "bookmark", element: <BookmarkPage /> },
       { path: "bookmark/labels", element: <LabelsPage /> },
-      { path: "bookmark/labels/:label", element: <div>label</div> },
+      { path: "bookmark/labels/:labelName", element: <LabelPage /> },
       { path: "/submission", element: <div>submission</div> },
       { path: "/ranking", element: <div>ranking</div> },
       { path: "/custom-contest", element: <div>custom contest</div> },
