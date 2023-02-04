@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useRecoilState } from "recoil";
+import { z } from "zod";
 import { alpha } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -12,11 +13,15 @@ import Chip from "@mui/material/Chip";
 import Tooltip from "@mui/material/Tooltip";
 import { labelsState } from "@features/bookmark/label.atom";
 import { HexaColor, generateRandomHexaColor } from "@features/color/labelColor";
+import { labelStateSchema } from "@features/bookmark/label.atom";
 
 export const LabelCreator: React.FC = () => {
   const [labels, setLabels] = useRecoilState(labelsState);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState({ value: "", errorMsg: [] as string[] });
+  const [description, setDescription] = useState({
+    value: "",
+    errorMsg: [] as string[],
+  });
   const [color, setColor] = useState(generateRandomHexaColor());
   const [showBlock, setShowBlock] = useState<boolean>(true);
 
@@ -24,18 +29,23 @@ export const LabelCreator: React.FC = () => {
     labels.length > 0 ? Math.max(...labels.map((label) => label.id)) + 1 : 0;
 
   const addLabel = () => {
-    setLabels((oldLabels) => [
-      ...oldLabels,
-      {
-        id: nextId,
-        name: name,
-        description: description,
-        color: color,
-        problems: [],
-      },
-    ]);
+    try {
+      setLabels((oldLabels) => [
+        ...oldLabels,
+        labelStateSchema.parse({
+          id: nextId,
+          name: name.value,
+          description: description.value,
+          color: color,
+          problems: [],
+        }),
+      ]);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+      }
+    }
   };
-  console.log(labels);
+
   return (
     <>
       <div css={{ textAlign: "right" }}>
@@ -53,7 +63,9 @@ export const LabelCreator: React.FC = () => {
         <Box>
           <div css={{ textAlign: "left", marginBottom: "10px" }}>
             <Chip
-              label={<div>Label Preview</div>}
+              label={
+                <div>{name.value.trim() ? name.value : "Label Preview"}</div>
+              }
               variant="filled"
               size="small"
               css={{
@@ -73,7 +85,7 @@ export const LabelCreator: React.FC = () => {
                 label="label name"
                 size="small"
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setName(event.target.value)
+                  setName({ value: event.target.value, errorMsg: "" })
                 }
               />
             </div>
@@ -83,7 +95,7 @@ export const LabelCreator: React.FC = () => {
                 label="Description (Optional)"
                 size="small"
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setDescription(event.target.value)
+                  setDescription({ value: event.target.value, errorMsg: "" })
                 }
               />
             </div>
@@ -128,7 +140,12 @@ export const LabelCreator: React.FC = () => {
             >
               Cancel
             </Button>
-            <Button variant="contained" color="success" onClick={addLabel}>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={addLabel}
+              disabled={name.value.length === 0}
+            >
               Create Label
             </Button>
           </div>

@@ -1,19 +1,43 @@
-import { atom } from "recoil";
-import type { Problem } from "@features/problems/problem";
-import type { HexaColor } from "@features/color/labelColor";
+import { atom, AtomEffect, DefaultValue } from "recoil";
+import { z } from "zod";
+import { problemSchema } from "@features/problems/problem";
 
-// type StrictOmit<T, K extends keyof T> = Omit<T, K>;
-type PickedProblem = Pick<Problem, "contestId" | "index" | "points">;
+export const labelStateSchema = z.object({
+  id: z.number().min(0),
+  name: z.string().trim().min(1, { message: "Name cannot be blank value." }),
+  description: z
+    .string()
+    .max(10, { message: "Description message is too long." })
+    .optional(),
+  color: z.string(),
+  problems: z.array(
+    problemSchema.pick({ contestId: true, index: true, name: true })
+  ),
+});
 
-type LabelState = {
-  id: number;
-  name: string;
-  description?: string;
-  color: HexaColor;
-  problems: PickedProblem[];
-};
+type LabelState = z.infer<typeof labelStateSchema>;
+
+// automatically added to localStorage when label is added
+const localStorageEffect: <T>(key: string) => AtomEffect<T> =
+  (key: string) =>
+  ({ setSelf, onSet }) => {
+    const savedValue = localStorage.getItem(key);
+
+    if (savedValue != null) {
+      setSelf(JSON.parse(savedValue));
+    }
+
+    onSet((newValue) => {
+      if (newValue instanceof DefaultValue) {
+        localStorage.removeItem(key);
+      } else {
+        localStorage.setItem(key, JSON.stringify(newValue));
+      }
+    });
+  };
 
 export const labelsState = atom<LabelState[]>({
   key: "labelsState",
   default: [],
+  effects: [localStorageEffect<LabelState[]>("labels")],
 });
