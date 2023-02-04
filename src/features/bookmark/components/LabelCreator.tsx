@@ -10,7 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import ReplayIcon from "@mui/icons-material/Replay";
 import Chip from "@mui/material/Chip";
 import Tooltip from "@mui/material/Tooltip";
-import Divider from "@mui/material/Divider";
 import { labelsState } from "@features/bookmark/label.atom";
 import { HexaColor, generateRandomHexaColor } from "@features/color/labelColor";
 
@@ -36,7 +35,7 @@ export const LabelCreator: React.FC = () => {
       },
     ]);
   };
-
+  console.log(labels);
   return (
     <>
       <div css={{ textAlign: "right" }}>
