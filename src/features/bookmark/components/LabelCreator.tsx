@@ -17,11 +17,8 @@ import { labelStateSchema } from "@features/bookmark/label.atom";
 
 export const LabelCreator: React.FC = () => {
   const [labels, setLabels] = useRecoilState(labelsState);
-  const [name, setName] = useState({ value: "", errorMsg: [] as string[] });
-  const [description, setDescription] = useState({
-    value: "",
-    errorMsg: [] as string[],
-  });
+  const [name, setName] = useState({ value: "", errorMsg: "" });
+  const [description, setDescription] = useState({ value: "", errorMsg: "" });
   const [color, setColor] = useState(generateRandomHexaColor());
   const [showBlock, setShowBlock] = useState<boolean>(true);
 
