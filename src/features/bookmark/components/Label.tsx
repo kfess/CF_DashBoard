@@ -4,8 +4,10 @@ import { useRecoilValue } from "recoil";
 import { labelsState } from "@features/bookmark/label.atom";
 import { LabelNameChip } from "./LabelIcon";
 
-export const Label: React.FC = () => {
-  const { labelName } = useParams(); // path = bookmark/labels/:labelName
+type Props = { labelName?: string };
+
+export const Label: React.FC<Props> = (props: Props) => {
+  const { labelName } = props;
   const label = useRecoilValue(labelsState).find((l) => l.name === labelName);
 
   return (

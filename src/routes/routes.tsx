@@ -4,6 +4,7 @@ import { ContestsPage } from "@pages/contests";
 import { LabelsPage } from "@pages/bookmark/labels";
 import { LabelPage } from "@pages/bookmark/label/index";
 import { BookmarkPage } from "@pages/bookmark";
+import { CustomBreadcrumbs } from "@features/ui/component/BreadCrumbs";
 
 export const router = createBrowserRouter([
   {
