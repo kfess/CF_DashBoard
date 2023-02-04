@@ -19,6 +19,7 @@ export const router = createBrowserRouter([
       { path: "/recommend", element: <div>recommend</div> },
       { path: "bookmark", element: <div>bookmark</div> },
       { path: "bookmark/labels", element: <LabelsPage /> },
+      { path: "bookmark/labels/:label", element: <div>label</div> },
       { path: "/submission", element: <div>submission</div> },
       { path: "/ranking", element: <div>ranking</div> },
       { path: "/custom-contest", element: <div>custom contest</div> },

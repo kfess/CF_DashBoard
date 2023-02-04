@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useRecoilState } from "recoil";
 import { z } from "zod";
-import { alpha } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -9,11 +8,11 @@ import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
 import ReplayIcon from "@mui/icons-material/Replay";
-import Chip from "@mui/material/Chip";
 import Tooltip from "@mui/material/Tooltip";
 import { labelsState } from "@features/bookmark/label.atom";
 import { HexaColor, generateRandomHexaColor } from "@features/color/labelColor";
 import { labelStateSchema } from "@features/bookmark/label.atom";
+import { LabelNameChip } from "./LabelIcon";
 
 export const LabelCreator: React.FC = () => {
   const [labels, setLabels] = useRecoilState(labelsState);
@@ -58,20 +57,11 @@ export const LabelCreator: React.FC = () => {
       </div>
       {showBlock && (
         <Box>
-          <div css={{ textAlign: "left", marginBottom: "10px" }}>
-            <Chip
-              label={
-                <div>{name.value.trim() ? name.value : "Label Preview"}</div>
-              }
-              variant="filled"
-              size="small"
-              css={{
-                color: color,
-                borderColor: "black",
-                backgroundColor: alpha(color, 0.15),
-              }}
-            />
-          </div>
+          <LabelNameChip
+            name={name.value.trim() ? name.value : "Label Preview"}
+            color={color}
+            mode="Preview"
+          />
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={{ xs: 1, sm: 2, md: 4 }}

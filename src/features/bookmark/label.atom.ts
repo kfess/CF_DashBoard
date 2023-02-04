@@ -7,7 +7,7 @@ export const labelStateSchema = z.object({
   name: z.string().trim().min(1, { message: "Name cannot be blank value." }),
   description: z
     .string()
-    .max(10, { message: "Description message is too long." })
+    .max(256, { message: "Description message is too long." })
     .optional(),
   color: z.string(),
   problems: z.array(
@@ -15,7 +15,7 @@ export const labelStateSchema = z.object({
   ),
 });
 
-type LabelState = z.infer<typeof labelStateSchema>;
+export type LabelState = z.infer<typeof labelStateSchema>;
 
 // automatically added to localStorage when label is added
 const localStorageEffect: <T>(key: string) => AtomEffect<T> =

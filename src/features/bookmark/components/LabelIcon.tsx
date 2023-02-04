@@ -1,8 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { css } from "@emotion/react";
 import Chip from "@mui/material/Chip";
+import { alpha } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderOutlined from "@mui/icons-material/StarBorderOutlined";
 import { labelsState } from "@features/bookmark/label.atom";
@@ -44,5 +45,46 @@ export const LabelsChip: React.FC = () => {
         navigate("/bookmark/labels");
       }}
     />
+  );
+};
+
+type Mode = "Preview" | "View";
+type LabelNameProps = { name: string; color: string; mode: Mode };
+
+export const LabelNameChip: React.FC<LabelNameProps> = (
+  props: LabelNameProps
+) => {
+  const { name, color, mode = "View" } = props;
+  const navigate = useNavigate();
+
+  return (
+    <div css={{ textAlign: "left", marginBottom: "10px" }}>
+      {mode === "Preview" ? (
+        <Chip
+          label={<div>{name}</div>}
+          variant="filled"
+          size="small"
+          css={{
+            color: color,
+            borderColor: "black",
+            backgroundColor: alpha(color, 0.15),
+          }}
+        />
+      ) : (
+        <Chip
+          label={<div>{name}</div>}
+          variant="filled"
+          size="small"
+          css={{
+            color: color,
+            borderColor: "black",
+            backgroundColor: alpha(color, 0.15),
+          }}
+          onClick={() => {
+            navigate(`/bookmark/labels/${name}`);
+          }}
+        />
+      )}
+    </div>
   );
 };
