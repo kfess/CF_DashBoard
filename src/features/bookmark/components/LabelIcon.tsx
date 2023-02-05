@@ -93,45 +93,47 @@ export const LabelIcon: React.FC<Props> = (props: Props) => {
       <div css={circleCss} id="label-button" onClick={handleClick}>
         <StarIcon fontSize="inherit" />
       </div>
-      <Menu
-        open={open}
-        onClose={handleClose}
-        id="label-menu"
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-      >
-        {labels.map((label) => (
-          <MenuItem
-            key={label.id}
-            onClick={() =>
-              addProblemToLabel(contestId, contestName, index, name, label.id)
-            }
-            css={{ display: "block" }}
-          >
-            <div>
-              <span
-                css={{
-                  borderRadius: "50%",
-                  display: "inline-block",
-                  paddingTop: "10px",
-                  paddingLeft: "10px",
-                  marginRight: "5px",
-                  backgroundColor: label.color,
-                }}
-              ></span>
-              {label.name}
-            </div>
-            <div css={{ fontSize: "13px" }}>{label.description}</div>
-          </MenuItem>
-        ))}
-      </Menu>
+      {labels.length > 0 && (
+        <Menu
+          open={open}
+          onClose={handleClose}
+          id="label-menu"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+        >
+          {labels.map((label) => (
+            <MenuItem
+              key={label.id}
+              onClick={() =>
+                addProblemToLabel(contestId, contestName, index, name, label.id)
+              }
+              css={{ display: "block" }}
+            >
+              <div>
+                <span
+                  css={{
+                    borderRadius: "50%",
+                    display: "inline-block",
+                    paddingTop: "10px",
+                    paddingLeft: "10px",
+                    marginRight: "5px",
+                    backgroundColor: label.color,
+                  }}
+                ></span>
+                {label.name}
+              </div>
+              <div css={{ fontSize: "13px" }}>{label.description}</div>
+            </MenuItem>
+          ))}
+        </Menu>
+      )}
     </div>
   );
 };
