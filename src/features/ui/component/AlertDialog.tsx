@@ -4,7 +4,8 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 
 type Props<T extends string | number> = {
   title: string;
@@ -34,10 +35,12 @@ export const ButtonWithAlertDialog = <T extends string | number>(
         {title}
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle css={{ color: "red" }}>{dialogTitle}</DialogTitle>
         <DialogContent>
-          <DialogContentText css={{ color: "red" }}>
-            {dialogText}
+          <DialogContentText>
+            <Alert severity="error">
+              <AlertTitle>{dialogTitle}</AlertTitle>
+              {dialogText}
+            </Alert>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

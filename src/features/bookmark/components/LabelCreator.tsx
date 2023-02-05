@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import { z } from "zod";
 import Stack from "@mui/material/Stack";
@@ -13,6 +13,7 @@ import { labelsState } from "@features/bookmark/label.atom";
 import { HexaColor, generateRandomHexaColor } from "@features/color/labelColor";
 import { labelStateSchema } from "@features/bookmark/label.atom";
 import { LabelNameChip } from "./LabelIcon";
+import { ColorPalette } from "@features/color/ColorPalette";
 
 export const LabelCreator: React.FC = () => {
   const [labels, setLabels] = useRecoilState(labelsState);
@@ -23,6 +24,12 @@ export const LabelCreator: React.FC = () => {
 
   const nextId =
     labels.length > 0 ? Math.max(...labels.map((label) => label.id)) + 1 : 0;
+
+  const resetInput = () => {
+    setName({ value: "", errorMsg: "" });
+    setDescription({ value: "", errorMsg: "" });
+    setColor(generateRandomHexaColor());
+  };
 
   const addLabel = () => {
     try {
@@ -40,6 +47,8 @@ export const LabelCreator: React.FC = () => {
       if (err instanceof z.ZodError) {
       }
     }
+    setShowBlock(false);
+    resetInput();
   };
 
   return (
@@ -138,93 +147,6 @@ export const LabelCreator: React.FC = () => {
           </div>
         </Box>
       )}
-    </>
-  );
-};
-
-type Props = {
-  setColor: Dispatch<SetStateAction<HexaColor>>;
-};
-
-const vividColors = [
-  "#FF0000",
-  "#FFA500",
-  "#FFD700",
-  "#008000",
-  "#008B8B",
-  "#4169E1",
-  "#0000FF",
-  "#8A2BE2",
-];
-
-const paleColors = [
-  "#FFB6C1",
-  "#FFDEAD",
-  "#F0E68C",
-  "#9ACD32",
-  "#3CB371",
-  "#6495ED",
-  "#4169E1",
-  "#9370DB",
-];
-
-const ColorPalette: React.FC<Props> = (props: Props) => {
-  const { setColor } = props;
-
-  return (
-    <>
-      <div css={{ marginBottom: "0.3rem" }}>Choose from popular colors</div>
-      {vividColors.map((c) => {
-        return (
-          <span
-            key={c}
-            css={{
-              cursor: "pointer",
-              marginRight: "0.1rem",
-              marginLeft: "0.1rem",
-            }}
-          >
-            <span
-              onClick={() => {
-                setColor(c as HexaColor);
-              }}
-              css={{
-                display: "inline-block",
-                width: "1.2rem",
-                height: "1.2rem",
-                borderRadius: "100%",
-                backgroundColor: c,
-              }}
-            ></span>
-          </span>
-        );
-      })}
-      <div></div>
-      {paleColors.map((c) => {
-        return (
-          <span
-            key={c}
-            css={{
-              cursor: "pointer",
-              marginRight: "0.1rem",
-              marginLeft: "0.1rem",
-            }}
-          >
-            <span
-              onClick={() => {
-                setColor(c as HexaColor);
-              }}
-              css={{
-                display: "inline-block",
-                width: "1.2rem",
-                height: "1.2rem",
-                borderRadius: "100%",
-                backgroundColor: c,
-              }}
-            ></span>
-          </span>
-        );
-      })}
     </>
   );
 };

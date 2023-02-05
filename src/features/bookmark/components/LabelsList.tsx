@@ -7,6 +7,7 @@ import { useRecoilState } from "recoil";
 import { labelsState } from "@features/bookmark/label.atom";
 import { LabelNameChip } from "./LabelIcon";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
+import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 
 const sortOrders = [
   "Alphabetically",
@@ -92,9 +93,13 @@ export const LabelsList: React.FC = () => {
                 <Button variant="text" onClick={editLabel}>
                   Edit
                 </Button>
-                <Button variant="text" onClick={() => deleteLabel(label.id)}>
-                  Delete
-                </Button>
+                <ButtonWithAlertDialog
+                  title="Delete"
+                  dialogText="Are you sure? Deleting a label will remove it from relevant problems."
+                  dialogTitle="Confirmation"
+                  deleteTarget={label.id}
+                  deleteFn={deleteLabel}
+                />
               </Box>
             </Box>
           ))}
