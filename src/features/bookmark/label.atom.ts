@@ -11,7 +11,9 @@ export const labelStateSchema = z.object({
     .optional(),
   color: z.string(),
   problems: z.array(
-    problemSchema.pick({ contestId: true, index: true, name: true })
+    problemSchema
+      .pick({ contestId: true, index: true, name: true })
+      .extend({ contestName: z.string() })
   ),
 });
 

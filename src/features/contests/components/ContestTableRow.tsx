@@ -47,6 +47,7 @@ export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
               <ProblemLink
                 showDifficulty={showDifficulty}
                 contestId={contestId}
+                contestName={contestName}
                 problemId={p.index}
                 problemName={p.name}
                 difficulty={p.rating}

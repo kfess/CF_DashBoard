@@ -37,7 +37,7 @@ import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-const mainField = ["Contests", "Problems", "Recommend", "Bookmark"] as const;
+const mainField = ["Contests", "Problems", "Recommend", "Labels"] as const;
 type MainField = typeof mainField[number];
 
 const activityField = [
@@ -90,8 +90,8 @@ export const mainItems: readonly Item[] = [
     notSelectedIcon: <ThumbUpAltOutlinedIcon />,
   },
   {
-    field: "Bookmark",
-    link: "/bookmark",
+    field: "Labels",
+    link: "/labels",
     selectedIcon: <StarIcon />,
     notSelectedIcon: <StarBorderOutlinedIcon />,
   },

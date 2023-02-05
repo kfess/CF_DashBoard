@@ -9,6 +9,7 @@ import { useThemeContext } from "@features/color/themeColor.hook";
 type Props = {
   readonly showDifficulty: boolean;
   readonly contestId: number;
+  readonly contestName: string;
   readonly problemId: string;
   readonly problemName: string;
   readonly difficulty?: number;
@@ -19,6 +20,7 @@ export const ProblemLink: React.FC<Props> = (props: Props) => {
   const {
     showDifficulty,
     contestId,
+    contestName,
     problemId,
     problemName,
     difficulty,
@@ -56,7 +58,12 @@ export const ProblemLink: React.FC<Props> = (props: Props) => {
           {problemId + ". " + problemName}
         </a>
       </div>
-      <LabelIcon contestId={contestId} index={problemId} name={problemName} />
+      <LabelIcon
+        contestId={contestId}
+        contestName={contestName}
+        index={problemId}
+        name={problemName}
+      />
     </Box>
   );
 };

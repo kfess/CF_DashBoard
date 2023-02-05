@@ -34,7 +34,10 @@ export const DropDownMenuButton = <T extends string | number>(
       <Button
         onClick={handleClick}
         endIcon={open ? <KeyboardArrowDownIcon /> : <KeyboardArrowLeftIcon />}
-        css={{ "&:hover": { textDecorationLine: "underline" } }}
+        css={{
+          textTransform: "none",
+          "&:hover": { textDecorationLine: "underline" },
+        }}
       >
         {title}
       </Button>

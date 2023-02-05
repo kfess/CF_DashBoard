@@ -74,7 +74,7 @@ const LabelItem: React.FC<Props> = (props: Props) => {
           >
             <Button
               onClick={() => {
-                navigate(`/bookmark/labels/${label.name}`);
+                navigate(`/labels/${label.name}`);
               }}
             >
               <CreateOutlinedIcon />
@@ -86,7 +86,7 @@ const LabelItem: React.FC<Props> = (props: Props) => {
               <Button
                 variant="text"
                 onClick={toggleShowBlock}
-                css={{ "&:hover": { textDecorationLine: "underline" } }}
+                css={{ textTransform:"none", "&:hover": { textDecorationLine: "underline" } }}
               >
                 Edit
               </Button>

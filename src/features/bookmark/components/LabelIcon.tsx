@@ -4,6 +4,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { z } from "zod";
 import { css } from "@emotion/react";
 import { alpha } from "@mui/material";
+import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -26,12 +27,13 @@ const circleCss = css({
 
 type Props = {
   contestId: number;
+  contestName: string;
   index: string;
   name: string;
 };
 
 export const LabelIcon: React.FC<Props> = (props: Props) => {
-  const { contestId, index, name } = props;
+  const { contestId, contestName, index, name } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -47,12 +49,13 @@ export const LabelIcon: React.FC<Props> = (props: Props) => {
 
   const addProblemToLabel = (
     contestId: number,
+    contestName: string,
     index: string,
     name: string,
     labelId: number
   ) => {
     try {
-      const newProblem = { contestId, index, name };
+      const newProblem = { contestId, contestName, index, name };
       setLabels((oldLabels) =>
         oldLabels.map((label) => {
           if (label.id === labelId) {
@@ -61,6 +64,7 @@ export const LabelIcon: React.FC<Props> = (props: Props) => {
               label.problems.filter(
                 (p) =>
                   p.contestId === contestId &&
+                  p.contestName === contestName &&
                   p.index === index &&
                   p.name === name
               ).length > 0;
@@ -106,7 +110,9 @@ export const LabelIcon: React.FC<Props> = (props: Props) => {
         {labels.map((label) => (
           <MenuItem
             key={label.id}
-            onClick={() => addProblemToLabel(contestId, index, name, label.id)}
+            onClick={() =>
+              addProblemToLabel(contestId, contestName, index, name, label.id)
+            }
             css={{ display: "block" }}
           >
             <div>
@@ -144,7 +150,7 @@ export const LabelsChip: React.FC = () => {
       }
       variant="outlined"
       onClick={() => {
-        navigate("/bookmark/labels");
+        navigate("/labels");
       }}
     />
   );
@@ -160,7 +166,7 @@ export const LabelNameChip: React.FC<LabelNameProps> = (
   const navigate = useNavigate();
 
   return (
-    <div css={{ textAlign: "left", marginBottom: "10px" }}>
+    <Box sx={{ p: 1, textAlign: "left" }}>
       {mode === "Preview" ? (
         <Chip
           label={<div>{name.trim().length > 0 ? name : "Label Preview"}</div>}
@@ -170,6 +176,7 @@ export const LabelNameChip: React.FC<LabelNameProps> = (
             color: color,
             borderColor: "black",
             backgroundColor: alpha(color, 0.15),
+            fontWeight: "bold",
           }}
         />
       ) : (
@@ -181,12 +188,13 @@ export const LabelNameChip: React.FC<LabelNameProps> = (
             color: color,
             borderColor: "black",
             backgroundColor: alpha(color, 0.15),
+            fontWeight: "bold",
           }}
           onClick={() => {
-            navigate(`/bookmark/labels/${name}`);
+            navigate(`/labels/${name}`);
           }}
         />
       )}
-    </div>
+    </Box>
   );
 };

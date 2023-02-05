@@ -34,7 +34,10 @@ export const ButtonWithAlertDialog = <T extends string | number>(
       <Button
         variant="text"
         onClick={handleClickOpen}
-        css={{ "&:hover": { textDecorationLine: "underline" } }}
+        css={{
+          textTransform: "none",
+          "&:hover": { textDecorationLine: "underline" },
+        }}
       >
         {title}
       </Button>
@@ -48,12 +51,15 @@ export const ButtonWithAlertDialog = <T extends string | number>(
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose} css={{ textTransform: "none" }}>
+            Cancel
+          </Button>
           <Button
             onClick={() => {
               deleteFn(deleteTarget);
               setOpen(false);
             }}
+            css={{ textTransform: "none" }}
           >
             OK
           </Button>

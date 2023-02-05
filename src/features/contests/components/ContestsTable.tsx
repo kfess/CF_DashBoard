@@ -66,8 +66,8 @@ export const ContestsTable: React.FC<Props> = (props: Props) => {
                 .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                 .map((contest) => (
                   <ContestTableRow
-                    contestId={contest.id}
-                    contestName={contest.name}
+                    contestId={contest.contestId}
+                    contestName={contest.contestName}
                     problems={contest.problems}
                     showDifficulty={showDifficulty}
                     solvedSet={solvedSet}

@@ -80,9 +80,9 @@ const kind = [
 ] as const;
 export type Kind = typeof kind[number];
 
-const contestSchema = z.object({
-  id: z.number(),
-  name: z.string(),
+export const contestSchema = z.object({
+  contestId: z.number(),
+  contestName: z.string(),
   type: typeSchema,
   phase: phaseSchema,
   frozen: z.boolean(),
@@ -107,8 +107,8 @@ export type Contest = z.infer<typeof contestSchema>;
 // need "reshape" for displaying contest table
 //by groupBying problems with the same index (A, A2)
 const reshapedContestSchema = z.object({
-  id: z.number(),
-  name: z.string(),
+  contestId: z.number(),
+  contestName: z.string(),
   type: typeSchema,
   phase: phaseSchema,
   frozen: z.boolean(),

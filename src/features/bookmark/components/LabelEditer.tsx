@@ -155,6 +155,7 @@ export const LabelEditor: React.FC<Props> = (props: Props) => {
             variant="contained"
             color="secondary"
             size="small"
+            css={{ textTransform: "none" }}
           >
             Cancel
           </Button>
@@ -164,6 +165,7 @@ export const LabelEditor: React.FC<Props> = (props: Props) => {
             variant="contained"
             color="success"
             size="small"
+            css={{ textTransform: "none" }}
           >
             Save Changes
           </Button>

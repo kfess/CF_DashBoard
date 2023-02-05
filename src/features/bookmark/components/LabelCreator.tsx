@@ -63,6 +63,7 @@ export const LabelCreator: React.FC = () => {
           variant="contained"
           color="primary"
           size="small"
+          css={{ textTransform: "none" }}
         >
           New Label
         </Button>
@@ -138,6 +139,7 @@ export const LabelCreator: React.FC = () => {
                 variant="contained"
                 color="secondary"
                 size="small"
+                css={{ textTransform: "none" }}
               >
                 Cancel
               </Button>
@@ -147,6 +149,7 @@ export const LabelCreator: React.FC = () => {
                 variant="contained"
                 color="success"
                 size="small"
+                css={{ textTransform: "none" }}
               >
                 Create Label
               </Button>
