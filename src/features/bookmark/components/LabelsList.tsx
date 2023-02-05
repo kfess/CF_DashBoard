@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import CheckIcon from "@mui/icons-material/Check";
+import SvgIcon from "@mui/material/SvgIcon";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -82,7 +83,11 @@ export const LabelsList: React.FC = () => {
                       setAnchorEl(null);
                     }}
                   >
-                    {sortOrder === order && <CheckIcon fontSize="small" />}
+                    {sortOrder === order ? (
+                      <CheckIcon fontSize="small" />
+                    ) : (
+                      <SvgIcon fontSize="small" />
+                    )}
                     {sortOrder}
                   </MenuItem>
                 ))}
