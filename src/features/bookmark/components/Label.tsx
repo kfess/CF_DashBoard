@@ -2,6 +2,7 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { labelsState } from "@features/bookmark/label.atom";
 import { LabelNameChip } from "./LabelIcon";
+import { labelStateSchema } from "@features/bookmark/label.atom";
 
 type Props = { labelName?: string };
 
