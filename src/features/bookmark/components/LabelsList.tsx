@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useRecoilState } from "recoil";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import { labelsState } from "@features/bookmark/label.atom";
 import type { LabelState } from "@features/bookmark/label.atom";
@@ -11,6 +12,7 @@ import { LabelEditor } from "@features/bookmark/components/LabelEditer";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { HexaColor } from "@features/color/labelColor";
+import { ButtonGroup } from "@mui/material";
 
 type Props = {
   label: LabelState;
@@ -50,11 +52,18 @@ const LabelItem: React.FC<Props> = (props: Props) => {
   return (
     <>
       {!showBlock ? (
-        <Box sx={{ p: 1, display: "flex" }}>
+        <Box
+          sx={{
+            p: 1,
+            paddingTop: "15px",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
           <Box sx={{ width: "25%", textAlign: "left" }}>
             <LabelNameChip name={name.value} color={label.color} mode="View" />
           </Box>
-          <Box sx={{ width: "40%", textAlign: "left" }}>
+          <Box sx={{ width: "40%", textAlign: "left", fontSize: "14px" }}>
             {label.description}
           </Box>
           <Box
@@ -73,25 +82,27 @@ const LabelItem: React.FC<Props> = (props: Props) => {
             </Button>
           </Box>
           <Box sx={{ width: "25%" }}>
-            <Button variant="text" onClick={toggleShowBlock}>
-              Edit
-            </Button>
-            <ButtonWithAlertDialog
-              title="Delete"
-              dialogText="Are you sure? Deleting a label will remove it from relevant problems."
-              dialogTitle="Confirmation"
-              deleteTarget={label.id}
-              deleteFn={deleteLabel}
-            />
+            <ButtonGroup>
+              <Button
+                variant="text"
+                onClick={toggleShowBlock}
+                css={{ "&:hover": { textDecorationLine: "underline" } }}
+              >
+                Edit
+              </Button>
+              <ButtonWithAlertDialog
+                title="Delete"
+                dialogText="Are you sure? Deleting a label will remove it from relevant problems."
+                dialogTitle="Confirmation"
+                deleteTarget={label.id}
+                deleteFn={deleteLabel}
+              />
+            </ButtonGroup>
           </Box>
         </Box>
       ) : (
-        <Box sx={{ p: 1 }}>
-          <LabelNameChip
-            name={name.value}
-            color={color}
-            mode="View"
-          />
+        <Box sx={{ p: 1, paddingTop: "15px" }}>
+          <LabelNameChip name={name.value} color={color} mode="View" />
           <LabelEditor
             id={label.id}
             name={name}
@@ -157,8 +168,12 @@ export const LabelItems: React.FC = () => {
           />
         </Box>
       </Box>
+      <Divider />
       {sortLabels(labels, order).map((label) => (
-        <LabelItem key={label.name} label={label} />
+        <>
+          <LabelItem key={label.name} label={label} />
+          <Divider />
+        </>
       ))}
     </Box>
   );

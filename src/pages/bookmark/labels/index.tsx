@@ -14,7 +14,6 @@ export const LabelsPage: React.FC = () => {
       <h2 css={{ textAlign: "left" }}>Bookmark Labels</h2>
       <Divider />
       <LabelCreator />
-      <Divider />
       <LabelItems />
     </>
   );
