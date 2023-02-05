@@ -1,13 +1,91 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useRecoilState } from "recoil";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
-import { useRecoilState } from "recoil";
 import { labelsState } from "@features/bookmark/label.atom";
-import { LabelNameChip } from "./LabelIcon";
+import type { LabelState } from "@features/bookmark/label.atom";
+import { LabelNameChip } from "@features/bookmark/components/LabelIcon";
+import { LabelEditor } from "@features/bookmark/components/LabelEditer";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
+import { HexaColor } from "@features/color/labelColor";
+
+type Props = {
+  label: LabelState;
+};
+
+const LabelItem: React.FC<Props> = (props: Props) => {
+  const { label } = props;
+  const navigate = useNavigate();
+  const [labels, setLabels] = useRecoilState(labelsState);
+
+  const [name, setName] = useState({ value: label.name, errorMsg: "" });
+  const [description, setDescription] = useState({
+    value: label.description,
+    errorMsg: "",
+  });
+  const [color, setColor] = useState(label.color);
+
+  const [showBlock, setShowBlock] = useState<boolean>(false);
+  const toggleShowBlock = () => setShowBlock(!showBlock);
+
+  const deleteLabel = (id: number) => {
+    setLabels(labels.filter((l) => l.id !== id));
+  };
+
+  return (
+    <>
+      <Box sx={{ p: 1, m: 1, display: "flex" }}>
+        <Box sx={{ width: "25%", textAlign: "left" }}>
+          <LabelNameChip name={label.name} color={label.color} mode="View" />
+        </Box>
+        <Box sx={{ width: "40%", textAlign: "left" }}>{label.description}</Box>
+        <Box
+          sx={{
+            width: "10%",
+            textAlign: "left",
+          }}
+        >
+          <Button
+            onClick={() => {
+              navigate(`/bookmark/labels/${label.name}`);
+            }}
+          >
+            <CreateOutlinedIcon />
+            {label.problems.length}
+          </Button>
+        </Box>
+        <Box sx={{ width: "25%" }}>
+          <Button variant="text" onClick={toggleShowBlock}>
+            Edit
+          </Button>
+          <ButtonWithAlertDialog
+            title="Delete"
+            dialogText="Are you sure? Deleting a label will remove it from relevant problems."
+            dialogTitle="Confirmation"
+            deleteTarget={label.id}
+            deleteFn={deleteLabel}
+          />
+        </Box>
+      </Box>
+      {showBlock && (
+        <LabelEditor
+          id={label.id}
+          name={name}
+          setName={setName}
+          description={description}
+          setDescription={setDescription}
+          color={color as HexaColor}
+          setColor={setColor}
+          showBlock={showBlock}
+          toggleShowBlock={toggleShowBlock}
+        />
+      )}
+    </>
+  );
+};
 
 const sortOrders = [
   "Alphabetically",
@@ -17,17 +95,8 @@ const sortOrders = [
 ] as const;
 type SortOrder = typeof sortOrders[number];
 
-export const LabelsList: React.FC = () => {
-  const [labels, setLabels] = useRecoilState(labelsState);
-  const navigate = useNavigate();
-
-  const editLabel = () => {};
-  const deleteLabel = (id: number) => {
-    setLabels(labels.filter((label) => label.id !== id));
-  };
-
-  const [order, setOrder] = useState<SortOrder>("Alphabetically");
-  const sortedLabels = [...labels].sort((a, b) => {
+const sortLabels = (labels: LabelState[], order: SortOrder) => {
+  return [...labels].sort((a, b) => {
     switch (order) {
       case "Alphabetically":
         return a.name.localeCompare(b.name);
@@ -39,72 +108,35 @@ export const LabelsList: React.FC = () => {
         return a.problems.length - b.problems.length;
     }
   });
+};
+
+export const LabelItems: React.FC = () => {
+  const labels = useRecoilValue(labelsState);
+  const [order, setOrder] = useState<SortOrder>("Alphabetically");
 
   return (
-    <>
-      <div css={{ width: "100%" }}>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <Box
-            sx={{
-              p: 1,
-              m: 1,
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <Box>{labels.length} labels</Box>
-            <Box>
-              <DropDownMenuButton
-                title="sort"
-                items={sortOrders}
-                selectedItem={order}
-                setSelectedItem={setOrder}
-              />
-            </Box>
-          </Box>
-          {sortedLabels.map((label) => (
-            <Box sx={{ p: 1, m: 1, display: "flex" }}>
-              <Box sx={{ width: "25%", textAlign: "left" }}>
-                <LabelNameChip
-                  name={label.name}
-                  color={label.color}
-                  mode="View"
-                />
-              </Box>
-              <Box sx={{ width: "40%", textAlign: "left" }}>
-                {label.description}
-              </Box>
-              <Box
-                sx={{
-                  width: "10%",
-                  textAlign: "left",
-                }}
-              >
-                <Button
-                  onClick={() => {
-                    navigate(`/bookmark/labels/${label.name}`);
-                  }}
-                >
-                  <CreateOutlinedIcon />
-                  {label.problems.length}
-                </Button>
-              </Box>
-              <Box sx={{ width: "25%" }}>
-                <Button variant="text" onClick={editLabel}>
-                  Edit
-                </Button>
-                <ButtonWithAlertDialog
-                  title="Delete"
-                  dialogText="Are you sure? Deleting a label will remove it from relevant problems."
-                  dialogTitle="Confirmation"
-                  deleteTarget={label.id}
-                  deleteFn={deleteLabel}
-                />
-              </Box>
-            </Box>
-          ))}
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <Box
+        sx={{
+          p: 1,
+          m: 1,
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Box>{labels.length} labels</Box>
+        <Box>
+          <DropDownMenuButton
+            title="sort"
+            items={sortOrders}
+            selectedItem={order}
+            setSelectedItem={setOrder}
+          />
         </Box>
-      </div>
-    </>
+      </Box>
+      {sortLabels(labels, order).map((label) => (
+        <LabelItem key={label.name} label={label} />
+      ))}
+    </Box>
   );
 };

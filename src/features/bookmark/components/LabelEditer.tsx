@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { useRecoilState } from "recoil";
 import { z } from "zod";
 import Stack from "@mui/material/Stack";
@@ -16,31 +16,49 @@ import { labelStateSchema } from "@features/bookmark/label.atom";
 import { LabelNameChip } from "./LabelIcon";
 import { ColorPalette } from "@features/color/ColorPalette";
 
-export const LabelCreator: React.FC = () => {
+type NameProps = {
+  value: string;
+  errorMsg: string;
+};
+
+type DescriptionProps = {
+  value: string | undefined;
+  errorMsg: string;
+};
+
+type Props = {
+  id: number;
+  name: NameProps;
+  setName: (name: NameProps) => void;
+  description: DescriptionProps;
+  setDescription: Dispatch<SetStateAction<DescriptionProps>>;
+  color: HexaColor;
+  setColor: (color: HexaColor) => void;
+  showBlock: boolean;
+  toggleShowBlock: () => void;
+};
+
+export const LabelEditor: React.FC<Props> = (props: Props) => {
+  const {
+    id,
+    name,
+    setName,
+    description,
+    setDescription,
+    color,
+    setColor,
+    showBlock,
+    toggleShowBlock,
+  } = props;
+
   const [labels, setLabels] = useRecoilState(labelsState);
 
-  const [name, setName] = useState({ value: "", errorMsg: "" });
-  const [description, setDescription] = useState({ value: "", errorMsg: "" });
-  const [color, setColor] = useState(generateRandomHexaColor());
-
-  const [showBlock, setShowBlock] = useState<boolean>(true);
-  const toggleShowBlock = () => setShowBlock(!showBlock);
-
-  const nextId =
-    labels.length > 0 ? Math.max(...labels.map((label) => label.id)) + 1 : 0;
-
-  const resetInput = () => {
-    setName({ value: "", errorMsg: "" });
-    setDescription({ value: "", errorMsg: "" });
-    setColor(generateRandomHexaColor());
-  };
-
-  const addLabel = () => {
+  const editLabel = () => {
     try {
       setLabels((oldLabels) => [
         ...oldLabels,
         labelStateSchema.parse({
-          id: nextId,
+          id: id,
           name: name.value,
           description: description.value,
           color: color,
@@ -51,29 +69,14 @@ export const LabelCreator: React.FC = () => {
       if (err instanceof z.ZodError) {
       }
     }
-    setShowBlock(false);
-    resetInput();
+    toggleShowBlock();
   };
 
   return (
     <>
-      <Box sx={{ p: 1, display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          onClick={toggleShowBlock}
-          variant="contained"
-          color="primary"
-          size="small"
-        >
-          New Label
-        </Button>
-      </Box>
+      <Box sx={{ p: 1, display: "flex", justifyContent: "flex-end" }}></Box>
       {showBlock && (
         <>
-          <LabelNameChip
-            name={name.value.trim() ? name.value : "Label Preview"}
-            color={color}
-            mode="Preview"
-          />
           <Box sx={{ display: "flex" }}>
             <Stack
               direction={{ xs: "column", sm: "row" }}
@@ -84,6 +87,7 @@ export const LabelCreator: React.FC = () => {
                 <TextField
                   label="label name"
                   size="small"
+                  defaultValue={name.value}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                     setName({ value: event.target.value, errorMsg: "" })
                   }
@@ -96,6 +100,7 @@ export const LabelCreator: React.FC = () => {
                 <TextField
                   label="Description (Optional)"
                   size="small"
+                  defaultValue={description.value}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                     setDescription({ value: event.target.value, errorMsg: "" })
                   }
@@ -146,7 +151,7 @@ export const LabelCreator: React.FC = () => {
                 Cancel
               </Button>
               <Button
-                onClick={addLabel}
+                onClick={editLabel}
                 disabled={name.value.length === 0}
                 variant="contained"
                 color="success"
