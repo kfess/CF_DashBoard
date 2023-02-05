@@ -69,11 +69,7 @@ export const LabelCreator: React.FC = () => {
       </Box>
       {showBlock && (
         <>
-          <LabelNameChip
-            name={name.value.trim() ? name.value : "Label Preview"}
-            color={color}
-            mode="Preview"
-          />
+          <LabelNameChip name={name.value} color={color} mode="Preview" />
           <Box sx={{ display: "flex" }}>
             <Stack
               direction={{ xs: "column", sm: "row" }}

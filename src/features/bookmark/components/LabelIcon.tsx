@@ -163,7 +163,7 @@ export const LabelNameChip: React.FC<LabelNameProps> = (
     <div css={{ textAlign: "left", marginBottom: "10px" }}>
       {mode === "Preview" ? (
         <Chip
-          label={<div>{name}</div>}
+          label={<div>{name.trim().length > 0 ? name : "Label Preview"}</div>}
           variant="filled"
           size="small"
           css={{
@@ -174,7 +174,7 @@ export const LabelNameChip: React.FC<LabelNameProps> = (
         />
       ) : (
         <Chip
-          label={<div>{name}</div>}
+          label={<div>{name.trim().length > 0 ? name : "Label Preview"}</div>}
           variant="filled"
           size="small"
           css={{

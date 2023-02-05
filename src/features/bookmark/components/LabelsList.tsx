@@ -87,7 +87,11 @@ const LabelItem: React.FC<Props> = (props: Props) => {
         </Box>
       ) : (
         <Box sx={{ p: 1 }}>
-          <LabelNameChip name={name.value} color={color} mode="View" />
+          <LabelNameChip
+            name={name.value}
+            color={color}
+            mode="View"
+          />
           <LabelEditor
             id={label.id}
             name={name}
