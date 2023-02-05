@@ -18,15 +18,27 @@ type Props = {
 
 const LabelItem: React.FC<Props> = (props: Props) => {
   const { label } = props;
+
   const navigate = useNavigate();
   const [labels, setLabels] = useRecoilState(labelsState);
 
-  const [name, setName] = useState({ value: label.name, errorMsg: "" });
+  const [name, setName] = useState({
+    value: label.name,
+    errorMsg: "",
+  });
+
   const [description, setDescription] = useState({
     value: label.description,
     errorMsg: "",
   });
+
   const [color, setColor] = useState(label.color);
+
+  const [defaultName, defaultDescription, defaultColor] = [
+    label.name,
+    label.description,
+    label.color,
+  ];
 
   const [showBlock, setShowBlock] = useState<boolean>(false);
   const toggleShowBlock = () => setShowBlock(!showBlock);
@@ -37,51 +49,59 @@ const LabelItem: React.FC<Props> = (props: Props) => {
 
   return (
     <>
-      <Box sx={{ p: 1, m: 1, display: "flex" }}>
-        <Box sx={{ width: "25%", textAlign: "left" }}>
-          <LabelNameChip name={label.name} color={label.color} mode="View" />
-        </Box>
-        <Box sx={{ width: "40%", textAlign: "left" }}>{label.description}</Box>
-        <Box
-          sx={{
-            width: "10%",
-            textAlign: "left",
-          }}
-        >
-          <Button
-            onClick={() => {
-              navigate(`/bookmark/labels/${label.name}`);
+      {!showBlock ? (
+        <Box sx={{ p: 1, display: "flex" }}>
+          <Box sx={{ width: "25%", textAlign: "left" }}>
+            <LabelNameChip name={name.value} color={label.color} mode="View" />
+          </Box>
+          <Box sx={{ width: "40%", textAlign: "left" }}>
+            {label.description}
+          </Box>
+          <Box
+            sx={{
+              width: "10%",
+              textAlign: "left",
             }}
           >
-            <CreateOutlinedIcon />
-            {label.problems.length}
-          </Button>
+            <Button
+              onClick={() => {
+                navigate(`/bookmark/labels/${label.name}`);
+              }}
+            >
+              <CreateOutlinedIcon />
+              {label.problems.length}
+            </Button>
+          </Box>
+          <Box sx={{ width: "25%" }}>
+            <Button variant="text" onClick={toggleShowBlock}>
+              Edit
+            </Button>
+            <ButtonWithAlertDialog
+              title="Delete"
+              dialogText="Are you sure? Deleting a label will remove it from relevant problems."
+              dialogTitle="Confirmation"
+              deleteTarget={label.id}
+              deleteFn={deleteLabel}
+            />
+          </Box>
         </Box>
-        <Box sx={{ width: "25%" }}>
-          <Button variant="text" onClick={toggleShowBlock}>
-            Edit
-          </Button>
-          <ButtonWithAlertDialog
-            title="Delete"
-            dialogText="Are you sure? Deleting a label will remove it from relevant problems."
-            dialogTitle="Confirmation"
-            deleteTarget={label.id}
-            deleteFn={deleteLabel}
+      ) : (
+        <Box sx={{ p: 1 }}>
+          <LabelNameChip name={name.value} color={color} mode="View" />
+          <LabelEditor
+            id={label.id}
+            name={name}
+            setName={setName}
+            defaultName={defaultName}
+            description={description}
+            setDescription={setDescription}
+            defaultDescription={defaultDescription}
+            color={color as HexaColor}
+            setColor={setColor}
+            defaultColor={defaultColor as HexaColor}
+            toggleShowBlock={toggleShowBlock}
           />
         </Box>
-      </Box>
-      {showBlock && (
-        <LabelEditor
-          id={label.id}
-          name={name}
-          setName={setName}
-          description={description}
-          setDescription={setDescription}
-          color={color as HexaColor}
-          setColor={setColor}
-          showBlock={showBlock}
-          toggleShowBlock={toggleShowBlock}
-        />
       )}
     </>
   );
@@ -119,7 +139,6 @@ export const LabelItems: React.FC = () => {
       <Box
         sx={{
           p: 1,
-          m: 1,
           display: "flex",
           justifyContent: "space-between",
         }}
