@@ -11,8 +11,8 @@ export const mockContest: ResponseResolver<MockedRequest, typeof restContext> =
   (req, res, ctx) => {
     const globalContests: Contest[] = range(1, 10).map((n) => {
       return {
-        id: n,
-        name: `Global-Contest-${n}`,
+        contestId: n,
+        contestName: `Global-Contest-${n}`,
         type: "CF",
         classification: "Global",
         frozen: false,
@@ -74,8 +74,8 @@ export const mockContest: ResponseResolver<MockedRequest, typeof restContext> =
 
     const div1Contests: Contest[] = range(11, 20).map((n) => {
       return {
-        id: n,
-        name: `div.1-Contest-${n}`,
+        contestId: n,
+        contestName: `div.1-Contest-${n}`,
         type: "CF",
         classification: "Global",
         frozen: false,

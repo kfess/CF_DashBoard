@@ -1,16 +1,16 @@
 import React from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { Label } from "@features/bookmark/components/Label";
+import { LabeledProblems } from "@features/bookmark/components/LabeledProblems";
 import { CustomBreadcrumbs } from "@features/ui/component/BreadCrumbs";
 
 export const LabelPage: React.FC = () => {
   const { pathname } = useLocation();
-  const { labelName } = useParams(); // path = bookmark/labels/:labelName
+  const { labelName } = useParams(); // path = /labels/:labelName
 
   return (
     <>
       <CustomBreadcrumbs path={pathname} />
-      <Label labelName={labelName} />
+      <LabeledProblems labelName={labelName} />
     </>
   );
 };
