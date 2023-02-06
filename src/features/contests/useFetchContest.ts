@@ -20,3 +20,17 @@ export const useFetchContests = () => {
 
   return { data, isError, error, isLoading };
 };
+
+export const useContestIdNameMap = () => {
+  const { data, isError, error, isLoading } = useQuery<Contest[], Error>({
+    queryKey: ["contests"],
+    queryFn: fetchContests,
+  });
+
+  const map = data?.reduce((m, d) => {
+    m.set(d.contestId, d.contestName);
+    return m;
+  }, new Map<number, string>());
+
+  return { map, isError, error, isLoading };
+};

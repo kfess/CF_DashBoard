@@ -16,17 +16,17 @@ export const mockSubmission: ResponseResolver<
 > = (req, res, ctx) => {
   const globalUserSubmissions: Submission[] = range(1, 5).map((n) => {
     return {
-      submissionId: n,
+      id: n,
       contestId: n,
       creationTimeSeconds: 1,
       relativeTimeSeconds: 1,
       author: {
         contestId: n,
-        members: { handle: "testUser" },
+        members: [{ handle: "testUser" }],
         participantType: "CONTESTANT",
         ghost: false,
       },
-      programmingLanuguage: "Rust",
+      programmingLanguage: "Rust",
       verdict: "OK",
       testset: "TESTS",
       timeConsumedMillis: 1,
@@ -44,17 +44,17 @@ export const mockSubmission: ResponseResolver<
 
   const div1UserSubmissions: Submission[] = range(11, 15).map((n) => {
     return {
-      submissionId: n,
+      id: n,
       contestId: n,
       creationTimeSeconds: 1,
       relativeTimeSeconds: 1,
       author: {
         contestId: n,
-        members: { handle: "testUser" },
+        members: [{ handle: "testUser" }],
         participantType: "CONTESTANT",
         ghost: false,
       },
-      programmingLanuguage: "Rust",
+      programmingLanguage: "Rust",
       verdict: "OK",
       testset: "TESTS",
       timeConsumedMillis: 1,

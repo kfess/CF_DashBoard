@@ -3,6 +3,7 @@ import { HeaderBar } from "@features/layout/components/HeaderBar";
 import { ContestsPage } from "@pages/contests";
 import { LabelsPage } from "@pages/bookmark/labels";
 import { LabelPage } from "@pages/bookmark/label/index";
+import { SubmissionPage } from "@pages/submission";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
       { path: "/recommend", element: <div>recommend</div> },
       { path: "labels", element: <LabelsPage /> },
       { path: "labels/:labelName", element: <LabelPage /> },
-      { path: "/submission", element: <div>submission</div> },
+      { path: "/submission", element: <SubmissionPage /> },
       { path: "/ranking", element: <div>ranking</div> },
       { path: "/custom-contest", element: <div>custom contest</div> },
       { path: "/api", element: <div>api</div> },

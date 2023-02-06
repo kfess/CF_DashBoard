@@ -31,7 +31,7 @@ type ParticipantType = typeof participantType[number];
 // party
 const partySchema = z.object({
   contestId: z.number(),
-  members: memberSchema,
+  members: z.array(memberSchema),
   participantType: participantTypeSchema,
   teamId: z.number().optional(),
   teamName: z.string().optional(),
@@ -117,13 +117,13 @@ type Testset = typeof testset[number];
 
 // submission
 const submissionSchema = z.object({
-  submissionId: z.number(),
+  id: z.number(),
   contestId: z.number().optional(),
   creationTimeSeconds: z.number(),
   relativeTimeSeconds: z.number(),
   problem: problemSchema,
   author: partySchema,
-  programmingLanuguage: z.string(),
+  programmingLanguage: z.string(),
   verdict: verdictSchema,
   testset: testsetSchema,
   passedTestCount: z.number().optional(),
@@ -142,3 +142,15 @@ export const submissionApiSchema = z.object({
   comment: z.optional(z.string()),
 });
 export type SubmissionAPI = z.infer<typeof submissionApiSchema>;
+
+export const okSubmissionApiSchema = z.object({
+  status: statusSchema,
+  result: z.array(submissionSchema),
+});
+export type OkSubmissionAPI = z.infer<typeof okSubmissionApiSchema>;
+
+export const ngSubmissionApiSchema = z.object({
+  status: statusSchema,
+  comment: z.string(),
+});
+export type NgSubmissionAPI = z.infer<typeof ngSubmissionApiSchema>;
