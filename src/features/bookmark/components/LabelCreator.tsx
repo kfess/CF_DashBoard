@@ -11,7 +11,11 @@ import IconButton from "@mui/material/IconButton";
 import ReplayIcon from "@mui/icons-material/Replay";
 import Tooltip from "@mui/material/Tooltip";
 import { labelsState } from "@features/bookmark/label.atom";
-import { HexaColor, generateRandomHexaColor } from "@features/color/labelColor";
+import {
+  HexaColor,
+  generateRandomHexaColor,
+  isValidHexaColor,
+} from "@features/color/labelColor";
 import { labelStateSchema } from "@features/bookmark/label.atom";
 import { LabelNameChip } from "./LabelIcon";
 import { ColorPalette } from "@features/color/ColorPalette";
@@ -70,8 +74,12 @@ export const LabelCreator: React.FC = () => {
       </Box>
       {showBlock && (
         <>
-          <LabelNameChip name={name.value} color={color} mode="Preview" />
-          <Box sx={{ display: "flex" }}>
+          <LabelNameChip
+            name={name.value}
+            color={isValidHexaColor(color) ? color : "#000000"}
+            mode="Preview"
+          />
+          <Box component="form" autoComplete="off" sx={{ display: "flex" }}>
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={{ xs: 1, sm: 2, md: 4 }}
@@ -108,23 +116,34 @@ export const LabelCreator: React.FC = () => {
                     setColor(generateRandomHexaColor());
                   }}
                 >
-                  <ReplayIcon fontSize="inherit" css={{ color: color }} />
+                  <ReplayIcon
+                    fontSize="inherit"
+                    css={{ color: isValidHexaColor(color) ? color : "#000000" }}
+                  />
                 </IconButton>
                 <Tooltip
                   title={<ColorPalette setColor={setColor} />}
                   arrow
-                  leaveDelay={500} // ms
+                  leaveDelay={300} // ms
                 >
                   <TextField
                     label="Color"
                     size="small"
                     value={color}
+                    inputProps={{
+                      pattern: "#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})",
+                      maxLength: "7",
+                      autoComplete: false,
+                    }}
+                    helperText={
+                      !isValidHexaColor(color) && "Invalid Color Code"
+                    }
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                       setColor(event.target.value as HexaColor)
                     }
                     sx={{
                       "& .MuiInputBase-root": {
-                        color: color,
+                        color: isValidHexaColor(color) ? color : "#000000",
                       },
                     }}
                   />
@@ -145,7 +164,7 @@ export const LabelCreator: React.FC = () => {
               </Button>
               <Button
                 onClick={addLabel}
-                disabled={name.value.length === 0}
+                disabled={name.value.length === 0 || !isValidHexaColor(color)}
                 variant="contained"
                 color="success"
                 size="small"
