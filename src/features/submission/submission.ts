@@ -124,7 +124,7 @@ const submissionSchema = z.object({
   problem: problemSchema,
   author: partySchema,
   programmingLanguage: z.string(),
-  verdict: verdictSchema,
+  verdict: z.optional(verdictSchema),
   testset: testsetSchema,
   passedTestCount: z.number().optional(),
   timeConsumedMillis: z.number(),

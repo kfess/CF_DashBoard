@@ -6,7 +6,7 @@ const typeSchema = z.union([z.literal("PROGRAMMING"), z.literal("QUESTION")]);
 export const problemType = ["PROGRAMMING", "QUESTION"] as const;
 export type ProblemType = typeof problemType[number];
 
-const tagSchema = z.union([
+export const tagSchema = z.union([
   z.literal("implementation"),
   z.literal("math"),
   z.literal("greedy"),
@@ -90,7 +90,12 @@ export const problemSchema = z.object({
   type: typeSchema,
   points: z.number().optional(),
   rating: z.number().optional(),
-  tags: z.array(tagSchema),
+  tags: z
+    .array(tagSchema)
+    .or(z.array(z.string())) // "tags" is sometimes empty array [], how can this situation be handled more elegantly?
+    .transform((val) =>
+      val.length > 0 ? (val as Tag[]) : (["no tags"] as const)
+    ),
 });
 export const problemsSchema = z.array(problemSchema);
 export type Problem = z.infer<typeof problemSchema>;

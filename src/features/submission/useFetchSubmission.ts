@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios from "axios";
 import { ZodError } from "zod";
 import { useQuery } from "@tanstack/react-query";
 import { submissionApiSchema } from "@features/submission/submission";
@@ -7,6 +7,12 @@ import type {
   SubmissionAPI,
 } from "@features/submission/submission";
 import { okSubmissionApiSchema } from "@features/submission/submission";
+
+const isMockMode = false;
+const submissionUrl = isMockMode ? "/mock/submissions" : "";
+const recentSubmissionUrl = isMockMode
+  ? "/mock/submissions"
+  : "https://codeforces.com/api/problemset.recentStatus?count=500";
 
 const fetchSubmissions = async (): Promise<SubmissionAPI> => {
   return axios
@@ -26,18 +32,14 @@ export const useFetchSubmissions = ({ searchUser }: { searchUser: string }) => {
 
 const fetchRecentSubmissions = async (): Promise<Submission[]> => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    const response = await axios.get("/mock/submissions");
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    const response = await axios.get(recentSubmissionUrl);
     const recentSubmission = okSubmissionApiSchema.parse(response.data);
-    console.log("response:", response);
-    console.log("recentSubmission:", recentSubmission);
-
     return recentSubmission.result;
   } catch (err) {
     if (err instanceof ZodError) {
       console.log(err);
     }
-    console.log(err);
     return [];
   }
 };
@@ -46,6 +48,7 @@ export const useFetchRecentSubmissions = () => {
   const { data, isError, error, isLoading } = useQuery<Submission[], Error>({
     queryKey: ["recent-submissions"],
     queryFn: fetchRecentSubmissions,
+    refetchInterval: 1000 * 60 * 60, // 1 hr
   });
 
   return { data, isError, error, isLoading };
