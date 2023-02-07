@@ -1,3 +1,5 @@
+import * as dayjs from "dayjs";
+
 export const groupBy = <K, V>(
   array: readonly V[],
   getKey: (cur: V, idx: number, src: readonly V[]) => K
@@ -14,3 +16,6 @@ export const groupBy = <K, V>(
       return map;
     }, new Map<K, V[]>())
   );
+
+export const formatUnixTime = (unitTime: number) =>
+  dayjs.unix(unitTime).format("YYYY-MM-DD HH:mm:ss");

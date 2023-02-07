@@ -5,10 +5,10 @@ import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 import type { ReshapedContest } from "@features/contests/contest";
 import { ContestTableRow } from "@features/contests/components/ContestTableRow";
+import { TablePagination } from "@features/ui/component/TablePagination";
 
 type Props = {
   contests: ReshapedContest[];
@@ -22,33 +22,19 @@ export const ContestsTable: React.FC<Props> = (props: Props) => {
   const { contests, problemIdxes, showDifficulty, solvedSet, attemptedSet } =
     props;
 
+  // for pagination
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
   const contestsLen = useMemo(() => contests.length, [contests]);
 
-  const handleChangePage = (
-    _event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   return (
     <>
       <TablePagination
-        component="div"
-        count={contestsLen}
+        size={contestsLen}
         page={page}
-        onPageChange={handleChangePage}
+        setPage={setPage}
         rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
+        setRowsPerPage={setRowsPerPage}
       />
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer component={Paper}>
@@ -79,12 +65,11 @@ export const ContestsTable: React.FC<Props> = (props: Props) => {
         </TableContainer>
       </Paper>
       <TablePagination
-        component="div"
-        count={contestsLen}
+        size={contestsLen}
         page={page}
-        onPageChange={handleChangePage}
+        setPage={setPage}
         rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
+        setRowsPerPage={setRowsPerPage}
       />
     </>
   );
