@@ -74,6 +74,7 @@ const ContestTypeFilter: React.FC<Pick<Props, "tab" | "setTab">> = ({
         variant="contained"
         disableElevation
         color="inherit"
+        size="small"
         onClick={handleClick}
         css={{ marginRight: "10px" }}
         endIcon={<KeyboardArrowDownIcon />}
@@ -105,6 +106,7 @@ const PeriodFilter: React.FC = () => {
       variant="contained"
       disableElevation
       color="inherit"
+      size="small"
       css={{ marginRight: "10px" }}
       endIcon={<KeyboardArrowDownIcon />}
     >
@@ -119,6 +121,7 @@ const SolvedStatusFilter: React.FC = () => {
       variant="contained"
       disableElevation
       color="inherit"
+      size="small"
       css={{ marginRight: "10px" }}
       endIcon={<KeyboardArrowDownIcon />}
     >

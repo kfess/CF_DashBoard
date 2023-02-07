@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useFetchContests } from "@features/contests/useFetchContest";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
 import type { Classification } from "@features/contests/contest";
@@ -6,8 +7,10 @@ import { reshapeContests, getProblemIdxes } from "@features/contests/helper";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
 import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 import { LabelsChip } from "@features/bookmark/components/LabelIcon";
+import { CustomBreadcrumbs } from "@features/ui/component/BreadCrumbs";
 
 export const ContestsPage: React.FC = () => {
+  const { pathname } = useLocation();
   const { data, isError, error, isLoading } = useFetchContests();
   const [tab, setTab] = useState<Classification>("All");
 
@@ -35,6 +38,8 @@ export const ContestsPage: React.FC = () => {
 
   return (
     <>
+      <CustomBreadcrumbs path={pathname} />
+      <h2 css={{ textAlign: "left" }}>Contests</h2>
       <div css={{ textAlign: "right" }}>
         <LabelsChip />
       </div>
