@@ -13,6 +13,7 @@ import { normalizeLanguage } from "@features/language/language";
 import { formatUnixTime } from "@helpers/index";
 import { useContestIdNameMap } from "@features/contests/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
+import { verdictMap } from "@helpers/verdict";
 
 export const RecentSubmission: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchRecentSubmissions();
@@ -26,7 +27,6 @@ export const RecentSubmission: React.FC = () => {
   // for pagination
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
-  const submissionsLen = 500;
 
   if (isLoading || mapIsLoading) {
     return <span>Loading...</span>;
@@ -45,7 +45,7 @@ export const RecentSubmission: React.FC = () => {
       {data && (
         <>
           <TablePagination
-            size={submissionsLen}
+            size={data.length}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}
@@ -103,7 +103,11 @@ export const RecentSubmission: React.FC = () => {
                             {d.author.members[0].handle}
                           </a>
                         </TableCell>
-                        <TableCell>{d.verdict}</TableCell>
+                        <TableCell>
+                          {d.verdict
+                            ? verdictMap[d.verdict]
+                            : verdictMap["UNKNOWN"]}
+                        </TableCell>
                         <TableCell>
                           {normalizeLanguage(d.programmingLanguage)}
                         </TableCell>
@@ -123,7 +127,7 @@ export const RecentSubmission: React.FC = () => {
             </TableContainer>
           </Paper>
           <TablePagination
-            size={submissionsLen}
+            size={data.length}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}

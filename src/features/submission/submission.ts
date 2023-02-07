@@ -78,8 +78,31 @@ const verdict = [
   "SKIPPED",
   "TESTING",
   "REJECTED",
+  "UNKNOWN",
 ] as const;
-type Verdict = typeof verdict[number];
+export type Verdict = typeof verdict[number];
+
+const verdictAbbr = [
+  "AC",
+  "FAILED",
+  "PARTIAL",
+  "CE",
+  "RE",
+  "WA",
+  "PE",
+  "TLE",
+  "ILE",
+  "SV",
+  "CRASHED",
+  "IPC",
+  "CHALLENGED",
+  "SKIPPED",
+  "TESTING",
+  "REJECTED",
+  "MLE",
+  "UNKNOWN",
+] as const;
+export type VerdictAbbr = typeof verdictAbbr[number];
 
 // testset
 const testsetSchema = z.union([
