@@ -8,11 +8,18 @@ import { FilterOptions } from "@features/contests/components/FilterOptions";
 import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 import { LabelsChip } from "@features/bookmark/components/LabelIcon";
 import { CustomBreadcrumbs } from "@features/ui/component/BreadCrumbs";
+import type { PeriodWord } from "@features/contests/components/PeriodFilter";
+import type { SolvedStatus } from "@features/contests/components/SolvedStatusFilter";
 
 export const ContestsPage: React.FC = () => {
   const { pathname } = useLocation();
   const { data, isError, error, isLoading } = useFetchContests();
   const [tab, setTab] = useState<Classification>("All");
+
+  const [period, setPeriod] = useState<PeriodWord>("All Period");
+
+  const [solvedStatus, setSolvedStatus] =
+    useState<SolvedStatus>("All Contests");
 
   const [showDifficulty, setshowDifficulty] = useState<boolean>(true);
   const toggleShowDifficulty = useCallback(() => {
@@ -46,6 +53,10 @@ export const ContestsPage: React.FC = () => {
       <FilterOptions
         tab={tab}
         setTab={setTab}
+        period={period}
+        setPeriod={setPeriod}
+        solvedStatus={solvedStatus}
+        setSolvedStatus={setSolvedStatus}
         showDifficulty={showDifficulty}
         toggleShowDifficulty={toggleShowDifficulty}
         reverse={reverse}

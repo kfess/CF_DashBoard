@@ -4,8 +4,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import CheckIcon from "@mui/icons-material/Check";
 import SvgIcon from "@mui/material/SvgIcon";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 type Props<T extends string | number> = {
   readonly title: string;
@@ -33,7 +33,7 @@ export const DropDownMenuButton = <T extends string | number>(
     <>
       <Button
         onClick={handleClick}
-        endIcon={open ? <KeyboardArrowDownIcon /> : <KeyboardArrowLeftIcon />}
+        endIcon={open ? <ArrowDropDownIcon /> : <ArrowLeftIcon />}
         css={{
           textTransform: "none",
           "&:hover": { textDecorationLine: "underline" },

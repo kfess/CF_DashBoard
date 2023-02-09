@@ -1,13 +1,11 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import { css } from "@emotion/react";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import type { Classification } from "@features/contests/contest";
-import { classification } from "@features/contests/contest";
+import { ContestTypeFilter } from "./ContestTypeFilter";
+import { SolvedStatus, SolvedStatusFilter } from "./SolvedStatusFilter";
+import { PeriodFilterButton, PeriodWord } from "./PeriodFilter";
 
 const buttonsCss = css({
   display: "flex",
@@ -17,7 +15,11 @@ const buttonsCss = css({
 
 type Props = {
   tab: Classification;
-  setTab: Dispatch<SetStateAction<Classification>>;
+  setTab: (arg: Classification) => void;
+  period: PeriodWord;
+  setPeriod: (arg: PeriodWord) => void;
+  solvedStatus: SolvedStatus;
+  setSolvedStatus: (arg: SolvedStatus) => void;
   showDifficulty: boolean;
   toggleShowDifficulty: (arg: boolean) => void;
   reverse: boolean;
@@ -28,6 +30,10 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
   const {
     tab,
     setTab,
+    period,
+    setPeriod,
+    solvedStatus,
+    setSolvedStatus,
     showDifficulty,
     toggleShowDifficulty,
     reverse,
@@ -38,8 +44,11 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
     <>
       <div css={buttonsCss}>
         <ContestTypeFilter tab={tab} setTab={setTab} />
-        <PeriodFilter />
-        <SolvedStatusFilter />
+        <PeriodFilterButton period={period} setPeriod={setPeriod} />
+        <SolvedStatusFilter
+          solvedStatus={solvedStatus}
+          setSolvedStatus={setSolvedStatus}
+        />
       </div>
       <div css={buttonsCss}>
         <ShowDifficltySwitch
@@ -53,82 +62,6 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
     </>
   );
 });
-
-const ContestTypeFilter: React.FC<Pick<Props, "tab" | "setTab">> = ({
-  tab,
-  setTab,
-}: Pick<Props, "tab" | "setTab">) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  return (
-    <>
-      <Button
-        id="contest-type-filter-button"
-        variant="contained"
-        disableElevation
-        color="inherit"
-        size="small"
-        onClick={handleClick}
-        css={{ marginRight: "10px" }}
-        endIcon={<KeyboardArrowDownIcon />}
-      >
-        Contest Type: {tab}
-      </Button>
-      <Menu
-        id="contest-type-filter-menu"
-        MenuListProps={{
-          "aria-labelledby": "contest-type-filter-button",
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        {classification.map((c) => (
-          <MenuItem onClick={() => setTab(c)} disableRipple>
-            {c}
-          </MenuItem>
-        ))}
-      </Menu>
-    </>
-  );
-};
-
-const PeriodFilter: React.FC = () => {
-  return (
-    <Button
-      variant="contained"
-      disableElevation
-      color="inherit"
-      size="small"
-      css={{ marginRight: "10px" }}
-      endIcon={<KeyboardArrowDownIcon />}
-    >
-      Period
-    </Button>
-  );
-};
-
-const SolvedStatusFilter: React.FC = () => {
-  return (
-    <Button
-      variant="contained"
-      disableElevation
-      color="inherit"
-      size="small"
-      css={{ marginRight: "10px" }}
-      endIcon={<KeyboardArrowDownIcon />}
-    >
-      Solved Status
-    </Button>
-  );
-};
 
 const ShowDifficltySwitch: React.FC<
   Pick<Props, "showDifficulty" | "toggleShowDifficulty">

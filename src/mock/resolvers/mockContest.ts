@@ -77,7 +77,7 @@ export const mockContest: ResponseResolver<MockedRequest, typeof restContext> =
         contestId: n,
         contestName: `div.1-Contest-${n}`,
         type: "CF",
-        classification: "Global",
+        classification: "Div. 1",
         frozen: false,
         phase: "FINISHED",
         durationSeconds: 18000,
