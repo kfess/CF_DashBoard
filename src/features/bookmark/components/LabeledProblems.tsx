@@ -104,7 +104,7 @@ export const LabeledProblems: React.FC<Props> = (props: Props) => {
           ) : (
             <Alert severity="warning">
               <AlertTitle css={{ textAlign: "left" }}>Warning</AlertTitle>
-              There is not problems related to this label.
+              There are no problems related to this label.
             </Alert>
           )}
         </>

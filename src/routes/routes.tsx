@@ -1,5 +1,5 @@
-import { createBrowserRouter, Outlet, Navigate } from "react-router-dom";
-import { HeaderBar } from "@features/layout/components/HeaderBar";
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import { LayoutPage } from "@pages/layout";
 import { ContestsPage } from "@pages/contests";
 import { LabelsPage } from "@pages/bookmark/labels";
 import { LabelPage } from "@pages/bookmark/label/index";
@@ -8,12 +8,7 @@ import { SubmissionPage } from "@pages/submission";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <HeaderBar />
-        <Outlet />
-      </>
-    ),
+    element: <LayoutPage />,
     children: [
       { index: true, element: <ContestsPage /> },
       { path: "/problems", element: <div>problems</div> },

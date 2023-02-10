@@ -27,8 +27,6 @@ export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
 
   const { theme } = useThemeContext();
 
-  console.log(solvedSet);
-
   return (
     <TableRow key={contestId} hover>
       <TableCell component="th" scope="row">

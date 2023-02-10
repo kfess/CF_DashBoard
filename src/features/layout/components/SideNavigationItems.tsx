@@ -37,15 +37,16 @@ import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-const mainField = ["Contests", "Problems", "Recommend", "Labels"] as const;
-type MainField = typeof mainField[number];
-
-const activityField = [
+const mainField = [
+  "Contests",
+  "Problems",
+  "Recommend",
   "Achievement",
   "Submission",
-  "Ranking",
-  "Custom Contest",
 ] as const;
+type MainField = typeof mainField[number];
+
+const activityField = ["Labels", "Ranking", "Custom Contest"] as const;
 type ActivityField = typeof activityField[number];
 
 const otherField = [
@@ -90,15 +91,6 @@ export const mainItems: readonly Item[] = [
     notSelectedIcon: <ThumbUpAltOutlinedIcon />,
   },
   {
-    field: "Labels",
-    link: "/labels",
-    selectedIcon: <StarIcon />,
-    notSelectedIcon: <StarBorderOutlinedIcon />,
-  },
-] as const;
-
-export const activityItems: readonly Item[] = [
-  {
     field: "Achievement",
     link: "/achievement",
     selectedIcon: <EmojiEventsIcon />,
@@ -109,6 +101,15 @@ export const activityItems: readonly Item[] = [
     link: "/submission",
     selectedIcon: <SendIcon />,
     notSelectedIcon: <SendOutlinedIcon />,
+  },
+] as const;
+
+export const activityItems: readonly Item[] = [
+  {
+    field: "Labels",
+    link: "/labels",
+    selectedIcon: <StarIcon />,
+    notSelectedIcon: <StarBorderOutlinedIcon />,
   },
   {
     field: "Ranking",
