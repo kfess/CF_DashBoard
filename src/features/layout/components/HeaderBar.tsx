@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import { Search } from "@features/layout/components/Search";
-import { SideNavigationBar } from "@features/layout/components/SideNavigationBar";
 
 // Without this offset, some part of the content to be invisible behind the header
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
-export const HeaderBar: React.FC = () => {
+type Props = {
+  isOpenSideBar: boolean;
+  toggleSideBar: Dispatch<SetStateAction<boolean>>;
+};
+
+export const HeaderBar: React.FC<Props> = (props: Props) => {
+  const { isOpenSideBar, toggleSideBar } = props;
   const { theme } = useThemeContext();
-  const [isOpenSideBar, setIsOpenSideBar] = useState(false);
-  const toggleSideBar = () => setIsOpenSideBar(!isOpenSideBar);
 
   return (
     <>
@@ -26,7 +29,7 @@ export const HeaderBar: React.FC = () => {
             <IconButton
               edge="start"
               aria-label="menu"
-              onClick={toggleSideBar}
+              onClick={() => toggleSideBar(!isOpenSideBar)}
               css={{
                 color: theme.colors.foregroundColor,
                 margin: theme.spacing(0, 1, 0, 0),
@@ -50,12 +53,6 @@ export const HeaderBar: React.FC = () => {
         </AppBar>
         <Offset />
       </Box>
-      {isOpenSideBar && (
-        <SideNavigationBar
-          isOpenSideBar={isOpenSideBar}
-          toggleSideBar={toggleSideBar}
-        />
-      )}
     </>
   );
 };

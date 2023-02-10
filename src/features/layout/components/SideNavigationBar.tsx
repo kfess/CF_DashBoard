@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { Drawer, Box, Toolbar, Divider, List } from "@mui/material";
 import type { Field } from "@features/layout/components/SideNavigationItems";
 import {
@@ -11,11 +11,12 @@ import {
 type Props = {
   isOpenSideBar: boolean;
   toggleSideBar: Dispatch<SetStateAction<boolean>>;
+  selectedItem: Field;
+  setSelectedItem: Dispatch<SetStateAction<Field>>;
 };
 
 export const SideNavigationBar: React.FC<Props> = (props: Props) => {
-  const { isOpenSideBar, toggleSideBar } = props;
-  const [selectedItem, setSelectedItem] = useState<Field>("Contests");
+  const { isOpenSideBar, toggleSideBar, selectedItem, setSelectedItem } = props;
 
   return (
     <Box role="presentation">
