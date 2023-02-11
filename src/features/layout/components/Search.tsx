@@ -9,7 +9,7 @@ import Input from "@mui/material/Input";
 import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
 import { searchUserState } from "@features/layout/searchUser.atom";
-import { generateUrlPath } from "../helper";
+import { generateUrlPath } from "@features/layout/helper";
 
 export const SearchBar: React.FC = () => {
   const { pathname } = useLocation();

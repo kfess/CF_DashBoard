@@ -9,7 +9,6 @@ import { SearchBar } from "@features/layout/components/Search";
 export const LayoutPage: React.FC = () => {
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
   const toggleSideBar = () => setIsOpenSideBar(!isOpenSideBar);
-
   const [selectedItem, setSelectedItem] = useState<Field>("Contests");
 
   const { pathname } = useLocation();

@@ -189,6 +189,7 @@ export const SideNavigationItem: React.FC<Props> = (props: Props) => {
     isOpenSideBar,
     toggleSideBar,
   } = props;
+
   return (
     <NavLink to={link}>
       <ListItem key={field} disablePadding>
