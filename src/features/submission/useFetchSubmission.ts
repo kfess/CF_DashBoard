@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ZodError } from "zod";
 import { useQuery } from "@tanstack/react-query";
-import { submissionApiSchema } from "@features/submission/submission";
+import { CF_USER_SUBMISSION_URL } from "@constants/url";
 import type {
   Submission,
   SubmissionAPI,
@@ -14,17 +14,22 @@ const recentSubmissionUrl = isMockMode
   ? "/mock/submissions"
   : "https://codeforces.com/api/problemset.recentStatus?count=500";
 
-const fetchSubmissions = async (): Promise<SubmissionAPI> => {
-  return axios
-    .get("/mock/submissions")
-    .then((response) => response.data)
-    .then((response) => submissionApiSchema.parse(response));
-};
-
-export const useFetchSubmissions = ({ searchUser }: { searchUser: string }) => {
-  const { data, isError, error, isLoading } = useQuery<SubmissionAPI, Error>({
-    queryKey: ["submissions", searchUser],
-    queryFn: fetchSubmissions,
+export const useFetchUserSubmission = ({ userId }: { userId: string }) => {
+  const { data, isError, error, isLoading } = useQuery<Submission[], Error>({
+    queryKey: ["user-submissions", userId],
+    queryFn: async (): Promise<Submission[]> => {
+      try {
+        const url = `${CF_USER_SUBMISSION_URL}?handle=${userId}`;
+        const response = await axios.get(url);
+        const userSubmission = okSubmissionApiSchema.parse(response.data);
+        return userSubmission.result;
+      } catch (err) {
+        if (err instanceof ZodError) {
+          throw new Error("validation error");
+        }
+        throw new Error("user submission error");
+      }
+    },
   });
 
   return { data, isError, error, isLoading };

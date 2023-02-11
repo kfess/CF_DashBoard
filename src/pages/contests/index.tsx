@@ -62,13 +62,13 @@ export const ContestsPage: React.FC = () => {
         reverse={reverse}
         toggleOrder={toggleOrder}
       />
-      <ContestsTable
+      {/* <ContestsTable
         contests={contests}
         problemIdxes={problemIdxes}
         showDifficulty={showDifficulty}
         solvedSet={solvedSet}
         attemptedSet={attemptedSet}
-      />
+      /> */}
     </>
   );
 };

@@ -1,15 +1,12 @@
-import { useRecoilValue } from "recoil";
-import { searchUserState } from "@features/layout/searchUser.atom";
-import { useFetchSubmissions } from "@features/submission/useFetchSubmission";
+import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
 
-export const useSolvedStatus = () => {
-  const searchUser = useRecoilValue(searchUserState);
-  const { data } = useFetchSubmissions({
-    searchUser,
+export const useSolvedStatus = (searchUserId: string) => {
+  const { data } = useFetchUserSubmission({
+    userId: searchUserId,
   });
 
   // AC
-  const solvedSet = data?.result?.reduce((set, sub) => {
+  const solvedSet = data?.reduce((set, sub) => {
     if (sub.verdict === "OK") {
       set.add(sub.contestId + sub.problem.index);
     }
@@ -17,7 +14,7 @@ export const useSolvedStatus = () => {
   }, new Set<string>());
 
   // tried solving, but not AC
-  const attemptedSet = data?.result?.reduce((set, sub) => {
+  const attemptedSet = data?.reduce((set, sub) => {
     if (
       sub.verdict !== "OK" &&
       !solvedSet?.has(sub.contestId + sub.problem.index)

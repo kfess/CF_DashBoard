@@ -5,6 +5,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { CustomBreadcrumbs } from "@features/ui/component/BreadCrumbs";
 import { RecentSubmission } from "@features/submission/components/recentSubmission";
+import { UserSubmission } from "@features/submission/components/UserSubmission";
 
 type TabPanelProps = {
   children?: React.ReactNode;
@@ -57,7 +58,9 @@ export const SubmissionPage: React.FC = () => {
         <TabPanel value={value} index={0}>
           <RecentSubmission />
         </TabPanel>
-        <TabPanel value={value} index={1}></TabPanel>
+        <TabPanel value={value} index={1}>
+          <UserSubmission userId={userId} />
+        </TabPanel>
       </Box>
     </>
   );
