@@ -13,7 +13,7 @@ import { formatUnixTime } from "@helpers/index";
 import { useContestIdNameMap } from "@features/contests/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { verdictMap } from "@helpers/verdict";
-import { useFetchUserSubmission } from "../useFetchSubmission";
+import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
 
 type Props = {
   userId: string;

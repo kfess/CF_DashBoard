@@ -1,18 +1,14 @@
 import axios from "axios";
 import { ZodError } from "zod";
 import { useQuery } from "@tanstack/react-query";
-import { CF_USER_SUBMISSION_URL } from "@constants/url";
-import type {
-  Submission,
-  SubmissionAPI,
-} from "@features/submission/submission";
+import type { Submission } from "@features/submission/submission";
 import { okSubmissionApiSchema } from "@features/submission/submission";
+import {
+  CF_USER_SUBMISSION_URL,
+  CF_RECENT_SUBMISSION_URL,
+} from "@constants/url";
 
 const isMockMode = false;
-const submissionUrl = isMockMode ? "/mock/submissions" : "";
-const recentSubmissionUrl = isMockMode
-  ? "/mock/submissions"
-  : "https://codeforces.com/api/problemset.recentStatus?count=500";
 
 export const useFetchUserSubmission = ({ userId }: { userId: string }) => {
   const { data, isError, error, isLoading } = useQuery<Submission[], Error>({
@@ -38,7 +34,10 @@ export const useFetchUserSubmission = ({ userId }: { userId: string }) => {
 const fetchRecentSubmissions = async (): Promise<Submission[]> => {
   try {
     await new Promise((resolve) => setTimeout(resolve, 300));
-    const response = await axios.get(recentSubmissionUrl);
+    const url = isMockMode
+      ? "/mock/submissions"
+      : `${CF_RECENT_SUBMISSION_URL}?count=500`;
+    const response = await axios.get(url);
     const recentSubmission = okSubmissionApiSchema.parse(response.data);
     return recentSubmission.result;
   } catch (err) {

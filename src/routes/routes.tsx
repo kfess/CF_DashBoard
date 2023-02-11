@@ -4,6 +4,7 @@ import { ContestsPage } from "@pages/contests";
 import { LabelsPage } from "@pages/bookmark/labels";
 import { LabelPage } from "@pages/bookmark/label/index";
 import { SubmissionPage } from "@pages/submission";
+import { AchievementPage } from "@pages/achievement";
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <ContestsPage /> },
       { path: "/problems", element: <div>problems</div> },
-      { path: "/achievement", element: <div>achievement</div> },
+      { path: "/achievement", element: <AchievementPage /> },
       { path: "/recommend", element: <div>recommend</div> },
       { path: "labels", element: <LabelsPage /> },
       { path: "labels/:labelName", element: <LabelPage /> },
