@@ -36,6 +36,10 @@ export const SubmissionPage: React.FC = () => {
     setValue(newValue);
   };
 
+  const urlSearch = useLocation().search;
+  const urlQueries = new URLSearchParams(urlSearch);
+  const userId = urlQueries.get("userId") ?? "";
+
   return (
     <>
       <CustomBreadcrumbs path={pathname} />
@@ -44,7 +48,10 @@ export const SubmissionPage: React.FC = () => {
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={value} onChange={handleChange}>
             <Tab label="Recent Submission" />
-            <Tab label={`testUser's Submission`} />
+            <Tab
+              label={`${userId ? userId : "User"}'s Submission`}
+              disabled={!userId}
+            />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
