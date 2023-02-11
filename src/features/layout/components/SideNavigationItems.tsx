@@ -173,6 +173,8 @@ export const otherItems: readonly Item[] = [
 type Props = Item & {
   isSelected: boolean;
   setSelected: Dispatch<SetStateAction<Field>>;
+  isOpenSideBar: boolean;
+  toggleSideBar: Dispatch<SetStateAction<boolean>>;
 };
 
 // tab の select 状態に合わせて Icon の色を反転
@@ -184,13 +186,18 @@ export const SideNavigationItem: React.FC<Props> = (props: Props) => {
     notSelectedIcon,
     isSelected,
     setSelected,
+    isOpenSideBar,
+    toggleSideBar,
   } = props;
   return (
     <NavLink to={link}>
       <ListItem key={field} disablePadding>
         <ListItemButton
           selected={isSelected}
-          onClick={() => setSelected(field)}
+          onClick={() => {
+            setSelected(field);
+            toggleSideBar(!isOpenSideBar);
+          }}
         >
           <ListItemIcon>
             {isSelected ? selectedIcon : notSelectedIcon}

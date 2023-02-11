@@ -1,14 +1,17 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
+import InputAdornment from "@mui/material/InputAdornment";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import Input from "@mui/material/Input";
 import SearchIcon from "@mui/icons-material/Search";
+import { IconButton } from "@mui/material";
 import { searchUserState } from "@features/layout/searchUser.atom";
 import { generateUrlPath } from "../helper";
 
-export const Search: React.FC = () => {
+export const SearchBar: React.FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [searchUserID, setSearchUserID] = useRecoilState(searchUserState);
@@ -28,31 +31,27 @@ export const Search: React.FC = () => {
   };
 
   return (
-    <Paper
-      sx={{
-        p: "2px 2px",
-        marginLeft: "20px",
-        display: "flex",
-        alignItems: "center",
-        width: 300,
-      }}
-    >
-      <InputBase
-        placeholder="User ID..."
-        inputProps={{ "aria-label": "search" }}
-        value={searchUserID}
-        onChange={onChange}
-        onKeyUp={onKeyEnter}
-        sx={{ ml: 1, flex: 1 }}
-      />
-      <IconButton
-        type="button"
-        sx={{ p: "10px" }}
-        aria-label="search"
-        onClick={onClickSearch}
-      >
-        <SearchIcon />
-      </IconButton>
-    </Paper>
+    <Box sx={{ p: 1, display: "flex", flexGrow: 1 }}>
+      <FormControl variant="standard">
+        <Input
+          id="input-with-icon-adornment"
+          onChange={onChange}
+          onKeyUp={onKeyEnter}
+          startAdornment={
+            <InputAdornment position="start">
+              <AccountCircle />
+            </InputAdornment>
+          }
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton onClick={onClickSearch}>
+                <SearchIcon />
+              </IconButton>
+            </InputAdornment>
+          }
+          placeholder="User ID"
+        />
+      </FormControl>
+    </Box>
   );
 };
