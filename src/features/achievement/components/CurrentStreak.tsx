@@ -1,7 +1,7 @@
+import * as dayjs from "dayjs";
 import React from "react";
 import type { Submission } from "@features/submission/submission";
 import { isACSubmission, uniqueDateSet } from "../processSubmission";
-import * as dayjs from "dayjs";
 
 const today = dayjs().format("YYYY/MM/DD");
 const yesterday = dayjs().subtract(1, "day").format("YYYY/MM/DD");
@@ -19,7 +19,7 @@ export const CurrentStreak: React.FC<Props> = (props: Props) => {
 
   const currentStreak =
     sortedDate.length === 0 ||
-    (sortedDate[0] === today && sortedDate[0] === yesterday)
+    (sortedDate[0] !== today && sortedDate[0] !== yesterday)
       ? 0
       : sortedDate
           .slice(1)

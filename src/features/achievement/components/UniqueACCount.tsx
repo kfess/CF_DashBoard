@@ -1,11 +1,16 @@
 import React from "react";
 import type { Submission } from "@features/submission/submission";
-import { isACSubmission, filterUniqueSubmissions } from "../processSubmission";
+import {
+  isACSubmission,
+  filterUniqueSubmissions,
+} from "@features/achievement/processSubmission";
 
-type Props = { submissions: Submission[] };
+type Period = "Last year" | "Last Month" | "Last Week" | "Total";
+type Props = { submissions: Submission[]; period: Period };
 
 export const UniqueACCount: React.FC<Props> = (props: Props) => {
-  const { submissions } = props;
+  const { submissions, period } = props;
+
   const ACSubmissions = submissions.filter(isACSubmission);
   const uniqueACSubmissions = filterUniqueSubmissions(ACSubmissions);
 

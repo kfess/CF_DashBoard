@@ -6,6 +6,7 @@ import { UniqueACCount } from "@features/achievement/components/UniqueACCount";
 import { TotalRatingSum } from "@features/achievement/components/TotalRatingSum";
 import { StreakSum } from "@features/achievement/components/StreakSum";
 import { CurrentStreak } from "@features/achievement/components/CurrentStreak";
+import { LongestStreak } from "@features/achievement/components/LongestStreak";
 
 export const AchievementPage: React.FC = () => {
   const { search } = useLocation();
@@ -20,10 +21,11 @@ export const AchievementPage: React.FC = () => {
     <>
       {data && (
         <>
-          <UniqueACCount submissions={data} />
+          <UniqueACCount submissions={data} period="Total" />
           <TotalRatingSum submissions={data} />
           <StreakSum submissions={data} />
           <CurrentStreak submissions={data} />
+          <LongestStreak submissions={data} />
         </>
       )}
     </>

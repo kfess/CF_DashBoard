@@ -4,7 +4,7 @@ import {
   isACSubmission,
   filterUniqueSubmissions,
   sumSubmissionsRating,
-} from "../processSubmission";
+} from "@features/achievement/processSubmission";
 
 type Props = { submissions: Submission[] };
 
