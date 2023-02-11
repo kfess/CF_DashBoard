@@ -27,7 +27,7 @@ export const LabelCreator: React.FC = () => {
   const [description, setDescription] = useState({ value: "", errorMsg: "" });
   const [color, setColor] = useState(generateRandomHexaColor());
 
-  const [showBlock, setShowBlock] = useState<boolean>(true);
+  const [showBlock, setShowBlock] = useState<boolean>(false);
   const toggleShowBlock = () => setShowBlock(!showBlock);
 
   const nextId =

@@ -7,6 +7,7 @@ import { TotalRatingSum } from "@features/achievement/components/TotalRatingSum"
 import { StreakSum } from "@features/achievement/components/StreakSum";
 import { CurrentStreak } from "@features/achievement/components/CurrentStreak";
 import { LongestStreak } from "@features/achievement/components/LongestStreak";
+import { ClimbingChart } from "@features/achievement/components/ClimbingChart";
 
 export const AchievementPage: React.FC = () => {
   const { search } = useLocation();
@@ -26,6 +27,7 @@ export const AchievementPage: React.FC = () => {
           <StreakSum submissions={data} />
           <CurrentStreak submissions={data} />
           <LongestStreak submissions={data} />
+          <ClimbingChart submissions={data} isColored={false} />
         </>
       )}
     </>

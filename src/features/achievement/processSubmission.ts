@@ -1,10 +1,12 @@
 import * as dayjs from "dayjs";
 import type { Submission } from "@features/submission/submission";
 
-export const isACSubmission = (submission: Submission) =>
+export const isACSubmission = (submission: Submission): boolean =>
   submission.verdict === "OK";
 
-export const filterUniqueSubmissions = (submissions: Submission[]) =>
+export const filterUniqueSubmissions = (
+  submissions: Submission[]
+): Submission[] =>
   Array.from(
     new Map(
       submissions.map((s) => [
@@ -14,11 +16,13 @@ export const filterUniqueSubmissions = (submissions: Submission[]) =>
     ).values()
   );
 
-export const sumSubmissionsRating = (submissions: Submission[]) =>
+export const sumSubmissionsRating = (submissions: Submission[]): number =>
   submissions.reduce((sum, s) => sum + (s.problem.rating ?? 0), 0);
 
-export const uniqueDateSet = (submissions: Submission[]) =>
+export const uniqueDateSet = (submissions: Submission[]): Set<string> =>
   submissions.reduce((set, s) => {
     set.add(dayjs.unix(s.creationTimeSeconds).format("YYYY/MM/DD"));
     return set;
   }, new Set<string>());
+
+export const groupbyRatingColor = (submissions: Submission[]) => {};
