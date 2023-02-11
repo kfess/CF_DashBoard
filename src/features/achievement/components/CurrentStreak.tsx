@@ -1,7 +1,10 @@
 import * as dayjs from "dayjs";
 import React from "react";
 import type { Submission } from "@features/submission/submission";
-import { isACSubmission, uniqueDateSet } from "../processSubmission";
+import {
+  isACSubmission,
+  uniqueDateSet,
+} from "@features/achievement/processSubmission";
 
 const today = dayjs().format("YYYY/MM/DD");
 const yesterday = dayjs().subtract(1, "day").format("YYYY/MM/DD");

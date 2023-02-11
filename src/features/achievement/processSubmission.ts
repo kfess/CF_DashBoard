@@ -1,5 +1,7 @@
 import * as dayjs from "dayjs";
+import { groupBy } from "@helpers/index";
 import type { Submission } from "@features/submission/submission";
+import { getRatingColorInfo } from "@features/color/ratingColor";
 
 export const isACSubmission = (submission: Submission): boolean =>
   submission.verdict === "OK";
@@ -25,4 +27,10 @@ export const uniqueDateSet = (submissions: Submission[]): Set<string> =>
     return set;
   }, new Set<string>());
 
-export const groupbyRatingColor = (submissions: Submission[]) => {};
+export const groupbyRatingColor = (submissions: Submission[]) => {
+  const groupedSubmissions = groupBy(
+    submissions,
+    (submission) => getRatingColorInfo(submission.problem.rating).name
+  );
+  return groupedSubmissions;
+};
