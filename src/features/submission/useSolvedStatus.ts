@@ -1,9 +1,15 @@
 import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
 
 export const useSolvedStatus = (searchUserId: string) => {
-  const { data } = useFetchUserSubmission({
+  const { data, isError } = useFetchUserSubmission({
     userId: searchUserId,
   });
+
+  if (isError) {
+    const s = new Set<string>();
+    const t = new Set<string>();
+    return { s, t };
+  }
 
   // AC
   const solvedSet = data?.reduce((set, sub) => {

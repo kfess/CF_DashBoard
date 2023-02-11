@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { CustomBreadcrumbs } from "@features/ui/component/BreadCrumbs";
 import { RecentSubmission } from "@features/submission/components/recentSubmission";
 import { UserSubmission } from "@features/submission/components/UserSubmission";
 
@@ -30,28 +29,26 @@ const TabPanel: React.FC<TabPanelProps> = (props: TabPanelProps) => {
 };
 
 export const SubmissionPage: React.FC = () => {
-  const { pathname } = useLocation();
+  const { search } = useLocation();
+  const urlQueries = new URLSearchParams(search);
+  const userId = urlQueries.get("userId") ?? "";
 
   const [value, setValue] = useState(0);
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
-  const urlSearch = useLocation().search;
-  const urlQueries = new URLSearchParams(urlSearch);
-  const userId = urlQueries.get("userId") ?? "";
-
   return (
     <>
-      <CustomBreadcrumbs path={pathname} />
       <h2 css={{ textAlign: "left" }}>Submission</h2>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={value} onChange={handleChange}>
-            <Tab label="Recent Submission" />
+            <Tab label="Recent Submission" sx={{ textTransform: "none" }} />
             <Tab
               label={`${userId ? userId : "User"}'s Submission`}
               disabled={!userId}
+              sx={{ textTransform: "none" }}
             />
           </Tabs>
         </Box>

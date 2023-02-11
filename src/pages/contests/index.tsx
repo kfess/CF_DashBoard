@@ -7,12 +7,14 @@ import { reshapeContests, getProblemIdxes } from "@features/contests/helper";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
 import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 import { LabelsChip } from "@features/bookmark/components/LabelIcon";
-import { CustomBreadcrumbs } from "@features/ui/component/BreadCrumbs";
 import type { PeriodWord } from "@features/contests/components/PeriodFilter";
 import type { SolvedStatus } from "@features/contests/components/SolvedStatusFilter";
 
 export const ContestsPage: React.FC = () => {
-  const { pathname } = useLocation();
+  const { search } = useLocation();
+  const urlQueries = new URLSearchParams(search);
+  const userId = urlQueries.get("userId") ?? "";
+
   const { data, isError, error, isLoading } = useFetchContests();
   const [tab, setTab] = useState<Classification>("All");
 
@@ -34,7 +36,7 @@ export const ContestsPage: React.FC = () => {
   const contests = reshapeContests(data ?? [], tab, reverse);
   const problemIdxes = getProblemIdxes(data ?? []);
 
-  const { solvedSet, attemptedSet } = useSolvedStatus();
+  const { solvedSet, attemptedSet } = useSolvedStatus(userId);
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -45,7 +47,6 @@ export const ContestsPage: React.FC = () => {
 
   return (
     <>
-      <CustomBreadcrumbs path={pathname} />
       <h2 css={{ textAlign: "left" }}>Contests</h2>
       <div css={{ textAlign: "right" }}>
         <LabelsChip />
@@ -62,13 +63,13 @@ export const ContestsPage: React.FC = () => {
         reverse={reverse}
         toggleOrder={toggleOrder}
       />
-      {/* <ContestsTable
+      <ContestsTable
         contests={contests}
         problemIdxes={problemIdxes}
         showDifficulty={showDifficulty}
         solvedSet={solvedSet}
         attemptedSet={attemptedSet}
-      /> */}
+      />
     </>
   );
 };
