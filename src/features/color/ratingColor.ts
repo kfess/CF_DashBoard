@@ -70,7 +70,7 @@ export type RatingColorInfo = {
 const MAX_RATING = 5000; // max rating of Codeforces?
 const NO_RATING = -1;
 
-const ratingColorInfo: RatingColorInfo = {
+export const ratingColorInfo: RatingColorInfo = {
   Black: {
     name: "Black",
     colorCode: "#000000",
