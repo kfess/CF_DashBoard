@@ -3,13 +3,13 @@ import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import type { VerdictAbbr } from "@features/submission/submission";
 import { verdictAbbr } from "@features/submission/submission";
 
-export type SolvedStatus = VerdictAbbr | "All";
+export type VerdictFilter = VerdictAbbr | "All";
 type Props = {
-  solvedStatus: SolvedStatus;
-  setSolvedStatus: (arg: SolvedStatus) => void;
+  solvedStatus: VerdictFilter;
+  setSolvedStatus: (arg: VerdictFilter) => void;
 };
 
-export const SolvedStatusFilter: React.FC<Props> = (props: Props) => {
+export const SolvedStatusFilterButton: React.FC<Props> = (props: Props) => {
   const { solvedStatus, setSolvedStatus } = props;
 
   return (

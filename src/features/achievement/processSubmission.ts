@@ -2,6 +2,7 @@ import * as dayjs from "dayjs";
 import { groupBy } from "@helpers/index";
 import type { Submission } from "@features/submission/submission";
 import { getRatingColorInfo } from "@features/color/ratingColor";
+import { normalizeLanguage } from "@features/language/language";
 
 export const isACSubmission = (submission: Submission): boolean =>
   submission.verdict === "OK";
@@ -38,6 +39,13 @@ export const groupbyRatingColor = (submissions: Submission[]) => {
   const gSubmissions = groupBy(
     submissions,
     (s) => getRatingColorInfo(s.problem.rating).name
+  );
+  return gSubmissions;
+};
+
+export const groupByLanguage = (submissions: Submission[]) => {
+  const gSubmissions = groupBy(submissions, (s) =>
+    normalizeLanguage(s.programmingLanguage)
   );
   return gSubmissions;
 };

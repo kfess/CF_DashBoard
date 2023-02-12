@@ -14,16 +14,18 @@ import { useContestIdNameMap } from "@features/contests/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
-import type { VerdictAbbr } from "@features/submission/submission";
 import { verdictMap } from "@helpers/verdict";
+import { VerdictFilter } from "./SolvedStatusFilter";
+import { LanguageFilter } from "./LanguageFilter";
 
 type Props = {
   userId: string;
-  solvedStatus: VerdictAbbr | "All";
+  solvedStatus: VerdictFilter;
+  language: LanguageFilter;
 };
 
 export const UserSubmission: React.FC<Props> = (props: Props) => {
-  const { userId, solvedStatus } = props;
+  const { userId, solvedStatus, language } = props;
 
   const { data, isError, error, isLoading } = useFetchUserSubmission({
     userId: userId,
@@ -85,6 +87,15 @@ export const UserSubmission: React.FC<Props> = (props: Props) => {
                       } else {
                         return (
                           verdictMap[d.verdict ?? "UNKNOWN"] === solvedStatus
+                        );
+                      }
+                    })
+                    .filter((d) => {
+                      if (language === "All") {
+                        return true;
+                      } else {
+                        return (
+                          normalizeLanguage(d.programmingLanguage) === language
                         );
                       }
                     })

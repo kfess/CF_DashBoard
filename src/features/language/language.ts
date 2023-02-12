@@ -1,4 +1,4 @@
-const normalizedLanguage = [
+export const normalizedLanguage = [
   "C",
   "C++",
   "C#",
@@ -34,7 +34,6 @@ const normalizedLanguage = [
   "Text",
   "Mysterious Language",
   "Other",
-  "All",
 ] as const;
 
 export type NormalizedLanguage = typeof normalizedLanguage[number];

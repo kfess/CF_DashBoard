@@ -7,6 +7,8 @@ import SvgIcon from "@mui/material/SvgIcon";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
+const ITEM_HEIGHT = 48;
+
 type Props<T extends string | number> = {
   readonly title: string;
   readonly items: readonly T[]; // "Japan" | "USA" | "China" , etc...
@@ -41,7 +43,12 @@ export const DropDownMenuButton = <T extends string | number>(
       >
         {title}
       </Button>
-      <Menu open={open} anchorEl={anchorEl} onClose={handleClose}>
+      <Menu
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5 } }}
+      >
         {items.map((item) => (
           <MenuItem
             key={item}
