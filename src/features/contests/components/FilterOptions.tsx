@@ -14,8 +14,8 @@ const buttonsCss = css({
 });
 
 type Props = {
-  tab: Classification;
-  setTab: (arg: Classification) => void;
+  classification: Classification;
+  setClassification: (arg: Classification) => void;
   period: PeriodWord;
   setPeriod: (arg: PeriodWord) => void;
   solvedStatus: SolvedStatus;
@@ -28,8 +28,8 @@ type Props = {
 
 export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
   const {
-    tab,
-    setTab,
+    classification,
+    setClassification,
     period,
     setPeriod,
     solvedStatus,
@@ -43,7 +43,10 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
   return (
     <>
       <div css={buttonsCss}>
-        <ContestTypeFilter tab={tab} setTab={setTab} />
+        <ContestTypeFilter
+          classification={classification}
+          setClassification={setClassification}
+        />
         <PeriodFilterButton period={period} setPeriod={setPeriod} />
         <SolvedStatusFilter
           solvedStatus={solvedStatus}

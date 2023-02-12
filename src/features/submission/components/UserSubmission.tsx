@@ -17,6 +17,7 @@ import { VerdictChip } from "@features/submission/components/VerdictChip";
 import { verdictMap } from "@helpers/verdict";
 import { VerdictFilter } from "./SolvedStatusFilter";
 import { LanguageFilter } from "./LanguageFilter";
+import { ContestTypeFilter } from "./ContestTypeFilter";
 
 type Props = {
   userId: string;

@@ -5,6 +5,8 @@ import type { VerdictFilter } from "@features/submission/components/SolvedStatus
 import { SolvedStatusFilterButton } from "@features/submission/components/SolvedStatusFilter";
 import type { LanguageFilter } from "@features/submission/components/LanguageFilter";
 import { LanguageFilterButton } from "@features/submission/components/LanguageFilter";
+import { ContestTypeFilter } from "@features/contests/components/ContestTypeFilter";
+import { Classification } from "@features/contests/contest";
 
 export const UserSubmissionPage: React.FC = () => {
   const { search } = useLocation();
@@ -13,9 +15,14 @@ export const UserSubmissionPage: React.FC = () => {
 
   const [solvedStatus, setSolvedStatus] = useState<VerdictFilter>("All");
   const [language, setLanguage] = useState<LanguageFilter>("All");
+  const [classification, setClassification] = useState<Classification>("All");
 
   return (
     <>
+      <ContestTypeFilter
+        classification={classification}
+        setClassification={setClassification}
+      />
       <SolvedStatusFilterButton
         solvedStatus={solvedStatus}
         setSolvedStatus={setSolvedStatus}

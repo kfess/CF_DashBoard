@@ -16,7 +16,7 @@ export const ContestsPage: React.FC = () => {
   const userId = urlQueries.get("userId") ?? "";
 
   const { data, isError, error, isLoading } = useFetchContests();
-  const [tab, setTab] = useState<Classification>("All");
+  const [classiffication, setClassification] = useState<Classification>("All");
 
   const [period, setPeriod] = useState<PeriodWord>("All Period");
 
@@ -33,7 +33,7 @@ export const ContestsPage: React.FC = () => {
     setReverse(!reverse);
   }, [reverse]);
 
-  const contests = reshapeContests(data ?? [], tab, reverse);
+  const contests = reshapeContests(data ?? [], classiffication, reverse);
   const problemIdxes = getProblemIdxes(data ?? []);
 
   const { solvedSet, attemptedSet } = useSolvedStatus(userId);
@@ -52,8 +52,8 @@ export const ContestsPage: React.FC = () => {
         <LabelsChip />
       </div>
       <FilterOptions
-        tab={tab}
-        setTab={setTab}
+        classification={classiffication}
+        setClassification={setClassification}
         period={period}
         setPeriod={setPeriod}
         solvedStatus={solvedStatus}

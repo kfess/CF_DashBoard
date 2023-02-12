@@ -28,7 +28,7 @@ const classificationSchema = z.union([
   z.literal("Educational"),
   z.literal("Others"),
 ]);
-export const classification = [
+export const classifications = [
   "All",
   "Div. 1",
   "Div. 2",
@@ -41,7 +41,7 @@ export const classification = [
   "Educational",
   "Others",
 ] as const;
-export type Classification = typeof classification[number];
+export type Classification = typeof classifications[number];
 
 const phaseSchema = z.union([
   z.literal("BEFORE"),
