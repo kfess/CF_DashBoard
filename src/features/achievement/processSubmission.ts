@@ -27,10 +27,17 @@ export const uniqueDateSet = (submissions: Submission[]): Set<string> =>
     return set;
   }, new Set<string>());
 
-export const groupbyRatingColor = (submissions: Submission[]) => {
-  const groupedSubmissions = groupBy(
-    submissions,
-    (submission) => getRatingColorInfo(submission.problem.rating).name
+export const groupbyDate = (submissions: Submission[]) => {
+  const gSubmissions = groupBy(submissions, (s) =>
+    dayjs.unix(s.creationTimeSeconds).format("YYYY/MM/DD")
   );
-  return groupedSubmissions;
+  return gSubmissions;
+};
+
+export const groupbyRatingColor = (submissions: Submission[]) => {
+  const gSubmissions = groupBy(
+    submissions,
+    (s) => getRatingColorInfo(s.problem.rating).name
+  );
+  return gSubmissions;
 };

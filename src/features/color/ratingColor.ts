@@ -1,17 +1,19 @@
 import { ThemeColor } from "@features/color/@types/theme";
 
-type RatingColor =
-  | "Black"
-  | "Gray"
-  | "Green"
-  | "Cyan"
-  | "Blue"
-  | "Violet"
-  | "LightOrange"
-  | "DeepOrange"
-  | "LightRed"
-  | "Red"
-  | "DeepRed";
+export const ratingColor = [
+  "Black",
+  "Gray",
+  "Green",
+  "Cyan",
+  "Blue",
+  "Violet",
+  "LightOrange",
+  "DeepOrange",
+  "LightRed",
+  "Red",
+  "DeepRed",
+] as const;
+export type RatingColor = typeof ratingColor[number];
 
 // for theme color (base, purple, green)
 type ColorCode =
@@ -54,7 +56,7 @@ type Title =
   | "Newbie" // Gray
   | "No Data"; // Black
 
-type RatingColorInfo = {
+export type RatingColorInfo = {
   [C in RatingColor]: {
     readonly name: C;
     readonly colorCode: ColorCode;
