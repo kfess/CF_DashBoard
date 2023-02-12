@@ -82,7 +82,7 @@ const verdict = [
 ] as const;
 export type Verdict = typeof verdict[number];
 
-const verdictAbbr = [
+export const verdictAbbr = [
   "AC",
   "FAILED",
   "PARTIAL",

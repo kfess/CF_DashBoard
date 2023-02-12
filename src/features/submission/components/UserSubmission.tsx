@@ -12,15 +12,19 @@ import { normalizeLanguage } from "@features/language/language";
 import { formatUnixTime } from "@helpers/index";
 import { useContestIdNameMap } from "@features/contests/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
-import { verdictMap } from "@helpers/verdict";
 import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
+import { VerdictChip } from "@features/submission/components/VerdictChip";
+import type { VerdictAbbr } from "@features/submission/submission";
+import { verdictMap } from "@helpers/verdict";
 
 type Props = {
   userId: string;
+  solvedStatus: VerdictAbbr | "All";
 };
 
 export const UserSubmission: React.FC<Props> = (props: Props) => {
-  const { userId } = props;
+  const { userId, solvedStatus } = props;
+
   const { data, isError, error, isLoading } = useFetchUserSubmission({
     userId: userId,
   });
@@ -75,6 +79,15 @@ export const UserSubmission: React.FC<Props> = (props: Props) => {
                 </TableHead>
                 <TableBody>
                   {[...data]
+                    .filter((d) => {
+                      if (solvedStatus === "All") {
+                        return true;
+                      } else {
+                        return (
+                          verdictMap[d.verdict ?? "UNKNOWN"] === solvedStatus
+                        );
+                      }
+                    })
                     .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                     .map((d) => (
                       <TableRow>
@@ -112,9 +125,7 @@ export const UserSubmission: React.FC<Props> = (props: Props) => {
                           </a>
                         </TableCell>
                         <TableCell>
-                          {d.verdict
-                            ? verdictMap[d.verdict]
-                            : verdictMap["UNKNOWN"]}
+                          <VerdictChip verdict={d.verdict} />
                         </TableCell>
                         <TableCell>
                           {normalizeLanguage(d.programmingLanguage)}

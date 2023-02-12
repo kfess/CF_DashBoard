@@ -13,7 +13,7 @@ import { normalizeLanguage } from "@features/language/language";
 import { formatUnixTime } from "@helpers/index";
 import { useContestIdNameMap } from "@features/contests/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
-import { verdictMap } from "@helpers/verdict";
+import { VerdictChip } from "@features/submission/components/VerdictChip";
 
 export const RecentSubmission: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchRecentSubmissions();
@@ -104,9 +104,7 @@ export const RecentSubmission: React.FC = () => {
                           </a>
                         </TableCell>
                         <TableCell>
-                          {d.verdict
-                            ? verdictMap[d.verdict]
-                            : verdictMap["UNKNOWN"]}
+                          <VerdictChip verdict={d.verdict} />
                         </TableCell>
                         <TableCell>
                           {normalizeLanguage(d.programmingLanguage)}

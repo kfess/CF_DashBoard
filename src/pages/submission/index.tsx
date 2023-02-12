@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { RecentSubmission } from "@features/submission/components/recentSubmission";
-import { UserSubmission } from "@features/submission/components/UserSubmission";
+import { RecentSubmissionPage } from "@pages/submission/recent";
+import { UserSubmissionPage } from "./user";
 
 type TabPanelProps = {
   children?: React.ReactNode;
@@ -53,10 +53,10 @@ export const SubmissionPage: React.FC = () => {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <RecentSubmission />
+          <RecentSubmissionPage />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <UserSubmission userId={userId} />
+          <UserSubmissionPage />
         </TabPanel>
       </Box>
     </>
