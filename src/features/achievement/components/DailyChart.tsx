@@ -101,12 +101,12 @@ export const DailyChart: React.FC<Props> = (props: Props) => {
             tick={{ fontSize: 12 }}
             scale="auto"
             tickFormatter={(date: number): string =>
-              dayjs(date).format("YY/MM/DD")
+              dayjs(date).format("YYYY-MM-DD")
             }
           />
           <YAxis tick={{ fontSize: 12 }} />
           <Tooltip
-            labelFormatter={(date: number) => dayjs(date).format("YY/MM/DD")}
+            labelFormatter={(date: number) => dayjs(date).format("YYYY-MM-DD")}
           />
         </BarChart>
       </ResponsiveContainer>

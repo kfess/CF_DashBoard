@@ -17,30 +17,30 @@ export type RatingColor = typeof ratingColor[number];
 
 // for theme color (base, purple, green)
 type ColorCode =
-  | "#000000" // Black
-  | "#CCCCCC" // Gray
-  | "#76DEBB" // Green
-  | "#76FF77" // Cyan
-  | "#AAAAFF" // Blue
-  | "#FF88FF" // Violet
-  | "#FFCC87" // LightOrange
-  | "#FFBB55" // DeepOrange
+  | "#1a1a1a" // Black
+  | "#7F8081" // Gray
+  | "#008000" // Green
+  | "#22AEA6" // Cyan
+  | "#0F06FF" // Blue
+  | "#AA00AA" // Violet
+  | "#E3CA0F" // LightOrange, this color looks yellowish
+  | "#FF8E0E" // DeepOrange
   | "#FF7777" // LightRed
-  | "#FF3333" // Red
+  | "#FE0A04" // Red
   | "#AA0100"; // DeepRed
 
 // for therme color (dark)
 type DarkColorCode =
-  | "#202020" // Black
-  | "#CCCCCC" // Gray // need Change!
-  | "#76DEBB" // Green // need Change!
-  | "#76FF77" // Cyan // need Change!
-  | "#AAAAFF" // Blue // need Change!
-  | "#FF88FF" // Violet // need Change!
-  | "#FFCC87" // LightOrange // need Change!
-  | "#FFBB55" // DeepOrange // need Change!
+  | "#1a1a1a" // Black
+  | "#7F8081" // Gray // need Change!
+  | "#008000" // Green // need Change!
+  | "#22AEA6" // Cyan // need Change!
+  | "#0F06FF" // Blue // need Change!
+  | "#AA00AA" // Violet // need Change!
+  | "#E3CA0F" // LightOrange // need Change!
+  | "#FF8E0E" // DeepOrange // need Change!
   | "#FF7777" // LightRed // need Change!
-  | "#FF3333" // Red // need Change!
+  | "#FE0A04" // Red // need Change!
   | "#AA0100"; // DeepRed // need Change!
 
 type Title =
@@ -73,64 +73,64 @@ const NO_RATING = -1;
 export const ratingColorInfo: RatingColorInfo = {
   Black: {
     name: "Black",
-    colorCode: "#000000",
-    darkColorCode: "#202020",
+    colorCode: "#1a1a1a",
+    darkColorCode: "#1a1a1a",
     lowerBound: NO_RATING,
     upperBound: NO_RATING,
     title: "No Data",
   },
   Gray: {
     name: "Gray",
-    colorCode: "#CCCCCC",
-    darkColorCode: "#CCCCCC",
+    colorCode: "#7F8081",
+    darkColorCode: "#7F8081",
     lowerBound: 0,
     upperBound: 1199,
     title: "Newbie",
   },
   Green: {
     name: "Green",
-    colorCode: "#76DEBB",
-    darkColorCode: "#76DEBB",
+    colorCode: "#008000",
+    darkColorCode: "#008000",
     lowerBound: 1200,
     upperBound: 1399,
     title: "Pupil",
   },
   Cyan: {
     name: "Cyan",
-    colorCode: "#76FF77",
-    darkColorCode: "#76FF77",
+    colorCode: "#22AEA6",
+    darkColorCode: "#22AEA6",
     lowerBound: 1400,
     upperBound: 1599,
     title: "Specialist",
   },
   Blue: {
     name: "Blue",
-    colorCode: "#AAAAFF",
-    darkColorCode: "#AAAAFF",
+    colorCode: "#0F06FF",
+    darkColorCode: "#0F06FF",
     lowerBound: 1600,
     upperBound: 1899,
     title: "Expert",
   },
   Violet: {
     name: "Violet",
-    colorCode: "#FF88FF",
-    darkColorCode: "#FF88FF",
+    colorCode: "#AA00AA",
+    darkColorCode: "#AA00AA",
     lowerBound: 1900,
     upperBound: 2099,
     title: "Candidate Master",
   },
   LightOrange: {
     name: "LightOrange",
-    colorCode: "#FFCC87",
-    darkColorCode: "#FFCC87",
+    colorCode: "#E3CA0F",
+    darkColorCode: "#E3CA0F",
     lowerBound: 2100,
     upperBound: 2299,
     title: "Master",
   },
   DeepOrange: {
     name: "DeepOrange",
-    colorCode: "#FFBB55",
-    darkColorCode: "#FFBB55",
+    colorCode: "#FF8E0E",
+    darkColorCode: "#FF8E0E",
     lowerBound: 2300,
     upperBound: 2399,
     title: "International Master",
@@ -145,8 +145,8 @@ export const ratingColorInfo: RatingColorInfo = {
   },
   Red: {
     name: "Red",
-    colorCode: "#FF3333",
-    darkColorCode: "#FF3333",
+    colorCode: "#FE0A04",
+    darkColorCode: "#FE0A04",
     lowerBound: 2600,
     upperBound: 2999,
     title: "International Grandmaster",
