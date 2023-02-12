@@ -75,13 +75,13 @@ export const ClimbingChart: React.FC<Props> = (props: Props) => {
       if (index === 0) {
         return [...arr, { ...g }];
       } else {
-        const cum = ratingColor.reduce((obj, color) => {
+        const cumColor = ratingColor.reduce((obj, color) => {
           return {
             ...obj,
             [color]: (g[color] ?? 0) + (arr[[...arr].length - 1][color] ?? 0),
           };
-        }, {});
-        return [...arr, { date: g.date, ...cum } as ColoredCumulativeEffort];
+        }, {} as Omit<ColoredCumulativeEffort, "date">);
+        return [...arr, { date: g.date, ...cumColor } as ColoredCumulativeEffort];
       }
     }, [] as ColoredCumulativeEffort[]);
 
