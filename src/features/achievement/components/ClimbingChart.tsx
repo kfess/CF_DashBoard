@@ -1,15 +1,15 @@
 import * as dayjs from "dayjs";
 import React, { useState } from "react";
 import {
-  BarChart,
-  Bar,
+  Area,
+  AreaChart,
   XAxis,
   ResponsiveContainer,
   YAxis,
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import type { Submission } from "@features/submission/submission";
+import { Submission } from "@features/submission/submission";
 import {
   isACSubmission,
   groupbyRatingColor,
@@ -19,43 +19,71 @@ import type { RatingColor } from "@features/color/ratingColor";
 import { ratingColor, ratingColorInfo } from "@features/color/ratingColor";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 
-type DailyEffort = {
+type CumulativeEffort = {
   date: number;
   count: number;
 };
-type ColoredDailyEffort = { date: number } & { [C in RatingColor]: number };
+type ColoredCumulativeEffort = { date: number } & {
+  [C in RatingColor]: number;
+};
 
 const displayColors = ["No Color", "Colored"] as const;
 type DisplayColor = typeof displayColors[number];
 
 type Props = { submissions: Submission[] };
 
-export const DailyChart: React.FC<Props> = (props: Props) => {
+export const ClimbingChart: React.FC<Props> = (props: Props) => {
   const { submissions } = props;
   const [displayColor, setDisplayColor] = useState<DisplayColor>("No Color");
 
   const ACSubmissions = submissions
     .filter(isACSubmission)
     .sort((a, b) => a.creationTimeSeconds - b.creationTimeSeconds);
-
   const gDateSubmissions = groupbyDate(ACSubmissions);
 
   // without rating color
-  const noColoredCount: DailyEffort[] = gDateSubmissions.map((g) => {
-    const [date, submissions] = g;
-    return { date: dayjs(date).unix() * 1000, count: submissions.length };
-  });
+  const noColoredCount: CumulativeEffort[] = gDateSubmissions
+    .map((g) => {
+      const [date, submissions] = g;
+      return {
+        date: dayjs(date).unix() * 1000,
+        count: submissions.length,
+      } as CumulativeEffort;
+    })
+    .reduce((arr, g, index) => {
+      return [
+        ...arr,
+        {
+          date: g.date,
+          count: index > 0 ? arr[[...arr].length - 1].count + g.count : g.count,
+        },
+      ];
+    }, [] as CumulativeEffort[]);
 
   // with rating color
-  const coloredCount: ColoredDailyEffort[] = gDateSubmissions.map((g) => {
-    const [date, submissions] = g;
-    const gColorSubmissions = groupbyRatingColor(submissions);
-    const colorCount = gColorSubmissions.reduce((obj, g) => {
-      const [color, submissions] = g;
-      return { ...obj, [color]: submissions.length };
-    }, {} as { [C in RatingColor]: number });
-    return { date: dayjs(date).unix() * 1000, ...colorCount };
-  });
+  const coloredCount: ColoredCumulativeEffort[] = gDateSubmissions
+    .map((g) => {
+      const [date, submissions] = g;
+      const gColorSubmissions = groupbyRatingColor(submissions);
+      const colorCount = gColorSubmissions.reduce((obj, g) => {
+        const [color, submissions] = g;
+        return { ...obj, [color]: submissions.length };
+      }, {} as { [C in RatingColor]: number });
+      return { date: dayjs(date).unix() * 1000, ...colorCount };
+    })
+    .reduce((arr, g, index) => {
+      if (index === 0) {
+        return [...arr, { ...g }];
+      } else {
+        const cum = ratingColor.reduce((obj, color) => {
+          return {
+            ...obj,
+            [color]: (g[color] ?? 0) + (arr[[...arr].length - 1][color] ?? 0),
+          };
+        }, {});
+        return [...arr, { date: g.date, ...cum } as ColoredCumulativeEffort];
+      }
+    }, [] as ColoredCumulativeEffort[]);
 
   return (
     <>
@@ -66,7 +94,7 @@ export const DailyChart: React.FC<Props> = (props: Props) => {
         setSelectedItem={setDisplayColor}
       />
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart
+        <AreaChart
           data={displayColor === "Colored" ? coloredCount : noColoredCount}
           margin={{
             top: 5,
@@ -77,7 +105,7 @@ export const DailyChart: React.FC<Props> = (props: Props) => {
         >
           {displayColor === "Colored" ? (
             ratingColor.map((color) => (
-              <Bar
+              <Area
                 key={color}
                 dataKey={color}
                 stackId="1"
@@ -86,7 +114,7 @@ export const DailyChart: React.FC<Props> = (props: Props) => {
               />
             ))
           ) : (
-            <Bar
+            <Area
               dataKey="count"
               type="linear"
               stroke="#8884d8"
@@ -108,7 +136,7 @@ export const DailyChart: React.FC<Props> = (props: Props) => {
           <Tooltip
             labelFormatter={(date: number) => dayjs(date).format("YYYY-MM-DD")}
           />
-        </BarChart>
+        </AreaChart>
       </ResponsiveContainer>
     </>
   );
