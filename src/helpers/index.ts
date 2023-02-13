@@ -19,3 +19,9 @@ export const groupBy = <K, V>(
 
 export const formatUnixTime = (unitTime: number) =>
   dayjs.unix(unitTime).format("YYYY-MM-DD HH:mm:ss");
+
+export const range = (i: number, j: number): number[] => {
+  return Array.from({ length: j - i + 1 }, (_, index) => {
+    return index + i;
+  });
+};

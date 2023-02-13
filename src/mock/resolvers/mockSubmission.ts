@@ -3,12 +3,7 @@ import type {
   Submission,
   SubmissionAPI,
 } from "@features/submission/submission";
-
-const range = (i: number, j: number): number[] => {
-  return Array.from({ length: j - i + 1 }, (_, index) => {
-    return index + i;
-  });
-};
+import { range } from "@helpers/index";
 
 export const mockSubmission: ResponseResolver<
   MockedRequest,

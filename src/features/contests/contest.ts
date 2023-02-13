@@ -15,7 +15,7 @@ const typeSchema = z.union([
 const contestType = ["CF", "IOI", "ICPC", "Other"] as const;
 export type ContestType = typeof contestType[number];
 
-const classificationSchema = z.union([
+export const classificationSchema = z.union([
   z.literal("All"),
   z.literal("Div. 1"),
   z.literal("Div. 2"),

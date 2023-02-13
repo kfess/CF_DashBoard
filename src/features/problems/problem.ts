@@ -1,5 +1,23 @@
 import { z } from "zod";
 
+// this is the same as "@features/contests/contest"
+// Importing classificationSchema from "@features/contests/contest"
+// did not work for me. So I redefined the same classificationSchema
+// I want to fix anyway.
+const classificationSchema = z.union([
+  z.literal("All"),
+  z.literal("Div. 1"),
+  z.literal("Div. 2"),
+  z.literal("Div. 1 + Div. 2"),
+  z.literal("Div. 3"),
+  z.literal("Div. 4"),
+  z.literal("ICPC"),
+  z.literal("Kotlin Heros"),
+  z.literal("Global"),
+  z.literal("Educational"),
+  z.literal("Others"),
+]);
+
 // https://codeforces.com/apiHelp/objects#Problem
 
 const typeSchema = z.union([z.literal("PROGRAMMING"), z.literal("QUESTION")]);
@@ -96,6 +114,8 @@ export const problemSchema = z.object({
     .transform((val) =>
       val.length > 0 ? (val as Tag[]) : (["no tags"] as const)
     ),
+  contestName: z.string().optional(), // need to remove optional in the future
+  classification: z.optional(classificationSchema), // need to remove optional in the future
 });
 export const problemsSchema = z.array(problemSchema);
 export type Problem = z.infer<typeof problemSchema>;
