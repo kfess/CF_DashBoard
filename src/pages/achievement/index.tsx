@@ -9,6 +9,8 @@ import { LongestStreak } from "@features/achievement/components/LongestStreak";
 import { DailyChart } from "@features/achievement/components/DailyChart";
 import { LanguageACCount } from "@features/achievement/components/LanguageACCount";
 import { ClimbingChart } from "@features/achievement/components/ClimbingChart";
+import { HeatMap } from "@features/achievement/components/HeatMap";
+import { createTableData } from "@features/achievement/helper";
 
 export const AchievementPage: React.FC = () => {
   const { search } = useLocation();
@@ -18,6 +20,8 @@ export const AchievementPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchUserSubmission({
     userId: userId,
   });
+
+  const tableData = createTableData();
 
   return (
     <>
@@ -31,6 +35,7 @@ export const AchievementPage: React.FC = () => {
           <DailyChart submissions={data} />
           <ClimbingChart submissions={data} />
           <LanguageACCount submissions={data} />
+          <HeatMap tableData={tableData} />
         </>
       )}
     </>
