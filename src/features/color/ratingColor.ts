@@ -16,7 +16,7 @@ export const ratingColor = [
 export type RatingColor = typeof ratingColor[number];
 
 // for theme color (base, purple, green)
-type ColorCode =
+export type ColorCode =
   | "#1a1a1a" // Black
   | "#7F8081" // Gray
   | "#008000" // Green
@@ -159,6 +159,34 @@ export const ratingColorInfo: RatingColorInfo = {
     upperBound: MAX_RATING,
     title: "Legendary Grandmaster",
   },
+};
+
+export const getColorNameFromRating = (
+  rating: number | undefined
+): RatingColor => {
+  if (rating == null) {
+    return ratingColorInfo["Black"].name;
+  } else if (rating <= ratingColorInfo["Gray"].upperBound) {
+    return ratingColorInfo["Gray"].name;
+  } else if (rating <= ratingColorInfo["Green"].upperBound) {
+    return ratingColorInfo["Green"].name;
+  } else if (rating <= ratingColorInfo["Cyan"].upperBound) {
+    return ratingColorInfo["Cyan"].name;
+  } else if (rating <= ratingColorInfo["Blue"].upperBound) {
+    return ratingColorInfo["Blue"].name;
+  } else if (rating <= ratingColorInfo["Violet"].upperBound) {
+    return ratingColorInfo["Violet"].name;
+  } else if (rating <= ratingColorInfo["LightOrange"].upperBound) {
+    return ratingColorInfo["LightOrange"].name;
+  } else if (rating <= ratingColorInfo["DeepOrange"].upperBound) {
+    return ratingColorInfo["DeepOrange"].name;
+  } else if (rating <= ratingColorInfo["LightRed"].upperBound) {
+    return ratingColorInfo["LightRed"].name;
+  } else if (rating <= ratingColorInfo["Red"].upperBound) {
+    return ratingColorInfo["Red"].name;
+  } else {
+    return ratingColorInfo["DeepRed"].name;
+  }
 };
 
 export const getRatingColorInfo = (rating: number | undefined) => {

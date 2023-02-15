@@ -11,8 +11,10 @@ const fetchProblems = async (): Promise<Problem[]> => {
 };
 
 export const useFetchProblems = () => {
-  return useQuery<Problem[], Error>({
+  const { data, isError, error, isLoading } = useQuery<Problem[], Error>({
     queryKey: ["contests"],
     queryFn: fetchProblems,
   });
+
+  return { data, isError, error, isLoading };
 };
