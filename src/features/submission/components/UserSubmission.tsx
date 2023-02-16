@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -17,7 +17,7 @@ import { VerdictChip } from "@features/submission/components/VerdictChip";
 import { verdictMap } from "@helpers/verdict";
 import { VerdictFilter } from "./SolvedStatusFilter";
 import { LanguageFilter } from "./LanguageFilter";
-import { ContestTypeFilter } from "./ContestTypeFilter";
+import { usePagination } from "@hooks/index";
 
 type Props = {
   userId: string;
@@ -40,8 +40,7 @@ export const UserSubmission: React.FC<Props> = (props: Props) => {
   } = useContestIdNameMap();
 
   // for pagination
-  const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(50);
+  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
 
   if (isLoading || mapIsLoading) {
     return <span>Loading...</span>;

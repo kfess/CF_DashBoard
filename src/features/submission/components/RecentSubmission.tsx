@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -14,6 +14,7 @@ import { formatUnixTime } from "@helpers/index";
 import { useContestIdNameMap } from "@features/contests/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
+import { usePagination } from "@hooks/index";
 
 export const RecentSubmission: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchRecentSubmissions();
@@ -25,8 +26,7 @@ export const RecentSubmission: React.FC = () => {
   } = useContestIdNameMap();
 
   // for pagination
-  const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(50);
+  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
 
   if (isLoading || mapIsLoading) {
     return <span>Loading...</span>;

@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import type { ReshapedContest } from "@features/contests/contest";
 import { ContestTableRow } from "@features/contests/components/ContestTableRow";
 import { TablePagination } from "@features/ui/component/TablePagination";
+import { usePagination } from "@hooks/index";
 
 type Props = {
   contests: ReshapedContest[];
@@ -22,9 +23,7 @@ export const ContestsTable: React.FC<Props> = (props: Props) => {
   const { contests, problemIdxes, showDifficulty, solvedSet, attemptedSet } =
     props;
 
-  // for pagination
-  const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(50);
+  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
   const contestsLen = useMemo(() => contests.length, [contests]);
 
   return (

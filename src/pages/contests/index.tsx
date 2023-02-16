@@ -9,6 +9,7 @@ import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 import { LabelsChip } from "@features/bookmark/components/LabelIcon";
 import type { PeriodWord } from "@features/contests/components/PeriodFilter";
 import type { SolvedStatus } from "@features/contests/components/SolvedStatusFilter";
+import { useToggle } from "@hooks/index";
 
 export const ContestsPage: React.FC = () => {
   const { search } = useLocation();
@@ -23,15 +24,8 @@ export const ContestsPage: React.FC = () => {
   const [solvedStatus, setSolvedStatus] =
     useState<SolvedStatus>("All Contests");
 
-  const [showDifficulty, setshowDifficulty] = useState<boolean>(true);
-  const toggleShowDifficulty = useCallback(() => {
-    setshowDifficulty(!showDifficulty);
-  }, [showDifficulty]);
-
-  const [reverse, setReverse] = useState<boolean>(false);
-  const toggleOrder = useCallback(() => {
-    setReverse(!reverse);
-  }, [reverse]);
+  const [showDifficulty, toggleShowDifficulty] = useToggle(true);
+  const [reverse, toggleOrder] = useToggle(false);
 
   const contests = reshapeContests(data ?? [], classiffication, reverse);
   const problemIdxes = getProblemIdxes(data ?? []);
