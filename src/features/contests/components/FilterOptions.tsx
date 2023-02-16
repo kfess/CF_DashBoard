@@ -6,6 +6,7 @@ import type { Classification } from "@features/contests/contest";
 import { ContestTypeFilter } from "./ContestTypeFilter";
 import { SolvedStatus, SolvedStatusFilter } from "./SolvedStatusFilter";
 import { PeriodFilterButton, PeriodWord } from "./PeriodFilter";
+import { ResetFilterButton } from "@features/contests/components/ResetFilter";
 
 const buttonsCss = css({
   display: "flex",
@@ -50,6 +51,11 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
         <PeriodFilterButton period={period} setPeriod={setPeriod} />
         <SolvedStatusFilter
           solvedStatus={solvedStatus}
+          setSolvedStatus={setSolvedStatus}
+        />
+        <ResetFilterButton
+          setClassification={setClassification}
+          setPeriod={setPeriod}
           setSolvedStatus={setSolvedStatus}
         />
       </div>

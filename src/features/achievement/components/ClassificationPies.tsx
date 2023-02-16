@@ -27,8 +27,6 @@ export const ClassificationPies: React.FC<Props> = (props: Props) => {
     {} as ClassificationCount
   );
 
-  console.log(data);
-
   return (
     <>
       {classificationProblems &&
