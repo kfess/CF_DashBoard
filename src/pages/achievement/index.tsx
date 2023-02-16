@@ -11,6 +11,8 @@ import { LanguageACCount } from "@features/achievement/components/LanguageACCoun
 import { ClimbingChart } from "@features/achievement/components/ClimbingChart";
 import { HeatMap } from "@features/achievement/components/HeatMap";
 import { createTableData } from "@features/achievement/helper";
+import { DifficultyPies } from "@features/achievement/components/DifficultyPies";
+import { ClassificationPies } from "@features/achievement/components/ClassificationPies";
 
 export const AchievementPage: React.FC = () => {
   const { search } = useLocation();
@@ -32,6 +34,8 @@ export const AchievementPage: React.FC = () => {
           <StreakSum submissions={data} />
           <CurrentStreak submissions={data} />
           <LongestStreak submissions={data} />
+          <DifficultyPies submissions={data} />
+          <ClassificationPies submissions={data} />
           <DailyChart submissions={data} />
           <ClimbingChart submissions={data} />
           <LanguageACCount submissions={data} />

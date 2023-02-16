@@ -4,7 +4,7 @@ import { range } from "@helpers/index";
 
 export const mockProblem: ResponseResolver<MockedRequest, typeof restContext> =
   (req, res, ctx) => {
-    const globalProblems: Problem[] = range(1, 30).map((n) => {
+    const globalProblems: Problem[] = range(1, 20).map((n) => {
       return {
         contestId: n,
         problemsetName: "globalTest",
@@ -13,30 +13,33 @@ export const mockProblem: ResponseResolver<MockedRequest, typeof restContext> =
         type: "PROGRAMMING",
         rating: 1000 + 100 * n,
         tags: ["implementation", "binary search", "brute force"],
+        classification: "Global",
       };
     });
 
-    const div1Problems: Problem[] = range(30, 60).map((n) => {
+    const div1Problems: Problem[] = range(21, 40).map((n) => {
       return {
         contestId: n,
         problemsetName: "div1Test",
         index: "A",
         name: `div1-contest-problem-${n}`,
         type: "PROGRAMMING",
-        rating: 1000 + 100 * (n - 30),
+        rating: 1000 + 100 * (n - 21),
         tags: ["implementation", "binary search", "brute force"],
+        classification: "Div. 1",
       };
     });
 
-    const educationalProblems: Problem[] = range(60, 90).map((n) => {
+    const educationalProblems: Problem[] = range(41, 67).map((n) => {
       return {
         contestId: n,
         problemsetName: "educationalTest",
         index: "A",
         name: `educational-contest-problem-${n}`,
         type: "PROGRAMMING",
-        rating: 1000 + 100 * (n - 60),
+        rating: 1000 + 100 * (n - 41),
         tags: ["implementation", "binary search", "brute force"],
+        classification: "Educational",
       };
     });
 
