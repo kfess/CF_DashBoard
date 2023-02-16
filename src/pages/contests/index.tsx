@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useFetchContests } from "@features/contests/useFetchContest";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
