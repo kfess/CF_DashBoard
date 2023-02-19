@@ -16,10 +16,18 @@ type Props = {
   problems: Problem[];
   selectedTags: Tag[];
   classification: Classification;
+  lowerDifficulty: number;
+  upperDifficulty: number;
 };
 
 export const ProblemsTable: React.FC<Props> = (props: Props) => {
-  const { problems, selectedTags, classification } = props;
+  const {
+    problems,
+    selectedTags,
+    classification,
+    lowerDifficulty,
+    upperDifficulty,
+  } = props;
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
   const filteredProblems = [...problems]
@@ -34,7 +42,9 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
       classification === "All"
         ? true
         : problem.classification === classification
-    );
+    )
+    .filter((problem) => (problem.rating ?? -1) >= lowerDifficulty)
+    .filter((problem) => (problem.rating ?? -1) <= upperDifficulty);
 
   const problemsLen = useMemo(
     () => filteredProblems.length,

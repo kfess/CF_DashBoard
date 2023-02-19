@@ -82,6 +82,8 @@ export const ProblemsPage: React.FC = () => {
         setClassification={setClassification}
         setSolvedStatus={setSolvedStatus}
         removeAllTags={removeAllTags}
+        setLowerDifficulty={setLowerDifficulty}
+        setUpperDifficulty={setUpperDifficulty}
       />
       <FilterChips
         classification={classification}
@@ -100,6 +102,8 @@ export const ProblemsPage: React.FC = () => {
           problems={data}
           selectedTags={selectedTags}
           classification={classification}
+          lowerDifficulty={lowerDifficulty}
+          upperDifficulty={upperDifficulty}
         />
       )}
     </>

@@ -5,7 +5,7 @@ const circle = css({
   borderStyle: "solid",
   borderWidth: "thin",
   display: "inline-block",
-  borderRadius: "50%", // circle shape
+  borderRadius: "50%",
   paddingTop: "10px",
   paddingLeft: "10px",
   marginRight: "5px",

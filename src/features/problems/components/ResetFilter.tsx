@@ -8,15 +8,25 @@ type Props = {
   setClassification: (arg: Classification) => void;
   setSolvedStatus: (arg: SolvedStatus) => void;
   removeAllTags: () => void;
+  setLowerDifficulty: (arg: number) => void;
+  setUpperDifficulty: (arg: number) => void;
 };
 
 export const ResetFilterButton: React.FC<Props> = (props: Props) => {
-  const { setClassification, setSolvedStatus, removeAllTags } = props;
+  const {
+    setClassification,
+    setSolvedStatus,
+    removeAllTags,
+    setLowerDifficulty,
+    setUpperDifficulty,
+  } = props;
 
   const onClickReset = () => {
     setClassification("All");
     setSolvedStatus("All Problems");
     removeAllTags();
+    setLowerDifficulty(0);
+    setUpperDifficulty(5000);
   };
 
   return (

@@ -20,7 +20,7 @@ type Props<T extends string | number> = {
 export const DropDownMenuButton = <T extends string | number>(
   props: Props<T>
 ) => {
-  const { title, items, selectedItem, setSelectedItem } = props;
+  const { title, items, selectedItem, setSelectedItem, startIcons } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -50,7 +50,7 @@ export const DropDownMenuButton = <T extends string | number>(
         onClose={handleClose}
         PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5 } }}
       >
-        {items.map((item) => (
+        {items.map((item, index) => (
           <MenuItem
             key={item}
             onClick={() => {
@@ -64,6 +64,7 @@ export const DropDownMenuButton = <T extends string | number>(
             ) : (
               <SvgIcon fontSize="small" css={{ paddingRight: "5px" }} />
             )}
+            {startIcons && startIcons[index]}
             {item}
           </MenuItem>
         ))}

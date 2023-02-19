@@ -53,7 +53,7 @@ export const FilterChips: React.FC<Props> = (props: Props) => {
         <Chip
           label={`from: ${lowerDifficulty}`}
           onClick={() => {}}
-          onDelete={() => {}}
+          onDelete={() => setLowerDifficulty(0)}
           size="small"
         />
       )}
@@ -61,7 +61,7 @@ export const FilterChips: React.FC<Props> = (props: Props) => {
         <Chip
           label={`To: ${upperDifficulty}`}
           onClick={() => {}}
-          onDelete={() => {}}
+          onDelete={() => setUpperDifficulty(5000)}
           size="small"
         />
       )}
