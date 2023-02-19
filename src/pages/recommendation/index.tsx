@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
-import { TabItem, Tabs } from "@features/ui/component/Tabs";
+import type { TabItem } from "@features/ui/component/Tabs";
+import { Tabs } from "@features/ui/component/Tabs";
 
 export const RecommendationPage: React.FC = () => {
   const { search } = useLocation();

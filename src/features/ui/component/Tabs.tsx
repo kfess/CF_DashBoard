@@ -42,21 +42,23 @@ export const Tabs: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-      <MuiTabs value={value} onChange={handleChange}>
-        {tabItems.map((item) => (
-          <Tab
-            label={item.label}
-            sx={{ textTransform: "none" }}
-            disabled={item.disabled}
-          />
-        ))}
-      </MuiTabs>
+    <>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <MuiTabs value={value} onChange={handleChange}>
+          {tabItems.map((item) => (
+            <Tab
+              label={item.label}
+              sx={{ textTransform: "none" }}
+              disabled={item.disabled}
+            />
+          ))}
+        </MuiTabs>
+      </Box>
       {tabItems.map((item, index) => (
         <TabPanel value={value} index={index}>
           {item.children}
         </TabPanel>
       ))}
-    </Box>
+    </>
   );
 };
