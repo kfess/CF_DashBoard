@@ -6,6 +6,7 @@ import { LabelsPage } from "@pages/bookmark/labels";
 import { LabelPage } from "@pages/bookmark/label/index";
 import { SubmissionPage } from "@pages/submission";
 import { AchievementPage } from "@pages/achievement";
+import { RecommendationPage } from "@pages/recommendation";
 
 export const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ export const router = createBrowserRouter([
       { index: true, element: <ContestsPage /> },
       { path: "/problems", element: <ProblemsPage /> },
       { path: "/achievement", element: <AchievementPage /> },
-      { path: "/recommend", element: <div>recommend</div> },
+      { path: "/recommend", element: <RecommendationPage /> },
       { path: "labels", element: <LabelsPage /> },
       { path: "labels/:labelName", element: <LabelPage /> },
       { path: "/submission", element: <SubmissionPage /> },

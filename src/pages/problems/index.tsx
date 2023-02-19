@@ -11,6 +11,7 @@ import type { SolvedStatus } from "@features/problems/components/SolvedStatusFil
 import { ResetFilterButton } from "@features/problems/components/ResetFilter";
 import { ratingColorInfo } from "@features/color/ratingColor";
 import { DifficultyButton } from "@features/problems/components/DifficultyButton";
+import { LabelsChip } from "@features/bookmark/components/LabelIcon";
 
 export const ProblemsPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchProblems();
@@ -59,6 +60,9 @@ export const ProblemsPage: React.FC = () => {
 
   return (
     <>
+      <div css={{ textAlign: "right" }}>
+        <LabelsChip />
+      </div>
       <ContestTypeFilter
         classification={classification}
         setClassification={setClassification}

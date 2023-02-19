@@ -65,8 +65,8 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
           <Table stickyHeader>
             <TableHead>
               <TableRow>
-                <TableCell>Contest</TableCell>
                 <TableCell>Problem</TableCell>
+                <TableCell>Contest</TableCell>
                 <TableCell>Difficulty</TableCell>
                 <TableCell>Solved Count</TableCell>
                 <TableCell>Solution</TableCell>
