@@ -61,7 +61,7 @@ export const tagSchema = z.union([
   z.literal("chinese remainder theorem"),
   z.literal("schedules"),
 ]);
-const tag = [
+export const tags = [
   "implementation",
   "math",
   "greedy",
@@ -98,7 +98,7 @@ const tag = [
   "chinese remainder theorem",
   "schedules",
 ] as const;
-export type Tag = typeof tag[number];
+export type Tag = typeof tags[number];
 
 export const problemSchema = z.object({
   contestId: z.number().optional(),

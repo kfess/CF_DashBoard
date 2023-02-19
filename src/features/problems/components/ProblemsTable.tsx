@@ -6,17 +6,18 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Problem } from "@features/problems/problem";
+import { Problem, Tag } from "@features/problems/problem";
 import { usePagination } from "@hooks/index";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { ProblemsTableRow } from "@features/problems/components/ProblemsTableRow";
 
 type Props = {
   problems: Problem[];
+  selectedTags: Tag[];
 };
 
 export const ProblemsTable: React.FC<Props> = (props: Props) => {
-  const { problems } = props;
+  const { problems, selectedTags } = props;
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
   const problemsLen = useMemo(() => problems.length, [problems]);
@@ -42,6 +43,13 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
             </TableHead>
             <TableBody>
               {[...problems]
+                .filter((problem) =>
+                  selectedTags.length === 0
+                    ? true
+                    : selectedTags.every((selectedTag) => {
+                        return (problem.tags as string[]).includes(selectedTag);
+                      })
+                )
                 .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                 .map((problem) => (
                   <ProblemsTableRow problem={problem} />

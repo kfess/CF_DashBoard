@@ -25,3 +25,6 @@ export const range = (i: number, j: number): number[] => {
     return index + i;
   });
 };
+
+export const haveDuplicateInArr = <T>(arr1: readonly T[], arr2: readonly T[]) =>
+  arr1.filter((v) => arr2.includes(v)).length > 0;
