@@ -12,6 +12,7 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderOutlined from "@mui/icons-material/StarBorderOutlined";
 import { labelsState } from "@features/bookmark/label.atom";
 import { labelStateSchema } from "@features/bookmark/label.atom";
+import { ColoredCircle } from "@features/color/ColoredCircle";
 
 const circleCss = css({
   cursor: "pointer",
@@ -117,16 +118,7 @@ export const LabelIcon: React.FC<Props> = (props: Props) => {
               css={{ display: "block" }}
             >
               <div>
-                <span
-                  css={{
-                    borderRadius: "50%",
-                    display: "inline-block",
-                    paddingTop: "10px",
-                    paddingLeft: "10px",
-                    marginRight: "5px",
-                    backgroundColor: label.color,
-                  }}
-                ></span>
+                <ColoredCircle color={label.color} />
                 {label.name}
               </div>
               <div css={{ fontSize: "13px" }}>{label.description}</div>

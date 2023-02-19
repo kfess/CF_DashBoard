@@ -14,6 +14,7 @@ type Props<T extends string | number> = {
   readonly items: readonly T[]; // "Japan" | "USA" | "China" , etc...
   selectedItem: T;
   setSelectedItem: (item: T) => void;
+  readonly startIcons?: React.ReactNode[];
 };
 
 export const DropDownMenuButton = <T extends string | number>(

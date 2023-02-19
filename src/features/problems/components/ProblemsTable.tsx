@@ -10,17 +10,36 @@ import { Problem, Tag } from "@features/problems/problem";
 import { usePagination } from "@hooks/index";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { ProblemsTableRow } from "@features/problems/components/ProblemsTableRow";
+import type { Classification } from "@features/contests/contest";
 
 type Props = {
   problems: Problem[];
   selectedTags: Tag[];
+  classification: Classification;
 };
 
 export const ProblemsTable: React.FC<Props> = (props: Props) => {
-  const { problems, selectedTags } = props;
+  const { problems, selectedTags, classification } = props;
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
-  const problemsLen = useMemo(() => problems.length, [problems]);
+  const filteredProblems = [...problems]
+    .filter((problem) =>
+      selectedTags.length === 0
+        ? true
+        : selectedTags.every((selectedTag) => {
+            return (problem.tags as string[]).includes(selectedTag);
+          })
+    )
+    .filter((problem) =>
+      classification === "All"
+        ? true
+        : problem.classification === classification
+    );
+
+  const problemsLen = useMemo(
+    () => filteredProblems.length,
+    [filteredProblems]
+  );
 
   return (
     <>
@@ -38,18 +57,13 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
               <TableRow>
                 <TableCell>Contest</TableCell>
                 <TableCell>Problem</TableCell>
+                <TableCell>Difficulty</TableCell>
+                <TableCell>Solved Count</TableCell>
                 <TableCell>Solution</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {[...problems]
-                .filter((problem) =>
-                  selectedTags.length === 0
-                    ? true
-                    : selectedTags.every((selectedTag) => {
-                        return (problem.tags as string[]).includes(selectedTag);
-                      })
-                )
+              {filteredProblems
                 .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                 .map((problem) => (
                   <ProblemsTableRow problem={problem} />

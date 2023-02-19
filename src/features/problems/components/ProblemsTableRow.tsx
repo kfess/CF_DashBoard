@@ -29,6 +29,8 @@ export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
           showDifficulty={true}
         />
       </TableCell>
+      <TableCell>{problem.rating}</TableCell>
+      <TableCell>{}</TableCell>
       <TableCell>
         <SolutionLink />
       </TableCell>

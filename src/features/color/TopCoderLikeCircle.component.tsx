@@ -1,20 +1,11 @@
 import React from "react";
-import { css } from "@emotion/react";
 import Tooltip from "@mui/material/Tooltip";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import {
   getColorCodeFromRating,
   calcFillPercent,
 } from "@features/color/ratingColor";
-
-const circle = css({
-  borderStyle: "solid",
-  borderWidth: "thin",
-  display: "inline-block",
-  borderRadius: "50%", // circle shape
-  width: "10px",
-  height: "10px",
-});
+import { ColoredCircle } from "@features/color/ColoredCircle";
 
 // 'rating' means "A person's rating"
 // 'difficulty' means the "Difficulty of a problem"
@@ -46,18 +37,9 @@ export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
 
   return (
     <Tooltip title={tooltipMsg}>
-      <span
-        css={[
-          circle,
-          {
-            borderColor: color,
-            background: `border-box linear-gradient(to top,
-             ${color} ${fillPercent * 100}%,
-             rgba(0,0,0,0) ${fillPercent * 100}%)`,
-            marginRight: theme.spacing(0.5),
-          },
-        ]}
-      />
+      <span>
+        <ColoredCircle color={color} fillPercent={fillPercent} />
+      </span>
     </Tooltip>
   );
 };
