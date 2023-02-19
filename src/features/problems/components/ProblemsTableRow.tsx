@@ -5,6 +5,7 @@ import { Problem } from "@features/problems/problem";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { SolutionLink } from "./SolutionLink";
+import { getColorCodeFromRating } from "@features/color/ratingColor";
 
 type Props = { problem: Problem };
 
@@ -29,7 +30,11 @@ export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
           showDifficulty={true}
         />
       </TableCell>
-      <TableCell>{problem.rating}</TableCell>
+      <TableCell>
+        <span css={{ color: getColorCodeFromRating(problem.rating) }}>
+          {problem.rating}
+        </span>
+      </TableCell>
       <TableCell>{}</TableCell>
       <TableCell>
         <SolutionLink />

@@ -1,5 +1,6 @@
 import React from "react";
 import { HexaColor } from "@features/color/labelColor";
+import { ColoredCircle } from "@features/color/ColoredCircle";
 
 const vividColors = [
   "#FF0000",
@@ -47,14 +48,9 @@ export const ColorPalette: React.FC<Props> = (props: Props) => {
               onClick={() => {
                 setColor(c as HexaColor);
               }}
-              css={{
-                display: "inline-block",
-                width: "1.2rem",
-                height: "1.2rem",
-                borderRadius: "100%",
-                backgroundColor: c,
-              }}
-            ></span>
+            >
+              <ColoredCircle color={c} width="0.5rem" height="0.5rem" />
+            </span>
           </span>
         );
       })}
@@ -73,14 +69,9 @@ export const ColorPalette: React.FC<Props> = (props: Props) => {
               onClick={() => {
                 setColor(c as HexaColor);
               }}
-              css={{
-                display: "inline-block",
-                width: "1.2rem",
-                height: "1.2rem",
-                borderRadius: "100%",
-                backgroundColor: c,
-              }}
-            ></span>
+            >
+              <ColoredCircle color={c} width="0.5rem" height="0.5rem" />
+            </span>
           </span>
         );
       })}

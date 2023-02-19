@@ -1,4 +1,5 @@
 import React from "react";
+import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
 import { Tag } from "@features/problems/problem";
 import type { Classification } from "@features/contests/contest";
@@ -32,7 +33,7 @@ export const FilterChips: React.FC<Props> = (props: Props) => {
   } = props;
 
   return (
-    <div>
+    <Stack direction="row" spacing={1}>
       {classification !== "All" && (
         <Chip
           label={classification}
@@ -75,6 +76,6 @@ export const FilterChips: React.FC<Props> = (props: Props) => {
             size="small"
           />
         ))}
-    </div>
+    </Stack>
   );
 };
