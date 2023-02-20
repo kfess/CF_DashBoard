@@ -32,6 +32,13 @@ export const DifficultyPies: React.FC<Props> = (props: Props) => {
             key={color}
             colorInfo={ratingColorInfo[color]}
             problemsCount={coloredProblems[color]}
+            submissions={submissions.filter(
+              (submission) =>
+                (submission.problem.rating ?? -1) >=
+                  ratingColorInfo[color].lowerBound &&
+                (submission.problem.rating ?? -1) <=
+                  ratingColorInfo[color].upperBound
+            )}
           />
         ))}
     </>

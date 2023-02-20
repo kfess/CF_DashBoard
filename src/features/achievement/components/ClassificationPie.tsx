@@ -7,11 +7,15 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import { Submission } from "@features/submission/submission";
+import {
+  getACProblemSet,
+  getNonACProblemSet,
+} from "@features/achievement/processSubmission";
 
 type RenderActiveShapeProps = {
   cx: number;
   cy: number;
-  midAngle: number;
   innerRadius: number;
   outerRadius: number;
   startAngle: number;
@@ -23,11 +27,9 @@ type RenderActiveShapeProps = {
 };
 
 const renderActiveShape = (props: RenderActiveShapeProps) => {
-  const RADIAN = Math.PI / 180;
   const {
     cx,
     cy,
-    midAngle,
     innerRadius,
     outerRadius,
     startAngle,
@@ -37,14 +39,6 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
     percent,
     value,
   } = props;
-
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
-  const mx = cx + (outerRadius + 30) * cos;
-  const my = cy + (outerRadius + 30) * sin;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-  const ey = my;
-  const textAnchor = cos >= 0 ? "start" : "end";
 
   return (
     <g>
@@ -80,6 +74,7 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
 
 type Props = {
   problemsCount: number;
+  submissions: Submission[];
 };
 
 type PieData = {
@@ -88,18 +83,18 @@ type PieData = {
   readonly color: string;
 };
 
-const solved = 1;
-const unsolved = 1;
-
 export const ClassificationPie: React.FC<Props> = (props: Props) => {
-  const { problemsCount } = props;
+  const { problemsCount, submissions } = props;
+
+  const ACProblemCount = getACProblemSet(submissions).size;
+  const nonACProblemCount = getNonACProblemSet(submissions).size;
 
   const pieData: PieData[] = [
-    { name: "AC", value: solved, color: "#33CD34" },
-    { name: "Non-AC", value: unsolved, color: "#FFDD99" },
+    { name: "AC", value: ACProblemCount, color: "#33CD34" },
+    { name: "Non-AC", value: nonACProblemCount, color: "#FFDD99" },
     {
       name: "No-Sub",
-      value: problemsCount - unsolved - solved,
+      value: 2000 - ACProblemCount - nonACProblemCount,
       color: "#59606A",
     },
   ];

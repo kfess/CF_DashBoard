@@ -14,6 +14,7 @@ import {
   isACSubmission,
   groupbyRatingColor,
   groupbyDate,
+  filterUniqueSubmissions,
 } from "@features/achievement/processSubmission";
 import type { RatingColor } from "@features/color/ratingColor";
 import { ratingColor, ratingColorInfo } from "@features/color/ratingColor";
@@ -35,11 +36,12 @@ type Props = { submissions: Submission[] };
 export const ClimbingChart: React.FC<Props> = (props: Props) => {
   const { submissions } = props;
   const [displayColor, setDisplayColor] = useState<DisplayColor>("No Color");
+  const ACSubmissions = submissions.filter(isACSubmission);
+  const uniqueACSubmissions = filterUniqueSubmissions(ACSubmissions).sort(
+    (a, b) => a.creationTimeSeconds - b.creationTimeSeconds
+  );
 
-  const ACSubmissions = submissions
-    .filter(isACSubmission)
-    .sort((a, b) => a.creationTimeSeconds - b.creationTimeSeconds);
-  const gDateSubmissions = groupbyDate(ACSubmissions);
+  const gDateSubmissions = groupbyDate(uniqueACSubmissions);
 
   // without rating color
   const noColoredCount: CumulativeEffort[] = gDateSubmissions

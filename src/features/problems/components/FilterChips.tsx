@@ -4,6 +4,8 @@ import Chip from "@mui/material/Chip";
 import { Tag } from "@features/problems/problem";
 import type { Classification } from "@features/contests/contest";
 import { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
+import { ColoredCircle } from "@features/color/ColoredCircle";
+import { getColorCodeFromRating } from "@features/color/ratingColor";
 
 type Props = {
   classification: Classification;
@@ -52,7 +54,13 @@ export const FilterChips: React.FC<Props> = (props: Props) => {
       )}
       {lowerDifficulty !== 0 && (
         <Chip
-          label={`from: ${lowerDifficulty}`}
+          label={
+            <div css={{ display: "inline-flex", alignItems: "center" }}>
+              <div css={{ paddingRight: "5px" }}>from:</div>
+              <ColoredCircle color={getColorCodeFromRating(lowerDifficulty)} />
+              {lowerDifficulty}
+            </div>
+          }
           onClick={() => {}}
           onDelete={() => setLowerDifficulty(0)}
           size="small"
@@ -60,7 +68,13 @@ export const FilterChips: React.FC<Props> = (props: Props) => {
       )}
       {upperDifficulty !== 5000 && (
         <Chip
-          label={`To: ${upperDifficulty}`}
+          label={
+            <div css={{ display: "inline-flex", alignItems: "center" }}>
+              <div css={{ paddingRight: "5px" }}>to:</div>
+              <ColoredCircle color={getColorCodeFromRating(upperDifficulty)} />
+              {upperDifficulty}
+            </div>
+          }
           onClick={() => {}}
           onDelete={() => setUpperDifficulty(5000)}
           size="small"

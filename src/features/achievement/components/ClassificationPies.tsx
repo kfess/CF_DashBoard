@@ -36,6 +36,10 @@ export const ClassificationPies: React.FC<Props> = (props: Props) => {
             <ClassificationPie
               key={classification}
               problemsCount={classificationProblems[classification]}
+              submissions={submissions.filter(
+                (submission) =>
+                  submission.problem.classification === classification
+              )}
             />
           </>
         ))}

@@ -9,11 +9,14 @@ import {
 } from "recharts";
 import type { RatingColor, RatingColorInfo } from "@features/color/ratingColor";
 import type { Submission } from "@features/submission/submission";
+import {
+  getACProblemSet,
+  getNonACProblemSet,
+} from "@features/achievement/processSubmission";
 
 type RenderActiveShapeProps = {
   cx: number;
   cy: number;
-  midAngle: number;
   innerRadius: number;
   outerRadius: number;
   startAngle: number;
@@ -25,11 +28,9 @@ type RenderActiveShapeProps = {
 };
 
 const renderActiveShape = (props: RenderActiveShapeProps) => {
-  const RADIAN = Math.PI / 180;
   const {
     cx,
     cy,
-    midAngle,
     innerRadius,
     outerRadius,
     startAngle,
@@ -39,14 +40,6 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
     percent,
     value,
   } = props;
-
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
-  const mx = cx + (outerRadius + 30) * cos;
-  const my = cy + (outerRadius + 30) * sin;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-  const ey = my;
-  const textAnchor = cos >= 0 ? "start" : "end";
 
   return (
     <g>
@@ -83,27 +76,28 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
 type Props = {
   readonly colorInfo: RatingColorInfo[RatingColor];
   readonly problemsCount: number;
+  readonly submissions: Submission[];
 };
+
 type PieData = {
   readonly name: string;
   readonly value: number;
   readonly color: string;
 };
 
-// need to change!
-const solved = 1;
-const unsolved = 1;
-//
-
 export const DifficultyPie: React.FC<Props> = (props: Props) => {
-  const { colorInfo, problemsCount } = props;
+  const { colorInfo, problemsCount, submissions } = props;
+
+  const ACProblemCount = getACProblemSet(submissions).size;
+  const nonACProblemCount = getNonACProblemSet(submissions).size;
 
   const pieData: PieData[] = [
-    { name: "AC", value: solved, color: colorInfo.colorCode },
-    { name: "Non-AC", value: unsolved, color: "#FFDD99" },
+    { name: "AC", value: ACProblemCount, color: colorInfo.colorCode },
+    { name: "Non-AC", value: nonACProblemCount, color: "#FFDD99" },
     {
       name: "No-Sub",
-      value: problemsCount - unsolved - solved,
+      // value: problemsCount - ACProblemCount - nonACProblemCount,
+      value: 2000 - ACProblemCount - nonACProblemCount,
       color: "#59606A",
     },
   ];

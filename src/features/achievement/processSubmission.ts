@@ -49,3 +49,28 @@ export const groupByLanguage = (submissions: Submission[]) => {
   );
   return gSubmissions;
 };
+
+export const getACProblemSet = (submissions: Submission[]): Set<string> => {
+  const ACSubmissions = submissions.filter(isACSubmission);
+  const uniqueACSubmissions = filterUniqueSubmissions(ACSubmissions);
+  const ACProblemSet = uniqueACSubmissions.reduce((set, submission) => {
+    set.add(
+      submission.contestId + submission.problem.index + submission.problem.name
+    );
+    return set;
+  }, new Set<string>());
+  return ACProblemSet;
+};
+
+export const getNonACProblemSet = (submissions: Submission[]): Set<string> => {
+  const uniqueSubmissions = filterUniqueSubmissions(submissions);
+  const attmptedProblemSet = uniqueSubmissions.reduce((set, submission) => {
+    set.add(
+      submission.contestId + submission.problem.index + submission.problem.name
+    );
+    return set;
+  }, new Set<string>());
+
+  const ACProblemSet = getACProblemSet(submissions);
+  return new Set([...attmptedProblemSet].filter((p) => !ACProblemSet.has(p)));
+};

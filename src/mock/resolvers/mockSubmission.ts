@@ -32,7 +32,8 @@ export const mockSubmission: ResponseResolver<
         index: "A",
         rating: 800,
         type: "PROGRAMMING",
-        tags: ["implementation"],
+        tags: ["implementation", "binary search", "sortings"],
+        classification: "Global",
       },
     };
   });
@@ -60,7 +61,8 @@ export const mockSubmission: ResponseResolver<
         index: "A",
         rating: 800,
         type: "PROGRAMMING",
-        tags: ["implementation"],
+        tags: ["bitmasks", "greedy"],
+        classification: "Div. 1",
       },
     };
   });
