@@ -97,6 +97,7 @@ export const tags = [
   "2-sat",
   "chinese remainder theorem",
   "schedules",
+  "no tags",
 ] as const;
 export type Tag = typeof tags[number];
 

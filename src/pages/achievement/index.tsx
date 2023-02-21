@@ -13,6 +13,7 @@ import { HeatMap } from "@features/achievement/components/HeatMap";
 import { createTableData } from "@features/achievement/helper";
 import { DifficultyPies } from "@features/achievement/components/DifficultyPies";
 import { ClassificationPies } from "@features/achievement/components/ClassificationPies";
+import { TagACCount } from "@features/achievement/components/TagACCount";
 
 export const AchievementPage: React.FC = () => {
   const { search } = useLocation();
@@ -39,6 +40,7 @@ export const AchievementPage: React.FC = () => {
           <DailyChart submissions={data} />
           <ClimbingChart submissions={data} />
           <LanguageACCount submissions={data} />
+          <TagACCount submissions={data} />
           <HeatMap tableData={tableData} />
         </>
       )}

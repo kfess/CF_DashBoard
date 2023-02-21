@@ -1,8 +1,10 @@
+import { NormalizedLanguage } from "./../language/language";
 import * as dayjs from "dayjs";
 import { groupBy } from "@helpers/index";
 import type { Submission } from "@features/submission/submission";
 import { getRatingColorInfo } from "@features/color/ratingColor";
 import { normalizeLanguage } from "@features/language/language";
+import { Tag } from "@features/problems/problem";
 
 export const isACSubmission = (submission: Submission): boolean =>
   submission.verdict === "OK";
@@ -43,7 +45,9 @@ export const groupbyRatingColor = (submissions: Submission[]) => {
   return gSubmissions;
 };
 
-export const groupByLanguage = (submissions: Submission[]) => {
+export const groupByLanguage = (
+  submissions: Submission[]
+): [NormalizedLanguage, Submission[]][] => {
   const gSubmissions = groupBy(submissions, (s) =>
     normalizeLanguage(s.programmingLanguage)
   );
@@ -73,4 +77,19 @@ export const getNonACProblemSet = (submissions: Submission[]): Set<string> => {
 
   const ACProblemSet = getACProblemSet(submissions);
   return new Set([...attmptedProblemSet].filter((p) => !ACProblemSet.has(p)));
+};
+
+export const getACTagMap = (submissions: Submission[]): Map<Tag, number> => {
+  const ACSubmissions = submissions.filter(isACSubmission);
+  const uniqueACSubmissions = filterUniqueSubmissions(ACSubmissions);
+
+  const tagMap = uniqueACSubmissions.reduce((map, submission) => {
+    submission.problem.tags.forEach((tag) =>
+      map.has(tag)
+        ? map.set(tag, (map.get(tag) as number) + 1)
+        : map.set(tag, 1)
+    );
+    return map;
+  }, new Map<Tag, number>());
+  return tagMap;
 };
