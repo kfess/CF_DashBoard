@@ -94,7 +94,9 @@ export const ClimbingChart: React.FC<Props> = (props: Props) => {
     <>
       <DropDownMenuButton
         title="color"
-        items={displayColors}
+        items={displayColors.map((dc) => {
+          return { item: dc };
+        })}
         selectedItem={displayColor}
         setSelectedItem={setDisplayColor}
       />

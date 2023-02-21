@@ -1,12 +1,10 @@
 import React from "react";
 import type { Tag } from "@features/problems/problem";
-import { TagsButton } from "@features/problems/components/TagsButton";
 import type { Classification } from "@features/contests/contest";
+import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
+import { TagsButton } from "@features/problems/components/TagsButton";
 import { ContestTypeFilter } from "@features/contests/components/ContestTypeFilter";
-import {
-  SolvedStatus,
-  SolvedStatusFilter,
-} from "@features/problems/components/SolvedStatusFilter";
+import { SolvedStatusFilter } from "@features/problems/components/SolvedStatusFilter";
 import { ResetFilterButton } from "@features/problems/components/ResetFilter";
 import { DifficultyButton } from "@features/problems/components/DifficultyButton";
 import { FilterChips } from "@features/problems/components/FilterChips";
