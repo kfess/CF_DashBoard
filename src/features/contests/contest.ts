@@ -18,8 +18,8 @@ export type ContestType = typeof contestType[number];
 export const classificationSchema = z.union([
   z.literal("All"),
   z.literal("Div. 1"),
-  z.literal("Div. 2"),
   z.literal("Div. 1 + Div. 2"),
+  z.literal("Div. 2"),
   z.literal("Div. 3"),
   z.literal("Div. 4"),
   z.literal("ICPC"),
@@ -31,8 +31,8 @@ export const classificationSchema = z.union([
 export const classifications = [
   "All",
   "Div. 1",
-  "Div. 2",
   "Div. 1 + Div. 2",
+  "Div. 2",
   "Div. 3",
   "Div. 4",
   "ICPC",

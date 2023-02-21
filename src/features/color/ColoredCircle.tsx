@@ -9,6 +9,7 @@ const circle = css({
   paddingTop: "10px",
   paddingLeft: "10px",
   marginRight: "5px",
+  marginLeft: "5px",
 });
 
 type Props = {
