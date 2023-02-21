@@ -1,9 +1,9 @@
 import React from "react";
-import { DropDownMenuButton_ } from "@features/ui/component/DropDownMenuButton";
-import type { Classification } from "@features/contests/contest";
-import { classifications } from "@features/contests/contest";
+import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { ratingColorInfo } from "@features/color/ratingColor";
 import { ColoredCircle } from "@features/color/ColoredCircle";
+import type { Classification } from "@features/contests/contest";
+import { classifications } from "@features/contests/contest";
 
 type Props = {
   classification: Classification;
@@ -58,7 +58,7 @@ export const ContestTypeFilter: React.FC<Props> = (props: Props) => {
   });
 
   return (
-    <DropDownMenuButton_
+    <DropDownMenuButton
       title="Content Type"
       items={items}
       selectedItem={classification}

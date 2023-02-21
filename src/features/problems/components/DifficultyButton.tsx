@@ -1,6 +1,10 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
-import { ratingColor, ratingColorInfo } from "@features/color/ratingColor";
+import {
+  getColorCodeFromRating,
+  ratingColor,
+  ratingColorInfo,
+} from "@features/color/ratingColor";
 import { ColoredCircle } from "@features/color/ColoredCircle";
 
 const lowerDifficulties = ratingColor.map(
@@ -10,10 +14,6 @@ const lowerDifficulties = ratingColor.map(
 const upperDifficulties = ratingColor.map(
   (color) => ratingColorInfo[color].upperBound
 );
-
-const ColoredCircles: ReactNode[] = ratingColor.map((color) => (
-  <ColoredCircle key={color} color={ratingColorInfo[color].colorCode} />
-));
 
 type Props = {
   lowerDifficulty: number;
@@ -34,17 +34,25 @@ export const DifficultyButton: React.FC<Props> = (props: Props) => {
     <>
       <DropDownMenuButton
         title="From Difficulty"
-        items={lowerDifficulties}
+        items={lowerDifficulties.map((ld) => {
+          return {
+            item: ld,
+            startIcon: <ColoredCircle color={getColorCodeFromRating(ld)} />,
+          };
+        })}
         selectedItem={lowerDifficulty}
         setSelectedItem={setLowerDifficulty}
-        startIcons={ColoredCircles}
       />
       <DropDownMenuButton
         title="To Difficulty"
-        items={upperDifficulties}
+        items={upperDifficulties.map((ud) => {
+          return {
+            item: ud,
+            startIcon: <ColoredCircle color={getColorCodeFromRating(ud)} />,
+          };
+        })}
         selectedItem={upperDifficulty}
         setSelectedItem={setUpperDifficulty}
-        startIcons={ColoredCircles}
       />
     </>
   );

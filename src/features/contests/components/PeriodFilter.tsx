@@ -37,7 +37,9 @@ export const PeriodFilterButton: React.FC<Props> = (props: Props) => {
   return (
     <DropDownMenuButton
       title="Period"
-      items={periodWords}
+      items={periodWords.map((periodWord) => {
+        return { item: periodWord };
+      })}
       selectedItem={period}
       setSelectedItem={setPeriod}
     />

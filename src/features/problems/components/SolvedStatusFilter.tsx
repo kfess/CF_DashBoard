@@ -20,7 +20,9 @@ export const SolvedStatusFilter: React.FC<Props> = (props: Props) => {
   return (
     <DropDownMenuButton
       title="Solved Status"
-      items={solvedStatuses}
+      items={solvedStatuses.map((ss) => {
+        return { item: ss };
+      })}
       selectedItem={solvedStatus}
       setSelectedItem={setSolvedStatus}
     />
