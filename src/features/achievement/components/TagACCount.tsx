@@ -27,7 +27,7 @@ export const TagACCount: React.FC<Props> = (props: Props) => {
                 size="small"
                 onClick={() => {}}
               />
-              <div>{tagMap.get(tag)} problems solved</div>
+              <div>× {tagMap.get(tag)}</div>
             </Stack>
           </Stack>
         ))}
