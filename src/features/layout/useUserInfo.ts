@@ -6,7 +6,10 @@ import { okUserInfoApiSchema } from "@features/layout/userInfo";
 import type { UserInfo } from "@features/layout/userInfo";
 
 export const useFetchUserInfo = ({ userId }: { userId: string }) => {
-  const { data, isError, error, isLoading } = useQuery<UserInfo, Error>({
+  const { data, isError, error, isLoading, isSuccess } = useQuery<
+    UserInfo,
+    Error
+  >({
     queryKey: ["userInfo", userId],
     queryFn: async (): Promise<UserInfo> => {
       try {
@@ -28,5 +31,5 @@ export const useFetchUserInfo = ({ userId }: { userId: string }) => {
     retry: false,
   });
 
-  return { data, isError, error, isLoading };
+  return { data, isError, error, isLoading, isSuccess };
 };

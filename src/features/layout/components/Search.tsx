@@ -8,8 +8,11 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import Input from "@mui/material/Input";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
+import Chip from "@mui/material/Chip";
 import { generateUrlPath } from "@features/layout/helper";
 import { useFetchUserInfo } from "../useUserInfo";
+import { getColorCodeFromRating } from "@features/color/ratingColor";
+import { ColoredCircle } from "@features/color/ColoredCircle";
 
 export const SearchBar: React.FC = () => {
   const navigate = useNavigate();
@@ -19,7 +22,9 @@ export const SearchBar: React.FC = () => {
 
   const [searchUserId, setSearchUserId] = useState(queryUserId);
 
-  const { isError } = useFetchUserInfo({
+  // If queryUserId is not falsy ("", undefined, null, ...),
+  // asynchronously fetch User Info by React-Query
+  const { data, isError, isSuccess } = useFetchUserInfo({
     userId: queryUserId,
   });
 
@@ -58,6 +63,22 @@ export const SearchBar: React.FC = () => {
           placeholder="User ID"
         />
       </form>
+      {isSuccess && (
+        <Chip
+          label={
+            <>
+              <ColoredCircle color={getColorCodeFromRating(data?.rating)} />
+              <span>{queryUserId}</span>
+            </>
+          }
+          onClick={() => {}}
+          onDelete={() => {
+            navigate(pathname);
+          }}
+          css={{ color: getColorCodeFromRating(data?.rating) }}
+          size="small"
+        />
+      )}
       <Box sx={{ p: 1 }}>
         {isError && queryUserId.length > 0 && (
           <NoUserFoundAlert userId={queryUserId} />
@@ -71,7 +92,7 @@ const NoUserFoundAlert = ({ userId }: { userId: string }) => {
   return (
     <Alert severity="error">
       <AlertTitle>Error</AlertTitle>
-      The user <strong>{userId}</strong> Not Found.
+      User <strong>{userId}</strong> Not Found. Please check the input value.
     </Alert>
   );
 };

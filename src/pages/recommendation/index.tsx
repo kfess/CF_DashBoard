@@ -3,29 +3,32 @@ import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
+import { useFetchUserInfo } from "@features/layout/useUserInfo";
+import { RecommendProblemsTable } from "@features/recommendation/components/RecommendProblemsTable";
+import { recommendLevels } from "@features/recommendation/components/RecommendProblemsTable";
 
 export const RecommendationPage: React.FC = () => {
   const { search } = useLocation();
   const urlQueries = new URLSearchParams(search);
-  const userId = urlQueries.get("userId") ?? "";
+  const queryUserId = urlQueries.get("userId") ?? "";
 
-  const tabItems: TabItem[] = [
-    {
-      label: "Easy Problems",
-      children: <div>easy</div>,
+  // If queryUserId is not falsy ("", undefined, null, ...),
+  // asynchronously fetch User Info by React-Query
+  const { data, isError, isSuccess } = useFetchUserInfo({
+    userId: queryUserId,
+  });
+
+  const userRating = isSuccess ? data?.rating : 0;
+
+  const tabItems: TabItem[] = recommendLevels.map((level) => {
+    return {
+      label: `${level} problems`,
+      children: (
+        <RecommendProblemsTable level={level} userRating={userRating} />
+      ),
       disabled: false,
-    },
-    {
-      label: "Medium Problems",
-      children: <div>medium</div>,
-      disabled: false,
-    },
-    {
-      label: "Hard Problems",
-      children: <div>hard</div>,
-      disabled: false,
-    },
-  ];
+    };
+  });
 
   return (
     <>
