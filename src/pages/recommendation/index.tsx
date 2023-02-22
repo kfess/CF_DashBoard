@@ -5,7 +5,8 @@ import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { RecommendProblemsTable } from "@features/recommendation/components/RecommendProblemsTable";
-import { recommendLevels } from "@features/recommendation/components/RecommendProblemsTable";
+import { recommendLevels } from "@features/recommendation/recommend";
+import { useFetchProblems } from "@features/problems/useFetchProblem";
 
 export const RecommendationPage: React.FC = () => {
   const { search } = useLocation();
@@ -14,17 +15,26 @@ export const RecommendationPage: React.FC = () => {
 
   // If queryUserId is not falsy ("", undefined, null, ...),
   // asynchronously fetch User Info by React-Query
-  const { data, isError, isSuccess } = useFetchUserInfo({
+  const {
+    data: userData,
+    isError: userIsError,
+    isSuccess,
+  } = useFetchUserInfo({
     userId: queryUserId,
   });
+  const userRating = userData?.rating;
 
-  const userRating = isSuccess ? data?.rating : 0;
+  const { data, isError, error, isLoading } = useFetchProblems();
 
   const tabItems: TabItem[] = recommendLevels.map((level) => {
     return {
       label: `${level} problems`,
-      children: (
-        <RecommendProblemsTable level={level} userRating={userRating} />
+      children: data && (
+        <RecommendProblemsTable
+          level={level}
+          userRating={userRating}
+          problems={data}
+        />
       ),
       disabled: false,
     };

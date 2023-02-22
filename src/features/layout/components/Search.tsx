@@ -73,6 +73,7 @@ export const SearchBar: React.FC = () => {
           }
           onClick={() => {}}
           onDelete={() => {
+            setSearchUserId("");
             navigate(pathname);
           }}
           css={{ color: getColorCodeFromRating(data?.rating) }}

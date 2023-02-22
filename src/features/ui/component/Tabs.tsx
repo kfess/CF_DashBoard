@@ -44,7 +44,7 @@ export const Tabs: React.FC<Props> = (props: Props) => {
   return (
     <>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <MuiTabs value={value} onChange={handleChange}>
+        <MuiTabs value={value} onChange={handleChange} sx={{}}>
           {tabItems.map((item) => (
             <Tab
               label={item.label}
