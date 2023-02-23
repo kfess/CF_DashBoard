@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useRecoilState } from "recoil";
-import { z } from "zod";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -10,51 +8,31 @@ import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
 import ReplayIcon from "@mui/icons-material/Replay";
 import Tooltip from "@mui/material/Tooltip";
-import { labelsState } from "@features/bookmark/label.atom";
 import {
   HexaColor,
   generateRandomHexaColor,
   isValidHexaColor,
 } from "@features/color/labelColor";
-import { labelStateSchema } from "@features/bookmark/label.atom";
 import { LabelNameChip } from "./LabelIcon";
 import { ColorPalette } from "@features/color/ColorPalette";
+import { labelActions } from "@features/bookmark/labelActions";
 
 export const LabelCreator: React.FC = () => {
-  const [labels, setLabels] = useRecoilState(labelsState);
-
   const [name, setName] = useState({ value: "", errorMsg: "" });
   const [description, setDescription] = useState({ value: "", errorMsg: "" });
   const [color, setColor] = useState(generateRandomHexaColor());
-
-  const [showBlock, setShowBlock] = useState<boolean>(false);
-  const toggleShowBlock = () => setShowBlock(!showBlock);
-
-  const nextId =
-    labels.length > 0 ? Math.max(...labels.map((label) => label.id)) + 1 : 0;
-
   const resetInput = () => {
     setName({ value: "", errorMsg: "" });
     setDescription({ value: "", errorMsg: "" });
     setColor(generateRandomHexaColor());
   };
 
-  const addLabel = () => {
-    try {
-      setLabels((oldLabels) => [
-        ...oldLabels,
-        labelStateSchema.parse({
-          id: nextId,
-          name: name.value,
-          description: description.value,
-          color: color,
-          problems: [],
-        }),
-      ]);
-    } catch (err) {
-      if (err instanceof z.ZodError) {
-      }
-    }
+  const [showBlock, setShowBlock] = useState<boolean>(false);
+  const toggleShowBlock = () => setShowBlock(!showBlock);
+
+  const addLabel = labelActions.useAddLabel();
+  const onClickCreateLabel = () => {
+    addLabel(name.value, color, description.value);
     setShowBlock(false);
     resetInput();
   };
@@ -163,7 +141,7 @@ export const LabelCreator: React.FC = () => {
                 Cancel
               </Button>
               <Button
-                onClick={addLabel}
+                onClick={onClickCreateLabel}
                 disabled={name.value.length === 0 || !isValidHexaColor(color)}
                 variant="contained"
                 color="success"
