@@ -36,14 +36,7 @@ export const ColorPalette: React.FC<Props> = (props: Props) => {
       <div css={{ marginBottom: "0.3rem" }}>Choose from popular colors</div>
       {vividColors.map((c) => {
         return (
-          <span
-            key={c}
-            css={{
-              cursor: "pointer",
-              marginRight: "0.1rem",
-              marginLeft: "0.1rem",
-            }}
-          >
+          <span key={c} css={{ cursor: "pointer" }}>
             <span
               onClick={() => {
                 setColor(c as HexaColor);
@@ -57,14 +50,7 @@ export const ColorPalette: React.FC<Props> = (props: Props) => {
       <div></div>
       {paleColors.map((c) => {
         return (
-          <span
-            key={c}
-            css={{
-              cursor: "pointer",
-              marginRight: "0.1rem",
-              marginLeft: "0.1rem",
-            }}
-          >
+          <span key={c} css={{ cursor: "pointer" }}>
             <span
               onClick={() => {
                 setColor(c as HexaColor);

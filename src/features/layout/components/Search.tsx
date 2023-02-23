@@ -8,11 +8,11 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import Input from "@mui/material/Input";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
-import Chip from "@mui/material/Chip";
 import { generateUrlPath } from "@features/layout/helper";
 import { useFetchUserInfo } from "../useUserInfo";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { ColoredCircle } from "@features/color/ColoredCircle";
+import { DeletableChip } from "@features/ui/component/Chip";
 
 export const SearchBar: React.FC = () => {
   const navigate = useNavigate();
@@ -62,24 +62,20 @@ export const SearchBar: React.FC = () => {
           }
           placeholder="User ID"
         />
-      </form>
-      {isSuccess && (
-        <Chip
-          label={
-            <>
+        {isSuccess && (
+          <DeletableChip
+            label={queryUserId}
+            icon={
               <ColoredCircle color={getColorCodeFromRating(data?.rating)} />
-              <span>{queryUserId}</span>
-            </>
-          }
-          onClick={() => {}}
-          onDelete={() => {
-            setSearchUserId("");
-            navigate(pathname);
-          }}
-          css={{ color: getColorCodeFromRating(data?.rating) }}
-          size="small"
-        />
-      )}
+            }
+            onDelete={() => {
+              setSearchUserId("");
+              navigate(pathname);
+            }}
+          />
+        )}
+      </form>
+
       <Box sx={{ p: 1 }}>
         {isError && queryUserId.length > 0 && (
           <NoUserFoundAlert userId={queryUserId} />

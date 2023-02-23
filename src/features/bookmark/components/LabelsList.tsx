@@ -86,7 +86,10 @@ const LabelItem: React.FC<Props> = (props: Props) => {
               <Button
                 variant="text"
                 onClick={toggleShowBlock}
-                css={{ textTransform:"none", "&:hover": { textDecorationLine: "underline" } }}
+                css={{
+                  textTransform: "none",
+                  "&:hover": { textDecorationLine: "underline" },
+                }}
               >
                 Edit
               </Button>
@@ -162,7 +165,9 @@ export const LabelItems: React.FC = () => {
         <Box>
           <DropDownMenuButton
             title="sort"
-            items={sortOrders}
+            items={sortOrders.map((so) => {
+              return { item: so };
+            })}
             selectedItem={order}
             setSelectedItem={setOrder}
           />

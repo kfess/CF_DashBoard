@@ -28,7 +28,7 @@ export const RecommendationPage: React.FC = () => {
 
   const tabItems: TabItem[] = recommendLevels.map((level) => {
     return {
-      label: `${level} problems`,
+      label: level,
       children: data && (
         <RecommendProblemsTable
           level={level}

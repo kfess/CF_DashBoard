@@ -13,6 +13,7 @@ import StarBorderOutlined from "@mui/icons-material/StarBorderOutlined";
 import { labelsState } from "@features/bookmark/label.atom";
 import { labelStateSchema } from "@features/bookmark/label.atom";
 import { ColoredCircle } from "@features/color/ColoredCircle";
+import { Chip_ } from "@features/ui/component/Chip";
 
 const circleCss = css({
   cursor: "pointer",
@@ -135,17 +136,12 @@ export const LabelsChip: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <Chip
-      label={
-        <div css={{ display: "flex", gap: "3px", alignItems: "center" }}>
-          <StarBorderOutlined fontSize="small" />
-          <div>{labels.length} Labels</div>
-        </div>
-      }
-      variant="outlined"
+    <Chip_
+      label={<div>{labels.length} Labels</div>}
       onClick={() => {
         navigate("/labels");
       }}
+      icon={<StarBorderOutlined fontSize="small" />}
     />
   );
 };
@@ -164,7 +160,6 @@ export const LabelNameChip: React.FC<LabelNameProps> = (
       {mode === "Preview" ? (
         <Chip
           label={<div>{name.trim().length > 0 ? name : "Label Preview"}</div>}
-          variant="filled"
           size="small"
           css={{
             color: color,
@@ -176,7 +171,6 @@ export const LabelNameChip: React.FC<LabelNameProps> = (
       ) : (
         <Chip
           label={<div>{name.trim().length > 0 ? name : "Label Preview"}</div>}
-          variant="filled"
           size="small"
           css={{
             color: color,
