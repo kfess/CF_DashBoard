@@ -1,6 +1,4 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { useSetRecoilState } from "recoil";
-import { z } from "zod";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -10,10 +8,9 @@ import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
 import ReplayIcon from "@mui/icons-material/Replay";
 import Tooltip from "@mui/material/Tooltip";
-import { labelsState } from "@features/bookmark/label.atom";
 import { HexaColor, generateRandomHexaColor } from "@features/color/labelColor";
-import { labelStateSchema } from "@features/bookmark/label.atom";
 import { ColorPalette } from "@features/color/ColorPalette";
+import { labelActions } from "@features/bookmark/labelActions";
 
 type NameProps = {
   value: string;
@@ -54,31 +51,7 @@ export const LabelEditor: React.FC<Props> = (props: Props) => {
     toggleShowBlock,
   } = props;
 
-  const setLabels = useSetRecoilState(labelsState);
-
-  const editLabel = () => {
-    try {
-      setLabels((oldLabels) =>
-        [...oldLabels].map((label) => {
-          if (label.id === id) {
-            return labelStateSchema.parse({
-              id: label.id,
-              name: name.value,
-              description: description.value,
-              color: color,
-              problems: label.problems,
-            });
-          } else {
-            return label;
-          }
-        })
-      );
-    } catch (err) {
-      if (err instanceof z.ZodError) {
-      }
-    }
-    toggleShowBlock();
-  };
+  const editLabel = labelActions.useEditLabel();
 
   const resetLabel = () => {
     setName({ value: defaultName, errorMsg: "" });
@@ -129,7 +102,7 @@ export const LabelEditor: React.FC<Props> = (props: Props) => {
             <Tooltip
               title={<ColorPalette setColor={setColor} />}
               arrow
-              leaveDelay={500} // ms
+              leaveDelay={300} // ms
             >
               <TextField
                 label="Color"
@@ -160,7 +133,10 @@ export const LabelEditor: React.FC<Props> = (props: Props) => {
             Cancel
           </Button>
           <Button
-            onClick={editLabel}
+            onClick={() => {
+              editLabel(id, name.value, color);
+              toggleShowBlock();
+            }}
             disabled={name.value.length === 0}
             variant="contained"
             color="success"

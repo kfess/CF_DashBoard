@@ -16,24 +16,24 @@ import {
 import { LabelNameChip } from "./LabelIcon";
 import { ColorPalette } from "@features/color/ColorPalette";
 import { labelActions } from "@features/bookmark/labelActions";
+import { useToggle } from "@hooks/index";
 
 export const LabelCreator: React.FC = () => {
+  const [showBlock, toggleShowBlock] = useToggle();
   const [name, setName] = useState({ value: "", errorMsg: "" });
   const [description, setDescription] = useState({ value: "", errorMsg: "" });
   const [color, setColor] = useState(generateRandomHexaColor());
+
   const resetInput = () => {
     setName({ value: "", errorMsg: "" });
     setDescription({ value: "", errorMsg: "" });
     setColor(generateRandomHexaColor());
   };
 
-  const [showBlock, setShowBlock] = useState<boolean>(false);
-  const toggleShowBlock = () => setShowBlock(!showBlock);
-
   const addLabel = labelActions.useAddLabel();
   const onClickCreateLabel = () => {
     addLabel(name.value, color, description.value);
-    setShowBlock(false);
+    toggleShowBlock();
     resetInput();
   };
 

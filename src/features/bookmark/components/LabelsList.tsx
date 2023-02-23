@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
@@ -13,6 +13,8 @@ import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { HexaColor } from "@features/color/labelColor";
 import { ButtonGroup } from "@mui/material";
+import { useToggle } from "@hooks/index";
+import { labelActions } from "@features/bookmark/labelActions";
 
 type Props = {
   label: LabelState;
@@ -20,20 +22,17 @@ type Props = {
 
 const LabelItem: React.FC<Props> = (props: Props) => {
   const { label } = props;
-
   const navigate = useNavigate();
-  const [labels, setLabels] = useRecoilState(labelsState);
+  const [showBlock, toggleShowBlock] = useToggle();
 
   const [name, setName] = useState({
     value: label.name,
     errorMsg: "",
   });
-
   const [description, setDescription] = useState({
     value: label.description,
     errorMsg: "",
   });
-
   const [color, setColor] = useState(label.color);
 
   const [defaultName, defaultDescription, defaultColor] = [
@@ -42,12 +41,7 @@ const LabelItem: React.FC<Props> = (props: Props) => {
     label.color,
   ];
 
-  const [showBlock, setShowBlock] = useState<boolean>(false);
-  const toggleShowBlock = () => setShowBlock(!showBlock);
-
-  const deleteLabel = (id: number) => {
-    setLabels(labels.filter((l) => l.id !== id));
-  };
+  const deleteLabel = labelActions.useDeleteLabel();
 
   return (
     <>

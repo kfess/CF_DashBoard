@@ -1,14 +1,23 @@
 import { useCallback } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { z } from "zod";
 import {
   LabelState,
   labelsState,
   labelStateSchema,
 } from "@features/bookmark/label.atom";
 import { HexaColor } from "@features/color/labelColor";
+import { Problem } from "@features/problems/problem";
 
 type LabelActions = {
   useAddLabel: () => (
+    name: string,
+    color: HexaColor,
+    description?: string
+  ) => void;
+  useDeleteLabel: () => (id: number) => void;
+  useEditLabel: () => (
+    id: number,
     name: string,
     color: HexaColor,
     description?: string
@@ -36,6 +45,44 @@ export const labelActions: LabelActions = {
         ]);
       },
       [nextId]
+    );
+  },
+
+  useDeleteLabel: () => {
+    const [labels, setLabels] = useRecoilState(labelsState);
+
+    return useCallback((id: number) => {
+      setLabels(labels.filter((l) => l.id !== id));
+    }, []);
+  },
+
+  useEditLabel: () => {
+    const setLabels = useSetRecoilState(labelsState);
+
+    return useCallback(
+      (id: number, name: string, color: HexaColor, description?: string) => {
+        try {
+          setLabels((oldLabels) =>
+            [...oldLabels].map((label) => {
+              if (label.id === id) {
+                return labelStateSchema.parse({
+                  id: label.id,
+                  name: name,
+                  description: description,
+                  color: color,
+                  problems: label.problems,
+                });
+              } else {
+                return label;
+              }
+            })
+          );
+        } catch (err) {
+          if (err instanceof z.ZodError) {
+          }
+        }
+      },
+      []
     );
   },
 };
