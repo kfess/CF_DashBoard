@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { z } from "zod";
+import { useRecoilValue } from "recoil";
 import { css } from "@emotion/react";
 import { alpha } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -11,9 +10,9 @@ import MenuItem from "@mui/material/MenuItem";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderOutlined from "@mui/icons-material/StarBorderOutlined";
 import { labelsState } from "@features/bookmark/label.atom";
-import { labelStateSchema } from "@features/bookmark/label.atom";
 import { ColoredCircle } from "@features/color/ColoredCircle";
 import { Chip_ } from "@features/ui/component/Chip";
+import { labelActions } from "@features/bookmark/labelActions";
 
 const circleCss = css({
   cursor: "pointer",
@@ -34,7 +33,7 @@ type Props = {
   name: string;
 };
 
-export const LabelIcon: React.FC<Props> = (props: Props) => {
+export const LabelAddButton: React.FC<Props> = (props: Props) => {
   const { contestId, contestName, index, name } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -47,48 +46,8 @@ export const LabelIcon: React.FC<Props> = (props: Props) => {
     setAnchorEl(null);
   };
 
-  const [labels, setLabels] = useRecoilState(labelsState);
-
-  const addProblemToLabel = (
-    contestId: number,
-    contestName: string,
-    index: string,
-    name: string,
-    labelId: number
-  ) => {
-    try {
-      const newProblem = { contestId, contestName, index, name };
-      setLabels((oldLabels) =>
-        oldLabels.map((label) => {
-          if (label.id === labelId) {
-            // this is ugly, Map is better
-            const alreadyAdded =
-              label.problems.filter(
-                (p) =>
-                  p.contestId === contestId &&
-                  p.contestName === contestName &&
-                  p.index === index &&
-                  p.name === name
-              ).length > 0;
-
-            return labelStateSchema.parse({
-              ...label,
-              problems: alreadyAdded
-                ? [...label.problems]
-                : [...label.problems, newProblem],
-            });
-          } else {
-            return labelStateSchema.parse(label);
-          }
-        })
-      );
-    } catch (err) {
-      if (err instanceof z.ZodError) {
-        console.log(err);
-      }
-    }
-    setAnchorEl(null);
-  };
+  const labels = useRecoilValue(labelsState);
+  const addProblem = labelActions.useAddProblem();
 
   return (
     <div>
@@ -113,9 +72,10 @@ export const LabelIcon: React.FC<Props> = (props: Props) => {
           {labels.map((label) => (
             <MenuItem
               key={label.id}
-              onClick={() =>
-                addProblemToLabel(contestId, contestName, index, name, label.id)
-              }
+              onClick={() => {
+                addProblem(label.id, contestId, contestName, index, name);
+                setAnchorEl(null);
+              }}
               css={{ display: "block" }}
             >
               <div>

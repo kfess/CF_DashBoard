@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { TopcoderLikeCircle } from "@features/color/TopCoderLikeCircle.component";
-import { LabelIcon } from "@features/bookmark/components/LabelIcon";
+import { LabelAddButton } from "@features/bookmark/components/LabelIcon";
 import { CF_CONTEST_URL, CF_GYM_URL } from "@constants/url";
 import { useThemeContext } from "@features/color/themeColor.hook";
 
@@ -58,7 +58,7 @@ export const ProblemLink: React.FC<Props> = (props: Props) => {
           {problemId + ". " + problemName}
         </a>
       </div>
-      <LabelIcon
+      <LabelAddButton
         contestId={contestId}
         contestName={contestName}
         index={problemId}
