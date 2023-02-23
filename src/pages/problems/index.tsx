@@ -8,24 +8,21 @@ import { ratingColorInfo } from "@features/color/ratingColor";
 import { FilterOptions } from "@features/problems/components/FilterOptions";
 import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 import { useToggle } from "@hooks/index";
+import { PickOneButton } from "@features/problems/components/PickOneButton";
 
 export const ProblemsPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchProblems();
 
   const [classification, setClassification] = useState<Classification>("All");
-
   const [solvedStatus, setSolvedStatus] =
     useState<SolvedStatus>("All Problems");
-
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
-
   const [lowerDifficulty, setLowerDifficulty] = useState(
     ratingColorInfo.Gray.lowerBound
   );
   const [upperDifficulty, setUpperDifficulty] = useState(
     ratingColorInfo.DeepRed.upperBound
   );
-
   const [showTags, toggleShowTags] = useToggle(false);
 
   if (isLoading) {
@@ -53,6 +50,7 @@ export const ProblemsPage: React.FC = () => {
         setUpperDifficulty={setUpperDifficulty}
         toggleShowTags={toggleShowTags}
       />
+      <PickOneButton />
       {data && (
         <ProblemsTable
           problems={data}

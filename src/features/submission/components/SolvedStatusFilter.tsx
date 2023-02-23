@@ -15,7 +15,9 @@ export const SolvedStatusFilterButton: React.FC<Props> = (props: Props) => {
   return (
     <DropDownMenuButton
       title="Solved Status"
-      items={["All", ...verdictAbbr]}
+      items={(["All", ...verdictAbbr] as const).map((verdict) => {
+        return { item: verdict };
+      })}
       selectedItem={solvedStatus}
       setSelectedItem={setSolvedStatus}
     />
