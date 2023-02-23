@@ -1,11 +1,14 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
-import Chip from "@mui/material/Chip";
-import { Tag } from "@features/problems/problem";
+import type { Tag } from "@features/problems/problem";
 import type { Classification } from "@features/contests/contest";
 import { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
 import { ColoredCircle } from "@features/color/ColoredCircle";
-import { getColorCodeFromRating } from "@features/color/ratingColor";
+import {
+  getColorCodeFromClassification,
+  getColorCodeFromRating,
+} from "@features/color/ratingColor";
+import { DeletableChip } from "@features/ui/component/Chip";
 
 type Props = {
   classification: Classification;
@@ -34,60 +37,50 @@ export const FilterChips: React.FC<Props> = (props: Props) => {
     setUpperDifficulty,
   } = props;
 
+  const [startColor, endColor] = getColorCodeFromClassification(classification);
+
   return (
-    <Stack direction="row" spacing={1}>
+    <Stack direction="row" sx={{ flexWrap: "wrap" }}>
       {classification !== "All" && (
-        <Chip
+        <DeletableChip
           label={classification}
-          onClick={() => {}}
           onDelete={setDefaultClassification}
-          size="small"
+          icon={
+            <>
+              <ColoredCircle color={startColor} />-
+              <ColoredCircle color={endColor} />
+            </>
+          }
         />
       )}
       {solvedStatus !== "All Problems" && (
-        <Chip
-          label={solvedStatus}
-          onClick={() => {}}
-          onDelete={setDefaultSolvedStatus}
-          size="small"
-        />
+        <DeletableChip label={solvedStatus} onDelete={setDefaultSolvedStatus} />
       )}
       {lowerDifficulty !== 0 && (
-        <Chip
-          label={
-            <div css={{ display: "inline-flex", alignItems: "center" }}>
-              <div css={{ paddingRight: "5px" }}>from:</div>
-              <ColoredCircle color={getColorCodeFromRating(lowerDifficulty)} />
-              {lowerDifficulty}
-            </div>
+        <DeletableChip
+          label={<div>from {lowerDifficulty}</div>}
+          icon={
+            <ColoredCircle color={getColorCodeFromRating(lowerDifficulty)} />
           }
-          onClick={() => {}}
           onDelete={() => setLowerDifficulty(0)}
-          size="small"
         />
       )}
       {upperDifficulty !== 5000 && (
-        <Chip
-          label={
-            <div css={{ display: "inline-flex", alignItems: "center" }}>
-              <div css={{ paddingRight: "5px" }}>to:</div>
-              <ColoredCircle color={getColorCodeFromRating(upperDifficulty)} />
-              {upperDifficulty}
-            </div>
+        <DeletableChip
+          label={<div>to {upperDifficulty}</div>}
+          icon={
+            <ColoredCircle color={getColorCodeFromRating(upperDifficulty)} />
           }
-          onClick={() => {}}
           onDelete={() => setUpperDifficulty(5000)}
-          size="small"
         />
       )}
+
       {selectedTags.length > 0 &&
         selectedTags.map((selectedTag) => (
-          <Chip
-            key={selectedTag}
+          <DeletableChip
             label={selectedTag}
-            onClick={() => {}}
+            key={selectedTag}
             onDelete={() => removeTag(selectedTag)}
-            size="small"
           />
         ))}
     </Stack>

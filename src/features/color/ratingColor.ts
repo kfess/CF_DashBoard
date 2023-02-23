@@ -1,3 +1,4 @@
+import type { Classification } from "@features/contests/contest";
 import { ThemeColor } from "@features/color/@types/theme";
 
 export const ratingColor = [
@@ -265,6 +266,59 @@ export const getColorCodeFromRating = (
     return !isDarkThemeColor(themeColor)
       ? ratingColorInfo["DeepRed"].colorCode
       : ratingColorInfo["DeepRed"].darkColorCode;
+  }
+};
+
+export const getColorCodeFromClassification = (
+  classification: Classification
+): [ColorCode, ColorCode] => {
+  switch (classification) {
+    case "All":
+      return [
+        ratingColorInfo.Gray.colorCode,
+        ratingColorInfo.DeepRed.colorCode,
+      ];
+    case "Div. 4":
+      return [ratingColorInfo.Gray.colorCode, ratingColorInfo.Green.colorCode];
+    case "Div. 3":
+      return [ratingColorInfo.Gray.colorCode, ratingColorInfo.Cyan.colorCode];
+    case "Div. 2":
+      return [ratingColorInfo.Blue.colorCode, ratingColorInfo.Violet.colorCode];
+    case "Div. 1 + Div. 2":
+      return [
+        ratingColorInfo.Violet.colorCode,
+        ratingColorInfo.DeepRed.colorCode,
+      ];
+    case "Div. 1":
+      return [
+        ratingColorInfo.LightOrange.colorCode,
+        ratingColorInfo.DeepRed.colorCode,
+      ];
+    case "Educational":
+      return [
+        ratingColorInfo.Gray.colorCode,
+        ratingColorInfo.DeepRed.colorCode,
+      ];
+    case "Global":
+      return [
+        ratingColorInfo.Gray.colorCode,
+        ratingColorInfo.DeepRed.colorCode,
+      ];
+    case "ICPC":
+      return [
+        ratingColorInfo.Gray.colorCode,
+        ratingColorInfo.DeepRed.colorCode,
+      ];
+    case "Kotlin Heros":
+      return [
+        ratingColorInfo.Gray.colorCode,
+        ratingColorInfo.DeepRed.colorCode,
+      ];
+    case "Others":
+      return [
+        ratingColorInfo.Gray.colorCode,
+        ratingColorInfo.DeepRed.colorCode,
+      ];
   }
 };
 

@@ -9,7 +9,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const ITEM_HEIGHT_ = 48;
 
-type Props_<T extends string | number> = {
+type Props<T extends string | number> = {
   readonly title: string;
   selectedItem: T;
   setSelectedItem: (item: T) => void;
@@ -17,7 +17,7 @@ type Props_<T extends string | number> = {
 };
 
 export const DropDownMenuButton = <T extends string | number>(
-  props: Props_<T>
+  props: Props<T>
 ) => {
   const { title, selectedItem, setSelectedItem, items } = props;
 
