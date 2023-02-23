@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { useToggle } from "@hooks/index";
 import { ProblemsTable } from "@features/problems/components/ProblemsTable";
 import { useFetchProblems } from "@features/problems/useFetchProblem";
 import { Tag } from "@features/problems/problem";
 import type { Classification } from "@features/contests/contest";
 import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
 import { ratingColorInfo } from "@features/color/ratingColor";
-import { LabelsChip } from "@features/bookmark/components/LabelIcon";
 import { FilterOptions } from "@features/problems/components/FilterOptions";
+import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 
 export const ProblemsPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchProblems();

@@ -6,10 +6,10 @@ import type { Classification } from "@features/contests/contest";
 import { reshapeContests, getProblemIdxes } from "@features/contests/helper";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
 import { useSolvedStatus } from "@features/submission/useSolvedStatus";
-import { LabelsChip } from "@features/bookmark/components/LabelIcon";
 import type { PeriodWord } from "@features/contests/components/PeriodFilter";
 import type { SolvedStatus } from "@features/contests/components/SolvedStatusFilter";
 import { useToggle } from "@hooks/index";
+import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 
 export const ContestsPage: React.FC = () => {
   const { search } = useLocation();
