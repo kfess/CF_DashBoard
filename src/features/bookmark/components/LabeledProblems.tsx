@@ -1,7 +1,5 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
 import Divider from "@mui/material/Divider";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
@@ -9,6 +7,7 @@ import { LabelState } from "@features/bookmark/label.atom";
 import { LabelNameChip } from "@features/bookmark/components/LabelIcon";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { labelActions } from "@features/bookmark/labelActions";
+import { AlertMessage } from "@features/ui/component/AlertDialog";
 
 type Props = { label: LabelState };
 
@@ -72,10 +71,7 @@ export const LabeledProblems: React.FC<Props> = (props: Props) => {
           ))}
         </Box>
       ) : (
-        <Alert severity="warning">
-          <AlertTitle css={{ textAlign: "left" }}>Warning</AlertTitle>
-          There are no problems related to this label.
-        </Alert>
+        <AlertMessage title="warning" message="There is no problems." />
       )}
     </>
   );

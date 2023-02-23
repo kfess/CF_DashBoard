@@ -68,3 +68,16 @@ export const ButtonWithAlertDialog = <T extends string | number>(
     </>
   );
 };
+
+type MessageProps = { title: string; message: string };
+
+export const AlertMessage: React.FC<MessageProps> = (props: MessageProps) => {
+  const { title, message } = props;
+
+  return (
+    <Alert severity="warning">
+      <AlertTitle css={{ textAlign: "left" }}>{title}</AlertTitle>
+      {message}
+    </Alert>
+  );
+};
