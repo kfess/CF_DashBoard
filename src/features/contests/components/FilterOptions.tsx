@@ -22,10 +22,8 @@ type Props = {
   setPeriod: (arg: PeriodWord) => void;
   solvedStatus: SolvedStatus;
   setSolvedStatus: (arg: SolvedStatus) => void;
-  showDifficulty: boolean;
-  toggleShowDifficulty: (arg: boolean) => void;
-  reverse: boolean;
-  toggleOrder: (arg: boolean) => void;
+  toggleShowDifficulty: () => void;
+  toggleOrder: () => void;
 };
 
 export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
@@ -36,9 +34,7 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
     setPeriod,
     solvedStatus,
     setSolvedStatus,
-    showDifficulty,
     toggleShowDifficulty,
-    reverse,
     toggleOrder,
   } = props;
 
@@ -73,28 +69,25 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
         setSolvedStatus={setSolvedStatus}
       />
       <div css={buttonsCss}>
-        <ShowDifficltySwitch
-          showDifficulty={showDifficulty}
-          toggleShowDifficulty={toggleShowDifficulty}
-        />
+        <ShowDifficltySwitch toggleShowDifficulty={toggleShowDifficulty} />
         <ShowACStatusSwitch />
         <PinTableHeaderSwitch />
-        <OrderSwitch reverse={reverse} toggleOrder={toggleOrder} />
+        <OrderSwitch toggleOrder={toggleOrder} />
       </div>
     </>
   );
 });
 
-const ShowDifficltySwitch: React.FC<
-  Pick<Props, "showDifficulty" | "toggleShowDifficulty">
-> = (props: Pick<Props, "showDifficulty" | "toggleShowDifficulty">) => {
-  const { showDifficulty, toggleShowDifficulty } = props;
+const ShowDifficltySwitch: React.FC<Pick<Props, "toggleShowDifficulty">> = (
+  props: Pick<Props, "toggleShowDifficulty">
+) => {
+  const { toggleShowDifficulty } = props;
 
   return (
     <FormControlLabel
-      control={<Switch defaultChecked />}
+      control={<Switch defaultChecked={true} />}
       label="Show Difficulty"
-      onChange={() => toggleShowDifficulty(!showDifficulty)}
+      onChange={toggleShowDifficulty}
     />
   );
 };
@@ -117,16 +110,16 @@ const PinTableHeaderSwitch: React.FC = () => {
   );
 };
 
-const OrderSwitch: React.FC<Pick<Props, "reverse" | "toggleOrder">> = (
-  props: Pick<Props, "reverse" | "toggleOrder">
+const OrderSwitch: React.FC<Pick<Props, "toggleOrder">> = (
+  props: Pick<Props, "toggleOrder">
 ) => {
-  const { reverse, toggleOrder } = props;
+  const { toggleOrder } = props;
 
   return (
     <FormControlLabel
       control={<Switch defaultChecked={false} />}
       label="Reverse Order"
-      onChange={() => toggleOrder(!reverse)}
+      onChange={toggleOrder}
     />
   );
 };

@@ -18,6 +18,7 @@ type Props = {
   classification: Classification;
   lowerDifficulty: number;
   upperDifficulty: number;
+  showTags: boolean;
 };
 
 export const ProblemsTable: React.FC<Props> = (props: Props) => {
@@ -27,6 +28,7 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
     classification,
     lowerDifficulty,
     upperDifficulty,
+    showTags,
   } = props;
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
@@ -76,7 +78,7 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
               {filteredProblems
                 .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                 .map((problem) => (
-                  <ProblemsTableRow problem={problem} />
+                  <ProblemsTableRow problem={problem} showTags={showTags} />
                 ))}
             </TableBody>
           </Table>

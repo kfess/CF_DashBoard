@@ -26,7 +26,7 @@ export const ProblemsPage: React.FC = () => {
     ratingColorInfo.DeepRed.upperBound
   );
 
-  const [showTags, toggleShowTags] = useToggle();
+  const [showTags, toggleShowTags] = useToggle(false);
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -60,6 +60,7 @@ export const ProblemsPage: React.FC = () => {
           classification={classification}
           lowerDifficulty={lowerDifficulty}
           upperDifficulty={upperDifficulty}
+          showTags={showTags}
         />
       )}
     </>

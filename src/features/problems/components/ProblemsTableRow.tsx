@@ -6,12 +6,12 @@ import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { SolutionLink } from "./SolutionLink";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
-import { formatUnixTime } from "@helpers/index";
+import { Chip_ } from "@features/ui/component/Chip";
 
-type Props = { problem: Problem };
+type Props = { problem: Problem; showTags: boolean };
 
 export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
-  const { problem } = props;
+  const { problem, showTags } = props;
 
   return (
     <TableRow>
@@ -24,6 +24,11 @@ export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
           difficulty={problem.rating}
           showDifficulty={true}
         />
+        <div>
+          {showTags &&
+            problem.tags.length > 0 &&
+            problem.tags.map((tag) => <Chip_ label={tag} />)}
+        </div>
       </TableCell>
       <TableCell>
         <ContestLink

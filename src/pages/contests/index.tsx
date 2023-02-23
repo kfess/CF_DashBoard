@@ -52,9 +52,7 @@ export const ContestsPage: React.FC = () => {
         setPeriod={setPeriod}
         solvedStatus={solvedStatus}
         setSolvedStatus={setSolvedStatus}
-        showDifficulty={showDifficulty}
         toggleShowDifficulty={toggleShowDifficulty}
-        reverse={reverse}
         toggleOrder={toggleOrder}
       />
       <ContestsTable

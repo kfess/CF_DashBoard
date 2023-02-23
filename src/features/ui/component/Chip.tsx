@@ -15,7 +15,7 @@ export const Chip_: React.FC<Props> = (props: Props) => {
       label={label}
       onClick={onClick ? onClick : () => {}}
       icon={icon}
-      sx={{ m: 1 }}
+      sx={{ m: 0.5 }}
       size="small"
     />
   );
@@ -36,7 +36,7 @@ export const DeletableChip: React.FC<DeletableProps> = (
       onClick={onClick ? onClick : () => {}}
       onDelete={onDelete}
       icon={icon}
-      sx={{ m: 1 }}
+      sx={{ m: 0.5 }}
       size="small"
     />
   );
