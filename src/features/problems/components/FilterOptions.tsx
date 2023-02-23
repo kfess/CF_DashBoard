@@ -8,6 +8,7 @@ import { SolvedStatusFilter } from "@features/problems/components/SolvedStatusFi
 import { ResetFilterButton } from "@features/problems/components/ResetFilter";
 import { DifficultyButton } from "@features/problems/components/DifficultyButton";
 import { FilterChips } from "@features/problems/components/FilterChips";
+import { ShowTagsSwitch } from "./ShowTagsSwitch";
 
 type Props = {
   classification: Classification;
@@ -20,6 +21,7 @@ type Props = {
   setLowerDifficulty: (arg: number) => void;
   upperDifficulty: number;
   setUpperDifficulty: (arg: number) => void;
+  toggleShowTags: () => void;
 };
 
 export const FilterOptions: React.FC<Props> = (props: Props) => {
@@ -34,6 +36,7 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
     setLowerDifficulty,
     upperDifficulty,
     setUpperDifficulty,
+    toggleShowTags,
   } = props;
 
   const setDefaultClassification = () => {
@@ -81,6 +84,7 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
         addOrRemoveTag={addOrRemoveTag}
         removeAllTags={removeAllTags}
       />
+      <ShowTagsSwitch toggleShowTags={toggleShowTags} />
       <ResetFilterButton
         setClassification={setClassification}
         setSolvedStatus={setSolvedStatus}

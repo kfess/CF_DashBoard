@@ -7,6 +7,7 @@ import type { SolvedStatus } from "@features/problems/components/SolvedStatusFil
 import { ratingColorInfo } from "@features/color/ratingColor";
 import { FilterOptions } from "@features/problems/components/FilterOptions";
 import { LabelsChip } from "@features/bookmark/components/LabelsChip";
+import { useToggle } from "@hooks/index";
 
 export const ProblemsPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchProblems();
@@ -24,6 +25,8 @@ export const ProblemsPage: React.FC = () => {
   const [upperDifficulty, setUpperDifficulty] = useState(
     ratingColorInfo.DeepRed.upperBound
   );
+
+  const [showTags, toggleShowTags] = useToggle();
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -48,6 +51,7 @@ export const ProblemsPage: React.FC = () => {
         setLowerDifficulty={setLowerDifficulty}
         upperDifficulty={upperDifficulty}
         setUpperDifficulty={setUpperDifficulty}
+        toggleShowTags={toggleShowTags}
       />
       {data && (
         <ProblemsTable
