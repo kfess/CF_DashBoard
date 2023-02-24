@@ -26,7 +26,8 @@
       "@constants/*": ["constants/*"],
       "@routes/*": ["routes/*"],
       "@mock/*": ["mock/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@recoil/*": ["recoil/*"]
     },
     "types": ["@emotion/react/types/css-prop"], // to make it possible to write css props in HTML tag
     "jsxImportSource": "@emotion/react" // to use @emotion's css props as JSX

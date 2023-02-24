@@ -1,6 +1,13 @@
-import { atom, AtomEffect, DefaultValue } from "recoil";
+import {
+  atom,
+  AtomEffect,
+  DefaultValue,
+  selector,
+  selectorFamily,
+} from "recoil";
 import { z } from "zod";
 import { problemSchema } from "@features/problems/problem";
+import { RecoilAtomKeys, RecoilSelectorKeys } from "@recoil/RecoilKeys";
 
 export const labelStateSchema = z.object({
   id: z.number().min(0),
@@ -39,7 +46,24 @@ const localStorageEffect: <T>(key: string) => AtomEffect<T> =
   };
 
 export const labelsState = atom<LabelState[]>({
-  key: "labelsState",
+  key: RecoilAtomKeys.LABELS_STATE,
   default: [],
   effects: [localStorageEffect<LabelState[]>("labels")],
+});
+
+// Read all labels
+export const labelsSelector = selector<LabelState[]>({
+  key: RecoilSelectorKeys.LABELS,
+  get: ({ get }) => get(labelsState),
+});
+
+// Read label specified by "label id"
+export const labelSelector = selectorFamily<LabelState | undefined, number>({
+  key: RecoilSelectorKeys.LABEL,
+  get:
+    (id) =>
+    ({ get }) => {
+      const labels = get(labelsState);
+      return labels.find((label) => label.id === id);
+    },
 });

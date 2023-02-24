@@ -1,10 +1,12 @@
 import { useCallback } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil";
 import { z } from "zod";
 import {
   LabelState,
   labelsState,
   labelStateSchema,
+  labelsSelector,
+  labelSelector,
 } from "@features/bookmark/label.atom";
 import { HexaColor } from "@features/color/labelColor";
 
@@ -175,4 +177,14 @@ export const labelActions: LabelActions = {
       []
     );
   },
+};
+
+type LabelSelectors = {
+  useLabels: () => LabelState[];
+  useLabel: (id: number) => LabelState | undefined;
+};
+
+export const labelSelectors: LabelSelectors = {
+  useLabels: () => useRecoilValue(labelsSelector),
+  useLabel: (id: number) => useRecoilValue(labelSelector(id)),
 };

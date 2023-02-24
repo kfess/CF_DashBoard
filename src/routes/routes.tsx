@@ -7,6 +7,7 @@ import { LabelPage } from "@pages/labels/label/index";
 import { SubmissionPage } from "@pages/submission";
 import { AchievementPage } from "@pages/achievement";
 import { RecommendationPage } from "@pages/recommendation";
+import { CustomContestPage } from "@pages/custom_contests";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
       { path: "labels/:labelName", element: <LabelPage /> },
       { path: "/submission", element: <SubmissionPage /> },
       { path: "/ranking", element: <div>ranking</div> },
-      { path: "/custom-contest", element: <div>custom contest</div> },
+      { path: "/custom-contest", element: <CustomContestPage /> },
       { path: "/api", element: <div>api</div> },
       { path: "/links", element: <div>links</div> },
       { path: "/setting", element: <div>setting</div> },
