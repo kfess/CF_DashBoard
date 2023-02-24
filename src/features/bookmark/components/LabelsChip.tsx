@@ -5,8 +5,8 @@ import { Chip_ } from "@features/ui/component/Chip";
 import { labelSelectors } from "@features/bookmark/labelActions";
 
 export const LabelsChip: React.FC = () => {
-  const labels = labelSelectors.useLabels();
   const navigate = useNavigate();
+  const labels = labelSelectors.useLabels();
 
   return (
     <Chip_
