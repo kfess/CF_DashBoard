@@ -17,8 +17,10 @@ export const groupBy = <K, V>(
     }, new Map<K, V[]>())
   );
 
-export const formatUnixTime = (unitTime: number) =>
-  dayjs.unix(unitTime).format("YYYY-MM-DD HH:mm:ss");
+export const formatUnixTime = (unitTime: number, simple: boolean = false) =>
+  simple
+    ? dayjs.unix(unitTime).format("YYYY-MM-DD")
+    : dayjs.unix(unitTime).format("YYYY-MM-DD HH:mm:ss");
 
 export const range = (i: number, j: number): number[] => {
   return Array.from({ length: j - i + 1 }, (_, index) => {

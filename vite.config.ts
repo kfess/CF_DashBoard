@@ -17,6 +17,7 @@ export default defineConfig({
       "@mock": path.resolve(__dirname, "src/mock/"),
       "@hooks": path.resolve(__dirname, "src/hooks/"),
       "@recoil": path.resolve(__dirname, "src/recoil/"),
+      "@assets": path.resolve(__dirname, "src/assets/"),
     },
   },
 });

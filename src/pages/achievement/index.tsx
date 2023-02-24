@@ -1,4 +1,5 @@
 import React from "react";
+import Box from "@mui/material/Box";
 import { useLocation } from "react-router-dom";
 import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
 import { UniqueACCount } from "@features/achievement/components/UniqueACCount";
@@ -14,6 +15,8 @@ import { createTableData } from "@features/achievement/helper";
 import { DifficultyPies } from "@features/achievement/components/DifficultyPies";
 import { ClassificationPies } from "@features/achievement/components/ClassificationPies";
 import { TagACCount } from "@features/achievement/components/TagACCount";
+import { Profile } from "@features/achievement/components/Profile";
+import { Divider } from "@mui/material";
 
 export const AchievementPage: React.FC = () => {
   const { search } = useLocation();
@@ -23,12 +26,36 @@ export const AchievementPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchUserSubmission({
     userId: userId,
   });
-
   const tableData = createTableData();
 
   return (
     <>
-      {data && (
+      <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
+        <Box gridColumn="span 4">
+          <Profile userId={userId} />
+          <Divider />
+          {data && <LanguageACCount submissions={data} />}
+          <Divider />
+          {data && <TagACCount submissions={data} />}
+        </Box>
+        <Box gridColumn="span 8">
+          {data && (
+            <>
+              <UniqueACCount submissions={data} period="Total" />
+              <Divider />
+              <TotalRatingSum submissions={data} />
+              <Divider />
+              <StreakSum submissions={data} />
+              <CurrentStreak submissions={data} />
+              <LongestStreak submissions={data} />
+              <Divider />
+              <DailyChart submissions={data} />
+              <ClimbingChart submissions={data} />
+            </>
+          )}
+        </Box>
+      </Box>
+      {/* {data && (
         <>
           <UniqueACCount submissions={data} period="Total" />
           <TotalRatingSum submissions={data} />
@@ -43,7 +70,7 @@ export const AchievementPage: React.FC = () => {
           <TagACCount submissions={data} />
           <HeatMap tableData={tableData} />
         </>
-      )}
+      )} */}
     </>
   );
 };

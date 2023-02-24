@@ -1,7 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Chip from "@mui/material/Chip";
 import type { Submission } from "@features/submission/submission";
 import { NormalizedLanguage } from "@features/language/language";
 import {
@@ -10,6 +9,7 @@ import {
   filterUniqueSubmissions,
 } from "@features/achievement/processSubmission";
 import { formatUnixTime } from "@helpers/index";
+import { Chip_ } from "@features/ui/component/Chip";
 
 type Count = {
   language: NormalizedLanguage;
@@ -35,7 +35,8 @@ export const LanguageACCount: React.FC<Props> = (props: Props) => {
       );
       const uniSubmissions = filterUniqueSubmissions(sortSubmissions);
       const lastACDate = formatUnixTime(
-        uniSubmissions[uniSubmissions.length - 1].creationTimeSeconds
+        uniSubmissions[uniSubmissions.length - 1].creationTimeSeconds,
+        true
       );
       return {
         language: lang,
@@ -47,20 +48,24 @@ export const LanguageACCount: React.FC<Props> = (props: Props) => {
 
   return (
     <Box>
-      <div>Language</div>
+      <div>
+        <strong>Language</strong>
+      </div>
       {gUniLangSubmissions.map((s) => (
         <Stack>
-          <Stack direction="row" spacing={5}>
-            <Chip
-              sx={{ m: 0.5 }}
-              label={s.language}
-              size="small"
-              onClick={() => {}}
-            />
+          <Stack
+            direction="row"
+            css={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Chip_ label={s.language} />
             <div>
               {s.count} {s.count > 1 ? "problems" : "problem"} solved
+              <div>{s.lastACDate}</div>
             </div>
-            <div>{s.lastACDate}</div>
           </Stack>
         </Stack>
       ))}
