@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { labelsState } from "@features/bookmark/label.atom";
 import { LabeledProblems } from "@features/bookmark/components/LabeledProblems";
+import { labelSelectors } from "@features/bookmark/labelActions";
 
 export const LabelPage: React.FC = () => {
   const navigate = useNavigate();
   const { labelName } = useParams(); // path = /labels/:labelName
-  const label = useRecoilValue(labelsState).find((l) => l.name === labelName);
+  const label = labelSelectors.useLabel(labelName ?? "");
 
-  if (!label) {
-    navigate("/contest");
-  }
+  useEffect(() => {
+    // if label does not exist, then go back to /labels page
+    if (!label) {
+      navigate("/labels");
+    }
+  }, []);
 
   return <>{label && <LabeledProblems label={label} />}</>;
 };

@@ -1,12 +1,10 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
 import { css } from "@emotion/react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import StarIcon from "@mui/icons-material/Star";
-import { labelsState } from "@features/bookmark/label.atom";
 import { ColoredCircle } from "@features/color/ColoredCircle";
-import { labelActions } from "@features/bookmark/labelActions";
+import { labelActions, labelSelectors } from "@features/bookmark/labelActions";
 
 const circleCss = css({
   cursor: "pointer",
@@ -40,7 +38,7 @@ export const AddLabelButton: React.FC<Props> = (props: Props) => {
     setAnchorEl(null);
   };
 
-  const labels = useRecoilValue(labelsState);
+  const labels = labelSelectors.useLabels();
   const addProblem = labelActions.useAddProblem();
 
   return (

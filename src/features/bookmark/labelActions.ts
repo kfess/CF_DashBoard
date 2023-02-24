@@ -181,10 +181,10 @@ export const labelActions: LabelActions = {
 
 type LabelSelectors = {
   useLabels: () => LabelState[];
-  useLabel: (id: number) => LabelState | undefined;
+  useLabel: (name: string) => LabelState | undefined;
 };
 
 export const labelSelectors: LabelSelectors = {
   useLabels: () => useRecoilValue(labelsSelector),
-  useLabel: (id: number) => useRecoilValue(labelSelector(id)),
+  useLabel: (name: string) => useRecoilValue(labelSelector(name)),
 };

@@ -57,13 +57,13 @@ export const labelsSelector = selector<LabelState[]>({
   get: ({ get }) => get(labelsState),
 });
 
-// Read label specified by "label id"
-export const labelSelector = selectorFamily<LabelState | undefined, number>({
+// Read label specified by "label name"
+export const labelSelector = selectorFamily<LabelState | undefined, string>({
   key: RecoilSelectorKeys.LABEL,
   get:
-    (id) =>
+    (name) =>
     ({ get }) => {
       const labels = get(labelsState);
-      return labels.find((label) => label.id === id);
+      return labels.find((label) => label.name === name);
     },
 });
