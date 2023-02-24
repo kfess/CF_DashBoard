@@ -30,8 +30,6 @@ export const ContestsPage: React.FC = () => {
 
   const { solvedSet, attemptedSet } = useSolvedStatus(userId);
 
-  const { theme } = useThemeContext();
-
   if (isLoading) {
     return <span>Loading...</span>;
   }
