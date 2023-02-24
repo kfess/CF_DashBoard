@@ -8,6 +8,10 @@ type Colors = {
   backgroundColor: string; // image color of the theme
   foregroundColor: string; // foregroundColor of the backgroundColor
   acColor: string;
+  header: {
+    backgroundColor: string;
+    foregroundColor: string;
+  };
   //   subTextColor: string // add when needed
   //   titleBackgroudColor: string // add when needed
   //   accentColor: string // add when needed

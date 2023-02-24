@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
-import { labelsState } from "@features/bookmark/label.atom";
+import { labelSelectors } from "@features/bookmark/labelActions";
 import type { LabelState } from "@features/bookmark/label.atom";
 import { LabelNameChip } from "@features/bookmark/components/LabelIcon";
 import { LabelEditor } from "@features/bookmark/components/LabelEditer";
@@ -20,7 +19,7 @@ type Props = {
   label: LabelState;
 };
 
-const LabelItem: React.FC<Props> = (props: Props) => {
+export const LabelItem: React.FC<Props> = (props: Props) => {
   const { label } = props;
   const navigate = useNavigate();
   const [showBlock, toggleShowBlock] = useToggle();
@@ -119,61 +118,61 @@ const LabelItem: React.FC<Props> = (props: Props) => {
   );
 };
 
-const sortOrders = [
-  "Alphabetically",
-  "Reverse Alphabetically",
-  "Most Problems",
-  "Fewest Problems",
-] as const;
-type SortOrder = typeof sortOrders[number];
+// const sortOrders = [
+//   "Alphabetically",
+//   "Reverse Alphabetically",
+//   "Most Problems",
+//   "Fewest Problems",
+// ] as const;
+// type SortOrder = typeof sortOrders[number];
 
-const sortLabels = (labels: LabelState[], order: SortOrder) => {
-  return [...labels].sort((a, b) => {
-    switch (order) {
-      case "Alphabetically":
-        return a.name.localeCompare(b.name);
-      case "Reverse Alphabetically":
-        return b.name.localeCompare(a.name);
-      case "Most Problems":
-        return b.problems.length - a.problems.length;
-      case "Fewest Problems":
-        return a.problems.length - b.problems.length;
-    }
-  });
-};
+// const sortLabels = (labels: LabelState[], order: SortOrder) => {
+//   return [...labels].sort((a, b) => {
+//     switch (order) {
+//       case "Alphabetically":
+//         return a.name.localeCompare(b.name);
+//       case "Reverse Alphabetically":
+//         return b.name.localeCompare(a.name);
+//       case "Most Problems":
+//         return b.problems.length - a.problems.length;
+//       case "Fewest Problems":
+//         return a.problems.length - b.problems.length;
+//     }
+//   });
+// };
 
-export const LabelItems: React.FC = () => {
-  const labels = useRecoilValue(labelsState);
-  const [order, setOrder] = useState<SortOrder>("Alphabetically");
+// export const LabelItems: React.FC = () => {
+//   const labels = labelSelectors.useLabels();
+//   const [order, setOrder] = useState<SortOrder>("Alphabetically");
 
-  return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Box
-        sx={{
-          p: 1,
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Box>{labels.length} labels</Box>
-        <Box>
-          <DropDownMenuButton
-            title="sort"
-            items={sortOrders.map((so) => {
-              return { item: so };
-            })}
-            selectedItem={order}
-            setSelectedItem={setOrder}
-          />
-        </Box>
-      </Box>
-      <Divider />
-      {sortLabels(labels, order).map((label) => (
-        <>
-          <LabelItem key={label.name} label={label} />
-          <Divider />
-        </>
-      ))}
-    </Box>
-  );
-};
+//   return (
+//     <Box sx={{ display: "flex", flexDirection: "column" }}>
+//       <Box
+//         sx={{
+//           p: 1,
+//           display: "flex",
+//           justifyContent: "space-between",
+//         }}
+//       >
+//         <Box>{labels.length} labels</Box>
+//         <Box>
+//           <DropDownMenuButton
+//             title="sort"
+//             items={sortOrders.map((so) => {
+//               return { item: so };
+//             })}
+//             selectedItem={order}
+//             setSelectedItem={setOrder}
+//           />
+//         </Box>
+//       </Box>
+//       <Divider />
+//       {sortLabels(labels, order).map((label) => (
+//         <>
+//           <LabelItem key={label.name} label={label} />
+//           <Divider />
+//         </>
+//       ))}
+//     </Box>
+//   );
+// };

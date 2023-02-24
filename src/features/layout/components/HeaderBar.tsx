@@ -20,7 +20,7 @@ export const HeaderBar: React.FC<Props> = (props: Props) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        css={{ backgroundColor: theme.colors.backgroundColor }}
+        css={{ backgroundColor: theme.colors.header.backgroundColor }}
         position="fixed"
       >
         <Toolbar>
@@ -29,7 +29,7 @@ export const HeaderBar: React.FC<Props> = (props: Props) => {
             aria-label="menu"
             onClick={() => toggleSideBar(!isOpenSideBar)}
             css={{
-              color: theme.colors.foregroundColor,
+              color: theme.colors.header.foregroundColor,
               margin: theme.spacing(0, 1, 0, 0),
             }}
           >
@@ -41,7 +41,7 @@ export const HeaderBar: React.FC<Props> = (props: Props) => {
               noWrap
               component="div"
               sx={{ display: { xs: "none", sm: "block" } }}
-              css={{ color: theme.colors.foregroundColor }}
+              css={{ color: theme.colors.header.foregroundColor }}
             >
               CF DashBoard
             </Typography>

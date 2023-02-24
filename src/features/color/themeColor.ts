@@ -8,6 +8,10 @@ export const baseTheme = createTheme({
     backgroundColor: "#ffffff", // totally white
     foregroundColor: "#4d5156",
     acColor: "#98D59E",
+    header: {
+      backgroundColor: "#ffffff",
+      foregroundColor: "#4d5156",
+    },
   },
 });
 
@@ -17,9 +21,13 @@ export const purpleTheme = createTheme({
   colors: {
     fontColor: "#4d5156",
     lineColor: "",
-    backgroundColor: "#79589F", // image color of Heroku
+    backgroundColor: "#F7F8F9",
     foregroundColor: "#ffffff",
     acColor: "#98D59E",
+    header: {
+      backgroundColor: "#79589F", // image color of Heroku
+      foregroundColor: "#ffffff",
+    },
   },
 });
 
@@ -31,6 +39,10 @@ export const greenTheme = createTheme({
     backgroundColor: "white",
     foregroundColor: "",
     acColor: "#98D59E",
+    header: {
+      backgroundColor: "white",
+      foregroundColor: "",
+    },
   },
 });
 
@@ -42,5 +54,9 @@ export const darkTheme = createTheme({
     backgroundColor: "#1C1C1C",
     foregroundColor: "#ffffff",
     acColor: "#98D59E",
+    header: {
+      backgroundColor: "#1C1C1C",
+      foregroundColor: "#ffffff",
+    },
   },
 });

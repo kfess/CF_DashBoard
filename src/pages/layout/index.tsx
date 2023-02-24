@@ -11,11 +11,10 @@ export const LayoutPage: React.FC = () => {
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
   const toggleSideBar = () => setIsOpenSideBar(!isOpenSideBar);
   const [selectedItem, setSelectedItem] = useState<Field>("Contests");
-
   const { pathname } = useLocation();
 
   return (
-    <>
+    <div>
       <HeaderBar isOpenSideBar={isOpenSideBar} toggleSideBar={toggleSideBar} />
       {isOpenSideBar && (
         <SideNavigationBar
@@ -28,6 +27,6 @@ export const LayoutPage: React.FC = () => {
       <CustomBreadcrumbs path={pathname} />
       {isMainField(pathname) && <SearchBar />}
       <Outlet />
-    </>
+    </div>
   );
 };

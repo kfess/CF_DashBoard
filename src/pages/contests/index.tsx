@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useThemeContext } from "@features/color/themeColor.hook";
 import { useFetchContests } from "@features/contests/useFetchContest";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
 import type { Classification } from "@features/contests/contest";
@@ -18,12 +19,9 @@ export const ContestsPage: React.FC = () => {
 
   const { data, isError, error, isLoading } = useFetchContests();
   const [classiffication, setClassification] = useState<Classification>("All");
-
   const [period, setPeriod] = useState<PeriodWord>("All Period");
-
   const [solvedStatus, setSolvedStatus] =
     useState<SolvedStatus>("All Contests");
-
   const [showDifficulty, toggleShowDifficulty] = useToggle(true);
   const [reverse, toggleOrder] = useToggle(false);
 
@@ -31,6 +29,8 @@ export const ContestsPage: React.FC = () => {
   const problemIdxes = getProblemIdxes(data ?? []);
 
   const { solvedSet, attemptedSet } = useSolvedStatus(userId);
+
+  const { theme } = useThemeContext();
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -40,7 +40,7 @@ export const ContestsPage: React.FC = () => {
   }
 
   return (
-    <>
+    <div>
       <h2 css={{ textAlign: "left" }}>Contests</h2>
       <div css={{ textAlign: "right" }}>
         <LabelsChip />
@@ -62,6 +62,6 @@ export const ContestsPage: React.FC = () => {
         solvedSet={solvedSet}
         attemptedSet={attemptedSet}
       />
-    </>
+    </div>
   );
 };
