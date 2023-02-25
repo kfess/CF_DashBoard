@@ -29,48 +29,35 @@ export const AchievementPage: React.FC = () => {
   const tableData = createTableData();
 
   return (
-    <>
-      <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
-        <Box gridColumn="span 4">
-          <Profile userId={userId} />
-          <Divider />
-          {data && <LanguageACCount submissions={data} />}
-          <Divider />
-          {data && <TagACCount submissions={data} />}
-        </Box>
-        <Box gridColumn="span 8">
-          {data && (
-            <>
-              <UniqueACCount submissions={data} period="Total" />
-              <Divider />
-              <TotalRatingSum submissions={data} />
-              <Divider />
-              <StreakSum submissions={data} />
-              <CurrentStreak submissions={data} />
-              <LongestStreak submissions={data} />
-              <Divider />
-              <DailyChart submissions={data} />
-              <ClimbingChart submissions={data} />
-            </>
-          )}
-        </Box>
+    <Box component="div" sx={{ display: { xs: "block", sm: "flex" } }} gap={2}>
+      <Box>
+        <Profile userId={userId} />
+        <Divider />
+        {data && <LanguageACCount submissions={data} />}
+        <Divider />
+        {data && <TagACCount submissions={data} />}
       </Box>
-      {/* {data && (
-        <>
-          <UniqueACCount submissions={data} period="Total" />
-          <TotalRatingSum submissions={data} />
-          <StreakSum submissions={data} />
-          <CurrentStreak submissions={data} />
-          <LongestStreak submissions={data} />
-          <DifficultyPies submissions={data} />
-          <ClassificationPies submissions={data} />
-          <DailyChart submissions={data} />
-          <ClimbingChart submissions={data} />
-          <LanguageACCount submissions={data} />
-          <TagACCount submissions={data} />
-          <HeatMap tableData={tableData} />
-        </>
-      )} */}
-    </>
+      <Box sx={{ flexGrow: { sm: "1" } }}>
+        {data && (
+          <>
+            <UniqueACCount submissions={data} period="Total" />
+            <Divider />
+            <TotalRatingSum submissions={data} />
+            <Divider />
+            <StreakSum submissions={data} />
+            <CurrentStreak submissions={data} />
+            <LongestStreak submissions={data} />
+            <Divider />
+            <DailyChart submissions={data} />
+            <ClimbingChart submissions={data} />
+            <Divider />
+            <HeatMap tableData={tableData} />
+            <Divider />
+            <DifficultyPies submissions={data} />
+            <ClassificationPies submissions={data} />
+          </>
+        )}
+      </Box>
+    </Box>
   );
 };

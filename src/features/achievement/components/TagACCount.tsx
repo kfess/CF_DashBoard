@@ -1,10 +1,10 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Chip from "@mui/material/Chip";
 import { Submission } from "@features/submission/submission";
 import { getACTagMap } from "@features/achievement/processSubmission";
 import { tags } from "@features/problems/problem";
+import { Chip_ } from "@features/ui/component/Chip";
 
 type Props = { submissions: Submission[] };
 
@@ -15,19 +15,19 @@ export const TagACCount: React.FC<Props> = (props: Props) => {
 
   return (
     <Box>
-      <div>Problem Tags</div>
+      <Box sx={{ marginTop: 1, marginBottom: 1 }}>
+        <strong>Problem Tags</strong>
+      </Box>
       {[...tags]
         .sort((a, b) => (tagMap.get(b) ?? 0) - (tagMap.get(a) ?? 0))
+        .filter((tag) => (tagMap.get(tag) ?? 0) > 0)
         .map((tag) => (
           <Stack>
-            <Stack direction="row" spacing={5}>
-              <Chip
-                sx={{ m: 0.5 }}
-                label={tag}
-                size="small"
-                onClick={() => {}}
-              />
-              <div>× {tagMap.get(tag)}</div>
+            <Stack
+              direction="row"
+              sx={{ display: "flex", alignItems: "center" }}
+            >
+              <Chip_ label={tag} />× {tagMap.get(tag)}
             </Stack>
           </Stack>
         ))}

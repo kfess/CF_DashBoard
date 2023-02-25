@@ -48,25 +48,31 @@ export const LanguageACCount: React.FC<Props> = (props: Props) => {
 
   return (
     <Box>
-      <div>
+      <Box sx={{ marginTop: 1, marginBottom: 1 }}>
         <strong>Language</strong>
-      </div>
+      </Box>
       {gUniLangSubmissions.map((s) => (
         <Stack>
           <Stack
             direction="row"
-            css={{
+            sx={{
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              m: 0.1,
             }}
           >
             <Chip_ label={s.language} />
             <div>
-              {s.count} {s.count > 1 ? "problems" : "problem"} solved
-              <div>{s.lastACDate}</div>
+              <strong>{s.count}</strong>{" "}
+              <span css={{ fontSize: "14px", color: "gray" }}>
+                {s.count > 1 ? "problems" : "problem"} solved
+              </span>
             </div>
           </Stack>
+          <div css={{ fontSize: "14px", color: "gray", textAlign: "right" }}>
+            Last AC Date: {s.lastACDate}
+          </div>
         </Stack>
       ))}
     </Box>
