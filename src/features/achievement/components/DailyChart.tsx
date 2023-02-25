@@ -1,5 +1,8 @@
 import * as dayjs from "dayjs";
 import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Button from "@mui/material/Button";
 import {
   BarChart,
   Bar,
@@ -59,14 +62,28 @@ export const DailyChart: React.FC<Props> = (props: Props) => {
 
   return (
     <>
-      <DropDownMenuButton
-        title="color"
-        items={displayColors.map((dc) => {
-          return { item: dc };
-        })}
-        selectedItem={displayColor}
-        setSelectedItem={setDisplayColor}
-      />
+      <Box sx={{ display: "flex", p: 1 }}>
+        <ButtonGroup>
+          <Button
+            onClick={() => {
+              setDisplayColor("No Color");
+            }}
+            variant="contained"
+            color="inherit"
+          >
+            Simple
+          </Button>
+          <Button
+            onClick={() => {
+              setDisplayColor("Colored");
+            }}
+            variant="contained"
+            color="inherit"
+          >
+            Color
+          </Button>
+        </ButtonGroup>
+      </Box>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart
           data={displayColor === "Colored" ? coloredCount : noColoredCount}
