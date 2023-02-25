@@ -70,9 +70,9 @@ export const LanguageACCount: React.FC<Props> = (props: Props) => {
               </span>
             </div>
           </Stack>
-          <div css={{ fontSize: "14px", color: "gray", textAlign: "right" }}>
+          <Box sx={{ fontSize: "14px", color: "gray", textAlign: "right" }}>
             Last AC Date: {s.lastACDate}
-          </div>
+          </Box>
         </Stack>
       ))}
     </Box>

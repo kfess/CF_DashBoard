@@ -1,6 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { useLocation } from "react-router-dom";
+import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
 import { UniqueACCount } from "@features/achievement/components/UniqueACCount";
 import { TotalRatingSum } from "@features/achievement/components/TotalRatingSum";
@@ -17,6 +18,7 @@ import { ClassificationPies } from "@features/achievement/components/Classificat
 import { TagACCount } from "@features/achievement/components/TagACCount";
 import { Profile } from "@features/achievement/components/Profile";
 import { Divider } from "@mui/material";
+import { Community } from "@features/achievement/components/Community";
 
 export const AchievementPage: React.FC = () => {
   const { search } = useLocation();
@@ -28,10 +30,17 @@ export const AchievementPage: React.FC = () => {
   });
   const tableData = createTableData();
 
+  const userInfo = useFetchUserInfo({ userId }).data;
+
   return (
     <Box component="div" sx={{ display: { xs: "block", sm: "flex" } }} gap={2}>
       <Box>
-        <Profile userId={userId} />
+        <Profile userInfo={userInfo} />
+        <Divider />
+        <Community
+          contribution={userInfo?.contribution}
+          friendsOfCount={userInfo?.friendOfCount}
+        />
         <Divider />
         {data && <LanguageACCount submissions={data} />}
         <Divider />
