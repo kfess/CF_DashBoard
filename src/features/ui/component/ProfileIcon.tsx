@@ -1,5 +1,6 @@
 import React from "react";
 import { css } from "@emotion/react";
+import Box from "@mui/material/Box";
 import SvgIcon from "@mui/material/SvgIcon";
 
 const iconCss = css({
@@ -17,7 +18,7 @@ export const ProfileIcon: React.FC<Props> = (props: Props) => {
   const { avatarUrl } = props;
 
   return (
-    <>
+    <Box sx={{ m: 1 }}>
       {avatarUrl ? (
         <img css={iconCss} src={avatarUrl} />
       ) : (
@@ -27,6 +28,6 @@ export const ProfileIcon: React.FC<Props> = (props: Props) => {
           </svg>
         </SvgIcon>
       )}
-    </>
+    </Box>
   );
 };
