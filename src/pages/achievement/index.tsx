@@ -33,8 +33,17 @@ export const AchievementPage: React.FC = () => {
   const userInfo = useFetchUserInfo({ userId }).data;
 
   return (
-    <Box component="div" sx={{ display: { xs: "block", sm: "flex" } }} gap={4}>
-      <Box sx={{ width: { sm: "300px" } }}>
+    <Box sx={{ display: { xs: "block", sm: "flex" } }} gap={1}>
+      <Box
+        sx={{
+          m: 0.5,
+          p: 2,
+          width: { sm: "300px" },
+          backgroundColor: "white",
+          borderRadius: 3,
+          boxShadow: [3, 3, 3, 3],
+        }}
+      >
         <Profile userInfo={userInfo} />
         <Divider />
         <Community
@@ -47,10 +56,23 @@ export const AchievementPage: React.FC = () => {
         {data && <TagACCount submissions={data} />}
       </Box>
       <Box sx={{ flex: { sm: 1 } }}>
+        <Box
+          sx={{
+            m: 0.5,
+            p: 2,
+            backgroundColor: "white",
+            borderRadius: 3,
+            boxShadow: [3, 3, 3, 3],
+          }}
+        >
+          {data && (
+            <>
+              <UniqueACCount submissions={data} />
+            </>
+          )}
+        </Box>
         {data && (
           <>
-            <UniqueACCount submissions={data} period="Total" />
-            <Divider />
             <TotalRatingSum submissions={data} />
             <Divider />
             <StreakSum submissions={data} />

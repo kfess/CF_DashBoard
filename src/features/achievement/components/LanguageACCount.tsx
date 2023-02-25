@@ -10,6 +10,7 @@ import {
 } from "@features/achievement/processSubmission";
 import { formatUnixTime } from "@helpers/index";
 import { Chip_ } from "@features/ui/component/Chip";
+import { useToggle } from "@hooks/index";
 
 type Count = {
   language: NormalizedLanguage;
@@ -23,35 +24,40 @@ type Props = { submissions: Submission[] };
 // it will not be recognized as new AC.
 // If you solve the same problem in different languages, it is recognized as new AC.
 export const LanguageACCount: React.FC<Props> = (props: Props) => {
-  const { submissions } = props;
+  const [isReadMore, toggleReadMore] = useToggle(true);
 
+  const { submissions } = props;
   const ACSubmissions = submissions.filter(isACSubmission);
-  const gLangSubmissions = groupByLanguage(ACSubmissions);
-  const gUniLangSubmissions: Count[] = gLangSubmissions
+  const gLangSubs = groupByLanguage(ACSubmissions);
+  const languageCounts: Count[] = gLangSubs
     .map((g) => {
-      const [lang, submissions] = g;
-      const sortSubmissions = submissions.sort(
+      const [lang, subs] = g;
+      const sortSubs = subs.sort(
         (a, b) => a.creationTimeSeconds - b.creationTimeSeconds
       );
-      const uniSubmissions = filterUniqueSubmissions(sortSubmissions);
+      const uniSubs = filterUniqueSubmissions(sortSubs);
       const lastACDate = formatUnixTime(
-        uniSubmissions[uniSubmissions.length - 1].creationTimeSeconds,
+        uniSubs[uniSubs.length - 1].creationTimeSeconds,
         true
       );
       return {
         language: lang,
-        count: uniSubmissions.length,
+        count: uniSubs.length,
         lastACDate: lastACDate,
       } as Count;
     })
     .sort((a, b) => b.count - a.count);
+
+  const readLabguageCounts = isReadMore
+    ? languageCounts.slice(0, 3)
+    : languageCounts;
 
   return (
     <Box>
       <Box sx={{ marginTop: 1, marginBottom: 1 }}>
         <strong>Language</strong>
       </Box>
-      {gUniLangSubmissions.map((s) => (
+      {readLabguageCounts.map((s) => (
         <Stack>
           <Stack
             direction="row"
@@ -75,6 +81,11 @@ export const LanguageACCount: React.FC<Props> = (props: Props) => {
           </Box>
         </Stack>
       ))}
+      <div css={{ fontSize: "12px", color: "gray", textAlign: "center" }}>
+        <span onClick={toggleReadMore} css={{ cursor: "pointer" }}>
+          {isReadMore ? "Show More" : "Show Less"}
+        </span>
+      </div>
     </Box>
   );
 };
