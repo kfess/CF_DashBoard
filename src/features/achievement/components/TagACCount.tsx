@@ -34,11 +34,15 @@ export const TagACCount: React.FC<Props> = (props: Props) => {
           </Stack>
         </Stack>
       ))}
-      <div css={{ fontSize: "12px", color: "gray", textAlign: "center" }}>
-        <span onClick={toggleReadMore} css={{ cursor: "pointer" }}>
-          {isReadMore ? "Show More" : "Show Less"}
-        </span>
-      </div>
+      {tagCounts.length > 5 ? (
+        <div css={{ fontSize: "12px", color: "gray", textAlign: "center" }}>
+          <span onClick={toggleReadMore} css={{ cursor: "pointer" }}>
+            {isReadMore ? "Show More" : "Show Less"}
+          </span>
+        </div>
+      ) : (
+        <div css={{ fontSize: "14px", color: "gray" }}>No problems solved</div>
+      )}
     </Box>
   );
 };

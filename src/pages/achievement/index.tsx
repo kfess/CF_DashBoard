@@ -45,6 +45,7 @@ export const AchievementPage: React.FC = () => {
           backgroundColor: "white",
           borderRadius: 3,
           boxShadow: [3, 3, 3, 3],
+          marginBottom: "auto",
         }}
       >
         <Profile userInfo={userInfo} />

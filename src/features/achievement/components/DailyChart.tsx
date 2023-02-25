@@ -69,6 +69,7 @@ export const DailyChart: React.FC<Props> = (props: Props) => {
             }}
             variant="contained"
             color="inherit"
+            size="small"
           >
             Simple
           </Button>
@@ -78,6 +79,7 @@ export const DailyChart: React.FC<Props> = (props: Props) => {
             }}
             variant="contained"
             color="inherit"
+            size="small"
           >
             Color
           </Button>
