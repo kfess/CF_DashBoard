@@ -1,5 +1,6 @@
 import * as dayjs from "dayjs";
 import React from "react";
+import Stack from "@mui/material/Stack";
 import type { Submission } from "@features/submission/submission";
 import {
   isACSubmission,
@@ -35,9 +36,16 @@ export const LongestStreak: React.FC<Props> = (props: Props) => {
       : 0;
 
   return (
-    <>
-      <div>Longest Streak</div>
-      <div>{maxStreak}</div>
-    </>
+    <Stack direction="column" sx={{ alignItems: "center" }}>
+      <div>
+        <strong>Max Streak</strong>
+      </div>
+      <div>
+        <strong>{maxStreak}</strong>{" "}
+        <span css={{ fontSize: "14px", color: "gray" }}>
+          {maxStreak > 1 ? "days" : "day"}
+        </span>
+      </div>
+    </Stack>
   );
 };

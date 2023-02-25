@@ -1,13 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useLocation } from "react-router-dom";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
 import { UniqueACCount } from "@features/achievement/components/UniqueACCount";
 import { TotalRatingSum } from "@features/achievement/components/TotalRatingSum";
-import { StreakSum } from "@features/achievement/components/StreakSum";
-import { CurrentStreak } from "@features/achievement/components/CurrentStreak";
-import { LongestStreak } from "@features/achievement/components/LongestStreak";
 import { DailyChart } from "@features/achievement/components/DailyChart";
 import { LanguageACCount } from "@features/achievement/components/LanguageACCount";
 import { ClimbingChart } from "@features/achievement/components/ClimbingChart";
@@ -19,6 +17,7 @@ import { TagACCount } from "@features/achievement/components/TagACCount";
 import { Profile } from "@features/achievement/components/Profile";
 import { Divider } from "@mui/material";
 import { Community } from "@features/achievement/components/Community";
+import { Streak } from "@features/achievement/components/Streak";
 
 export const AchievementPage: React.FC = () => {
   const { search } = useLocation();
@@ -32,11 +31,15 @@ export const AchievementPage: React.FC = () => {
 
   const userInfo = useFetchUserInfo({ userId }).data;
 
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
   return (
     <Box sx={{ display: { xs: "block", sm: "flex" } }} gap={1}>
       <Box
         sx={{
-          m: 0.5,
+          m: 1,
           p: 2,
           width: { sm: "300px" },
           backgroundColor: "white",
@@ -58,7 +61,7 @@ export const AchievementPage: React.FC = () => {
       <Box sx={{ flex: { sm: 1 } }}>
         <Box
           sx={{
-            m: 0.5,
+            m: 1,
             p: 2,
             backgroundColor: "white",
             borderRadius: 3,
@@ -68,18 +71,35 @@ export const AchievementPage: React.FC = () => {
           {data && (
             <>
               <UniqueACCount submissions={data} />
+              <TotalRatingSum submissions={data} />
             </>
           )}
         </Box>
+        <Box
+          sx={{
+            m: 1,
+            p: 2,
+            backgroundColor: "white",
+            borderRadius: 3,
+            boxShadow: [3, 3, 3, 3],
+          }}
+        >
+          {data && <Streak submissions={data} />}
+        </Box>
+        <Box
+          sx={{
+            m: 1,
+            p: 2,
+            backgroundColor: "white",
+            borderRadius: 3,
+            boxShadow: [3, 3, 3, 3],
+          }}
+        >
+          {data && <DailyChart submissions={data} />}
+        </Box>
+
         {data && (
           <>
-            <TotalRatingSum submissions={data} />
-            <Divider />
-            <StreakSum submissions={data} />
-            <CurrentStreak submissions={data} />
-            <LongestStreak submissions={data} />
-            <Divider />
-            <DailyChart submissions={data} />
             <ClimbingChart submissions={data} />
             <Divider />
             <HeatMap tableData={tableData} />

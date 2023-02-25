@@ -1,5 +1,6 @@
 import * as dayjs from "dayjs";
 import React from "react";
+import Stack from "@mui/material/Stack";
 import type { Submission } from "@features/submission/submission";
 import {
   isACSubmission,
@@ -30,9 +31,16 @@ export const CurrentStreak: React.FC<Props> = (props: Props) => {
           .findIndex((n) => n !== 1) + 1;
 
   return (
-    <>
-      <div>Current Streak</div>
-      <div>{currentStreak}</div>
-    </>
+    <Stack direction="column" sx={{ alignItems: "center" }}>
+      <div>
+        <strong>Current Streak</strong>
+      </div>
+      <div>
+        <strong>{currentStreak}</strong>{" "}
+        <span css={{ fontSize: "14px", color: "gray" }}>
+          {currentStreak > 1 ? "days" : "day"}
+        </span>
+      </div>
+    </Stack>
   );
 };
