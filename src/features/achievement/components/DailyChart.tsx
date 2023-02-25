@@ -61,6 +61,9 @@ export const DailyChart: React.FC<Props> = (props: Props) => {
 
   return (
     <>
+      <Box sx={{ marginTop: 1, marginBottom: 1 }}>
+        <strong>Daily Progress</strong>
+      </Box>
       <Box sx={{ display: "flex", p: 1 }}>
         <ButtonGroup>
           <Button

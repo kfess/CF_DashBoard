@@ -39,7 +39,7 @@ export const UniqueACCount: React.FC<Props> = (props: Props) => {
             <strong>Total</strong>
           </div>
           <div>
-            <strong>{uniqueACSubs.length}</strong>{" "}
+            <strong>{uniqueACSubs.length.toLocaleString()}</strong>{" "}
             <span css={{ fontSize: "14px", color: "gray" }}>
               {uniqueACSubs.length > 1 ? "problems" : "problem"} solved
             </span>
@@ -50,7 +50,7 @@ export const UniqueACCount: React.FC<Props> = (props: Props) => {
             <strong>Last Year</strong>
           </div>
           <div>
-            <strong>{lastYearUniqueACSubs.length}</strong>{" "}
+            <strong>{lastYearUniqueACSubs.length.toLocaleString()}</strong>{" "}
             <span css={{ fontSize: "14px", color: "gray" }}>
               {lastYearUniqueACSubs.length > 1 ? "problems" : "problem"} solved
             </span>
@@ -59,7 +59,7 @@ export const UniqueACCount: React.FC<Props> = (props: Props) => {
         <Stack direction="column" sx={{ alignItems: "center" }}>
           <strong>Last Month</strong>
           <div>
-            <strong>{lastMonthYniqueACSubs.length}</strong>{" "}
+            <strong>{lastMonthYniqueACSubs.length.toLocaleString()}</strong>{" "}
             <span css={{ fontSize: "14px", color: "gray" }}>
               {lastMonthYniqueACSubs.length > 1 ? "problems" : "problem"} solved
             </span>

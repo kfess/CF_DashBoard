@@ -29,7 +29,7 @@ export const TagACCount: React.FC<Props> = (props: Props) => {
           <Stack direction="row" sx={{ display: "flex", alignItems: "center" }}>
             <Chip_ label={tag} />
             <span css={{ fontSize: "12px", color: "gray" }}>
-              × {tagMap.get(tag)}
+              × {tagMap.get(tag)?.toLocaleString()}
             </span>
           </Stack>
         </Stack>

@@ -24,7 +24,7 @@ export const Community: React.FC<Props> = (props: Props) => {
             color="primary"
             sx={{ marginRight: "10px" }}
           />
-          <strong>{contribution ?? 0}</strong>
+          <strong>{(contribution ?? 0).toLocaleString()}</strong>
           <div css={{ fontSize: "14px", color: "gray", marginLeft: "8px" }}>
             contributions
           </div>
@@ -35,7 +35,7 @@ export const Community: React.FC<Props> = (props: Props) => {
             color="success"
             sx={{ marginRight: "10px" }}
           />
-          <strong>{friendsOfCount ?? 0}</strong>
+          <strong>{(friendsOfCount ?? 0).toLocaleString()}</strong>
           <div css={{ fontSize: "14px", color: "gray", marginLeft: "8px" }}>
             friends
           </div>

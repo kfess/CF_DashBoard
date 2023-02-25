@@ -20,15 +20,9 @@ export const TotalRatingSum: React.FC<Props> = (props: Props) => {
       <div>
         <strong>Rated Point Sum</strong>
       </div>
-      <Stack
-        direction="row"
-        sx={{
-          display: "flex",
-          m: 1,
-        }}
-      >
+      <Stack direction="row" sx={{ display: "flex", m: 1 }}>
         <div>
-          <strong>{sum}</strong>{" "}
+          <strong>{sum.toLocaleString()}</strong>{" "}
           <span css={{ fontSize: "14px", color: "gray" }}>points</span>
         </div>
       </Stack>

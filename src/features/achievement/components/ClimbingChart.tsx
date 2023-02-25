@@ -94,6 +94,9 @@ export const ClimbingChart: React.FC<Props> = (props: Props) => {
 
   return (
     <>
+      <Box sx={{ marginTop: 1, marginBottom: 1 }}>
+        <strong>Climbing Progress</strong>
+      </Box>
       <Box sx={{ display: "flex", p: 1 }}>
         <ButtonGroup>
           <Button

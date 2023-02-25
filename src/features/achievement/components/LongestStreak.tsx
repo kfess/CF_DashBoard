@@ -41,7 +41,7 @@ export const LongestStreak: React.FC<Props> = (props: Props) => {
         <strong>Max Streak</strong>
       </div>
       <div>
-        <strong>{maxStreak}</strong>{" "}
+        <strong>{maxStreak.toLocaleString()}</strong>{" "}
         <span css={{ fontSize: "14px", color: "gray" }}>
           {maxStreak > 1 ? "days" : "day"}
         </span>

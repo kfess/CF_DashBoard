@@ -70,7 +70,7 @@ export const LanguageACCount: React.FC<Props> = (props: Props) => {
           >
             <Chip_ label={s.language} />
             <div>
-              <strong>{s.count}</strong>{" "}
+              <strong>{s.count.toLocaleString()}</strong>{" "}
               <span css={{ fontSize: "14px", color: "gray" }}>
                 {s.count > 1 ? "problems" : "problem"} solved
               </span>

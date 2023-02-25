@@ -16,7 +16,7 @@ export const StreakSum: React.FC<Props> = (props: Props) => {
         <strong>Streak Sum</strong>
       </div>
       <div>
-        <strong>{uniqueACDate.size}</strong>{" "}
+        <strong>{uniqueACDate.size.toLocaleString()}</strong>{" "}
         <span css={{ fontSize: "14px", color: "gray" }}>
           {uniqueACDate.size > 1 ? "days" : "day"}
         </span>

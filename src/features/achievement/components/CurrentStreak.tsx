@@ -36,7 +36,7 @@ export const CurrentStreak: React.FC<Props> = (props: Props) => {
         <strong>Current Streak</strong>
       </div>
       <div>
-        <strong>{currentStreak}</strong>{" "}
+        <strong>{currentStreak.toLocaleString()}</strong>{" "}
         <span css={{ fontSize: "14px", color: "gray" }}>
           {currentStreak > 1 ? "days" : "day"}
         </span>
