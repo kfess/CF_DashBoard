@@ -97,11 +97,20 @@ export const AchievementPage: React.FC = () => {
         >
           {data && <DailyChart submissions={data} />}
         </Box>
+        <Box
+          sx={{
+            m: 1,
+            p: 2,
+            backgroundColor: "white",
+            borderRadius: 3,
+            boxShadow: [3, 3, 3, 3],
+          }}
+        >
+          {data && <ClimbingChart submissions={data} />}
+        </Box>
 
         {data && (
           <>
-            <ClimbingChart submissions={data} />
-            <Divider />
             <HeatMap tableData={tableData} />
             <Divider />
             <DifficultyPies submissions={data} />

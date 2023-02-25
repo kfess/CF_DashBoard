@@ -20,7 +20,6 @@ import {
 } from "@features/achievement/processSubmission";
 import type { RatingColor } from "@features/color/ratingColor";
 import { ratingColor, ratingColorInfo } from "@features/color/ratingColor";
-import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 
 type DailyEffort = {
   date: number;
