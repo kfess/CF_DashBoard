@@ -25,8 +25,8 @@ export const ContestsPage: React.FC = () => {
   const [showDifficulty, toggleShowDifficulty] = useToggle(true);
   const [reverse, toggleOrder] = useToggle(false);
 
-  const contests = reshapeContests(data ?? [], classiffication, reverse);
-  const problemIdxes = getProblemIdxes(data ?? []);
+  const contests = data && reshapeContests(data, classiffication, reverse);
+  const problemIdxes = data && getProblemIdxes(data);
 
   const { solvedSet, attemptedSet } = useSolvedStatus(userId);
 
@@ -53,13 +53,15 @@ export const ContestsPage: React.FC = () => {
         toggleShowDifficulty={toggleShowDifficulty}
         toggleOrder={toggleOrder}
       />
-      <ContestsTable
-        contests={contests}
-        problemIdxes={problemIdxes}
-        showDifficulty={showDifficulty}
-        solvedSet={solvedSet}
-        attemptedSet={attemptedSet}
-      />
+      {contests && (
+        <ContestsTable
+          contests={contests}
+          problemIdxes={problemIdxes}
+          showDifficulty={showDifficulty}
+          solvedSet={solvedSet}
+          attemptedSet={attemptedSet}
+        />
+      )}
     </div>
   );
 };
