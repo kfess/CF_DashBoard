@@ -1,4 +1,5 @@
 import React from "react";
+import Box from "@mui/material/Box";
 import type { Submission } from "@features/submission/submission";
 import { useFetchProblems } from "@features/problems/useFetchProblem";
 import type { Classification } from "@features/contests/contest";
@@ -31,8 +32,7 @@ export const ClassificationPies: React.FC<Props> = (props: Props) => {
     <>
       {classificationProblems &&
         classifications.map((classification) => (
-          <>
-            <div>{classification}</div>
+          <Box sx={{ textAlign: "center" }}>
             <ClassificationPie
               key={classification}
               problemsCount={classificationProblems[classification]}
@@ -41,7 +41,8 @@ export const ClassificationPies: React.FC<Props> = (props: Props) => {
                   submission.problem.classification === classification
               )}
             />
-          </>
+            <h3>{classification}</h3>
+          </Box>
         ))}
     </>
   );

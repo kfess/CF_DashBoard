@@ -42,13 +42,6 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={-4} textAnchor="middle" fill={fill}>
-        {payload.name}: {value}
-      </text>
-      <text x={cx} y={cy} dy={18} textAnchor="middle" fill={fill}>
-        {` ${(percent * 100).toFixed(2)}%`}
-      </text>
-
       <Sector
         cx={cx}
         cy={cy}
@@ -63,11 +56,16 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
         cy={cy}
         startAngle={startAngle}
         endAngle={endAngle}
-        innerRadius={outerRadius + 6}
-        outerRadius={outerRadius + 10}
+        innerRadius={outerRadius + 2}
+        outerRadius={outerRadius + 4}
         fill={fill}
       />
-      <text x={cx} y={cy} dy={120} textAnchor="middle" fill={fill}></text>
+      <text x={cx} y={cy} dy={-4} textAnchor="middle" fill={fill}>
+        {payload.name}: {value}
+      </text>
+      <text x={cx} y={cy} dy={18} textAnchor="middle" fill={fill}>
+        {`${(percent * 100).toFixed(2)}%`}
+      </text>
     </g>
   );
 };
@@ -111,27 +109,26 @@ export const ClassificationPie: React.FC<Props> = (props: Props) => {
   }, [setActiveIndex]);
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <PieChart>
-        <Pie
-          activeIndex={activeIndex}
-          activeShape={renderActiveShape}
-          dataKey="value"
-          data={pieData}
-          onMouseEnter={onPieEnter}
-          onMouseLeave={onPieLeave}
-          //   fill={colorInfo.colorCode}
-          cx={200}
-          cy={200}
-          innerRadius={60}
-          outerRadius={80}
-        >
-          {pieData.map((d, index) => (
-            <Cell key={`cell-${index}`} fill={d.color} />
-          ))}
-        </Pie>
-        <Legend />
-      </PieChart>
-    </ResponsiveContainer>
+    <div>
+      <ResponsiveContainer width="100%" aspect={2.5}>
+        <PieChart>
+          <Pie
+            activeIndex={activeIndex}
+            activeShape={renderActiveShape}
+            dataKey="value"
+            data={pieData}
+            onMouseEnter={onPieEnter}
+            onMouseLeave={onPieLeave}
+            innerRadius="60%"
+            outerRadius="80%"
+          >
+            {pieData.map((d, index) => (
+              <Cell key={`cell-${index}`} fill={d.color} />
+            ))}
+          </Pie>
+          <Legend />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
   );
 };

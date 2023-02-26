@@ -18,6 +18,7 @@ import { Profile } from "@features/achievement/components/Profile";
 import { Divider } from "@mui/material";
 import { Community } from "@features/achievement/components/Community";
 import { Streak } from "@features/achievement/components/Streak";
+import { Pies } from "@features/achievement/components/Pies";
 
 export const AchievementPage: React.FC = () => {
   const { search } = useLocation();
@@ -44,7 +45,7 @@ export const AchievementPage: React.FC = () => {
           width: { sm: "300px" },
           backgroundColor: "white",
           borderRadius: 3,
-          boxShadow: [3, 3, 3, 3],
+          boxShadow: [1, 1, 1, 1],
           marginBottom: "auto",
         }}
       >
@@ -66,7 +67,7 @@ export const AchievementPage: React.FC = () => {
             p: 2,
             backgroundColor: "white",
             borderRadius: 3,
-            boxShadow: [3, 3, 3, 3],
+            boxShadow: [1, 1, 1, 1],
           }}
         >
           {data && (
@@ -82,7 +83,7 @@ export const AchievementPage: React.FC = () => {
             p: 2,
             backgroundColor: "white",
             borderRadius: 3,
-            boxShadow: [3, 3, 3, 3],
+            boxShadow: [1, 1, 1, 1],
           }}
         >
           {data && <Streak submissions={data} />}
@@ -93,7 +94,7 @@ export const AchievementPage: React.FC = () => {
             p: 2,
             backgroundColor: "white",
             borderRadius: 3,
-            boxShadow: [3, 3, 3, 3],
+            boxShadow: [1, 1, 1, 1],
           }}
         >
           {data && <DailyChart submissions={data} />}
@@ -104,20 +105,24 @@ export const AchievementPage: React.FC = () => {
             p: 2,
             backgroundColor: "white",
             borderRadius: 3,
-            boxShadow: [3, 3, 3, 3],
+            boxShadow: [1, 1, 1, 1],
           }}
         >
           {data && <ClimbingChart submissions={data} />}
         </Box>
+        <Box
+          sx={{
+            m: 1,
+            p: 2,
+            backgroundColor: "white",
+            borderRadius: 3,
+            boxShadow: [1, 1, 1, 1],
+          }}
+        >
+          {data && <Pies submissions={data} />}
+        </Box>
 
-        {data && (
-          <>
-            <HeatMap tableData={tableData} />
-            <Divider />
-            <DifficultyPies submissions={data} />
-            <ClassificationPies submissions={data} />
-          </>
-        )}
+        {data && <HeatMap tableData={tableData} />}
       </Box>
     </Box>
   );

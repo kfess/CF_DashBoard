@@ -13,7 +13,7 @@ export const Community: React.FC<Props> = (props: Props) => {
   const { contribution, friendsOfCount } = props;
 
   return (
-    <Box>
+    <Box sx={{ marginBottom: 1 }}>
       <Box sx={{ marginTop: 1, marginBottom: 1 }}>
         <strong>Community</strong>
       </Box>

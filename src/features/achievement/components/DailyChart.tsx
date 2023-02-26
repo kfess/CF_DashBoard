@@ -88,7 +88,7 @@ export const DailyChart: React.FC<Props> = (props: Props) => {
           </Button>
         </ButtonGroup>
       </Box>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" aspect={2}>
         <BarChart
           data={displayColor === "Colored" ? coloredCount : noColoredCount}
           margin={{

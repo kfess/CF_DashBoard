@@ -81,13 +81,14 @@ export const LanguageACCount: React.FC<Props> = (props: Props) => {
           </Box>
         </Stack>
       ))}
-      {languageCounts.length > 3 ? (
+      {languageCounts.length > 3 && (
         <div css={{ fontSize: "12px", color: "gray", textAlign: "center" }}>
           <span onClick={toggleReadMore} css={{ cursor: "pointer" }}>
             {isReadMore ? "Show More" : "Show Less"}
           </span>
         </div>
-      ) : (
+      )}
+      {languageCounts.length === 0 && (
         <div css={{ fontSize: "14px", color: "gray" }}>No problems solved</div>
       )}
     </Box>

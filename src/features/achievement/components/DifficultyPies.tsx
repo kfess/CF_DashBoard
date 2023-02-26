@@ -1,4 +1,5 @@
 import React from "react";
+import Box from "@mui/material/Box";
 import type { Submission } from "@features/submission/submission";
 import { useFetchProblems } from "@features/problems/useFetchProblem";
 import {
@@ -26,21 +27,24 @@ export const DifficultyPies: React.FC<Props> = (props: Props) => {
 
   return (
     <>
-      {coloredProblems &&
-        ratingColor.map((color) => (
-          <DifficultyPie
-            key={color}
-            colorInfo={ratingColorInfo[color]}
-            problemsCount={coloredProblems[color]}
-            submissions={submissions.filter(
-              (submission) =>
-                (submission.problem.rating ?? -1) >=
-                  ratingColorInfo[color].lowerBound &&
-                (submission.problem.rating ?? -1) <=
-                  ratingColorInfo[color].upperBound
-            )}
-          />
-        ))}
+      {coloredProblems && (
+        <Box>
+          {ratingColor.map((color) => (
+            <DifficultyPie
+              key={color}
+              colorInfo={ratingColorInfo[color]}
+              problemsCount={coloredProblems[color]}
+              submissions={submissions.filter(
+                (submission) =>
+                  (submission.problem.rating ?? -1) >=
+                    ratingColorInfo[color].lowerBound &&
+                  (submission.problem.rating ?? -1) <=
+                    ratingColorInfo[color].upperBound
+              )}
+            />
+          ))}
+        </Box>
+      )}
     </>
   );
 };
