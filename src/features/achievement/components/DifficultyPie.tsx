@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import Box from "@mui/material/Box";
 import {
   PieChart,
   Pie,
@@ -13,7 +14,6 @@ import {
   getACProblemSet,
   getNonACProblemSet,
 } from "@features/achievement/processSubmission";
-
 type RenderActiveShapeProps = {
   cx: number;
   cy: number;
@@ -112,27 +112,33 @@ export const DifficultyPie: React.FC<Props> = (props: Props) => {
   }, [setActiveIndex]);
 
   return (
-    <div>
-      <ResponsiveContainer width="100%" aspect={2.5}>
-        <PieChart>
-          <Pie
-            activeIndex={activeIndex}
-            activeShape={renderActiveShape}
-            dataKey="value"
-            data={pieData}
-            onMouseEnter={onPieEnter}
-            onMouseLeave={onPieLeave}
-            fill={colorInfo.colorCode}
-            innerRadius="60%"
-            outerRadius="80%"
-          >
-            {pieData.map((d) => (
-              <Cell key={`cell-${d.name}`} fill={d.color} />
-            ))}
-          </Pie>
-          <Legend />
-        </PieChart>
-      </ResponsiveContainer>
-    </div>
+    <Box sx={{ textAlign: "center" }}>
+      <div>
+        <ResponsiveContainer width="100%" aspect={2.5}>
+          <PieChart>
+            <Pie
+              activeIndex={activeIndex}
+              activeShape={renderActiveShape}
+              dataKey="value"
+              data={pieData}
+              onMouseEnter={onPieEnter}
+              onMouseLeave={onPieLeave}
+              fill={colorInfo.colorCode}
+              innerRadius="60%"
+              outerRadius="80%"
+            >
+              {pieData.map((d) => (
+                <Cell key={`cell-${d.name}`} fill={d.color} />
+              ))}
+            </Pie>
+            <Legend />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+      <div>{ACProblemCount}/2000</div>
+      <div>
+        Difficulty: {colorInfo.lowerBound}-{colorInfo.upperBound}
+      </div>
+    </Box>
   );
 };

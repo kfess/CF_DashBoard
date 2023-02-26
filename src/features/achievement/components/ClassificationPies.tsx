@@ -40,8 +40,8 @@ export const ClassificationPies: React.FC<Props> = (props: Props) => {
                 (submission) =>
                   submission.problem.classification === classification
               )}
+              classification={classification}
             />
-            <h3>{classification}</h3>
           </Box>
         ))}
     </>

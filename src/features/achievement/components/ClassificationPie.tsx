@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import Box from "@mui/material/Box";
 import {
   PieChart,
   Pie,
@@ -12,6 +13,7 @@ import {
   getACProblemSet,
   getNonACProblemSet,
 } from "@features/achievement/processSubmission";
+import type { Classification } from "@features/contests/contest";
 
 type RenderActiveShapeProps = {
   cx: number;
@@ -73,6 +75,7 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
 type Props = {
   problemsCount: number;
   submissions: Submission[];
+  classification: Classification;
 };
 
 type PieData = {
@@ -82,7 +85,7 @@ type PieData = {
 };
 
 export const ClassificationPie: React.FC<Props> = (props: Props) => {
-  const { problemsCount, submissions } = props;
+  const { problemsCount, submissions, classification } = props;
 
   const ACProblemCount = getACProblemSet(submissions).size;
   const nonACProblemCount = getNonACProblemSet(submissions).size;
@@ -109,26 +112,30 @@ export const ClassificationPie: React.FC<Props> = (props: Props) => {
   }, [setActiveIndex]);
 
   return (
-    <div>
-      <ResponsiveContainer width="100%" aspect={2.5}>
-        <PieChart>
-          <Pie
-            activeIndex={activeIndex}
-            activeShape={renderActiveShape}
-            dataKey="value"
-            data={pieData}
-            onMouseEnter={onPieEnter}
-            onMouseLeave={onPieLeave}
-            innerRadius="60%"
-            outerRadius="80%"
-          >
-            {pieData.map((d, index) => (
-              <Cell key={`cell-${index}`} fill={d.color} />
-            ))}
-          </Pie>
-          <Legend />
-        </PieChart>
-      </ResponsiveContainer>
-    </div>
+    <Box sx={{ textAlign: "center" }}>
+      <div>
+        <ResponsiveContainer width="100%" aspect={2.5}>
+          <PieChart>
+            <Pie
+              activeIndex={activeIndex}
+              activeShape={renderActiveShape}
+              dataKey="value"
+              data={pieData}
+              onMouseEnter={onPieEnter}
+              onMouseLeave={onPieLeave}
+              innerRadius="60%"
+              outerRadius="80%"
+            >
+              {pieData.map((d, index) => (
+                <Cell key={`cell-${index}`} fill={d.color} />
+              ))}
+            </Pie>
+            <Legend />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+      <div>{ACProblemCount}/2000</div>
+      <div>{classification}</div>
+    </Box>
   );
 };
