@@ -53,7 +53,7 @@ export const ContestsPage: React.FC = () => {
         toggleShowDifficulty={toggleShowDifficulty}
         toggleOrder={toggleOrder}
       />
-      {contests && (
+      {contests && problemIdxes && (
         <ContestsTable
           contests={contests}
           problemIdxes={problemIdxes}
