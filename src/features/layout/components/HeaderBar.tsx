@@ -23,7 +23,7 @@ export const HeaderBar: React.FC<Props> = (props: Props) => {
         css={{ backgroundColor: theme.colors.header.backgroundColor }}
         position="fixed"
       >
-        <Toolbar>
+        <Toolbar variant="dense">
           <IconButton
             edge="start"
             aria-label="menu"

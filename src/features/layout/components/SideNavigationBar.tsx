@@ -32,7 +32,10 @@ export const SideNavigationBar: React.FC<Props> = (props: Props) => {
   return (
     <Box role="presentation">
       <Drawer anchor="left" open={isOpenSideBar} onClose={toggleSideBar}>
-        <Toolbar css={{ backgroundColor: theme.colors.backgroundColor }}>
+        <Toolbar
+          css={{ backgroundColor: theme.colors.header.backgroundColor }}
+          variant="dense"
+        >
           <IconButton
             edge="start"
             aria-label="menu"
