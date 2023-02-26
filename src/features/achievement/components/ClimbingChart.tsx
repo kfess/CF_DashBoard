@@ -106,6 +106,7 @@ export const ClimbingChart: React.FC<Props> = (props: Props) => {
             variant="contained"
             color="inherit"
             size="small"
+            sx={{ textTransform: "none" }}
           >
             Simple
           </Button>
@@ -116,6 +117,7 @@ export const ClimbingChart: React.FC<Props> = (props: Props) => {
             variant="contained"
             color="inherit"
             size="small"
+            sx={{ textTransform: "none" }}
           >
             Color
           </Button>
