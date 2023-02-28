@@ -41,10 +41,8 @@ export const RecommendationPage: React.FC = () => {
   });
 
   return (
-    <>
-      <Box sx={{ width: "100%" }}>
-        <Tabs tabItems={tabItems} />
-      </Box>
-    </>
+    <Box sx={{ width: "100%" }}>
+      <Tabs tabItems={tabItems} />
+    </Box>
   );
 };
