@@ -19,4 +19,5 @@ export const customContestSchema = z.object({
   problems: problemsSchema,
   participants: z.array(z.string()).min(1),
 });
+export const customContestsSchema = z.array(customContestSchema);
 export type CustomContest = z.infer<typeof customContestSchema>;

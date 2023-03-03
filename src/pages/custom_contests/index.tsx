@@ -1,5 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
 import { createdContestTypes } from "@features/custom_contests/customContest";
@@ -23,8 +24,17 @@ export const CustomContestPage: React.FC = () => {
   ];
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Tabs tabItems={tabItems} />
-    </Box>
+    <>
+      <Button
+        color="success"
+        variant="contained"
+        css={{ textTransform: "none" }}
+      >
+        Create New Contest
+      </Button>
+      <Box sx={{ width: "100%" }}>
+        <Tabs tabItems={tabItems} />
+      </Box>
+    </>
   );
 };
