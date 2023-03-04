@@ -19,8 +19,14 @@ export const Timer: React.FC<Props> = (props: Props) => {
 
   return (
     <>
-      {Math.floor(remainingTime / 60)}:
-      {(remainingTime % 60).toString().padStart(2, "0")}
+      {Math.floor(remainingTime / (60 * 60))}:
+      {(
+        Math.floor(remainingTime / 60) -
+        Math.floor(remainingTime / (60 * 60)) * 60
+      )
+        .toString()
+        .padStart(2, "0")}
+      :{(remainingTime % 60).toString().padStart(2, "0")}
     </>
   );
 };

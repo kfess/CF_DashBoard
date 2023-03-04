@@ -139,8 +139,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       owner: "tourist",
       description: "Solve extremely difficult problems...",
       penalty: 200,
-      //   startDate: dayjs().subtract(1, "hours").format("YYYY-MM-DD HH:mm:ss"),
-      startDate: "2023-03-04 09:00:00",
+      startDate: dayjs().subtract(1, "hours").format("YYYY-MM-DD HH:mm:ss"),
       length: 60 * 24,
       visibility: "Public",
       problems: range(1, 6).map((n) => {
@@ -167,7 +166,8 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       owner: "testUser",
       description: "This contest is held at the middle of Murch",
       penalty: 200,
-      startDate: dayjs().add(1, "day").format("YYYY-MM-DD HH:mm:ss"),
+      //   startDate: dayjs().add(1, "day").format("YYYY-MM-DD HH:mm:ss"),
+      startDate: "2023-03-05 18:00:00",
       length: 60,
       visibility: "Public",
       problems: range(1, 6).map((n) => {
@@ -191,7 +191,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       owner: "testUser",
       description: "Solve difficult problems in a few days",
       penalty: 200,
-      startDate: dayjs().add(1, "day").format("YYYY-MM-DD HH:mm:ss"),
+      startDate: dayjs().add(5, "day").format("YYYY-MM-DD HH:mm:ss"),
       length: 120,
       visibility: "Public",
       problems: range(1, 6).map((n) => {
@@ -215,7 +215,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       owner: "tourist",
       description: "Solve extremely difficult problems...",
       penalty: 200,
-      startDate: dayjs().add(1, "day").format("YYYY-MM-DD HH:mm:ss"),
+      startDate: dayjs().add(10, "day").format("YYYY-MM-DD HH:mm:ss"),
       length: 180,
       visibility: "Public",
       problems: range(1, 6).map((n) => {

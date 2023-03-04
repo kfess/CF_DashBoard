@@ -12,6 +12,8 @@ import { useFetchPublicCustomContest } from "@features/custom_contests/useFetchC
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { usePagination } from "@hooks/index";
 import { RunningContestTableRow } from "@features/custom_contests/components/RunningContestTableRow";
+import { UpcomingContestTableRow } from "./UpcomingContestTableRow";
+import { FinishedContestTableRow } from "./FinishedContestTableRow";
 
 type Props = { contestType: CreatedContestType };
 
@@ -83,9 +85,19 @@ export const PublicContestTable: React.FC<Props> = (props: Props) => {
                       />
                     );
                   case "Upcoming":
-                    return <></>;
+                    return (
+                      <UpcomingContestTableRow
+                        key={customContest.contestId}
+                        customContest={customContest}
+                      />
+                    );
                   case "Finished":
-                    return <></>;
+                    return (
+                      <FinishedContestTableRow
+                        key={customContest.contestId}
+                        customContest={customContest}
+                      />
+                    );
                 }
               })}
             </TableBody>

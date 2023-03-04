@@ -19,30 +19,30 @@ export const RunningContestTableRow: React.FC<Props> = (props: Props) => {
   );
 
   return (
-    <>
-      <TableRow hover>
-        <TableCell>
-          <NavLink to={`/custom-contest/show/${customContest.contestId}`}>
-            {customContest.title}
-          </NavLink>
-        </TableCell>
-        <TableCell>{customContest.owner}</TableCell>
-        <TableCell>{customContest.description}</TableCell>
-        <TableCell>{customContest.startDate}</TableCell>
-        <TableCell>
-          {Math.floor(customContest.length / 60)}:
-          {(customContest.length % 60).toString().padStart(2, "0")}
-        </TableCell>
-        <TableCell>
-          <Timer
-            remainingTime={remainingTime}
-            setRemainingTime={setRemainingTime}
-          />
-        </TableCell>
-        <TableCell>
-          <NavLink to="">Register</NavLink>
-        </TableCell>
-      </TableRow>
-    </>
+    <TableRow hover>
+      <TableCell>
+        <NavLink to={`/custom-contest/show/${customContest.contestId}`}>
+          {customContest.title}
+        </NavLink>
+      </TableCell>
+      <TableCell>{customContest.owner}</TableCell>
+      <TableCell>{customContest.description}</TableCell>
+      <TableCell>{customContest.startDate}</TableCell>
+      <TableCell>
+        {Math.floor(customContest.length / 60)
+          .toString()
+          .padStart(2, "0")}
+        :{(customContest.length % 60).toString().padStart(2, "0")}
+      </TableCell>
+      <TableCell>
+        <Timer
+          remainingTime={remainingTime}
+          setRemainingTime={setRemainingTime}
+        />
+      </TableCell>
+      <TableCell>
+        <NavLink to="">Register</NavLink>
+      </TableCell>
+    </TableRow>
   );
 };
