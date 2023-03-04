@@ -6,6 +6,7 @@ import { Tabs } from "@features/ui/component/Tabs";
 import { createdContestTypes } from "@features/custom_contests/customContest";
 import { PublicContestTable } from "@features/custom_contests/components/PublicContestTable";
 import { PrivateContestList } from "@features/custom_contests/components/PrivateContestList";
+import { NavLink } from "react-router-dom";
 
 export const CustomContestPage: React.FC = () => {
   const tabItems: TabItem[] = [
@@ -25,13 +26,16 @@ export const CustomContestPage: React.FC = () => {
 
   return (
     <>
-      <Button
-        color="success"
-        variant="contained"
-        css={{ textTransform: "none" }}
-      >
-        Create New Contest
-      </Button>
+      <NavLink to="/custom-contest/create">
+        <Button
+          color="success"
+          variant="contained"
+          css={{ textTransform: "none" }}
+        >
+          Create New Contest
+        </Button>
+      </NavLink>
+
       <Box sx={{ width: "100%" }}>
         <Tabs tabItems={tabItems} />
       </Box>

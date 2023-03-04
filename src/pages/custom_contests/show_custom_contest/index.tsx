@@ -8,7 +8,7 @@ export const ShowCustomContestPage: React.FC = () => {
   return (
     <>
       {contestId}
-      <div>this is Create CustomContestPage</div>
+      <div>this is Show CustomContestPage</div>
     </>
   );
 };

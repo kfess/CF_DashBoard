@@ -9,6 +9,7 @@ import { AchievementPage } from "@pages/achievement";
 import { RecommendationPage } from "@pages/recommendation";
 import { CustomContestPage } from "@pages/custom_contests";
 import { ShowCustomContestPage } from "@pages/custom_contests/show_custom_contest";
+import { CreateCustomContestPage } from "@pages/custom_contests/create_custom_contest";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
         path: "/custom-contest/show/:contestId",
         element: <ShowCustomContestPage />,
       },
+      { path: "/custom-contest/create", element: <CreateCustomContestPage /> },
       { path: "/api", element: <div>api</div> },
       { path: "/links", element: <div>links</div> },
       { path: "/setting", element: <div>setting</div> },
