@@ -9,12 +9,13 @@ const visibilities = ["Public", "Private"] as const;
 type Visibility = typeof visibilities[number];
 
 export const customContestSchema = z.object({
+  contestId: z.string(),
   title: z.string(),
   owner: z.string(),
   description: z.string(),
   penalty: z.number(),
   startDate: z.string(),
-  endDate: z.string(),
+  length: z.number(), // minutes
   visibility: visibilitySchema,
   problems: problemsSchema,
   participants: z.array(z.string()).min(1),

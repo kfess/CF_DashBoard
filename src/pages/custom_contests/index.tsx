@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
 import { createdContestTypes } from "@features/custom_contests/customContest";
-import { PublicContestList } from "@features/custom_contests/components/PublicContestList";
+import { PublicContestTable } from "@features/custom_contests/components/PublicContestTable";
 import { PrivateContestList } from "@features/custom_contests/components/PrivateContestList";
 
 export const CustomContestPage: React.FC = () => {
@@ -12,7 +12,7 @@ export const CustomContestPage: React.FC = () => {
     ...createdContestTypes.map((contestType) => {
       return {
         label: contestType,
-        children: <PublicContestList contestType={contestType} />,
+        children: <PublicContestTable contestType={contestType} />,
         disabled: false,
       };
     }),

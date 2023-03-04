@@ -23,6 +23,10 @@ export const router = createBrowserRouter([
       { path: "/submission", element: <SubmissionPage /> },
       { path: "/ranking", element: <div>ranking</div> },
       { path: "/custom-contest", element: <CustomContestPage /> },
+      {
+        path: "/custom-contest/show/:contestId",
+        element: <CustomContestPage />,
+      },
       { path: "/api", element: <div>api</div> },
       { path: "/links", element: <div>links</div> },
       { path: "/setting", element: <div>setting</div> },
