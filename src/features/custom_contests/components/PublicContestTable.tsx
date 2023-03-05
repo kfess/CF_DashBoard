@@ -23,13 +23,12 @@ export const PublicContestTable: React.FC<Props> = (props: Props) => {
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(10);
   const customContests = data?.filter((d) => {
-    const length = dayjs(d.endDate).diff(d.startDate, "hours");
     if (contestType === "Finished") {
-      return dayjs().isAfter(dayjs(d.startDate).add(length, "minutes"));
+      return dayjs().isAfter(dayjs(d.endDate));
     } else if (contestType === "Running") {
       return (
         dayjs().isAfter(dayjs(d.startDate)) &&
-        dayjs().isBefore(dayjs(d.startDate).add(length, "minutes"))
+        dayjs().isBefore(dayjs(d.endDate))
       );
     } else if (contestType === "Upcoming") {
       return dayjs().isBefore(dayjs(d.startDate));
@@ -55,6 +54,7 @@ export const PublicContestTable: React.FC<Props> = (props: Props) => {
                 <TableCell align="center">Owner</TableCell>
                 <TableCell align="center">Description</TableCell>
                 <TableCell align="center">Start</TableCell>
+                <TableCell align="center">End</TableCell>
                 <TableCell align="center">Length</TableCell>
                 {contestType === "Running" && (
                   <>

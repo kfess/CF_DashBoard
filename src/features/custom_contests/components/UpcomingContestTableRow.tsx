@@ -19,7 +19,7 @@ export const UpcomingContestTableRow: React.FC<Props> = (props: Props) => {
   );
   const length = dayjs(customContest.endDate).diff(
     customContest.startDate,
-    "hours"
+    "minutes"
   );
 
   const navigate = useNavigate();
@@ -34,6 +34,7 @@ export const UpcomingContestTableRow: React.FC<Props> = (props: Props) => {
       <TableCell>{customContest.owner}</TableCell>
       <TableCell>{customContest.description}</TableCell>
       <TableCell>{customContest.startDate}</TableCell>
+      <TableCell>{customContest.endDate}</TableCell>
       <TableCell>
         {Math.floor(length / 60)
           .toString()

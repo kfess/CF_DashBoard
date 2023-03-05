@@ -14,14 +14,12 @@ type Props = {
 export const RunningContestTableRow: React.FC<Props> = (props: Props) => {
   const { customContest } = props;
   const [remainingTime, setRemainingTime] = useState<number>(
-    // dayjs(customContest.startDate)
-    //   .add(customContest.length, "minute")
     dayjs(customContest.endDate).diff(dayjs(), "second")
   );
 
   const length = dayjs(customContest.endDate).diff(
     customContest.startDate,
-    "hours"
+    "minutes"
   );
 
   const navigate = useNavigate();
@@ -36,6 +34,7 @@ export const RunningContestTableRow: React.FC<Props> = (props: Props) => {
       <TableCell>{customContest.owner}</TableCell>
       <TableCell>{customContest.description}</TableCell>
       <TableCell>{customContest.startDate}</TableCell>
+      <TableCell>{customContest.endDate}</TableCell>
       <TableCell>
         {Math.floor(length / 60)
           .toString()

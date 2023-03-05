@@ -14,8 +14,8 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       owner: "applemelon",
       description: "This contest is for beginners",
       penalty: 200,
-      startDate: dayjs().subtract(1, "day").format("YYYY-MM-DD HH:mm:ss"),
-      length: 60,
+      startDate: dayjs().subtract(2, "day").format("YYYY-MM-DD HH:mm:ss"),
+      endDate: dayjs().subtract(1, "day").format("YYYY-MM-DD HH:mm:ss"),
       visibility: "Public",
       problems: range(1, 6).map((n) => {
         return {
@@ -38,8 +38,8 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       owner: "applemelon",
       description: "This contest is for intermediate levels",
       penalty: 300,
-      startDate: dayjs().subtract(2, "day").format("YYYY-MM-DD HH:mm:ss"),
-      length: 60,
+      startDate: dayjs().subtract(3, "day").format("YYYY-MM-DD HH:mm:ss"),
+      endDate: dayjs().subtract(2, "day").format("YYYY-MM-DD HH:mm:ss"),
       visibility: "Public",
       problems: range(1, 6).map((n) => {
         return {
@@ -62,8 +62,8 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       owner: "applemelon",
       description: "This contest is for high levels",
       penalty: 300,
-      startDate: dayjs().subtract(3, "day").format("YYYY-MM-DD HH:mm:ss"),
-      length: 60,
+      startDate: dayjs().subtract(4, "day").format("YYYY-MM-DD HH:mm:ss"),
+      endDate: dayjs().subtract(3, "day").format("YYYY-MM-DD HH:mm:ss"),
       visibility: "Public",
       problems: range(1, 6).map((n) => {
         return {
@@ -89,9 +89,8 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       owner: "testUser",
       description: "This contest is held at the middle of Murch",
       penalty: 200,
-      //   startDate: dayjs().subtract(1, "hours").format("YYYY-MM-DD HH:mm:ss"),
       startDate: "2023-03-04 09:00:00",
-      length: 60 * 24,
+      endDate: "2023-03-05 21:00:00",
       visibility: "Public",
       problems: range(1, 6).map((n) => {
         return {
@@ -114,9 +113,8 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       owner: "testUser",
       description: "Solve difficult problems in a few days",
       penalty: 200,
-      //   startDate: dayjs().subtract(1, "hours").format("YYYY-MM-DD HH:mm:ss"),
       startDate: "2023-03-04 09:00:00",
-      length: 60 * 9,
+      endDate: "2023-03-06 21:00:00",
       visibility: "Public",
       problems: range(1, 6).map((n) => {
         return {
@@ -139,8 +137,8 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       owner: "tourist",
       description: "Solve extremely difficult problems...",
       penalty: 200,
-      startDate: dayjs().subtract(1, "hours").format("YYYY-MM-DD HH:mm:ss"),
-      length: 60 * 24,
+      startDate: "2023-03-04 09:00:00",
+      endDate: "2023-03-07 21:00:00",
       visibility: "Public",
       problems: range(1, 6).map((n) => {
         return {
@@ -166,9 +164,8 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       owner: "testUser",
       description: "This contest is held at the middle of Murch",
       penalty: 200,
-      //   startDate: dayjs().add(1, "day").format("YYYY-MM-DD HH:mm:ss"),
-      startDate: "2023-03-05 18:00:00",
-      length: 60,
+      startDate: "2023-03-15 18:00:00",
+      endDate: "2023-03-16 18:00:00",
       visibility: "Public",
       problems: range(1, 6).map((n) => {
         return {
@@ -192,7 +189,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       description: "Solve difficult problems in a few days",
       penalty: 200,
       startDate: dayjs().add(5, "day").format("YYYY-MM-DD HH:mm:ss"),
-      length: 120,
+      endDate: dayjs().add(6, "day").format("YYYY-MM-DD HH:mm:ss"),
       visibility: "Public",
       problems: range(1, 6).map((n) => {
         return {
@@ -216,7 +213,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
       description: "Solve extremely difficult problems...",
       penalty: 200,
       startDate: dayjs().add(10, "day").format("YYYY-MM-DD HH:mm:ss"),
-      length: 180,
+      endDate: dayjs().add(11, "day").format("YYYY-MM-DD HH:mm:ss"),
       visibility: "Public",
       problems: range(1, 6).map((n) => {
         return {
