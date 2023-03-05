@@ -5,8 +5,8 @@ export const createdContestTypes = ["Running", "Upcoming", "Finished"] as const;
 export type CreatedContestType = typeof createdContestTypes[number];
 
 const visibilitySchema = z.union([z.literal("Public"), z.literal("Private")]);
-const visibilities = ["Public", "Private"] as const;
-type Visibility = typeof visibilities[number];
+export const visibilities = ["Public", "Private"] as const;
+export type Visibility = typeof visibilities[number];
 
 export const customContestSchema = z.object({
   contestId: z.string(),
@@ -17,8 +17,8 @@ export const customContestSchema = z.object({
   startDate: z.string(),
   length: z.number(), // minutes
   visibility: visibilitySchema,
+  participants: z.array(z.object({ userId: z.string() })).min(1),
   problems: problemsSchema,
-  participants: z.array(z.string()).min(1),
 });
 export const customContestsSchema = z.array(customContestSchema);
 export type CustomContest = z.infer<typeof customContestSchema>;

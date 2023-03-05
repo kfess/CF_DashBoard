@@ -30,7 +30,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
           classification: "Global",
         };
       }),
-      participants: ["applemelon", "kenkoooo"],
+      participants: [{ userId: "applemelon" }, { userId: "kenkoooo" }],
     },
     {
       contestId: "73335ccd-442d-27fd-4697-dca9067094aa",
@@ -54,7 +54,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
           classification: "Educational",
         };
       }),
-      participants: ["applemelon", "kenkoooo", "tourist"],
+      participants: [{ userId: "applemelon" }, { userId: "kenkoooo" }],
     },
     {
       contestId: "177350d3-28b0-3a26-9fbe-488b930e8174",
@@ -78,7 +78,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
           classification: "Educational",
         };
       }),
-      participants: ["applemelon", "kenkoooo", "tourist", "Petr"],
+      participants: [{ userId: "applemelon" }, { userId: "kenkoooo" }],
     },
   ];
 
@@ -106,7 +106,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
           classification: "Global",
         };
       }),
-      participants: ["applemelon", "kenkoooo"],
+      participants: [{ userId: "applemelon" }, { userId: "kenkoooo" }],
     },
     {
       contestId: "a0c59344-b379-88ac-c71f-3dfb1d194937",
@@ -131,7 +131,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
           classification: "Global",
         };
       }),
-      participants: ["applemelon", "kenkoooo"],
+      participants: [{ userId: "applemelon" }, { userId: "kenkoooo" }],
     },
     {
       contestId: "fe91569c-0eee-8d56-2ba3-ec25260cfe2f",
@@ -155,7 +155,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
           classification: "Global",
         };
       }),
-      participants: ["applemelon", "kenkoooo"],
+      participants: [{ userId: "applemelon" }, { userId: "kenkoooo" }],
     },
   ];
 
@@ -183,7 +183,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
           classification: "Global",
         };
       }),
-      participants: ["applemelon", "kenkoooo"],
+      participants: [{ userId: "applemelon" }, { userId: "kenkoooo" }],
     },
     {
       contestId: "df41a211-39fe-d658-26f9-5bb65ac91e44",
@@ -207,7 +207,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
           classification: "Global",
         };
       }),
-      participants: ["applemelon", "kenkoooo"],
+      participants: [{ userId: "applemelon" }, { userId: "kenkoooo" }],
     },
     {
       contestId: "9779438f-ed9e-a2e4-ea27-a383c5b169d0",
@@ -231,7 +231,7 @@ export const mockFetchPublicCustomContest: ResponseResolver<
           classification: "Global",
         };
       }),
-      participants: ["applemelon", "kenkoooo"],
+      participants: [{ userId: "applemelon" }, { userId: "kenkoooo" }],
     },
   ];
 
