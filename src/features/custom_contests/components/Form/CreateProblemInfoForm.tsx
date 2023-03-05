@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { Tag } from "@features/problems/problem";
 import { useToggle } from "@hooks/index";
 import { Input } from "@features/ui/component/Input";
 import { TagsButton } from "@features/problems/components/TagsButton";
 import { DeletableChip } from "@features/ui/component/Chip";
+import { Checkbox } from "@features/ui/component/Checkbox";
 
 export const CreateProblemInfoForm: React.FC = () => {
   const [count, setCount] = useState<number>(0);
@@ -137,18 +136,25 @@ export const CreateProblemInfoForm: React.FC = () => {
             />
           ))}
       </Stack>
-      <FormControlLabel
-        control={<Checkbox size="small" onChange={toggleRandomize} />}
+      <Checkbox
         label="Randomize the order of problems"
+        toggle={toggleRandomize}
+        description={
+          <>
+            <div>
+              When you check this, the order of the problems will be randomized
+              regardless of the difficulty.
+            </div>
+            <div>
+              Othewise, problems are arranged in ascending order of difficulty.
+            </div>
+          </>
+        }
       />
-      <div css={{ fontSize: 14 }}>
-        When you check this button, the order of the problems will be randomized
-        regardless of the difficulty. Othewise, problems are arranged in
-        ascending order of difficulty.
-      </div>
-      <FormControlLabel
-        control={<Checkbox size="small" onChange={toggleExcludeSolved} />}
+      <Checkbox
         label="Don't suggest problems solved by expected participants"
+        toggle={toggleExcludeSolved}
+        description="When you check this, "
       />
       <div css={{ textAlign: "right" }}>
         <Button

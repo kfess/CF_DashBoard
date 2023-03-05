@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import Checkbox from "@mui/material/Checkbox";
+// import Checkbox from "@mui/material/Checkbox";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoItem } from "@mui/x-date-pickers/internals/demo";
@@ -18,6 +18,7 @@ import { generateUUIDv4 } from "@helpers/index";
 import { CreateProblemInfoForm } from "./Form/CreateProblemInfoForm";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { modes } from "../customContest";
+import { Checkbox } from "@features/ui/component/Checkbox";
 
 const globalCFUserId = "applemelon" as const;
 
@@ -64,25 +65,18 @@ export const CreateContestInfoForm: React.FC = () => {
         name="visibility"
         control={control}
         render={({ field }) => (
-          <>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  size="small"
-                  onChange={() => {
-                    switch (field.value) {
-                      case "Private":
-                        setValue("visibility", "Public");
-                      case "Public":
-                        setValue("visibility", "Private");
-                    }
-                  }}
-                />
+          <Checkbox
+            label="Make the contest Private"
+            toggle={() => {
+              switch (field.value) {
+                case "Private":
+                  setValue("visibility", "Public");
+                case "Public":
+                  setValue("visibility", "Private");
               }
-              label="Make the contest Private"
-            />
-            <div>Private Contest is invisible to everyone except you.</div>
-          </>
+            }}
+            description="Private Contest is invisible to everyone except you."
+          />
         )}
       />
       {/* <Controller
@@ -184,7 +178,12 @@ export const CreateContestInfoForm: React.FC = () => {
           <div>
             <FormControl variant="standard">
               <InputLabel shrink>Penalty (seconds)</InputLabel>
-              <Input placeholder="300" value={field.value} fullWidth />
+              <Input
+                placeholder="300"
+                type="number"
+                value={field.value}
+                fullWidth
+              />
             </FormControl>
           </div>
         )}
