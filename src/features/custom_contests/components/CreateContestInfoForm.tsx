@@ -11,7 +11,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { Chip_ } from "@features/ui/component/Chip";
+import { DeletableChip, Chip_ } from "@features/ui/component/Chip";
 import { CustomContest, customContestSchema } from "../customContest";
 import { Input } from "@features/ui/component/Input";
 import { generateUUIDv4 } from "@helpers/index";
@@ -87,7 +87,11 @@ export const CreateContestInfoForm: React.FC = () => {
           <div>
             <FormControl variant="standard">
               <InputLabel shrink>Title</InputLabel>
-              <Input placeholder="Contest Title" value={field.value} />
+              <Input
+                placeholder="Contest Title"
+                type="text"
+                value={field.value}
+              />
             </FormControl>
             {errors.title?.message && <p>{errors.title?.message}</p>}
           </div>
@@ -100,7 +104,12 @@ export const CreateContestInfoForm: React.FC = () => {
           <div>
             <FormControl variant="standard">
               <InputLabel shrink>Description</InputLabel>
-              <Input placeholder="Description" value={field.value} fullWidth />
+              <Input
+                placeholder="Description"
+                type="text"
+                value={field.value}
+                fullWidth
+              />
             </FormControl>
           </div>
         )}
@@ -110,9 +119,16 @@ export const CreateContestInfoForm: React.FC = () => {
         control={control}
         render={({ field }) => (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoItem label="Start Date">
+            <DemoItem label="Start Time">
               <DateTimePicker
-              //  defaultValue={dayjs()}
+                value={field.value}
+                onChange={() => {
+                  setValue(
+                    "startDate",
+                    dayjs(field.value).format("YYYY/MM/DD HH:mm")
+                  );
+                }}
+                format="YYYY/MM/DD HH:mm"
               />
             </DemoItem>
           </LocalizationProvider>
@@ -123,19 +139,21 @@ export const CreateContestInfoForm: React.FC = () => {
         control={control}
         render={({ field }) => (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoItem label="End Date">
+            <DemoItem label="End Time">
               <DateTimePicker
-                // defaultValue={dayjs().add(2, "hours")}
                 value={field.value}
-                // onChange={() => {
-                //   setValue("endDate");
-                // }}
+                onChange={() => {
+                  setValue(
+                    "endDate",
+                    dayjs(field.value).format("YYYY/MM/DD HH:mm")
+                  );
+                }}
+                format="YYYY/MM/DD HH:mm"
               />
             </DemoItem>
           </LocalizationProvider>
         )}
       />
-
       <Controller
         name="penalty"
         control={control}
@@ -148,17 +166,36 @@ export const CreateContestInfoForm: React.FC = () => {
           </div>
         )}
       />
-
-      {fields.map((field, index) => (
+      {/* {fields.map((field, index) => (
         <Controller
           name="participants"
           control={control}
-          render={({ field }) => <Chip_ label={field.value[index].userId} />}
+          render={({ field }) => (
+            <>
+              <FormControl variant="standard">
+                <div css={{ display: "inline-block" }}>
+                  <InputLabel shrink>Expected Participants</InputLabel>
+                  <Input />
+                </div>
+              </FormControl>
+              <Button
+                onClick={() => {
+                  append({ userId: field.value[index].userId });
+                }}
+                size="small"
+                css={{ textTransform: "none" }}
+              >
+                +
+              </Button>
+            </>
+          )}
         />
       ))}
-      <Button onClick={() => {}} size="small" css={{ textTransform: "none" }}>
-        +
-      </Button>
+      <div>
+        {fields.map((field) => (
+          <DeletableChip label={field.userId} onDelete={() => {}} />
+        ))}
+      </div> */}
     </form>
   );
 };
