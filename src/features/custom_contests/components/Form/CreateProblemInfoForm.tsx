@@ -23,42 +23,26 @@ import { ContestLink } from "@features/contests/components/ContestLink";
 import { usePagination } from "@hooks/index";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { IconButton } from "@mui/material";
+import { useTags } from "@features/problems/useTags";
 
 export const CreateProblemInfoForm: React.FC = () => {
   const [count, setCount] = useState<number>(0);
   const [difficultyFrom, setDifficultyFrom] = useState(0);
   const [difficultyTo, setDifficultyTo] = useState(5000);
-  const [includeTags, setIncludeTags] = useState<Tag[]>([]);
 
-  const removeIncludeTag = (tag: Tag) => {
-    setIncludeTags([...includeTags.filter((includeTag) => includeTag !== tag)]);
-  };
-  const addOrRemoveIncludeTag = (tag: Tag) => {
-    includeTags.includes(tag)
-      ? setIncludeTags([
-          ...includeTags.filter((includeTag) => includeTag !== tag),
-        ])
-      : setIncludeTags([...includeTags, tag]);
-  };
-  const removeAllIncludeTags = () => {
-    setIncludeTags([]);
-  };
+  const {
+    selectedTags: includeTags,
+    removeTag: removeIncludeTag,
+    removeAllTags: removeAllIncludeTags,
+    addOrRemoveTag: addOrRemoveIncludeTag,
+  } = useTags();
 
-  const [excludeTags, setExcludeTags] = useState<Tag[]>([]);
-
-  const removeExcludeTag = (tag: Tag) => {
-    setExcludeTags([...excludeTags.filter((excludeTag) => excludeTag !== tag)]);
-  };
-  const addOrRemoveExcludeTag = (tag: Tag) => {
-    excludeTags.includes(tag)
-      ? setExcludeTags([
-          ...excludeTags.filter((excludeTag) => excludeTag !== tag),
-        ])
-      : setExcludeTags([...excludeTags, tag]);
-  };
-  const removeAllExcludeTags = () => {
-    setExcludeTags([]);
-  };
+  const {
+    selectedTags: excludeTags,
+    removeTag: removeExcludeTag,
+    removeAllTags: removeAllExcludeTags,
+    addOrRemoveTag: addOrRemoveExcludeTag,
+  } = useTags();
 
   const [randomize, toggleRandomize] = useToggle(false);
   const [excludeSolved, toggleExcludeSolved] = useToggle(false);
