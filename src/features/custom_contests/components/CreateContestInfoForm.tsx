@@ -220,6 +220,16 @@ export const CreateContestInfoForm: React.FC = () => {
         ))}
       </div> */}
       <CreateProblemInfoForm />
+      <div css={{ textAlign: "right" }}>
+        <Button
+          onClick={() => {}}
+          variant="contained"
+          color="success"
+          css={{ textTransform: "none" }}
+        >
+          Create New Contest
+        </Button>
+      </div>
     </form>
   );
 };

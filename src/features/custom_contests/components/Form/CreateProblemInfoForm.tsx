@@ -8,7 +8,6 @@ import Checkbox from "@mui/material/Checkbox";
 import { Tag } from "@features/problems/problem";
 import { useToggle } from "@hooks/index";
 import { Input } from "@features/ui/component/Input";
-import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { TagsButton } from "@features/problems/components/TagsButton";
 import { DeletableChip } from "@features/ui/component/Chip";
 
@@ -151,6 +150,16 @@ export const CreateProblemInfoForm: React.FC = () => {
         control={<Checkbox size="small" onChange={toggleExcludeSolved} />}
         label="Don't suggest problems solved by expected participants"
       />
+      <div css={{ textAlign: "right" }}>
+        <Button
+          onClick={() => {}}
+          variant="contained"
+          color="success"
+          css={{ textTransform: "none" }}
+        >
+          Generate Problems
+        </Button>
+      </div>
     </>
   );
 };
