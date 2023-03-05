@@ -15,7 +15,8 @@ export const customContestSchema = z.object({
   description: z.string(),
   penalty: z.number(),
   startDate: z.string(),
-  length: z.number(), // minutes
+  endDate: z.string(),
+  // length: z.number(), // minutes
   visibility: visibilitySchema,
   participants: z.array(z.object({ userId: z.string() })).min(1),
   problems: problemsSchema,

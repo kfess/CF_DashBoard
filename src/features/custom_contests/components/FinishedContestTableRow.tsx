@@ -1,3 +1,4 @@
+import * as dayjs from "dayjs";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import TableCell from "@mui/material/TableCell";
@@ -10,6 +11,10 @@ type Props = {
 
 export const FinishedContestTableRow: React.FC<Props> = (props: Props) => {
   const { customContest } = props;
+  const length = dayjs(customContest.endDate).diff(
+    customContest.startDate,
+    "hours"
+  );
 
   return (
     <TableRow hover>
@@ -22,10 +27,10 @@ export const FinishedContestTableRow: React.FC<Props> = (props: Props) => {
       <TableCell>{customContest.description}</TableCell>
       <TableCell>{customContest.startDate}</TableCell>
       <TableCell>
-        {Math.floor(customContest.length / 60)
+        {Math.floor(length / 60)
           .toString()
           .padStart(2, "0")}
-        :{(customContest.length % 60).toString().padStart(2, "0")}
+        :{(length % 60).toString().padStart(2, "0")}
       </TableCell>
       <TableCell>
         <NavLink to={`/custom-contest/show/${customContest.contestId}`}>

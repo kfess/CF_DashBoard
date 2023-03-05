@@ -1,3 +1,4 @@
+import * as dayjs from "dayjs";
 import React from "react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,6 +7,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { Chip_ } from "@features/ui/component/Chip";
 import { CustomContest, customContestSchema } from "../customContest";
 import { Input } from "@features/ui/component/Input";
@@ -66,7 +71,7 @@ export const CreateContestInfoForm: React.FC = () => {
               }
               label="Make the contest Private"
             />
-            <div>Private Contest is invisible to every except you.</div>
+            <div>Private Contest is invisible to everyone except you.</div>
           </>
         )}
       />
@@ -94,6 +99,29 @@ export const CreateContestInfoForm: React.FC = () => {
           </div>
         )}
       />
+      <Controller
+        name="startDate"
+        control={control}
+        render={({ field }) => (
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoItem label="Start Date">
+              <DateTimePicker defaultValue={dayjs("2022-04-18 21:00:00")} />
+            </DemoItem>
+          </LocalizationProvider>
+        )}
+      />
+      <Controller
+        name="endDate"
+        control={control}
+        render={({ field }) => (
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoItem label="End Date">
+              <DateTimePicker defaultValue={dayjs("2022-04-18 23:00:00")} />
+            </DemoItem>
+          </LocalizationProvider>
+        )}
+      />
+
       <Controller
         name="penalty"
         control={control}
