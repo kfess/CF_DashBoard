@@ -221,6 +221,7 @@ export const CreateContestInfoForm: React.FC = () => {
           type="submit"
           variant="contained"
           color="success"
+          size="small"
           css={{ textTransform: "none" }}
         >
           Create New Contest

@@ -117,7 +117,7 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
           removeAllTags={removeAllIncludeTags}
         />
       </div>
-      <div css={{ fontSize: 14 }}>
+      <div css={{ fontSize: 14, color: "gray", marginLeft: "20px" }}>
         When you select tags, suggested problems are related to the topic.
       </div>
       <Stack direction="row" sx={{ flexWrap: "wrap" }}>
@@ -171,22 +171,24 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
         toggle={toggleExcludeSolved}
         description="When you check this, "
       />
-      <div css={{ textAlign: "right" }}>
+      <div>
+        <h4>Generated Problems</h4>
         <Button
           onClick={() => {
             data && setSelectedProblems(selectProblems(data));
           }}
           variant="contained"
           color="success"
+          size="small"
           css={{ textTransform: "none" }}
         >
           Generate Problems
         </Button>
-        <SelectedProblemsTable
-          selectedProblems={selectedProblems}
-          setSelectedProblems={setSelectedProblems}
-        />
       </div>
+      <SelectedProblemsTable
+        selectedProblems={selectedProblems}
+        setSelectedProblems={setSelectedProblems}
+      />
     </>
   );
 };
