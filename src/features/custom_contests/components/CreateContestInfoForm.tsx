@@ -15,6 +15,9 @@ import { DeletableChip, Chip_ } from "@features/ui/component/Chip";
 import { CustomContest, customContestSchema } from "../customContest";
 import { Input } from "@features/ui/component/Input";
 import { generateUUIDv4 } from "@helpers/index";
+import { CreateProblemInfoForm } from "./Form/CreateProblemInfoForm";
+import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
+import { modes } from "../customContest";
 
 const globalCFUserId = "applemelon" as const;
 
@@ -30,6 +33,7 @@ export const CreateContestInfoForm: React.FC = () => {
       contestId: generateUUIDv4(),
       owner: globalCFUserId,
       visibility: "Public",
+      mode: "Normal",
       participants: [{ userId: globalCFUserId }],
     },
   });
@@ -42,6 +46,7 @@ export const CreateContestInfoForm: React.FC = () => {
 
   return (
     <form onSubmit={onSubmit}>
+      <h3>Contest Form</h3>
       <div>
         Organize Custom Contest as <Chip_ label={globalCFUserId} />
         <Button
@@ -80,6 +85,24 @@ export const CreateContestInfoForm: React.FC = () => {
           </>
         )}
       />
+      {/* <Controller
+        name="mode"
+        control={control}
+        render={({ field }) => (
+          <>
+            <DropDownMenuButton
+              title="Contest Mode"
+              selectedItem={field.value}
+              setSelectedItem={() => {
+                setValue("mode", field.value);
+              }}
+              items={modes.map((mode) => {
+                return { item: mode };
+              })}
+            />
+          </>
+        )}
+      /> */}
       <Controller
         name="title"
         control={control}
@@ -196,6 +219,7 @@ export const CreateContestInfoForm: React.FC = () => {
           <DeletableChip label={field.userId} onDelete={() => {}} />
         ))}
       </div> */}
+      <CreateProblemInfoForm />
     </form>
   );
 };
