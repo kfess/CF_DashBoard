@@ -1,12 +1,11 @@
 import * as dayjs from "dayjs";
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-// import Checkbox from "@mui/material/Checkbox";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoItem } from "@mui/x-date-pickers/internals/demo";
@@ -19,6 +18,7 @@ import { CreateProblemInfoForm } from "./Form/CreateProblemInfoForm";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { modes } from "../customContest";
 import { Checkbox } from "@features/ui/component/Checkbox";
+import { Problem } from "@features/problems/problem";
 
 const globalCFUserId = "applemelon" as const;
 
@@ -28,6 +28,7 @@ export const CreateContestInfoForm: React.FC = () => {
     setValue,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm<CustomContest>({
     resolver: zodResolver(customContestSchema),
     defaultValues: {
@@ -36,12 +37,15 @@ export const CreateContestInfoForm: React.FC = () => {
       visibility: "Public",
       mode: "Normal",
       participants: [{ userId: globalCFUserId }],
+      problems: [],
     },
   });
   const { fields, append, remove } = useFieldArray({
     control,
     name: "participants",
   });
+
+  const [selectedProblems, setSelectedProblems] = useState<Problem[]>([]);
 
   const onSubmit = handleSubmit((data) => console.log(data));
 
@@ -104,11 +108,7 @@ export const CreateContestInfoForm: React.FC = () => {
           <div>
             <FormControl variant="standard">
               <InputLabel shrink>Title</InputLabel>
-              <Input
-                placeholder="Contest Title"
-                type="text"
-                value={field.value}
-              />
+              <Input {...field} placeholder="Contest Title" type="text" />
             </FormControl>
             {errors.title?.message && <p>{errors.title?.message}</p>}
           </div>
@@ -121,12 +121,7 @@ export const CreateContestInfoForm: React.FC = () => {
           <div>
             <FormControl variant="standard">
               <InputLabel shrink>Description</InputLabel>
-              <Input
-                placeholder="Description"
-                type="text"
-                value={field.value}
-                fullWidth
-              />
+              <Input {...field} placeholder="Description" type="text" />
             </FormControl>
           </div>
         )}
@@ -138,11 +133,11 @@ export const CreateContestInfoForm: React.FC = () => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoItem label="Start Time">
               <DateTimePicker
-                value={field.value}
-                onChange={() => {
+                {...field}
+                onChange={(newValue) => {
                   setValue(
                     "startDate",
-                    dayjs(field.value).format("YYYY/MM/DD HH:mm")
+                    dayjs(newValue).format("YYYY/MM/DD HH:mm")
                   );
                 }}
                 format="YYYY/MM/DD HH:mm"
@@ -158,11 +153,11 @@ export const CreateContestInfoForm: React.FC = () => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoItem label="End Time">
               <DateTimePicker
-                value={field.value}
-                onChange={() => {
+                {...field}
+                onChange={(newValue) => {
                   setValue(
                     "endDate",
-                    dayjs(field.value).format("YYYY/MM/DD HH:mm")
+                    dayjs(newValue).format("YYYY/MM/DD HH:mm")
                   );
                 }}
                 format="YYYY/MM/DD HH:mm"
@@ -178,12 +173,7 @@ export const CreateContestInfoForm: React.FC = () => {
           <div>
             <FormControl variant="standard">
               <InputLabel shrink>Penalty (seconds)</InputLabel>
-              <Input
-                placeholder="300"
-                type="number"
-                value={field.value}
-                fullWidth
-              />
+              <Input {...field} placeholder="300" type="number" fullWidth />
             </FormControl>
           </div>
         )}
@@ -218,10 +208,17 @@ export const CreateContestInfoForm: React.FC = () => {
           <DeletableChip label={field.userId} onDelete={() => {}} />
         ))}
       </div> */}
-      <CreateProblemInfoForm />
+      <CreateProblemInfoForm
+        selectedProblems={selectedProblems}
+        setSelectedProblems={setSelectedProblems}
+      />
       <div css={{ textAlign: "right" }}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            setValue("problems", selectedProblems);
+            console.log(getValues());
+          }}
+          type="submit"
           variant="contained"
           color="success"
           css={{ textTransform: "none" }}

@@ -1,16 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, Dispatch, SetStateAction } from "react";
 import Stack from "@mui/material/Stack";
-import ClearIcon from "@mui/icons-material/Clear";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import TableContainer from "@mui/material/TableContainer";
-import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { Problem, Tag } from "@features/problems/problem";
 import { useToggle } from "@hooks/index";
 import { Input } from "@features/ui/component/Input";
@@ -18,14 +10,18 @@ import { TagsButton } from "@features/problems/components/TagsButton";
 import { DeletableChip } from "@features/ui/component/Chip";
 import { Checkbox } from "@features/ui/component/Checkbox";
 import { useFetchProblems } from "@features/problems/useFetchProblem";
-import { ProblemLink } from "@features/problems/components/ProblemLink";
-import { ContestLink } from "@features/contests/components/ContestLink";
-import { usePagination } from "@hooks/index";
-import { TablePagination } from "@features/ui/component/TablePagination";
-import { IconButton } from "@mui/material";
 import { useTags } from "@features/problems/useTags";
+import { SelectedProblemsTable } from "./SelectedProblemsTable";
 
-export const CreateProblemInfoForm: React.FC = () => {
+type Props = {
+  selectedProblems: Problem[];
+  setSelectedProblems: Dispatch<SetStateAction<Problem[]>>;
+};
+
+export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
+  const { selectedProblems, setSelectedProblems } = props;
+  const { data } = useFetchProblems();
+
   const [count, setCount] = useState<number>(0);
   const [difficultyFrom, setDifficultyFrom] = useState(0);
   const [difficultyTo, setDifficultyTo] = useState(5000);
@@ -47,10 +43,6 @@ export const CreateProblemInfoForm: React.FC = () => {
   const [randomize, toggleRandomize] = useToggle(false);
   const [excludeSolved, toggleExcludeSolved] = useToggle(false);
 
-  const { data } = useFetchProblems();
-  const [selectedProblems, setSelectedProblems] = useState<Problem[]>([]);
-  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
-
   const selectProblems = (problems: Problem[]) => {
     const filteredProblems = problems
       .filter(
@@ -70,10 +62,6 @@ export const CreateProblemInfoForm: React.FC = () => {
     return randomize
       ? filteredProblems
       : filteredProblems.sort((a, b) => (a.rating ?? 0) - (b.rating ?? 0));
-  };
-
-  const removeProblem = (index: number) => {
-    setSelectedProblems(selectedProblems.filter((_, idx) => index !== idx));
   };
 
   return (
@@ -194,65 +182,10 @@ export const CreateProblemInfoForm: React.FC = () => {
         >
           Generate Problems
         </Button>
-        <TablePagination
-          size={selectedProblems.length}
-          page={page}
-          setPage={setPage}
-          rowsPerPage={rowsPerPage}
-          setRowsPerPage={setRowsPerPage}
+        <SelectedProblemsTable
+          selectedProblems={selectedProblems}
+          setSelectedProblems={setSelectedProblems}
         />
-        <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <TableContainer component={Paper}>
-            <Table stickyHeader>
-              <TableHead>
-                <TableRow hover>
-                  <TableCell>Problem</TableCell>
-                  <TableCell>Contest</TableCell>
-                  <TableCell>Difficulty</TableCell>
-                  <TableCell>Delete</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {selectedProblems.length > 0 &&
-                  selectedProblems
-                    .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-                    .map((p, index) => (
-                      <TableRow key={p.name} hover>
-                        <TableCell>
-                          <ProblemLink
-                            contestId={p.contestId ?? 0}
-                            contestName={p.contestName ?? ""}
-                            problemId={p.index}
-                            problemName={p.name}
-                            difficulty={p.rating}
-                            showDifficulty={true}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <ContestLink
-                            contestId={p.contestId ?? 0}
-                            contestName={p.contestName ?? ""}
-                          />
-                        </TableCell>
-                        <TableCell>{p.rating}</TableCell>
-                        <TableCell>
-                          <IconButton size="small">
-                            <ClearIcon
-                              onClick={() => {
-                                removeProblem(index);
-                              }}
-                            />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                {selectedProblems.length === 0 && (
-                  <TableRow>No Problems are selected.</TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
       </div>
     </>
   );
