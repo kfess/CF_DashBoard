@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
+import ClearIcon from "@mui/icons-material/Clear";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -21,6 +22,7 @@ import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { usePagination } from "@hooks/index";
 import { TablePagination } from "@features/ui/component/TablePagination";
+import { IconButton } from "@mui/material";
 
 export const CreateProblemInfoForm: React.FC = () => {
   const [count, setCount] = useState<number>(0);
@@ -84,6 +86,10 @@ export const CreateProblemInfoForm: React.FC = () => {
     return randomize
       ? filteredProblems
       : filteredProblems.sort((a, b) => (a.rating ?? 0) - (b.rating ?? 0));
+  };
+
+  const removeProblem = (index: number) => {
+    setSelectedProblems(selectedProblems.filter((_, idx) => index !== idx));
   };
 
   return (
@@ -215,7 +221,7 @@ export const CreateProblemInfoForm: React.FC = () => {
           <TableContainer component={Paper}>
             <Table stickyHeader>
               <TableHead>
-                <TableRow>
+                <TableRow hover>
                   <TableCell>Problem</TableCell>
                   <TableCell>Contest</TableCell>
                   <TableCell>Difficulty</TableCell>
@@ -226,8 +232,8 @@ export const CreateProblemInfoForm: React.FC = () => {
                 {selectedProblems.length > 0 &&
                   selectedProblems
                     .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-                    .map((p) => (
-                      <TableRow key={p.name}>
+                    .map((p, index) => (
+                      <TableRow key={p.name} hover>
                         <TableCell>
                           <ProblemLink
                             contestId={p.contestId ?? 0}
@@ -245,7 +251,15 @@ export const CreateProblemInfoForm: React.FC = () => {
                           />
                         </TableCell>
                         <TableCell>{p.rating}</TableCell>
-                        <TableCell>Delete</TableCell>
+                        <TableCell>
+                          <IconButton size="small">
+                            <ClearIcon
+                              onClick={() => {
+                                removeProblem(index);
+                              }}
+                            />
+                          </IconButton>
+                        </TableCell>
                       </TableRow>
                     ))}
                 {selectedProblems.length === 0 && (
