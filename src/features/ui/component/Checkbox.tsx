@@ -19,7 +19,7 @@ export const Checkbox: React.FC<Props> = (props: Props) => {
         onChange={toggle}
       />
       {description && (
-        <Box sx={{ paddingLeft: "28px", fontSize: 14, color: "gray" }}>
+        <Box sx={{ paddingLeft: "26px", fontSize: 14, color: "gray" }}>
           {description}
         </Box>
       )}
