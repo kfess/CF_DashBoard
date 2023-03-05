@@ -19,7 +19,12 @@ import { generateUUIDv4 } from "@helpers/index";
 const globalCFUserId = "applemelon" as const;
 
 export const CreateContestInfoForm: React.FC = () => {
-  const { control, setValue, handleSubmit } = useForm<CustomContest>({
+  const {
+    control,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CustomContest>({
     resolver: zodResolver(customContestSchema),
     defaultValues: {
       contestId: generateUUIDv4(),
@@ -84,6 +89,7 @@ export const CreateContestInfoForm: React.FC = () => {
               <InputLabel shrink>Title</InputLabel>
               <Input placeholder="Contest Title" value={field.value} />
             </FormControl>
+            {errors.title?.message && <p>{errors.title?.message}</p>}
           </div>
         )}
       />
@@ -105,7 +111,9 @@ export const CreateContestInfoForm: React.FC = () => {
         render={({ field }) => (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoItem label="Start Date">
-              <DateTimePicker defaultValue={dayjs("2022-04-18 21:00:00")} />
+              <DateTimePicker
+              //  defaultValue={dayjs()}
+              />
             </DemoItem>
           </LocalizationProvider>
         )}
@@ -116,7 +124,13 @@ export const CreateContestInfoForm: React.FC = () => {
         render={({ field }) => (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoItem label="End Date">
-              <DateTimePicker defaultValue={dayjs("2022-04-18 23:00:00")} />
+              <DateTimePicker
+                // defaultValue={dayjs().add(2, "hours")}
+                value={field.value}
+                // onChange={() => {
+                //   setValue("endDate");
+                // }}
+              />
             </DemoItem>
           </LocalizationProvider>
         )}
