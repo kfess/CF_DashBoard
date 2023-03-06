@@ -28,7 +28,11 @@ export const useFetchPublicCustomContests = () => {
   return { data, isError, error, isLoading };
 };
 
-export const useFetchPublicCustomContest = () => {
+export const useFetchPublicCustomContest = ({
+  contestId,
+}: {
+  contestId: string;
+}) => {
   const { data, isError, error, isLoading } = useQuery<CustomContest, Error>({
     queryKey: ["public-custom-contest"],
     queryFn: async (): Promise<CustomContest> => {
@@ -39,11 +43,13 @@ export const useFetchPublicCustomContest = () => {
         return publicCustomContest;
       } catch (err) {
         if (err instanceof ZodError) {
+          console.log(err);
           throw new Error("validation error");
         }
         throw new Error("custom contest error");
       }
     },
+    enabled: !!contestId,
   });
 
   return { data, isError, error, isLoading };

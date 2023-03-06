@@ -6,16 +6,22 @@ import { ContestDetail } from "@features/custom_contests/components/ContestDetai
 
 export const ShowCustomContestPage: React.FC = () => {
   const params = useParams();
-  const { data, isLoading } = useFetchPublicCustomContest();
+  const contestId = params.contestId ?? "";
+  const { data, isLoading, isError, error } = useFetchPublicCustomContest({
+    contestId,
+  });
 
   if (isLoading) {
     return <CircularProgress />;
   }
 
+  if (isError) {
+    console.log(error);
+  }
+
   return (
     <>
-      {params.contestId}
-      <div>this is Show CustomContestPage</div>
+      <div>this is Show CustomContestPage. UUID:{contestId}</div>
       {data && <ContestDetail customContest={data} />}
     </>
   );

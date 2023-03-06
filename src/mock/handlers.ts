@@ -1,10 +1,10 @@
-import { mockFetchPublicCustomContest } from "./resolvers/mockCustomContest";
 import { rest } from "msw";
 import { mockContest } from "@mock/resolvers/mockContest";
 import { mockProblem } from "@mock/resolvers/mockProblems";
 import { mockSubmission } from "@mock/resolvers/mockSubmission";
 import {
   mockFetchPublicCustomContests,
+  mockFetchPublicCustomContest,
   mockPrivateCustomContest,
 } from "@mock/resolvers/mockCustomContest";
 

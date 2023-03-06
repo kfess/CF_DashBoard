@@ -250,7 +250,33 @@ export const mockFetchPublicCustomContest: ResponseResolver<
   MockedRequest,
   typeof restContext
 > = (req, res, ctx) => {
-  return res(ctx.json([]));
+  const contest: CustomContest = {
+    contestId: "randomly-generated UUID",
+    title: "for grandmaster",
+    owner: "tourist",
+    description: "Solve extremely difficult problems...",
+    penalty: 200,
+    mode: "Normal",
+    startDate: "2023-03-04 09:00:00",
+    endDate: "2023-03-07 21:00:00",
+    visibility: "Public",
+    problems: range(1, 6).map((n) => {
+      return {
+        contestId: n,
+        contestName: `globalProblem-${n}`,
+        problemsetName: "globalTest",
+        index: "A",
+        name: `global-contest-problem-${n}`,
+        type: "PROGRAMMING",
+        rating: 1000 + 200 * n,
+        tags: ["implementation", "binary search", "brute force"],
+        classification: "Global",
+      };
+    }),
+    participants: [{ userId: "applemelon" }, { userId: "kenkoooo" }],
+  };
+
+  return res(ctx.json(contest));
 };
 
 export const mockPrivateCustomContest: ResponseResolver<

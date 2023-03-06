@@ -8,5 +8,5 @@ type Props = {
 export const ContestDetail: React.FC<Props> = (props: Props) => {
   const { customContest } = props;
 
-  return <></>;
+  return <>{customContest.contestId}</>;
 };

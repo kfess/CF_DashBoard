@@ -19,7 +19,7 @@ export type Mode = typeof modes[number];
 
 export const customContestSchema = z.object({
   contestId: z.string(),
-  title: z.string().min(1, { message: "Required" }),
+  title: z.string().min(1),
   owner: z.string(),
   description: z.string(),
   penalty: z.number(),
