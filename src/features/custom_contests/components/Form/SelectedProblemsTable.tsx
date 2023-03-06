@@ -13,6 +13,7 @@ import { TablePagination } from "@features/ui/component/TablePagination";
 import { Problem } from "@features/problems/problem";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ContestLink } from "@features/contests/components/ContestLink";
+import { NoDataBlock } from "@features/ui/component/NoDataBlock";
 
 type Props = {
   selectedProblems: Problem[];
@@ -73,19 +74,18 @@ export const SelectedProblemsTable: React.FC<Props> = (props: Props) => {
                         </TableCell>
                         <TableCell>{p.rating}</TableCell>
                         <TableCell>
-                          <IconButton size="small" sx={{ borderRadius: "20%" }}>
-                            <DeleteIcon
-                              onClick={() => {
-                                removeProblem(index);
-                              }}
-                            />
+                          <IconButton
+                            onClick={() => {
+                              removeProblem(index);
+                            }}
+                            size="small"
+                            sx={{ borderRadius: "20%" }}
+                          >
+                            <DeleteIcon />
                           </IconButton>
                         </TableCell>
                       </TableRow>
                     ))}
-                  {selectedProblems.length === 0 && (
-                    <TableRow hover>No Problems are selected.</TableRow>
-                  )}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -93,28 +93,16 @@ export const SelectedProblemsTable: React.FC<Props> = (props: Props) => {
         </>
       )}
       {selectedProblems.length === 0 && (
-        <div
-          css={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            borderStyle: "solid",
-            borderRadius: "5px",
-            borderColor: "gray",
-            borderWidth: "1px",
-            height: "100px",
-            fontSize: "20px",
-            color: "gray",
-            marginTop: "10px",
-            marginBottom: "10px",
-          }}
-        >
-          <div>There are no selected problems.</div>
-          <div css={{ fontSize: "16px" }}>
-            Generated problems are listed here.
-          </div>
-        </div>
+        <NoDataBlock
+          children={
+            <>
+              <div>You have not added any problems yet. </div>
+              <div css={{ fontSize: "16px" }}>
+                Generated problems are listed here.
+              </div>
+            </>
+          }
+        />
       )}
     </>
   );

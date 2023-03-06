@@ -138,8 +138,8 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
           removeAllTags={removeAllExcludeTags}
         />
       </div>
-      <div css={{ fontSize: 14 }}>
-        When you select tags, problems related to the tags will be excluded
+      <div css={{ fontSize: 14, color: "gray", marginLeft: "20px" }}>
+        When you select tags, problems related to the tags will be excluded.
       </div>
       <Stack direction="row" sx={{ flexWrap: "wrap" }}>
         {excludeTags.length > 0 &&
