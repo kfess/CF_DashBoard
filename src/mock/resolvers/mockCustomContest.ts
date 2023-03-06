@@ -3,7 +3,7 @@ import { MockedRequest, ResponseResolver, restContext } from "msw";
 import type { CustomContest } from "@features/custom_contests/customContest";
 import { range } from "@helpers/index";
 
-export const mockFetchPublicCustomContest: ResponseResolver<
+export const mockFetchPublicCustomContests: ResponseResolver<
   MockedRequest,
   typeof restContext
 > = (req, res, ctx) => {
@@ -244,6 +244,13 @@ export const mockFetchPublicCustomContest: ResponseResolver<
   return res(
     ctx.json([...finishedContests, ...runningContest, ...upcomingContest])
   );
+};
+
+export const mockFetchPublicCustomContest: ResponseResolver<
+  MockedRequest,
+  typeof restContext
+> = (req, res, ctx) => {
+  return res(ctx.json([]));
 };
 
 export const mockPrivateCustomContest: ResponseResolver<

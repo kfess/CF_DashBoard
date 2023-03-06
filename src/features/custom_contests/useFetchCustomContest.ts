@@ -6,7 +6,7 @@ import {
   customContestsSchema,
 } from "@features/custom_contests/customContest";
 
-export const useFetchPublicCustomContest = () => {
+export const useFetchPublicCustomContests = () => {
   const { data, isError, error, isLoading } = useQuery<CustomContest[], Error>({
     queryKey: ["public-custom-contests"],
     queryFn: async (): Promise<CustomContest[]> => {
