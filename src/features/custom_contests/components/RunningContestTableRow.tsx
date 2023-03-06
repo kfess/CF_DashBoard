@@ -1,5 +1,5 @@
-import * as dayjs from "dayjs";
-import React, { useState } from "react";
+import dayjs from "dayjs";
+import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
@@ -13,10 +13,6 @@ type Props = {
 
 export const RunningContestTableRow: React.FC<Props> = (props: Props) => {
   const { customContest } = props;
-  const [remainingTime, setRemainingTime] = useState<number>(
-    dayjs(customContest.endDate).diff(dayjs(), "second")
-  );
-
   const length = dayjs(customContest.endDate).diff(
     customContest.startDate,
     "minutes"
@@ -42,10 +38,7 @@ export const RunningContestTableRow: React.FC<Props> = (props: Props) => {
         :{(length % 60).toString().padStart(2, "0")}
       </TableCell>
       <TableCell>
-        <Timer
-          remainingTime={remainingTime}
-          setRemainingTime={setRemainingTime}
-        />
+        <Timer endDate={customContest.endDate} />
       </TableCell>
       <TableCell>
         <Chip_

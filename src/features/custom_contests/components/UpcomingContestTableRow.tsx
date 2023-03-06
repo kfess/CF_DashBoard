@@ -14,9 +14,6 @@ type Props = {
 export const UpcomingContestTableRow: React.FC<Props> = (props: Props) => {
   const { customContest } = props;
   const daysToStart = dayjs(customContest.startDate).diff(dayjs(), "days");
-  const [remainingTime, setRemainingTime] = useState<number>(
-    dayjs(customContest.startDate).diff(dayjs(), "second")
-  );
   const length = dayjs(customContest.endDate).diff(
     customContest.startDate,
     "minutes"
@@ -46,12 +43,7 @@ export const UpcomingContestTableRow: React.FC<Props> = (props: Props) => {
         <div>
           {daysToStart > 1 && <span>{daysToStart} days</span>}
           {daysToStart === 1 && <span>{daysToStart} day</span>}
-          {daysToStart === 0 && (
-            <Timer
-              remainingTime={remainingTime}
-              setRemainingTime={setRemainingTime}
-            />
-          )}
+          {daysToStart === 0 && <Timer endDate={customContest.endDate} />}
         </div>
       </TableCell>
       <TableCell>

@@ -1,12 +1,15 @@
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import dayjs from "dayjs";
+import React, { useState, useEffect } from "react";
 
 type Props = {
-  remainingTime: number;
-  setRemainingTime: Dispatch<SetStateAction<number>>;
+  endDate: string;
 };
 
 export const Timer: React.FC<Props> = (props: Props) => {
-  const { remainingTime, setRemainingTime } = props;
+  const { endDate } = props;
+  const [remainingTime, setRemainingTime] = useState<number>(
+    dayjs(endDate).diff(dayjs(), "seconds")
+  );
 
   useEffect(() => {
     if (remainingTime > 0) {
