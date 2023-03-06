@@ -12,10 +12,10 @@ export const handlers = [
   rest.get("/mock/contests", mockContest),
   rest.get("/mock/submissions", mockSubmission),
   rest.get("/mock/problems", mockProblem),
-  rest.get("/mock/customcontest/public", mockFetchPublicCustomContests),
+  rest.get("/mock/custom-contest/public", mockFetchPublicCustomContests),
   rest.get("/mock/customcontest/private", mockPrivateCustomContest),
   rest.get(
-    "/mock/customcontest/public/random-uuid",
+    "/mock/custom-contest/public/random-uuid",
     mockFetchPublicCustomContest
   ),
 ];

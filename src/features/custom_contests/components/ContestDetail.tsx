@@ -1,10 +1,12 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { CustomContest } from "@features/custom_contests/customContest";
 
-type Props = {};
+type Props = {
+  customContest: CustomContest;
+};
 
 export const ContestDetail: React.FC<Props> = (props: Props) => {
-  const params = useParams();
+  const { customContest } = props;
 
   return <></>;
 };
