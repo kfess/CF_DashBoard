@@ -93,8 +93,8 @@ export const mockFetchPublicCustomContests: ResponseResolver<
       description: "This contest is held at the middle of Murch",
       penalty: 200,
       mode: "Normal",
-      startDate: "2023-03-04 09:00:00",
-      endDate: "2023-03-05 21:00:00",
+      startDate: "2023-03-07 09:00:00",
+      endDate: "2023-03-09 21:00:00",
       visibility: "Public",
       problems: range(1, 6).map((n) => {
         return {
@@ -118,8 +118,8 @@ export const mockFetchPublicCustomContests: ResponseResolver<
       description: "Solve difficult problems in a few days",
       penalty: 200,
       mode: "Normal",
-      startDate: "2023-03-04 09:00:00",
-      endDate: "2023-03-06 21:00:00",
+      startDate: "2023-03-07 09:00:00",
+      endDate: "2023-03-09 21:00:00",
       visibility: "Public",
       problems: range(1, 6).map((n) => {
         return {
@@ -143,8 +143,8 @@ export const mockFetchPublicCustomContests: ResponseResolver<
       description: "Solve extremely difficult problems...",
       penalty: 200,
       mode: "Normal",
-      startDate: "2023-03-04 09:00:00",
-      endDate: "2023-03-07 21:00:00",
+      startDate: "2023-03-07 09:00:00",
+      endDate: "2023-03-10 21:00:00",
       visibility: "Public",
       problems: range(1, 6).map((n) => {
         return {
