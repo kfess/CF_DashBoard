@@ -1,9 +1,10 @@
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { CustomContest } from "@features/custom_contests/customContest";
+import { Chip_ } from "@features/ui/component/Chip";
 
 type Props = {
   customContest: CustomContest;
@@ -22,6 +23,7 @@ export const FinishedContestTableRow: React.FC<Props> = (props: Props) => {
         <NavLink to={`/custom-contest/show/${customContest.contestId}`}>
           {customContest.title}
         </NavLink>
+        <Chip_ label={customContest.visibility} />
       </TableCell>
       <TableCell>{customContest.owner}</TableCell>
       <TableCell>{customContest.description}</TableCell>

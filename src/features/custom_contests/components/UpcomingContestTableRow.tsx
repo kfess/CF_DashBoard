@@ -27,6 +27,7 @@ export const UpcomingContestTableRow: React.FC<Props> = (props: Props) => {
         <NavLink to={`/custom-contest/show/${customContest.contestId}`}>
           {customContest.title}
         </NavLink>
+        <Chip_ label={customContest.visibility} />
       </TableCell>
       <TableCell>{customContest.owner}</TableCell>
       <TableCell>{customContest.description}</TableCell>
