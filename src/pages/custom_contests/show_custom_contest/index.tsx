@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useFetchPublicCustomContest } from "@features/custom_contests/useFetchCustomContest";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Box } from "@mui/material";
 import { ContestDetail } from "@features/custom_contests/components/ContestDetail";
 import { CountdownScheduler } from "@features/custom_contests/components/CountdownScheduler";
 import { Chip_ } from "@features/ui/component/Chip";
@@ -24,7 +24,7 @@ export const ShowCustomContestPage: React.FC = () => {
   return (
     <>
       {data && (
-        <>
+        <Box sx={{ m: 1 }}>
           <h2>
             {data.title}
             <Chip_ label={data.visibility} />
@@ -36,8 +36,23 @@ export const ShowCustomContestPage: React.FC = () => {
             startDate={data.startDate}
             endDate={data.endDate}
           />
+          <Box sx={{ m: 1, textAlign: "right" }}>
+            <Button
+              variant="contained"
+              color="success"
+              size="small"
+              css={{ textTransform: "none" }}
+            >
+              Register to participate
+            </Button>
+          </Box>
+          <h3>{data.description}</h3>
+          <div>
+            Period: {data.startDate} ~ {data.endDate}
+          </div>
+          <div>Penalty: {data.penalty}</div>
           {/* <ContestDetail customContest={data} /> */}
-        </>
+        </Box>
       )}
     </>
   );

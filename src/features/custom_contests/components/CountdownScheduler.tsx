@@ -32,9 +32,9 @@ export const CountdownScheduler: React.FC<Props> = (props: Props) => {
         flexWrap: "wrap",
         fontSize: "1.1rem",
         borderStyle: "solid",
-        borderRadius: "6px",
+        borderRadius: "4px",
         borderColor: "#c0c0c0",
-        borderWidth: "1px",
+        borderWidth: "0.8px",
         borderLeftColor: isUpcoming ? "green" : isRuuning ? "red" : "gray",
         borderLeftWidth: "5px",
       }}
