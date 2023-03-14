@@ -257,8 +257,8 @@ export const mockFetchPublicCustomContest: ResponseResolver<
     description: "Solve extremely difficult problems...",
     penalty: 200,
     mode: "Normal",
-    startDate: "2023-03-04 09:00:00",
-    endDate: "2023-03-07 21:00:00",
+    startDate: "2023-03-15 09:00:00",
+    endDate: "2023-03-16 21:00:00",
     visibility: "Public",
     problems: range(1, 6).map((n) => {
       return {

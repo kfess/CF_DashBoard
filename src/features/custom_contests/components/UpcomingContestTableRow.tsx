@@ -44,7 +44,7 @@ export const UpcomingContestTableRow: React.FC<Props> = (props: Props) => {
         <div>
           {daysToStart > 1 && <span>{daysToStart} days</span>}
           {daysToStart === 1 && <span>{daysToStart} day</span>}
-          {daysToStart === 0 && <Timer endDate={customContest.endDate} />}
+          {daysToStart === 0 && <Timer toDate={customContest.endDate} />}
         </div>
       </TableCell>
       <TableCell>

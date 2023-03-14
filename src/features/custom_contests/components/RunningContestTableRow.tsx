@@ -39,7 +39,7 @@ export const RunningContestTableRow: React.FC<Props> = (props: Props) => {
         :{(length % 60).toString().padStart(2, "0")}
       </TableCell>
       <TableCell>
-        <Timer endDate={customContest.endDate} />
+        <Timer toDate={customContest.endDate} />
       </TableCell>
       <TableCell>
         <Chip_

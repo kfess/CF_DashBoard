@@ -1,14 +1,21 @@
 import dayjs from "dayjs";
 import React, { useState, useEffect } from "react";
+import { css } from "@emotion/react";
+
+const timerStyle = css({
+  marginLeft: "6px",
+  marginRight: "6px",
+});
 
 type Props = {
-  endDate: string;
+  toDate: string;
 };
 
+// count down the time to "toDate"
 export const Timer: React.FC<Props> = (props: Props) => {
-  const { endDate } = props;
+  const { toDate } = props;
   const [remainingTime, setRemainingTime] = useState<number>(
-    dayjs(endDate).diff(dayjs(), "seconds")
+    dayjs(toDate).diff(dayjs(), "seconds")
   );
 
   useEffect(() => {
@@ -21,7 +28,7 @@ export const Timer: React.FC<Props> = (props: Props) => {
   }, [remainingTime]);
 
   return (
-    <>
+    <div css={timerStyle}>
       {Math.floor(remainingTime / (60 * 60))}:
       {(
         Math.floor(remainingTime / 60) -
@@ -30,6 +37,6 @@ export const Timer: React.FC<Props> = (props: Props) => {
         .toString()
         .padStart(2, "0")}
       :{(remainingTime % 60).toString().padStart(2, "0")}
-    </>
+    </div>
   );
 };
