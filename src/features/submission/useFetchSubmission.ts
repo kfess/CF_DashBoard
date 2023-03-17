@@ -26,6 +26,7 @@ export const useFetchUserSubmission = ({ userId }: { userId: string }) => {
         throw new Error("user submission error");
       }
     },
+    enabled: !!userId,
   });
 
   return { data, isError, error, isLoading };

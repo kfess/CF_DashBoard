@@ -1,3 +1,4 @@
+import { mockSessionId } from "./resolvers/mockSessinId";
 import { rest } from "msw";
 import { mockContest } from "@mock/resolvers/mockContest";
 import { mockProblem } from "@mock/resolvers/mockProblems";
@@ -18,4 +19,5 @@ export const handlers = [
     "/mock/custom-contest/public/random-uuid",
     mockFetchPublicCustomContest
   ),
+  rest.post("/mock/authenticate", mockSessionId),
 ];

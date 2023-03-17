@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useThemeContext } from "@features/color/themeColor.hook";
 import { useFetchContests } from "@features/contests/useFetchContest";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
 import type { Classification } from "@features/contests/contest";

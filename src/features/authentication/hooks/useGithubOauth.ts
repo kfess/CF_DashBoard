@@ -2,7 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
-type SessionData = {
+const AUTHENTICATE_URL = "/mock/authenticate";
+
+const isMock = true;
+
+export type SessionData = {
   readonly sessionId: string;
   readonly user: {
     readonly id: string;
@@ -28,14 +32,14 @@ const exchangeCodeForSession = async ({
       throw new Error("Mismatched state!");
     }
 
-    const response = await axios.post<SessionData>(
-      "/api/auth/github/callback",
-      { code, state }
-    );
-
+    const response = await axios.post<SessionData>(AUTHENTICATE_URL, {
+      code,
+      state,
+    });
     return response.data;
   } catch (error) {
-    console.error("An error occurred during the GitHub OAuth process:", error);
+    console.error("An error occurred during the GitHub OAuth process.");
+    throw new Error(error as string);
     throw new Error("Failed to exchange code for session");
   }
 };
@@ -45,13 +49,13 @@ export const useGithubOauth = () => {
 
   const onSuccess = (sessionData: SessionData) => {
     localStorage.setItem("session_id", sessionData.sessionId);
-    console.log(sessionData);
-    navigate("/");
+    navigate("/labels");
   };
 
   const onError = (error: Error) => {
     console.error("An error occurred during the GitHub OAuth process:", error);
-    navigate(-1);
+    localStorage.setItem("err", error.message);
+    navigate("/");
   };
 
   const mutation = useMutation<
