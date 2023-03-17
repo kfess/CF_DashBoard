@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useFetchPublicCustomContest } from "@features/custom_contests/useFetchCustomContest";
 import { Button, CircularProgress, Box } from "@mui/material";
-import { ContestDetail } from "@features/custom_contests/components/ContestDetail";
 import { CountdownScheduler } from "@features/custom_contests/components/CountdownScheduler";
 import { Chip_ } from "@features/ui/component/Chip";
 

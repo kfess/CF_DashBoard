@@ -10,6 +10,7 @@ import { RecommendationPage } from "@pages/recommendation";
 import { CustomContestPage } from "@pages/custom_contests";
 import { ShowCustomContestPage } from "@pages/custom_contests/show_custom_contest";
 import { CreateCustomContestPage } from "@pages/custom_contests/create_custom_contest";
+import Callback from "@features/authentication/components/Callback";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ export const router = createBrowserRouter([
       { path: "/user-guide", element: <div>user guide</div> },
       { path: "/faq", element: <div>faq</div> },
       { path: "/feedback", element: <div>feedback</div> },
+      { path: "/callback", element: <Callback /> },
       { path: "/send-a-tip", element: <div>send a tip</div> },
       { path: "/terms", element: <div>terms</div> },
       { path: "*", element: <Navigate to="/" /> },
