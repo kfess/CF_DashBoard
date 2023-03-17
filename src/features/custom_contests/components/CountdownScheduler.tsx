@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import React from "react";
 import Box from "@mui/material/Box";
-import { css } from "@emotion/react";
 import { AddToGoogleCalendarLink } from "@features/ui/component/AddToGoogleCalendar";
 import { Timer } from "@features/ui/component/Timer";
 

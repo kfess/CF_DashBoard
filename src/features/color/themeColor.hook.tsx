@@ -17,10 +17,10 @@ import {
 } from "@features/color/themeColor";
 
 const Context = createContext<{
-  setBaseTheme: Dispatch<SetStateAction<Theme>>;
-  setPurpleTheme: Dispatch<SetStateAction<Theme>>;
-  setGreenTheme: Dispatch<SetStateAction<Theme>>;
-  setDarkTheme: Dispatch<SetStateAction<Theme>>;
+  setBaseTheme: () => void;
+  setPurpleTheme: () => void;
+  setGreenTheme: () => void;
+  setDarkTheme: () => void;
 }>({
   setBaseTheme: () => {},
   setPurpleTheme: () => {},

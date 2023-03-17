@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useThemeContext } from "@features/color/themeColor.hook";
+import { ThemeSelector } from "@features/layout/components/ThemeSelector";
 
 // Without this offset, some part of the content to be invisible behind the header
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
@@ -46,6 +47,7 @@ export const HeaderBar: React.FC<Props> = (props: Props) => {
               CF DashBoard
             </Typography>
           </NavLink>
+          <ThemeSelector />
         </Toolbar>
       </AppBar>
       <Offset />
