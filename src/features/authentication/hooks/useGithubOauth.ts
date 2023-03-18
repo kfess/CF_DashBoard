@@ -1,20 +1,10 @@
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import { SessionData } from "@features/authentication/session.atom";
+import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 
 const AUTHENTICATE_URL = "/mock/authenticate";
-
-const isMock = true;
-
-export type SessionData = {
-  readonly sessionId: string;
-  readonly user: {
-    readonly id: string;
-    readonly name: string;
-    readonly email: string;
-    readonly avatarUrl: string;
-  };
-};
 
 const exchangeCodeForSession = async ({
   code,
@@ -36,25 +26,24 @@ const exchangeCodeForSession = async ({
       code,
       state,
     });
+
     return response.data;
   } catch (error) {
     console.error("An error occurred during the GitHub OAuth process.");
-    throw new Error(error as string);
     throw new Error("Failed to exchange code for session");
   }
 };
 
 export const useGithubOauth = () => {
   const navigate = useNavigate();
+  const { login } = useLoggedIn();
 
   const onSuccess = (sessionData: SessionData) => {
-    localStorage.setItem("session_id", sessionData.sessionId);
-    navigate("/labels");
+    login(sessionData);
   };
 
   const onError = (error: Error) => {
     console.error("An error occurred during the GitHub OAuth process:", error);
-    localStorage.setItem("err", error.message);
     navigate("/");
   };
 
@@ -64,7 +53,7 @@ export const useGithubOauth = () => {
     { code: string | null; state: string | null }
   >(exchangeCodeForSession, {
     onSuccess,
-    onError: onError,
+    onError,
   });
 
   return {
