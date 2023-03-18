@@ -6,7 +6,7 @@ import { useSessionData } from "@features/authentication/hooks/useSessionData";
 const SESSION_VALIDATION_URL = "/mock/validate-session";
 
 const validateSession = async (
-  sessionId: string | null
+  sessionId: string | null | undefined
 ): Promise<SessionData> => {
   if (!sessionId) {
     return Promise.reject(new Error("No session Id available"));
@@ -21,10 +21,10 @@ export const useSessionValidation = () => {
   const { sessionData, setSessionInfo, clearSessionInfo } = useSessionData();
   const sessionId = sessionData?.sessionId;
 
-  const { isError, error, isLoading } = useQuery<SessionData, Error>({
+  useQuery<SessionData, Error>({
     queryKey: ["sessionValidation", sessionId],
-    queryFn: () => validateSession(sessionId!),
-    enabled: !!sessionId,
+    queryFn: () => validateSession(sessionId),
+    enabled: !!sessionId, // When logged out, the request is not enabled.
     onSuccess: (data) => {
       setSessionInfo(data);
     },
@@ -33,6 +33,4 @@ export const useSessionValidation = () => {
     },
     refetchOnWindowFocus: false,
   });
-
-  return { isLoading, isError, error };
 };

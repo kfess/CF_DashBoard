@@ -1,15 +1,7 @@
 import { atom, AtomEffect, DefaultValue } from "recoil";
 import { RecoilAtomKeys } from "@recoil/RecoilKeys";
 
-export type SessionData = {
-  readonly sessionId: string;
-  readonly user: {
-    readonly id: string;
-    readonly name: string;
-  };
-};
-
-// automatically added to localStorage when session is changed
+// automatically added to localStorage when codeforces username is updated
 const localStorageEffect: <T>(key: string) => AtomEffect<T> =
   (key: string) =>
   ({ setSelf, onSet }) => {
@@ -28,10 +20,10 @@ const localStorageEffect: <T>(key: string) => AtomEffect<T> =
     });
   };
 
-export const seissionDataState = atom<SessionData | null>({
-  key: RecoilAtomKeys.SESSION_DATA,
+export const codeforcesUsernameState = atom<string | null>({
+  key: RecoilAtomKeys.CODEFORCES_USERNAME,
   default: null,
   effects: [
-    localStorageEffect<SessionData | null>(RecoilAtomKeys.SESSION_DATA),
+    localStorageEffect<string | null>(RecoilAtomKeys.CODEFORCES_USERNAME),
   ],
 });

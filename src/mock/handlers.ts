@@ -1,4 +1,4 @@
-import { mockSessionId } from "./resolvers/mockSessinId";
+import { mockPostSessionId } from "./resolvers/mockSessinId";
 import { rest } from "msw";
 import { mockContest } from "@mock/resolvers/mockContest";
 import { mockProblem } from "@mock/resolvers/mockProblems";
@@ -8,6 +8,7 @@ import {
   mockFetchPublicCustomContest,
   mockPrivateCustomContest,
 } from "@mock/resolvers/mockCustomContest";
+import { mockUpdateCodeforcesUsername } from "@mock/resolvers/mockSessinId";
 
 export const handlers = [
   rest.get("/mock/contests", mockContest),
@@ -19,5 +20,6 @@ export const handlers = [
     "/mock/custom-contest/public/random-uuid",
     mockFetchPublicCustomContest
   ),
-  rest.post("/mock/authenticate", mockSessionId),
+  rest.post("/mock/authenticate", mockPostSessionId),
+  rest.post("/mock/user/update", mockUpdateCodeforcesUsername),
 ];
