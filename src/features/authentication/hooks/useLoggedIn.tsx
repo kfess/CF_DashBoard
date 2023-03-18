@@ -13,7 +13,7 @@ export const useLoggedIn = ({
 }: UseLoginOptions = {}) => {
   const { sessionData, setSessionInfo, clearSessionInfo } = useSessionData();
 
-  const loggedIn = sessionData?.sessionId !== null;
+  const loggedIn = sessionData !== null;
   const navigate = useNavigate();
 
   const login = (info: SessionData) => {
