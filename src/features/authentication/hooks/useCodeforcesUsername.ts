@@ -10,7 +10,7 @@ import type { SessionData } from "@features/authentication/session.atom";
 const updateCodeforcesUsernameIfExists = async (
   codeforcesUsername: string,
   sessionData: SessionData | null
-): Promise<void> => {
+): Promise<string | null> => {
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${sessionData?.sessionId}`,
@@ -36,6 +36,7 @@ const updateCodeforcesUsernameIfExists = async (
 
   try {
     await axios.post("/mock/user/update", body, { headers });
+    return codeforcesUsername;
   } catch (error) {
     throw new Error(
       "An error occurred while updating the codeforces username."
@@ -49,10 +50,15 @@ export const useCodeforcesUsername = () => {
   );
   const { sessionData } = useSessionData();
 
-  const mutation = useMutation<void, Error, string>(
+  const mutation = useMutation<string | null, Error, string>(
     (codeforcesUsername: string) =>
       updateCodeforcesUsernameIfExists(codeforcesUsername, sessionData),
     {
+      onSuccess: (result) => {
+        if (result) {
+          setCodeforcesUsername(result);
+        }
+      },
       onError: (error) => {
         console.log("An error occurred during updating codeforces username");
         // add Toast in the future
@@ -61,9 +67,10 @@ export const useCodeforcesUsername = () => {
   );
 
   const updateUsername = async (codeforcesUsername: string) => {
-    if (!!codeforcesUsername) {
+    const pattern = /^[a-zA-Z0-9_]+$/;
+    const isValidUsername = pattern.test(codeforcesUsername);
+    if (!!codeforcesUsername && isValidUsername) {
       await mutation.mutateAsync(codeforcesUsername);
-      setCodeforcesUsername(codeforcesUsername);
     }
   };
 
