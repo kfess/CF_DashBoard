@@ -12,8 +12,3 @@ export const mockPostSessionId: ResponseResolver<
 
   return res(ctx.status(200), ctx.json(sessionData));
 };
-
-export const mockUpdateCodeforcesUsername: ResponseResolver<
-  MockedRequest,
-  typeof restContext
-> = (req, res, ctx) => {};

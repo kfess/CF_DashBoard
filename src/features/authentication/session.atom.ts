@@ -28,7 +28,7 @@ const localStorageEffect: <T>(key: string) => AtomEffect<T> =
     });
   };
 
-export const seissionDataState = atom<SessionData | null>({
+export const sessionDataState = atom<SessionData | null>({
   key: RecoilAtomKeys.SESSION_DATA,
   default: null,
   effects: [

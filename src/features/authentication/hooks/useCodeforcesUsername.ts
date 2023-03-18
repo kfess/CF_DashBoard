@@ -1,39 +1,41 @@
-import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { CF_USER_INFO_URL } from "@constants/url";
 import { useSessionData } from "./useSessionData";
 import { codeforcesUsernameState } from "@features/authentication/codeforces_username.atom";
 import { okUserInfoApiSchema } from "@features/layout/userInfo";
-
-const CODEFORCES_USERNAME_UPDATE_URL = "/mock/user/update";
+import type { SessionData } from "@features/authentication/session.atom";
 
 const updateCodeforcesUsernameIfExists = async (
-  codeforcesUsername: string
-): Promise<string> => {
-  const { sessionData } = useSessionData();
+  codeforcesUsername: string,
+  sessionData: SessionData | null
+): Promise<void> => {
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${sessionData?.sessionId}`,
   };
   const body = { codeforcesUsername };
 
+  // codeforces official API, verify the user really exists.
   try {
-    // codeforces official API, verify the user really exists.
-    const url = `${CF_USER_INFO_URL}?handles=${codeforcesUsername}`;
-    const userResponse = await axios.get(url);
+    const userResponse = await axios.get(
+      `${CF_USER_INFO_URL}?handles=${codeforcesUsername}`
+    );
     const existUser =
       okUserInfoApiSchema.parse(userResponse.data).status === "OK";
 
-    if (userResponse.status === 404 || !existUser) {
+    if (!existUser) {
       throw new Error("User does not exist.");
     }
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw new Error(error.message);
+    }
+  }
 
-    const response = await axios.post(CODEFORCES_USERNAME_UPDATE_URL, body, {
-      headers,
-    });
-    return response.data;
+  try {
+    await axios.post("/mock/user/update", body, { headers });
   } catch (error) {
     throw new Error(
       "An error occurred while updating the codeforces username."
@@ -45,13 +47,12 @@ export const useCodeforcesUsername = () => {
   const [codeforcesUsername, setCodeforcesUsername] = useRecoilState(
     codeforcesUsernameState
   );
+  const { sessionData } = useSessionData();
 
-  const mutation = useMutation<string, Error, string>(
-    updateCodeforcesUsernameIfExists,
+  const mutation = useMutation<void, Error, string>(
+    (codeforcesUsername: string) =>
+      updateCodeforcesUsernameIfExists(codeforcesUsername, sessionData),
     {
-      onSuccess: (codeforcesUsername: string) => {
-        setCodeforcesUsername(codeforcesUsername);
-      },
       onError: (error) => {
         console.log("An error occurred during updating codeforces username");
         // add Toast in the future
@@ -59,14 +60,11 @@ export const useCodeforcesUsername = () => {
     }
   );
 
-  useEffect(() => {
-    return () => {
-      mutation.reset();
-    };
-  }, [mutation]);
-
-  const updateUsername = (codeforcesUsername: string) => {
-    mutation.mutate(codeforcesUsername);
+  const updateUsername = async (codeforcesUsername: string) => {
+    if (!!codeforcesUsername) {
+      await mutation.mutateAsync(codeforcesUsername);
+      setCodeforcesUsername(codeforcesUsername);
+    }
   };
 
   return { codeforcesUsername, updateUsername, isLoading: mutation.isLoading };

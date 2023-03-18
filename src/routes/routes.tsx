@@ -11,6 +11,8 @@ import { CustomContestPage } from "@pages/custom_contests";
 import { ShowCustomContestPage } from "@pages/custom_contests/show_custom_contest";
 import { CreateCustomContestPage } from "@pages/custom_contests/create_custom_contest";
 import Callback from "@features/authentication/components/Callback";
+import { PrivateRoute } from "@features/authentication/components/PrivateRoute";
+import { ProfilePage } from "@pages/authentication/profile";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ export const router = createBrowserRouter([
       {
         path: "/custom-contest/show/:contestId",
         element: <ShowCustomContestPage />,
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <ProfilePage />
+          </PrivateRoute>
+        ),
       },
       { path: "/custom-contest/create", element: <CreateCustomContestPage /> },
       { path: "/api", element: <div>api</div> },
