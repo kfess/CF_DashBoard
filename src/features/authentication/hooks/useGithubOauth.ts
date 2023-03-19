@@ -21,12 +21,10 @@ const exchangeCodeForSession = async ({
     if (originalState !== state) {
       throw new Error("Mismatched state!");
     }
-
     const response = await axios.post<SessionData>(AUTHENTICATE_URL, {
       code,
       state,
     });
-
     return response.data;
   } catch (error) {
     console.error("An error occurred during the GitHub OAuth process.");

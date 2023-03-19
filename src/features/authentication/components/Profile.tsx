@@ -1,30 +1,29 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { useSessionData } from "@features/authentication/hooks/useSessionData";
-import { useCodeforcesUsername } from "@features/authentication/hooks/useCodeforcesUsername";
-import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
-import { AlertMessage } from "@features/ui/component/AlertDialog";
+import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 
 export const Profile: React.FC = () => {
   const { sessionData } = useSessionData();
-  const { codeforcesUsername, updateUsername, isLoading } =
-    useCodeforcesUsername();
-  const { loggedIn } = useLoggedIn();
 
-  const [newCodeforcesUsername, setNewCodeforcesUsername] =
-    useState<string>("");
+  const { githubId, githubUserName, codeforcesUsername, updateUsername } =
+    useUserProfile();
+
+  const [newUsername, setNewUsername] = useState<string>(
+    codeforcesUsername ?? ""
+  );
   const [error, setError] = useState<string | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewCodeforcesUsername(event.target.value);
+    setNewUsername(event.target.value);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
     try {
-      await updateUsername(newCodeforcesUsername);
-      setNewCodeforcesUsername("");
+      await updateUsername(newUsername);
+      setNewUsername("");
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -34,30 +33,21 @@ export const Profile: React.FC = () => {
     }
   };
 
-  if (!loggedIn) {
-    return (
-      <AlertMessage
-        title="Error"
-        message="You must be logged in to view this page"
-      />
-    );
-  }
-
   return (
     <>
       <h2>Profile</h2>
+      <p>GitHub ID: {githubId}</p>
+      <p>GitHub Name: {githubUserName}</p>
       <p>Codeforces Username:{codeforcesUsername}</p>
       <form onSubmit={handleSubmit}>
         <label></label>
         <input
           type="text"
           id="codeforcesUsername"
-          value={newCodeforcesUsername}
+          value={newUsername}
           onChange={handleChange}
         />
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Updating..." : "Update"}
-        </Button>
+        <Button type="submit">Update</Button>
       </form>
     </>
   );

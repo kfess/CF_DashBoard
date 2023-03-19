@@ -1,20 +1,28 @@
-import { useRecoilState } from "recoil";
 import axios, { AxiosError } from "axios";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { CF_USER_INFO_URL } from "@constants/url";
-import { useSessionData } from "./useSessionData";
-import { codeforcesUsernameState } from "@features/authentication/codeforces_username.atom";
 import { okUserInfoApiSchema } from "@features/layout/userInfo";
-import type { SessionData } from "@features/authentication/session.atom";
+import {
+  UserProfile,
+  userProfileSchema,
+} from "@features/authentication/userProfile";
+
+const INTERNAL_CF_GET_URL = "/mock/user/get";
+const INTERNAL_CF_UPDATE_URL = "/mock/user/update";
+
+const fetchUserProfile = async (): Promise<UserProfile> => {
+  try {
+    const response = await axios.get(INTERNAL_CF_GET_URL);
+    const data = userProfileSchema.parse(response.data);
+    return data;
+  } catch (error) {
+    throw new Error("An error occurred while fetching user profile data");
+  }
+};
 
 const updateCodeforcesUsernameIfExists = async (
-  codeforcesUsername: string,
-  sessionData: SessionData | null
+  codeforcesUsername: string
 ): Promise<string | null> => {
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${sessionData?.sessionId}`,
-  };
   const body = { codeforcesUsername };
 
   // codeforces official API, verify the user really exists.
@@ -35,7 +43,7 @@ const updateCodeforcesUsernameIfExists = async (
   }
 
   try {
-    await axios.post("/mock/user/update", body, { headers });
+    await axios.post(INTERNAL_CF_UPDATE_URL, body);
     return codeforcesUsername;
   } catch (error) {
     throw new Error(
@@ -44,20 +52,22 @@ const updateCodeforcesUsernameIfExists = async (
   }
 };
 
-export const useCodeforcesUsername = () => {
-  const [codeforcesUsername, setCodeforcesUsername] = useRecoilState(
-    codeforcesUsernameState
-  );
-  const { sessionData } = useSessionData();
+export const useUserProfile = () => {
+  const queryClient = useQueryClient();
 
+  // fetch user profile data
+  const { data, isLoading, isError } = useQuery<UserProfile, Error>({
+    queryKey: ["userProfile"],
+    queryFn: fetchUserProfile,
+  });
+
+  // mutate user codeforces username
   const mutation = useMutation<string | null, Error, string>(
     (codeforcesUsername: string) =>
-      updateCodeforcesUsernameIfExists(codeforcesUsername, sessionData),
+      updateCodeforcesUsernameIfExists(codeforcesUsername),
     {
-      onSuccess: (result) => {
-        if (result) {
-          setCodeforcesUsername(result);
-        }
+      onSuccess: () => {
+        queryClient.invalidateQueries(["userProfile"]); // update usename immediately
       },
       onError: (error) => {
         console.log("An error occurred during updating codeforces username");
@@ -74,5 +84,10 @@ export const useCodeforcesUsername = () => {
     }
   };
 
-  return { codeforcesUsername, updateUsername, isLoading: mutation.isLoading };
+  return {
+    githubId: data?.userId,
+    githubUserName: data?.userName,
+    codeforcesUsername: data?.codeforcesUsername,
+    updateUsername,
+  };
 };
