@@ -9,9 +9,11 @@ import {
 } from "@mock/resolvers/mockCustomContest";
 import { mockPostSessionId } from "./resolvers/mockSessinId";
 import {
+  mockAddJoinedCustomContest,
+  mockAddOwnedCustomContest,
   mockFetchUserProfile,
   mockUpdateCodeforcesUsername,
-} from "@mock/resolvers/mockCodeforcesUsername";
+} from "@mock/resolvers/mockUserProfile";
 
 export const handlers = [
   rest.get("/mock/contests", mockContest),
@@ -26,4 +28,6 @@ export const handlers = [
   rest.post("/mock/authenticate", mockPostSessionId),
   rest.get("/mock/user/get", mockFetchUserProfile),
   rest.post("/mock/user/update", mockUpdateCodeforcesUsername),
+  rest.post("/mock/user/ownedContests/add", mockAddOwnedCustomContest),
+  rest.post("/mock/user/joinedContest/add", mockAddJoinedCustomContest),
 ];

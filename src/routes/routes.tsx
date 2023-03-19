@@ -40,7 +40,14 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      { path: "/custom-contest/create", element: <CreateCustomContestPage /> },
+      {
+        path: "/custom-contest/create",
+        element: (
+          <PrivateRoute>
+            <CreateCustomContestPage />
+          </PrivateRoute>
+        ),
+      },
       { path: "/api", element: <div>api</div> },
       { path: "/links", element: <div>links</div> },
       { path: "/setting", element: <div>setting</div> },

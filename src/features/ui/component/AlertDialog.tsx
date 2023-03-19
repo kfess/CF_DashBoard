@@ -6,6 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
+import { useToggle } from "@hooks/index";
 
 type Props<T extends string | number> = {
   title: string;
@@ -74,8 +75,17 @@ type MessageProps = { title: string; message: string };
 export const AlertMessage: React.FC<MessageProps> = (props: MessageProps) => {
   const { title, message } = props;
 
+  const [open, setOpen] = useState(true);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  if (!open) {
+    return null;
+  }
+
   return (
-    <Alert severity="warning">
+    <Alert onClose={handleClose} severity="warning">
       <AlertTitle css={{ textAlign: "left" }}>{title}</AlertTitle>
       {message}
     </Alert>

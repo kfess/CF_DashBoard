@@ -19,10 +19,13 @@ import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { modes } from "../customContest";
 import { Checkbox } from "@features/ui/component/Checkbox";
 import { Problem } from "@features/problems/problem";
+import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 
 const globalCFUserId = "applemelon" as const;
 
 export const CreateContestInfoForm: React.FC = () => {
+  const { codeforcesUsername, updateUsername } = useUserProfile();
+
   const {
     control,
     setValue,
@@ -53,7 +56,7 @@ export const CreateContestInfoForm: React.FC = () => {
     <form onSubmit={onSubmit}>
       <h3>Contest Form</h3>
       <div>
-        Organize Custom Contest as <Chip_ label={globalCFUserId} />
+        Organize Custom Contest as <Chip_ label={codeforcesUsername} />
         <Button
           onClick={() => {}} // change global CF user ID
           variant="contained"

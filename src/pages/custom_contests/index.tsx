@@ -7,8 +7,11 @@ import { createdContestTypes } from "@features/custom_contests/customContest";
 import { PublicContestTable } from "@features/custom_contests/components/PublicContestTable";
 import { PrivateContestList } from "@features/custom_contests/components/PrivateContestList";
 import { NavLink } from "react-router-dom";
+import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
+import { AlertMessage } from "@features/ui/component/AlertDialog";
 
 export const CustomContestPage: React.FC = () => {
+  const { loggedIn } = useLoggedIn();
   const tabItems: TabItem[] = [
     ...createdContestTypes.map((contestType) => {
       return {
@@ -26,16 +29,22 @@ export const CustomContestPage: React.FC = () => {
 
   return (
     <>
-      <NavLink to="/custom-contest/create">
+      <NavLink to={loggedIn ? "/custom-contest/create" : "#"}>
         <Button
           color="success"
           variant="contained"
           css={{ textTransform: "none" }}
+          disabled={!loggedIn}
         >
           Create New Contest
         </Button>
       </NavLink>
-
+      {!loggedIn && (
+        <AlertMessage
+          title=""
+          message="To create a New Contest, You need to be logged in."
+        />
+      )}
       <Box sx={{ width: "100%" }}>
         <Tabs tabItems={tabItems} />
       </Box>
