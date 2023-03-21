@@ -20,12 +20,14 @@ const filterSubmissions = (
   startDate: string,
   endDate: string
 ): Submission[] => {
-  return submissions.filter(
-    (submission) =>
-      dayjs.unix(submission.creationTimeSeconds).isAfter(startDate) &&
-      dayjs.unix(submission.creationTimeSeconds).isBefore(endDate) &&
-      problemSet.has(`${submission.contestId}-${submission.problem.index}`)
-  );
+  return submissions
+    .filter(
+      (submission) =>
+        dayjs.unix(submission.creationTimeSeconds).isAfter(startDate) &&
+        dayjs.unix(submission.creationTimeSeconds).isBefore(endDate) &&
+        problemSet.has(`${submission.contestId}-${submission.problem.index}`)
+    )
+    .sort((a, b) => a.creationTimeSeconds - b.creationTimeSeconds);
 };
 
 const fetchUserSubmissions = async (userId: string): Promise<Submission[]> => {
@@ -66,8 +68,9 @@ const fetchSubmissions = async (
         );
         return { ...acc, [userId]: submissionsForUser };
       },
-      {}
+      {} as Record<string, Submission[]>
     );
+
     return submissionsByUser;
   } catch (error) {
     throw new Error("Error fetching submissions");
