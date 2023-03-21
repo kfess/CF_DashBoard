@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -9,29 +9,43 @@ import Paper from "@mui/material/Paper";
 import { Problem } from "@features/problems/problem";
 import { useFetchSubmissions } from "@features/custom_contests/useFetchSubmissions";
 import { useToggle } from "@hooks/index";
+import { UserStats, calculateAllUsersStats } from "../calculateStandings";
 
 type Props = {
   participants: { userId: string }[];
   problems: Problem[];
   startDate: string;
   endDate: string;
+  penalty: number;
 };
 
 // 各ユーザーのサブミッション状況は、codeforces API を直接叩いて取得する。
 
 export const Standings: React.FC<Props> = (props: Props) => {
-  const { problems, participants, startDate, endDate } = props;
+  const { problems, participants, startDate, endDate, penalty } = props;
   const numParticipants = participants.length;
 
   const [autoRefetch, toggleAutoRefetch] = useToggle(true);
 
-  const { data, isError, error, isLoading } = useFetchSubmissions(
+  const { submissionsByUser, isError, error, isLoading } = useFetchSubmissions(
     participants,
     problems,
     startDate,
     endDate,
     autoRefetch
   );
+
+  const userStats = useMemo(() => {
+    if (!submissionsByUser) {
+      return {};
+    }
+    return calculateAllUsersStats(
+      submissionsByUser,
+      problems,
+      startDate,
+      penalty
+    );
+  }, [submissionsByUser, problems]);
 
   return (
     <>

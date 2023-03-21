@@ -11,7 +11,7 @@ type ProblemStats = {
   score: number;
 };
 
-type UserStats = {
+export type UserStats = {
   problemStats: Record<string, ProblemStats>;
   totalScore: number;
   totalWrongAttempts: number;
@@ -101,15 +101,13 @@ export const calculateAllUsersStats = (
   startDate: string,
   penalty: number
 ): Record<string, UserStats> => {
-  const allUsersStats: Record<string, UserStats> = {};
-  for (const userId in submissionsByUser) {
-    const submissions = submissionsByUser[userId];
-    allUsersStats[userId] = calculateUserStats(
-      submissions,
-      problems,
-      startDate,
-      penalty
-    );
-  }
-  return allUsersStats;
+  return Object.entries(submissionsByUser).reduce<Record<string, UserStats>>(
+    (acc, [userId, submissions]) => {
+      return {
+        ...acc,
+        [userId]: calculateUserStats(submissions, problems, startDate, penalty),
+      };
+    },
+    {}
+  );
 };

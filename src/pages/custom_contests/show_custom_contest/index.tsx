@@ -57,6 +57,7 @@ export const ShowCustomContestPage: React.FC = () => {
             problems={data.problems}
             startDate={data.startDate}
             endDate={data.endDate}
+            penalty={data.penalty}
           />
         </Box>
       )}

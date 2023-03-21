@@ -56,20 +56,19 @@ const fetchSubmissions = async (
     );
 
     const allSubmissions = responses.flat();
-    const submissionsByUser: UserSubmissions = users.reduce(
-      (acc, { userId }) => {
-        const submissionsForUser = filterSubmissions(
-          allSubmissions,
-          problemSet,
-          startDate,
-          endDate
-        ).filter((submission) =>
-          submission.author.members.some((member) => member.handle === userId)
-        );
-        return { ...acc, [userId]: submissionsForUser };
-      },
-      {} as Record<string, Submission[]>
-    );
+    const submissionsByUser: UserSubmissions = users.reduce<
+      Record<string, Submission[]>
+    >((acc, { userId }) => {
+      const submissionsForUser = filterSubmissions(
+        allSubmissions,
+        problemSet,
+        startDate,
+        endDate
+      ).filter((submission) =>
+        submission.author.members.some((member) => member.handle === userId)
+      );
+      return { ...acc, [userId]: submissionsForUser };
+    }, {});
 
     return submissionsByUser;
   } catch (error) {
@@ -91,5 +90,5 @@ export const useFetchSubmissions = (
     refetchInterval: shouldRefetch ? 60000 : false,
   });
 
-  return { data, isError, error, isLoading };
+  return { submissionsByUser: data, isError, error, isLoading };
 };
