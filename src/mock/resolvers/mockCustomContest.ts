@@ -273,7 +273,11 @@ export const mockFetchPublicCustomContest: ResponseResolver<
         classification: "Global",
       };
     }),
-    participants: [{ userId: "applemelon" }, { userId: "kenkoooo" }],
+    participants: [
+      { userId: "applemelon" },
+      { userId: "kenkoooo" },
+      { userId: "tourist" },
+    ],
   };
 
   return res(ctx.json(contest));

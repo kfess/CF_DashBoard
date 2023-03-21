@@ -4,6 +4,7 @@ import { useFetchPublicCustomContest } from "@features/custom_contests/useFetchC
 import { Button, CircularProgress, Box } from "@mui/material";
 import { CountdownScheduler } from "@features/custom_contests/components/CountdownScheduler";
 import { Chip_ } from "@features/ui/component/Chip";
+import { Standings } from "@features/custom_contests/components/Standings";
 
 export const ShowCustomContestPage: React.FC = () => {
   const params = useParams();
@@ -50,7 +51,13 @@ export const ShowCustomContestPage: React.FC = () => {
             Period: {data.startDate} ~ {data.endDate}
           </div>
           <div>Penalty: {data.penalty}</div>
-          {/* <ContestDetail customContest={data} /> */}
+
+          <Standings
+            participants={data.participants}
+            problems={data.problems}
+            startDate={data.startDate}
+            endDate={data.endDate}
+          />
         </Box>
       )}
     </>
