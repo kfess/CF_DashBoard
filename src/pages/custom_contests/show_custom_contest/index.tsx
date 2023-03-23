@@ -1,17 +1,43 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { Button, CircularProgress, Box, Divider } from "@mui/material";
+import type { TabItem } from "@features/ui/component/Tabs";
+import { Tabs } from "@features/ui/component/Tabs";
 import { useFetchPublicCustomContest } from "@features/custom_contests/useFetchCustomContest";
-import { Button, CircularProgress, Box } from "@mui/material";
 import { CountdownScheduler } from "@features/custom_contests/components/CountdownScheduler";
 import { Chip_ } from "@features/ui/component/Chip";
 import { Standings } from "@features/custom_contests/components/Standings";
+import { Problems } from "@features/custom_contests/components/Problems";
+import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 
 export const ShowCustomContestPage: React.FC = () => {
+  const { loggedIn } = useLoggedIn();
   const params = useParams();
   const contestId = params.contestId ?? "";
   const { data, isLoading, isError, error } = useFetchPublicCustomContest({
     contestId,
   });
+
+  const tabItems: TabItem[] = [
+    {
+      label: "Problem",
+      children: data && <Problems problems={data.problems} />,
+      disabled: false,
+    },
+    {
+      label: "Standings",
+      children: data && (
+        <Standings
+          participants={data.participants}
+          problems={data.problems}
+          startDate={data.startDate}
+          endDate={data.endDate}
+          penalty={data.penalty}
+        />
+      ),
+      disabled: false,
+    },
+  ];
 
   if (isLoading) {
     return <CircularProgress />;
@@ -42,6 +68,7 @@ export const ShowCustomContestPage: React.FC = () => {
               color="success"
               size="small"
               css={{ textTransform: "none" }}
+              disabled={!loggedIn}
             >
               Register to participate
             </Button>
@@ -52,13 +79,7 @@ export const ShowCustomContestPage: React.FC = () => {
           </div>
           <div>Penalty: {data.penalty}</div>
 
-          <Standings
-            participants={data.participants}
-            problems={data.problems}
-            startDate={data.startDate}
-            endDate={data.endDate}
-            penalty={data.penalty}
-          />
+          <Tabs tabItems={tabItems} />
         </Box>
       )}
     </>

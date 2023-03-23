@@ -55,6 +55,7 @@ export const Standings: React.FC<Props> = (props: Props) => {
 
   return (
     <>
+      <>{numParticipants} people participated</>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer component={Paper}>
           <Table stickyHeader>
