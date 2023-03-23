@@ -87,7 +87,8 @@ export const useFetchSubmissions = (
     queryKey: ["custom-contest-submissions"],
     queryFn: () => fetchSubmissions(users, problems, startDate, endDate),
     enabled: !!users.length,
-    refetchInterval: shouldRefetch ? 60000 : false,
+    // refetchInterval: shouldRefetch ? 60000 : false,
+    refetchInterval: false,
   });
 
   return { submissionsByUser: data, isError, error, isLoading };
