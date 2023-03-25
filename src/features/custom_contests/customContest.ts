@@ -2,6 +2,15 @@ import { z } from "zod";
 import { tagSchema } from "@features/problems/problem";
 import { problemsSchema } from "@features/problems/problem";
 
+export const apiFilterTypes = [
+  "all",
+  "public",
+  "private",
+  "createdbyme",
+  "joined",
+] as const;
+export type APIFilterType = typeof apiFilterTypes[number];
+
 export const createdContestTypes = ["Running", "Upcoming", "Finished"] as const;
 export type CreatedContestType = typeof createdContestTypes[number];
 
@@ -21,6 +30,7 @@ export const customContestSchema = z.object({
   contestId: z.string(),
   title: z.string().min(1),
   owner: z.string(),
+  ownerId: z.string(), // github account user ID
   description: z.string(),
   penalty: z.number(),
   mode: modeSchema,

@@ -6,6 +6,10 @@ import {
   mockFetchPublicCustomContests,
   mockFetchPublicCustomContest,
   mockPrivateCustomContest,
+  mockFetchContests,
+  mockAddContest,
+  mockEditContest,
+  mockDeleteContest,
 } from "@mock/resolvers/mockCustomContest";
 import { mockPostSessionId } from "./resolvers/mockSessinId";
 import {
@@ -19,15 +23,24 @@ export const handlers = [
   rest.get("/mock/contests", mockContest),
   rest.get("/mock/submissions", mockSubmission),
   rest.get("/mock/problems", mockProblem),
+
+  // deprecated
   rest.get("/mock/custom-contest/public", mockFetchPublicCustomContests),
   rest.get("/mock/customcontest/private", mockPrivateCustomContest),
   rest.get(
     "/mock/custom-contest/public/random-uuid",
     mockFetchPublicCustomContest
   ),
+  // deprecated
+
   rest.post("/mock/authenticate", mockPostSessionId),
   rest.get("/mock/user/get", mockFetchUserProfile),
   rest.post("/mock/user/update", mockUpdateCodeforcesUsername),
   rest.post("/mock/user/ownedContests/add", mockAddOwnedCustomContest),
   rest.post("/mock/user/joinedContest/add", mockAddJoinedCustomContest),
+
+  rest.get("/mock/custom-contest/contests", mockFetchContests),
+  rest.post("/mock/custom-contest/contests", mockAddContest),
+  rest.put("/mock/custom-contest/:contestId", mockEditContest),
+  rest.delete("/mock/custom-contest/:contestId", mockDeleteContest),
 ];

@@ -12,7 +12,7 @@ export const useFetchPublicCustomContests = () => {
     queryKey: ["public-custom-contests"],
     queryFn: async (): Promise<CustomContest[]> => {
       try {
-        const url = "/mock/custom-contest/public";
+        const url = "/mock/custom-contest/contests";
         const response = await axios.get(url);
         const publicCustomContests = customContestsSchema.parse(response.data);
         return publicCustomContests;
@@ -54,3 +54,5 @@ export const useFetchPublicCustomContest = ({
 
   return { data, isError, error, isLoading };
 };
+
+export const useAddCustomContest = () => {};
