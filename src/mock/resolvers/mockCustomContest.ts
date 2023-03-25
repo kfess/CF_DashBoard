@@ -78,9 +78,6 @@ export const mockFetchContests: ResponseResolver<
   let selectedContests: CustomContest[] = [];
 
   switch (filter as APIFilterType) {
-    case "all":
-      selectedContests = [...contests];
-      break;
     case "public":
       selectedContests = [
         ...contests.filter((contest) => contest.visibility === "Public"),
@@ -94,10 +91,12 @@ export const mockFetchContests: ResponseResolver<
             myAccount.userId.includes(contest.ownerId)
         ),
       ];
+      break;
     case "createdbyme":
       selectedContests = [
         ...contests.filter((contest) => contest.ownerId === "12345"),
       ];
+      break;
     case "joined":
       selectedContests = [
         ...contests.filter((contest) =>
@@ -106,6 +105,7 @@ export const mockFetchContests: ResponseResolver<
           )
         ),
       ];
+      break;
   }
 
   return res(ctx.status(200), ctx.json(selectedContests));

@@ -3,7 +3,6 @@ import { tagSchema } from "@features/problems/problem";
 import { problemsSchema } from "@features/problems/problem";
 
 export const apiFilterTypes = [
-  "all",
   "public",
   "private",
   "createdbyme",
