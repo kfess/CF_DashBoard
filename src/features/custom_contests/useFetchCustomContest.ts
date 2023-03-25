@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ZodError } from "zod";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import {
   CustomContest,
   customContestSchema,
@@ -12,12 +12,13 @@ export const useFetchPublicCustomContests = () => {
     queryKey: ["public-custom-contests"],
     queryFn: async (): Promise<CustomContest[]> => {
       try {
-        const url = "/mock/custom-contest/contests";
+        const url = "/mock/custom-contest/contests?filter=public";
         const response = await axios.get(url);
         const publicCustomContests = customContestsSchema.parse(response.data);
         return publicCustomContests;
       } catch (err) {
         if (err instanceof ZodError) {
+          console.log(err);
           throw new Error("validation error");
         }
         throw new Error("custom contest error");
@@ -55,4 +56,31 @@ export const useFetchPublicCustomContest = ({
   return { data, isError, error, isLoading };
 };
 
-export const useAddCustomContest = () => {};
+export const useAddCustomContest = () => {
+  const addContest = async (contest: CustomContest): Promise<void> => {
+    try {
+      await axios.post("/mock/custom-contest/contests", contest);
+    } catch (error) {
+      throw new Error("An error occurred while adding custom contest.");
+    }
+  };
+
+  const addContestMutation = useMutation<void, Error, CustomContest>(
+    (contest: CustomContest) => addContest(contest),
+    {
+      onSuccess: () => {
+        console.log("successfully added contest");
+      },
+      onError: (error) => {
+        console.log("An error occurred while adding custom contest.");
+        // add user notification
+      },
+    }
+  );
+
+  const mutate = (contest: CustomContest) => {
+    addContestMutation.mutate(contest);
+  };
+
+  return { mutate };
+};

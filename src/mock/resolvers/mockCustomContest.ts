@@ -88,7 +88,7 @@ export const mockFetchContests: ResponseResolver<
         ...contests.filter(
           (contest) =>
             contest.visibility === "Private" &&
-            myAccount.userId.includes(contest.ownerId)
+            myAccount.userId === contest.ownerId
         ),
       ];
       break;
@@ -106,6 +106,11 @@ export const mockFetchContests: ResponseResolver<
         ),
       ];
       break;
+    default:
+      return res(
+        ctx.status(400),
+        ctx.json({ message: "Invalid filter parameter" })
+      );
   }
 
   return res(ctx.status(200), ctx.json(selectedContests));

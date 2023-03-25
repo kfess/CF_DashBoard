@@ -34,6 +34,7 @@ export const PublicContestTable: React.FC<Props> = (props: Props) => {
       return dayjs().isBefore(dayjs(d.startDate));
     }
   });
+
   const contestsLen = customContests?.length ?? 0;
 
   return (

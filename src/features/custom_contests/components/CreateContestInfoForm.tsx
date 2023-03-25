@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@mui/material/Button";
@@ -20,29 +20,48 @@ import { modes } from "../customContest";
 import { Checkbox } from "@features/ui/component/Checkbox";
 import { Problem } from "@features/problems/problem";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
-
-const globalCFUserId = "applemelon" as const;
+import { useAddCustomContest } from "../useFetchCustomContest";
 
 export const CreateContestInfoForm: React.FC = () => {
-  const { codeforcesUsername, updateUsername } = useUserProfile();
+  const { codeforcesUsername, githubId } = useUserProfile();
+
+  const defaultValues: Pick<
+    CustomContest,
+    | "contestId"
+    | "owner"
+    | "ownerId"
+    | "participants"
+    | "visibility"
+    | "mode"
+    | "penalty"
+    | "problems"
+  > = {
+    contestId: generateUUIDv4(),
+    owner: codeforcesUsername ?? "",
+    ownerId: githubId ?? "",
+    visibility: "Public",
+    mode: "Normal",
+    penalty: 300,
+    participants: [{ userId: codeforcesUsername ?? "" }],
+    problems: [],
+  };
 
   const {
     control,
     setValue,
+    getValues,
     handleSubmit,
     formState: { errors },
-    getValues,
+    reset,
   } = useForm<CustomContest>({
     resolver: zodResolver(customContestSchema),
-    defaultValues: {
-      contestId: generateUUIDv4(),
-      owner: globalCFUserId,
-      visibility: "Public",
-      mode: "Normal",
-      participants: [{ userId: globalCFUserId }],
-      problems: [],
-    },
+    defaultValues: defaultValues,
   });
+
+  useEffect(() => {
+    reset(defaultValues);
+  }, [codeforcesUsername, githubId]);
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: "participants",
@@ -50,10 +69,17 @@ export const CreateContestInfoForm: React.FC = () => {
 
   const [selectedProblems, setSelectedProblems] = useState<Problem[]>([]);
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const { mutate } = useAddCustomContest();
+
+  const onSubmit = (data: CustomContest) => {
+    const updatedData: CustomContest = { ...data, problems: selectedProblems };
+    mutate(updatedData);
+  };
+
+  // console.log(errors);
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h3>Contest Form</h3>
       <div>
         Organize Custom Contest as <Chip_ label={codeforcesUsername} />
@@ -218,8 +244,7 @@ export const CreateContestInfoForm: React.FC = () => {
       <div css={{ textAlign: "right" }}>
         <Button
           onClick={() => {
-            setValue("problems", selectedProblems);
-            console.log(getValues());
+            getValues();
           }}
           type="submit"
           variant="contained"
