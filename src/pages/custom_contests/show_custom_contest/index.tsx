@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Button, CircularProgress, Box, Divider } from "@mui/material";
+import { Button, CircularProgress, Box } from "@mui/material";
+import { AlertMessage } from "@features/ui/component/AlertDialog";
 import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
 import { useFetchPublicCustomContest } from "@features/custom_contests/useFetchCustomContest";
@@ -9,9 +10,12 @@ import { Chip_ } from "@features/ui/component/Chip";
 import { Standings } from "@features/custom_contests/components/Standings";
 import { Problems } from "@features/custom_contests/components/Problems";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
+import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 
 export const ShowCustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
+  const { codeforcesUsername } = useUserProfile();
+
   const params = useParams();
   const contestId = params.contestId ?? "";
   const { data, isLoading, isError, error } = useFetchPublicCustomContest({
@@ -49,6 +53,12 @@ export const ShowCustomContestPage: React.FC = () => {
 
   return (
     <>
+      {(!loggedIn || !codeforcesUsername) && (
+        <AlertMessage
+          title=""
+          message="To Register to participate, You need to be logged in and set your Codeforces User ID."
+        />
+      )}
       {data && (
         <Box sx={{ m: 1 }}>
           <h2>
@@ -68,7 +78,7 @@ export const ShowCustomContestPage: React.FC = () => {
               color="success"
               size="small"
               css={{ textTransform: "none" }}
-              disabled={!loggedIn}
+              disabled={!loggedIn || !codeforcesUsername}
             >
               Register to participate
             </Button>
@@ -78,7 +88,6 @@ export const ShowCustomContestPage: React.FC = () => {
             Period: {data.startDate} ~ {data.endDate}
           </div>
           <div>Penalty: {data.penalty}</div>
-
           <Tabs tabItems={tabItems} />
         </Box>
       )}

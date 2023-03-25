@@ -23,7 +23,7 @@ export const ProblemsPage: React.FC = () => {
   const [upperDifficulty, setUpperDifficulty] = useState(
     ratingColorInfo.DeepRed.upperBound
   );
-  const [showTags, toggleShowTags] = useToggle(false);
+  const [showTags, toggleShowTags] = useToggle(false, true);
 
   if (isLoading) {
     return <span>Loading...</span>;

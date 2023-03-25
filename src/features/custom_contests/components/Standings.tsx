@@ -27,7 +27,7 @@ export const Standings: React.FC<Props> = (props: Props) => {
   const { problems, participants, startDate, endDate, penalty } = props;
   const numParticipants = participants.length;
 
-  const [autoRefetch, toggleAutoRefetch] = useToggle(true);
+  const [autoRefetch, toggleAutoRefetch] = useToggle(true, false);
 
   const { submissionsByUser, isError, error, isLoading } = useFetchSubmissions(
     participants,
