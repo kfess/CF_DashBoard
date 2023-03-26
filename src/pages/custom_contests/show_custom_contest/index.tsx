@@ -4,7 +4,11 @@ import { Button, CircularProgress, Box } from "@mui/material";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
 import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
-import { useFetchPublicCustomContest } from "@features/custom_contests/useFetchCustomContest";
+import {
+  useAddParticipantToContest,
+  useFetchPublicCustomContest,
+  useHasUserRegistered,
+} from "@features/custom_contests/useFetchCustomContest";
 import { CountdownScheduler } from "@features/custom_contests/components/CountdownScheduler";
 import { Chip_ } from "@features/ui/component/Chip";
 import { Standings } from "@features/custom_contests/components/Standings";
@@ -21,6 +25,12 @@ export const ShowCustomContestPage: React.FC = () => {
   const { data, isLoading, isError, error } = useFetchPublicCustomContest({
     contestId,
   });
+
+  const { data: isUserRegistered } = useHasUserRegistered(
+    contestId,
+    codeforcesUsername
+  );
+  const { mutate } = useAddParticipantToContest();
 
   const tabItems: TabItem[] = [
     {
@@ -72,17 +82,24 @@ export const ShowCustomContestPage: React.FC = () => {
             startDate={data.startDate}
             endDate={data.endDate}
           />
+
           <Box sx={{ m: 1, textAlign: "right" }}>
             <Button
               variant="contained"
               color="success"
               size="small"
               css={{ textTransform: "none" }}
-              disabled={!loggedIn || !codeforcesUsername}
+              disabled={!loggedIn || !codeforcesUsername || isUserRegistered}
+              onClick={() => {
+                mutate(contestId, codeforcesUsername);
+              }}
             >
-              Register to participate
+              {isUserRegistered
+                ? "Already registered"
+                : "Register to participate"}
             </Button>
           </Box>
+
           <h3>{data.description}</h3>
           <div>
             Period: {data.startDate} ~ {data.endDate}

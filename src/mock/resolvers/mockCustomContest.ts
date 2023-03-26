@@ -116,6 +116,31 @@ export const mockFetchContests: ResponseResolver<
   return res(ctx.status(200), ctx.json(selectedContests));
 };
 
+// get all public custom contests
+export const mockFetchContest: ResponseResolver<
+  MockedRequest,
+  typeof restContext
+> = (req, res, ctx) => {
+  const pathRegex = /\/custom-contest\/(.+)/;
+  const matchResult = req.url.pathname.match(pathRegex);
+  const contestId = matchResult ? matchResult[1] : "";
+
+  const contests = getContestsFromLocalStorage();
+
+  const contestIdx = contests.findIndex(
+    (contest) => contest.contestId === contestId
+  );
+
+  if (contestIdx === -1) {
+    return res(ctx.status(400), ctx.json({ errors: "Contest Not Found" }));
+  }
+  const selectedContest = contests.find(
+    (contest) => contest.contestId === contestId
+  );
+
+  return res(ctx.status(200), ctx.json(selectedContest));
+};
+
 // add custom contest (the visibility of the contest is both public and private)
 export const mockAddContest: ResponseResolver<
   MockedRequest,
@@ -181,6 +206,80 @@ export const mockDeleteContest: ResponseResolver<
   ]);
 
   return res(ctx.status(204));
+};
+
+// コンテストへの参加者を追加する
+export const mockAddParticipantToContest: ResponseResolver<
+  MockedRequest,
+  typeof restContext
+> = async (req, res, ctx) => {
+  const pathRegex = /\/custom-contest\/(.+)\/participants/;
+  const matchResult = req.url.pathname.match(pathRegex);
+  const contestId = matchResult ? matchResult[1] : "";
+
+  const requestBody = JSON.parse(await req.text());
+  const { userId } = requestBody;
+
+  if (!userId) {
+    res(ctx.status(400), ctx.json({ errors: "User ID is missing." }));
+  }
+
+  const contests = getContestsFromLocalStorage();
+
+  const contestIdx = contests.findIndex(
+    (contest) => contest.contestId === contestId
+  );
+
+  if (contestIdx === -1) {
+    return res(ctx.status(400), ctx.json({ errors: "Contest Not Found" }));
+  }
+
+  // Check if the user is already a participant
+  const existingParticipant = contests[contestIdx].participants.find(
+    (participant) => participant.userId === userId
+  );
+
+  if (existingParticipant) {
+    return res(ctx.status(400), ctx.json({ errors: "User already exists" }));
+  }
+
+  const updatedContest: CustomContest = {
+    ...contests[contestIdx],
+    participants: [...contests[contestIdx].participants, { userId: userId }],
+  };
+
+  contests[contestIdx] = updatedContest;
+  setContestsToLocalStorage(contests);
+
+  return res(ctx.status(204));
+};
+
+// コンテストに既に参加済みかどうかを判断するための API
+export const mockHasUserRegistered: ResponseResolver<
+  MockedRequest,
+  typeof restContext
+> = async (req, res, ctx) => {
+  console.log("hehah");
+
+  const url = req.url.pathname;
+  const uuidRegex = /[a-f\d]{8}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{12}/;
+  const match = url.match(uuidRegex);
+  const contestId = match ? match[0] : "";
+
+  const userId = req.url.searchParams.get("userId");
+
+  const contests = getContestsFromLocalStorage();
+  const contest = contests.find((c) => c.contestId === contestId);
+
+  if (!contest) {
+    return res(ctx.status(404), ctx.json({ errors: "Contest Not Found" }));
+  }
+
+  const hasUserRegistered = contest.participants.some(
+    (participant) => participant.userId === userId
+  );
+
+  return res(ctx.status(200), ctx.json({ hasUserRegistered }));
 };
 
 //////////////////////////////////////////////

@@ -40,8 +40,8 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
     addOrRemoveTag: addOrRemoveExcludeTag,
   } = useTags();
 
-  const [randomize, toggleRandomize] = useToggle(false);
-  const [excludeSolved, toggleExcludeSolved] = useToggle(false);
+  const [randomize, toggleRandomize] = useToggle(false, true);
+  const [excludeSolved, toggleExcludeSolved] = useToggle(false, true);
 
   const selectProblems = (problems: Problem[]) => {
     const filteredProblems = problems
