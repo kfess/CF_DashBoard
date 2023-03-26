@@ -1,20 +1,17 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Button, CircularProgress, Box } from "@mui/material";
+import { CircularProgress, Box } from "@mui/material";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
 import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
-import {
-  useAddParticipantToContest,
-  useFetchPublicCustomContest,
-  useHasUserRegistered,
-} from "@features/custom_contests/useFetchCustomContest";
+import { useFetchPublicCustomContest } from "@features/custom_contests/useFetchCustomContest";
 import { CountdownScheduler } from "@features/custom_contests/components/CountdownScheduler";
 import { Chip_ } from "@features/ui/component/Chip";
 import { Standings } from "@features/custom_contests/components/Standings";
 import { Problems } from "@features/custom_contests/components/Problems";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
+import { RegisterButton } from "@features/custom_contests/components/RegisterButton";
 
 export const ShowCustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
@@ -25,12 +22,6 @@ export const ShowCustomContestPage: React.FC = () => {
   const { data, isLoading, isError, error } = useFetchPublicCustomContest({
     contestId,
   });
-
-  const { data: isUserRegistered } = useHasUserRegistered(
-    contestId,
-    codeforcesUsername
-  );
-  const { mutate } = useAddParticipantToContest();
 
   const tabItems: TabItem[] = [
     {
@@ -82,23 +73,7 @@ export const ShowCustomContestPage: React.FC = () => {
             startDate={data.startDate}
             endDate={data.endDate}
           />
-          {!isUserRegistered && (
-            <Box sx={{ m: 1, textAlign: "right" }}>
-              <Button
-                variant="contained"
-                color="success"
-                size="small"
-                css={{ textTransform: "none" }}
-                disabled={!loggedIn || !codeforcesUsername || isUserRegistered}
-                onClick={() => {
-                  mutate(contestId, codeforcesUsername);
-                }}
-              >
-                Register to Participate
-              </Button>
-            </Box>
-          )}
-
+          <RegisterButton />
           <h3>{data.description}</h3>
           <div>
             Period: {data.startDate} ~ {data.endDate}

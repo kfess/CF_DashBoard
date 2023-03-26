@@ -36,7 +36,7 @@ export const useFetchPublicCustomContest = ({
   contestId: string;
 }) => {
   const { data, isError, error, isLoading } = useQuery<CustomContest, Error>({
-    queryKey: ["public-custom-contest"],
+    queryKey: ["public-custom-contest", contestId],
     queryFn: async (): Promise<CustomContest> => {
       try {
         const url = `/mock/custom-contest/${contestId}`;
@@ -149,6 +149,7 @@ export const useHasUserRegistered = (contestId: string, userId?: string) => {
   return useQuery<boolean, Error>({
     queryKey: ["userRegistration", contestId, userId],
     queryFn: fetchUserRegistration,
-    enabled: !!userId,
+    enabled: !!userId && !!contestId,
+    initialData: false,
   });
 };
