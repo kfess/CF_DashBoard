@@ -1,5 +1,5 @@
-import type { Classification } from "@features/contests/contest";
 import { ThemeColor } from "@features/color/@types/theme";
+import type { Classification } from "@features/contests/contest";
 
 export const ratingColor = [
   "Black",
@@ -162,122 +162,54 @@ export const ratingColorInfo: RatingColorInfo = {
   },
 };
 
-export const getColorNameFromRating = (
-  rating: number | undefined
-): RatingColor => {
-  if (rating == null) {
-    return ratingColorInfo["Black"].name;
-  } else if (rating <= ratingColorInfo["Gray"].upperBound) {
-    return ratingColorInfo["Gray"].name;
-  } else if (rating <= ratingColorInfo["Green"].upperBound) {
-    return ratingColorInfo["Green"].name;
-  } else if (rating <= ratingColorInfo["Cyan"].upperBound) {
-    return ratingColorInfo["Cyan"].name;
-  } else if (rating <= ratingColorInfo["Blue"].upperBound) {
-    return ratingColorInfo["Blue"].name;
-  } else if (rating <= ratingColorInfo["Violet"].upperBound) {
-    return ratingColorInfo["Violet"].name;
-  } else if (rating <= ratingColorInfo["LightOrange"].upperBound) {
-    return ratingColorInfo["LightOrange"].name;
-  } else if (rating <= ratingColorInfo["DeepOrange"].upperBound) {
-    return ratingColorInfo["DeepOrange"].name;
-  } else if (rating <= ratingColorInfo["LightRed"].upperBound) {
-    return ratingColorInfo["LightRed"].name;
-  } else if (rating <= ratingColorInfo["Red"].upperBound) {
-    return ratingColorInfo["Red"].name;
-  } else {
-    return ratingColorInfo["DeepRed"].name;
+export const getRatingColorInfo = (
+  rating?: number,
+  themeColor: ThemeColor = "base"
+) => {
+  const colorInfo = Object.values(ratingColorInfo).find((info) => {
+    if (rating === undefined) {
+      return info.name === "Black";
+    }
+    return rating >= info.lowerBound && rating <= info.upperBound;
+  });
+
+  if (colorInfo) {
+    return {
+      ...colorInfo,
+      colorCode:
+        themeColor === "dark" ? colorInfo.colorCode : colorInfo.darkColorCode,
+    };
   }
+  return ratingColorInfo["Black"];
 };
 
-export const getRatingColorInfo = (rating: number | undefined) => {
-  if (rating == null) {
-    return ratingColorInfo["Black"];
-  } else if (rating <= ratingColorInfo["Gray"].upperBound) {
-    return ratingColorInfo["Gray"];
-  } else if (rating <= ratingColorInfo["Green"].upperBound) {
-    return ratingColorInfo["Green"];
-  } else if (rating <= ratingColorInfo["Cyan"].upperBound) {
-    return ratingColorInfo["Cyan"];
-  } else if (rating <= ratingColorInfo["Blue"].upperBound) {
-    return ratingColorInfo["Blue"];
-  } else if (rating <= ratingColorInfo["Violet"].upperBound) {
-    return ratingColorInfo["Violet"];
-  } else if (rating <= ratingColorInfo["LightOrange"].upperBound) {
-    return ratingColorInfo["LightOrange"];
-  } else if (rating <= ratingColorInfo["DeepOrange"].upperBound) {
-    return ratingColorInfo["DeepOrange"];
-  } else if (rating <= ratingColorInfo["LightRed"].upperBound) {
-    return ratingColorInfo["LightRed"];
-  } else if (rating <= ratingColorInfo["Red"].upperBound) {
-    return ratingColorInfo["Red"];
-  } else {
-    return ratingColorInfo["DeepRed"];
-  }
+export const getColorNameFromRating = (rating?: number): RatingColor => {
+  return getRatingColorInfo(rating).name;
 };
-
-const isDarkThemeColor = (themeColor: ThemeColor) => themeColor === "dark";
 
 export const getColorCodeFromRating = (
-  rating: number | undefined,
-  themeColor: ThemeColor = "base" // default theme
+  rating?: number,
+  themeColor: ThemeColor = "base"
 ): ColorCode | DarkColorCode => {
-  if (rating == null) {
-    return !isDarkThemeColor(themeColor)
-      ? ratingColorInfo["Black"].colorCode
-      : ratingColorInfo["Black"].darkColorCode;
-  } else if (rating <= ratingColorInfo["Gray"].upperBound) {
-    return !isDarkThemeColor(themeColor)
-      ? ratingColorInfo["Gray"].colorCode
-      : ratingColorInfo["Gray"].darkColorCode;
-  } else if (rating <= ratingColorInfo["Green"].upperBound) {
-    return !isDarkThemeColor(themeColor)
-      ? ratingColorInfo["Green"].colorCode
-      : ratingColorInfo["Green"].darkColorCode;
-  } else if (rating <= ratingColorInfo["Cyan"].upperBound) {
-    return !isDarkThemeColor(themeColor)
-      ? ratingColorInfo["Cyan"].colorCode
-      : ratingColorInfo["Cyan"].darkColorCode;
-  } else if (rating <= ratingColorInfo["Blue"].upperBound) {
-    return !isDarkThemeColor(themeColor)
-      ? ratingColorInfo["Blue"].colorCode
-      : ratingColorInfo["Blue"].darkColorCode;
-  } else if (rating <= ratingColorInfo["Violet"].upperBound) {
-    return !isDarkThemeColor(themeColor)
-      ? ratingColorInfo["Violet"].colorCode
-      : ratingColorInfo["Violet"].darkColorCode;
-  } else if (rating <= ratingColorInfo["LightOrange"].upperBound) {
-    return !isDarkThemeColor(themeColor)
-      ? ratingColorInfo["LightOrange"].colorCode
-      : ratingColorInfo["LightOrange"].darkColorCode;
-  } else if (rating <= ratingColorInfo["DeepOrange"].upperBound) {
-    return !isDarkThemeColor(themeColor)
-      ? ratingColorInfo["DeepOrange"].colorCode
-      : ratingColorInfo["DeepOrange"].darkColorCode;
-  } else if (rating <= ratingColorInfo["LightRed"].upperBound) {
-    return !isDarkThemeColor(themeColor)
-      ? ratingColorInfo["LightRed"].colorCode
-      : ratingColorInfo["LightRed"].darkColorCode;
-  } else if (rating <= ratingColorInfo["Red"].upperBound) {
-    return !isDarkThemeColor(themeColor)
-      ? ratingColorInfo["Red"].colorCode
-      : ratingColorInfo["Red"].darkColorCode;
-  } else {
-    return !isDarkThemeColor(themeColor)
-      ? ratingColorInfo["DeepRed"].colorCode
-      : ratingColorInfo["DeepRed"].darkColorCode;
-  }
+  return getRatingColorInfo(rating, themeColor).colorCode;
 };
 
 export const getColorCodeFromClassification = (
   classification: Classification
 ): [ColorCode, ColorCode] => {
+  const defaultColorCodes: [ColorCode, ColorCode] = [
+    ratingColorInfo.Gray.colorCode,
+    ratingColorInfo.DeepRed.colorCode,
+  ];
+
   switch (classification) {
     case "All":
-      return [
-        ratingColorInfo.Gray.colorCode,
-        ratingColorInfo.DeepRed.colorCode,
-      ];
+    case "Educational":
+    case "Global":
+    case "ICPC":
+    case "Kotlin Heros":
+    case "Others":
+      return defaultColorCodes;
     case "Div. 4":
       return [ratingColorInfo.Gray.colorCode, ratingColorInfo.Green.colorCode];
     case "Div. 3":
@@ -294,55 +226,55 @@ export const getColorCodeFromClassification = (
         ratingColorInfo.LightOrange.colorCode,
         ratingColorInfo.DeepRed.colorCode,
       ];
-    case "Educational":
-      return [
-        ratingColorInfo.Gray.colorCode,
-        ratingColorInfo.DeepRed.colorCode,
-      ];
-    case "Global":
-      return [
-        ratingColorInfo.Gray.colorCode,
-        ratingColorInfo.DeepRed.colorCode,
-      ];
-    case "ICPC":
-      return [
-        ratingColorInfo.Gray.colorCode,
-        ratingColorInfo.DeepRed.colorCode,
-      ];
-    case "Kotlin Heros":
-      return [
-        ratingColorInfo.Gray.colorCode,
-        ratingColorInfo.DeepRed.colorCode,
-      ];
-    case "Others":
-      return [
-        ratingColorInfo.Gray.colorCode,
-        ratingColorInfo.DeepRed.colorCode,
-      ];
   }
 };
 
 // To Do
-export const calcFillPercent = (rating: number | undefined) => {
+export const calcFillPercent = (rating?: number) => {
   if (rating == null) {
     return 1;
-  } else if (rating <= ratingColorInfo["Gray"].upperBound) {
-    return (rating - 800) / 400;
-  } else if (rating < ratingColorInfo["Green"].upperBound) {
-    return 1 - (1400 - rating) / 200;
-  } else if (rating < ratingColorInfo["Cyan"].upperBound) {
-    return 1 - (1600 - rating) / 200;
-  } else if (rating < ratingColorInfo["Blue"].upperBound) {
-    return 1 - (1900 - rating) / 300;
-  } else if (rating < ratingColorInfo["Violet"].upperBound) {
-    return 1 - (2100 - rating) / 200;
-  } else if (rating < ratingColorInfo["LightOrange"].upperBound) {
-    return 1 - (2300 - rating) / 300;
-  } else if (rating < ratingColorInfo["DeepOrange"].upperBound) {
-    return 1 - (2400 - rating) / 300;
-  } else if (rating < ratingColorInfo["Red"].upperBound) {
-    return 1 - (2600 - rating) / 200;
-  } else {
-    return 1;
   }
+
+  const ratingBoundaries = [
+    { upperBound: ratingColorInfo["Gray"].upperBound, base: 800, divisor: 400 },
+    {
+      upperBound: ratingColorInfo["Green"].upperBound,
+      base: 1400,
+      divisor: 200,
+    },
+    {
+      upperBound: ratingColorInfo["Cyan"].upperBound,
+      base: 1600,
+      divisor: 200,
+    },
+    {
+      upperBound: ratingColorInfo["Blue"].upperBound,
+      base: 1900,
+      divisor: 300,
+    },
+    {
+      upperBound: ratingColorInfo["Violet"].upperBound,
+      base: 2100,
+      divisor: 200,
+    },
+    {
+      upperBound: ratingColorInfo["LightOrange"].upperBound,
+      base: 2300,
+      divisor: 300,
+    },
+    {
+      upperBound: ratingColorInfo["DeepOrange"].upperBound,
+      base: 2400,
+      divisor: 300,
+    },
+    { upperBound: ratingColorInfo["Red"].upperBound, base: 2600, divisor: 200 },
+  ];
+
+  for (const boundary of ratingBoundaries) {
+    if (rating <= boundary.upperBound) {
+      return 1 - (boundary.base - rating) / boundary.divisor;
+    }
+  }
+
+  return 1;
 };
