@@ -1,7 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
@@ -102,9 +101,7 @@ export const ShowCustomContestPage: React.FC = () => {
               <Chip_ label={"Created by: " + data.owner} />
             </Box>
           </Box>
-          <Typography variant="h6" component="h3" sx={{ mt: 2 }}>
-            {data.description}
-          </Typography>
+
           <CountdownScheduler
             title={data.title}
             description={data.description}
@@ -112,6 +109,22 @@ export const ShowCustomContestPage: React.FC = () => {
             endDate={data.endDate}
           />
           <RegisterButton />
+          <Box
+            sx={{
+              p: 1,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-around",
+              flexWrap: "wrap",
+            }}
+          >
+            <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
+              Description
+            </Typography>
+            <Typography sx={{ mt: 2, flex: 8 }}>{data.description}</Typography>
+          </Box>
+          <Divider />
           <Box
             sx={{
               p: 1,
@@ -143,15 +156,10 @@ export const ShowCustomContestPage: React.FC = () => {
             <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
               Penalty
             </Typography>
-            <Typography sx={{ mt: 2, flex: 8 }}>{data.penalty}</Typography>
+            <Typography sx={{ mt: 2, flex: 8 }}>
+              {data.penalty} seconds
+            </Typography>
           </Box>
-          {/* <Typography variant="h6" component="h3" sx={{ mt: 2 }}>
-            {data.description}
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
-            Period: {data.startDate} ~ {data.endDate}
-          </Typography>
-          <Typography sx={{ mt: 2 }}>Penalty: {data.penalty}</Typography> */}
           <Box sx={{ mt: 2 }}>
             <Tabs tabItems={tabItems} />
           </Box>
