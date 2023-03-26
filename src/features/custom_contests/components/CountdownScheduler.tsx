@@ -36,10 +36,12 @@ export const CountdownScheduler: React.FC<Props> = (props: Props) => {
   return (
     <Box
       sx={{
+        m: 1,
         p: 2,
         display: "flex",
         flexWrap: "wrap",
         fontSize: "1.1rem",
+        backgroundColor: "#ffffff",
         borderStyle: "solid",
         borderRadius: "4px",
         borderColor: "#c0c0c0",

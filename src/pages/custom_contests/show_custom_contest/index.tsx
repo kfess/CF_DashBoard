@@ -1,6 +1,8 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Box } from "@mui/material";
+import { useParams } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
 import type { TabItem } from "@features/ui/component/Tabs";
@@ -13,10 +15,9 @@ import { Problems } from "@features/custom_contests/components/Problems";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { RegisterButton } from "@features/custom_contests/components/RegisterButton";
+import { Divider } from "@mui/material";
 
 export const ShowCustomContestPage: React.FC = () => {
-  const navigate = useNavigate();
-
   const { loggedIn } = useLoggedIn();
   const { codeforcesUsername } = useUserProfile();
 
@@ -72,11 +73,38 @@ export const ShowCustomContestPage: React.FC = () => {
       )}
       {data && (
         <Box sx={{ m: 1 }}>
-          <h2>
-            {data.title}
-            <Chip_ label={data.visibility} />
-            <Chip_ label={data.mode} />
-          </h2>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" },
+              alignItems: "center",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+            }}
+          >
+            <Typography
+              variant="h5"
+              component="h2"
+              sx={{ mb: { xs: 1, md: 0 } }}
+            >
+              {data.title}
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                mt: { xs: 1, md: 0 },
+                gap: 1,
+              }}
+            >
+              <Chip_ label={data.visibility} />
+              <Chip_ label={data.mode} />
+              <Chip_ label={"Created by: " + data.owner} />
+            </Box>
+          </Box>
+          <Typography variant="h6" component="h3" sx={{ mt: 2 }}>
+            {data.description}
+          </Typography>
           <CountdownScheduler
             title={data.title}
             description={data.description}
@@ -84,12 +112,49 @@ export const ShowCustomContestPage: React.FC = () => {
             endDate={data.endDate}
           />
           <RegisterButton />
-          <h3>{data.description}</h3>
-          <div>
+          <Box
+            sx={{
+              p: 1,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-around",
+              flexWrap: "wrap",
+            }}
+          >
+            <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
+              Period
+            </Typography>
+            <Typography sx={{ mt: 2, flex: 8 }}>
+              {data.startDate} ~ {data.endDate}
+            </Typography>
+          </Box>
+          <Divider />
+          <Box
+            sx={{
+              p: 1,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-around",
+              flexWrap: "wrap",
+            }}
+          >
+            <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
+              Penalty
+            </Typography>
+            <Typography sx={{ mt: 2, flex: 8 }}>{data.penalty}</Typography>
+          </Box>
+          {/* <Typography variant="h6" component="h3" sx={{ mt: 2 }}>
+            {data.description}
+          </Typography>
+          <Typography sx={{ mt: 2 }}>
             Period: {data.startDate} ~ {data.endDate}
-          </div>
-          <div>Penalty: {data.penalty}</div>
-          <Tabs tabItems={tabItems} />
+          </Typography>
+          <Typography sx={{ mt: 2 }}>Penalty: {data.penalty}</Typography> */}
+          <Box sx={{ mt: 2 }}>
+            <Tabs tabItems={tabItems} />
+          </Box>
         </Box>
       )}
     </>
