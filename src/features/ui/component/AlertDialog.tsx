@@ -85,7 +85,7 @@ export const AlertMessage: React.FC<MessageProps> = (props: MessageProps) => {
   }
 
   return (
-    <Alert onClose={handleClose} severity="warning">
+    <Alert onClose={handleClose} severity="error" css={{ margin: "16px 8px" }}>
       <AlertTitle css={{ textAlign: "left" }}>{title}</AlertTitle>
       {message}
     </Alert>

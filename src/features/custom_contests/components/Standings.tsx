@@ -11,7 +11,7 @@ import { useFetchSubmissions } from "@features/custom_contests/useFetchSubmissio
 import { useToggle } from "@hooks/index";
 import { UserStats, calculateAllUsersStats } from "../calculateStandings";
 import { CF_CONTEST_URL } from "@constants/url";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 type Props = {
   participants: { userId: string }[];

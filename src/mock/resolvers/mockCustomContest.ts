@@ -258,8 +258,6 @@ export const mockHasUserRegistered: ResponseResolver<
   MockedRequest,
   typeof restContext
 > = async (req, res, ctx) => {
-  console.log("hehah");
-
   const url = req.url.pathname;
   const uuidRegex = /[a-f\d]{8}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{12}/;
   const match = url.match(uuidRegex);

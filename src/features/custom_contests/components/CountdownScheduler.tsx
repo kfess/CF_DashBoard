@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React from "react";
+import React, { useMemo } from "react";
 import Box from "@mui/material/Box";
 import { AddToGoogleCalendarLink } from "@features/ui/component/AddToGoogleCalendar";
 import { Timer } from "@features/ui/component/Timer";
@@ -14,14 +14,24 @@ type Props = {
 export const CountdownScheduler: React.FC<Props> = (props: Props) => {
   const { title, description, startDate, endDate } = props;
 
-  const [hoursToStart, daysToStart]: [number, number] = [
-    dayjs(startDate).diff(dayjs(), "hours"),
-    dayjs(startDate).diff(dayjs(), "days"),
-  ];
-  const isUpcoming = dayjs().isBefore(startDate);
-  const isRuuning =
-    dayjs().isAfter(dayjs(startDate)) && dayjs().isBefore(dayjs(endDate));
-  const isFinished = dayjs().isAfter(dayjs(endDate));
+  const [isUpcoming, isRunning, isFinished] = useMemo(() => {
+    const now = dayjs();
+    return [
+      now.isBefore(startDate),
+      now.isAfter(dayjs(startDate)) && now.isBefore(dayjs(endDate)),
+      now.isAfter(dayjs(endDate)),
+    ];
+  }, [startDate, endDate]);
+
+  const borderColor = useMemo(() => {
+    if (isUpcoming) {
+      return "green";
+    }
+    if (isRunning) {
+      return "red";
+    }
+    return "gray";
+  }, [isUpcoming, isRunning]);
 
   return (
     <Box
@@ -34,29 +44,13 @@ export const CountdownScheduler: React.FC<Props> = (props: Props) => {
         borderRadius: "4px",
         borderColor: "#c0c0c0",
         borderWidth: "0.8px",
-        borderLeftColor: isUpcoming ? "green" : isRuuning ? "red" : "gray",
+        borderLeftColor: borderColor,
         borderLeftWidth: "5px",
       }}
     >
-      {isFinished && <span>The contest has ended.</span>}
-      {isUpcoming && (
-        <>
-          <span>The contest will start in </span>
-          <span>
-            {hoursToStart >= 24 ? (
-              <span css={{ marginLeft: "6px" }}>{daysToStart} days</span>
-            ) : (
-              <Timer toDate={startDate} />
-            )}
-          </span>
-        </>
-      )}
-      {isRuuning && (
-        <>
-          The contest has started. It will end in
-          <Timer toDate={endDate} />
-        </>
-      )}
+      {isUpcoming && <UpcomingContestMessage startDate={startDate} />}
+      {isRunning && <RunningContestMessage endDate={endDate} />}
+      {isFinished && <FinishedContestMessage />}
       {!isFinished && (
         <div>
           <AddToGoogleCalendarLink
@@ -70,3 +64,33 @@ export const CountdownScheduler: React.FC<Props> = (props: Props) => {
     </Box>
   );
 };
+
+const UpcomingContestMessage: React.FC<Pick<Props, "startDate">> = ({
+  startDate,
+}) => (
+  <>
+    <span>The contest will start in </span>
+    <span>
+      {dayjs(startDate).diff(dayjs(), "hours") >= 24 ? (
+        <span css={{ marginLeft: "6px" }}>
+          {dayjs(startDate).diff(dayjs(), "days")} days
+        </span>
+      ) : (
+        <Timer toDate={startDate} />
+      )}
+    </span>
+  </>
+);
+
+const RunningContestMessage: React.FC<Pick<Props, "endDate">> = ({
+  endDate,
+}) => (
+  <>
+    The contest has started. It will end in
+    <Timer toDate={endDate} />
+  </>
+);
+
+const FinishedContestMessage: React.FC = () => (
+  <span>The contest has ended.</span>
+);

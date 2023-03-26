@@ -41,6 +41,9 @@ export const useFetchPublicCustomContest = ({
       try {
         const url = `/mock/custom-contest/${contestId}`;
         const response = await axios.get(url);
+        if (response.status === 404) {
+          throw new Error("Contest not found");
+        }
         const publicCustomContest = customContestSchema.parse(response.data);
         return publicCustomContest;
       } catch (err) {
@@ -52,6 +55,7 @@ export const useFetchPublicCustomContest = ({
       }
     },
     enabled: !!contestId,
+    retry: 0,
   });
 
   return { data, isError, error, isLoading };

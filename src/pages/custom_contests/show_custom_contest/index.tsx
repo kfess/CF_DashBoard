@@ -1,6 +1,7 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { CircularProgress, Box } from "@mui/material";
+import { useParams, useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
+import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
 import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
@@ -14,6 +15,8 @@ import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { RegisterButton } from "@features/custom_contests/components/RegisterButton";
 
 export const ShowCustomContestPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const { loggedIn } = useLoggedIn();
   const { codeforcesUsername } = useUserProfile();
 
@@ -23,33 +26,40 @@ export const ShowCustomContestPage: React.FC = () => {
     contestId,
   });
 
-  const tabItems: TabItem[] = [
-    {
-      label: "Problem",
-      children: data && <Problems problems={data.problems} />,
-      disabled: false,
-    },
-    {
-      label: "Standings",
-      children: data && (
-        <Standings
-          participants={data.participants}
-          problems={data.problems}
-          startDate={data.startDate}
-          endDate={data.endDate}
-          penalty={data.penalty}
-        />
-      ),
-      disabled: false,
-    },
-  ];
+  const tabItems: TabItem[] = data
+    ? [
+        {
+          label: "Problem",
+          children: <Problems problems={data.problems} />,
+          disabled: false,
+        },
+        {
+          label: "Standings",
+          children: (
+            <Standings
+              participants={data.participants}
+              problems={data.problems}
+              startDate={data.startDate}
+              endDate={data.endDate}
+              penalty={data.penalty}
+            />
+          ),
+          disabled: false,
+        },
+      ]
+    : [];
 
   if (isLoading) {
     return <CircularProgress />;
   }
 
   if (isError) {
-    console.log(error);
+    return (
+      <AlertMessage
+        title="Error"
+        message="The specified contest does not exist. Please check the URL and try again."
+      />
+    );
   }
 
   return (
