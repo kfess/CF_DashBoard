@@ -3,9 +3,6 @@ import { mockContest } from "@mock/resolvers/mockContest";
 import { mockProblem } from "@mock/resolvers/mockProblems";
 import { mockSubmission } from "@mock/resolvers/mockSubmission";
 import {
-  mockFetchPublicCustomContests,
-  mockFetchPublicCustomContest,
-  mockPrivateCustomContest,
   mockFetchContests,
   mockFetchContest,
   mockAddContest,
@@ -26,15 +23,6 @@ export const handlers = [
   rest.get("/mock/contests", mockContest),
   rest.get("/mock/submissions", mockSubmission),
   rest.get("/mock/problems", mockProblem),
-
-  // deprecated
-  rest.get("/mock/custom-contest/public", mockFetchPublicCustomContests),
-  rest.get("/mock/customcontest/private", mockPrivateCustomContest),
-  rest.get(
-    "/mock/custom-contest/public/random-uuid",
-    mockFetchPublicCustomContest
-  ),
-  // deprecated
 
   rest.post("/mock/authenticate", mockPostSessionId),
   rest.get("/mock/user/get", mockFetchUserProfile),
