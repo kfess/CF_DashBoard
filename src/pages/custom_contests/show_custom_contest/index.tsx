@@ -82,23 +82,22 @@ export const ShowCustomContestPage: React.FC = () => {
             startDate={data.startDate}
             endDate={data.endDate}
           />
-
-          <Box sx={{ m: 1, textAlign: "right" }}>
-            <Button
-              variant="contained"
-              color="success"
-              size="small"
-              css={{ textTransform: "none" }}
-              disabled={!loggedIn || !codeforcesUsername || isUserRegistered}
-              onClick={() => {
-                mutate(contestId, codeforcesUsername);
-              }}
-            >
-              {isUserRegistered
-                ? "Already registered"
-                : "Register to participate"}
-            </Button>
-          </Box>
+          {!isUserRegistered && (
+            <Box sx={{ m: 1, textAlign: "right" }}>
+              <Button
+                variant="contained"
+                color="success"
+                size="small"
+                css={{ textTransform: "none" }}
+                disabled={!loggedIn || !codeforcesUsername || isUserRegistered}
+                onClick={() => {
+                  mutate(contestId, codeforcesUsername);
+                }}
+              >
+                Register to Participate
+              </Button>
+            </Box>
+          )}
 
           <h3>{data.description}</h3>
           <div>
