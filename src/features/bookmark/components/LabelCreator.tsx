@@ -19,7 +19,7 @@ import { labelActions } from "@features/bookmark/labelActions";
 import { useToggle } from "@hooks/index";
 
 export const LabelCreator: React.FC = () => {
-  const [showBlock, toggleShowBlock] = useToggle();
+  const [showBlock, toggleShowBlock] = useToggle(false, true);
   const [name, setName] = useState({ value: "", errorMsg: "" });
   const [description, setDescription] = useState({ value: "", errorMsg: "" });
   const [color, setColor] = useState(generateRandomHexaColor());

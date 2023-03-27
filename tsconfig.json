@@ -30,7 +30,7 @@
       "@recoil/*": ["recoil/*"],
       "@assets/*": ["assets/*"]
     },
-    "types": ["@emotion/react/types/css-prop"], // to make it possible to write css props in HTML tag
+    "types": ["@emotion/react/types/css-prop", "jest"], // to make it possible to write css props in HTML tag
     "jsxImportSource": "@emotion/react" // to use @emotion's css props as JSX
   },
   "include": ["src"],

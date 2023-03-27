@@ -6,10 +6,8 @@ const circle = css({
   borderWidth: "thin",
   display: "inline-block",
   borderRadius: "50%",
-  paddingTop: "10px",
-  paddingLeft: "10px",
-  marginRight: "5px",
-  marginLeft: "5px",
+  padding: "5px",
+  margin: "0 5px",
 });
 
 type Props = {
@@ -20,7 +18,7 @@ type Props = {
 };
 
 export const ColoredCircle: React.FC<Props> = (props: Props) => {
-  const { color, fillPercent, width, height } = props;
+  const { color, fillPercent = 1, width, height } = props;
 
   return (
     <span

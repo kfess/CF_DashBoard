@@ -23,10 +23,8 @@ export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
 
   const { theme } = useThemeContext();
 
-  const [color, fillPercent] = [
-    getColorCodeFromRating(rating, theme.themeColor),
-    calcFillPercent(rating),
-  ];
+  const color = getColorCodeFromRating(rating, theme.themeColor);
+  const fillPercent = calcFillPercent(rating);
 
   const tooltipMsg =
     displayPurpose === "rating"
