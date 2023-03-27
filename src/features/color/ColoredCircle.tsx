@@ -22,6 +22,7 @@ export const ColoredCircle: React.FC<Props> = (props: Props) => {
 
   return (
     <span
+      aria-label="colored circle"
       css={[
         circle,
         {
