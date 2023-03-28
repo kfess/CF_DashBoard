@@ -14,7 +14,7 @@ import {
   isValidHexaColor,
 } from "@features/color/labelColor";
 import { LabelNameChip } from "./LabelIcon";
-import { ColorPalette } from "@features/color/ColorPalette";
+import { ColorPalette } from "@features/color/components/ColorPalette";
 import { labelActions } from "@features/bookmark/labelActions";
 import { useToggle } from "@hooks/index";
 

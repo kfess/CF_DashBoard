@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import ReplayIcon from "@mui/icons-material/Replay";
 import Tooltip from "@mui/material/Tooltip";
 import { HexaColor, generateRandomHexaColor } from "@features/color/labelColor";
-import { ColorPalette } from "@features/color/ColorPalette";
+import { ColorPalette } from "@features/color/components/ColorPalette";
 import { labelActions } from "@features/bookmark/labelActions";
 
 type NameProps = {

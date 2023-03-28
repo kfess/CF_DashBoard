@@ -22,7 +22,7 @@ type Props = {
 export const LabelItem: React.FC<Props> = (props: Props) => {
   const { label } = props;
   const navigate = useNavigate();
-  const [showBlock, toggleShowBlock] = useToggle();
+  const [showBlock, toggleShowBlock] = useToggle(false, true);
 
   const [name, setName] = useState({
     value: label.name,

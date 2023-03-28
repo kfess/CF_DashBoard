@@ -1,7 +1,7 @@
 import React from "react";
 import userEvent from "@testing-library/user-event";
 import { render, screen, fireEvent, within } from "@testing-library/react";
-import { TopcoderLikeCircle } from "@features/color/TopCoderLikeCircle.component";
+import { TopcoderLikeCircle } from "@features/color/components/TopCoderLikeCircle";
 
 describe("TopCoderLikeCircle", () => {
   test("renders the circle with the specified rating and displayPurpose", () => {

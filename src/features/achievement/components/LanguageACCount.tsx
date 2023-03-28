@@ -24,7 +24,7 @@ type Props = { submissions: Submission[] };
 // it will not be recognized as new AC.
 // If you solve the same problem in different languages, it is recognized as new AC.
 export const LanguageACCount: React.FC<Props> = (props: Props) => {
-  const [isReadMore, toggleReadMore] = useToggle(true);
+  const [isReadMore, toggleReadMore] = useToggle(true, false);
 
   const { submissions } = props;
   const ACSubmissions = submissions.filter(isACSubmission);

@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import type { Tag } from "@features/problems/problem";
 import type { Classification } from "@features/contests/contest";
 import { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
-import { ColoredCircle } from "@features/color/ColoredCircle";
+import { ColoredCircle } from "@features/color/components/ColoredCircle";
 import {
   getColorCodeFromClassification,
   getColorCodeFromRating,

@@ -1,7 +1,7 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
 import type { Classification } from "@features/contests/contest";
-import { ColoredCircle } from "@features/color/ColoredCircle";
+import { ColoredCircle } from "@features/color/components/ColoredCircle";
 import { getColorCodeFromClassification } from "@features/color/ratingColor";
 import { DeletableChip } from "@features/ui/component/Chip";
 import type { PeriodWord } from "./PeriodFilter";

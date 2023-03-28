@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import StarIcon from "@mui/icons-material/Star";
-import { ColoredCircle } from "@features/color/ColoredCircle";
+import { ColoredCircle } from "@features/color/components/ColoredCircle";
 import { labelActions, labelSelectors } from "@features/bookmark/labelActions";
 
 const circleCss = css({

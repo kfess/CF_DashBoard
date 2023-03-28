@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { ProfileIcon } from "@features/ui/component/ProfileIcon";
-import { ColoredCircle } from "@features/color/ColoredCircle";
+import { ColoredCircle } from "@features/color/components/ColoredCircle";
 import {
   getColorCodeFromRating,
   calcFillPercent,

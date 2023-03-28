@@ -5,7 +5,7 @@ import {
   getColorCodeFromRating,
   calcFillPercent,
 } from "@features/color/ratingColor";
-import { ColoredCircle } from "@features/color/ColoredCircle";
+import { ColoredCircle } from "@features/color/components/ColoredCircle";
 
 type DisplayPurpose = "rating" | "difficulty";
 type Props = {

@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
-import { TopcoderLikeCircle } from "@features/color/TopCoderLikeCircle.component";
+import { TopcoderLikeCircle } from "@features/color/components/TopCoderLikeCircle";
 import { CF_CONTEST_URL, CF_GYM_URL } from "@constants/url";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import { AddLabelButton } from "@features/bookmark/components/AddLabelButton";

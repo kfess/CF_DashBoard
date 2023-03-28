@@ -21,8 +21,8 @@ export const ContestsPage: React.FC = () => {
   const [period, setPeriod] = useState<PeriodWord>("All Period");
   const [solvedStatus, setSolvedStatus] =
     useState<SolvedStatus>("All Contests");
-  const [showDifficulty, toggleShowDifficulty] = useToggle(true);
-  const [reverse, toggleOrder] = useToggle(false);
+  const [showDifficulty, toggleShowDifficulty] = useToggle(true, false);
+  const [reverse, toggleOrder] = useToggle(false, true);
 
   const contests = data && reshapeContests(data, classiffication, reverse);
   const problemIdxes = data && getProblemIdxes(data);

@@ -5,7 +5,7 @@ import {
   ratingColor,
   ratingColorInfo,
 } from "@features/color/ratingColor";
-import { ColoredCircle } from "@features/color/ColoredCircle";
+import { ColoredCircle } from "@features/color/components/ColoredCircle";
 
 const lowerDifficulties = ratingColor.map(
   (color) => ratingColorInfo[color].lowerBound

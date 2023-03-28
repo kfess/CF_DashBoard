@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import { generateUrlPath } from "@features/layout/helper";
 import { useFetchUserInfo } from "../useUserInfo";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
-import { ColoredCircle } from "@features/color/ColoredCircle";
+import { ColoredCircle } from "@features/color/components/ColoredCircle";
 import { DeletableChip } from "@features/ui/component/Chip";
 
 export const SearchBar: React.FC = () => {

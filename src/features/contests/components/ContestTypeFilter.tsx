@@ -1,7 +1,7 @@
 import React from "react";
 import type { Classification } from "@features/contests/contest";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
-import { ColoredCircle } from "@features/color/ColoredCircle";
+import { ColoredCircle } from "@features/color/components/ColoredCircle";
 import { classifications } from "@features/contests/contest";
 import { getColorCodeFromClassification } from "@features/color/ratingColor";
 

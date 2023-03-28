@@ -229,52 +229,26 @@ export const getColorCodeFromClassification = (
   }
 };
 
-// To Do
-export const calcFillPercent = (rating?: number) => {
+export const calcFillPercent = (rating: number | undefined) => {
   if (rating == null) {
     return 1;
+  } else if (rating <= ratingColorInfo["Gray"].upperBound) {
+    return (rating - 800) / 400;
+  } else if (rating < ratingColorInfo["Green"].upperBound) {
+    return 1 - (1400 - rating) / 200;
+  } else if (rating < ratingColorInfo["Cyan"].upperBound) {
+    return 1 - (1600 - rating) / 200;
+  } else if (rating < ratingColorInfo["Blue"].upperBound) {
+    return 1 - (1900 - rating) / 300;
+  } else if (rating < ratingColorInfo["Violet"].upperBound) {
+    return 1 - (2100 - rating) / 200;
+  } else if (rating < ratingColorInfo["LightOrange"].upperBound) {
+    return 1 - (2300 - rating) / 300;
+  } else if (rating < ratingColorInfo["DeepOrange"].upperBound) {
+    return 1 - (2400 - rating) / 300;
+  } else if (rating < ratingColorInfo["Red"].upperBound) {
+    return 1 - (2600 - rating) / 200;
+  } else {
+    return 1;
   }
-
-  const ratingBoundaries = [
-    { upperBound: ratingColorInfo["Gray"].upperBound, base: 800, divisor: 400 },
-    {
-      upperBound: ratingColorInfo["Green"].upperBound,
-      base: 1400,
-      divisor: 200,
-    },
-    {
-      upperBound: ratingColorInfo["Cyan"].upperBound,
-      base: 1600,
-      divisor: 200,
-    },
-    {
-      upperBound: ratingColorInfo["Blue"].upperBound,
-      base: 1900,
-      divisor: 300,
-    },
-    {
-      upperBound: ratingColorInfo["Violet"].upperBound,
-      base: 2100,
-      divisor: 200,
-    },
-    {
-      upperBound: ratingColorInfo["LightOrange"].upperBound,
-      base: 2300,
-      divisor: 300,
-    },
-    {
-      upperBound: ratingColorInfo["DeepOrange"].upperBound,
-      base: 2400,
-      divisor: 300,
-    },
-    { upperBound: ratingColorInfo["Red"].upperBound, base: 2600, divisor: 200 },
-  ];
-
-  for (const boundary of ratingBoundaries) {
-    if (rating <= boundary.upperBound) {
-      return 1 - (boundary.base - rating) / boundary.divisor;
-    }
-  }
-
-  return 1;
 };
