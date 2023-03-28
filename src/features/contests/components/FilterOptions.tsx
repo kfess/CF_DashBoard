@@ -1,13 +1,13 @@
 import React from "react";
 import { css } from "@emotion/react";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import { Switch } from "@features/ui/component/Switch";
 import type { Classification } from "@features/contests/contest";
 import { ContestTypeFilter } from "./ContestTypeFilter";
 import { SolvedStatus, SolvedStatusFilter } from "./SolvedStatusFilter";
 import { PeriodFilterButton, PeriodWord } from "./PeriodFilter";
 import { ResetFilterButton } from "@features/contests/components/ResetFilter";
 import { FilterChips } from "@features/contests/components/FilterChips";
+import { FilterOptionsState } from "../hooks/useFilterOptionsState";
 
 const buttonsCss = css({
   display: "flex",
@@ -16,6 +16,7 @@ const buttonsCss = css({
 });
 
 type Props = {
+  state: FilterOptionsState;
   classification: Classification;
   setClassification: (arg: Classification) => void;
   period: PeriodWord;
@@ -23,11 +24,14 @@ type Props = {
   solvedStatus: SolvedStatus;
   setSolvedStatus: (arg: SolvedStatus) => void;
   toggleShowDifficulty: () => void;
-  toggleOrder: () => void;
+  toggleShowACStatus: () => void;
+  togglePinTableHeader: () => void;
+  toggleReverse: () => void;
 };
 
 export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
   const {
+    state,
     classification,
     setClassification,
     period,
@@ -35,7 +39,9 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
     solvedStatus,
     setSolvedStatus,
     toggleShowDifficulty,
-    toggleOrder,
+    toggleShowACStatus,
+    togglePinTableHeader,
+    toggleReverse,
   } = props;
 
   return (
@@ -69,57 +75,27 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
         setSolvedStatus={setSolvedStatus}
       />
       <div css={buttonsCss}>
-        <ShowDifficltySwitch toggleShowDifficulty={toggleShowDifficulty} />
-        <ShowACStatusSwitch />
-        <PinTableHeaderSwitch />
-        <OrderSwitch toggleOrder={toggleOrder} />
+        <Switch
+          label="Show Difficulty"
+          checked={state.showDifficulty}
+          onChange={toggleShowDifficulty}
+        />
+        <Switch
+          label="Show AC Status"
+          checked={state.showACStatus}
+          onChange={toggleShowACStatus}
+        />
+        <Switch
+          label="Pin Header"
+          checked={state.pinTableHeader}
+          onChange={togglePinTableHeader}
+        />
+        <Switch
+          label="Reverse"
+          checked={state.reverse}
+          onChange={toggleReverse}
+        />
       </div>
     </>
   );
 });
-
-const ShowDifficltySwitch: React.FC<Pick<Props, "toggleShowDifficulty">> = (
-  props: Pick<Props, "toggleShowDifficulty">
-) => {
-  const { toggleShowDifficulty } = props;
-
-  return (
-    <FormControlLabel
-      control={<Switch defaultChecked={true} />}
-      label="Show Difficulty"
-      onChange={toggleShowDifficulty}
-    />
-  );
-};
-
-const ShowACStatusSwitch: React.FC = () => {
-  return (
-    <FormControlLabel
-      control={<Switch defaultChecked />}
-      label="Show AC Status"
-    />
-  );
-};
-
-const PinTableHeaderSwitch: React.FC = () => {
-  return (
-    <FormControlLabel
-      control={<Switch defaultChecked={false} />}
-      label="Pin Table Header"
-    />
-  );
-};
-
-const OrderSwitch: React.FC<Pick<Props, "toggleOrder">> = (
-  props: Pick<Props, "toggleOrder">
-) => {
-  const { toggleOrder } = props;
-
-  return (
-    <FormControlLabel
-      control={<Switch defaultChecked={false} />}
-      label="Reverse Order"
-      onChange={toggleOrder}
-    />
-  );
-};

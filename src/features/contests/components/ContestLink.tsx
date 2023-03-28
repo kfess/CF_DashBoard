@@ -2,18 +2,16 @@ import React from "react";
 import { CF_CONTEST_URL } from "@constants/url";
 
 type Props = {
-  contestId: number;
-  contestName: string;
+  readonly contestId: number;
+  readonly contestName: string;
 };
 
-export const ContestLink: React.FC<Props> = (props: Props) => {
-  const { contestId, contestName } = props;
-
+export const ContestLink: React.FC<Props> = ({ contestId, contestName }) => {
   return (
     <a
-      href={[CF_CONTEST_URL, contestId].join("/")}
+      href={`${CF_CONTEST_URL}/${contestId}`}
       target="_blank"
-      rel="noopner noreferrer"
+      rel="noopener noreferrer"
     >
       {contestName}
     </a>

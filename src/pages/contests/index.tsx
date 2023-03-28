@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { useFetchContests } from "@features/contests/useFetchContest";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
-import type { Classification } from "@features/contests/contest";
 import { reshapeContests, getProblemIdxes } from "@features/contests/helper";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
 import { useSolvedStatus } from "@features/submission/useSolvedStatus";
-import type { PeriodWord } from "@features/contests/components/PeriodFilter";
-import type { SolvedStatus } from "@features/contests/components/SolvedStatusFilter";
-import { useToggle } from "@hooks/index";
 import { LabelsChip } from "@features/bookmark/components/LabelsChip";
+import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
 
 export const ContestsPage: React.FC = () => {
   const { search } = useLocation();
@@ -17,14 +14,20 @@ export const ContestsPage: React.FC = () => {
   const userId = urlQueries.get("userId") ?? "";
 
   const { data, isError, error, isLoading } = useFetchContests();
-  const [classiffication, setClassification] = useState<Classification>("All");
-  const [period, setPeriod] = useState<PeriodWord>("All Period");
-  const [solvedStatus, setSolvedStatus] =
-    useState<SolvedStatus>("All Contests");
-  const [showDifficulty, toggleShowDifficulty] = useToggle(true, false);
-  const [reverse, toggleOrder] = useToggle(false, true);
 
-  const contests = data && reshapeContests(data, classiffication, reverse);
+  const {
+    state,
+    setClassification,
+    setPeriod,
+    setSolvedStatus,
+    toggleShowDifficulty,
+    toggleShowACStatus,
+    togglePinTableHeader,
+    toggleReverse,
+  } = useFilterOptionsState();
+
+  const contests =
+    data && reshapeContests(data, state.classification, state.reverse);
   const problemIdxes = data && getProblemIdxes(data);
 
   const { solvedSet, attemptedSet } = useSolvedStatus(userId);
@@ -43,20 +46,23 @@ export const ContestsPage: React.FC = () => {
         <LabelsChip />
       </div>
       <FilterOptions
-        classification={classiffication}
+        state={state}
+        classification={state.classification}
         setClassification={setClassification}
-        period={period}
+        period={state.period}
         setPeriod={setPeriod}
-        solvedStatus={solvedStatus}
+        solvedStatus={state.solvedStatus}
         setSolvedStatus={setSolvedStatus}
         toggleShowDifficulty={toggleShowDifficulty}
-        toggleOrder={toggleOrder}
+        toggleShowACStatus={toggleShowACStatus}
+        togglePinTableHeader={togglePinTableHeader}
+        toggleReverse={toggleReverse}
       />
       {contests && problemIdxes && (
         <ContestsTable
           contests={contests}
           problemIdxes={problemIdxes}
-          showDifficulty={showDifficulty}
+          showDifficulty={state.showDifficulty}
           solvedSet={solvedSet}
           attemptedSet={attemptedSet}
         />

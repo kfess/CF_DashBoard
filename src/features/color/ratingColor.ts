@@ -229,7 +229,7 @@ export const getColorCodeFromClassification = (
   }
 };
 
-export const calcFillPercent = (rating: number | undefined) => {
+export const calcFillPercent = (rating?: number) => {
   if (rating == null) {
     return 1;
   } else if (rating <= ratingColorInfo["Gray"].upperBound) {
