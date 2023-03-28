@@ -61,6 +61,7 @@ export const Switch: React.FC<Props> = ({ label, checked, onChange }) => {
           inputProps={{ "aria-label": "ant design" }}
           checked={checked}
           onChange={onChange}
+          sx={{ marginRight: 1, marginLeft: 2 }}
         />
       }
     />
