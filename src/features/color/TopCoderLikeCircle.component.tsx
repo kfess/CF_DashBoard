@@ -11,27 +11,24 @@ import { ColoredCircle } from "@features/color/ColoredCircle";
 // 'difficulty' means the "Difficulty of a problem"
 type DisplayPurpose = "rating" | "difficulty";
 type Props = {
-  displayPurpose: DisplayPurpose;
-  rating?: number;
-  solvedCount?: number;
-  width?: string;
-  height?: string;
+  readonly displayPurpose: DisplayPurpose;
+  readonly rating?: number;
+  readonly solvedCount?: number;
 };
 
-export const TopcoderLikeCircle: React.FC<Props> = (props: Props) => {
-  const { displayPurpose, rating, solvedCount } = props;
-
+export const TopcoderLikeCircle: React.FC<Props> = ({
+  displayPurpose,
+  rating,
+  solvedCount,
+}) => {
   const { theme } = useThemeContext();
-
   const color = getColorCodeFromRating(rating, theme.themeColor);
   const fillPercent = calcFillPercent(rating);
 
   const tooltipMsg =
     displayPurpose === "rating"
       ? `Rating: ${rating ?? "?"}`
-      : displayPurpose === "difficulty"
-      ? `Difficulty: ${rating ?? "?"}, Solved by ${solvedCount ?? "?"}`
-      : "";
+      : `Difficulty: ${rating ?? "?"}, Solved by ${solvedCount ?? "?"}`;
 
   return (
     <Tooltip title={tooltipMsg}>
