@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColoredCircle matches the snapshot with the specified fillPercent 1`] = `
+<DocumentFragment>
+  <span
+    aria-label="colored circle"
+    class="css-66aem9"
+  />
+</DocumentFragment>
+`;

@@ -31,13 +31,15 @@ type Props = {
 };
 
 export const ColoredCircle: React.FC<Props> = (props: Props) => {
+  const { color, fillPercent, width, height } = props;
+
   return (
     <StyledCircle
       aria-label="colored circle"
-      color={props.color}
-      fillPercent={props.fillPercent}
-      width={props.width}
-      height={props.height}
+      color={color}
+      fillPercent={fillPercent}
+      width={width}
+      height={height}
     />
   );
 };
