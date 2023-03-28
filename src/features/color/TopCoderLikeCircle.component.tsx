@@ -7,8 +7,6 @@ import {
 } from "@features/color/ratingColor";
 import { ColoredCircle } from "@features/color/ColoredCircle";
 
-// 'rating' means "A person's rating"
-// 'difficulty' means the "Difficulty of a problem"
 type DisplayPurpose = "rating" | "difficulty";
 type Props = {
   readonly displayPurpose: DisplayPurpose;
