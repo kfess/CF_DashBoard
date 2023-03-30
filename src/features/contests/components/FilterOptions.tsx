@@ -12,7 +12,7 @@ import { FilterOptionsState } from "../hooks/useFilterOptionsState";
 const buttonsCss = css({
   display: "flex",
   flexWrap: "wrap",
-  justifyContent: "flex-start",
+  gap: "1rem",
 });
 
 type Props = {

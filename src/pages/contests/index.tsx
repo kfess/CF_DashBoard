@@ -7,6 +7,8 @@ import { FilterOptions } from "@features/contests/components/FilterOptions";
 import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
+import { CircularProgress } from "@features/ui/component/CircularProgress";
+import { Button } from "@features/ui/component/Button";
 
 export const ContestsPage: React.FC = () => {
   const { search } = useLocation();
@@ -33,7 +35,7 @@ export const ContestsPage: React.FC = () => {
   const { solvedSet, attemptedSet } = useSolvedStatus(userId);
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <CircularProgress />;
   }
   if (isError) {
     return <span>Error: {error?.message}</span>;

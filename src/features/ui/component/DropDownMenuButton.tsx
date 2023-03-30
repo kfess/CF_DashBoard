@@ -1,13 +1,13 @@
-import React, { ReactNode } from "react";
-import Button from "@mui/material/Button";
+import React, { ReactNode, useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import CheckIcon from "@mui/icons-material/Check";
 import SvgIcon from "@mui/material/SvgIcon";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { Button } from "@features/ui/component/Button";
 
-const ITEM_HEIGHT_ = 48;
+const ITEM_HEIGHT = 48;
 
 type Props<T extends string | number> = {
   readonly title: string;
@@ -21,7 +21,7 @@ export const DropDownMenuButton = <T extends string | number>(
 ) => {
   const { title, selectedItem, setSelectedItem, items } = props;
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -36,10 +36,6 @@ export const DropDownMenuButton = <T extends string | number>(
       <Button
         onClick={handleClick}
         endIcon={open ? <ArrowDropDownIcon /> : <ArrowLeftIcon />}
-        css={{
-          textTransform: "none",
-          "&:hover": { textDecorationLine: "underline" },
-        }}
       >
         {title}
       </Button>
@@ -47,7 +43,7 @@ export const DropDownMenuButton = <T extends string | number>(
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
-        PaperProps={{ style: { maxHeight: ITEM_HEIGHT_ * 4.5 } }}
+        PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5 } }}
       >
         {items.map((item) => (
           <MenuItem

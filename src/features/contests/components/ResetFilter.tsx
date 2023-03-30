@@ -1,9 +1,9 @@
 import React from "react";
-import Button from "@mui/material/Button";
 import ReplayIcon from "@mui/icons-material/Replay";
 import type { Classification } from "@features/contests/contest";
 import { SolvedStatus } from "./SolvedStatusFilter";
 import { PeriodWord } from "./PeriodFilter";
+import { Button } from "@features/ui/component/Button";
 
 type Props = {
   setClassification: (arg: Classification) => void;
@@ -23,8 +23,6 @@ export const ResetFilterButton: React.FC<Props> = (props: Props) => {
   return (
     <Button
       onClick={onClickReset}
-      color="error"
-      css={{ textTransform: "none" }}
       startIcon={<ReplayIcon fontSize="inherit" />}
     >
       Reset
