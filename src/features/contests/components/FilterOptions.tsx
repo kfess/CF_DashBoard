@@ -5,7 +5,6 @@ import { ContestTypeFilter } from "./ContestTypeFilter";
 import { SolvedStatus, SolvedStatusFilter } from "./SolvedStatusFilter";
 import { PeriodFilterButton, PeriodWord } from "./PeriodFilter";
 import { ResetFilterButton } from "@features/contests/components/ResetFilter";
-import { FilterChips } from "@features/contests/components/FilterChips";
 import { ViewFilter } from "./ViewFilter";
 
 const buttonsCss = css({
@@ -50,45 +49,31 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
   } = props;
 
   return (
-    <>
-      <div css={buttonsCss}>
-        <ContestTypeFilter
-          classification={classification}
-          setClassification={setClassification}
-        />
-        <PeriodFilterButton period={period} setPeriod={setPeriod} />
-        <SolvedStatusFilter
-          solvedStatus={solvedStatus}
-          setSolvedStatus={setSolvedStatus}
-        />
-        <ViewFilter
-          showDifficulty={showDifficulty}
-          showACStatus={showACStatus}
-          pinTableHeader={pinTableHeader}
-          reverse={reverse}
-          toggleShowDifficulty={toggleShowDifficulty}
-          toggleShowACStatus={toggleShowACStatus}
-          toggleReverse={toggleReverse}
-          togglePinTableHeader={togglePinTableHeader}
-        />
-        <ResetFilterButton
-          setClassification={setClassification}
-          setPeriod={setPeriod}
-          setSolvedStatus={setSolvedStatus}
-        />
-      </div>
-      <FilterChips
+    <div css={buttonsCss}>
+      <ContestTypeFilter
         classification={classification}
-        setDefaultClassification={() => {
-          setClassification("All");
-        }}
-        period={period}
-        setPeriod={() => {
-          setPeriod("All Period");
-        }}
+        setClassification={setClassification}
+      />
+      <PeriodFilterButton period={period} setPeriod={setPeriod} />
+      <SolvedStatusFilter
         solvedStatus={solvedStatus}
         setSolvedStatus={setSolvedStatus}
       />
-    </>
+      <ViewFilter
+        showDifficulty={showDifficulty}
+        showACStatus={showACStatus}
+        pinTableHeader={pinTableHeader}
+        reverse={reverse}
+        toggleShowDifficulty={toggleShowDifficulty}
+        toggleShowACStatus={toggleShowACStatus}
+        toggleReverse={toggleReverse}
+        togglePinTableHeader={togglePinTableHeader}
+      />
+      <ResetFilterButton
+        setClassification={setClassification}
+        setPeriod={setPeriod}
+        setSolvedStatus={setSolvedStatus}
+      />
+    </div>
   );
 });

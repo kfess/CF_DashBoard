@@ -8,6 +8,8 @@ import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
+import { Divider, Typography } from "@mui/material";
+import { FilterChips } from "@features/contests/components/FilterChips";
 
 export const ContestsPage: React.FC = () => {
   const { search } = useLocation();
@@ -46,26 +48,50 @@ export const ContestsPage: React.FC = () => {
 
   return (
     <div>
-      <h2 css={{ textAlign: "left" }}>Contests</h2>
-      <div css={{ textAlign: "right" }}>
+      <Typography variant="h4" component="h1">
+        Contests
+      </Typography>
+      <Divider />
+      <div
+        css={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "1rem",
+        }}
+      >
+        <FilterOptions
+          showDifficulty={showDifficulty}
+          showACStatus={showACStatus}
+          pinTableHeader={pinTableHeader}
+          reverse={reverse}
+          classification={state.classification}
+          period={state.period}
+          solvedStatus={state.solvedStatus}
+          setClassification={setClassification}
+          setPeriod={setPeriod}
+          setSolvedStatus={setSolvedStatus}
+          toggleShowDifficulty={toggleShowDifficulty}
+          toggleShowACStatus={toggleShowACStatus}
+          togglePinTableHeader={togglePinTableHeader}
+          toggleReverse={toggleReverse}
+        />
         <LabelsChip />
       </div>
-      <FilterOptions
-        showDifficulty={showDifficulty}
-        showACStatus={showACStatus}
-        pinTableHeader={pinTableHeader}
-        reverse={reverse}
-        classification={state.classification}
-        period={state.period}
-        solvedStatus={state.solvedStatus}
-        setClassification={setClassification}
-        setPeriod={setPeriod}
-        setSolvedStatus={setSolvedStatus}
-        toggleShowDifficulty={toggleShowDifficulty}
-        toggleShowACStatus={toggleShowACStatus}
-        togglePinTableHeader={togglePinTableHeader}
-        toggleReverse={toggleReverse}
-      />
+      <div>
+        <FilterChips
+          classification={state.classification}
+          setDefaultClassification={() => {
+            setClassification("All");
+          }}
+          period={state.period}
+          setPeriod={() => {
+            setPeriod("All Period");
+          }}
+          solvedStatus={state.solvedStatus}
+          setSolvedStatus={setSolvedStatus}
+        />
+      </div>
+
       {contests && problemIdxes && (
         <ContestsTable
           contests={contests}
