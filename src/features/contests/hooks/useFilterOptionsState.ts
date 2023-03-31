@@ -82,6 +82,9 @@ export const useFilterOptionsState = () => {
   return {
     state,
     showDifficulty: state.showDifficulty,
+    showACStatus: state.showACStatus,
+    pinTableHeader: state.pinTableHeader,
+    reverse: state.reverse,
     setClassification,
     setPeriod,
     setSolvedStatus,

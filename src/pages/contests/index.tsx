@@ -8,7 +8,6 @@ import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
-import { Button } from "@features/ui/component/Button";
 
 export const ContestsPage: React.FC = () => {
   const { search } = useLocation();
@@ -20,6 +19,9 @@ export const ContestsPage: React.FC = () => {
   const {
     state,
     showDifficulty,
+    showACStatus,
+    pinTableHeader,
+    reverse,
     setClassification,
     setPeriod,
     setSolvedStatus,
@@ -49,13 +51,15 @@ export const ContestsPage: React.FC = () => {
         <LabelsChip />
       </div>
       <FilterOptions
-        state={state}
         showDifficulty={showDifficulty}
+        showACStatus={showACStatus}
+        pinTableHeader={pinTableHeader}
+        reverse={reverse}
         classification={state.classification}
-        setClassification={setClassification}
         period={state.period}
-        setPeriod={setPeriod}
         solvedStatus={state.solvedStatus}
+        setClassification={setClassification}
+        setPeriod={setPeriod}
         setSolvedStatus={setSolvedStatus}
         toggleShowDifficulty={toggleShowDifficulty}
         toggleShowACStatus={toggleShowACStatus}

@@ -6,7 +6,6 @@ import { SolvedStatus, SolvedStatusFilter } from "./SolvedStatusFilter";
 import { PeriodFilterButton, PeriodWord } from "./PeriodFilter";
 import { ResetFilterButton } from "@features/contests/components/ResetFilter";
 import { FilterChips } from "@features/contests/components/FilterChips";
-import { FilterOptionsState } from "../hooks/useFilterOptionsState";
 import { ViewFilter } from "./ViewFilter";
 
 const buttonsCss = css({
@@ -16,13 +15,15 @@ const buttonsCss = css({
 });
 
 type Props = {
-  state: FilterOptionsState;
   showDifficulty: boolean;
+  showACStatus: boolean;
+  pinTableHeader: boolean;
+  reverse: boolean;
   classification: Classification;
-  setClassification: (arg: Classification) => void;
   period: PeriodWord;
-  setPeriod: (arg: PeriodWord) => void;
   solvedStatus: SolvedStatus;
+  setClassification: (arg: Classification) => void;
+  setPeriod: (arg: PeriodWord) => void;
   setSolvedStatus: (arg: SolvedStatus) => void;
   toggleShowDifficulty: () => void;
   toggleShowACStatus: () => void;
@@ -32,13 +33,15 @@ type Props = {
 
 export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
   const {
-    state,
     showDifficulty,
+    showACStatus,
+    pinTableHeader,
+    reverse,
     classification,
-    setClassification,
     period,
-    setPeriod,
     solvedStatus,
+    setClassification,
+    setPeriod,
     setSolvedStatus,
     toggleShowDifficulty,
     toggleShowACStatus,
@@ -60,6 +63,9 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
         />
         <ViewFilter
           showDifficulty={showDifficulty}
+          showACStatus={showACStatus}
+          pinTableHeader={pinTableHeader}
+          reverse={reverse}
           toggleShowDifficulty={toggleShowDifficulty}
           toggleShowACStatus={toggleShowACStatus}
           toggleReverse={toggleReverse}

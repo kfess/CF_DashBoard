@@ -9,6 +9,9 @@ const ITEM_HEIGHT = 48;
 
 type Props = {
   showDifficulty: boolean;
+  showACStatus: boolean;
+  pinTableHeader: boolean;
+  reverse: boolean;
   toggleShowDifficulty: () => void;
   toggleShowACStatus: () => void;
   togglePinTableHeader: () => void;
@@ -17,6 +20,9 @@ type Props = {
 
 export const ViewFilter: React.FC<Props> = ({
   showDifficulty,
+  showACStatus,
+  pinTableHeader,
+  reverse,
   toggleShowDifficulty,
   toggleShowACStatus,
   togglePinTableHeader,
@@ -49,16 +55,28 @@ export const ViewFilter: React.FC<Props> = ({
         PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5 } }}
       >
         <MenuItem>
-          <Switch label="Show Difficulty" onChange={toggleShowDifficulty} />
+          <Switch
+            label="Show Difficulty"
+            checked={showDifficulty}
+            onChange={toggleShowDifficulty}
+          />
         </MenuItem>
         <MenuItem>
-          <Switch label="Show AC Status" onChange={toggleShowACStatus} />
+          <Switch
+            label="Show AC Status"
+            checked={showACStatus}
+            onChange={toggleShowACStatus}
+          />
         </MenuItem>
         <MenuItem>
-          <Switch label="Pin Header" onChange={togglePinTableHeader} />
+          <Switch
+            label="Pin Header"
+            checked={pinTableHeader}
+            onChange={togglePinTableHeader}
+          />
         </MenuItem>
         <MenuItem>
-          <Switch label="Reverse" onChange={toggleReverse} />
+          <Switch label="Reverse" checked={reverse} onChange={toggleReverse} />
         </MenuItem>
       </Menu>
     </>

@@ -91,6 +91,8 @@ export default {
   moduleNameMapper: {
     // "^@/(.*)$": "<rootDir>/src/$1",
     "^@features(.*)$": "<rootDir>/src/features/$1",
+    "^@constants/(.*)$": "<rootDir>/src/constants/$1",
+    "^@hooks/(.*)$": "<rootDir>/src/hooks/$1",
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
