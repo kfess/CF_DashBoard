@@ -1,6 +1,5 @@
 import React from "react";
 import { css } from "@emotion/react";
-import { Switch } from "@features/ui/component/Switch";
 import type { Classification } from "@features/contests/contest";
 import { ContestTypeFilter } from "./ContestTypeFilter";
 import { SolvedStatus, SolvedStatusFilter } from "./SolvedStatusFilter";
@@ -8,6 +7,7 @@ import { PeriodFilterButton, PeriodWord } from "./PeriodFilter";
 import { ResetFilterButton } from "@features/contests/components/ResetFilter";
 import { FilterChips } from "@features/contests/components/FilterChips";
 import { FilterOptionsState } from "../hooks/useFilterOptionsState";
+import { ViewFilter } from "./ViewFilter";
 
 const buttonsCss = css({
   display: "flex",
@@ -17,6 +17,7 @@ const buttonsCss = css({
 
 type Props = {
   state: FilterOptionsState;
+  showDifficulty: boolean;
   classification: Classification;
   setClassification: (arg: Classification) => void;
   period: PeriodWord;
@@ -32,6 +33,7 @@ type Props = {
 export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
   const {
     state,
+    showDifficulty,
     classification,
     setClassification,
     period,
@@ -56,6 +58,13 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
           solvedStatus={solvedStatus}
           setSolvedStatus={setSolvedStatus}
         />
+        <ViewFilter
+          showDifficulty={showDifficulty}
+          toggleShowDifficulty={toggleShowDifficulty}
+          toggleShowACStatus={toggleShowACStatus}
+          toggleReverse={toggleReverse}
+          togglePinTableHeader={togglePinTableHeader}
+        />
         <ResetFilterButton
           setClassification={setClassification}
           setPeriod={setPeriod}
@@ -74,28 +83,6 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
         solvedStatus={solvedStatus}
         setSolvedStatus={setSolvedStatus}
       />
-      <div css={buttonsCss}>
-        <Switch
-          label="Show Difficulty"
-          checked={state.showDifficulty}
-          onChange={toggleShowDifficulty}
-        />
-        <Switch
-          label="Show AC Status"
-          checked={state.showACStatus}
-          onChange={toggleShowACStatus}
-        />
-        <Switch
-          label="Pin Header"
-          checked={state.pinTableHeader}
-          onChange={togglePinTableHeader}
-        />
-        <Switch
-          label="Reverse"
-          checked={state.reverse}
-          onChange={toggleReverse}
-        />
-      </div>
     </>
   );
 });

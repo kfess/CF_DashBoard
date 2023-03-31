@@ -19,6 +19,7 @@ export const ContestsPage: React.FC = () => {
 
   const {
     state,
+    showDifficulty,
     setClassification,
     setPeriod,
     setSolvedStatus,
@@ -49,6 +50,7 @@ export const ContestsPage: React.FC = () => {
       </div>
       <FilterOptions
         state={state}
+        showDifficulty={showDifficulty}
         classification={state.classification}
         setClassification={setClassification}
         period={state.period}

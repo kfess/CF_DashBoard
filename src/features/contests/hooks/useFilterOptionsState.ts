@@ -81,6 +81,7 @@ export const useFilterOptionsState = () => {
 
   return {
     state,
+    showDifficulty: state.showDifficulty,
     setClassification,
     setPeriod,
     setSolvedStatus,

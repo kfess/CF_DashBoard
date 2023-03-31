@@ -42,6 +42,11 @@ export const DropDownMenuButton = <T extends string | number>(
       <Menu
         open={open}
         anchorEl={anchorEl}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
         onClose={handleClose}
         PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5 } }}
       >
