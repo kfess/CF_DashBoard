@@ -1,6 +1,7 @@
 import React from "react";
+import { Divider, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import { useFetchContests } from "@features/contests/useFetchContest";
+import { useFetchContests } from "@features/contests/hooks/useFetchContest";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
 import { reshapeContests, getProblemIdxes } from "@features/contests/helper";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
@@ -8,7 +9,6 @@ import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
-import { Divider, Typography } from "@mui/material";
 import { FilterChips } from "@features/contests/components/FilterChips";
 
 export const ContestsPage: React.FC = () => {
@@ -42,12 +42,13 @@ export const ContestsPage: React.FC = () => {
   if (isLoading) {
     return <CircularProgress />;
   }
+
   if (isError) {
     return <span>Error: {error?.message}</span>;
   }
 
   return (
-    <div>
+    <>
       <Typography variant="h4" component="h1">
         Contests
       </Typography>
@@ -101,6 +102,6 @@ export const ContestsPage: React.FC = () => {
           attemptedSet={attemptedSet}
         />
       )}
-    </div>
+    </>
   );
 };

@@ -4,23 +4,31 @@ import { contestsSchema } from "@features/contests/contest";
 import type { Contest } from "@features/contests/contest";
 
 const fetchContests = async (): Promise<Contest[]> => {
-  return axios
-    .get("/mock/contests")
-    .then((response) => response.data)
-    .then((response) => contestsSchema.parse(response));
+  try {
+    const response = await axios.get("/mock/contests");
+    const data = contestsSchema.parse(response.data);
+    return data;
+  } catch (error) {
+    throw new Error("An Error occurred while fetching contests");
+  }
 };
 
+// codeforces の contest データの更新頻度は低いため、長めの cache を持つ
 export const useFetchContests = () => {
   const { data, isError, error, isLoading } = useQuery<Contest[], Error>({
     queryKey: ["contests"],
     queryFn: fetchContests,
+    cacheTime: 1000 * 60 * 60 * 24,
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: true,
+    retry: 3,
   });
-
-  const finishedContest = data?.filter((d) => d.phase === "FINISHED");
 
   return { data, isError, error, isLoading };
 };
 
+// deprecated
 export const useContestIdNameMap = () => {
   const { data, isError, error, isLoading } = useQuery<Contest[], Error>({
     queryKey: ["contests"],
