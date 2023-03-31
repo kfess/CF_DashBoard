@@ -28,7 +28,7 @@ const initialState: FilterOptionsState = {
   period: "All Period",
   solvedStatus: "All Contests",
   showDifficulty: true,
-  showACStatus: true,
+  showACStatus: false,
   pinTableHeader: false,
   reverse: false,
 };

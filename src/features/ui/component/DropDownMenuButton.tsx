@@ -48,7 +48,9 @@ export const DropDownMenuButton = <T extends string | number>(
           horizontal: "left",
         }}
         onClose={handleClose}
-        PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5 } }}
+        PaperProps={{
+          style: { maxHeight: ITEM_HEIGHT * 4.5, marginTop: "8px" },
+        }}
       >
         {items.map((item) => (
           <MenuItem

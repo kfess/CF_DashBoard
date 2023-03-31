@@ -41,7 +41,7 @@ export const ViewFilter: React.FC<Props> = ({
   return (
     <>
       <Button onClick={handleClick}>
-        <SettingsIcon />
+        <SettingsIcon css={{ color: !open ? "inherit" : "#3170B9" }} />
       </Button>
       <Menu
         open={open}
@@ -52,7 +52,9 @@ export const ViewFilter: React.FC<Props> = ({
           horizontal: "left",
         }}
         onClose={handleClose}
-        PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5 } }}
+        PaperProps={{
+          style: { maxHeight: ITEM_HEIGHT * 4.5, marginTop: "8px" },
+        }}
       >
         <MenuItem>
           <Switch
