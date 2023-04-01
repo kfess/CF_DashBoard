@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Divider from "@mui/material/Divider";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import CheckIcon from "@mui/icons-material/Check";
@@ -10,6 +9,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { tags } from "@features/problems/problem";
 import type { Tag } from "@features/problems/problem";
+import { Button } from "@features/ui/component/Button";
 
 const ITEM_HEIGHT = 48;
 
@@ -37,10 +37,6 @@ export const TagsButton: React.FC<Props> = (props: Props) => {
       <Button
         onClick={handleClick}
         endIcon={open ? <ArrowDropDownIcon /> : <ArrowLeftIcon />}
-        css={{
-          textTransform: "none",
-          "&:hover": { textDecorationLine: "underline" },
-        }}
       >
         Tags
       </Button>

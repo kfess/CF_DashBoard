@@ -10,7 +10,7 @@ import { ViewFilter } from "./ViewFilter";
 const buttonsCss = css({
   display: "flex",
   flexWrap: "wrap",
-  gap: "1rem",
+  gap: "0.5rem",
 });
 
 type Props = {

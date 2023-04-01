@@ -1,4 +1,5 @@
 import React from "react";
+import { css } from "@emotion/react";
 import type { Tag } from "@features/problems/problem";
 import type { Classification } from "@features/contests/contest";
 import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
@@ -9,6 +10,12 @@ import { ResetFilterButton } from "@features/problems/components/ResetFilter";
 import { DifficultyButton } from "@features/problems/components/DifficultyButton";
 import { FilterChips } from "@features/problems/components/FilterChips";
 import { ShowTagsSwitch } from "./ShowTagsSwitch";
+
+const buttonsCss = css({
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "0.5rem",
+});
 
 type Props = {
   classification: Classification;
@@ -65,33 +72,35 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
 
   return (
     <>
-      <ContestTypeFilter
-        classification={classification}
-        setClassification={setClassification}
-      />
-      <SolvedStatusFilter
-        solvedStatus={solvedStatus}
-        setSolvedStatus={setSolvedStatus}
-      />
-      <DifficultyButton
-        lowerDifficulty={lowerDifficulty}
-        setLowerDifficulty={setLowerDifficulty}
-        upperDifficulty={upperDifficulty}
-        setUpperDifficulty={setUpperDifficulty}
-      />
-      <TagsButton
-        selectedTags={selectedTags}
-        addOrRemoveTag={addOrRemoveTag}
-        removeAllTags={removeAllTags}
-      />
+      <div css={buttonsCss}>
+        <ContestTypeFilter
+          classification={classification}
+          setClassification={setClassification}
+        />
+        <SolvedStatusFilter
+          solvedStatus={solvedStatus}
+          setSolvedStatus={setSolvedStatus}
+        />
+        <DifficultyButton
+          lowerDifficulty={lowerDifficulty}
+          setLowerDifficulty={setLowerDifficulty}
+          upperDifficulty={upperDifficulty}
+          setUpperDifficulty={setUpperDifficulty}
+        />
+        <TagsButton
+          selectedTags={selectedTags}
+          addOrRemoveTag={addOrRemoveTag}
+          removeAllTags={removeAllTags}
+        />
+        <ResetFilterButton
+          setClassification={setClassification}
+          setSolvedStatus={setSolvedStatus}
+          removeAllTags={removeAllTags}
+          setLowerDifficulty={setLowerDifficulty}
+          setUpperDifficulty={setUpperDifficulty}
+        />
+      </div>
       <ShowTagsSwitch toggleShowTags={toggleShowTags} />
-      <ResetFilterButton
-        setClassification={setClassification}
-        setSolvedStatus={setSolvedStatus}
-        removeAllTags={removeAllTags}
-        setLowerDifficulty={setLowerDifficulty}
-        setUpperDifficulty={setUpperDifficulty}
-      />
       <FilterChips
         classification={classification}
         setDefaultClassification={setDefaultClassification}

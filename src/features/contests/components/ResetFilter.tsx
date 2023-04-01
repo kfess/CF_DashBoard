@@ -21,10 +21,7 @@ export const ResetFilterButton: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <Button
-      onClick={onClickReset}
-      startIcon={<ReplayIcon fontSize="inherit" />}
-    >
+    <Button onClick={onClickReset} startIcon={<ReplayIcon />}>
       Reset
     </Button>
   );

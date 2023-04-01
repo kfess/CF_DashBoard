@@ -1,15 +1,16 @@
 import React, { useMemo } from "react";
-import { Divider, Typography } from "@mui/material";
+import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
 import { useLocation } from "react-router-dom";
 import { useFetchContests } from "@features/contests/hooks/useFetchContest";
-import { ContestsTable } from "@features/contests/components/ContestsTable";
+import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
+import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 import { reshapeContests, getProblemIdxes } from "@features/contests/helper";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
-import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 import { LabelsChip } from "@features/bookmark/components/LabelsChip";
-import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { FilterChips } from "@features/contests/components/FilterChips";
+import { ContestsTable } from "@features/contests/components/ContestsTable";
 
 export const ContestsPage: React.FC = () => {
   const { search } = useLocation();
@@ -46,7 +47,7 @@ export const ContestsPage: React.FC = () => {
 
   const { solvedSet, attemptedSet } = useSolvedStatus(userId);
 
-  if (isLoading || !contests) {
+  if (isLoading || !contests || !problemIdxes) {
     return <CircularProgress />;
   }
 

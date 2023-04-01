@@ -9,6 +9,7 @@ import { FilterOptions } from "@features/problems/components/FilterOptions";
 import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 import { useToggle } from "@hooks/index";
 import { PickOneButton } from "@features/problems/components/PickOneButton";
+import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 export const ProblemsPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchProblems();
@@ -26,8 +27,9 @@ export const ProblemsPage: React.FC = () => {
   const [showTags, toggleShowTags] = useToggle(false, true);
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <CircularProgress />;
   }
+
   if (isError) {
     return <span>Error: {error?.message}</span>;
   }
