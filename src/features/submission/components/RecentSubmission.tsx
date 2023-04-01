@@ -11,7 +11,7 @@ import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { useFetchRecentSubmissions } from "../useFetchSubmission";
 import { normalizeLanguage } from "@features/language/language";
 import { formatUnixTime } from "@helpers/index";
-import { useContestIdNameMap } from "@features/contests/useFetchContest";
+import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
 import { usePagination } from "@hooks/index";

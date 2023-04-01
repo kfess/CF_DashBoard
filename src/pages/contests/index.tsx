@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Divider, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { useFetchContests } from "@features/contests/hooks/useFetchContest";
@@ -33,13 +33,20 @@ export const ContestsPage: React.FC = () => {
     toggleReverse,
   } = useFilterOptionsState();
 
-  const contests =
-    data && reshapeContests(data, state.classification, state.reverse);
-  const problemIdxes = data && getProblemIdxes(data);
+  const contests = useMemo(
+    () =>
+      data ? reshapeContests(data, state.classification, state.reverse) : [],
+    [data, state.classification, state.reverse]
+  );
+
+  const problemIdxes = useMemo(
+    () => (data ? getProblemIdxes(data) : []),
+    [data]
+  );
 
   const { solvedSet, attemptedSet } = useSolvedStatus(userId);
 
-  if (isLoading) {
+  if (isLoading || !contests) {
     return <CircularProgress />;
   }
 
@@ -93,7 +100,7 @@ export const ContestsPage: React.FC = () => {
         />
       </div>
 
-      {contests && problemIdxes && (
+      {contests.length > 0 && problemIdxes.length > 0 && (
         <ContestsTable
           contests={contests}
           problemIdxes={problemIdxes}

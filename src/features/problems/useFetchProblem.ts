@@ -4,16 +4,24 @@ import { problemsSchema } from "@features/problems/problem";
 import type { Problem } from "@features/problems/problem";
 
 const fetchProblems = async (): Promise<Problem[]> => {
-  return axios
-    .get("/mock/problems")
-    .then((response) => response.data)
-    .then((response) => problemsSchema.parse(response));
+  try {
+    const response = await axios.get("/mock/problems");
+    const data = problemsSchema.parse(response.data);
+    return data;
+  } catch (error) {
+    throw new Error("An Error occurred while fetching problems");
+  }
 };
 
 export const useFetchProblems = () => {
   const { data, isError, error, isLoading } = useQuery<Problem[], Error>({
-    queryKey: ["contests"],
+    queryKey: ["problems"],
     queryFn: fetchProblems,
+    cacheTime: 1000 * 60 * 60 * 24,
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: true,
+    retry: 3,
   });
 
   return { data, isError, error, isLoading };

@@ -1,21 +1,23 @@
 import * as dayjs from "dayjs";
 
 export const groupBy = <K, V>(
-  array: readonly V[],
+  array: readonly V[] | undefined,
   getKey: (cur: V, idx: number, src: readonly V[]) => K
-): [K, V[]][] =>
-  Array.from(
+): [K, V[]][] => {
+  if (!array) {
+    return [];
+  }
+
+  return Array.from(
     array.reduce((map, cur, idx, src) => {
       const key = getKey(cur, idx, src);
       const list = map.get(key);
-      if (list) {
-        list.push(cur);
-      } else {
-        map.set(key, [cur]);
-      }
+      map.set(key, list ? [...list, cur] : [cur]);
       return map;
-    }, new Map<K, V[]>())
+    }, new Map<K, V[]>()),
+    ([key, value]) => [key, value]
   );
+};
 
 export const formatUnixTime = (unitTime: number, simple: boolean = false) =>
   simple
