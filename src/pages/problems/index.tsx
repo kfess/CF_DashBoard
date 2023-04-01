@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
 import { ProblemsTable } from "@features/problems/components/ProblemsTable";
 import { useFetchProblems } from "@features/problems/useFetchProblem";
 import { Tag } from "@features/problems/problem";
@@ -36,22 +38,33 @@ export const ProblemsPage: React.FC = () => {
 
   return (
     <>
-      <div css={{ textAlign: "right" }}>
+      <Typography variant="h4" component="h1">
+        Problems
+      </Typography>
+      <Divider />
+      <div
+        css={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "1rem",
+        }}
+      >
+        <FilterOptions
+          classification={classification}
+          setClassification={setClassification}
+          solvedStatus={solvedStatus}
+          setSolvedStatus={setSolvedStatus}
+          selectedTags={selectedTags}
+          setSelectedTags={setSelectedTags}
+          lowerDifficulty={lowerDifficulty}
+          setLowerDifficulty={setLowerDifficulty}
+          upperDifficulty={upperDifficulty}
+          setUpperDifficulty={setUpperDifficulty}
+          toggleShowTags={toggleShowTags}
+        />
         <LabelsChip />
       </div>
-      <FilterOptions
-        classification={classification}
-        setClassification={setClassification}
-        solvedStatus={solvedStatus}
-        setSolvedStatus={setSolvedStatus}
-        selectedTags={selectedTags}
-        setSelectedTags={setSelectedTags}
-        lowerDifficulty={lowerDifficulty}
-        setLowerDifficulty={setLowerDifficulty}
-        upperDifficulty={upperDifficulty}
-        setUpperDifficulty={setUpperDifficulty}
-        toggleShowTags={toggleShowTags}
-      />
+
       <PickOneButton />
       {data && (
         <ProblemsTable
