@@ -57,35 +57,34 @@ export const ContestsPage: React.FC = () => {
 
   return (
     <>
-      <Typography variant="h4" component="h1">
-        Contests
-      </Typography>
-      <Divider />
       <div
         css={{
           display: "flex",
           justifyContent: "space-between",
-          marginTop: "1rem",
         }}
       >
-        <FilterOptions
-          showDifficulty={showDifficulty}
-          showACStatus={showACStatus}
-          pinTableHeader={pinTableHeader}
-          reverse={reverse}
-          classification={state.classification}
-          period={state.period}
-          solvedStatus={state.solvedStatus}
-          setClassification={setClassification}
-          setPeriod={setPeriod}
-          setSolvedStatus={setSolvedStatus}
-          toggleShowDifficulty={toggleShowDifficulty}
-          toggleShowACStatus={toggleShowACStatus}
-          togglePinTableHeader={togglePinTableHeader}
-          toggleReverse={toggleReverse}
-        />
+        <Typography variant="h4" component="h1">
+          Contests
+        </Typography>
         <LabelsChip />
       </div>
+      <Divider />
+      <FilterOptions
+        showDifficulty={showDifficulty}
+        showACStatus={showACStatus}
+        pinTableHeader={pinTableHeader}
+        reverse={reverse}
+        classification={state.classification}
+        period={state.period}
+        solvedStatus={state.solvedStatus}
+        setClassification={setClassification}
+        setPeriod={setPeriod}
+        setSolvedStatus={setSolvedStatus}
+        toggleShowDifficulty={toggleShowDifficulty}
+        toggleShowACStatus={toggleShowACStatus}
+        togglePinTableHeader={togglePinTableHeader}
+        toggleReverse={toggleReverse}
+      />
       <div>
         <FilterChips
           classification={state.classification}

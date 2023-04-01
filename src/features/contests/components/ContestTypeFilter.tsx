@@ -29,7 +29,7 @@ export const ContestTypeFilter: React.FC<Props> = (props: Props) => {
 
   return (
     <DropDownMenuButton
-      title="Content Type"
+      title="Contest Type"
       items={items}
       selectedItem={classification}
       setSelectedItem={setClassification}

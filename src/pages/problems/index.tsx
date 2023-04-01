@@ -38,33 +38,32 @@ export const ProblemsPage: React.FC = () => {
 
   return (
     <>
-      <Typography variant="h4" component="h1">
-        Problems
-      </Typography>
-      <Divider />
       <div
         css={{
           display: "flex",
           justifyContent: "space-between",
-          marginTop: "1rem",
         }}
       >
-        <FilterOptions
-          classification={classification}
-          setClassification={setClassification}
-          solvedStatus={solvedStatus}
-          setSolvedStatus={setSolvedStatus}
-          selectedTags={selectedTags}
-          setSelectedTags={setSelectedTags}
-          lowerDifficulty={lowerDifficulty}
-          setLowerDifficulty={setLowerDifficulty}
-          upperDifficulty={upperDifficulty}
-          setUpperDifficulty={setUpperDifficulty}
-          toggleShowTags={toggleShowTags}
-        />
+        <Typography variant="h4" component="h1">
+          Problems
+        </Typography>
         <LabelsChip />
       </div>
-
+      <Divider />
+      <FilterOptions
+        classification={classification}
+        setClassification={setClassification}
+        solvedStatus={solvedStatus}
+        setSolvedStatus={setSolvedStatus}
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+        lowerDifficulty={lowerDifficulty}
+        setLowerDifficulty={setLowerDifficulty}
+        upperDifficulty={upperDifficulty}
+        setUpperDifficulty={setUpperDifficulty}
+        showTags={showTags}
+        toggleShowTags={toggleShowTags}
+      />
       <PickOneButton />
       {data && (
         <ProblemsTable

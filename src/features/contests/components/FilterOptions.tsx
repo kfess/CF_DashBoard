@@ -11,6 +11,7 @@ const buttonsCss = css({
   display: "flex",
   flexWrap: "wrap",
   gap: "0.5rem",
+  marginTop: "0.5rem",
 });
 
 type Props = {
