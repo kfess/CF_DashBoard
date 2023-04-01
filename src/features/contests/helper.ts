@@ -59,13 +59,34 @@ export const reshapeContests = (
   });
 };
 
-export const getProblemIdxes = (contests: Contest[]): string[] => {
-  const problemIdxes = contests.reduce((set, contest) => {
-    contest.problems.forEach((problem) => {
-      set.add(problem.index.replace(/\d/g, ""));
-    });
-    return set;
-  }, new Set<string>());
+export const getProblemIdxFromClassification = (
+  contests: ReshapedContest[],
+  classification: Classification
+): string[] => {
+  const getSortedIdxes = (idxes: string[]): string[] => {
+    return idxes.sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+  };
 
-  return Array.from(problemIdxes).sort();
+  if (classification === "All") {
+    const allIdxes = Array.from(
+      new Set(
+        contests.flatMap((contest) =>
+          contest.problems.map((problem) => problem.index.replace(/\d/g, ""))
+        )
+      )
+    );
+    return getSortedIdxes(allIdxes);
+  }
+
+  const filteredContests = contests.filter(
+    (contest) => contest.classification === classification
+  );
+  const idxes = Array.from(
+    new Set(
+      filteredContests.flatMap((contest) =>
+        contest.problems.map((problem) => problem.index.replace(/\d/g, ""))
+      )
+    )
+  );
+  return getSortedIdxes(idxes);
 };

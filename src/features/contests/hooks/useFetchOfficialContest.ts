@@ -69,6 +69,7 @@ const fetchOfficialContestsAndProblems = async (): Promise<Contest[]> => {
       const classification = getClassification(contest.name);
       const contestProblems = problemMap[contest.id]
         ?.filter((problem) => !/^\d+$/.test(problem.index))
+        .sort((a, b) => (a.index < b.index ? -1 : a.index > b.index ? 1 : 0))
         .map((problem) => ({
           ...problem,
           contestName: contest.name,

@@ -81,6 +81,7 @@ export const useFilterOptionsState = () => {
 
   return {
     state,
+    classification: state.classification,
     showDifficulty: state.showDifficulty,
     showACStatus: state.showACStatus,
     pinTableHeader: state.pinTableHeader,

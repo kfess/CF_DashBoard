@@ -5,7 +5,10 @@ import { useLocation } from "react-router-dom";
 import { useFetchContests } from "@features/contests/hooks/useFetchContest";
 import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
 import { useSolvedStatus } from "@features/submission/useSolvedStatus";
-import { reshapeContests, getProblemIdxes } from "@features/contests/helper";
+import {
+  reshapeContests,
+  getProblemIdxFromClassification,
+} from "@features/contests/helper";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
 import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
@@ -24,6 +27,7 @@ export const ContestsPage: React.FC = () => {
 
   const {
     state,
+    classification,
     showDifficulty,
     showACStatus,
     pinTableHeader,
@@ -44,15 +48,16 @@ export const ContestsPage: React.FC = () => {
   );
 
   const problemIdxes = useMemo(
-    () => (data ? getProblemIdxes(data) : []),
-    [data]
+    () =>
+      data ? getProblemIdxFromClassification(contests, classification) : [],
+    [data, classification]
   );
 
-  console.log(problemIdxes);
+  console.log("problemIdxes", problemIdxes);
 
   const { solvedSet, attemptedSet } = useSolvedStatus(userId);
 
-  if (isLoading || !contests || !problemIdxes) {
+  if (isLoading || !contests) {
     return <CircularProgress />;
   }
 
@@ -82,7 +87,7 @@ export const ContestsPage: React.FC = () => {
         showACStatus={showACStatus}
         pinTableHeader={pinTableHeader}
         reverse={reverse}
-        classification={state.classification}
+        classification={classification}
         period={state.period}
         solvedStatus={state.solvedStatus}
         setClassification={setClassification}
