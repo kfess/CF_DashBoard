@@ -43,7 +43,7 @@ export const ViewFilter: React.FC<Props> = ({ showTags, toggleShowTags }) => {
       >
         <MenuItem>
           <Switch
-            label="Show Difficulty"
+            label="Show Tags"
             checked={showTags}
             onChange={toggleShowTags}
           />

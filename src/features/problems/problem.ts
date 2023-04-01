@@ -4,7 +4,7 @@ import { z } from "zod";
 // Importing classificationSchema from "@features/contests/contest"
 // did not work for me. So I redefined the same classificationSchema
 // I want to fix anyway.
-const classificationSchema = z.union([
+export const classificationSchema = z.union([
   z.literal("All"),
   z.literal("Div. 1"),
   z.literal("Div. 2"),
@@ -20,7 +20,10 @@ const classificationSchema = z.union([
 
 // https://codeforces.com/apiHelp/objects#Problem
 
-const typeSchema = z.union([z.literal("PROGRAMMING"), z.literal("QUESTION")]);
+export const typeSchema = z.union([
+  z.literal("PROGRAMMING"),
+  z.literal("QUESTION"),
+]);
 export const problemType = ["PROGRAMMING", "QUESTION"] as const;
 export type ProblemType = typeof problemType[number];
 

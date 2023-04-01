@@ -13,7 +13,7 @@ const fetchContests = async (): Promise<Contest[]> => {
   }
 };
 
-// codeforces の contest データの更新頻度は低いため、長めの cache を持つ
+// codeforces の contest データの更新頻度は低いため、長めの cache を持たせる
 export const useFetchContests = () => {
   const { data, isError, error, isLoading } = useQuery<Contest[], Error>({
     queryKey: ["contests"],

@@ -171,9 +171,3 @@ export const okSubmissionApiSchema = z.object({
   result: z.array(submissionSchema),
 });
 export type OkSubmissionAPI = z.infer<typeof okSubmissionApiSchema>;
-
-export const ngSubmissionApiSchema = z.object({
-  status: statusSchema,
-  comment: z.string(),
-});
-export type NgSubmissionAPI = z.infer<typeof ngSubmissionApiSchema>;

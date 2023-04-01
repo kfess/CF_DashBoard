@@ -6,7 +6,7 @@ import {
 
 // reference: https://codeforces.com/apiHelp/objects#Contest
 
-const typeSchema = z.union([
+export const typeSchema = z.union([
   z.literal("CF"),
   z.literal("IOI"),
   z.literal("ICPC"),
@@ -43,7 +43,7 @@ export const classifications = [
 ] as const;
 export type Classification = typeof classifications[number];
 
-const phaseSchema = z.union([
+export const phaseSchema = z.union([
   z.literal("BEFORE"),
   z.literal("CODING"),
   z.literal("PENDING_SYSTEM_TEST"),
@@ -59,7 +59,7 @@ const phase = [
 ] as const;
 export type Phase = typeof phase[number];
 
-const kindSchema = z
+export const kindSchema = z
   .union([
     z.literal("Official ICPC Contest"),
     z.literal("Official School Contest"),

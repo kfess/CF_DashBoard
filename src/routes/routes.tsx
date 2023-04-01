@@ -1,7 +1,8 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { LayoutPage } from "@pages/layout";
 import { ContestsPage } from "@pages/contests";
-import { ProblemsPage } from "@pages/problems";
+import ProblemsPage from "@pages/problems";
 import { LabelsPage } from "@pages/labels/index";
 import { LabelPage } from "@pages/labels/label/index";
 import { SubmissionPage } from "@pages/submission";
@@ -13,6 +14,8 @@ import { CreateCustomContestPage } from "@pages/custom_contests/create_custom_co
 import Callback from "@features/authentication/components/Callback";
 import { PrivateRoute } from "@features/authentication/components/PrivateRoute";
 import { ProfilePage } from "@pages/authentication/profile";
+
+// const ProblemsPage = lazy(() => import("@pages/problems"));
 
 export const router = createBrowserRouter([
   {

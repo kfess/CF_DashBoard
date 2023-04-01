@@ -13,7 +13,7 @@ import { useToggle } from "@hooks/index";
 import { PickOneButton } from "@features/problems/components/PickOneButton";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 
-export const ProblemsPage: React.FC = () => {
+const ProblemsPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchProblems();
 
   const [classification, setClassification] = useState<Classification>("All");
@@ -78,3 +78,5 @@ export const ProblemsPage: React.FC = () => {
     </>
   );
 };
+
+export default ProblemsPage;

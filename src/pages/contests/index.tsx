@@ -11,13 +11,16 @@ import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { FilterChips } from "@features/contests/components/FilterChips";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
+import { Input } from "@features/ui/component/Input";
+import { useFetchOfficialContests } from "@features/contests/hooks/useFetchOfficialContest";
 
 export const ContestsPage: React.FC = () => {
   const { search } = useLocation();
   const urlQueries = new URLSearchParams(search);
   const userId = urlQueries.get("userId") ?? "";
 
-  const { data, isError, error, isLoading } = useFetchContests();
+  // const { data, isError, error, isLoading } = useFetchContests();
+  const { data, isError, error, isLoading } = useFetchOfficialContests();
 
   const {
     state,
@@ -45,6 +48,8 @@ export const ContestsPage: React.FC = () => {
     [data]
   );
 
+  console.log(problemIdxes);
+
   const { solvedSet, attemptedSet } = useSolvedStatus(userId);
 
   if (isLoading || !contests || !problemIdxes) {
@@ -57,6 +62,9 @@ export const ContestsPage: React.FC = () => {
 
   return (
     <>
+      <div css={{ width: "50%" }}>
+        <Input />
+      </div>
       <div
         css={{
           display: "flex",
