@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
+import { styled } from "@mui/system";
 import {
   ListItem,
   ListItemText,
@@ -170,6 +171,14 @@ export const otherItems: readonly Item[] = [
   },
 ] as const;
 
+const CustomListItemIcon = styled(ListItemIcon)`
+  margin-right: 8px;
+`;
+
+const CustomListItemText = styled(ListItemText)`
+  margin-left: -20px;
+`;
+
 type Props = Item & {
   isSelected: boolean;
   setSelected: Dispatch<SetStateAction<Field>>;
@@ -177,7 +186,6 @@ type Props = Item & {
   toggleSideBar: Dispatch<SetStateAction<boolean>>;
 };
 
-// tab の select 状態に合わせて Icon の色を反転
 export const SideNavigationItem: React.FC<Props> = (props: Props) => {
   const {
     field,
@@ -191,7 +199,15 @@ export const SideNavigationItem: React.FC<Props> = (props: Props) => {
   } = props;
 
   return (
-    <NavLink to={link}>
+    <NavLink
+      to={link}
+      css={{
+        color: isSelected ? "#0d47a1" : "inherit",
+        "&:hover": {
+          color: isSelected ? "#0d47a1" : "inherit",
+        },
+      }}
+    >
       <ListItem key={field} disablePadding>
         <ListItemButton
           selected={isSelected}
@@ -200,10 +216,10 @@ export const SideNavigationItem: React.FC<Props> = (props: Props) => {
             toggleSideBar(!isOpenSideBar);
           }}
         >
-          <ListItemIcon>
+          <CustomListItemIcon>
             {isSelected ? selectedIcon : notSelectedIcon}
-          </ListItemIcon>
-          <ListItemText primary={field} />
+          </CustomListItemIcon>
+          <CustomListItemText primary={field} />
         </ListItemButton>
       </ListItem>
     </NavLink>
