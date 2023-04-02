@@ -10,7 +10,7 @@ const Tab = styled(TabUnstyled)`
   font-size: 0.875rem;
   font-weight: 500;
   background-color: transparent;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
   margin: 6px 6px;
   border: none;
   border-radius: 6px;
@@ -18,7 +18,8 @@ const Tab = styled(TabUnstyled)`
   justify-content: center;
 
   &:hover {
-    background-color: #e9edf1;
+    background-color: ${({ disabled }) =>
+      disabled ? "transparent" : "#e9edf1"};
   }
 
   &:focus {
@@ -31,6 +32,7 @@ const Tab = styled(TabUnstyled)`
     bottom: 0;
     width: 100%;
     height: 2px;
+    pointer-events: none;
   }
 
   &.${tabUnstyledClasses.selected} {

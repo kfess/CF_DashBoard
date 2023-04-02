@@ -9,6 +9,7 @@ import { PrivateContestList } from "@features/custom_contests/components/Private
 import { NavLink } from "react-router-dom";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
+import { HeadLine } from "@features/layout/components/HeadLine";
 
 export const CustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
@@ -29,6 +30,7 @@ export const CustomContestPage: React.FC = () => {
 
   return (
     <>
+      <HeadLine title="Custom Contest" />
       <NavLink to={loggedIn ? "/custom-contest/create" : "#"}>
         <Button
           color="success"
