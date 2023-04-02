@@ -53,11 +53,16 @@ export const ContestsPage: React.FC = () => {
     [data, classification]
   );
 
-  console.log("problemIdxes", problemIdxes);
-
   const { solvedSet, attemptedSet } = useSolvedStatus(userId);
 
-  if (isLoading || !contests) {
+  console.log(attemptedSet);
+
+  if (
+    isLoading ||
+    !contests ||
+    !problemIdxes ||
+    (userId && !solvedSet && !attemptedSet)
+  ) {
     return <CircularProgress />;
   }
 

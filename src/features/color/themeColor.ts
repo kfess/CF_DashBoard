@@ -7,7 +7,8 @@ export const baseTheme = createTheme({
     lineColor: "",
     backgroundColor: "#ffffff", // totally white
     foregroundColor: "#4d5156",
-    acColor: "#98D59E",
+    acColor: "#c3e6cb",
+    waColor: "#FFEEBA",
     header: {
       backgroundColor: "#ffffff",
       foregroundColor: "#4d5156",
@@ -23,7 +24,8 @@ export const purpleTheme = createTheme({
     lineColor: "",
     backgroundColor: "#F7F8F9",
     foregroundColor: "#ffffff",
-    acColor: "#98D59E",
+    acColor: "#c3e6cb",
+    waColor: "#FFEEBA",
     header: {
       backgroundColor: "#79589F", // image color of Heroku
       foregroundColor: "#ffffff",
@@ -38,7 +40,8 @@ export const greenTheme = createTheme({
     lineColor: "",
     backgroundColor: "white",
     foregroundColor: "",
-    acColor: "#98D59E",
+    acColor: "#c3e6cb",
+    waColor: "#FFEEBA",
     header: {
       backgroundColor: "white",
       foregroundColor: "",
@@ -53,7 +56,8 @@ export const darkTheme = createTheme({
     lineColor: "",
     backgroundColor: "#1C1C1C",
     foregroundColor: "#ffffff",
-    acColor: "#98D59E",
+    acColor: "#c3e6cb",
+    waColor: "#FFEEBA",
     header: {
       backgroundColor: "#1C1C1C",
       foregroundColor: "#ffffff",

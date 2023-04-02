@@ -37,7 +37,7 @@ export const ContestsTable: React.FC<Props> = (props: Props) => {
       />
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer component={Paper}>
-          <Table stickyHeader>
+          <Table stickyHeader css={{ height: "100%" }}>
             <TableHead>
               <TableRow>
                 <TableCell align="center">Contest</TableCell>
@@ -54,6 +54,7 @@ export const ContestsTable: React.FC<Props> = (props: Props) => {
                     <ContestTableRow
                       contestId={contest.contestId}
                       contestName={contest.contestName}
+                      problemIdxes={problemIdxes}
                       problems={contest.problems}
                       showDifficulty={showDifficulty}
                       solvedSet={solvedSet}

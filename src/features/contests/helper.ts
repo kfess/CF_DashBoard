@@ -1,3 +1,4 @@
+import { ReshapedProblem } from "./../../../../../.vscode-server/data/User/History/539c7a0e/HlZn";
 import type { Problem } from "@features/problems/problem";
 import type {
   Contest,
@@ -89,4 +90,19 @@ export const getProblemIdxFromClassification = (
     )
   );
   return getSortedIdxes(idxes);
+};
+
+export const isAllProblemsSolved = (
+  problemIdxes: string[],
+  problemMap: Record<string, ReshapedProblem>,
+  solvedSet: Set<string> | undefined,
+  contestId: number
+) => {
+  return problemIdxes.every((idx) => {
+    const problem = problemMap[idx];
+    const indexedProblems = problem?.indexedProblems || [];
+    return indexedProblems.every((p) =>
+      solvedSet?.has(`${contestId}-${p.index}`)
+    );
+  });
 };

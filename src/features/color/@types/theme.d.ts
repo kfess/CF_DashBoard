@@ -8,6 +8,7 @@ type Colors = {
   backgroundColor: string; // image color of the theme
   foregroundColor: string; // foregroundColor of the backgroundColor
   acColor: string;
+  waColor: string;
   header: {
     backgroundColor: string;
     foregroundColor: string;
