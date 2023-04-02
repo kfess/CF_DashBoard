@@ -53,7 +53,8 @@ export const useFetchRecentSubmissions = () => {
   const { data, isError, error, isLoading } = useQuery<Submission[], Error>({
     queryKey: ["recent-submissions"],
     queryFn: fetchRecentSubmissions,
-    refetchInterval: 1000 * 60 * 60,
+    refetchInterval: 1000 * 60 * 60 * 1,
+    refetchOnWindowFocus: false,
   });
 
   return { data, isError, error, isLoading };

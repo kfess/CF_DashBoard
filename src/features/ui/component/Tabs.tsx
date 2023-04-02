@@ -8,7 +8,7 @@ import TabUnstyled, { tabUnstyledClasses } from "@mui/base/TabUnstyled";
 
 const Tab = styled(TabUnstyled)`
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 400;
   background-color: transparent;
   cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
   margin: 6px 6px;

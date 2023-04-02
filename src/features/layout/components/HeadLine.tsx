@@ -7,6 +7,7 @@ import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 const headLineCss = css({
   display: "flex",
   justifyContent: "space-between",
+  marginBottom: "0.5rem",
 });
 
 type Props = { readonly title: string };
