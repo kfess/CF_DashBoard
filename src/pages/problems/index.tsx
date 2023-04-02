@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
 import { ProblemsTable } from "@features/problems/components/ProblemsTable";
 import { useFetchProblems } from "@features/problems/useFetchProblem";
 import { Tag } from "@features/problems/problem";
@@ -8,10 +6,10 @@ import type { Classification } from "@features/contests/contest";
 import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
 import { ratingColorInfo } from "@features/color/ratingColor";
 import { FilterOptions } from "@features/problems/components/FilterOptions";
-import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 import { useToggle } from "@hooks/index";
 import { PickOneButton } from "@features/problems/components/PickOneButton";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
+import { HeadLine } from "@features/layout/components/HeadLine";
 
 const ProblemsPage: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchProblems();
@@ -38,18 +36,7 @@ const ProblemsPage: React.FC = () => {
 
   return (
     <>
-      <div
-        css={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Typography variant="h4" component="h1">
-          Problems
-        </Typography>
-        <LabelsChip />
-      </div>
-      <Divider />
+      <HeadLine title="Problems" />
       <FilterOptions
         classification={classification}
         setClassification={setClassification}

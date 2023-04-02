@@ -5,7 +5,6 @@ import { HeaderBar } from "@features/layout/components/HeaderBar";
 import { SideNavigationBar } from "@features/layout/components/SideNavigationBar";
 import { isMainField } from "@features/layout/helper";
 import { SearchBar } from "@features/layout/components/Search";
-import { CustomBreadcrumbs } from "@features/ui/component/BreadCrumbs";
 
 export const LayoutPage: React.FC = () => {
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
@@ -24,7 +23,6 @@ export const LayoutPage: React.FC = () => {
           setSelectedItem={setSelectedItem}
         />
       )}
-      <CustomBreadcrumbs path={pathname} />
       {isMainField(pathname) && <SearchBar />}
       <Outlet />
     </div>

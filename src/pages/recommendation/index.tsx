@@ -2,11 +2,12 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import type { TabItem } from "@features/ui/component/Tabs";
-import { Tabs } from "@features/ui/component/Tabs";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { RecommendProblemsTable } from "@features/recommendation/components/RecommendProblemsTable";
 import { recommendLevels } from "@features/recommendation/recommend";
 import { useFetchProblems } from "@features/problems/useFetchProblem";
+import { HeadLine } from "@features/layout/components/HeadLine";
+import { Tabs } from "@features/ui/component/Tabs";
 
 export const RecommendationPage: React.FC = () => {
   const { search } = useLocation();
@@ -41,8 +42,11 @@ export const RecommendationPage: React.FC = () => {
   });
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Tabs tabItems={tabItems} />
-    </Box>
+    <>
+      <HeadLine title="Recommend" />
+      <Box sx={{ width: "100%" }}>
+        <Tabs tabItems={tabItems} />
+      </Box>
+    </>
   );
 };

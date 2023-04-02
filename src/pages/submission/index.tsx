@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import { RecentSubmissionPage } from "@pages/submission/recent";
 import { UserSubmissionPage } from "@pages/submission/user/index";
 import { TabItem, Tabs } from "@features/ui/component/Tabs";
+import { HeadLine } from "@features/layout/components/HeadLine";
 
 export const SubmissionPage: React.FC = () => {
   const { search } = useLocation();
@@ -25,7 +26,7 @@ export const SubmissionPage: React.FC = () => {
 
   return (
     <>
-      <h2 css={{ textAlign: "left" }}>Submission</h2>
+      <HeadLine title="Submissions" />
       <Box sx={{ width: "100%" }}>
         <Tabs tabItems={tabItems} />
       </Box>

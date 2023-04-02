@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
 import { LabelCreator } from "@features/bookmark/components/LabelCreator";
-// import { LabelItems } from "@features/bookmark/components/LabelsList";
 import { LabelsTable } from "@features/bookmark/components/LabelsTable";
+import { HeadLine } from "@features/layout/components/HeadLine";
 
 export const LabelsPage: React.FC = () => {
   const tabItems: TabItem[] = [
@@ -13,7 +13,6 @@ export const LabelsPage: React.FC = () => {
       children: (
         <>
           <LabelCreator />
-          {/* <LabelItems /> */}
           <LabelsTable />
         </>
       ),
@@ -24,6 +23,7 @@ export const LabelsPage: React.FC = () => {
 
   return (
     <>
+      <HeadLine title="Labels" />
       <Box sx={{ width: "100%" }}>
         <Tabs tabItems={tabItems} />
       </Box>
