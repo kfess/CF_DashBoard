@@ -15,6 +15,7 @@ import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { RegisterButton } from "@features/custom_contests/components/RegisterButton";
 import { Divider } from "@mui/material";
+import { HeadLine } from "@features/layout/components/HeadLine";
 
 export const ShowCustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
@@ -72,6 +73,7 @@ export const ShowCustomContestPage: React.FC = () => {
       )}
       {data && (
         <Box sx={{ m: 1 }}>
+          <HeadLine title={data.title} />
           <Box
             sx={{
               display: "flex",
@@ -81,13 +83,6 @@ export const ShowCustomContestPage: React.FC = () => {
               flexWrap: "wrap",
             }}
           >
-            <Typography
-              variant="h5"
-              component="h2"
-              sx={{ mb: { xs: 1, md: 0 } }}
-            >
-              {data.title}
-            </Typography>
             <Box
               sx={{
                 display: "flex",
