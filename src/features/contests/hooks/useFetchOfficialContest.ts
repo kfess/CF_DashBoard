@@ -16,7 +16,7 @@ const getClassification = (contestName: string): Classification => {
     "Div. 3",
     "Div. 4",
     "ICPC",
-    "Kotlin Heros",
+    "Kotlin Heroes",
     "Global",
     "Educational",
   ];
