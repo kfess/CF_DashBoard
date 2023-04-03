@@ -1,12 +1,15 @@
 import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
 
-export const useSolvedStatus = (searchUserId: string) => {
+export const useSolvedStatus = (searchUserId: string | null) => {
+  const solvedSet = new Set<string>();
+  const attemptedSet = new Set<string>();
+  if (!searchUserId) {
+    return { solvedSet, attemptedSet };
+  }
+
   const { data, isError } = useFetchUserSubmission({
     userId: searchUserId,
   });
-
-  const solvedSet = new Set<string>();
-  const attemptedSet = new Set<string>();
 
   if (!isError && data) {
     data.forEach((sub) => {

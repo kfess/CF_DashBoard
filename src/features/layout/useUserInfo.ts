@@ -5,7 +5,7 @@ import { CF_USER_INFO_URL } from "@constants/url";
 import { okUserInfoApiSchema } from "@features/layout/userInfo";
 import type { UserInfo } from "@features/layout/userInfo";
 
-export const useFetchUserInfo = ({ userId }: { userId: string }) => {
+export const useFetchUserInfo = ({ userId }: { userId: string | null }) => {
   const { data, isError, error, isLoading, isSuccess } = useQuery<
     UserInfo,
     Error

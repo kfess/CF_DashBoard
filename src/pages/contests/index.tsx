@@ -1,8 +1,6 @@
 import React, { useMemo } from "react";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
-import { useLocation } from "react-router-dom";
-import { useFetchContests } from "@features/contests/hooks/useFetchContest";
 import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
 import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 import {
@@ -14,13 +12,11 @@ import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { FilterChips } from "@features/contests/components/FilterChips";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
-import { Input } from "@features/ui/component/Input";
 import { useFetchOfficialContests } from "@features/contests/hooks/useFetchOfficialContest";
+import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
 
 export const ContestsPage: React.FC = () => {
-  const { search } = useLocation();
-  const urlQueries = new URLSearchParams(search);
-  const userId = urlQueries.get("userId") ?? "";
+  const userId = useQueryParams(QueryParamKeys.USERID);
 
   // const { data, isError, error, isLoading } = useFetchContests();
   const { data, isError, error, isLoading } = useFetchOfficialContests();
@@ -72,9 +68,6 @@ export const ContestsPage: React.FC = () => {
 
   return (
     <>
-      <div css={{ width: "50%" }}>
-        <Input />
-      </div>
       <div
         css={{
           display: "flex",

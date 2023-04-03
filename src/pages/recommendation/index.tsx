@@ -1,5 +1,4 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import type { TabItem } from "@features/ui/component/Tabs";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
@@ -8,14 +7,11 @@ import { recommendLevels } from "@features/recommendation/recommend";
 import { useFetchProblems } from "@features/problems/useFetchProblem";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { Tabs } from "@features/ui/component/Tabs";
+import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
 
 export const RecommendationPage: React.FC = () => {
-  const { search } = useLocation();
-  const urlQueries = new URLSearchParams(search);
-  const queryUserId = urlQueries.get("userId") ?? "";
+  const queryUserId = useQueryParams(QueryParamKeys.USERID);
 
-  // If queryUserId is not falsy ("", undefined, null, ...),
-  // asynchronously fetch User Info by React-Query
   const {
     data: userData,
     isError: userIsError,

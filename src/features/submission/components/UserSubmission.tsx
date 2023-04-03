@@ -18,6 +18,7 @@ import { verdictMap } from "@helpers/verdict";
 import { VerdictFilter } from "./SolvedStatusFilter";
 import { LanguageFilter } from "./LanguageFilter";
 import { usePagination } from "@hooks/index";
+import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 type Props = {
   userId: string;
@@ -39,12 +40,12 @@ export const UserSubmission: React.FC<Props> = (props: Props) => {
     isLoading: mapIsLoading,
   } = useContestIdNameMap();
 
-  // for pagination
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
 
   if (isLoading || mapIsLoading) {
-    return <span>Loading...</span>;
+    return <CircularProgress />;
   }
+
   if (isError || mapIsError) {
     return (
       <>
