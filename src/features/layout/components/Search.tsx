@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { generateUrlPath } from "@features/layout/helper";
@@ -32,6 +32,12 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
     },
     [navigate, pathname, searchUserId]
   );
+
+  useEffect(() => {
+    if (isError) {
+      navigate(generateUrlPath(pathname, ""));
+    }
+  }, [isError, navigate, pathname]);
 
   return visible ? (
     <Box css={{ width: "100%" }}>
