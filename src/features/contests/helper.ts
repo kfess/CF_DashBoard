@@ -1,10 +1,10 @@
-import { ReshapedProblem } from "./../../../../../.vscode-server/data/User/History/539c7a0e/HlZn";
 import type { Problem } from "@features/problems/problem";
 import type {
   Contest,
   Classification,
   ReshapedContest,
 } from "@features/contests/contest";
+import { ReshapedProblem } from "@features/problems/problem";
 import { groupBy } from "@helpers/index";
 
 export const reshapeProblems = (problems: Problem[]) => {

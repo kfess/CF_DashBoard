@@ -6,7 +6,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
-import { useToggle } from "@hooks/index";
 
 type Props<T extends string | number> = {
   title: string;

@@ -41,7 +41,7 @@ export const RecentSubmission: React.FC = () => {
           />
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer component={Paper}>
-              <Table stickyHeader size="small">
+              <Table stickyHeader>
                 <TableHead>
                   <TableRow>
                     <TableCell>Date</TableCell>
