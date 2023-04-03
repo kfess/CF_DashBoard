@@ -3,6 +3,8 @@ import { css } from "@emotion/react";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { LabelsChip } from "@features/bookmark/components/LabelsChip";
+import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
+import { DeletableChip } from "@features/ui/component/Chip";
 
 const headLineCss = css({
   display: "flex",
@@ -13,6 +15,8 @@ const headLineCss = css({
 type Props = { readonly title: string };
 
 export const HeadLine: React.FC<Props> = ({ title }) => {
+  const queryUserId = useQueryParams(QueryParamKeys.USERID);
+
   return (
     <>
       <div css={headLineCss}>

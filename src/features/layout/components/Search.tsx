@@ -3,21 +3,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { generateUrlPath } from "@features/layout/helper";
 import { useFetchUserInfo } from "../useUserInfo";
-import { getColorCodeFromRating } from "@features/color/ratingColor";
-import { ColoredCircle } from "@features/color/components/ColoredCircle";
-import { DeletableChip } from "@features/ui/component/Chip";
 import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
 import { Input } from "@features/ui/component/Input";
-import { AlertMessage } from "@features/ui/component/AlertDialog";
 
-export const SearchBar: React.FC = () => {
+type Props = { visible: boolean };
+
+export const SearchBar: React.FC<Props> = ({ visible }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   const queryUserId = useQueryParams(QueryParamKeys.USERID);
   const [searchUserId, setSearchUserId] = useState(queryUserId);
 
-  const { data, isError, isSuccess } = useFetchUserInfo({
+  const { data, isError, isSuccess, isLoading } = useFetchUserInfo({
     userId: queryUserId,
   });
 
@@ -35,31 +33,11 @@ export const SearchBar: React.FC = () => {
     [navigate, pathname, searchUserId]
   );
 
-  return (
+  return visible ? (
     <Box css={{ width: "100%" }}>
       <form onSubmit={onSubmit}>
         <Input placeholder="User ID" value={searchUserId} onChange={onChange} />
-        {/* {isSuccess && (
-          <DeletableChip
-            label={queryUserId}
-            icon={
-              <ColoredCircle color={getColorCodeFromRating(data?.rating)} />
-            }
-            onDelete={() => {
-              setSearchUserId("");
-              navigate(pathname);
-            }}
-          />
-        )} */}
       </form>
-      {/* <Box sx={{ p: 1 }}>
-        {isError && (
-          <AlertMessage
-            title="Error"
-            message={`${searchUserId} Not Found. Please check the User ID`}
-          />
-        )}
-      </Box> */}
     </Box>
-  );
+  ) : null;
 };

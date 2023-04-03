@@ -3,6 +3,7 @@ import { useFetchUserSubmission } from "@features/submission/useFetchSubmission"
 export const useSolvedStatus = (searchUserId: string | null) => {
   const solvedSet = new Set<string>();
   const attemptedSet = new Set<string>();
+
   if (!searchUserId) {
     return { solvedSet, attemptedSet };
   }

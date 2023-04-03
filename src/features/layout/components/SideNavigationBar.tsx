@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { Drawer, Box, Toolbar, Divider, List } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
@@ -13,6 +13,7 @@ import {
 } from "@features/layout/components/SideNavigationItems";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import { generateUrlPath } from "@features/layout/helper";
+import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
 
 type Props = {
   isOpenSideBar: boolean;
@@ -24,10 +25,7 @@ type Props = {
 export const SideNavigationBar: React.FC<Props> = (props: Props) => {
   const { isOpenSideBar, toggleSideBar, selectedItem, setSelectedItem } = props;
   const { theme } = useThemeContext();
-
-  const urlSearch = useLocation().search;
-  const urlQueries = new URLSearchParams(urlSearch);
-  const userId = urlQueries.get("userId") ?? "";
+  const userId = useQueryParams(QueryParamKeys.USERID) ?? "";
 
   return (
     <Box role="presentation">
