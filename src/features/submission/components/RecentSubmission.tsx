@@ -11,7 +11,7 @@ import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { useFetchRecentSubmissions } from "../useFetchSubmission";
 import { normalizeLanguage } from "@features/language/language";
 import { formatUnixTime } from "@helpers/index";
-import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
+import { useOfficialContestIdNameMap } from "@features/contests/hooks/useFetchOfficialContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
 import { usePagination } from "@hooks/index";
@@ -19,26 +19,13 @@ import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 export const RecentSubmission: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchRecentSubmissions();
-  const {
-    map,
-    isError: mapIsError,
-    error: mapError,
-    isLoading: mapIsLoading,
-  } = useContestIdNameMap();
-
-  // for pagination
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
+
+  const { contestIdNameMap, isLoading: mapIsLoading } =
+    useOfficialContestIdNameMap();
 
   if (isLoading || mapIsLoading) {
     return <CircularProgress />;
-  }
-  if (isError || mapIsError) {
-    return (
-      <>
-        <div>Error: {error?.message}</div>
-        <div>Error: {mapError?.message}</div>
-      </>
-    );
   }
 
   return (
@@ -78,7 +65,7 @@ export const RecentSubmission: React.FC = () => {
                           <ContestLink
                             contestId={d.contestId as number}
                             contestName={
-                              map?.get(d.contestId as number) as string
+                              contestIdNameMap[d.contestId as number]
                             }
                           />
                         </TableCell>
@@ -87,8 +74,8 @@ export const RecentSubmission: React.FC = () => {
                             showDifficulty={true}
                             contestId={d.contestId as number} // need to fix this.
                             contestName={
-                              map?.get(d.contestId as number) as string
-                            } // need to fix this
+                              contestIdNameMap[d.contestId as number]
+                            }
                             problemId={d.problem.index}
                             problemName={d.problem.name}
                             difficulty={d.problem.rating}

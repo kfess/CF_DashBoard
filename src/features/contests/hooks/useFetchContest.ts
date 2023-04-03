@@ -28,17 +28,21 @@ export const useFetchContests = () => {
   return { data, isError, error, isLoading };
 };
 
-// deprecated
 export const useContestIdNameMap = () => {
   const { data, isError, error, isLoading } = useQuery<Contest[], Error>({
     queryKey: ["contests"],
     queryFn: fetchContests,
+    cacheTime: 1000 * 60 * 60 * 24,
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: true,
+    retry: 3,
   });
 
-  const map = data?.reduce((m, d) => {
-    m.set(d.contestId, d.contestName);
-    return m;
-  }, new Map<number, string>());
+  const contestIdNameMap: Record<number, string> = {};
+  data?.forEach((contest) => {
+    contestIdNameMap[contest.contestId] = contest.contestName;
+  });
 
-  return { map, isError, error, isLoading };
+  return { contestIdNameMap, isError, error, isLoading };
 };

@@ -19,6 +19,7 @@ import { VerdictFilter } from "./SolvedStatusFilter";
 import { LanguageFilter } from "./LanguageFilter";
 import { usePagination } from "@hooks/index";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
+import { useOfficialContestIdNameMap } from "@features/contests/hooks/useFetchOfficialContest";
 
 type Props = {
   userId: string;
@@ -33,26 +34,13 @@ export const UserSubmission: React.FC<Props> = (props: Props) => {
     userId: userId,
   });
 
-  const {
-    map,
-    isError: mapIsError,
-    error: mapError,
-    isLoading: mapIsLoading,
-  } = useContestIdNameMap();
+  const { contestIdNameMap, isLoading: mapIsLoading } =
+    useOfficialContestIdNameMap();
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
 
   if (isLoading || mapIsLoading) {
     return <CircularProgress />;
-  }
-
-  if (isError || mapIsError) {
-    return (
-      <>
-        <div>Error: {error?.message}</div>
-        <div>Error: {mapError?.message}</div>
-      </>
-    );
   }
 
   return (
@@ -110,7 +98,7 @@ export const UserSubmission: React.FC<Props> = (props: Props) => {
                           <ContestLink
                             contestId={d.contestId as number}
                             contestName={
-                              map?.get(d.contestId as number) as string
+                              contestIdNameMap[d.contestId as number]
                             }
                           />
                         </TableCell>
@@ -119,8 +107,8 @@ export const UserSubmission: React.FC<Props> = (props: Props) => {
                             showDifficulty={true}
                             contestId={d.contestId as number} // need to fix this.
                             contestName={
-                              map?.get(d.contestId as number) as string
-                            } // need to fix this
+                              contestIdNameMap[d.contestId as number]
+                            }
                             problemId={d.problem.index}
                             problemName={d.problem.name}
                             difficulty={d.problem.rating}

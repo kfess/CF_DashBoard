@@ -116,3 +116,25 @@ export const useFetchOfficialContests = () => {
 
   return { data, isError, error, isLoading };
 };
+
+export const useOfficialContestIdNameMap = () => {
+  const { data, isError, error, isLoading } = useQuery<
+    OfficialContest[],
+    Error
+  >({
+    queryKey: ["official-contests-id-name"],
+    queryFn: fetchOfficialContests,
+    cacheTime: 1000 * 60 * 60 * 24,
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: true,
+    retry: 3,
+  });
+
+  const contestIdNameMap: Record<number, string> = {};
+  data?.forEach((contest) => {
+    contestIdNameMap[contest.id] = contest.name;
+  });
+
+  return { contestIdNameMap, isError, error, isLoading };
+};
