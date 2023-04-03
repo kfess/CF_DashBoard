@@ -36,10 +36,10 @@ export const SearchBar: React.FC = () => {
   );
 
   return (
-    <Box sx={{ p: 1 }}>
+    <Box css={{ width: "100%" }}>
       <form onSubmit={onSubmit}>
         <Input placeholder="User ID" value={searchUserId} onChange={onChange} />
-        {isSuccess && (
+        {/* {isSuccess && (
           <DeletableChip
             label={queryUserId}
             icon={
@@ -50,9 +50,8 @@ export const SearchBar: React.FC = () => {
               navigate(pathname);
             }}
           />
-        )}
+        )} */}
       </form>
-
       {/* <Box sx={{ p: 1 }}>
         {isError && (
           <AlertMessage

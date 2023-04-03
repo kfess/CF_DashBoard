@@ -108,7 +108,6 @@ export const ContestsPage: React.FC = () => {
           setSolvedStatus={setSolvedStatus}
         />
       </div>
-
       {contests.length > 0 && problemIdxes.length > 0 && (
         <ContestsTable
           contests={contests}
