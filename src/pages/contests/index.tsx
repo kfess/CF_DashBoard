@@ -51,8 +51,6 @@ export const ContestsPage: React.FC = () => {
 
   const { solvedSet, attemptedSet } = useSolvedStatus(userId);
 
-  console.log(attemptedSet);
-
   if (
     isLoading ||
     !contests ||

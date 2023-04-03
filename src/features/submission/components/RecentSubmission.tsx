@@ -15,6 +15,7 @@ import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
 import { usePagination } from "@hooks/index";
+import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 export const RecentSubmission: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchRecentSubmissions();
@@ -29,7 +30,7 @@ export const RecentSubmission: React.FC = () => {
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
 
   if (isLoading || mapIsLoading) {
-    return <span>Loading...</span>;
+    return <CircularProgress />;
   }
   if (isError || mapIsError) {
     return (
