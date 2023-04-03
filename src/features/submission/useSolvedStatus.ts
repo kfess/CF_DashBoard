@@ -1,34 +1,35 @@
+import { useMemo } from "react";
 import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
 
 export const useSolvedStatus = (searchUserId: string | null) => {
-  const solvedSet = new Set<string>();
-  const attemptedSet = new Set<string>();
-
-  if (!searchUserId) {
-    return { solvedSet, attemptedSet };
-  }
-
   const { data, isError } = useFetchUserSubmission({
     userId: searchUserId,
   });
 
-  if (!isError && data) {
-    data.forEach((sub) => {
-      const problemKey = `${sub.contestId}-${sub.problem.index}`;
+  const { solvedSet, attemptedSet } = useMemo(() => {
+    const solved = new Set<string>();
+    const attempted = new Set<string>();
 
-      if (sub.verdict === "OK") {
-        solvedSet.add(problemKey);
-      }
-    });
+    if (!isError && data) {
+      data.forEach((sub) => {
+        const problemKey = `${sub.contestId}-${sub.problem.index}`;
 
-    data.forEach((sub) => {
-      const problemKey = `${sub.contestId}-${sub.problem.index}`;
+        if (sub.verdict === "OK") {
+          solved.add(problemKey);
+        }
+      });
 
-      if (sub.verdict !== "OK" && !solvedSet.has(problemKey)) {
-        attemptedSet.add(problemKey);
-      }
-    });
-  }
+      data.forEach((sub) => {
+        const problemKey = `${sub.contestId}-${sub.problem.index}`;
+
+        if (sub.verdict !== "OK" && !solved.has(problemKey)) {
+          attempted.add(problemKey);
+        }
+      });
+    }
+
+    return { solvedSet: solved, attemptedSet: attempted };
+  }, [data, isError]);
 
   return { solvedSet, attemptedSet };
 };

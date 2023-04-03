@@ -10,7 +10,11 @@ import {
 
 const isMockMode = false;
 
-export const useFetchUserSubmission = ({ userId }: { userId: string }) => {
+export const useFetchUserSubmission = ({
+  userId,
+}: {
+  userId: string | null;
+}) => {
   const { data, isError, error, isLoading } = useQuery<Submission[], Error>({
     queryKey: ["user-submissions", userId],
     queryFn: async (): Promise<Submission[]> => {
