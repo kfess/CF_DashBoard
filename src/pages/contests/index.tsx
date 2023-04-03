@@ -1,6 +1,4 @@
 import React, { useMemo } from "react";
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
 import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
 import { useSolvedStatus } from "@features/submission/useSolvedStatus";
 import {
@@ -8,12 +6,12 @@ import {
   getProblemIdxFromClassification,
 } from "@features/contests/helper";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
-import { LabelsChip } from "@features/bookmark/components/LabelsChip";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { FilterChips } from "@features/contests/components/FilterChips";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
 import { useFetchOfficialContests } from "@features/contests/hooks/useFetchOfficialContest";
 import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
+import { HeadLine } from "@features/layout/components/HeadLine";
 
 export const ContestsPage: React.FC = () => {
   const userId = useQueryParams(QueryParamKeys.USERID);
@@ -66,18 +64,7 @@ export const ContestsPage: React.FC = () => {
 
   return (
     <>
-      <div
-        css={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Typography variant="h4" component="h1">
-          Contests
-        </Typography>
-        <LabelsChip />
-      </div>
-      <Divider />
+      <HeadLine title="Contests" />
       <FilterOptions
         showDifficulty={showDifficulty}
         showACStatus={showACStatus}

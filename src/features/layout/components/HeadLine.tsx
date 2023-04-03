@@ -23,7 +23,15 @@ export const HeadLine: React.FC<Props> = ({ title }) => {
         <Typography variant="h4" component="h1">
           {title}
         </Typography>
-        <LabelsChip />
+        <div css={{ display: "flex" }}>
+          {queryUserId && (
+            <DeletableChip
+              label={`query: ${queryUserId}`}
+              onDelete={() => {}}
+            />
+          )}
+          <LabelsChip />
+        </div>
       </div>
       <Divider />
     </>

@@ -63,9 +63,7 @@ export const HeaderBar: React.FC<Props> = (props: Props) => {
               width: "40%",
             }}
           >
-            {isMainField(pathname) && (
-              <SearchBar visible={isMainField(pathname)} />
-            )}
+            <SearchBar visible={isMainField(pathname)} />
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <SignInOutButton />
