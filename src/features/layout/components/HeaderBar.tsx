@@ -4,10 +4,9 @@ import { styled } from "@mui/material/styles";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useThemeContext } from "@features/color/themeColor.hook";
-import { SignInOutButton } from "@features/authentication/components/SignInOut";
-import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { isMainField } from "@features/layout/helper";
 import { SearchBar } from "@features/layout/components/Search";
+import { UserSettingIcon } from "./UserSettingIcon";
 
 // Without this offset, some part of the content to be invisible behind the header
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
@@ -20,7 +19,6 @@ type Props = {
 export const HeaderBar: React.FC<Props> = (props: Props) => {
   const { isOpenSideBar, toggleSideBar } = props;
   const { theme } = useThemeContext();
-  const { loggedIn } = useLoggedIn();
   const { pathname } = useLocation();
 
   return (
@@ -66,20 +64,7 @@ export const HeaderBar: React.FC<Props> = (props: Props) => {
             <SearchBar visible={isMainField(pathname)} />
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <SignInOutButton />
-            {loggedIn && (
-              <NavLink to="/profile">
-                <Typography
-                  noWrap
-                  component="div"
-                  css={{
-                    color: theme.colors.header.foregroundColor,
-                  }}
-                >
-                  Profile
-                </Typography>
-              </NavLink>
-            )}
+            <UserSettingIcon />
           </Box>
         </Toolbar>
       </AppBar>

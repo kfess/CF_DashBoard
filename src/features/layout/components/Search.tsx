@@ -42,7 +42,11 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
   return visible ? (
     <Box css={{ width: "100%" }}>
       <form onSubmit={onSubmit}>
-        <Input placeholder="User ID" value={searchUserId} onChange={onChange} />
+        <Input
+          placeholder="Search User ID"
+          value={searchUserId}
+          onChange={onChange}
+        />
       </form>
     </Box>
   ) : null;
