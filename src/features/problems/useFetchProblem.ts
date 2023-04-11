@@ -5,7 +5,7 @@ import type { Problem } from "@features/problems/problem";
 
 const fetchProblems = async (): Promise<Problem[]> => {
   try {
-    const response = await axios.get("/mock/problems");
+    const response = await axios.get("http://localhost:4000/problems");
     const data = problemsSchema.parse(response.data);
     return data;
   } catch (error) {
