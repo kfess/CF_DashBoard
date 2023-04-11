@@ -68,6 +68,7 @@ export const kindSchema = z
     z.literal("Training Camp Contest"),
     z.literal("Official International Personal Contest"),
     z.literal("Training Contest"),
+    z.literal("Unknown"),
   ])
   .optional();
 const kind = [
@@ -77,12 +78,13 @@ const kind = [
   "Training Camp Contest",
   "Official International Personal Contest",
   "Training Contest",
+  "Unknown",
 ] as const;
 export type Kind = typeof kind[number];
 
 export const contestSchema = z.object({
-  contestId: z.number(),
-  contestName: z.string(),
+  id: z.number(),
+  name: z.string(),
   type: typeSchema,
   phase: phaseSchema,
   frozen: z.boolean(),
@@ -107,8 +109,8 @@ export type Contest = z.infer<typeof contestSchema>;
 // need "reshape" for displaying contest table
 //by groupBying problems with the same index (A, A2)
 const reshapedContestSchema = z.object({
-  contestId: z.number(),
-  contestName: z.string(),
+  id: z.number(),
+  name: z.string(),
   type: typeSchema,
   phase: phaseSchema,
   frozen: z.boolean(),

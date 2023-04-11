@@ -52,8 +52,8 @@ export const ContestsTable: React.FC<Props> = (props: Props) => {
                 .map((contest) => {
                   return (
                     <ContestTableRow
-                      contestId={contest.contestId}
-                      contestName={contest.contestName}
+                      contestId={contest.id}
+                      contestName={contest.name}
                       problemIdxes={problemIdxes}
                       problems={contest.problems}
                       showDifficulty={showDifficulty}

@@ -5,10 +5,12 @@ import type { Contest } from "@features/contests/contest";
 
 const fetchContests = async (): Promise<Contest[]> => {
   try {
-    const response = await axios.get("/mock/contests");
+    // const response = await axios.get("/mock/contests");
+    const response = await axios.get("http://localhost:4000/contests");
     const data = contestsSchema.parse(response.data);
     return data;
   } catch (error) {
+    console.log(error);
     throw new Error("An Error occurred while fetching contests");
   }
 };

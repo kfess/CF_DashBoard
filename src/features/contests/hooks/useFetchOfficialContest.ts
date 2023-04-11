@@ -33,6 +33,7 @@ const fetchOfficialContests = async (): Promise<OfficialContest[]> => {
     const data = okContestsApiSchema.parse(response.data);
     return data.result;
   } catch (error) {
+    console.log(error);
     throw new Error("An Error occurred while fetching official contests");
   }
 };

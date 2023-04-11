@@ -12,12 +12,13 @@ import { ContestsTable } from "@features/contests/components/ContestsTable";
 import { useFetchOfficialContests } from "@features/contests/hooks/useFetchOfficialContest";
 import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
 import { HeadLine } from "@features/layout/components/HeadLine";
+import { useFetchContests } from "@features/contests/hooks/useFetchContest";
 
 export const ContestsPage: React.FC = () => {
   const userId = useQueryParams(QueryParamKeys.USERID);
 
-  // const { data, isError, error, isLoading } = useFetchContests();
-  const { data, isError, error, isLoading } = useFetchOfficialContests();
+  const { data, isError, error, isLoading } = useFetchContests();
+  // const { data, isError, error, isLoading } = useFetchOfficialContests();
 
   const {
     state,
