@@ -11,6 +11,9 @@ import { usePagination } from "@hooks/index";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { ProblemsTableRow } from "@features/problems/components/ProblemsTableRow";
 import type { Classification } from "@features/contests/contest";
+import { useSolvedStatus } from "@features/submission/useSolvedStatus";
+import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
+import { useThemeContext } from "@features/color/themeColor.hook";
 
 type Props = {
   problems: Problem[];
@@ -53,6 +56,10 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
     [filteredProblems]
   );
 
+  const { theme } = useThemeContext();
+  const searchUserId = useQueryParams(QueryParamKeys.USERID);
+  const { solvedSet, attemptedSet } = useSolvedStatus(searchUserId);
+
   return (
     <>
       <TablePagination
@@ -64,7 +71,7 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
       />
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer component={Paper}>
-          <Table stickyHeader>
+          <Table stickyHeader css={{ height: "100%" }}>
             <TableHead>
               <TableRow>
                 <TableCell>Problem</TableCell>
@@ -77,9 +84,23 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
             <TableBody>
               {filteredProblems
                 .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-                .map((problem) => (
-                  <ProblemsTableRow problem={problem} showTags={showTags} />
-                ))}
+                .map((problem) => {
+                  const problemKey = `${problem.contestId}-${problem.index}`;
+                  const isSolved = solvedSet?.has(problemKey);
+                  const isAttempted = attemptedSet?.has(problemKey);
+                  const backgroundColor = isSolved
+                    ? theme.colors.acColor
+                    : isAttempted
+                    ? theme.colors.waColor
+                    : "";
+                  return (
+                    <ProblemsTableRow
+                      problem={problem}
+                      showTags={showTags}
+                      backgroundColor={backgroundColor}
+                    />
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>

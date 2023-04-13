@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
 
 export const useSolvedStatus = (searchUserId: string | null) => {
-  const { data, isError } = useFetchUserSubmission({
+  const { data, isError, isLoading } = useFetchUserSubmission({
     userId: searchUserId,
   });
 

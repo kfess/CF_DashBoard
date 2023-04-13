@@ -8,13 +8,13 @@ import { SolutionLink } from "./SolutionLink";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { Chip_ } from "@features/ui/component/Chip";
 
-type Props = { problem: Problem; showTags: boolean };
+type Props = { problem: Problem; showTags: boolean; backgroundColor: string };
 
 export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
-  const { problem, showTags } = props;
+  const { problem, showTags, backgroundColor } = props;
 
   return (
-    <TableRow>
+    <TableRow css={{ backgroundColor: backgroundColor }}>
       <TableCell>
         <ProblemLink
           contestId={problem.contestId ?? 0} // need to change!
