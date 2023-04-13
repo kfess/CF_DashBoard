@@ -1,27 +1,22 @@
 import React from "react";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
-import IconButton from "@mui/material/IconButton";
+import { CF_CONTEST_URL } from "@constants/url";
+import { Button } from "@features/ui/component/Button";
+import { Problem } from "@features/problems/problem";
 
-type Props = {};
+type Props = {
+  problem: Problem;
+};
 
-export const PickOneButton: React.FC<Props> = (props: Props) => {
-  const {} = props;
+export const PickOneButton: React.FC<Props> = ({ problem }) => {
+  const problemUrl = `${CF_CONTEST_URL}/${problem.contestId}/problem/${problem.index}`;
 
   return (
-    <a
-      href=""
-      target="_blank"
-      rel="noopener noreferrer"
-      css={{
-        display: "inline-flex",
-        alignItems: "center",
-        color: "green",
-      }}
-    >
-      <IconButton size="small" disabled>
-        <ShuffleIcon color="success" />
-      </IconButton>
-      Pick One
+    <a href={problemUrl} target="_blank" rel="noopener noreferrer">
+      <Button>
+        <ShuffleIcon />
+        Pick One
+      </Button>
     </a>
   );
 };

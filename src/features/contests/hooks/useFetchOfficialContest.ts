@@ -78,8 +78,8 @@ const fetchOfficialContestsAndProblems = async (): Promise<Contest[]> => {
         }));
 
       return {
-        contestId: contest.id,
-        contestName: contest.name,
+        id: contest.id,
+        name: contest.name,
         type: contest.type,
         phase: contest.phase,
         frozen: contest.frozen,

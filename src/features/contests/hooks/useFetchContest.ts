@@ -43,7 +43,7 @@ export const useContestIdNameMap = () => {
 
   const contestIdNameMap: Record<number, string> = {};
   data?.forEach((contest) => {
-    contestIdNameMap[contest.contestId] = contest.contestName;
+    contestIdNameMap[contest.id] = contest.name;
   });
 
   return { contestIdNameMap, isError, error, isLoading };

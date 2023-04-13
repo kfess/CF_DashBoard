@@ -120,6 +120,7 @@ export const problemSchema = z.object({
     ),
   contestName: z.string().optional(), // need to remove optional in the future
   classification: z.optional(classificationSchema), // need to remove optional in the future
+  solvedCount: z.number().optional(),
 });
 export const problemsSchema = z.array(problemSchema);
 export type Problem = z.infer<typeof problemSchema>;

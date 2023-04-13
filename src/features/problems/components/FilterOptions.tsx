@@ -10,6 +10,8 @@ import { ResetFilterButton } from "@features/problems/components/ResetFilter";
 import { DifficultyButton } from "@features/problems/components/DifficultyButton";
 import { FilterChips } from "@features/problems/components/FilterChips";
 import { ViewFilter } from "./ViewFilter";
+import { Problem } from "@features/problems/problem";
+import { PickOneButton } from "@features/problems/components/PickOneButton";
 
 const buttonsCss = css({
   display: "flex",
@@ -19,6 +21,7 @@ const buttonsCss = css({
 });
 
 type Props = {
+  problem: Problem;
   classification: Classification;
   setClassification: (arg: Classification) => void;
   solvedStatus: SolvedStatus;
@@ -35,6 +38,7 @@ type Props = {
 
 export const FilterOptions: React.FC<Props> = (props: Props) => {
   const {
+    problem,
     classification,
     setClassification,
     solvedStatus,
@@ -80,10 +84,6 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
           classification={classification}
           setClassification={setClassification}
         />
-        <SolvedStatusFilter
-          solvedStatus={solvedStatus}
-          setSolvedStatus={setSolvedStatus}
-        />
         <DifficultyButton
           lowerDifficulty={lowerDifficulty}
           setLowerDifficulty={setLowerDifficulty}
@@ -95,6 +95,10 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
           addOrRemoveTag={addOrRemoveTag}
           removeAllTags={removeAllTags}
         />
+        <SolvedStatusFilter
+          solvedStatus={solvedStatus}
+          setSolvedStatus={setSolvedStatus}
+        />
         <ViewFilter showTags={showTags} toggleShowTags={toggleShowTags} />
         <ResetFilterButton
           setClassification={setClassification}
@@ -103,6 +107,7 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
           setLowerDifficulty={setLowerDifficulty}
           setUpperDifficulty={setUpperDifficulty}
         />
+        {problem && <PickOneButton problem={problem} />}
       </div>
       <FilterChips
         classification={classification}

@@ -23,6 +23,7 @@ export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
           problemName={problem.name}
           difficulty={problem.rating}
           showDifficulty={true}
+          solvedCount={problem.solvedCount}
         />
         <div>
           {showTags &&
@@ -38,10 +39,10 @@ export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
       </TableCell>
       <TableCell>
         <span css={{ color: getColorCodeFromRating(problem.rating) }}>
-          {problem.rating}
+          {problem.rating ?? "no data"}
         </span>
       </TableCell>
-      <TableCell>{}</TableCell>
+      <TableCell>{problem.solvedCount ?? "no data"}</TableCell>
       <TableCell>
         <SolutionLink />
       </TableCell>
