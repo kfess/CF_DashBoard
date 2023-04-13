@@ -48,7 +48,7 @@ export const ContestsPage: React.FC = () => {
     [data, classification]
   );
 
-  const { solvedSet, attemptedSet } = useSolvedStatus(userId);
+  const { solvedSet, attemptedSet } = useSolvedStatus();
 
   if (
     isLoading ||

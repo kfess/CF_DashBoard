@@ -57,8 +57,7 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
   );
 
   const { theme } = useThemeContext();
-  const searchUserId = useQueryParams(QueryParamKeys.USERID);
-  const { solvedSet, attemptedSet } = useSolvedStatus(searchUserId);
+  const { solvedSet, attemptedSet } = useSolvedStatus();
 
   return (
     <>

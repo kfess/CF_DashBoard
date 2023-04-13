@@ -1,7 +1,9 @@
 import { useMemo } from "react";
 import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
+import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
 
-export const useSolvedStatus = (searchUserId: string | null) => {
+export const useSolvedStatus = () => {
+  const searchUserId = useQueryParams(QueryParamKeys.USERID);
   const { data, isError, isLoading } = useFetchUserSubmission({
     userId: searchUserId,
   });
