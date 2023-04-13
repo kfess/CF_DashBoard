@@ -12,8 +12,8 @@ import { TablePagination } from "@features/ui/component/TablePagination";
 import { ProblemsTableRow } from "@features/problems/components/ProblemsTableRow";
 import type { Classification } from "@features/contests/contest";
 import { useSolvedStatus } from "@features/submission/useSolvedStatus";
-import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
 import { useThemeContext } from "@features/color/themeColor.hook";
+import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
 
 type Props = {
   problems: Problem[];
@@ -22,6 +22,7 @@ type Props = {
   lowerDifficulty: number;
   upperDifficulty: number;
   showTags: boolean;
+  solvedStatus: SolvedStatus;
 };
 
 export const ProblemsTable: React.FC<Props> = (props: Props) => {
@@ -32,6 +33,7 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
     lowerDifficulty,
     upperDifficulty,
     showTags,
+    solvedStatus,
   } = props;
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
@@ -82,6 +84,20 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
             </TableHead>
             <TableBody>
               {filteredProblems
+                .filter((problem) => {
+                  const problemKey = `${problem.contestId}-${problem.index}`;
+                  const isSolved = solvedSet?.has(problemKey);
+                  const isAttempted = attemptedSet?.has(problemKey);
+                  if (solvedStatus === "All Problems") {
+                    return true;
+                  } else if (solvedStatus === "Solved") {
+                    return isSolved;
+                  } else if (solvedStatus === "Attempting") {
+                    return isAttempted;
+                  } else {
+                    return !isSolved && !isAttempted;
+                  }
+                })
                 .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                 .map((problem) => {
                   const problemKey = `${problem.contestId}-${problem.index}`;

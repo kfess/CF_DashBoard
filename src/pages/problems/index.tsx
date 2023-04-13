@@ -57,6 +57,7 @@ const ProblemsPage: React.FC = () => {
             lowerDifficulty={lowerDifficulty}
             upperDifficulty={upperDifficulty}
             showTags={showTags}
+            solvedStatus={solvedStatus}
           />
         </>
       )}
