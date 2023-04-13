@@ -1,5 +1,6 @@
 import React from "react";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
+import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
 
 const solvedStatuses = [
   "All Problems",
@@ -16,6 +17,7 @@ type Props = {
 
 export const SolvedStatusFilter: React.FC<Props> = (props: Props) => {
   const { solvedStatus, setSolvedStatus } = props;
+  const searchUserId = useQueryParams(QueryParamKeys.USERID);
 
   return (
     <DropDownMenuButton
@@ -25,6 +27,7 @@ export const SolvedStatusFilter: React.FC<Props> = (props: Props) => {
       })}
       selectedItem={solvedStatus}
       setSelectedItem={setSolvedStatus}
+      disabled={!searchUserId}
     />
   );
 };

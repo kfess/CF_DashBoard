@@ -14,12 +14,19 @@ type Props<T extends string | number> = {
   selectedItem: T;
   setSelectedItem: (item: T) => void;
   readonly items: { readonly item: T; startIcon?: ReactNode }[];
+  disabled?: boolean;
 };
 
 export const DropDownMenuButton = <T extends string | number>(
   props: Props<T>
 ) => {
-  const { title, selectedItem, setSelectedItem, items } = props;
+  const {
+    title,
+    selectedItem,
+    setSelectedItem,
+    items,
+    disabled = false,
+  } = props;
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
@@ -36,6 +43,7 @@ export const DropDownMenuButton = <T extends string | number>(
       <Button
         onClick={handleClick}
         endIcon={open ? <ArrowDropDownIcon /> : <ArrowLeftIcon />}
+        disabled={disabled}
       >
         {title}
       </Button>
