@@ -10,7 +10,6 @@ import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { normalizeLanguage } from "@features/language/language";
 import { formatUnixTime } from "@helpers/index";
-import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
@@ -20,16 +19,22 @@ import { LanguageFilter } from "./LanguageFilter";
 import { usePagination } from "@hooks/index";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { useOfficialContestIdNameMap } from "@features/contests/hooks/useFetchOfficialContest";
+import { Classification } from "@features/contests/contest";
+import { getClassification } from "@features/contests/utils/getClassification";
 
 type Props = {
   userId: string;
+  classification: Classification;
   solvedStatus: VerdictFilter;
   language: LanguageFilter;
 };
 
-export const UserSubmission: React.FC<Props> = (props: Props) => {
-  const { userId, solvedStatus, language } = props;
-
+export const UserSubmission: React.FC<Props> = ({
+  userId,
+  classification,
+  solvedStatus,
+  language,
+}) => {
   const { data, isError, error, isLoading } = useFetchUserSubmission({
     userId: userId,
   });
@@ -70,6 +75,18 @@ export const UserSubmission: React.FC<Props> = (props: Props) => {
                 </TableHead>
                 <TableBody>
                   {[...data]
+                    .filter((d) => {
+                      if (classification === "All") {
+                        return true;
+                      } else {
+                        return (
+                          classification ===
+                          getClassification(
+                            contestIdNameMap[d.contestId as number] ?? ""
+                          )
+                        );
+                      }
+                    })
                     .filter((d) => {
                       if (solvedStatus === "All") {
                         return true;
@@ -112,7 +129,7 @@ export const UserSubmission: React.FC<Props> = (props: Props) => {
                             problemId={d.problem.index}
                             problemName={d.problem.name}
                             difficulty={d.problem.rating}
-                            // solvedCount={}
+                            solvedCount={d.problem.solvedCount}
                           />
                         </TableCell>
                         <TableCell>

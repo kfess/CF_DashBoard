@@ -39,6 +39,7 @@ export const UserSubmissionPage: React.FC<Props> = ({ userId }) => {
       {userId && (
         <UserSubmission
           userId={userId}
+          classification={classification}
           solvedStatus={solvedStatus}
           language={language}
         />
