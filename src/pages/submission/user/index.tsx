@@ -7,6 +7,7 @@ import type { LanguageFilter } from "@features/submission/components/LanguageFil
 import { LanguageFilterButton } from "@features/submission/components/LanguageFilter";
 import { ContestTypeFilter } from "@features/contests/components/ContestTypeFilter";
 import { Classification } from "@features/contests/contest";
+import { FilterChips } from "@features/submission/components/FilterChips";
 
 const buttonsCss = css({
   display: "flex",
@@ -35,7 +36,16 @@ export const UserSubmissionPage: React.FC<Props> = ({ userId }) => {
         />
         <LanguageFilterButton language={language} setLanguage={setLanguage} />
       </div>
-
+      <div>
+        <FilterChips
+          classification={classification}
+          setClassification={setClassification}
+          solvedStatus={solvedStatus}
+          setSolvedStatus={setSolvedStatus}
+          language={language}
+          setLanguage={setLanguage}
+        />
+      </div>
       {userId && (
         <UserSubmission
           userId={userId}
