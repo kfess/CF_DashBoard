@@ -69,8 +69,10 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
         solvedStatusMatch = isSolved;
       } else if (solvedStatus === "Attempting") {
         solvedStatusMatch = isAttempted;
-      } else {
+      } else if (solvedStatus === "Not Solved yet") {
         solvedStatusMatch = !isSolved && !isAttempted;
+      } else {
+        return 1;
       }
 
       return (
