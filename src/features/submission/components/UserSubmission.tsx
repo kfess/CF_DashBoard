@@ -42,6 +42,20 @@ export const UserSubmission: React.FC<Props> = ({
   const { contestIdNameMap, isLoading: mapIsLoading } =
     useOfficialContestIdNameMap();
 
+  const filteredData = data?.filter((d) => {
+    const contestClassification = getClassification(
+      contestIdNameMap[d.contestId as number] ?? ""
+    );
+    const normalizedLanguage = normalizeLanguage(d.programmingLanguage);
+    const verdictStatus = verdictMap[d.verdict ?? "UNKNOWN"];
+
+    return (
+      (classification === "All" || classification === contestClassification) &&
+      (solvedStatus === "All" || solvedStatus === verdictStatus) &&
+      (language === "All" || language === normalizedLanguage)
+    );
+  });
+
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
 
   if (isLoading || mapIsLoading) {
@@ -50,10 +64,10 @@ export const UserSubmission: React.FC<Props> = ({
 
   return (
     <>
-      {data && (
+      {filteredData && (
         <>
           <TablePagination
-            size={data.length}
+            size={filteredData.length}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}
@@ -74,37 +88,7 @@ export const UserSubmission: React.FC<Props> = ({
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {[...data]
-                    .filter((d) => {
-                      if (classification === "All") {
-                        return true;
-                      } else {
-                        return (
-                          classification ===
-                          getClassification(
-                            contestIdNameMap[d.contestId as number] ?? ""
-                          )
-                        );
-                      }
-                    })
-                    .filter((d) => {
-                      if (solvedStatus === "All") {
-                        return true;
-                      } else {
-                        return (
-                          verdictMap[d.verdict ?? "UNKNOWN"] === solvedStatus
-                        );
-                      }
-                    })
-                    .filter((d) => {
-                      if (language === "All") {
-                        return true;
-                      } else {
-                        return (
-                          normalizeLanguage(d.programmingLanguage) === language
-                        );
-                      }
-                    })
+                  {filteredData
                     .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                     .map((d) => (
                       <TableRow>
@@ -163,7 +147,7 @@ export const UserSubmission: React.FC<Props> = ({
             </TableContainer>
           </Paper>
           <TablePagination
-            size={data.length}
+            size={filteredData.length}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}
