@@ -37,29 +37,61 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
   } = props;
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
-  const filteredProblems = [...problems]
-    .filter((problem) =>
-      selectedTags.length === 0
-        ? true
-        : selectedTags.every((selectedTag) => {
-            return (problem.tags as string[]).includes(selectedTag);
-          })
-    )
-    .filter((problem) =>
-      classification === "All"
-        ? true
-        : problem.classification === classification
-    )
-    .filter((problem) => (problem.rating ?? -1) >= lowerDifficulty)
-    .filter((problem) => (problem.rating ?? -1) <= upperDifficulty);
+
+  const { theme } = useThemeContext();
+  const { solvedSet, attemptedSet } = useSolvedStatus();
+
+  const filteredProblems = useMemo(() => {
+    return problems.filter((problem) => {
+      const problemKey = `${problem.contestId}-${problem.index}`;
+      const isSolved = solvedSet?.has(problemKey);
+      const isAttempted = attemptedSet?.has(problemKey);
+
+      // Tag filter
+      const tagMatch =
+        selectedTags.length === 0 ||
+        selectedTags.every((selectedTag) =>
+          (problem.tags as string[]).includes(selectedTag)
+        );
+
+      // Classification filter
+      const classificationMatch =
+        classification === "All" || problem.classification === classification;
+
+      // Difficulty filter
+      const difficultyMatch =
+        (problem.rating ?? -1) >= lowerDifficulty &&
+        (problem.rating ?? -1) <= upperDifficulty;
+
+      // Solved status filter
+      let solvedStatusMatch = true;
+      if (solvedStatus === "Solved") {
+        solvedStatusMatch = isSolved;
+      } else if (solvedStatus === "Attempting") {
+        solvedStatusMatch = isAttempted;
+      } else {
+        solvedStatusMatch = !isSolved && !isAttempted;
+      }
+
+      return (
+        tagMatch && classificationMatch && difficultyMatch && solvedStatusMatch
+      );
+    });
+  }, [
+    problems,
+    selectedTags,
+    classification,
+    lowerDifficulty,
+    upperDifficulty,
+    solvedStatus,
+    solvedSet,
+    attemptedSet,
+  ]);
 
   const problemsLen = useMemo(
     () => filteredProblems.length,
     [filteredProblems]
   );
-
-  const { theme } = useThemeContext();
-  const { solvedSet, attemptedSet } = useSolvedStatus();
 
   return (
     <>
@@ -84,20 +116,6 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
             </TableHead>
             <TableBody>
               {filteredProblems
-                .filter((problem) => {
-                  const problemKey = `${problem.contestId}-${problem.index}`;
-                  const isSolved = solvedSet?.has(problemKey);
-                  const isAttempted = attemptedSet?.has(problemKey);
-                  if (solvedStatus === "All Problems") {
-                    return true;
-                  } else if (solvedStatus === "Solved") {
-                    return isSolved;
-                  } else if (solvedStatus === "Attempting") {
-                    return isAttempted;
-                  } else {
-                    return !isSolved && !isAttempted;
-                  }
-                })
                 .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                 .map((problem) => {
                   const problemKey = `${problem.contestId}-${problem.index}`;
