@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -42,19 +42,22 @@ export const UserSubmission: React.FC<Props> = ({
   const { contestIdNameMap, isLoading: mapIsLoading } =
     useOfficialContestIdNameMap();
 
-  const filteredData = data?.filter((d) => {
-    const contestClassification = getClassification(
-      contestIdNameMap[d.contestId as number] ?? ""
-    );
-    const normalizedLanguage = normalizeLanguage(d.programmingLanguage);
-    const verdictStatus = verdictMap[d.verdict ?? "UNKNOWN"];
+  const filteredData = useMemo(() => {
+    return data?.filter((d) => {
+      const contestClassification = getClassification(
+        contestIdNameMap[d.contestId as number] ?? ""
+      );
+      const normalizedLanguage = normalizeLanguage(d.programmingLanguage);
+      const verdictStatus = verdictMap[d.verdict ?? "UNKNOWN"];
 
-    return (
-      (classification === "All" || classification === contestClassification) &&
-      (solvedStatus === "All" || solvedStatus === verdictStatus) &&
-      (language === "All" || language === normalizedLanguage)
-    );
-  });
+      return (
+        (classification === "All" ||
+          classification === contestClassification) &&
+        (solvedStatus === "All" || solvedStatus === verdictStatus) &&
+        (language === "All" || language === normalizedLanguage)
+      );
+    });
+  }, [data, contestIdNameMap, classification, solvedStatus, language]);
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
 
