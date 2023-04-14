@@ -2,10 +2,8 @@ import dayjs from "dayjs";
 import React, { useState, useEffect } from "react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Button from "@mui/material/Button";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
+// import InputLabel from "@mui/material/InputLabel";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoItem } from "@mui/x-date-pickers/internals/demo";
@@ -21,6 +19,9 @@ import { Checkbox } from "@features/ui/component/Checkbox";
 import { Problem } from "@features/problems/problem";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { useAddCustomContest } from "../useFetchCustomContest";
+import { Button } from "@features/ui/component/Button";
+import { TextArea } from "@features/ui/component/TextArea";
+import { TextareaAutosize } from "@mui/material";
 
 export const CreateContestInfoForm: React.FC = () => {
   const { codeforcesUsername, githubId } = useUserProfile();
@@ -76,23 +77,11 @@ export const CreateContestInfoForm: React.FC = () => {
     mutate(updatedData);
   };
 
-  // console.log(errors);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h3>Contest Form</h3>
       <div>
         Organize Custom Contest as <Chip_ label={codeforcesUsername} />
-        <Button
-          onClick={() => {}} // change global CF user ID
-          variant="contained"
-          color="inherit"
-          size="small"
-          disableRipple
-          css={{ textTransform: "none" }}
-        >
-          Change CF User Id
-        </Button>
+        <Button onClick={() => {}}>Change your CF User Id</Button>
       </div>
       <Controller
         name="visibility"
@@ -112,7 +101,7 @@ export const CreateContestInfoForm: React.FC = () => {
           />
         )}
       />
-      {/* <Controller
+      <Controller
         name="mode"
         control={control}
         render={({ field }) => (
@@ -129,30 +118,35 @@ export const CreateContestInfoForm: React.FC = () => {
             />
           </>
         )}
-      /> */}
+      />
       <Controller
         name="title"
         control={control}
         render={({ field }) => (
-          <div>
-            <FormControl variant="standard">
-              <InputLabel shrink>Title</InputLabel>
-              <Input {...field} placeholder="Contest Title" type="text" />
-            </FormControl>
+          <FormControl fullWidth>
+            <label htmlFor="title-input" css={{ fontWeight: "bold" }}>
+              Title
+            </label>
+            <Input
+              {...field}
+              placeholder="Contest Title"
+              id="title-input"
+              type="text"
+            />
             {errors.title?.message && <p>{errors.title?.message}</p>}
-          </div>
+          </FormControl>
         )}
       />
       <Controller
         name="description"
         control={control}
         render={({ field }) => (
-          <div>
-            <FormControl variant="standard">
-              <InputLabel shrink>Description</InputLabel>
-              <Input {...field} placeholder="Description" type="text" />
-            </FormControl>
-          </div>
+          <FormControl fullWidth>
+            <label htmlFor="description-input" css={{ fontWeight: "bold" }}>
+              Description
+            </label>
+            <TextArea {...field} placeholder="Description" />
+          </FormControl>
         )}
       />
       <Controller
@@ -201,8 +195,7 @@ export const CreateContestInfoForm: React.FC = () => {
         render={({ field }) => (
           <div>
             <FormControl variant="standard">
-              <InputLabel shrink>Penalty (seconds)</InputLabel>
-              <Input {...field} placeholder="300" type="number" fullWidth />
+              <Input {...field} placeholder="300" type="number" />
             </FormControl>
           </div>
         )}
@@ -247,10 +240,6 @@ export const CreateContestInfoForm: React.FC = () => {
             getValues();
           }}
           type="submit"
-          variant="contained"
-          color="success"
-          size="small"
-          css={{ textTransform: "none" }}
         >
           Create New Contest
         </Button>

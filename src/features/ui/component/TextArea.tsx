@@ -24,13 +24,9 @@ const grey = {
   900: "#1A2027",
 };
 
-export type InputProps = InputUnstyledProps & {
-  inputHeight?: string;
-};
-
-const StyledInputElement = styled("input")(
+const StyledTextareaElement = styled("textarea")<InputUnstyledProps>(
   ({ theme }) => `
-  height: 23px;
+  resize: vertical;
   width: 100%;
   font-size: 1rem;
   padding: 0.4rem;
@@ -60,11 +56,15 @@ const StyledInputElement = styled("input")(
 `
 );
 
-export const Input = React.forwardRef(function CustomInput(
+export const TextArea = React.forwardRef(function CustomInput(
   props: InputUnstyledProps,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
   return (
-    <InputUnstyled slots={{ input: StyledInputElement }} {...props} ref={ref} />
+    <InputUnstyled
+      slots={{ input: StyledTextareaElement }}
+      {...props}
+      ref={ref}
+    />
   );
 });
