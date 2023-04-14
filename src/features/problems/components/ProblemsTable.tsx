@@ -71,8 +71,6 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
         solvedStatusMatch = isAttempted;
       } else if (solvedStatus === "Not Solved yet") {
         solvedStatusMatch = !isSolved && !isAttempted;
-      } else {
-        return 1;
       }
 
       return (

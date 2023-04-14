@@ -4,9 +4,27 @@ import { problemsSchema } from "@features/problems/problem";
 import type { Problem } from "@features/problems/problem";
 
 const fetchProblems = async (): Promise<Problem[]> => {
+  const currentTime = new Date().getTime();
+  const problemsCached = localStorage.getItem("problems");
+  const problemsCachedTimestamp = localStorage.getItem("problemsTimestamp");
+
+  // キャッシュされたデータが存在し、6 時間以内の場合は、キャッシュされたデータを使用
+  if (
+    problemsCached &&
+    problemsCachedTimestamp &&
+    currentTime - parseInt(problemsCachedTimestamp) < 1000 * 60 * 60 * 6
+  ) {
+    return JSON.parse(problemsCached);
+  }
+
   try {
     const response = await axios.get("http://localhost:4000/problems");
     const data = problemsSchema.parse(response.data);
+
+    // データを localStorage にキャッシュ
+    localStorage.setItem("problems", JSON.stringify(data));
+    localStorage.setItem("problemsTimestamp", currentTime.toString());
+
     return data;
   } catch (error) {
     throw new Error("An Error occurred while fetching problems");
