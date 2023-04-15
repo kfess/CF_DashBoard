@@ -97,6 +97,7 @@ export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
                       problemId={p.index}
                       problemName={p.name}
                       difficulty={p.rating}
+                      solvedCount={p.solvedCount}
                     />
                   </div>
                 );

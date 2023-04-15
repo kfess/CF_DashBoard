@@ -9,13 +9,10 @@ import { FilterOptions } from "@features/contests/components/FilterOptions";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { FilterChips } from "@features/contests/components/FilterChips";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
-import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { useFetchContests } from "@features/contests/hooks/useFetchContest";
 
 export const ContestsPage: React.FC = () => {
-  const userId = useQueryParams(QueryParamKeys.USERID);
-
   const { data, isError, error, isLoading } = useFetchContests();
 
   const {
@@ -52,7 +49,7 @@ export const ContestsPage: React.FC = () => {
     isLoading ||
     !contests ||
     !problemIdxes ||
-    (userId && !solvedSet && !attemptedSet)
+    (!solvedSet && !attemptedSet)
   ) {
     return <CircularProgress />;
   }
