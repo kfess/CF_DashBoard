@@ -10,6 +10,7 @@ type Props = {
   removeAllTags: () => void;
   setLowerDifficulty: (arg: number) => void;
   setUpperDifficulty: (arg: number) => void;
+  setShowTags: (arg: boolean) => void;
 };
 
 export const ResetFilterButton: React.FC<Props> = (props: Props) => {
@@ -19,6 +20,7 @@ export const ResetFilterButton: React.FC<Props> = (props: Props) => {
     removeAllTags,
     setLowerDifficulty,
     setUpperDifficulty,
+    setShowTags,
   } = props;
 
   const onClickReset = () => {
@@ -27,6 +29,7 @@ export const ResetFilterButton: React.FC<Props> = (props: Props) => {
     removeAllTags();
     setLowerDifficulty(0);
     setUpperDifficulty(5000);
+    setShowTags(false);
   };
 
   return (

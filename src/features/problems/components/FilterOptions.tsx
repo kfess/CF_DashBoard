@@ -34,6 +34,7 @@ type Props = {
   setUpperDifficulty: (arg: number) => void;
   showTags: boolean;
   toggleShowTags: () => void;
+  setShowTags: (arg: boolean) => void;
 };
 
 export const FilterOptions: React.FC<Props> = (props: Props) => {
@@ -51,6 +52,7 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
     setUpperDifficulty,
     showTags,
     toggleShowTags,
+    setShowTags,
   } = props;
 
   const setDefaultClassification = () => {
@@ -106,6 +108,7 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
           removeAllTags={removeAllTags}
           setLowerDifficulty={setLowerDifficulty}
           setUpperDifficulty={setUpperDifficulty}
+          setShowTags={setShowTags}
         />
         {problem && <PickOneButton problem={problem} />}
       </div>

@@ -9,5 +9,5 @@ export const useToggle = <T>(initialValue: T, alternativeValue: T) => {
     );
   }, [initialValue, alternativeValue]);
 
-  return [state, toggle] as const;
+  return [state, toggle, setState] as const;
 };

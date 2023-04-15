@@ -28,7 +28,7 @@ export const Problems: React.FC<Props> = (props: Props) => {
             </TableHead>
             <TableBody>
               {problems.map((problem, idx) => (
-                <TableRow>
+                <TableRow key={problem.contestId + problem.index}>
                   <TableCell>{idx + 1}</TableCell>
                   <TableCell>
                     <ProblemLink

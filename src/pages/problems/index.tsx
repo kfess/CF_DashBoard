@@ -24,7 +24,7 @@ const ProblemsPage: React.FC = () => {
   const [upperDifficulty, setUpperDifficulty] = useState(
     ratingColorInfo.DeepRed.upperBound
   );
-  const [showTags, toggleShowTags] = useToggle(false, true);
+  const [showTags, toggleShowTags, setShowTags] = useToggle(false, true);
 
   if (isLoading) {
     return <CircularProgress />;
@@ -49,6 +49,7 @@ const ProblemsPage: React.FC = () => {
             setUpperDifficulty={setUpperDifficulty}
             showTags={showTags}
             toggleShowTags={toggleShowTags}
+            setShowTags={setShowTags}
           />
           <ProblemsTable
             problems={data}

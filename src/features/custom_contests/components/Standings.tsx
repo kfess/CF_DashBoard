@@ -65,7 +65,7 @@ export const Standings: React.FC<Props> = (props: Props) => {
                 <TableCell>Participants</TableCell>
                 <TableCell>Score</TableCell>
                 {problems.map((problem, idx) => (
-                  <TableCell>
+                  <TableCell key={problem.contestId + problem.index}>
                     <a
                       rel="noopener noreferrer"
                       target="_blank"
@@ -87,7 +87,7 @@ export const Standings: React.FC<Props> = (props: Props) => {
                 .map((participant, i) => {
                   const stats = userStats[participant.userId] || null;
                   return (
-                    <TableRow hover>
+                    <TableRow hover key={participant.userId}>
                       <TableCell>{i + 1}</TableCell>
                       <TableCell>{participant.userId}</TableCell>
                       <TableCell>
