@@ -31,6 +31,7 @@ const StyledTextareaElement = styled("textarea")<InputUnstyledProps>(
   width: 100%;
   font-size: 1rem;
   padding: 0.4rem;
+  padding-left:1rem;
   border-radius: 0.375rem;
   color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
   background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};

@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { DeletableChip, Chip_ } from "@features/ui/component/Chip";
+import { Chip_ } from "@features/ui/component/Chip";
 import { CustomContest, customContestSchema } from "../customContest";
 import { Input } from "@features/ui/component/Input";
 import { generateUUIDv4 } from "@helpers/index";
@@ -80,9 +80,9 @@ export const CreateContestInfoForm: React.FC = () => {
   return (
     <Container maxWidth={false}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+        <div css={{ marginTop: "1rem", marginBottom: "1rem" }}>
           Organize Custom Contest as <Chip_ label={codeforcesUsername} />
-          <Button onClick={() => {}}>Change your CF User Id</Button>
+          <Button onClick={() => {}}>Change CF user</Button>
         </div>
         <Controller
           name="visibility"
@@ -108,6 +108,9 @@ export const CreateContestInfoForm: React.FC = () => {
           control={control}
           render={({ field }) => (
             <>
+              <div css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}>
+                Mode
+              </div>
               <DropDownMenuButton
                 title="Contest Mode"
                 selectedItem={field.value}
