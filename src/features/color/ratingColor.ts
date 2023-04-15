@@ -207,7 +207,7 @@ export const getColorCodeFromClassification = (
     case "Educational":
     case "Global":
     case "ICPC":
-    case "Kotlin Heros":
+    case "Kotlin Heroes":
     case "Others":
       return defaultColorCodes;
     case "Div. 4":
