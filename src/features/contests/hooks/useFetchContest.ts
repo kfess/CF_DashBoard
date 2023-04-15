@@ -18,7 +18,7 @@ const fetchContests = async (): Promise<Contest[]> => {
   }
 
   try {
-    const response = await axios.get("http://localhost:4000/contests");
+    const response = await axios.get("http://localhost:4000/api/contests");
     const data = contestsSchema.parse(response.data);
 
     // データを localStorage にキャッシュ

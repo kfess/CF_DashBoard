@@ -18,7 +18,7 @@ const fetchProblems = async (): Promise<Problem[]> => {
   }
 
   try {
-    const response = await axios.get("http://localhost:4000/problems");
+    const response = await axios.get("http://localhost:4000/api/problems");
     const data = problemsSchema.parse(response.data);
 
     // データを localStorage にキャッシュ
