@@ -18,4 +18,4 @@ describe("ContestLink", () => {
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
   });
-})
+});

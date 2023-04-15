@@ -43,7 +43,24 @@ export const chooseRandomIndex = <T>(arr: T[]): T => {
   return arr[index];
 };
 
-export const getRandomElements = <T>(arr: T[], n: number): T[] => {
-  const shuffledArray = [...arr].sort(() => Math.random() - 0.5);
+const seedBasedRandom = (seed: number): (() => number) => {
+  let x = Math.sin(seed++) * 10000;
+  return () => {
+    x *= x;
+    x %= 1;
+    return x;
+  };
+};
+
+export const getRandomElements = <T>(
+  arr: T[],
+  n: number,
+  rng: () => number = seedBasedRandom(
+    new Date().getFullYear() * 10000 +
+      (new Date().getMonth() + 1) * 100 +
+      new Date().getDate()
+  )
+): T[] => {
+  const shuffledArray = [...arr].sort(() => rng() - 0.5);
   return shuffledArray.slice(0, n);
 };

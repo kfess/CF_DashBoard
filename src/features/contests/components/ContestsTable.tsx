@@ -42,7 +42,9 @@ export const ContestsTable: React.FC<Props> = (props: Props) => {
               <TableRow>
                 <TableCell align="center">Contest</TableCell>
                 {problemIdxes.map((idx) => (
-                  <TableCell align="center">{idx}</TableCell>
+                  <TableCell align="center" key={idx}>
+                    {idx}
+                  </TableCell>
                 ))}
               </TableRow>
             </TableHead>
@@ -52,6 +54,7 @@ export const ContestsTable: React.FC<Props> = (props: Props) => {
                 .map((contest) => {
                   return (
                     <ContestTableRow
+                      key={contest.id}
                       contestId={contest.id}
                       contestName={contest.name}
                       problemIdxes={problemIdxes}
