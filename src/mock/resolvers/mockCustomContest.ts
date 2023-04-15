@@ -5,7 +5,7 @@ import {
   apiFilterTypes,
 } from "@features/custom_contests/customContest";
 import { customContestSchema } from "@features/custom_contests/customContest";
-import { range } from "@helpers/index";
+import { range } from "@helpers/arr-utils";
 
 const CUSTOM_CONTEST_KEY = "_mock_custom_contest";
 const initialCustomContestsData: CustomContest[] = [

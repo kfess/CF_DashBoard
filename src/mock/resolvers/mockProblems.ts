@@ -1,6 +1,6 @@
 import { MockedRequest, ResponseResolver, restContext } from "msw";
 import type { Problem } from "@features/problems/problem";
-import { range } from "@helpers/index";
+import { range } from "@helpers/arr-utils";
 
 export const mockProblem: ResponseResolver<MockedRequest, typeof restContext> =
   (req, res, ctx) => {

@@ -1,13 +1,13 @@
 import { ResponseResolver, MockedRequest, restContext } from "msw";
 import type { Contest } from "@features/contests/contest";
-import { range } from "@helpers/index";
+import { range } from "@helpers/arr-utils";
 
 export const mockContest: ResponseResolver<MockedRequest, typeof restContext> =
   (req, res, ctx) => {
     const globalContests: Contest[] = range(1, 10).map((n) => {
       return {
-        contestId: n,
-        contestName: `Global-Contest-${n}`,
+        id: n,
+        name: `Global-Contest-${n}`,
         type: "CF",
         classification: "Global",
         frozen: false,
@@ -93,8 +93,8 @@ export const mockContest: ResponseResolver<MockedRequest, typeof restContext> =
 
     const div1Contests: Contest[] = range(11, 20).map((n) => {
       return {
-        contestId: n,
-        contestName: `div.1-Contest-${n}`,
+        id: n,
+        name: `div.1-Contest-${n}`,
         type: "CF",
         classification: "Div. 1",
         frozen: false,

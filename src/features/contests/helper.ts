@@ -6,7 +6,7 @@ import type {
   ReshapedContest,
 } from "@features/contests/contest";
 import { ReshapedProblem } from "@features/problems/problem";
-import { groupBy } from "@helpers/index";
+import { groupBy } from "@helpers/arr-utils";
 import { PeriodWord, periodFilter } from "./components/PeriodFilter";
 
 export const reshapeProblems = (problems: Problem[]) => {

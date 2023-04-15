@@ -1,6 +1,6 @@
 import { NormalizedLanguage } from "./../language/language";
 import dayjs from "dayjs";
-import { groupBy } from "@helpers/index";
+import { groupBy } from "@helpers/arr-utils";
 import type { Submission } from "@features/submission/submission";
 import { getRatingColorInfo } from "@features/color/ratingColor";
 import { normalizeLanguage } from "@features/language/language";

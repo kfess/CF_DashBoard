@@ -3,7 +3,7 @@ import type {
   Submission,
   SubmissionAPI,
 } from "@features/submission/submission";
-import { range } from "@helpers/index";
+import { range } from "@helpers/arr-utils";
 
 export const mockSubmission: ResponseResolver<
   MockedRequest,
