@@ -18,7 +18,7 @@ import { VerdictFilter } from "./SolvedStatusFilter";
 import { LanguageFilter } from "./LanguageFilter";
 import { usePagination } from "@hooks/index";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
-import { useOfficialContestIdNameMap } from "@features/contests/hooks/useFetchOfficialContest";
+import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 import { Classification } from "@features/contests/contest";
 import { getClassification } from "@features/contests/utils/getClassification";
 
@@ -39,8 +39,7 @@ export const UserSubmission: React.FC<Props> = ({
     userId: userId,
   });
 
-  const { contestIdNameMap, isLoading: mapIsLoading } =
-    useOfficialContestIdNameMap();
+  const { contestIdNameMap, isLoading: mapIsLoading } = useContestIdNameMap();
 
   const filteredData = useMemo(() => {
     return data?.filter((d) => {

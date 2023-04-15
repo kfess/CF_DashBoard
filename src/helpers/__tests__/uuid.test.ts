@@ -13,9 +13,9 @@ describe("uuid-utils", () => {
 
   it("should generate unique UUIDs", () => {
     const uuids = new Set();
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 10000; i++) {
       uuids.add(generateUUIDv4());
     }
-    expect(uuids.size).toBe(1000);
+    expect(uuids.size).toBe(10000);
   });
 });

@@ -4,7 +4,6 @@ import { router } from "@routes/routes";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeContextProvider } from "@features/color/themeColor.hook";
-import { useSessionValidation } from "@features/authentication/hooks/useSessionValidate";
 
 const queryClient = new QueryClient();
 

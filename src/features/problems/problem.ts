@@ -12,7 +12,7 @@ export const classificationSchema = z.union([
   z.literal("Div. 3"),
   z.literal("Div. 4"),
   z.literal("ICPC"),
-  z.literal("Kotlin Heros"),
+  z.literal("Kotlin Heroes"),
   z.literal("Global"),
   z.literal("Educational"),
   z.literal("Others"),

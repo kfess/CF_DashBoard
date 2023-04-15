@@ -11,7 +11,7 @@ import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { useFetchRecentSubmissions } from "../useFetchSubmission";
 import { normalizeLanguage } from "@features/language/language";
 import { formatUnixTime } from "@helpers/date";
-import { useOfficialContestIdNameMap } from "@features/contests/hooks/useFetchOfficialContest";
+import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
 import { usePagination } from "@hooks/index";
@@ -21,8 +21,7 @@ export const RecentSubmission: React.FC = () => {
   const { data, isError, error, isLoading } = useFetchRecentSubmissions();
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
 
-  const { contestIdNameMap, isLoading: mapIsLoading } =
-    useOfficialContestIdNameMap();
+  const { contestIdNameMap, isLoading: mapIsLoading } = useContestIdNameMap();
 
   if (isLoading || mapIsLoading) {
     return <CircularProgress />;
