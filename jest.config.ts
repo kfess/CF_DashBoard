@@ -93,6 +93,8 @@ export default {
     "^@features(.*)$": "<rootDir>/src/features/$1",
     "^@constants/(.*)$": "<rootDir>/src/constants/$1",
     "^@hooks/(.*)$": "<rootDir>/src/hooks/$1",
+    "^@recoil/(.*)$": "<rootDir>/src/recoil/$1",
+    "^@helpers/(.*)$": "<rootDir>/src/helpers/$1",
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

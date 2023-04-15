@@ -10,7 +10,7 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { Chip_ } from "@features/ui/component/Chip";
 import { CustomContest, customContestSchema } from "../customContest";
 import { Input } from "@features/ui/component/Input";
-import { generateUUIDv4 } from "@helpers/index";
+import { generateUUIDv4 } from "@helpers/uuid";
 import { Container } from "@mui/material";
 import { CreateProblemInfoForm } from "./Form/CreateProblemInfoForm";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
