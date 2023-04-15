@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import type { Problem } from "@features/problems/problem";
 import type {
   Contest,
@@ -6,6 +7,7 @@ import type {
 } from "@features/contests/contest";
 import { ReshapedProblem } from "@features/problems/problem";
 import { groupBy } from "@helpers/index";
+import { PeriodWord, periodFilter } from "./components/PeriodFilter";
 
 export const reshapeProblems = (problems: Problem[]) => {
   const groupedProblems = groupBy(problems, (problem) =>
@@ -21,29 +23,36 @@ export const reshapeProblems = (problems: Problem[]) => {
 const filterAndSortContests = (
   contests: Contest[],
   classification: Classification,
-  reverse: boolean
+  reverse: boolean,
+  period: PeriodWord
 ): Contest[] => {
-  const filteredContests =
-    classification === "All"
-      ? contests
-      : contests.filter((contest) => contest.classification === classification);
-
-  return filteredContests.sort((a, b) =>
-    reverse
-      ? a.startTimeSeconds - b.startTimeSeconds
-      : b.startTimeSeconds - a.startTimeSeconds
-  );
+  return contests
+    .filter((contest) => {
+      const isClassificationMatch =
+        classification === "All" || contest.classification === classification;
+      const isAfterPeriodStart = dayjs
+        .unix(contest.startTimeSeconds)
+        .isAfter(periodFilter[period].from);
+      return isClassificationMatch && isAfterPeriodStart;
+    })
+    .sort((a, b) =>
+      reverse
+        ? a.startTimeSeconds - b.startTimeSeconds
+        : b.startTimeSeconds - a.startTimeSeconds
+    );
 };
 
 export const reshapeContests = (
   contests: Contest[],
   classification: Classification,
-  reverse: boolean
+  reverse: boolean,
+  period: PeriodWord
 ): ReshapedContest[] => {
   const filteredAndSortedContests = filterAndSortContests(
     contests,
     classification,
-    reverse
+    reverse,
+    period
   );
 
   return filteredAndSortedContests.map((contest) => {

@@ -22,6 +22,7 @@ export const ContestsPage: React.FC = () => {
     showACStatus,
     pinTableHeader,
     reverse,
+    period,
     setClassification,
     setPeriod,
     setSolvedStatus,
@@ -32,9 +33,8 @@ export const ContestsPage: React.FC = () => {
   } = useFilterOptionsState();
 
   const contests = useMemo(
-    () =>
-      data ? reshapeContests(data, state.classification, state.reverse) : [],
-    [data, state.classification, state.reverse]
+    () => (data ? reshapeContests(data, classification, reverse, period) : []),
+    [data, state.classification, state.reverse, period]
   );
 
   const problemIdxes = useMemo(

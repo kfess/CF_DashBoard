@@ -1,4 +1,4 @@
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import React from "react";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 
@@ -11,12 +11,14 @@ const periodWords = [
   "Within 1 years",
   "Within 3 years",
   "Within 5 years",
+  "Within 10 years",
 ] as const;
 export type PeriodWord = typeof periodWords[number];
 
 type PeriodFilter = { [K in PeriodWord]: { from: number } };
-const periodFilter: PeriodFilter = {
-  "All Period": { from: dayjs().valueOf() },
+export const periodFilter: PeriodFilter = {
+  "All Period": { from: dayjs("1970-01-01").valueOf() },
+  "Within 10 years": { from: dayjs().subtract(10, "years").valueOf() },
   "Within 5 years": { from: dayjs().subtract(5, "years").valueOf() },
   "Within 3 years": { from: dayjs().subtract(3, "years").valueOf() },
   "Within 1 years": { from: dayjs().subtract(1, "years").valueOf() },
