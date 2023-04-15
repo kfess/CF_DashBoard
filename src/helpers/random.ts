@@ -12,7 +12,7 @@ export class Random {
   }
 
   /** XorShift */
-  next() {
+  next(): number {
     const t = this.x ^ (this.x << 11);
     this.x = this.y;
     this.y = this.z;
@@ -21,13 +21,13 @@ export class Random {
   }
 
   /** 指定した整数の範囲内で、seed 付き乱数を発生させる */
-  nextInt(min: number, max: number) {
+  nextInt(min: number, max: number): number {
     const r = Math.abs(this.next());
     return min + (r % (max - min + 1));
   }
 
   /** 指定した整数の範囲内で、seed 付き乱数のセットを発生 */
-  nextSet(count: number, min: number, max: number) {
+  nextSet(count: number, min: number, max: number): Set<number> {
     const randomSet = new Set<number>();
     let loopCount = 0;
     while (randomSet.size < count && loopCount < 1000) {
@@ -41,4 +41,9 @@ export class Random {
 export const chooseRandomIndex = <T>(arr: T[]): T => {
   let index = Math.floor(arr.length * Math.random());
   return arr[index];
+};
+
+export const getRandomElements = <T>(arr: T[], n: number): T[] => {
+  const shuffledArray = [...arr].sort(() => Math.random() - 0.5);
+  return shuffledArray.slice(0, n);
 };

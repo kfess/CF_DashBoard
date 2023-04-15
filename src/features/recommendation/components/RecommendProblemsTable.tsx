@@ -10,8 +10,7 @@ import type { RecommendLevel } from "@features/recommendation/recommend";
 import { recommendDifficultyRange } from "@features/recommendation/helper";
 import type { Problem } from "@features/problems/problem";
 import { ProblemsTableRow } from "@features/problems/components/ProblemsTableRow";
-import { usePagination } from "@hooks/index";
-import { TablePagination } from "@features/ui/component/TablePagination";
+import { getRandomElements } from "@helpers/random";
 
 type Props = {
   level: RecommendLevel;
@@ -21,31 +20,24 @@ type Props = {
 
 export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
   const { userRating, level, problems } = props;
-  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
   const [lowerDifficulty, upperDifficulty] = recommendDifficultyRange(
     userRating,
     level
   );
 
-  const filteredProblems = problems.filter(
-    (problem) =>
-      (problem.rating ?? 0) >= lowerDifficulty &&
-      (problem.rating ?? 0) <= upperDifficulty
-  );
-  const problemsLen = useMemo(
-    () => filteredProblems.length,
-    [filteredProblems]
-  );
+  const filteredProblems = useMemo(() => {
+    return getRandomElements(
+      problems.filter(
+        (problem) =>
+          (problem.rating ?? 0) >= lowerDifficulty &&
+          (problem.rating ?? 0) <= upperDifficulty
+      ),
+      20
+    );
+  }, [problems]);
 
   return (
     <>
-      <TablePagination
-        size={problemsLen}
-        page={page}
-        setPage={setPage}
-        rowsPerPage={rowsPerPage}
-        setRowsPerPage={setRowsPerPage}
-      />
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer component={Paper}>
           <Table stickyHeader>
@@ -61,7 +53,6 @@ export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
             <TableBody>
               {filteredProblems
                 .sort((a, b) => (a.rating ?? 0) - (b.rating ?? 0))
-                .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                 .map((problem) => (
                   <ProblemsTableRow problem={problem} />
                 ))}
@@ -69,13 +60,6 @@ export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
           </Table>
         </TableContainer>
       </Paper>
-      <TablePagination
-        size={problemsLen}
-        page={page}
-        setPage={setPage}
-        rowsPerPage={rowsPerPage}
-        setRowsPerPage={setRowsPerPage}
-      />
     </>
   );
 };
