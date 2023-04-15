@@ -8,7 +8,7 @@ import {
   groupByLanguage,
   filterUniqueSubmissions,
 } from "@features/achievement/processSubmission";
-import { formatUnixTime } from "@helpers/index";
+import { formatUnixTime } from "@helpers/date";
 import { Chip_ } from "@features/ui/component/Chip";
 import { useToggle } from "@hooks/index";
 

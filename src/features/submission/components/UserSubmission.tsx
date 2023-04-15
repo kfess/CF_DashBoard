@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { normalizeLanguage } from "@features/language/language";
-import { formatUnixTime } from "@helpers/index";
+import { formatUnixTime } from "@helpers/date";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
 import { VerdictChip } from "@features/submission/components/VerdictChip";

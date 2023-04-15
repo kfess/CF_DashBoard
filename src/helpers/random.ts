@@ -43,7 +43,7 @@ export const chooseRandomIndex = <T>(arr: T[]): T => {
   return arr[index];
 };
 
-const seedBasedRandom = (seed: number): (() => number) => {
+export const seedBasedRandom = (seed: number): (() => number) => {
   let x = Math.sin(seed++) * 10000;
   return () => {
     x *= x;

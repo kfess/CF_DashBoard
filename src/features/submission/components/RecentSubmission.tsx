@@ -10,7 +10,7 @@ import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { useFetchRecentSubmissions } from "../useFetchSubmission";
 import { normalizeLanguage } from "@features/language/language";
-import { formatUnixTime } from "@helpers/index";
+import { formatUnixTime } from "@helpers/date";
 import { useOfficialContestIdNameMap } from "@features/contests/hooks/useFetchOfficialContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { VerdictChip } from "@features/submission/components/VerdictChip";

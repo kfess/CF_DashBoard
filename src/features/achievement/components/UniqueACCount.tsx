@@ -5,7 +5,7 @@ import {
   isACSubmission,
   filterUniqueSubmissions,
 } from "@features/achievement/processSubmission";
-import { isLastMonth, isLastYear } from "@helpers/index";
+import { isLastMonth, isLastYear } from "@helpers/date";
 
 type Props = { submissions: Submission[] };
 
