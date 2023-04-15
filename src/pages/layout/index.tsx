@@ -11,7 +11,12 @@ export const LayoutPage: React.FC = () => {
 
   return (
     <div>
-      <HeaderBar isOpenSideBar={isOpenSideBar} toggleSideBar={toggleSideBar} />
+      <HeaderBar
+        isOpenSideBar={isOpenSideBar}
+        toggleSideBar={toggleSideBar}
+        selectedItem={selectedItem}
+        setSelectedItem={setSelectedItem}
+      />
       {isOpenSideBar && (
         <SideNavigationBar
           isOpenSideBar={isOpenSideBar}

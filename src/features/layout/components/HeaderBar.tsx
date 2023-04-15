@@ -7,6 +7,7 @@ import { useThemeContext } from "@features/color/themeColor.hook";
 import { isMainField } from "@features/layout/helper";
 import { SearchBar } from "@features/layout/components/Search";
 import { UserSettingIcon } from "./UserSettingIcon";
+import type { Field } from "@features/layout/components/SideNavigationItems";
 
 // Without this offset, some part of the content to be invisible behind the header
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
@@ -14,10 +15,16 @@ const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 type Props = {
   isOpenSideBar: boolean;
   toggleSideBar: Dispatch<SetStateAction<boolean>>;
+  selectedItem: Field;
+  setSelectedItem: Dispatch<SetStateAction<Field>>;
 };
 
-export const HeaderBar: React.FC<Props> = (props: Props) => {
-  const { isOpenSideBar, toggleSideBar } = props;
+export const HeaderBar: React.FC<Props> = ({
+  isOpenSideBar,
+  toggleSideBar,
+  selectedItem,
+  setSelectedItem,
+}) => {
   const { theme } = useThemeContext();
   const { pathname } = useLocation();
 
@@ -44,6 +51,7 @@ export const HeaderBar: React.FC<Props> = (props: Props) => {
               <Typography
                 variant="h6"
                 component="div"
+                onClick={() => setSelectedItem("Contests")}
                 noWrap
                 sx={{ display: { xs: "none", sm: "block" } }}
                 css={{
