@@ -48,7 +48,6 @@ export const ContestsTable: React.FC<Props> = (props: Props) => {
             </TableHead>
             <TableBody>
               {[...contests]
-                .filter((contest) => contest.phase !== "BEFORE")
                 .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                 .map((contest) => {
                   return (

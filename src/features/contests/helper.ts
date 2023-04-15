@@ -28,12 +28,13 @@ const filterAndSortContests = (
 ): Contest[] => {
   return contests
     .filter((contest) => {
+      const isFinished = contest.phase !== "BEFORE";
       const isClassificationMatch =
         classification === "All" || contest.classification === classification;
       const isAfterPeriodStart = dayjs
         .unix(contest.startTimeSeconds)
         .isAfter(periodFilter[period].from);
-      return isClassificationMatch && isAfterPeriodStart;
+      return isFinished && isClassificationMatch && isAfterPeriodStart;
     })
     .sort((a, b) =>
       reverse
