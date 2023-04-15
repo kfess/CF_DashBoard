@@ -11,7 +11,7 @@ import { usePagination } from "@hooks/index";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { ProblemsTableRow } from "@features/problems/components/ProblemsTableRow";
 import type { Classification } from "@features/contests/contest";
-import { useSolvedStatus } from "@features/submission/useSolvedStatus";
+import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
 

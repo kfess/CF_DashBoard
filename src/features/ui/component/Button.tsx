@@ -51,8 +51,9 @@ type Props = React.ComponentProps<typeof ButtonUnstyled> & {
 };
 
 export const Button: React.FC<Props> = (props) => {
+  const { startIcon, endIcon, ...otherProps } = props;
   return (
-    <CustomButton {...props}>
+    <CustomButton {...otherProps}>
       <div
         css={{
           display: "flex",

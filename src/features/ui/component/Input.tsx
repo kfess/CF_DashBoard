@@ -65,7 +65,14 @@ export const Input = React.forwardRef(function CustomInput(
   props: InputUnstyledProps,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
+  const { value, ...otherProps } = props;
+  const inputValue = value === null ? undefined : value;
   return (
-    <InputUnstyled slots={{ input: StyledInputElement }} {...props} ref={ref} />
+    <InputUnstyled
+      slots={{ input: StyledInputElement }}
+      {...otherProps}
+      value={inputValue}
+      ref={ref}
+    />
   );
 });

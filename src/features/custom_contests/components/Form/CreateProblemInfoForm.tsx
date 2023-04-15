@@ -7,8 +7,8 @@ import { Input } from "@features/ui/component/Input";
 import { TagsButton } from "@features/problems/components/TagsButton";
 import { DeletableChip } from "@features/ui/component/Chip";
 import { Checkbox } from "@features/ui/component/Checkbox";
-import { useFetchProblems } from "@features/problems/useFetchProblem";
-import { useTags } from "@features/problems/useTags";
+import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
+import { useTags } from "@features/problems/hooks/useTags";
 import { SelectedProblemsTable } from "./SelectedProblemsTable";
 import { FormControl } from "@features/ui/component/FormControl";
 

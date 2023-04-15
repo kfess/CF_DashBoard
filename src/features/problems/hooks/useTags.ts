@@ -21,6 +21,7 @@ export const useTags = () => {
         ])
       : setSelectedTags([...selectedTags, tag]);
   };
+
   const removeAllTags = () => {
     setSelectedTags([]);
   };

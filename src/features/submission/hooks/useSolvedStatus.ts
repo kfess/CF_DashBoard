@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
+import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
 import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
 
 export const useSolvedStatus = () => {

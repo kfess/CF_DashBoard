@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
-import { useSolvedStatus } from "@features/submission/useSolvedStatus";
+import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
 import {
   reshapeContests,
   getProblemIdxFromClassification,

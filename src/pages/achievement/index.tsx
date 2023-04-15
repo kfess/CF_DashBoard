@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useLocation } from "react-router-dom";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
-import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
+import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
 import { UniqueACCount } from "@features/achievement/components/UniqueACCount";
 import { TotalRatingSum } from "@features/achievement/components/TotalRatingSum";
 import { DailyChart } from "@features/achievement/components/DailyChart";

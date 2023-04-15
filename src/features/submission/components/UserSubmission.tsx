@@ -11,7 +11,7 @@ import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { normalizeLanguage } from "@features/language/language";
 import { formatUnixTime } from "@helpers/date";
 import { TablePagination } from "@features/ui/component/TablePagination";
-import { useFetchUserSubmission } from "@features/submission/useFetchSubmission";
+import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
 import { verdictMap } from "@helpers/verdict";
 import { VerdictFilter } from "./SolvedStatusFilter";

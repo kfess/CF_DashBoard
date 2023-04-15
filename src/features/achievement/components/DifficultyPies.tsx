@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import type { Submission } from "@features/submission/submission";
-import { useFetchProblems } from "@features/problems/useFetchProblem";
+import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import {
   ratingColor,
   getColorNameFromRating,

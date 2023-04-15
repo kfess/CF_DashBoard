@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import type { Submission } from "@features/submission/submission";
-import { useFetchProblems } from "@features/problems/useFetchProblem";
+import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import type { Classification } from "@features/contests/contest";
 import { classifications } from "@features/contests/contest";
 

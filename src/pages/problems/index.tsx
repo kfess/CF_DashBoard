@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { chooseRandomIndex } from "@helpers/random";
 import { ProblemsTable } from "@features/problems/components/ProblemsTable";
-import { useFetchProblems } from "@features/problems/useFetchProblem";
+import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import { Tag } from "@features/problems/problem";
 import type { Classification } from "@features/contests/contest";
 import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
