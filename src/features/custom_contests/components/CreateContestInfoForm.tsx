@@ -1,10 +1,8 @@
 import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { useState, useEffect } from "react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FormControl from "@mui/material/FormControl";
-// import InputLabel from "@mui/material/InputLabel";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
@@ -12,6 +10,7 @@ import { DeletableChip, Chip_ } from "@features/ui/component/Chip";
 import { CustomContest, customContestSchema } from "../customContest";
 import { Input } from "@features/ui/component/Input";
 import { generateUUIDv4 } from "@helpers/index";
+import { Container } from "@mui/material";
 import { CreateProblemInfoForm } from "./Form/CreateProblemInfoForm";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { modes } from "../customContest";
@@ -21,7 +20,7 @@ import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { useAddCustomContest } from "../useFetchCustomContest";
 import { Button } from "@features/ui/component/Button";
 import { TextArea } from "@features/ui/component/TextArea";
-import { TextareaAutosize } from "@mui/material";
+import { FormControl } from "@features/ui/component/FormControl";
 
 export const CreateContestInfoForm: React.FC = () => {
   const { codeforcesUsername, githubId } = useUserProfile();
@@ -78,129 +77,145 @@ export const CreateContestInfoForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        Organize Custom Contest as <Chip_ label={codeforcesUsername} />
-        <Button onClick={() => {}}>Change your CF User Id</Button>
-      </div>
-      <Controller
-        name="visibility"
-        control={control}
-        render={({ field }) => (
-          <Checkbox
-            label="Make the contest Private"
-            toggle={() => {
-              switch (field.value) {
-                case "Private":
-                  setValue("visibility", "Public");
-                case "Public":
-                  setValue("visibility", "Private");
-              }
-            }}
-            description="Private Contest is invisible to everyone except you."
-          />
-        )}
-      />
-      <Controller
-        name="mode"
-        control={control}
-        render={({ field }) => (
-          <>
-            <DropDownMenuButton
-              title="Contest Mode"
-              selectedItem={field.value}
-              setSelectedItem={() => {
-                setValue("mode", field.value);
+    <Container maxWidth={false}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          Organize Custom Contest as <Chip_ label={codeforcesUsername} />
+          <Button onClick={() => {}}>Change your CF User Id</Button>
+        </div>
+        <Controller
+          name="visibility"
+          control={control}
+          render={({ field }) => (
+            <Checkbox
+              title="Contest Visibility"
+              label="Make the contest Private"
+              toggle={() => {
+                switch (field.value) {
+                  case "Private":
+                    setValue("visibility", "Public");
+                  case "Public":
+                    setValue("visibility", "Private");
+                }
               }}
-              items={modes.map((mode) => {
-                return { item: mode };
-              })}
+              description="Private Contest is invisible to everyone except you."
             />
-          </>
-        )}
-      />
-      <Controller
-        name="title"
-        control={control}
-        render={({ field }) => (
-          <FormControl fullWidth>
-            <label htmlFor="title-input" css={{ fontWeight: "bold" }}>
-              Title
-            </label>
-            <Input
-              {...field}
-              placeholder="Contest Title"
-              id="title-input"
-              type="text"
-            />
-            {errors.title?.message && <p>{errors.title?.message}</p>}
-          </FormControl>
-        )}
-      />
-      <Controller
-        name="description"
-        control={control}
-        render={({ field }) => (
-          <FormControl fullWidth>
-            <label htmlFor="description-input" css={{ fontWeight: "bold" }}>
-              Description
-            </label>
-            <TextArea {...field} placeholder="Description" />
-          </FormControl>
-        )}
-      />
-      <Controller
-        name="startDate"
-        control={control}
-        render={({ field }) => (
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoItem label="Start Time">
-              <DateTimePicker
-                {...field}
-                onChange={(newValue) => {
-                  setValue(
-                    "startDate",
-                    dayjs(newValue).format("YYYY/MM/DD HH:mm")
-                  );
+          )}
+        />
+        <Controller
+          name="mode"
+          control={control}
+          render={({ field }) => (
+            <>
+              <DropDownMenuButton
+                title="Contest Mode"
+                selectedItem={field.value}
+                setSelectedItem={() => {
+                  setValue("mode", field.value);
                 }}
-                format="YYYY/MM/DD HH:mm"
+                items={modes.map((mode) => {
+                  return { item: mode };
+                })}
               />
-            </DemoItem>
-          </LocalizationProvider>
-        )}
-      />
-      <Controller
-        name="endDate"
-        control={control}
-        render={({ field }) => (
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoItem label="End Time">
-              <DateTimePicker
+            </>
+          )}
+        />
+        <Controller
+          name="title"
+          control={control}
+          render={({ field }) => (
+            <FormControl>
+              <label
+                htmlFor="title-input"
+                css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
+              >
+                Title
+              </label>
+              <Input
                 {...field}
-                onChange={(newValue) => {
-                  setValue(
-                    "endDate",
-                    dayjs(newValue).format("YYYY/MM/DD HH:mm")
-                  );
-                }}
-                format="YYYY/MM/DD HH:mm"
+                placeholder="Contest Title"
+                id="title-input"
+                type="text"
               />
-            </DemoItem>
-          </LocalizationProvider>
-        )}
-      />
-      <Controller
-        name="penalty"
-        control={control}
-        render={({ field }) => (
-          <div>
-            <FormControl variant="standard">
-              <Input {...field} placeholder="300" type="number" />
+              {errors.title?.message && <p>{errors.title?.message}</p>}
             </FormControl>
-          </div>
-        )}
-      />
-      {/* {fields.map((field, index) => (
+          )}
+        />
+        <Controller
+          name="description"
+          control={control}
+          render={({ field }) => (
+            <FormControl>
+              <label
+                htmlFor="description-input"
+                css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
+              >
+                Description
+              </label>
+              <TextArea {...field} placeholder="Description" />
+            </FormControl>
+          )}
+        />
+        <Controller
+          name="startDate"
+          control={control}
+          render={({ field }) => (
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoItem label="Start Time">
+                <DateTimePicker
+                  {...field}
+                  onChange={(newValue) => {
+                    setValue(
+                      "startDate",
+                      dayjs(newValue).format("YYYY/MM/DD HH:mm")
+                    );
+                  }}
+                  format="YYYY/MM/DD HH:mm"
+                />
+              </DemoItem>
+            </LocalizationProvider>
+          )}
+        />
+        <Controller
+          name="endDate"
+          control={control}
+          render={({ field }) => (
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoItem label="End Time">
+                <DateTimePicker
+                  {...field}
+                  onChange={(newValue) => {
+                    setValue(
+                      "endDate",
+                      dayjs(newValue).format("YYYY/MM/DD HH:mm")
+                    );
+                  }}
+                  format="YYYY/MM/DD HH:mm"
+                />
+              </DemoItem>
+            </LocalizationProvider>
+          )}
+        />
+        <Controller
+          name="penalty"
+          control={control}
+          render={({ field }) => (
+            <div>
+              <FormControl>
+                <label htmlFor="penalty-input" css={{ fontWeight: "bold" }}>
+                  Penalty
+                </label>
+                <Input
+                  {...field}
+                  id="penalty-input"
+                  placeholder="300"
+                  type="number"
+                />
+              </FormControl>
+            </div>
+          )}
+        />
+        {/* {fields.map((field, index) => (
         <Controller
           name="participants"
           control={control}
@@ -230,20 +245,21 @@ export const CreateContestInfoForm: React.FC = () => {
           <DeletableChip label={field.userId} onDelete={() => {}} />
         ))}
       </div> */}
-      <CreateProblemInfoForm
-        selectedProblems={selectedProblems}
-        setSelectedProblems={setSelectedProblems}
-      />
-      <div css={{ textAlign: "right" }}>
-        <Button
-          onClick={() => {
-            getValues();
-          }}
-          type="submit"
-        >
-          Create New Contest
-        </Button>
-      </div>
-    </form>
+        <CreateProblemInfoForm
+          selectedProblems={selectedProblems}
+          setSelectedProblems={setSelectedProblems}
+        />
+        <div css={{ textAlign: "right" }}>
+          <Button
+            onClick={() => {
+              getValues();
+            }}
+            type="submit"
+          >
+            Create New Contest
+          </Button>
+        </div>
+      </form>
+    </Container>
   );
 };

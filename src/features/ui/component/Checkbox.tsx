@@ -70,16 +70,18 @@ const BpCheckbox = (props: CheckboxProps) => {
 };
 
 type Props = {
+  readonly title: string;
   readonly toggle: () => void;
   readonly label: ReactNode;
   readonly description?: ReactNode;
 };
 
 export const Checkbox: React.FC<Props> = (props: Props) => {
-  const { toggle, label, description } = props;
+  const { title, toggle, label, description } = props;
 
   return (
-    <div>
+    <Box sx={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+      <div css={{ fontWeight: "bold" }}>{title}</div>
       <FormControlLabel
         control={<BpCheckbox />}
         label={<div>{label}</div>}
@@ -90,6 +92,6 @@ export const Checkbox: React.FC<Props> = (props: Props) => {
           {description}
         </Box>
       )}
-    </div>
+    </Box>
   );
 };

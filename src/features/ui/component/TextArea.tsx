@@ -27,6 +27,7 @@ const grey = {
 const StyledTextareaElement = styled("textarea")<InputUnstyledProps>(
   ({ theme }) => `
   resize: vertical;
+  min-height: 50px;
   width: 100%;
   font-size: 1rem;
   padding: 0.4rem;

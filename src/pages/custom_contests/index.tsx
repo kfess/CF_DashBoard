@@ -44,7 +44,7 @@ export const CustomContestPage: React.FC = () => {
       {!loggedIn && (
         <AlertMessage
           title=""
-          message="To create a New Contest, You need to be logged in."
+          message="To create a new Contest, You need to be logged in."
         />
       )}
       <Box sx={{ width: "100%" }}>
