@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from "@mui/material/Divider";
 import { CreateContestInfoForm } from "@features/custom_contests/components/CreateContestInfoForm";
 import { HeadLine } from "@features/layout/components/HeadLine";
 

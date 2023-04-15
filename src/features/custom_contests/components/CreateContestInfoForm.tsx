@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { useState, useEffect } from "react";
+import Divider from "@mui/material/Divider";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -245,6 +246,7 @@ export const CreateContestInfoForm: React.FC = () => {
           <DeletableChip label={field.userId} onDelete={() => {}} />
         ))}
       </div> */}
+        <Divider />
         <CreateProblemInfoForm
           selectedProblems={selectedProblems}
           setSelectedProblems={setSelectedProblems}

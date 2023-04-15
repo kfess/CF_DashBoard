@@ -1,8 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
 import { Problem, Tag } from "@features/problems/problem";
 import { useToggle } from "@hooks/index";
 import { Input } from "@features/ui/component/Input";
@@ -12,6 +10,7 @@ import { Checkbox } from "@features/ui/component/Checkbox";
 import { useFetchProblems } from "@features/problems/useFetchProblem";
 import { useTags } from "@features/problems/useTags";
 import { SelectedProblemsTable } from "./SelectedProblemsTable";
+import { FormControl } from "@features/ui/component/FormControl";
 
 type Props = {
   selectedProblems: Problem[];
@@ -67,12 +66,18 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
   return (
     <>
       <h3>Problems Form</h3>
-      <FormControl variant="standard">
-        <InputLabel shrink>Number of Problems</InputLabel>
+      <FormControl>
+        <label
+          htmlFor="problems-number-input"
+          css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
+        >
+          Number of Problems
+        </label>
         <Input
-          placeholder="6"
+          id="problems-number-input"
+          placeholder="5"
           type="number"
-          defaultValue={0}
+          defaultValue={5}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             const val = Number(e.target.value);
             if (Number.isInteger(val) && val >= 0) {
@@ -81,9 +86,15 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
           }}
         />
       </FormControl>
-      <FormControl variant="standard">
-        <InputLabel shrink>Difficulty From</InputLabel>
+      <FormControl>
+        <label
+          htmlFor="difficulty-from-input"
+          css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
+        >
+          Difficulty From
+        </label>
         <Input
+          id="difficulty-from-input"
           placeholder="1100"
           type="number"
           defaultValue={0}
@@ -95,9 +106,15 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
           }}
         />
       </FormControl>
-      <FormControl variant="standard">
-        <InputLabel shrink>Difficulty To</InputLabel>
+      <FormControl>
+        <label
+          htmlFor="difficulty-to-input"
+          css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
+        >
+          Difficulty To
+        </label>
         <Input
+          id="difficulty-to-input"
           placeholder="1900"
           type="number"
           defaultValue={5000}
@@ -109,16 +126,18 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
           }}
         />
       </FormControl>
-      <div>
-        Include tags
+      <div css={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
+        <span css={{ fontWeight: "bold", marginRight: "1rem" }}>
+          Include tags
+        </span>
         <TagsButton
           selectedTags={includeTags}
           addOrRemoveTag={addOrRemoveIncludeTag}
           removeAllTags={removeAllIncludeTags}
         />
-      </div>
-      <div css={{ fontSize: 14, color: "gray", marginLeft: "20px" }}>
-        When you select tags, suggested problems are related to the topic.
+        <div css={{ fontSize: 14, color: "gray", marginLeft: "20px" }}>
+          When you select tags, suggested problems are related to the topic.
+        </div>
       </div>
       <Stack direction="row" sx={{ flexWrap: "wrap" }}>
         {includeTags.length > 0 &&
@@ -130,16 +149,18 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
             />
           ))}
       </Stack>
-      <div>
-        Exclude tags
+      <div css={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
+        <span css={{ fontWeight: "bold", marginRight: "1rem" }}>
+          Exclude tags
+        </span>
         <TagsButton
           selectedTags={excludeTags}
           addOrRemoveTag={addOrRemoveExcludeTag}
           removeAllTags={removeAllExcludeTags}
         />
-      </div>
-      <div css={{ fontSize: 14, color: "gray", marginLeft: "20px" }}>
-        When you select tags, problems related to the tags will be excluded.
+        <div css={{ fontSize: 14, color: "gray", marginLeft: "20px" }}>
+          When you select tags, problems related to the tags will be excluded.
+        </div>
       </div>
       <Stack direction="row" sx={{ flexWrap: "wrap" }}>
         {excludeTags.length > 0 &&
@@ -152,6 +173,7 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
           ))}
       </Stack>
       <Checkbox
+        title="Order of Problems"
         label="Randomize the order of problems"
         toggle={toggleRandomize}
         description={
@@ -167,9 +189,10 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
         }
       />
       <Checkbox
+        title="Restriction of Problems"
         label="Don't suggest problems solved by expected participants"
         toggle={toggleExcludeSolved}
-        description="When you check this, "
+        description="When you check this, problems solved by expected participants are excluded"
       />
       <div>
         <h4>Generated Problems</h4>
