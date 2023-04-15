@@ -78,7 +78,7 @@ export const CreateContestInfoForm: React.FC = () => {
   };
 
   return (
-    <Container maxWidth={false}>
+    <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div css={{ marginTop: "1rem", marginBottom: "1rem" }}>
           Organize Custom Contest as <Chip_ label={codeforcesUsername} />

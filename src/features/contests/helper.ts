@@ -98,6 +98,14 @@ export const isAllProblemsSolved = (
   solvedSet: Set<string> | undefined,
   contestId: number
 ) => {
+  const hasValidProblem = problemIdxes.some(
+    (idx) => problemMap[idx] !== undefined && problemMap[idx] !== null
+  );
+
+  if (!hasValidProblem) {
+    return false;
+  }
+
   return problemIdxes.every((idx) => {
     const problem = problemMap[idx];
     const indexedProblems = problem?.indexedProblems || [];
