@@ -28,6 +28,7 @@ export const RecommendationPage: React.FC = () => {
       label: level,
       children: data && (
         <RecommendProblemsTable
+          key={level}
           level={level}
           userRating={userRating}
           problems={data}

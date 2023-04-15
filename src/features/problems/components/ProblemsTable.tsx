@@ -128,6 +128,7 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
                     : "";
                   return (
                     <ProblemsTableRow
+                      key={problemKey}
                       problem={problem}
                       showTags={showTags}
                       backgroundColor={backgroundColor}

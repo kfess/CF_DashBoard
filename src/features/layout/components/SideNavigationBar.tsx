@@ -65,6 +65,7 @@ export const SideNavigationBar: React.FC<Props> = (props: Props) => {
         <List>
           {mainItems.map((item) => (
             <SideNavigationItem
+              key={item.field}
               field={item.field}
               link={generateUrlPath(item.link, userId)}
               selectedIcon={item.selectedIcon}
@@ -81,6 +82,7 @@ export const SideNavigationBar: React.FC<Props> = (props: Props) => {
         <List>
           {activityItems.map((item) => (
             <SideNavigationItem
+              key={item.field}
               field={item.field}
               link={item.link}
               selectedIcon={item.selectedIcon}
@@ -97,6 +99,7 @@ export const SideNavigationBar: React.FC<Props> = (props: Props) => {
         <List>
           {otherItems.map((item) => (
             <SideNavigationItem
+              key={item.field}
               field={item.field}
               link={item.link}
               selectedIcon={item.selectedIcon}

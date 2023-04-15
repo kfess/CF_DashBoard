@@ -114,14 +114,16 @@ export const Tabs: React.FC<Props> = ({ tabItems }) => {
     <TabsUnstyled defaultValue={0} onChange={handleTabChange}>
       <TabsList>
         {tabItems.map((item, index) => (
-          <Tab key={index} disabled={item.disabled}>
+          <Tab key={item.label} disabled={item.disabled}>
             {item.label}
           </Tab>
         ))}
         <TabIndicator css={indicatorStyle} />
       </TabsList>
       {tabItems.map((item, index) => (
-        <TabPanel value={index}>{item.children}</TabPanel>
+        <TabPanel key={item.label} value={index}>
+          {item.children}
+        </TabPanel>
       ))}
     </TabsUnstyled>
   );

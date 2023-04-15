@@ -56,10 +56,10 @@ export const LabelsTable: React.FC = () => {
       </Box>
       <Divider />
       {sortLabels(labels, order).map((label) => (
-        <>
-          <LabelItem key={label.name} label={label} />
+        <div key={label.name}>
+          <LabelItem label={label} />
           <Divider />
-        </>
+        </div>
       ))}
     </Box>
   );
