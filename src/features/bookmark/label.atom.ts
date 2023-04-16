@@ -1,11 +1,6 @@
-import {
-  atom,
-  AtomEffect,
-  DefaultValue,
-  selector,
-  selectorFamily,
-} from "recoil";
+import { atom, selector, selectorFamily } from "recoil";
 import { z } from "zod";
+import { localStorageEffect } from "@recoil/localStorageEffect";
 import { problemSchema } from "@features/problems/problem";
 import { RecoilAtomKeys, RecoilSelectorKeys } from "@recoil/RecoilKeys";
 
@@ -25,25 +20,6 @@ export const labelStateSchema = z.object({
 });
 
 export type LabelState = z.infer<typeof labelStateSchema>;
-
-// automatically added to localStorage when label is added
-const localStorageEffect: <T>(key: string) => AtomEffect<T> =
-  (key: string) =>
-  ({ setSelf, onSet }) => {
-    const savedValue = localStorage.getItem(key);
-
-    if (savedValue != null) {
-      setSelf(JSON.parse(savedValue));
-    }
-
-    onSet((newValue) => {
-      if (newValue instanceof DefaultValue) {
-        localStorage.removeItem(key);
-      } else {
-        localStorage.setItem(key, JSON.stringify(newValue));
-      }
-    });
-  };
 
 export const labelsState = atom<LabelState[]>({
   key: RecoilAtomKeys.LABELS_STATE,
