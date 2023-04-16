@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
+import { Box } from "@mui/material";
+import { Button } from "@features/ui/component/Button";
+import { Input } from "@features/ui/component/Input";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 
 export const Profile: React.FC = () => {
   const { githubId, githubUserName, codeforcesUsername, updateUsername } =
     useUserProfile();
 
-  const [newUsername, setNewUsername] = useState<string>(
-    codeforcesUsername ?? ""
-  );
+  const [newUsername, setNewUsername] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,16 +35,19 @@ export const Profile: React.FC = () => {
       <h2>Profile</h2>
       <p>GitHub ID: {githubId}</p>
       <p>GitHub Name: {githubUserName}</p>
-      <p>Codeforces Username:{codeforcesUsername}</p>
+      <p>Codeforces Username: {codeforcesUsername}</p>
       <form onSubmit={handleSubmit}>
         <label></label>
-        <input
-          type="text"
-          id="codeforcesUsername"
-          value={newUsername}
-          onChange={handleChange}
-        />
-        <Button type="submit">Update</Button>
+        <Box sx={{ width: "50%" }}>
+          <Input
+            type="text"
+            id="codeforcesUsername"
+            placeholder={codeforcesUsername ?? "Codeforces Username"}
+            value={newUsername}
+            onChange={handleChange}
+          />
+          <Button type="submit">Update</Button>
+        </Box>
       </form>
     </>
   );
