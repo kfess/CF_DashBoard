@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import { useSessionData } from "@features/authentication/hooks/useSessionData";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 
 export const Profile: React.FC = () => {
-  const { sessionData } = useSessionData();
-
   const { githubId, githubUserName, codeforcesUsername, updateUsername } =
     useUserProfile();
 

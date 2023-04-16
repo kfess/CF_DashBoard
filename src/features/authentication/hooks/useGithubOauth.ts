@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { SessionData } from "@features/authentication/session.atom";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 
-const AUTHENTICATE_URL = "/mock/authenticate";
+const AUTHENTICATE_URL = "http://localhost:4000/api/users/exchange";
 
 const exchangeCodeForSession = async ({
   code,
@@ -21,13 +21,15 @@ const exchangeCodeForSession = async ({
     if (originalState !== state) {
       throw new Error("Mismatched state!");
     }
-    const response = await axios.post<SessionData>(AUTHENTICATE_URL, {
-      code,
-      state,
-    });
+
+    const response = await axios.post<SessionData>(
+      AUTHENTICATE_URL,
+      { code },
+      { withCredentials: true }
+    );
+
     return response.data;
   } catch (error) {
-    console.error("An error occurred during the GitHub OAuth process.");
     throw new Error("Failed to exchange code for session");
   }
 };

@@ -7,7 +7,7 @@ import type { UserProfile } from "@features/authentication/userProfile";
 import type { CustomContest } from "@features/custom_contests/customContest";
 
 const INTERNAL_CF_GET_URL = "/mock/user/get";
-const INTERNAL_CF_UPDATE_URL = "/mock/user/update";
+const INTERNAL_CF_UPDATE_URL = "http://localhost:4000/api/users/update";
 const INTERNAL_ADD_OWNED_CONTEST_URL = "/mock/user/ownedContests/add";
 const INTERNAL_ADD_JOINED_CONTEST_URL = "/mock/user/joinedContests/add";
 
@@ -42,7 +42,11 @@ const updateCodeforcesUsernameIfExists = async (
   }
 
   try {
-    await axios.post(INTERNAL_CF_UPDATE_URL, { codeforcesUsername });
+    await axios.put(
+      INTERNAL_CF_UPDATE_URL,
+      { codeforcesUsername },
+      { withCredentials: true }
+    );
   } catch (error) {
     throw new Error(
       "An error occurred while updating the codeforces username."
@@ -91,6 +95,7 @@ export const useUserProfile = () => {
         console.log("An error occurred during updating codeforces username");
         // add Toast in the future
       },
+      retry: false,
     }
   );
 

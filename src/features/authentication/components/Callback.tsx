@@ -10,12 +10,13 @@ export default function Callback() {
     const state = params.get("state");
     const code = params.get("code");
 
+    githubOauth.mutate({ code, state });
     // this implementation is only for msw.
     // because msw need a few seconds to start, setTimeout 1000 ms.
-    setTimeout(() => {
-      githubOauth.mutate({ code, state });
-    }, 1000);
-  }, [githubOauth]);
+    // setTimeout(() => {
+    //   githubOauth.mutate({ code, state });
+    // }, 1000);
+  }, []);
 
   return (
     <div>
