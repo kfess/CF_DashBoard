@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useSessionData } from "@features/authentication/hooks/useSessionData";
-import { SessionData } from "../session.atom";
+import { useRecoilUserProfile } from "@features/authentication/hooks/useRecoilUserProfile";
+import type { UserProfile } from "../userProfile";
 
 type UseLoginOptions = {
   readonly loginRedirectTo?: string;
@@ -11,18 +11,19 @@ export const useLoggedIn = ({
   loginRedirectTo = "/",
   logoutRedirectTo = "/",
 }: UseLoginOptions = {}) => {
-  const { sessionData, setSessionInfo, clearSessionInfo } = useSessionData();
+  const { userProfile, setUserProfileInfo, clearUserProfile } =
+    useRecoilUserProfile();
 
-  const loggedIn = sessionData !== null;
+  const loggedIn = userProfile !== null;
   const navigate = useNavigate();
 
-  const login = (info: SessionData) => {
-    setSessionInfo(info);
+  const login = (info: UserProfile) => {
+    setUserProfileInfo(info);
     navigate(loginRedirectTo);
   };
 
   const logout = () => {
-    clearSessionInfo();
+    clearUserProfile();
     navigate(logoutRedirectTo);
   };
 

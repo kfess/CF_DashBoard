@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { SessionData } from "@features/authentication/session.atom";
+import type { UserProfile } from "@features/authentication/userProfile";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 
 const AUTHENTICATE_URL = "http://localhost:4000/api/users/exchange";
@@ -12,7 +12,7 @@ const exchangeCodeForSession = async ({
 }: {
   code: string | null;
   state: string | null;
-}): Promise<SessionData> => {
+}): Promise<UserProfile> => {
   try {
     if (!state || !code || state.trim() === "" || code.trim() === "") {
       throw new Error("Invalid state or code!");
@@ -22,7 +22,7 @@ const exchangeCodeForSession = async ({
       throw new Error("Mismatched state!");
     }
 
-    const response = await axios.post<SessionData>(
+    const response = await axios.post<UserProfile>(
       AUTHENTICATE_URL,
       { code },
       { withCredentials: true }
@@ -38,8 +38,8 @@ export const useGithubOauth = () => {
   const navigate = useNavigate();
   const { login } = useLoggedIn();
 
-  const onSuccess = (sessionData: SessionData) => {
-    login(sessionData);
+  const onSuccess = (userProfile: UserProfile) => {
+    login(userProfile);
   };
 
   const onError = (error: Error) => {
@@ -48,7 +48,7 @@ export const useGithubOauth = () => {
   };
 
   const mutation = useMutation<
-    SessionData,
+    UserProfile,
     Error,
     { code: string | null; state: string | null }
   >(exchangeCodeForSession, {

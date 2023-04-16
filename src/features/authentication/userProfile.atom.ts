@@ -1,13 +1,6 @@
 import { atom, AtomEffect, DefaultValue } from "recoil";
 import { RecoilAtomKeys } from "@recoil/RecoilKeys";
-
-export type SessionData = {
-  readonly sessionId: string;
-  readonly user: {
-    readonly id: string;
-    readonly name: string;
-  };
-};
+import { UserProfile } from "./userProfile";
 
 // automatically added to localStorage when session is changed
 const localStorageEffect: <T>(key: string) => AtomEffect<T> =
@@ -28,10 +21,10 @@ const localStorageEffect: <T>(key: string) => AtomEffect<T> =
     });
   };
 
-export const sessionDataState = atom<SessionData | null>({
-  key: RecoilAtomKeys.SESSION_DATA,
+export const userProfileState = atom<UserProfile | null>({
+  key: RecoilAtomKeys.USER_PROFILE,
   default: null,
   effects: [
-    localStorageEffect<SessionData | null>(RecoilAtomKeys.SESSION_DATA),
+    localStorageEffect<UserProfile | null>(RecoilAtomKeys.USER_PROFILE),
   ],
 });
