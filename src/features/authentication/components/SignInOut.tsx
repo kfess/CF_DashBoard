@@ -1,8 +1,6 @@
 import Button from "@mui/material/Button";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { useLoggedIn } from "../hooks/useLoggedIn";
-
-const GITHUB_CLIENT_ID = "d3222c18172256b27ea6";
+import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 
 export const SignInOutButton: React.FC = () => {
   const { logout, loggedIn } = useLoggedIn();
@@ -14,7 +12,7 @@ export const SignInOutButton: React.FC = () => {
     const redirectUri = encodeURIComponent(
       `${window.location.origin}/callback`
     );
-    const url = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${redirectUri}&state=${state}`;
+    const url = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&redirect_uri=${redirectUri}&state=${state}`;
     window.location.href = url;
   };
 
