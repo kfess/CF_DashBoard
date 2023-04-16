@@ -6,14 +6,16 @@ import { userProfileSchema } from "@features/authentication/userProfile";
 import type { UserProfile } from "@features/authentication/userProfile";
 // import type { CustomContest } from "@features/custom_contests/customContest";
 
-const INTERNAL_CF_GET_URL = "/mock/user/get";
+const INTERNAL_CF_GET_URL = "http://localhost:4000/api/users/find";
 const INTERNAL_CF_UPDATE_URL = "http://localhost:4000/api/users/update";
 // const INTERNAL_ADD_OWNED_CONTEST_URL = "/mock/user/ownedContests/add";
 // const INTERNAL_ADD_JOINED_CONTEST_URL = "/mock/user/joinedContests/add";
 
 const fetchUserProfile = async (): Promise<UserProfile> => {
   try {
-    const response = await axios.get(INTERNAL_CF_GET_URL);
+    const response = await axios.get(INTERNAL_CF_GET_URL, {
+      withCredentials: true,
+    });
     const data = userProfileSchema.parse(response.data);
     return data;
   } catch (error) {
@@ -81,6 +83,7 @@ export const useUserProfile = () => {
   const { data, isLoading, isError } = useQuery<UserProfile, Error>({
     queryKey: ["userProfile"],
     queryFn: fetchUserProfile,
+    retry: false,
   });
 
   // mutate user codeforces username

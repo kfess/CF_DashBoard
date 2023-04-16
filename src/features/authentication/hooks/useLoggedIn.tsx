@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useRecoilUserProfile } from "@features/authentication/hooks/useRecoilUserProfile";
+import { useQueryClient } from "@tanstack/react-query";
 import type { UserProfile } from "../userProfile";
+import { useUserProfile } from "./useUserProfile";
 
 type UseLoginOptions = {
   readonly loginRedirectTo?: string;
@@ -11,19 +12,18 @@ export const useLoggedIn = ({
   loginRedirectTo = "/",
   logoutRedirectTo = "/",
 }: UseLoginOptions = {}) => {
-  const { userProfile, setUserProfileInfo, clearUserProfile } =
-    useRecoilUserProfile();
-
-  const loggedIn = userProfile !== null;
+  const { githubId } = useUserProfile();
+  const loggedIn = githubId != null;
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const login = (info: UserProfile) => {
-    setUserProfileInfo(info);
+    queryClient.setQueryData(["userProfile"], info);
     navigate(loginRedirectTo);
   };
 
   const logout = () => {
-    clearUserProfile();
+    queryClient.removeQueries(["userProfile"]);
     navigate(logoutRedirectTo);
   };
 
