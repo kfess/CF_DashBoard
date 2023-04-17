@@ -1,9 +1,22 @@
-import { useEffect } from "react";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import type { UserProfile } from "@features/authentication/userProfile";
 import { userProfileState } from "@features/authentication/userProfile.atom";
-import axios from "axios";
+
+const fetchLoggedInStatus = async () => {
+  try {
+    const response = await axios.get("http://localhost:4000/api/users/verify", {
+      withCredentials: true,
+    });
+
+    return response.status === 200;
+  } catch (error) {
+    console.error("Error while fetching user status:", error);
+    return false;
+  }
+};
 
 type UseLoginOptions = {
   readonly loginRedirectTo?: string;
@@ -19,18 +32,18 @@ export const useLoggedIn = ({
   const loggedIn = userProfile !== null;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const checkStatus = async () => {
-      const response = await axios.get(
-        "http://localhost:4000/api/users/verify",
-        { withCredentials: true }
-      );
-      if (response.status !== 200) {
+  useQuery({
+    queryKey: ["loggedInStatus"],
+    queryFn: fetchLoggedInStatus,
+    refetchInterval: 1000 * 60 * 30,
+    refetchOnWindowFocus: false,
+    enabled: loggedIn,
+    onSuccess: (isLoggedIn) => {
+      if (!isLoggedIn) {
         setUserProfile(null);
       }
-    };
-    checkStatus();
-  }, []);
+    },
+  });
 
   const login = (info: UserProfile) => {
     setUserProfile(info);

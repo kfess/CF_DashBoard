@@ -31,24 +31,26 @@ export const CustomContestPage: React.FC = () => {
   return (
     <>
       <HeadLine title="Custom Contest" />
-      <NavLink to={loggedIn ? "/custom-contest/create" : "#"}>
-        <Button
-          color="success"
-          variant="contained"
-          css={{ textTransform: "none" }}
-          disabled={!loggedIn}
-        >
-          Create New Contest
-        </Button>
-      </NavLink>
-      {!loggedIn && (
-        <AlertMessage
-          title=""
-          message="To create a new Contest, You need to be logged in."
-        />
-      )}
-      <Box sx={{ width: "100%" }}>
-        <Tabs tabItems={tabItems} />
+      <Box sx={{ p: 1 }}>
+        <NavLink to={loggedIn ? "/custom-contest/create" : "#"}>
+          <Button
+            color="success"
+            variant="contained"
+            css={{ textTransform: "none" }}
+            disabled={!loggedIn}
+          >
+            Create New Contest
+          </Button>
+        </NavLink>
+        {!loggedIn && (
+          <AlertMessage
+            title=""
+            message="To create a new Contest, You need to be logged in."
+          />
+        )}
+        <Box sx={{ width: "100%" }}>
+          <Tabs tabItems={tabItems} />
+        </Box>
       </Box>
     </>
   );
