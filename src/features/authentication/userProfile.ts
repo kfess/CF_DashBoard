@@ -5,6 +5,7 @@ export const userProfileSchema = z.object({
   githubId: z.number(),
   githubUsername: z.string(),
   codeforcesUsername: z.string().optional(),
+  isLoggedIn: z.boolean(),
 });
 
 export const userCustomContestSchema = z.object({

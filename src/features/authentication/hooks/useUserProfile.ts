@@ -19,6 +19,7 @@ const fetchUserProfile = async (): Promise<UserProfile> => {
     const data = userProfileSchema.parse(response.data);
     return data;
   } catch (error) {
+    console.log(error);
     throw new Error("An error occurred while fetching user profile data");
   }
 };

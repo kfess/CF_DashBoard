@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { Button } from "@features/ui/component/Button";
 import { Input } from "@features/ui/component/Input";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
+import { string } from "zod";
 
 export const Profile: React.FC = () => {
   const { githubId, githubUserName, codeforcesUsername, updateUsername } =
@@ -32,6 +33,7 @@ export const Profile: React.FC = () => {
 
   return (
     <>
+      {String(githubId)}
       <h2>Profile</h2>
       <p>GitHub ID: {githubId}</p>
       <p>GitHub Name: {githubUserName}</p>
