@@ -13,7 +13,9 @@ export const useFetchPublicCustomContests = () => {
     queryKey: ["public-custom-contests"],
     queryFn: async (): Promise<CustomContest[]> => {
       try {
-        const url = "/mock/custom-contest/contests?filter=public";
+        // const url = "/mock/custom-contest/contests?filter=public";
+        const url = "http://localhost:4000/api/custom-contests/all-contests";
+
         const response = await axios.get(url);
         const publicCustomContests = customContestsSchema.parse(response.data);
         return publicCustomContests;
