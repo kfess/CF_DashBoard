@@ -36,7 +36,7 @@ export const customContestSchema = z.object({
   startDate: z.string(),
   endDate: z.string(),
   visibility: visibilitySchema,
-  participants: z.array(z.object({ userId: z.string() })).min(1),
+  participants: z.array(z.string()).min(1),
   problems: problemsSchema,
 });
 export const customContestsSchema = z.array(customContestSchema);

@@ -43,7 +43,7 @@ const fetchUserSubmissions = async (userId: string): Promise<Submission[]> => {
 };
 
 const fetchSubmissions = async (
-  users: { userId: string }[],
+  users: string[],
   problems: Problem[],
   startDate: string,
   endDate: string
@@ -52,13 +52,13 @@ const fetchSubmissions = async (
     const problemSet = createProblemSet(problems);
 
     const responses = await Promise.all(
-      users.map(({ userId }) => fetchUserSubmissions(userId))
+      users.map((userId) => fetchUserSubmissions(userId))
     );
 
     const allSubmissions = responses.flat();
     const submissionsByUser: UserSubmissions = users.reduce<
       Record<string, Submission[]>
-    >((acc, { userId }) => {
+    >((acc, userId) => {
       const submissionsForUser = filterSubmissions(
         allSubmissions,
         problemSet,
@@ -77,7 +77,7 @@ const fetchSubmissions = async (
 };
 
 export const useFetchSubmissions = (
-  users: { userId: string }[],
+  users: string[],
   problems: Problem[],
   startDate: string,
   endDate: string,

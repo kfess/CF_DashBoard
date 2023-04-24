@@ -14,7 +14,7 @@ import { CF_CONTEST_URL } from "@constants/url";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 type Props = {
-  participants: { userId: string }[];
+  participants: string[];
   problems: Problem[];
   startDate: string;
   endDate: string;
@@ -85,11 +85,11 @@ export const Standings: React.FC<Props> = (props: Props) => {
                 //     userStats[a.userId].totalScore
                 // )
                 .map((participant, i) => {
-                  const stats = userStats[participant.userId] || null;
+                  const stats = userStats[participant] || null;
                   return (
-                    <TableRow hover key={participant.userId}>
+                    <TableRow hover key={participant}>
                       <TableCell>{i + 1}</TableCell>
-                      <TableCell>{participant.userId}</TableCell>
+                      <TableCell>{participant}</TableCell>
                       <TableCell>
                         {stats ? (
                           <div>
