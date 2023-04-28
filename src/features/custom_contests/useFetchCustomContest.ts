@@ -13,7 +13,6 @@ export const useFetchPublicCustomContests = () => {
     queryKey: ["public-custom-contests"],
     queryFn: async (): Promise<CustomContest[]> => {
       try {
-        // const url = "/mock/custom-contest/contests?filter=public";
         const url = "http://localhost:4000/api/custom-contests/all-contests";
 
         const response = await axios.get(url);
@@ -41,7 +40,7 @@ export const useFetchPublicCustomContest = ({
     queryKey: ["public-custom-contest", contestId],
     queryFn: async (): Promise<CustomContest> => {
       try {
-        const url = `/mock/custom-contest/${contestId}`;
+        const url = `http://localhost:4000/api/custom-contests/${contestId}`;
         const response = await axios.get(url);
         if (response.status === 404) {
           throw new Error("Contest not found");
