@@ -4,63 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import {
   CustomContest,
-  customContestSchema,
-  customContestsSchema,
 } from "@features/custom_contests/customContest";
-
-export const useFetchPublicCustomContests = () => {
-  const { data, isError, error, isLoading } = useQuery<CustomContest[], Error>({
-    queryKey: ["public-custom-contests"],
-    queryFn: async (): Promise<CustomContest[]> => {
-      try {
-        const url = "http://localhost:4000/api/custom-contests/all-contests";
-
-        const response = await axios.get(url);
-        const publicCustomContests = customContestsSchema.parse(response.data);
-        return publicCustomContests;
-      } catch (err) {
-        if (err instanceof ZodError) {
-          console.log(err);
-          throw new Error("validation error");
-        }
-        throw new Error("custom contest error");
-      }
-    },
-  });
-
-  return { data, isError, error, isLoading };
-};
-
-export const useFetchPublicCustomContest = ({
-  contestId,
-}: {
-  contestId: string;
-}) => {
-  const { data, isError, error, isLoading } = useQuery<CustomContest, Error>({
-    queryKey: ["public-custom-contest", contestId],
-    queryFn: async (): Promise<CustomContest> => {
-      try {
-        const url = `http://localhost:4000/api/custom-contests/${contestId}`;
-        const response = await axios.get(url);
-        if (response.status === 404) {
-          throw new Error("Contest not found");
-        }
-        const publicCustomContest = customContestSchema.parse(response.data);
-        return publicCustomContest;
-      } catch (err) {
-        if (err instanceof ZodError) {
-          console.log(err);
-          throw new Error("validation error");
-        }
-        throw new Error("custom contest error");
-      }
-    },
-    enabled: !!contestId,
-    retry: 0,
-  });
-
-  return { data, isError, error, isLoading };
-};
 
 export const useAddCustomContest = () => {
   const addContest = async (contest: CustomContest): Promise<void> => {

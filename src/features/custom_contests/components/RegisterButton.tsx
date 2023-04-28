@@ -8,8 +8,8 @@ import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import {
   useAddParticipantToContest,
   useHasUserRegistered,
-  useFetchPublicCustomContest,
 } from "@features/custom_contests/useFetchCustomContest";
+import { useFetchCustomContestByContestId } from "@features/custom_contests/hooks/useFetchCustomContestByContestId";
 
 type RouteParams = {
   readonly contestId?: string;
@@ -28,7 +28,7 @@ export const RegisterButton: React.FC = () => {
 
   const { mutate } = useAddParticipantToContest();
 
-  const { data: contest } = useFetchPublicCustomContest({
+  const { data: contest } = useFetchCustomContestByContestId({
     contestId,
   });
 

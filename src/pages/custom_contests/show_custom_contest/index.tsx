@@ -6,7 +6,7 @@ import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
 import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
-import { useFetchPublicCustomContest } from "@features/custom_contests/useFetchCustomContest";
+import { useFetchCustomContestByContestId } from "@features/custom_contests/hooks/useFetchCustomContestByContestId";
 import { CountdownScheduler } from "@features/custom_contests/components/CountdownScheduler";
 import { Chip_ } from "@features/ui/component/Chip";
 import { Standings } from "@features/custom_contests/components/Standings";
@@ -23,7 +23,7 @@ export const ShowCustomContestPage: React.FC = () => {
 
   const params = useParams();
   const contestId = params.contestId ?? "";
-  const { data, isLoading, isError, error } = useFetchPublicCustomContest({
+  const { data, isLoading, isError, error } = useFetchCustomContestByContestId({
     contestId,
   });
 

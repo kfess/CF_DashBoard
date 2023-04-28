@@ -8,7 +8,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import type { CreatedContestType } from "@features/custom_contests/customContest";
-import { useFetchPublicCustomContests } from "@features/custom_contests/useFetchCustomContest";
+import { useFetchAllCustomContests } from "@features/custom_contests/hooks/useFetchAllCustomContests";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { usePagination } from "@hooks/index";
 import { RunningContestTableRow } from "@features/custom_contests/components/RunningContestTableRow";
@@ -19,7 +19,7 @@ type Props = { contestType: CreatedContestType };
 
 export const PublicContestTable: React.FC<Props> = (props: Props) => {
   const { contestType } = props;
-  const { data, error, isLoading } = useFetchPublicCustomContests();
+  const { data, error, isLoading } = useFetchAllCustomContests();
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(10);
   const customContests = data?.filter((d) => {
