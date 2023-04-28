@@ -7,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Problem } from "@features/problems/problem";
-import { useFetchSubmissions } from "@features/custom_contests/useFetchSubmissions";
+import { useFetchSubmissions } from "@features/custom_contests/hooks/useFetchSubmissions";
 import { useToggle } from "@hooks/index";
 import { UserStats, calculateAllUsersStats } from "../calculateStandings";
 import { CF_CONTEST_URL } from "@constants/url";

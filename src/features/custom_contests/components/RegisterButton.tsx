@@ -5,10 +5,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
-import {
-  useAddParticipantToContest,
-  useHasUserRegistered,
-} from "@features/custom_contests/useFetchCustomContest";
+import { useAddParticipantToContest } from "@features/custom_contests/hooks/useAddParticipantToContest";
 import { useFetchCustomContestByContestId } from "@features/custom_contests/hooks/useFetchCustomContestByContestId";
 
 type RouteParams = {
@@ -21,16 +18,15 @@ export const RegisterButton: React.FC = () => {
 
   const { loggedIn } = useLoggedIn();
   const { codeforcesUsername } = useUserProfile();
-  const { data: isUserRegistered } = useHasUserRegistered(
-    contestId,
-    codeforcesUsername
-  );
 
   const { mutate } = useAddParticipantToContest();
 
   const { data: contest } = useFetchCustomContestByContestId({
     contestId,
   });
+
+  const isUserRegistered =
+    codeforcesUsername && contest?.participants.includes(codeforcesUsername);
 
   const isBeforeContestEnd: boolean = useMemo(() => {
     return dayjs().isBefore(contest?.endDate);

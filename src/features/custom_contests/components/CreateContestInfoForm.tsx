@@ -18,7 +18,7 @@ import { modes } from "../customContest";
 import { Checkbox } from "@features/ui/component/Checkbox";
 import { Problem } from "@features/problems/problem";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
-import { useAddCustomContest } from "../useFetchCustomContest";
+import { useAddCustomContest } from "@features/custom_contests/hooks/useAddCustomContest";
 import { Button } from "@features/ui/component/Button";
 import { TextArea } from "@features/ui/component/TextArea";
 import { FormControl } from "@features/ui/component/FormControl";
@@ -30,7 +30,6 @@ export const CreateContestInfoForm: React.FC = () => {
     CustomContest,
     | "contestId"
     | "owner"
-    | "ownerId"
     | "participants"
     | "visibility"
     | "mode"
@@ -39,11 +38,10 @@ export const CreateContestInfoForm: React.FC = () => {
   > = {
     contestId: generateUUIDv4(),
     owner: codeforcesUsername ?? "",
-    ownerId: githubId ?? "",
     visibility: "Public",
     mode: "Normal",
     penalty: 300,
-    participants: [{ userId: codeforcesUsername ?? "" }],
+    participants: [codeforcesUsername ?? ""],
     problems: [],
   };
 
@@ -70,11 +68,11 @@ export const CreateContestInfoForm: React.FC = () => {
 
   const [selectedProblems, setSelectedProblems] = useState<Problem[]>([]);
 
-  const { mutate } = useAddCustomContest();
+  const { create } = useAddCustomContest();
 
   const onSubmit = (data: CustomContest) => {
     const updatedData: CustomContest = { ...data, problems: selectedProblems };
-    mutate(updatedData);
+    create(updatedData);
   };
 
   return (
