@@ -1,4 +1,5 @@
 import { z } from "zod";
+import dayjs from "dayjs";
 import { tagSchema } from "@features/problems/problem";
 import { problemsSchema } from "@features/problems/problem";
 
@@ -13,18 +14,26 @@ export type APIFilterType = typeof apiFilterTypes[number];
 export const createdContestTypes = ["Running", "Upcoming", "Finished"] as const;
 export type CreatedContestType = typeof createdContestTypes[number];
 
-const visibilitySchema = z.union([z.literal("Public"), z.literal("Private")]);
+// visibility of contest
 export const visibilities = ["Public", "Private"] as const;
+const visibilitySchema = z
+  .enum(visibilities)
+  .refine((val) => visibilities.includes(val), {
+    message: "Visibility must be either 'Public' or 'Private'",
+  });
 export type Visibility = typeof visibilities[number];
 
-const modeSchema = z.union([
-  z.literal("Normal"),
-  z.literal("Lockout"),
-  z.literal("Training"),
-]);
+// mode of contest
 export const modes = ["Normal", "Lockout", "Training"] as const;
+const modeSchema = z.enum(modes).refine(
+  (val) => {
+    return modes.includes(val);
+  },
+  { message: "Mode must be 'Normal' or 'Lockout' or 'Training'" }
+);
 export type Mode = typeof modes[number];
 
+// created custom contest
 export const customContestSchema = z.object({
   contestId: z.string(),
   title: z.string().min(1),
@@ -41,6 +50,41 @@ export const customContestSchema = z.object({
 });
 export const customContestsSchema = z.array(customContestSchema);
 export type CustomContest = z.infer<typeof customContestSchema>;
+
+// to create custom contest
+export const createCustomContestSchema = z.object({
+  title: z
+    .string()
+    .min(1, { message: "Title cannot be empty" })
+    .refine((val) => val.trim().length > 0, {
+      message: "Title cannot be only whitespace",
+    }),
+  owner: z.string(),
+  ownerId: z.string(), // github account user ID
+  description: z
+    .string()
+    .min(1, { message: "Description cannot be empty" })
+    .refine((val) => val.trim().length > 0, {
+      message: "Description cannot be only whitespace",
+    }),
+  penalty: z
+    .number()
+    .nonnegative({ message: "Penalty must be non negative value" })
+    .nullable()
+    .refine((value) => value !== null, { message: "Penalty cannot be empty" }),
+  mode: modeSchema,
+  startDate: z
+    .string()
+    .refine((val) => dayjs(val).isValid(), { message: "Invalid start Date" }),
+  endDate: z
+    .string()
+    .refine((val) => dayjs(val).isValid(), { message: "Invalid end Date" }),
+  visibility: visibilitySchema,
+  participants: z.array(z.string()).min(1),
+  problems: problemsSchema,
+});
+
+export type CreateCustomContest = z.infer<typeof createCustomContestSchema>;
 
 export const problemSuggestOptionSchema = z.object({
   count: z.number(),
