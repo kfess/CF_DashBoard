@@ -77,8 +77,9 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
           id="problems-number-input"
           type="number"
           defaultValue={count}
+          value={count}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const val = Number(e.target.value);
+            const val = e.target.valueAsNumber;
             if (Number.isInteger(val) && val >= 0) {
               setCount(val);
             }

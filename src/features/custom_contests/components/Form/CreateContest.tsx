@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Container } from "@mui/material";
+import Divider from "@mui/material/Divider";
 import { Button } from "@features/ui/component/Button";
 import { Checkbox } from "@features/ui/component/Checkbox";
 import { RadioButton } from "@features/ui/component/RadioButton";
@@ -15,6 +16,9 @@ import {
   createCustomContestSchema,
 } from "@features/custom_contests/customContest";
 import { modes } from "@features/custom_contests/customContest";
+import { Problem } from "@features/problems/problem";
+import { CreateProblemInfoForm } from "@features/custom_contests/components/Form/CreateProblemInfoForm";
+
 // import { useAddCustomContest } from "@features/custom_contests/hooks/useAddCustomContest";
 
 import dayjs from "dayjs";
@@ -22,25 +26,13 @@ import utc from "dayjs/plugin/utc";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 dayjs.extend(utc);
 
 export const CreateContest: React.FC = () => {
   const { codeforcesUsername, githubUserName } = useUserProfile();
 
-  const defaultValues: Pick<
-    CreateCustomContest,
-    | "title"
-    | "description"
-    | "owner"
-    | "ownerId"
-    | "participants"
-    | "startDate"
-    | "endDate"
-    | "visibility"
-    | "mode"
-    | "penalty"
-    | "problems"
-  > = {
+  const defaultValues: CreateCustomContest = {
     title: "",
     description: "",
     owner: codeforcesUsername ?? "",
@@ -69,6 +61,8 @@ export const CreateContest: React.FC = () => {
   useEffect(() => {
     reset(defaultValues);
   }, [codeforcesUsername, githubUserName]);
+
+  const [selectedProblems, setSelectedProblems] = useState<Problem[]>([]);
 
   console.log(errors);
 
@@ -106,9 +100,7 @@ export const CreateContest: React.FC = () => {
                 }}
                 description="Private Contest is invisible to everyone except you."
               />
-              {errors.visibility?.message && (
-                <p css={{ color: "red" }}>{errors.visibility?.message}</p>
-              )}
+              <ErrorMessage message={errors.visibility?.message} />
             </>
           )}
         />
@@ -125,9 +117,7 @@ export const CreateContest: React.FC = () => {
                   setValue("mode", selectedMode);
                 }}
               />
-              {errors.mode?.message && (
-                <p css={{ color: "red" }}>{errors.mode?.message}</p>
-              )}
+              <ErrorMessage message={errors.mode?.message} />
             </>
           )}
         />
@@ -148,9 +138,7 @@ export const CreateContest: React.FC = () => {
                 id="title-input"
                 type="text"
               />
-              {errors.title?.message && (
-                <p css={{ color: "red" }}>{errors.title?.message}</p>
-              )}
+              <ErrorMessage message={errors.title?.message} />
             </FormControl>
           )}
         />
@@ -166,9 +154,7 @@ export const CreateContest: React.FC = () => {
                 Description
               </label>
               <TextArea {...field} placeholder="Description" />
-              {errors.description?.message && (
-                <p css={{ color: "red" }}>{errors.description?.message}</p>
-              )}
+              <ErrorMessage message={errors.description?.message} />
             </FormControl>
           )}
         />
@@ -196,9 +182,7 @@ export const CreateContest: React.FC = () => {
                     css={{ backgroundColor: "white" }}
                   />
                 </LocalizationProvider>
-                {errors.startDate?.message && (
-                  <p css={{ color: "red" }}>{errors.startDate?.message}</p>
-                )}
+                <ErrorMessage message={errors.startDate?.message} />
               </div>
             </>
           )}
@@ -227,6 +211,7 @@ export const CreateContest: React.FC = () => {
                     css={{ backgroundColor: "white" }}
                   />
                 </LocalizationProvider>
+                <ErrorMessage message={errors.endDate?.message} />
               </div>
             </>
           )}
@@ -255,12 +240,15 @@ export const CreateContest: React.FC = () => {
                     field.onChange(val);
                   }}
                 />
-                {errors.penalty?.message && (
-                  <p css={{ color: "red" }}>{errors.penalty?.message}</p>
-                )}
+                <ErrorMessage message={errors.penalty?.message} />
               </FormControl>
             </div>
           )}
+        />
+        <Divider />
+        <CreateProblemInfoForm
+          selectedProblems={selectedProblems}
+          setSelectedProblems={setSelectedProblems}
         />
         <Button type="submit">Submit</Button>
       </form>

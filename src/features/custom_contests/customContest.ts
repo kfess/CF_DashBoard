@@ -56,11 +56,12 @@ export const createCustomContestSchema = z.object({
   title: z
     .string()
     .min(1, { message: "Title cannot be empty" })
+    .max(100, { message: "Title cannot be more than 100 characters" })
     .refine((val) => val.trim().length > 0, {
       message: "Title cannot be only whitespace",
     }),
-  owner: z.string(),
-  ownerId: z.string(), // github account user ID
+  owner: z.string(), // codeforces account username
+  ownerId: z.string(), // github account username
   description: z
     .string()
     .min(1, { message: "Description cannot be empty" })
