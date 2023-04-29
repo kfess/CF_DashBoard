@@ -10,7 +10,6 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { Chip_ } from "@features/ui/component/Chip";
 import { CustomContest, customContestSchema } from "../customContest";
 import { Input } from "@features/ui/component/Input";
-import { generateUUIDv4 } from "@helpers/uuid";
 import { Container } from "@mui/material";
 import { CreateProblemInfoForm } from "./Form/CreateProblemInfoForm";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
@@ -24,20 +23,20 @@ import { TextArea } from "@features/ui/component/TextArea";
 import { FormControl } from "@features/ui/component/FormControl";
 
 export const CreateContestInfoForm: React.FC = () => {
-  const { codeforcesUsername, githubId } = useUserProfile();
+  const { codeforcesUsername, githubUserName } = useUserProfile();
 
   const defaultValues: Pick<
     CustomContest,
-    | "contestId"
     | "owner"
+    | "ownerId"
     | "participants"
     | "visibility"
     | "mode"
     | "penalty"
     | "problems"
   > = {
-    contestId: generateUUIDv4(),
     owner: codeforcesUsername ?? "",
+    ownerId: githubUserName ?? "",
     visibility: "Public",
     mode: "Normal",
     penalty: 300,
@@ -59,19 +58,21 @@ export const CreateContestInfoForm: React.FC = () => {
 
   useEffect(() => {
     reset(defaultValues);
-  }, [codeforcesUsername, githubId]);
+  }, [codeforcesUsername, githubUserName]);
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "participants",
-  });
+  // const { fields, append, remove } = useFieldArray({
+  //   control,
+  //   name: "participants",
+  // });
 
   const [selectedProblems, setSelectedProblems] = useState<Problem[]>([]);
 
   const { create } = useAddCustomContest();
 
   const onSubmit = (data: CustomContest) => {
+    console.log(data);
     const updatedData: CustomContest = { ...data, problems: selectedProblems };
+    console.log(updatedData);
     create(updatedData);
   };
 
@@ -253,14 +254,7 @@ export const CreateContestInfoForm: React.FC = () => {
           setSelectedProblems={setSelectedProblems}
         />
         <div css={{ textAlign: "right" }}>
-          <Button
-            onClick={() => {
-              getValues();
-            }}
-            type="submit"
-          >
-            Create New Contest
-          </Button>
+          <Button type="submit">Create New Contest</Button>
         </div>
       </form>
     </Container>

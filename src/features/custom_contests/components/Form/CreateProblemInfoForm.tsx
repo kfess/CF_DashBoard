@@ -21,7 +21,7 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
   const { selectedProblems, setSelectedProblems } = props;
   const { data } = useFetchProblems();
 
-  const [count, setCount] = useState<number>(0);
+  const [count, setCount] = useState<number>(5);
   const [difficultyFrom, setDifficultyFrom] = useState(0);
   const [difficultyTo, setDifficultyTo] = useState(5000);
 
@@ -75,9 +75,8 @@ export const CreateProblemInfoForm: React.FC<Props> = (props: Props) => {
         </label>
         <Input
           id="problems-number-input"
-          placeholder="5"
           type="number"
-          defaultValue={5}
+          defaultValue={count}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             const val = Number(e.target.value);
             if (Number.isInteger(val) && val >= 0) {
