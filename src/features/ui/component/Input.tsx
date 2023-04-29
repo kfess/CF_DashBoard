@@ -34,7 +34,7 @@ const StyledInputElement = styled("input")(
   width: 100%;
   font-size: 1rem;
   padding: 0.4rem;
-  padding-left:1rem;
+  padding-left:0.875rem;
   border-radius: 0.375rem;
   color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
   background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
@@ -66,7 +66,8 @@ export const Input = React.forwardRef(function CustomInput(
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const { value, ...otherProps } = props;
-  const inputValue = value === null ? undefined : value;
+  const inputValue = value === null || value === undefined ? "" : value;
+
   return (
     <InputUnstyled
       slots={{ input: StyledInputElement }}
