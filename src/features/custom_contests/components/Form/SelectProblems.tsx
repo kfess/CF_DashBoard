@@ -6,11 +6,11 @@ import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import { useTags } from "@features/problems/hooks/useTags";
 import { useToggle } from "@hooks/index";
 import { Problem, Tag } from "@features/problems/problem";
-import { Checkbox } from "@features/ui/component/Checkbox";
 import { SelectedProblemsTable } from "./SelectedProblemsTable";
 import { ProblemsCount } from "@features/custom_contests/components/Form/ProblemsCount";
 import { ProblemsDifficulty } from "./ProblemsDifficulty";
 import { ProblemsTag } from "./ProblemsTag";
+import { ExpectedParticipants } from "./ExpectedParticipants";
 
 type Props = {
   control: Control<CreateCustomContest>;
@@ -86,12 +86,11 @@ export const SelectProblems: React.FC<Props> = ({
         removeAllExcludeTags={removeAllExcludeTags}
         addOrRemoveExcludeTag={addOrRemoveExcludeTag}
       />
-
-      <Checkbox
-        title="Restriction of Problems"
-        label="Don't suggest problems solved by expected participants"
-        toggle={toggleExcludeSolved}
-        description="When you check this, problems solved by expected participants are excluded"
+      <ExpectedParticipants
+        control={control}
+        errors={errors}
+        excludeSolved={excludeSolved}
+        toggleExcludeSolved={toggleExcludeSolved}
       />
       <Button
         onClick={() => {
