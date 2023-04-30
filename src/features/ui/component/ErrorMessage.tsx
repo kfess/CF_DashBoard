@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-  message: string | undefined;
+  readonly message: string | undefined;
 };
 
 export const ErrorMessage: React.FC<Props> = ({ message }) => {
