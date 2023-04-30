@@ -8,9 +8,9 @@ import { useToggle } from "@hooks/index";
 import { Problem, Tag } from "@features/problems/problem";
 import { SelectedProblemsTable } from "./SelectedProblemsTable";
 import { ProblemsCount } from "@features/custom_contests/components/Form/ProblemsCount";
-import { ProblemsDifficulty } from "./ProblemsDifficulty";
-import { ProblemsTag } from "./ProblemsTag";
-import { ExpectedParticipants } from "./ExpectedParticipants";
+import { ProblemsDifficulty } from "@features/custom_contests/components/Form/ProblemsDifficulty";
+import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsTag";
+import { ExpectedParticipants } from "@features/custom_contests/components/Form/ExpectedParticipants";
 
 type Props = {
   control: Control<CreateCustomContest>;

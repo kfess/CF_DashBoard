@@ -93,7 +93,7 @@ export const problemSuggestOptionSchema = z.object({
   difficultyTo: z.number(),
   includeTags: z.array(tagSchema),
   excludeTags: z.array(tagSchema),
-  randomizeOrder: z.boolean(),
   excludeSolvedProblems: z.boolean(),
+  expectedParticipants: z.array(z.string()),
 });
 export type ProblemSuggestOption = z.infer<typeof problemSuggestOptionSchema>;

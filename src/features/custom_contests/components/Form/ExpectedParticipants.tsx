@@ -1,5 +1,5 @@
 import React from "react";
-import { Control, Controller, FieldErrors } from "react-hook-form";
+import { Control, FieldErrors } from "react-hook-form";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Checkbox } from "@features/ui/component/Checkbox";
@@ -25,6 +25,7 @@ export const ExpectedParticipants: React.FC<Props> = ({
         toggle={toggleExcludeSolved}
         description="When you check this, problems solved by expected participants are excluded"
       />
+      {excludeSolved && <></>}
     </>
   );
 };
