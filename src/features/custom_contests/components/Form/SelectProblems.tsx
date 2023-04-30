@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { Control, Controller, FieldErrors } from "react-hook-form";
+import { Control, Controller, FieldErrors, useWatch } from "react-hook-form";
 import { Button } from "@features/ui/component/Button";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
@@ -25,9 +25,15 @@ export const SelectProblems: React.FC<Props> = ({
 }) => {
   const { data } = useFetchProblems();
 
-  const [count, setCount] = useState<number>(5);
-  const [difficultyFrom, setDifficultyFrom] = useState(0);
-  const [difficultyTo, setDifficultyTo] = useState(5000);
+  const count = useWatch({ control, name: "problemsFilter.count" });
+  const difficultyFrom = useWatch({
+    control,
+    name: "problemsFilter.difficultyFrom",
+  });
+  const difficultyTo = useWatch({
+    control,
+    name: "problemsFilter.difficultyTo",
+  });
 
   const {
     selectedTags: includeTags,
@@ -50,8 +56,8 @@ export const SelectProblems: React.FC<Props> = ({
       return problems
         .filter(
           (problem) =>
-            (problem.rating ?? 0) >= difficultyFrom &&
-            (problem.rating ?? 0) <= difficultyTo &&
+            (problem.rating ?? 0) >= (difficultyFrom ?? 0) &&
+            (problem.rating ?? 0) <= (difficultyTo ?? 0) &&
             includeTags.every((includeTag) =>
               (problem.tags as Tag[]).includes(includeTag)
             ) &&
@@ -60,7 +66,7 @@ export const SelectProblems: React.FC<Props> = ({
             )
         )
         .sort(() => Math.random() - 0.5)
-        .slice(0, count)
+        .slice(0, count ?? 0)
         .sort((a, b) => (a.rating ?? 0) - (b.rating ?? 0));
     },
     [difficultyFrom, difficultyTo, includeTags, excludeTags, count]
@@ -69,13 +75,9 @@ export const SelectProblems: React.FC<Props> = ({
   return (
     <>
       <h3>Problems Form</h3>
-      <ProblemsCount count={count} setCount={setCount} />
-      <ProblemsDifficulty
-        difficultyFrom={difficultyFrom}
-        setDifficultyFrom={setDifficultyFrom}
-        difficultyTo={difficultyTo}
-        setDifficultyTo={setDifficultyTo}
-      />
+      <ProblemsCount control={control} errors={errors} />
+      <ProblemsDifficulty control={control} errors={errors} />
+
       <ProblemsTag
         includeTags={includeTags}
         removeIncludeTag={removeIncludeTag}

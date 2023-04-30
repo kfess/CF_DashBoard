@@ -35,6 +35,15 @@ const getDefaultValues = (
   endDate: dayjs(new Date()).utc().format("YYYY/MM/DD HH:mm"),
   participants: [codeforcesUsername ?? ""],
   problems: [],
+  problemsFilter: {
+    count: 5,
+    difficultyFrom: 0,
+    difficultyTo: 5000,
+    includeTags: [],
+    excludeTags: [],
+    excludeSolved: false,
+    expectedParticipants: [],
+  },
 });
 
 export const CreateContest: React.FC = () => {
@@ -47,7 +56,6 @@ export const CreateContest: React.FC = () => {
 
   const {
     control,
-    getValues,
     setValue,
     handleSubmit,
     formState: { errors },

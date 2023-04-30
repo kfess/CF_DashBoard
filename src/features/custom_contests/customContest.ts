@@ -51,6 +51,33 @@ export const customContestSchema = z.object({
 export const customContestsSchema = z.array(customContestSchema);
 export type CustomContest = z.infer<typeof customContestSchema>;
 
+// options for custom contest problem suggestion
+export const problemSuggestOptionSchema = z.object({
+  count: z
+    .number()
+    .nonnegative({ message: "Count must be non negative value" })
+    .nullable(),
+  difficultyFrom: z
+    .number()
+    .nonnegative({ message: "Difficulty must be non negative value" })
+    .nullable()
+    .refine((value) => value !== null, {
+      message: "Difficulty cannot be empty",
+    }),
+  difficultyTo: z
+    .number()
+    .nonnegative({ message: "Difficulty must be non negative value" })
+    .nullable()
+    .refine((value) => value !== null, {
+      message: "Difficulty cannot be empty",
+    }),
+  includeTags: z.array(tagSchema),
+  excludeTags: z.array(tagSchema),
+  excludeSolved: z.boolean(),
+  expectedParticipants: z.array(z.string()),
+});
+export type ProblemSuggestOption = z.infer<typeof problemSuggestOptionSchema>;
+
 // to create custom contest
 export const createCustomContestSchema = z.object({
   title: z
@@ -65,6 +92,7 @@ export const createCustomContestSchema = z.object({
   description: z
     .string()
     .min(1, { message: "Description cannot be empty" })
+    .max(1000, { message: "Description cannot be more than 1000 characters" })
     .refine((val) => val.trim().length > 0, {
       message: "Description cannot be only whitespace",
     }),
@@ -83,17 +111,7 @@ export const createCustomContestSchema = z.object({
   visibility: visibilitySchema,
   participants: z.array(z.string()).min(1),
   problems: problemsSchema,
+  problemsFilter: problemSuggestOptionSchema,
 });
 
 export type CreateCustomContest = z.infer<typeof createCustomContestSchema>;
-
-export const problemSuggestOptionSchema = z.object({
-  count: z.number(),
-  difficultyFrom: z.number(),
-  difficultyTo: z.number(),
-  includeTags: z.array(tagSchema),
-  excludeTags: z.array(tagSchema),
-  excludeSolvedProblems: z.boolean(),
-  expectedParticipants: z.array(z.string()),
-});
-export type ProblemSuggestOption = z.infer<typeof problemSuggestOptionSchema>;
