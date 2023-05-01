@@ -28,7 +28,6 @@ export const ProblemsDifficulty: React.FC<Props> = ({ control, errors }) => {
               <Input
                 id="difficulty-from-input"
                 type="number"
-                defaultValue={0}
                 value={field.value.difficultyFrom}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   const val =
@@ -59,7 +58,6 @@ export const ProblemsDifficulty: React.FC<Props> = ({ control, errors }) => {
               <Input
                 id="difficulty-to-input"
                 type="number"
-                defaultValue={5000}
                 value={field.value.difficultyTo}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   const val =

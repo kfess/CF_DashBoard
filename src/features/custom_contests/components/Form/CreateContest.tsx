@@ -70,8 +70,6 @@ export const CreateContest: React.FC = () => {
     reset(defaultValues);
   }, [codeforcesUsername, githubUserName]);
 
-  console.log(errors);
-
   //   const { create } = useAddCustomContest();
 
   const onSubmit = () => {

@@ -87,8 +87,8 @@ export const createCustomContestSchema = z.object({
     .refine((val) => val.trim().length > 0, {
       message: "Title cannot be only whitespace",
     }),
-  owner: z.string(), // codeforces account username
-  ownerId: z.string(), // github account username
+  owner: z.string().min(1, { message: "Codeforces username have to be set." }), // codeforces account username
+  ownerId: z.string().min(1, { message: "GitHub username have to be set." }), // github account username
   description: z
     .string()
     .min(1, { message: "Description cannot be empty" })

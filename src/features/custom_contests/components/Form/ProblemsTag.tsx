@@ -17,6 +17,7 @@ type TagSectionProps = {
   name: `problemsFilter.${"includeTags" | "excludeTags"}`;
   control: Control<CreateCustomContest>;
   hintText: string;
+  errors?: FieldErrors<CreateCustomContest>;
 };
 
 const TagSection: React.FC<TagSectionProps> = ({
@@ -24,6 +25,7 @@ const TagSection: React.FC<TagSectionProps> = ({
   name,
   control,
   hintText,
+  errors,
 }) => {
   return (
     <Controller
@@ -61,6 +63,13 @@ const TagSection: React.FC<TagSectionProps> = ({
                 />
               ))}
           </Stack>
+          <ErrorMessage
+            message={
+              name === "problemsFilter.includeTags"
+                ? errors?.problemsFilter?.includeTags?.message
+                : errors?.problemsFilter?.excludeTags?.message
+            }
+          />
         </>
       )}
     />
@@ -75,12 +84,14 @@ export const ProblemsTag: React.FC<Props> = ({ control, errors }) => {
         name="problemsFilter.includeTags"
         control={control}
         hintText="When you select tags, suggested problems are related to the topic."
+        errors={errors}
       />
       <TagSection
         label="Exclude tags"
         name="problemsFilter.excludeTags"
         control={control}
         hintText="When you select tags, problems related to the tags will be excluded."
+        errors={errors}
       />
     </>
   );

@@ -92,13 +92,7 @@ export const SelectProblems: React.FC<Props> = ({
       <Controller
         name="problems"
         control={control}
-        render={({ field }) => (
-          <SelectedProblemsTable
-            field={field}
-            // selectedProblems={field.value}
-            // setSelectedProblems={field.onChange}
-          />
-        )}
+        render={({ field }) => <SelectedProblemsTable field={field} />}
       />
     </>
   );
