@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TableContainer from "@mui/material/TableContainer";
@@ -10,24 +10,23 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { usePagination } from "@hooks/index";
 import { TablePagination } from "@features/ui/component/TablePagination";
-import { Problem } from "@features/problems/problem";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { NoDataBlock } from "@features/ui/component/NoDataBlock";
+import { ControllerRenderProps } from "react-hook-form";
+import { CreateCustomContest } from "@features/custom_contests/customContest";
 
 type Props = {
-  selectedProblems: Problem[];
-  setSelectedProblems: Dispatch<SetStateAction<Problem[]>>;
+  field: ControllerRenderProps<CreateCustomContest, "problems">;
 };
 
-export const SelectedProblemsTable: React.FC<Props> = (props: Props) => {
-  const { selectedProblems, setSelectedProblems } = props;
+export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
+  const selectedProblems = field.value;
+  const removeProblem = (index: number) => {
+    field.onChange(selectedProblems.filter((_, idx) => index !== idx));
+  };
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
-
-  const removeProblem = (index: number) => {
-    setSelectedProblems(selectedProblems.filter((_, idx) => index !== idx));
-  };
 
   return (
     <>

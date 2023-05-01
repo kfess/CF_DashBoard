@@ -75,7 +75,6 @@ export const SelectProblems: React.FC<Props> = ({
       <ProblemsCount control={control} errors={errors} />
       <ProblemsDifficulty control={control} errors={errors} />
       <ProblemsTag control={control} errors={errors} />
-
       <ExpectedParticipants
         control={control}
         errors={errors}
@@ -90,14 +89,14 @@ export const SelectProblems: React.FC<Props> = ({
       >
         Generate Problems
       </Button>
-
       <Controller
         name="problems"
         control={control}
         render={({ field }) => (
           <SelectedProblemsTable
-            selectedProblems={field.value}
-            setSelectedProblems={field.onChange}
+            field={field}
+            // selectedProblems={field.value}
+            // setSelectedProblems={field.onChange}
           />
         )}
       />
