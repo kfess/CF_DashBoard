@@ -56,6 +56,7 @@ export const CreateContest: React.FC = () => {
 
   const {
     control,
+    getValues,
     setValue,
     handleSubmit,
     formState: { errors },

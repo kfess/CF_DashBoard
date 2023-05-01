@@ -1,78 +1,192 @@
+// import React from "react";
+// import { Control, Controller, FieldErrors } from "react-hook-form";
+// import Stack from "@mui/material/Stack";
+// import { TagsButton } from "@features/problems/components/TagsButton";
+// import { DeletableChip } from "@features/ui/component/Chip";
+// import { Tag } from "@features/problems/problem";
+// import { ErrorMessage } from "@features/ui/component/ErrorMessage";
+// import { CreateCustomContest } from "@features/custom_contests/customContest";
+
+// type Props = {
+//   control: Control<CreateCustomContest>;
+//   errors: FieldErrors<CreateCustomContest>;
+// };
+
+// export const ProblemsTag: React.FC<Props> = ({ control, errors }) => {
+//   return (
+//     <>
+//       <Controller
+//         name="problemsFilter.includeTags"
+//         control={control}
+//         render={({ field }) => (
+//           <>
+//             <div css={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
+//               <span css={{ fontWeight: "bold", marginRight: "1rem" }}>
+//                 Include tags
+//               </span>
+//               <TagsButton
+//                 selectedTags={field.value}
+//                 addOrRemoveTag={(tag: Tag) => {
+//                   const updatedTags = field.value.includes(tag)
+//                     ? field.value.filter((t: Tag) => t !== tag)
+//                     : [...field.value, tag];
+//                   field.onChange(updatedTags);
+//                 }}
+//                 removeAllTags={() => field.onChange([])}
+//               />
+
+//               <div css={{ fontSize: 14, color: "gray", marginLeft: "20px" }}>
+//                 When you select tags, suggested problems are related to the
+//                 topic.
+//               </div>
+//             </div>
+//             <Stack direction="row" sx={{ flexWrap: "wrap" }}>
+//               {field.value.length > 0 &&
+//                 field.value.map((includeTag: Tag) => (
+//                   <DeletableChip
+//                     label={includeTag}
+//                     key={includeTag}
+//                     onDelete={() =>
+//                       field.onChange(
+//                         field.value.filter((tag: Tag) => tag !== includeTag)
+//                       )
+//                     }
+//                   />
+//                 ))}
+//             </Stack>
+//           </>
+//         )}
+//       />
+//       <Controller
+//         name="problemsFilter.excludeTags"
+//         control={control}
+//         render={({ field }) => (
+//           <>
+//             <div css={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
+//               <span css={{ fontWeight: "bold", marginRight: "1rem" }}>
+//                 Exclude tags
+//               </span>
+//               <TagsButton
+//                 selectedTags={field.value}
+//                 addOrRemoveTag={(tag: Tag) => {
+//                   const updatedTags = field.value.includes(tag)
+//                     ? field.value.filter((t: Tag) => t !== tag)
+//                     : [...field.value, tag];
+//                   field.onChange(updatedTags);
+//                 }}
+//                 removeAllTags={() => field.onChange([])}
+//               />
+
+//               <div css={{ fontSize: 14, color: "gray", marginLeft: "20px" }}>
+//                 When you select tags, problems related to the tags will be
+//                 excluded.
+//               </div>
+//             </div>
+//             <Stack direction="row" sx={{ flexWrap: "wrap" }}>
+//               {field.value.length > 0 &&
+//                 field.value.map((includeTag: Tag) => (
+//                   <DeletableChip
+//                     label={includeTag}
+//                     key={includeTag}
+//                     onDelete={() =>
+//                       field.onChange(
+//                         field.value.filter((tag: Tag) => tag !== includeTag)
+//                       )
+//                     }
+//                   />
+//                 ))}
+//             </Stack>
+//           </>
+//         )}
+//       />
+//     </>
+//   );
+// };
+
 import React from "react";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 import Stack from "@mui/material/Stack";
 import { TagsButton } from "@features/problems/components/TagsButton";
 import { DeletableChip } from "@features/ui/component/Chip";
 import { Tag } from "@features/problems/problem";
+import { ErrorMessage } from "@features/ui/component/ErrorMessage";
+import { CreateCustomContest } from "@features/custom_contests/customContest";
 
 type Props = {
-  includeTags: Tag[];
-  removeIncludeTag: (tag: Tag) => void;
-  removeAllIncludeTags: () => void;
-  addOrRemoveIncludeTag: (tag: Tag) => void;
-  excludeTags: Tag[];
-  removeExcludeTag: (tag: Tag) => void;
-  removeAllExcludeTags: () => void;
-  addOrRemoveExcludeTag: (tag: Tag) => void;
+  control: Control<CreateCustomContest>;
+  errors: FieldErrors<CreateCustomContest>;
 };
 
-export const ProblemsTag: React.FC<Props> = ({
-  includeTags,
-  removeIncludeTag,
-  removeAllIncludeTags,
-  addOrRemoveIncludeTag,
-  excludeTags,
-  removeExcludeTag,
-  removeAllExcludeTags,
-  addOrRemoveExcludeTag,
+type TagSectionProps = {
+  label: string;
+  name: `problemsFilter.${"includeTags" | "excludeTags"}`;
+  control: Control<CreateCustomContest>;
+  hintText: string;
+};
+
+const TagSection: React.FC<TagSectionProps> = ({
+  label,
+  name,
+  control,
+  hintText,
 }) => {
   return (
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <>
+          <div css={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
+            <span css={{ fontWeight: "bold", marginRight: "1rem" }}>
+              {label}
+            </span>
+            <TagsButton
+              selectedTags={field.value}
+              addOrRemoveTag={(tag: Tag) => {
+                const updatedTags = field.value.includes(tag)
+                  ? field.value.filter((t: Tag) => t !== tag)
+                  : [...field.value, tag];
+                field.onChange(updatedTags);
+              }}
+              removeAllTags={() => field.onChange([])}
+            />
+            <div css={{ fontSize: 14, color: "gray", marginLeft: "20px" }}>
+              {hintText}
+            </div>
+          </div>
+          <Stack direction="row" sx={{ flexWrap: "wrap" }}>
+            {field.value.length > 0 &&
+              field.value.map((tag: Tag) => (
+                <DeletableChip
+                  label={tag}
+                  key={tag}
+                  onDelete={() =>
+                    field.onChange(field.value.filter((t: Tag) => t !== tag))
+                  }
+                />
+              ))}
+          </Stack>
+        </>
+      )}
+    />
+  );
+};
+
+export const ProblemsTag: React.FC<Props> = ({ control, errors }) => {
+  return (
     <>
-      <div css={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
-        <span css={{ fontWeight: "bold", marginRight: "1rem" }}>
-          Include tags
-        </span>
-        <TagsButton
-          selectedTags={includeTags}
-          addOrRemoveTag={addOrRemoveIncludeTag}
-          removeAllTags={removeAllIncludeTags}
-        />
-        <div css={{ fontSize: 14, color: "gray", marginLeft: "20px" }}>
-          When you select tags, suggested problems are related to the topic.
-        </div>
-      </div>
-      <Stack direction="row" sx={{ flexWrap: "wrap" }}>
-        {includeTags.length > 0 &&
-          includeTags.map((includeTag) => (
-            <DeletableChip
-              label={includeTag}
-              key={includeTag}
-              onDelete={() => removeIncludeTag(includeTag)}
-            />
-          ))}
-      </Stack>
-      <div css={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
-        <span css={{ fontWeight: "bold", marginRight: "1rem" }}>
-          Exclude tags
-        </span>
-        <TagsButton
-          selectedTags={excludeTags}
-          addOrRemoveTag={addOrRemoveExcludeTag}
-          removeAllTags={removeAllExcludeTags}
-        />
-        <div css={{ fontSize: 14, color: "gray", marginLeft: "20px" }}>
-          When you select tags, problems related to the tags will be excluded.
-        </div>
-      </div>
-      <Stack direction="row" sx={{ flexWrap: "wrap" }}>
-        {excludeTags.length > 0 &&
-          excludeTags.map((excludeTag) => (
-            <DeletableChip
-              label={excludeTag}
-              key={excludeTag}
-              onDelete={() => removeExcludeTag(excludeTag)}
-            />
-          ))}
-      </Stack>
+      <TagSection
+        label="Include tags"
+        name="problemsFilter.includeTags"
+        control={control}
+        hintText="When you select tags, suggested problems are related to the topic."
+      />
+      <TagSection
+        label="Exclude tags"
+        name="problemsFilter.excludeTags"
+        control={control}
+        hintText="When you select tags, problems related to the tags will be excluded."
+      />
     </>
   );
 };

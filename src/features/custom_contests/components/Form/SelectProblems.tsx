@@ -1,9 +1,8 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import { Control, Controller, FieldErrors, useWatch } from "react-hook-form";
 import { Button } from "@features/ui/component/Button";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
-import { useTags } from "@features/problems/hooks/useTags";
 import { useToggle } from "@hooks/index";
 import { Problem, Tag } from "@features/problems/problem";
 import { SelectedProblemsTable } from "./SelectedProblemsTable";
@@ -26,28 +25,26 @@ export const SelectProblems: React.FC<Props> = ({
   const { data } = useFetchProblems();
 
   const count = useWatch({ control, name: "problemsFilter.count" });
+
   const difficultyFrom = useWatch({
     control,
     name: "problemsFilter.difficultyFrom",
   });
+
   const difficultyTo = useWatch({
     control,
     name: "problemsFilter.difficultyTo",
   });
 
-  const {
-    selectedTags: includeTags,
-    removeTag: removeIncludeTag,
-    removeAllTags: removeAllIncludeTags,
-    addOrRemoveTag: addOrRemoveIncludeTag,
-  } = useTags();
+  const includeTags = useWatch({
+    control,
+    name: "problemsFilter.includeTags",
+  });
 
-  const {
-    selectedTags: excludeTags,
-    removeTag: removeExcludeTag,
-    removeAllTags: removeAllExcludeTags,
-    addOrRemoveTag: addOrRemoveExcludeTag,
-  } = useTags();
+  const excludeTags = useWatch({
+    control,
+    name: "problemsFilter.excludeTags",
+  });
 
   const [excludeSolved, toggleExcludeSolved] = useToggle(false, true);
 
@@ -77,17 +74,8 @@ export const SelectProblems: React.FC<Props> = ({
       <h3>Problems Form</h3>
       <ProblemsCount control={control} errors={errors} />
       <ProblemsDifficulty control={control} errors={errors} />
+      <ProblemsTag control={control} errors={errors} />
 
-      <ProblemsTag
-        includeTags={includeTags}
-        removeIncludeTag={removeIncludeTag}
-        removeAllIncludeTags={removeAllIncludeTags}
-        addOrRemoveIncludeTag={addOrRemoveIncludeTag}
-        excludeTags={excludeTags}
-        removeExcludeTag={removeExcludeTag}
-        removeAllExcludeTags={removeAllExcludeTags}
-        addOrRemoveExcludeTag={addOrRemoveExcludeTag}
-      />
       <ExpectedParticipants
         control={control}
         errors={errors}

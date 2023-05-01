@@ -63,6 +63,7 @@ export const tagSchema = z.union([
   z.literal("2-sat"),
   z.literal("chinese remainder theorem"),
   z.literal("schedules"),
+  z.literal("no tags"),
 ]);
 export const tags = [
   "implementation",
