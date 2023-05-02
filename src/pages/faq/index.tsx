@@ -1,6 +1,5 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { Accordions } from "@features/ui/component/Accordions";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { faqData } from "@features/faq/faq";
