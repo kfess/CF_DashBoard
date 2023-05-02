@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import React from "react";
+import { utcISOStringToLocal } from "@helpers/date";
 import { NavLink } from "react-router-dom";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
@@ -10,8 +11,10 @@ type Props = {
   customContest: CustomContest;
 };
 
-export const FinishedContestTableRow: React.FC<Props> = (props: Props) => {
-  const { customContest } = props;
+export const FinishedContestTableRow: React.FC<Props> = ({ customContest }) => {
+  const localStartDate = utcISOStringToLocal(customContest.startDate);
+  const localEndDate = utcISOStringToLocal(customContest.endDate);
+
   const length = dayjs(customContest.endDate).diff(
     customContest.startDate,
     "minutes"
@@ -27,8 +30,9 @@ export const FinishedContestTableRow: React.FC<Props> = (props: Props) => {
       </TableCell>
       <TableCell>{customContest.owner}</TableCell>
       <TableCell>{customContest.description}</TableCell>
-      <TableCell>{customContest.startDate}</TableCell>
-      <TableCell>{customContest.endDate}</TableCell>
+      <TableCell>{localStartDate}</TableCell>
+      <TableCell>{localEndDate}</TableCell>
+
       <TableCell>
         {Math.floor(length / 60)
           .toString()

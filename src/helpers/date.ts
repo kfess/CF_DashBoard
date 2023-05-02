@@ -1,4 +1,6 @@
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
 
 export const formatUnixTime = (unitTime: number, simple: boolean = false) =>
   simple
@@ -23,4 +25,14 @@ export const isLastMonth = (unixTime: number) => {
       thisMonth - dayjs.unix(unixTime).month() === 1
     );
   }
+};
+
+// ローカルの時間を UTC ISOString に変換する関数
+export const localToUtcISOString = (localDateTime: Date) => {
+  return dayjs(localDateTime).utc().toISOString();
+};
+
+// UTC ISOString をローカルの時間に変換する関数
+export const utcISOStringToLocal = (utcISOString: string) => {
+  return dayjs.utc(utcISOString).local().format("YYYY-MM-DD HH:mm:ss");
 };

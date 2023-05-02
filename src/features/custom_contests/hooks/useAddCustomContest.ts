@@ -1,19 +1,28 @@
 import axios from "axios";
 import { ZodError } from "zod";
 import { useMutation } from "@tanstack/react-query";
-import { CustomContest } from "@features/custom_contests/customContest";
+import { CreateCustomContest } from "@features/custom_contests/customContest";
 
-const addContest = async (contest: CustomContest): Promise<void> => {
+const addContest = async (
+  contest: Omit<CreateCustomContest, "problemsFilter">
+): Promise<void> => {
   try {
-    await axios.post("http://localhost:4000/api/custom-contests", contest);
+    await axios.post("http://localhost:4000/api/custom-contests", contest,{
+      withCredentials: true,
+    });
   } catch (error) {
     throw new Error("An error occurred while adding custom contest.");
   }
 };
 
 export const useAddCustomContest = () => {
-  const addContestMutation = useMutation<void, Error, CustomContest>(
-    (contest: CustomContest) => addContest(contest),
+  const addContestMutation = useMutation<
+    void,
+    Error,
+    Omit<CreateCustomContest, "problemsFilter">
+  >(
+    (contest: Omit<CreateCustomContest, "problemsFilter">) =>
+      addContest(contest),
     {
       onSuccess: () => {
         console.log("successfully added contest");
@@ -25,7 +34,7 @@ export const useAddCustomContest = () => {
     }
   );
 
-  const create = (contest: CustomContest) => {
+  const create = (contest: Omit<CreateCustomContest, "problemsFilter">) => {
     addContestMutation.mutate(contest);
   };
 

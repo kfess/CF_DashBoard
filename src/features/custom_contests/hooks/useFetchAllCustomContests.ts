@@ -9,7 +9,7 @@ import {
 const fetchAllCustomContests = async (): Promise<CustomContest[]> => {
   try {
     const url = "http://localhost:4000/api/custom-contests/all-contests";
-    const response = await axios.get(url);
+    const response = await axios.get(url, { withCredentials: true });
     const allCustomContests = customContestsSchema.parse(response.data);
     return allCustomContests;
   } catch (err) {

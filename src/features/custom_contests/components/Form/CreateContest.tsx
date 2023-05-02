@@ -1,5 +1,5 @@
-import dayjs from "dayjs";
 import React, { useEffect } from "react";
+import { localToUtcISOString } from "@helpers/date";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Container } from "@mui/material";
@@ -10,8 +10,7 @@ import {
   CreateCustomContest,
   createCustomContestSchema,
 } from "@features/custom_contests/customContest";
-// import { useAddCustomContest } from "@features/custom_contests/hooks/useAddCustomContest";
-
+import { useAddCustomContest } from "@features/custom_contests/hooks/useAddCustomContest";
 import { Visibility } from "@features/custom_contests/components/Form/Visibility";
 import { Mode } from "@features/custom_contests/components/Form/Mode";
 import { Title } from "@features/custom_contests/components/Form/Title";
@@ -31,8 +30,8 @@ const getDefaultValues = (
   title: "",
   description: "",
   penalty: 300,
-  startDate: dayjs(new Date()).utc().format("YYYY/MM/DD HH:mm"),
-  endDate: dayjs(new Date()).utc().format("YYYY/MM/DD HH:mm"),
+  startDate: localToUtcISOString(new Date()),
+  endDate: localToUtcISOString(new Date()),
   participants: [codeforcesUsername ?? ""],
   problems: [],
   problemsFilter: {
@@ -70,10 +69,13 @@ export const CreateContest: React.FC = () => {
     reset(defaultValues);
   }, [codeforcesUsername, githubUserName]);
 
-  //   const { create } = useAddCustomContest();
+  const { create } = useAddCustomContest();
 
   const onSubmit = () => {
-    console.log(getValues());
+    const values = getValues();
+    const { problemsFilter, ...submitValues } = values;
+    console.log(submitValues);
+    create(submitValues);
   };
 
   return (
