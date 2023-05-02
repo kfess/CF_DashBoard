@@ -63,19 +63,21 @@ export const SideNavigationBar: React.FC<Props> = (props: Props) => {
         </Toolbar>
         <Divider />
         <List>
-          {mainItems.map((item) => (
-            <SideNavigationItem
-              key={item.field}
-              field={item.field}
-              link={generateUrlPath(item.link, userId)}
-              selectedIcon={item.selectedIcon}
-              notSelectedIcon={item.notSelectedIcon}
-              isSelected={selectedItem === item.field}
-              setSelected={setSelectedItem}
-              isOpenSideBar={isOpenSideBar}
-              toggleSideBar={toggleSideBar}
-            />
-          ))}
+          {mainItems.map((item) => {
+            return (
+              <SideNavigationItem
+                key={item.field}
+                field={item.field}
+                link={generateUrlPath(item.link, userId)}
+                selectedIcon={item.selectedIcon}
+                notSelectedIcon={item.notSelectedIcon}
+                isSelected={selectedItem === item.field}
+                setSelected={setSelectedItem}
+                isOpenSideBar={isOpenSideBar}
+                toggleSideBar={toggleSideBar}
+              />
+            );
+          })}
         </List>
         <Toolbar />
         <Divider />

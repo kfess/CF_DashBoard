@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
       { path: "labels", element: <LabelsPage /> },
       { path: "labels/:labelName", element: <LabelPage /> },
       { path: "/submission", element: <SubmissionPage /> },
-      { path: "/ranking", element: <div>ranking</div> },
+      // { path: "/ranking", element: <div>ranking</div> },
       { path: "/custom-contest", element: <CustomContestPage /> },
       {
         path: "/custom-contest/show/:contestId",

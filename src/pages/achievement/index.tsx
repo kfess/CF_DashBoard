@@ -12,11 +12,12 @@ import { HeatMap } from "@features/achievement/components/HeatMap";
 import { createTableData } from "@features/achievement/helper";
 import { TagACCount } from "@features/achievement/components/TagACCount";
 import { Profile } from "@features/achievement/components/Profile";
-import { Divider } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { Community } from "@features/achievement/components/Community";
 import { Streak } from "@features/achievement/components/Streak";
 import { Pies } from "@features/achievement/components/Pies";
 import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
+import { SearchBar } from "@features/layout/components/Search";
 
 export const AchievementPage: React.FC = () => {
   const userId = useQueryParams(QueryParamKeys.USERID);
@@ -27,6 +28,14 @@ export const AchievementPage: React.FC = () => {
   const tableData = createTableData();
 
   const userInfo = useFetchUserInfo({ userId }).data;
+
+  if (!userId) {
+    return (
+      <>
+        <SearchBar visible={true} />
+      </>
+    );
+  }
 
   if (isLoading) {
     return <CircularProgress />;

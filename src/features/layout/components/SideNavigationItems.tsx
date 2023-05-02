@@ -112,12 +112,12 @@ export const activityItems: readonly Item[] = [
     selectedIcon: <StarIcon />,
     notSelectedIcon: <StarBorderOutlinedIcon />,
   },
-  {
-    field: "Ranking",
-    link: "/ranking",
-    selectedIcon: <LeaderboardIcon />,
-    notSelectedIcon: <LeaderboardOutlinedIcon />,
-  },
+  // {
+  //   field: "Ranking",
+  //   link: "/ranking",
+  //   selectedIcon: <LeaderboardIcon />,
+  //   notSelectedIcon: <LeaderboardOutlinedIcon />,
+  // },
   {
     field: "Custom Contest",
     link: "/custom-contest",
