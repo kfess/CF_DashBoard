@@ -29,6 +29,7 @@ export const useFetchMyCustomContests = () => {
       refetchOnWindowFocus: false,
       refetchOnReconnect: true,
       retry: 3,
+      staleTime: 1000 * 60 * 60, // 60 minutes
     }
   );
 

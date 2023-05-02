@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { localToUtcISOString } from "@helpers/date";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Container } from "@mui/material";
@@ -70,12 +71,15 @@ export const CreateContest: React.FC = () => {
   }, [codeforcesUsername, githubUserName]);
 
   const { create } = useAddCustomContest();
+  const navigate = useNavigate();
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const values = getValues();
     const { problemsFilter, ...submitValues } = values;
-    console.log(submitValues);
-    create(submitValues);
+    const createdContest = await create(submitValues);
+    if (createdContest) {
+      navigate(`/custom-contest/show/${createdContest.contestId}`);
+    }
   };
 
   return (

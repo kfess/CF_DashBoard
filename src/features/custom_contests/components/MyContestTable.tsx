@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Divider from "@mui/material/Divider";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -81,7 +82,7 @@ export const MyContestTable: React.FC = () => {
                       ).diff(dayjs(), "days");
 
                       return (
-                        <TableRow hover>
+                        <TableRow hover key={contest.contestId}>
                           <TableCell>
                             <NavLink
                               to={`/custom-contest/show/${contest.contestId}`}
@@ -135,7 +136,7 @@ export const MyContestTable: React.FC = () => {
           </Paper>
         </>
       )}
-
+      <Divider />
       <Typography variant="h6">Joined Contests</Typography>
       {data && (
         <>
@@ -176,7 +177,7 @@ export const MyContestTable: React.FC = () => {
                       ).diff(dayjs(), "days");
 
                       return (
-                        <TableRow hover>
+                        <TableRow hover key={contest.contestId}>
                           <TableCell>
                             <NavLink
                               to={`/custom-contest/show/${contest.contestId}`}

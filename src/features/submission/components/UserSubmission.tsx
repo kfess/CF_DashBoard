@@ -93,7 +93,7 @@ export const UserSubmission: React.FC<Props> = ({
                   {filteredData
                     .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                     .map((d) => (
-                      <TableRow>
+                      <TableRow key={d.id}>
                         <TableCell>
                           {formatUnixTime(d.creationTimeSeconds)}
                         </TableCell>

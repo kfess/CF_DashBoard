@@ -1,7 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useLocation } from "react-router-dom";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
 import { UniqueACCount } from "@features/achievement/components/UniqueACCount";
@@ -11,19 +10,16 @@ import { LanguageACCount } from "@features/achievement/components/LanguageACCoun
 import { ClimbingChart } from "@features/achievement/components/ClimbingChart";
 import { HeatMap } from "@features/achievement/components/HeatMap";
 import { createTableData } from "@features/achievement/helper";
-import { DifficultyPies } from "@features/achievement/components/DifficultyPies";
-import { ClassificationPies } from "@features/achievement/components/ClassificationPies";
 import { TagACCount } from "@features/achievement/components/TagACCount";
 import { Profile } from "@features/achievement/components/Profile";
 import { Divider } from "@mui/material";
 import { Community } from "@features/achievement/components/Community";
 import { Streak } from "@features/achievement/components/Streak";
 import { Pies } from "@features/achievement/components/Pies";
+import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
 
 export const AchievementPage: React.FC = () => {
-  const { search } = useLocation();
-  const urlQueries = new URLSearchParams(search);
-  const userId = urlQueries.get("userId") ?? "";
+  const userId = useQueryParams(QueryParamKeys.USERID);
 
   const { data, isError, error, isLoading } = useFetchUserSubmission({
     userId: userId,
