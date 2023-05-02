@@ -16,6 +16,7 @@ import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { RegisterButton } from "@features/custom_contests/components/RegisterButton";
 import { Divider } from "@mui/material";
 import { HeadLine } from "@features/layout/components/HeadLine";
+import { utcISOStringToLocal } from "@helpers/date";
 
 export const ShowCustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
@@ -99,8 +100,8 @@ export const ShowCustomContestPage: React.FC = () => {
 
           <CountdownScheduler
             title={data.title}
-            description={data.description}
-            startDate={data.startDate}
+            description={utcISOStringToLocal(data.description)}
+            startDate={utcISOStringToLocal(data.startDate)}
             endDate={data.endDate}
           />
           <RegisterButton />
@@ -134,7 +135,8 @@ export const ShowCustomContestPage: React.FC = () => {
               Period
             </Typography>
             <Typography sx={{ mt: 2, flex: 8 }}>
-              {data.startDate} ~ {data.endDate}
+              {utcISOStringToLocal(data.startDate)} ~{" "}
+              {utcISOStringToLocal(data.endDate)}
             </Typography>
           </Box>
           <Divider />

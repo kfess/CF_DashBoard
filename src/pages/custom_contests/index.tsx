@@ -5,7 +5,7 @@ import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
 import { createdContestTypes } from "@features/custom_contests/customContest";
 import { PublicContestTable } from "@features/custom_contests/components/PublicContestTable";
-import { PrivateContestList } from "@features/custom_contests/components/PrivateContestList";
+import { MyContestTable } from "@features/custom_contests/components/MyContestTable";
 import { NavLink } from "react-router-dom";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
@@ -13,6 +13,7 @@ import { HeadLine } from "@features/layout/components/HeadLine";
 
 export const CustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
+
   const tabItems: TabItem[] = [
     ...createdContestTypes.map((contestType) => {
       return {
@@ -23,8 +24,8 @@ export const CustomContestPage: React.FC = () => {
     }),
     {
       label: "MyContest",
-      children: <PrivateContestList />,
-      disabled: true,
+      children: <MyContestTable />,
+      disabled: !loggedIn,
     },
   ];
 

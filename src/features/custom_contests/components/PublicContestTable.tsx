@@ -1,4 +1,4 @@
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import React from "react";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -17,11 +17,11 @@ import { FinishedContestTableRow } from "./FinishedContestTableRow";
 
 type Props = { contestType: CreatedContestType };
 
-export const PublicContestTable: React.FC<Props> = (props: Props) => {
-  const { contestType } = props;
+export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
   const { data, error, isLoading } = useFetchAllCustomContests();
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(10);
+
   const customContests = data?.filter((d) => {
     if (contestType === "Finished") {
       return dayjs().isAfter(dayjs(d.endDate));

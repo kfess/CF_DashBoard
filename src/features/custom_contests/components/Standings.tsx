@@ -9,7 +9,10 @@ import Paper from "@mui/material/Paper";
 import { Problem } from "@features/problems/problem";
 import { useFetchSubmissions } from "@features/custom_contests/hooks/useFetchSubmissions";
 import { useToggle } from "@hooks/index";
-import { UserStats, calculateAllUsersStats } from "../calculateStandings";
+import {
+  UserStats,
+  calculateAllUsersStats,
+} from "@features/custom_contests/utils/calculateStandings";
 import { CF_CONTEST_URL } from "@constants/url";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 

@@ -115,3 +115,10 @@ export const createCustomContestSchema = z.object({
 });
 
 export type CreateCustomContest = z.infer<typeof createCustomContestSchema>;
+
+// my custom contests
+export const myCustomContestsSchema = z.object({
+  createdContests: z.array(customContestSchema),
+  participatedContests: z.array(customContestSchema),
+});
+export type MyCustomContests = z.infer<typeof myCustomContestsSchema>;
