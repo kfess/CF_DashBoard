@@ -25,7 +25,7 @@ export const TagACCount: React.FC<Props> = (props: Props) => {
         <strong>Problem Tags</strong>
       </Box>
       {readTagCounts.map((tag) => (
-        <Stack>
+        <Stack key={tag}>
           <Stack direction="row" sx={{ display: "flex", alignItems: "center" }}>
             <Chip_ label={tag} />
             <span css={{ fontSize: "12px", color: "gray" }}>

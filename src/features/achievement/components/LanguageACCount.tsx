@@ -58,7 +58,7 @@ export const LanguageACCount: React.FC<Props> = (props: Props) => {
         <strong>Language</strong>
       </Box>
       {readLabguageCounts.map((s) => (
-        <Stack>
+        <Stack key={s.language}>
           <Stack
             direction="row"
             sx={{
