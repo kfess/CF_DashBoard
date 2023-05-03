@@ -1,4 +1,7 @@
 import React, { useMemo } from "react";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
 import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
 import {
@@ -59,47 +62,55 @@ export const ContestsPage: React.FC = () => {
   }
 
   return (
-    <>
-      <HeadLine title="Contests" />
-      <FilterOptions
-        showDifficulty={showDifficulty}
-        showACStatus={showACStatus}
-        pinTableHeader={pinTableHeader}
-        reverse={reverse}
-        classification={classification}
-        period={state.period}
-        solvedStatus={state.solvedStatus}
-        setClassification={setClassification}
-        setPeriod={setPeriod}
-        setSolvedStatus={setSolvedStatus}
-        toggleShowDifficulty={toggleShowDifficulty}
-        toggleShowACStatus={toggleShowACStatus}
-        togglePinTableHeader={togglePinTableHeader}
-        toggleReverse={toggleReverse}
-      />
-      <div>
-        <FilterChips
-          classification={state.classification}
-          setDefaultClassification={() => {
-            setClassification("All");
-          }}
-          period={state.period}
-          setPeriod={() => {
-            setPeriod("All Period");
-          }}
-          solvedStatus={state.solvedStatus}
-          setSolvedStatus={setSolvedStatus}
-        />
-      </div>
-      {contests.length > 0 && problemIdxes.length > 0 && (
-        <ContestsTable
-          contests={contests}
-          problemIdxes={problemIdxes}
-          showDifficulty={state.showDifficulty}
-          solvedSet={solvedSet}
-          attemptedSet={attemptedSet}
-        />
-      )}
-    </>
+    <Container maxWidth="lg">
+      <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+        <HeadLine title="Contests" />
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <FilterOptions
+              showDifficulty={showDifficulty}
+              showACStatus={showACStatus}
+              pinTableHeader={pinTableHeader}
+              reverse={reverse}
+              classification={classification}
+              period={state.period}
+              solvedStatus={state.solvedStatus}
+              setClassification={setClassification}
+              setPeriod={setPeriod}
+              setSolvedStatus={setSolvedStatus}
+              toggleShowDifficulty={toggleShowDifficulty}
+              toggleShowACStatus={toggleShowACStatus}
+              togglePinTableHeader={togglePinTableHeader}
+              toggleReverse={toggleReverse}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <FilterChips
+              classification={state.classification}
+              setDefaultClassification={() => {
+                setClassification("All");
+              }}
+              period={state.period}
+              setPeriod={() => {
+                setPeriod("All Period");
+              }}
+              solvedStatus={state.solvedStatus}
+              setSolvedStatus={setSolvedStatus}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            {contests.length > 0 && problemIdxes.length > 0 && (
+              <ContestsTable
+                contests={contests}
+                problemIdxes={problemIdxes}
+                showDifficulty={state.showDifficulty}
+                solvedSet={solvedSet}
+                attemptedSet={attemptedSet}
+              />
+            )}
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
   );
 };
