@@ -15,6 +15,7 @@ import Callback from "@features/authentication/components/Callback";
 import { PrivateRoute } from "@features/authentication/components/PrivateRoute";
 import { ProfilePage } from "@pages/authentication/profile";
 import { LoginPage } from "@pages/authentication/login";
+import { TermsPage } from "@pages/terms";
 
 // const ProblemsPage = lazy(() => import("@pages/problems"));
 
@@ -57,7 +58,7 @@ export const router = createBrowserRouter([
       { path: "/setting", element: <div>setting</div> },
       { path: "/login", element: <LoginPage /> },
       { path: "/callback", element: <Callback /> },
-      { path: "/terms", element: <div>terms</div> },
+      { path: "/terms", element: <TermsPage /> },
       { path: "*", element: <Navigate to="/" /> },
     ],
   },

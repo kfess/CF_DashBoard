@@ -25,8 +25,6 @@ import HubOutlinedIcon from "@mui/icons-material/HubOutlined";
 import HubIcon from "@mui/icons-material/Hub";
 import BuildOutlinedIcon from "@mui/icons-material/BuildOutlined";
 import BuildIcon from "@mui/icons-material/Build";
-import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
-import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import FeedIcon from "@mui/icons-material/Feed";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 
@@ -120,12 +118,6 @@ export const otherItems: readonly Item[] = [
     link: "/links",
     selectedIcon: <BuildIcon />,
     notSelectedIcon: <BuildOutlinedIcon />,
-  },
-  {
-    field: "FAQ",
-    link: "/faq",
-    selectedIcon: <QuestionAnswerIcon />,
-    notSelectedIcon: <QuestionAnswerOutlinedIcon />,
   },
   {
     field: "Terms",
