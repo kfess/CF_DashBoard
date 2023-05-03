@@ -1,4 +1,6 @@
 import React from "react";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
@@ -22,11 +24,15 @@ export const LabelsPage: React.FC = () => {
   ];
 
   return (
-    <>
-      <HeadLine title="Labels" />
-      <Box sx={{ width: "100%" }}>
-        <Tabs tabItems={tabItems} />
+    <Container maxWidth="lg">
+      <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+        <HeadLine title="Labels" />
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Tabs tabItems={tabItems} />
+          </Grid>
+        </Grid>
       </Box>
-    </>
+    </Container>
   );
 };
