@@ -114,6 +114,7 @@ export const ShowCustomContestPage: React.FC = () => {
                   endDate={data.endDate}
                 />
                 <RegisterButton />
+
                 <Box
                   sx={{
                     p: 1,

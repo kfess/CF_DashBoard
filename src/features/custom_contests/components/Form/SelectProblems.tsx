@@ -10,6 +10,7 @@ import { ProblemsCount } from "@features/custom_contests/components/Form/Problem
 import { ProblemsDifficulty } from "@features/custom_contests/components/Form/ProblemsDifficulty";
 import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsTag";
 import { ExpectedParticipants } from "@features/custom_contests/components/Form/ExpectedParticipants";
+import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 
 type Props = {
   control: Control<CreateCustomContest>;
@@ -94,6 +95,7 @@ export const SelectProblems: React.FC<Props> = ({
         control={control}
         render={({ field }) => <SelectedProblemsTable field={field} />}
       />
+      <ErrorMessage message={errors.problems?.message} />
     </>
   );
 };

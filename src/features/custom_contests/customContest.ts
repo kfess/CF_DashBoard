@@ -45,8 +45,12 @@ export const customContestSchema = z.object({
   startDate: z.string().datetime(),
   endDate: z.string().datetime(),
   visibility: visibilitySchema,
-  participants: z.array(z.string()).min(1),
-  problems: problemsSchema,
+  participants: z
+    .array(z.string())
+    .min(1, { message: "Participants required" }),
+  problems: problemsSchema.min(1, {
+    message: "At least one problem is required.",
+  }),
 });
 export const customContestsSchema = z.array(customContestSchema);
 export type CustomContest = z.infer<typeof customContestSchema>;
@@ -109,8 +113,12 @@ export const createCustomContestSchema = z.object({
     .string()
     .refine((val) => dayjs(val).isValid(), { message: "Invalid end Date" }),
   visibility: visibilitySchema,
-  participants: z.array(z.string()).min(1),
-  problems: problemsSchema,
+  participants: z
+    .array(z.string())
+    .min(1, { message: "Participants required" }),
+  problems: problemsSchema.min(1, {
+    message: "At least one problem is required.",
+  }),
   problemsFilter: problemSuggestOptionSchema,
 });
 
