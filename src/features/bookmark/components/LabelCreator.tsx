@@ -48,7 +48,7 @@ export const LabelCreator: React.FC = () => {
             borderColor: "divider",
             borderRadius: "6px",
             backgroundColor: "white",
-            p: 2,
+            p: 1,
           }}
         >
           <LabelNameChip
@@ -59,7 +59,7 @@ export const LabelCreator: React.FC = () => {
           <Box component="form" autoComplete="off">
             <Stack
               direction={{ xs: "column", sm: "row", md: "row" }}
-              sx={{ width: "100%" }}
+              sx={{ width: "100%", margin: "0 -8px" }}
             >
               <Box sx={{ p: 1, flexGrow: 1, width: "100%" }}>
                 <InputLabel

@@ -1,15 +1,8 @@
 import * as React from "react";
+import InputBase from "@mui/material/InputBase";
 import { InputUnstyledProps } from "@mui/base/InputUnstyled";
 import InputUnstyled from "@mui/base/InputUnstyled";
 import { styled } from "@mui/system";
-
-const blue = {
-  100: "#DAECFF",
-  200: "#80BFFF",
-  400: "#3399FF",
-  500: "#007FFF",
-  600: "#0072E5",
-};
 
 const grey = {
   50: "#F3F6F9",
@@ -28,42 +21,6 @@ export type InputProps = InputUnstyledProps & {
   inputHeight?: string;
 };
 
-// const StyledInputElement = styled("input")(
-//   ({ theme }) => `
-//   line-height: 1.5;
-//   min-width: 100%;
-//   max-width: 100%;
-//   width: 100%;
-//   font-size: 1rem;
-//   padding: 0.4rem;
-//   padding-left:0.875rem;
-//   border-radius: 0.375rem;
-//   color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
-//   background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
-//   border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-//   box-shadow: 0px 2px 2px ${
-//     theme.palette.mode === "dark" ? grey[900] : grey[50]
-//   };
-
-//   &:hover {
-//     border-color: ${blue[400]};
-//   }
-
-//   &:focus {
-//     border-color: ${blue[600]};
-//     box-shadow: 0 0 0 2px ${
-//       theme.palette.mode === "dark" ? blue[500] : blue[400]
-//     };
-//   }
-
-//   // firefox
-//   &:focus-visible {
-//     outline: 0;
-//   }
-// `
-// );
-
-import InputBase from "@mui/material/InputBase";
 const StyledInputElement = styled(InputBase)(({ theme }) => ({
   boxSizing: "border-box",
   lineHeight: "1",
@@ -84,7 +41,6 @@ const StyledInputElement = styled(InputBase)(({ theme }) => ({
   },
   "& input": {
     padding: theme.spacing(1, 1.2),
-    minHeight: "23px",
     height: "100%",
     boxSizing: "border-box",
   },
