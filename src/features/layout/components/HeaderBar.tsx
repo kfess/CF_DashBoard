@@ -6,7 +6,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import { isMainField } from "@features/layout/helper";
 import { SearchBar } from "@features/layout/components/Search";
-import { UserSettingIcon } from "./UserSettingIcon";
+import { AccountMenu } from "@features/layout/components/AccountMenu";
 import type { Field } from "@features/layout/components/SideNavigationItems";
 
 // Without this offset, some part of the content to be invisible behind the header
@@ -72,7 +72,7 @@ export const HeaderBar: React.FC<Props> = ({
             <SearchBar visible={isMainField(pathname)} />
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <UserSettingIcon />
+            <AccountMenu />
           </Box>
         </Toolbar>
       </AppBar>
