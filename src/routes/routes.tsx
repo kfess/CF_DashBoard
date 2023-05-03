@@ -14,7 +14,6 @@ import { CreateCustomContestPage } from "@pages/custom_contests/create_custom_co
 import Callback from "@features/authentication/components/Callback";
 import { PrivateRoute } from "@features/authentication/components/PrivateRoute";
 import { ProfilePage } from "@pages/authentication/profile";
-import { FAQPage } from "@pages/faq";
 import { LoginPage } from "@pages/authentication/login";
 
 // const ProblemsPage = lazy(() => import("@pages/problems"));
@@ -56,7 +55,6 @@ export const router = createBrowserRouter([
       { path: "/api", element: <div>api</div> },
       { path: "/links", element: <div>links</div> },
       { path: "/setting", element: <div>setting</div> },
-      { path: "/faq", element: <FAQPage /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/callback", element: <Callback /> },
       { path: "/terms", element: <div>terms</div> },

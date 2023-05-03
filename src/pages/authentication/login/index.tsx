@@ -20,18 +20,18 @@ export const LoginPage: React.FC = () => {
       container
       justifyContent="center"
       alignItems="center"
-      minHeight="50vh"
+      minHeight="20vh"
       spacing={2}
     >
       <Grid item xs={12} sm={8} md={6} lg={4}>
         <Card>
           <CardContent>
             <Typography variant="h5" align="center">
-              CF Dashboard
+              CF DashBoard
             </Typography>
           </CardContent>
           <CardContent>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h6" align="center" gutterBottom>
               Sign in with
             </Typography>
             <SocialLoginButton provider="github" />
