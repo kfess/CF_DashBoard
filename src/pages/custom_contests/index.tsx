@@ -1,4 +1,6 @@
 import React from "react";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import type { TabItem } from "@features/ui/component/Tabs";
@@ -30,29 +32,35 @@ export const CustomContestPage: React.FC = () => {
   ];
 
   return (
-    <>
-      <HeadLine title="Custom Contest" />
-      <Box sx={{ p: 1 }}>
-        <NavLink to={loggedIn ? "/custom-contest/create" : "#"}>
-          <Button
-            color="success"
-            variant="contained"
-            css={{ textTransform: "none" }}
-            disabled={!loggedIn}
-          >
-            Create New Contest
-          </Button>
-        </NavLink>
-        {!loggedIn && (
-          <AlertMessage
-            title=""
-            message="To create a new Contest, You need to be logged in."
-          />
-        )}
-        <Box sx={{ width: "100%" }}>
-          <Tabs tabItems={tabItems} />
-        </Box>
+    <Container maxWidth="lg">
+      <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+        <HeadLine title="Custom Contest" />
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Box py={1}>
+              <NavLink to={loggedIn ? "/custom-contest/create" : "#"}>
+                <Button
+                  color="success"
+                  variant="contained"
+                  css={{ textTransform: "none" }}
+                  disabled={!loggedIn}
+                >
+                  Create New Contest
+                </Button>
+              </NavLink>
+            </Box>
+            {!loggedIn && (
+              <AlertMessage
+                title=""
+                message="To create a new Contest, You need to be logged in."
+              />
+            )}
+          </Grid>
+          <Grid item xs={12}>
+            <Tabs tabItems={tabItems} />
+          </Grid>
+        </Grid>
       </Box>
-    </>
+    </Container>
   );
 };

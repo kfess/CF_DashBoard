@@ -1,5 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
@@ -73,94 +75,106 @@ export const ShowCustomContestPage: React.FC = () => {
         />
       )}
       {data && (
-        <Box sx={{ m: 1 }}>
-          <HeadLine title={data.title} />
+        <Container maxWidth="lg">
           <Box
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              alignItems: "center",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-            }}
+            pt={{ xs: 2, md: 4 }}
+            pb={{ xs: 2, md: 4 }}
+            px={{ xs: 0, md: 2 }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                mt: { xs: 1, md: 0 },
-                gap: 1,
-              }}
-            >
-              <Chip_ label={data.visibility} />
-              <Chip_ label={data.mode} />
-              <Chip_ label={"Created by: " + data.owner} />
-            </Box>
+            <HeadLine title={data.title} />
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: { xs: "column", md: "row" },
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      gap: 1,
+                    }}
+                  >
+                    <Chip_ label={data.visibility} />
+                    <Chip_ label={data.mode} />
+                    <Chip_ label={"Created by: " + data.owner} />
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <CountdownScheduler
+                  title={data.title}
+                  description={utcISOStringToLocal(data.description)}
+                  startDate={utcISOStringToLocal(data.startDate)}
+                  endDate={data.endDate}
+                />
+                <RegisterButton />
+                <Box
+                  sx={{
+                    p: 1,
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
+                    Description
+                  </Typography>
+                  <Typography sx={{ mt: 2, flex: 8 }}>
+                    {data.description}
+                  </Typography>
+                </Box>
+                <Divider />
+                <Box
+                  sx={{
+                    p: 1,
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
+                    Period
+                  </Typography>
+                  <Typography sx={{ mt: 2, flex: 8 }}>
+                    {utcISOStringToLocal(data.startDate)} ~{" "}
+                    {utcISOStringToLocal(data.endDate)}
+                  </Typography>
+                </Box>
+                <Divider />
+                <Box
+                  sx={{
+                    p: 1,
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
+                    Penalty
+                  </Typography>
+                  <Typography sx={{ mt: 2, flex: 8 }}>
+                    {data.penalty} seconds
+                  </Typography>
+                </Box>
+                <Box sx={{ mt: 2 }}>
+                  <Tabs tabItems={tabItems} />
+                </Box>
+              </Grid>
+            </Grid>
           </Box>
-
-          <CountdownScheduler
-            title={data.title}
-            description={utcISOStringToLocal(data.description)}
-            startDate={utcISOStringToLocal(data.startDate)}
-            endDate={data.endDate}
-          />
-          <RegisterButton />
-          <Box
-            sx={{
-              p: 1,
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-around",
-              flexWrap: "wrap",
-            }}
-          >
-            <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
-              Description
-            </Typography>
-            <Typography sx={{ mt: 2, flex: 8 }}>{data.description}</Typography>
-          </Box>
-          <Divider />
-          <Box
-            sx={{
-              p: 1,
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-around",
-              flexWrap: "wrap",
-            }}
-          >
-            <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
-              Period
-            </Typography>
-            <Typography sx={{ mt: 2, flex: 8 }}>
-              {utcISOStringToLocal(data.startDate)} ~{" "}
-              {utcISOStringToLocal(data.endDate)}
-            </Typography>
-          </Box>
-          <Divider />
-          <Box
-            sx={{
-              p: 1,
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-around",
-              flexWrap: "wrap",
-            }}
-          >
-            <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
-              Penalty
-            </Typography>
-            <Typography sx={{ mt: 2, flex: 8 }}>
-              {data.penalty} seconds
-            </Typography>
-          </Box>
-          <Box sx={{ mt: 2 }}>
-            <Tabs tabItems={tabItems} />
-          </Box>
-        </Box>
+        </Container>
       )}
     </>
   );
