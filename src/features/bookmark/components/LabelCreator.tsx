@@ -3,7 +3,6 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
 import ReplayIcon from "@mui/icons-material/Replay";
@@ -17,6 +16,7 @@ import { LabelNameChip } from "./LabelIcon";
 import { ColorPalette } from "@features/color/components/ColorPalette";
 import { labelActions } from "@features/bookmark/labelActions";
 import { useToggle } from "@hooks/index";
+import { Input } from "@features/ui/component/Input";
 
 export const LabelCreator: React.FC = () => {
   const [showBlock, toggleShowBlock] = useToggle(false, true);
@@ -63,25 +63,31 @@ export const LabelCreator: React.FC = () => {
               spacing={{ xs: 1, sm: 2, md: 4 }}
             >
               <Box sx={{ p: 1 }}>
-                <InputLabel css={{ fontWeight: "bold" }}>Label Name</InputLabel>
-                <TextField
-                  label="label name"
-                  size="small"
+                <InputLabel
+                  css={{ paddingBottom: "0.3rem", fontWeight: "bold" }}
+                >
+                  Label Name
+                </InputLabel>
+                <Input
+                  value={name.value}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                     setName({ value: event.target.value, errorMsg: "" })
                   }
+                  placeholder="label name"
                 />
               </Box>
               <Box sx={{ p: 1 }}>
-                <InputLabel css={{ fontWeight: "bold" }}>
+                <InputLabel
+                  css={{ paddingBottom: "0.3rem", fontWeight: "bold" }}
+                >
                   Description
                 </InputLabel>
-                <TextField
-                  label="Description (Optional)"
-                  size="small"
+                <Input
+                  value={description.value}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setDescription({ value: event.target.value, errorMsg: "" })
+                    setName({ value: event.target.value, errorMsg: "" })
                   }
+                  placeholder="description"
                 />
               </Box>
               <Box sx={{ p: 1 }}>
@@ -104,22 +110,12 @@ export const LabelCreator: React.FC = () => {
                   arrow
                   leaveDelay={300} // ms
                 >
-                  <TextField
-                    label="Color"
-                    size="small"
+                  <Input
                     value={color}
-                    inputProps={{
-                      pattern: "#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})",
-                      maxLength: "7",
-                      autoComplete: false,
-                    }}
-                    helperText={
-                      !isValidHexaColor(color) && "Invalid Color Code"
-                    }
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                       setColor(event.target.value as HexaColor)
                     }
-                    sx={{
+                    css={{
                       "& .MuiInputBase-root": {
                         color: isValidHexaColor(color) ? color : "#000000",
                       },
