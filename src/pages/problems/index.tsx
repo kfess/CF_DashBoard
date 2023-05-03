@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import { chooseRandomIndex } from "@helpers/random";
 import { ProblemsTable } from "@features/problems/components/ProblemsTable";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
@@ -11,7 +14,7 @@ import { useToggle } from "@hooks/index";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { HeadLine } from "@features/layout/components/HeadLine";
 
-const ProblemsPage: React.FC = () => {
+export const ProblemsPage: React.FC = () => {
   const { data, isLoading } = useFetchProblems();
 
   const [classification, setClassification] = useState<Classification>("All");
@@ -31,39 +34,45 @@ const ProblemsPage: React.FC = () => {
   }
 
   return (
-    <>
-      <HeadLine title="Problems" />
-      {data && (
-        <>
-          <FilterOptions
-            problem={chooseRandomIndex(data)}
-            classification={classification}
-            setClassification={setClassification}
-            solvedStatus={solvedStatus}
-            setSolvedStatus={setSolvedStatus}
-            selectedTags={selectedTags}
-            setSelectedTags={setSelectedTags}
-            lowerDifficulty={lowerDifficulty}
-            setLowerDifficulty={setLowerDifficulty}
-            upperDifficulty={upperDifficulty}
-            setUpperDifficulty={setUpperDifficulty}
-            showTags={showTags}
-            toggleShowTags={toggleShowTags}
-            setShowTags={setShowTags}
-          />
-          <ProblemsTable
-            problems={data}
-            selectedTags={selectedTags}
-            classification={classification}
-            lowerDifficulty={lowerDifficulty}
-            upperDifficulty={upperDifficulty}
-            showTags={showTags}
-            solvedStatus={solvedStatus}
-          />
-        </>
-      )}
-    </>
+    <Container maxWidth="lg">
+      <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+        <HeadLine title="Problems" />
+        {data && (
+          <>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <FilterOptions
+                  problem={chooseRandomIndex(data)}
+                  classification={classification}
+                  setClassification={setClassification}
+                  solvedStatus={solvedStatus}
+                  setSolvedStatus={setSolvedStatus}
+                  selectedTags={selectedTags}
+                  setSelectedTags={setSelectedTags}
+                  lowerDifficulty={lowerDifficulty}
+                  setLowerDifficulty={setLowerDifficulty}
+                  upperDifficulty={upperDifficulty}
+                  setUpperDifficulty={setUpperDifficulty}
+                  showTags={showTags}
+                  toggleShowTags={toggleShowTags}
+                  setShowTags={setShowTags}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <ProblemsTable
+                  problems={data}
+                  selectedTags={selectedTags}
+                  classification={classification}
+                  lowerDifficulty={lowerDifficulty}
+                  upperDifficulty={upperDifficulty}
+                  showTags={showTags}
+                  solvedStatus={solvedStatus}
+                />
+              </Grid>
+            </Grid>
+          </>
+        )}
+      </Box>
+    </Container>
   );
 };
-
-export default ProblemsPage;
