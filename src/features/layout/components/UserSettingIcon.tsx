@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FlagIcon from "@mui/icons-material/Flag";
-import SettingsIcon from "@mui/icons-material/Settings";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
+
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -61,13 +62,13 @@ export const UserSettingIcon: React.FC<Props> = () => {
         </MenuItem>
         <MenuItem onClick={handleClick}>
           <NavLink to="/setting">
-            <SettingsIcon />
+            <SettingsOutlinedIcon />
             Setting
           </NavLink>
         </MenuItem>
         <MenuItem onClick={handleClick}>
           <a href={GITHUB_ISSUE_URL} target="_blank" rel="noopener noreferrer">
-            <FlagIcon />
+            <OutlinedFlagIcon />
             Feedback
           </a>
         </MenuItem>
@@ -77,7 +78,7 @@ export const UserSettingIcon: React.FC<Props> = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FavoriteIcon />
+            <FavoriteBorderOutlinedIcon />
             Sponsor
           </a>
         </MenuItem>

@@ -25,17 +25,8 @@ import HubOutlinedIcon from "@mui/icons-material/HubOutlined";
 import HubIcon from "@mui/icons-material/Hub";
 import BuildOutlinedIcon from "@mui/icons-material/BuildOutlined";
 import BuildIcon from "@mui/icons-material/Build";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import SettingsIcon from "@mui/icons-material/Settings";
-import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import FlagIcon from "@mui/icons-material/Flag";
-import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-
 import FeedIcon from "@mui/icons-material/Feed";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 
@@ -139,8 +130,8 @@ export const otherItems: readonly Item[] = [
   {
     field: "Terms",
     link: "/terms",
-    selectedIcon: <QuestionAnswerIcon />,
-    notSelectedIcon: <QuestionAnswerOutlinedIcon />,
+    selectedIcon: <FeedIcon />,
+    notSelectedIcon: <FeedOutlinedIcon />,
   },
 ] as const;
 
