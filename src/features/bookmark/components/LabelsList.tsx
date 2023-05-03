@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import { labelSelectors } from "@features/bookmark/labelActions";
 import type { LabelState } from "@features/bookmark/label.atom";

@@ -48,7 +48,7 @@ export const LabelCreator: React.FC = () => {
             borderColor: "divider",
             borderRadius: "6px",
             backgroundColor: "white",
-            p: 1,
+            p: 2,
           }}
         >
           <LabelNameChip
