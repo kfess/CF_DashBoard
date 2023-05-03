@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
+import { Button } from "@features/ui/component/Button";
 import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
 import ReplayIcon from "@mui/icons-material/Replay";
@@ -40,29 +39,29 @@ export const LabelCreator: React.FC = () => {
   return (
     <>
       <Box sx={{ p: 1, display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          onClick={toggleShowBlock}
-          variant="contained"
-          color="primary"
-          size="small"
-          css={{ textTransform: "none" }}
-        >
-          New Label
-        </Button>
+        <Button onClick={toggleShowBlock}>New Label</Button>
       </Box>
       {showBlock && (
-        <>
+        <Box
+          sx={{
+            border: "1px solid",
+            borderColor: "divider",
+            borderRadius: "6px",
+            backgroundColor: "white",
+            p: 2,
+          }}
+        >
           <LabelNameChip
             name={name.value}
             color={isValidHexaColor(color) ? color : "#000000"}
             mode="Preview"
           />
-          <Box component="form" autoComplete="off" sx={{ display: "flex" }}>
+          <Box component="form" autoComplete="off">
             <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1, sm: 2, md: 4 }}
+              direction={{ xs: "column", sm: "row", md: "row" }}
+              sx={{ width: "100%" }}
             >
-              <Box sx={{ p: 1 }}>
+              <Box sx={{ p: 1, flexGrow: 1, width: "100%" }}>
                 <InputLabel
                   css={{ paddingBottom: "0.3rem", fontWeight: "bold" }}
                 >
@@ -76,7 +75,7 @@ export const LabelCreator: React.FC = () => {
                   placeholder="label name"
                 />
               </Box>
-              <Box sx={{ p: 1 }}>
+              <Box sx={{ p: 1, flexGrow: 1, width: "100%" }}>
                 <InputLabel
                   css={{ paddingBottom: "0.3rem", fontWeight: "bold" }}
                 >
@@ -85,70 +84,79 @@ export const LabelCreator: React.FC = () => {
                 <Input
                   value={description.value}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setName({ value: event.target.value, errorMsg: "" })
+                    setDescription({ value: event.target.value, errorMsg: "" })
                   }
-                  placeholder="description"
+                  placeholder="description (optional)"
                 />
               </Box>
-              <Box sx={{ p: 1 }}>
-                <InputLabel css={{ fontWeight: "bold" }}>
+              <Box
+                sx={{
+                  p: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  flexGrow: 1,
+                  width: "100%",
+                }}
+              >
+                <InputLabel
+                  css={{ paddingBottom: "0.3rem", fontWeight: "bold" }}
+                >
                   Generate Color
                 </InputLabel>
-                <IconButton
-                  aria-label="generate"
-                  onClick={() => {
-                    setColor(generateRandomHexaColor());
-                  }}
-                >
-                  <ReplayIcon
-                    fontSize="inherit"
-                    css={{ color: isValidHexaColor(color) ? color : "#000000" }}
-                  />
-                </IconButton>
-                <Tooltip
-                  title={<ColorPalette setColor={setColor} />}
-                  arrow
-                  leaveDelay={300} // ms
-                >
-                  <Input
-                    value={color}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                      setColor(event.target.value as HexaColor)
-                    }
-                    css={{
-                      "& .MuiInputBase-root": {
-                        color: isValidHexaColor(color) ? color : "#000000",
-                      },
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <IconButton
+                    aria-label="generate"
+                    onClick={() => {
+                      setColor(generateRandomHexaColor());
                     }}
-                  />
-                </Tooltip>
+                  >
+                    <ReplayIcon
+                      fontSize="inherit"
+                      css={{
+                        color: isValidHexaColor(color) ? color : "#000000",
+                      }}
+                    />
+                  </IconButton>
+                  <Box sx={{ flexGrow: 1, width: "100%" }}>
+                    <Tooltip
+                      title={<ColorPalette setColor={setColor} />}
+                      arrow
+                      leaveDelay={300} // ms
+                    >
+                      <Input
+                        value={color}
+                        onChange={(
+                          event: React.ChangeEvent<HTMLInputElement>
+                        ) => setColor(event.target.value as HexaColor)}
+                        css={{
+                          "& .MuiInputBase-root": {
+                            color: isValidHexaColor(color) ? color : "#000000",
+                          },
+                        }}
+                      />
+                    </Tooltip>
+                  </Box>
+                </Box>
               </Box>
             </Stack>
           </Box>
-          <Box sx={{ p: 1, display: "flex", justifyContent: "flex-end" }}>
-            <ButtonGroup>
-              <Button
-                onClick={toggleShowBlock}
-                variant="contained"
-                color="secondary"
-                size="small"
-                css={{ textTransform: "none" }}
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={onClickCreateLabel}
-                disabled={name.value.length === 0 || !isValidHexaColor(color)}
-                variant="contained"
-                color="success"
-                size="small"
-                css={{ textTransform: "none" }}
-              >
-                Create Label
-              </Button>
-            </ButtonGroup>
+          <Box
+            sx={{
+              p: 1,
+              display: "flex",
+              justifyContent: "flex-end",
+              flexWrap: { xs: "wrap", sm: "nowrap" },
+            }}
+          >
+            <Button onClick={toggleShowBlock}>Cancel</Button>
+            <Button
+              onClick={onClickCreateLabel}
+              disabled={name.value.length === 0 || !isValidHexaColor(color)}
+            >
+              Create Label
+            </Button>
           </Box>
-        </>
+        </Box>
       )}
     </>
   );
