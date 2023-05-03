@@ -9,8 +9,6 @@ import {
 import { NavLink } from "react-router-dom";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import HomeIcon from "@mui/icons-material/Home";
-import LeaderboardOutlinedIcon from "@mui/icons-material/LeaderboardOutlined";
-import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import CreateIcon from "@mui/icons-material/Create";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
@@ -38,6 +36,9 @@ import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
+import FeedIcon from "@mui/icons-material/Feed";
+import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
+
 const mainField = [
   "Contests",
   "Problems",
@@ -50,17 +51,7 @@ type MainField = typeof mainField[number];
 const activityField = ["Labels", "Ranking", "Custom Contest"] as const;
 type ActivityField = typeof activityField[number];
 
-const otherField = [
-  "API",
-  "Links",
-  "Tools",
-  "Setting",
-  "User Guide",
-  "FAQ",
-  "Feedback",
-  "Send a Tip",
-  "Terms",
-] as const;
+const otherField = ["API", "Links", "FAQ", "Terms"] as const;
 type OtherField = typeof otherField[number];
 
 export type Field = MainField | ActivityField | OtherField;
@@ -140,34 +131,16 @@ export const otherItems: readonly Item[] = [
     notSelectedIcon: <BuildOutlinedIcon />,
   },
   {
-    field: "Setting",
-    link: "/setting",
-    selectedIcon: <SettingsIcon />,
-    notSelectedIcon: <SettingsOutlinedIcon />,
-  },
-  {
-    field: "User Guide",
-    link: "/user-guide",
-    selectedIcon: <HelpOutlinedIcon />,
-    notSelectedIcon: <HelpOutlineIcon />,
-  },
-  {
     field: "FAQ",
     link: "/faq",
     selectedIcon: <QuestionAnswerIcon />,
     notSelectedIcon: <QuestionAnswerOutlinedIcon />,
   },
   {
-    field: "Feedback",
-    link: "/feedback",
-    selectedIcon: <FlagIcon />,
-    notSelectedIcon: <OutlinedFlagIcon />,
-  },
-  {
-    field: "Send a Tip",
-    link: "/send-a-tip",
-    selectedIcon: <FavoriteIcon />,
-    notSelectedIcon: <FavoriteBorderOutlinedIcon />,
+    field: "Terms",
+    link: "/terms",
+    selectedIcon: <QuestionAnswerIcon />,
+    notSelectedIcon: <QuestionAnswerOutlinedIcon />,
   },
 ] as const;
 

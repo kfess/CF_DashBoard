@@ -8,3 +8,7 @@ export const CF_USER_INFO_URL = "https://codeforces.com/api/user.info";
 export const CF_USER_SUBMISSION_URL = " https://codeforces.com/api/user.status";
 export const CF_RECENT_SUBMISSION_URL =
   "https://codeforces.com/api/problemset.recentStatus";
+export const USER_GUIDE_URL = "https://kfess.github.io/cf-dashboard";
+export const GITHUB_SPONSOR_URL = "";
+export const GITHUB_ISSUE_URL =
+  "https://github.com/kfess/Codeforces_Problems_frontend/issues";
