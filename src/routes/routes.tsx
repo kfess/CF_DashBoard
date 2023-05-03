@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { LayoutPage } from "@pages/layout";
 import { ContestsPage } from "@pages/contests";
-import ProblemsPage from "@pages/problems";
+import { ProblemsPage } from "@pages/problems/";
 import { LabelsPage } from "@pages/labels/index";
 import { LabelPage } from "@pages/labels/label/index";
 import { SubmissionPage } from "@pages/submission";
