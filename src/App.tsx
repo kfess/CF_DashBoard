@@ -1,4 +1,5 @@
 import "./App.css";
+import { HelmetProvider } from "react-helmet-async";
 import { RouterProvider } from "react-router-dom";
 import { router } from "@routes/routes";
 import { RecoilRoot } from "recoil";
@@ -9,13 +10,15 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <ThemeContextProvider>
-          <RouterProvider router={router} />
-        </ThemeContextProvider>
-      </QueryClientProvider>
-    </RecoilRoot>
+    <HelmetProvider>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+          <ThemeContextProvider>
+            <RouterProvider router={router} />
+          </ThemeContextProvider>
+        </QueryClientProvider>
+      </RecoilRoot>
+    </HelmetProvider>
   );
 }
 
