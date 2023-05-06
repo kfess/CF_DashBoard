@@ -18,6 +18,7 @@ import { LoginPage } from "@pages/authentication/login";
 import { LinksPage } from "@pages/links";
 import { TermsPage } from "@pages/terms";
 import { ApiPage } from "@pages/api";
+import { SettingPage } from "@pages/setting";
 
 // const ProblemsPage = lazy(() => import("@pages/problems"));
 
@@ -57,7 +58,7 @@ export const router = createBrowserRouter([
       },
       { path: "/api", element: <ApiPage /> },
       { path: "/links", element: <LinksPage /> },
-      { path: "/setting", element: <div>setting</div> },
+      { path: "/setting", element: <SettingPage /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/callback", element: <Callback /> },
       { path: "/terms", element: <TermsPage /> },
