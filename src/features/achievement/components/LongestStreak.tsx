@@ -1,4 +1,4 @@
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import React from "react";
 import Stack from "@mui/material/Stack";
 import type { Submission } from "@features/submission/submission";

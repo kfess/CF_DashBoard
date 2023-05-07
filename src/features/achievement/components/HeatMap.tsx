@@ -1,4 +1,4 @@
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import React from "react";
 
 const COLOR_GREY = "#ebedf0";

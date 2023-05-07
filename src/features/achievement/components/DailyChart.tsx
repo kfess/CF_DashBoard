@@ -1,4 +1,4 @@
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import ButtonGroup from "@mui/material/ButtonGroup";

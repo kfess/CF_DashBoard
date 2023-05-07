@@ -38,5 +38,6 @@
     "jsxImportSource": "@emotion/react" // to use @emotion's css props as JSX
   },
   "include": ["src"],
+  "exclude": ["src/mock"], // for development
   "references": [{ "path": "./tsconfig.node.json" }]
 }
