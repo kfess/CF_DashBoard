@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import type { UserProfile } from "@features/authentication/userProfile";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
+import { INTERNAL_API_BASE_URL } from "@constants/url";
 
-const AUTHENTICATE_URL = "http://localhost:4000/api/users/exchange";
+const AUTHENTICATE_URL = INTERNAL_API_BASE_URL + "/users/exchange";
 
 const exchangeCodeForSession = async ({
   code,

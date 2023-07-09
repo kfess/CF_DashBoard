@@ -4,10 +4,11 @@ import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import type { UserProfile } from "@features/authentication/userProfile";
 import { userProfileState } from "@features/authentication/userProfile.atom";
+import { INTERNAL_API_BASE_URL } from "@constants/url";
 
 const fetchLoggedInStatus = async () => {
   try {
-    const response = await axios.get("http://localhost:4000/api/users/verify", {
+    const response = await axios.get(INTERNAL_API_BASE_URL + "/users/verify", {
       withCredentials: true,
     });
 

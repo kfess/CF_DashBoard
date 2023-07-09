@@ -2,6 +2,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { problemsSchema } from "@features/problems/problem";
 import type { Problem } from "@features/problems/problem";
+import { INTERNAL_API_BASE_URL } from "@constants/url";
 
 const fetchProblems = async (): Promise<Problem[]> => {
   const currentTime = new Date().getTime();
@@ -18,7 +19,7 @@ const fetchProblems = async (): Promise<Problem[]> => {
   }
 
   try {
-    const response = await axios.get("http://localhost:4000/api/problems");
+    const response = await axios.get(INTERNAL_API_BASE_URL + "/problems");
     const data = problemsSchema.parse(response.data);
 
     // データを localStorage にキャッシュ

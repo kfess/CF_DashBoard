@@ -4,13 +4,14 @@ import {
   CreateCustomContest,
   CustomContest,
 } from "@features/custom_contests/customContest";
+import { INTERNAL_API_BASE_URL } from "@constants/url";
 
 const addContest = async (
   contest: Omit<CreateCustomContest, "problemsFilter">
 ): Promise<CustomContest> => {
   try {
     const response = await axios.post(
-      "http://localhost:4000/api/custom-contests",
+      INTERNAL_API_BASE_URL + "/api/custom-contests",
       contest,
       {
         withCredentials: true,

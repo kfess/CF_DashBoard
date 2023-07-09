@@ -5,10 +5,11 @@ import {
   CustomContest,
   customContestsSchema,
 } from "@features/custom_contests/customContest";
+import { INTERNAL_API_BASE_URL } from "@constants/url";
 
 const fetchAllCustomContests = async (): Promise<CustomContest[]> => {
   try {
-    const url = "http://localhost:4000/api/custom-contests/all-contests";
+    const url = INTERNAL_API_BASE_URL + "/api/custom-contests/all-contests";
     const response = await axios.get(url, { withCredentials: true });
     const allCustomContests = customContestsSchema.parse(response.data);
     return allCustomContests;

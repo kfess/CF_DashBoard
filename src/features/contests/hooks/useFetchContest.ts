@@ -2,6 +2,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { contestsSchema } from "@features/contests/contest";
 import type { Contest } from "@features/contests/contest";
+import { INTERNAL_API_BASE_URL } from "@constants/url";
 
 const fetchContests = async (): Promise<Contest[]> => {
   const currentTime = new Date().getTime();
@@ -18,7 +19,7 @@ const fetchContests = async (): Promise<Contest[]> => {
   }
 
   try {
-    const response = await axios.get("http://localhost:4000/api/contests");
+    const response = await axios.get(INTERNAL_API_BASE_URL + "/contests");
     const data = contestsSchema.parse(response.data);
 
     // データを localStorage にキャッシュ

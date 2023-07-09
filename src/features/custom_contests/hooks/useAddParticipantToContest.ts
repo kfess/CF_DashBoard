@@ -2,6 +2,7 @@ import axios from "axios";
 import { ZodError } from "zod";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
+import { INTERNAL_API_BASE_URL } from "@constants/url";
 
 export const useAddParticipantToContest = () => {
   const navigate = useNavigate();
@@ -14,10 +15,13 @@ export const useAddParticipantToContest = () => {
     userId: string;
   }): Promise<void> => {
     try {
-      await axios.post("http://localhost:4000/api/custom-contests/add-user", {
-        participant: userId,
-        contestId: contestId,
-      });
+      await axios.post(
+        INTERNAL_API_BASE_URL + "/api/custom-contests/add-user",
+        {
+          participant: userId,
+          contestId: contestId,
+        }
+      );
     } catch (error) {
       throw new Error("An error occurred while adding participant.");
     }
