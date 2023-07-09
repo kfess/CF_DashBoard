@@ -19,7 +19,7 @@ const fetchProblems = async (): Promise<Problem[]> => {
   }
 
   try {
-    const response = await axios.get(INTERNAL_API_BASE_URL + "/problems");
+    const response = await axios.get(INTERNAL_API_BASE_URL + "/api/problems");
     const data = problemsSchema.parse(response.data);
 
     // データを localStorage にキャッシュ

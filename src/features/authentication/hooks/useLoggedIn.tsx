@@ -8,7 +8,7 @@ import { INTERNAL_API_BASE_URL } from "@constants/url";
 
 const fetchLoggedInStatus = async () => {
   try {
-    const response = await axios.get(INTERNAL_API_BASE_URL + "/users/verify", {
+    const response = await axios.get(INTERNAL_API_BASE_URL + "/api/users/verify", {
       withCredentials: true,
     });
 

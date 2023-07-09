@@ -16,5 +16,4 @@ export const GITHUB_ISSUE_URL =
   "https://github.com/kfess/Codeforces_Problems_frontend/issues";
 
 // Internal API
-export const INTERNAL_API_BASE_URL =
-  process.env.REACT_APP_INTERNAL_API_BASE_URL;
+export const INTERNAL_API_BASE_URL = import.meta.env.VITE_INTERNAL_API_BASE_URL;
