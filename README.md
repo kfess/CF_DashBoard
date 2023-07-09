@@ -11,5 +11,5 @@ https://user-images.githubusercontent.com/35001425/232385894-6d5221a4-2cc4-446e-
 
 # Development
 
-You can access the web application from https://djkt4hplele68.cloudfront.net/
+You can access the web application from https://djkt4hplele68.cloudfront.net/  
 Please note that unanticipated changes may occur without prior notice because this is under development.
