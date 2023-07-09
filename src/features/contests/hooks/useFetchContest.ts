@@ -19,7 +19,7 @@ const fetchContests = async (): Promise<Contest[]> => {
   }
 
   try {
-    const response = await axios.get(INTERNAL_API_BASE_URL + "/api/contests");
+    const response = await axios.get(`${INTERNAL_API_BASE_URL}/api/contests`);
     const data = contestsSchema.parse(response.data);
 
     // データを localStorage にキャッシュ

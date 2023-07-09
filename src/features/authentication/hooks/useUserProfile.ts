@@ -5,8 +5,8 @@ import { okUserInfoApiSchema } from "@features/layout/userInfo";
 import { userProfileSchema } from "@features/authentication/userProfile";
 import type { UserProfile } from "@features/authentication/userProfile";
 
-const INTERNAL_CF_GET_URL = INTERNAL_API_BASE_URL + "/api/users/find";
-const INTERNAL_CF_UPDATE_URL = INTERNAL_API_BASE_URL + "/api/users/update";
+const INTERNAL_CF_GET_URL = `${INTERNAL_API_BASE_URL}/api/users/find`;
+const INTERNAL_CF_UPDATE_URL = `${INTERNAL_API_BASE_URL}/api/users/update`;
 
 const fetchUserProfile = async (): Promise<UserProfile> => {
   try {

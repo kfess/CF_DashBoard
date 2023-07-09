@@ -8,9 +8,12 @@ import { INTERNAL_API_BASE_URL } from "@constants/url";
 
 const fetchLoggedInStatus = async () => {
   try {
-    const response = await axios.get(INTERNAL_API_BASE_URL + "/api/users/verify", {
-      withCredentials: true,
-    });
+    const response = await axios.get(
+      `${INTERNAL_API_BASE_URL}/api/users/verify`,
+      {
+        withCredentials: true,
+      }
+    );
 
     return response.status === 200;
   } catch (error) {

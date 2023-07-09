@@ -13,7 +13,7 @@ const fetchCustomContestByContestId = async ({
   contestId: string;
 }): Promise<CustomContest> => {
   try {
-    const url = INTERNAL_API_BASE_URL + `/api/custom-contests/${contestId}`;
+    const url = `${INTERNAL_API_BASE_URL}/api/custom-contests/${contestId}}`;
     const response = await axios.get(url);
     const contest = customContestSchema.parse(response.data);
     return contest;

@@ -11,7 +11,7 @@ const addContest = async (
 ): Promise<CustomContest> => {
   try {
     const response = await axios.post(
-      INTERNAL_API_BASE_URL + "/api/custom-contests",
+      `${INTERNAL_API_BASE_URL}/api/custom-contests`,
       contest,
       {
         withCredentials: true,

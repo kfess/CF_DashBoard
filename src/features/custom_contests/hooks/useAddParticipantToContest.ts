@@ -16,7 +16,7 @@ export const useAddParticipantToContest = () => {
   }): Promise<void> => {
     try {
       await axios.post(
-        INTERNAL_API_BASE_URL + "/api/custom-contests/add-user",
+        `${INTERNAL_API_BASE_URL}/api/custom-contests/add-user`,
         {
           participant: userId,
           contestId: contestId,
