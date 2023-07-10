@@ -12,7 +12,6 @@ import { TablePagination } from "@features/ui/component/TablePagination";
 import { ProblemsTableRow } from "@features/problems/components/ProblemsTableRow";
 import type { Classification } from "@features/contests/contest";
 import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
-import { useThemeContext } from "@features/color/themeColor.hook";
 import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
 
 type Props = {
@@ -38,7 +37,6 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
 
-  const { theme } = useThemeContext();
   const { solvedSet, attemptedSet } = useSolvedStatus();
 
   const filteredProblems = useMemo(() => {
@@ -107,6 +105,7 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
           <Table stickyHeader css={{ height: "100%" }}>
             <TableHead>
               <TableRow>
+                <TableCell>Status</TableCell>
                 <TableCell>Problem</TableCell>
                 <TableCell>Contest</TableCell>
                 <TableCell>Difficulty</TableCell>
@@ -121,17 +120,13 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
                   const problemKey = `${problem.contestId}-${problem.index}`;
                   const isSolved = solvedSet?.has(problemKey);
                   const isAttempted = attemptedSet?.has(problemKey);
-                  const backgroundColor = isSolved
-                    ? theme.colors.acColor
-                    : isAttempted
-                    ? theme.colors.waColor
-                    : "";
                   return (
                     <ProblemsTableRow
                       key={problemKey}
                       problem={problem}
                       showTags={showTags}
-                      backgroundColor={backgroundColor}
+                      isSolved={isSolved}
+                      isAttempted={isAttempted}
                     />
                   );
                 })}
