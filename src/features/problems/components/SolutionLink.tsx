@@ -1,4 +1,5 @@
 import React from "react";
+import TaskIcon from "@mui/icons-material/Task";
 
 type Props = {};
 
@@ -12,7 +13,7 @@ export const SolutionLink: React.FC<Props> = (props: Props) => {
       rel="noopener noreferrer"
       css={{ textDecoration: "underline" }}
     >
-      link
+      <TaskIcon />
     </a>
   );
 };

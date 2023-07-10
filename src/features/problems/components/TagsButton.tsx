@@ -38,7 +38,7 @@ export const TagsButton: React.FC<Props> = (props: Props) => {
         onClick={handleClick}
         endIcon={open ? <ArrowDropDownIcon /> : <ArrowLeftIcon />}
       >
-        Tags
+        Tags {selectedTags.length > 0 && `(${selectedTags.length})`}
       </Button>
       <Menu
         anchorEl={anchorEl}
