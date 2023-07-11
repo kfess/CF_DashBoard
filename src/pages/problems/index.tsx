@@ -14,6 +14,7 @@ import { useToggle } from "@hooks/index";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { TagItems } from "@features/problems/components/TagItems";
+import { DifficultyStatus } from "@features/problems/components/DifficultyStatus";
 
 export const ProblemsPage: React.FC = () => {
   const { data, isLoading } = useFetchProblems();
@@ -37,46 +38,52 @@ export const ProblemsPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+        <HeadLine title="Difficulty Table" />
+        {data && (
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <DifficultyStatus problems={data} />
+            </Grid>
+          </Grid>
+        )}
         <HeadLine title="Problem List" />
         {data && (
-          <>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TagItems
-                  problems={data}
-                  selectedTags={selectedTags}
-                  setSelectedTags={setSelectedTags}
-                />
-                <FilterOptions
-                  problem={chooseRandomIndex(data)}
-                  classification={classification}
-                  setClassification={setClassification}
-                  solvedStatus={solvedStatus}
-                  setSolvedStatus={setSolvedStatus}
-                  selectedTags={selectedTags}
-                  setSelectedTags={setSelectedTags}
-                  lowerDifficulty={lowerDifficulty}
-                  setLowerDifficulty={setLowerDifficulty}
-                  upperDifficulty={upperDifficulty}
-                  setUpperDifficulty={setUpperDifficulty}
-                  showTags={showTags}
-                  toggleShowTags={toggleShowTags}
-                  setShowTags={setShowTags}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <ProblemsTable
-                  problems={data}
-                  selectedTags={selectedTags}
-                  classification={classification}
-                  lowerDifficulty={lowerDifficulty}
-                  upperDifficulty={upperDifficulty}
-                  showTags={showTags}
-                  solvedStatus={solvedStatus}
-                />
-              </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TagItems
+                problems={data}
+                selectedTags={selectedTags}
+                setSelectedTags={setSelectedTags}
+              />
+              <FilterOptions
+                problem={chooseRandomIndex(data)}
+                classification={classification}
+                setClassification={setClassification}
+                solvedStatus={solvedStatus}
+                setSolvedStatus={setSolvedStatus}
+                selectedTags={selectedTags}
+                setSelectedTags={setSelectedTags}
+                lowerDifficulty={lowerDifficulty}
+                setLowerDifficulty={setLowerDifficulty}
+                upperDifficulty={upperDifficulty}
+                setUpperDifficulty={setUpperDifficulty}
+                showTags={showTags}
+                toggleShowTags={toggleShowTags}
+                setShowTags={setShowTags}
+              />
             </Grid>
-          </>
+            <Grid item xs={12}>
+              <ProblemsTable
+                problems={data}
+                selectedTags={selectedTags}
+                classification={classification}
+                lowerDifficulty={lowerDifficulty}
+                upperDifficulty={upperDifficulty}
+                showTags={showTags}
+                solvedStatus={solvedStatus}
+              />
+            </Grid>
+          </Grid>
         )}
       </Box>
     </Container>
