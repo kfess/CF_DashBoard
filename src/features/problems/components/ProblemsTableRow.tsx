@@ -11,6 +11,7 @@ import { SolutionLink } from "./SolutionLink";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { Chip_ } from "@features/ui/component/Chip";
 import { useThemeContext } from "@features/color/themeColor.hook";
+import { CF_CONTEST_URL } from "@constants/url";
 
 type Props = {
   problem: Problem;
@@ -71,7 +72,19 @@ export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
           {problem.rating ?? "no data"}
         </span>
       </TableCell>
-      <TableCell>{problem.solvedCount ?? "no data"}</TableCell>
+      <TableCell>
+        {problem.solvedCount ? (
+          <a
+            href={`${CF_CONTEST_URL}/${problem.contestId}/status`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {problem.solvedCount}
+          </a>
+        ) : (
+          <div>no data</div>
+        )}
+      </TableCell>
       <TableCell>
         <SolutionLink />
       </TableCell>

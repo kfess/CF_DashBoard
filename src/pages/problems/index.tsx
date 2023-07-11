@@ -37,7 +37,7 @@ export const ProblemsPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
-        <HeadLine title="Problems" />
+        <HeadLine title="Problem List" />
         {data && (
           <>
             <Grid container spacing={2}>

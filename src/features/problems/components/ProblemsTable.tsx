@@ -5,6 +5,7 @@ import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { Problem, Tag } from "@features/problems/problem";
 import { usePagination } from "@hooks/index";
@@ -113,24 +114,34 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
                 <TableCell>Solution</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {filteredProblems
-                .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-                .map((problem) => {
-                  const problemKey = `${problem.contestId}-${problem.index}`;
-                  const isSolved = solvedSet?.has(problemKey);
-                  const isAttempted = attemptedSet?.has(problemKey);
-                  return (
-                    <ProblemsTableRow
-                      key={problemKey}
-                      problem={problem}
-                      showTags={showTags}
-                      isSolved={isSolved}
-                      isAttempted={isAttempted}
-                    />
-                  );
-                })}
-            </TableBody>
+            {problemsLen > 0 ? (
+              <TableBody>
+                {filteredProblems
+                  .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
+                  .map((problem) => {
+                    const problemKey = `${problem.contestId}-${problem.index}`;
+                    const isSolved = solvedSet?.has(problemKey);
+                    const isAttempted = attemptedSet?.has(problemKey);
+                    return (
+                      <ProblemsTableRow
+                        key={problemKey}
+                        problem={problem}
+                        showTags={showTags}
+                        isSolved={isSolved}
+                        isAttempted={isAttempted}
+                      />
+                    );
+                  })}
+              </TableBody>
+            ) : (
+              <TableBody>
+                <TableRow>
+                  <TableCell colSpan={6}>
+                    There is no Data to display.
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            )}
           </Table>
         </TableContainer>
       </Paper>
