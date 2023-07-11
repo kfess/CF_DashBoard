@@ -9,6 +9,9 @@ import { Tag } from "@features/problems/problem";
 export const isACSubmission = (submission: Submission): boolean =>
   submission.verdict === "OK";
 
+export const isGymSubmission = (submission: Submission | undefined): boolean =>
+  submission?.contestId ? submission.contestId >= 100001 : false;
+
 export const filterUniqueSubmissions = (
   submissions: Submission[]
 ): Submission[] =>

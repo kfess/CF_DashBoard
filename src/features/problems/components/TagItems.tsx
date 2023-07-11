@@ -62,6 +62,7 @@ export const TagItems: React.FC<Props> = ({
         >
           {tagItems.map((tagItem) => (
             <Box
+              key={tagItem.tag}
               sx={{
                 display: "flex",
                 alignItems: "center",
