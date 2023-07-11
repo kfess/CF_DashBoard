@@ -13,6 +13,7 @@ import { FilterOptions } from "@features/problems/components/FilterOptions";
 import { useToggle } from "@hooks/index";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { HeadLine } from "@features/layout/components/HeadLine";
+import { TagItems } from "@features/problems/components/TagItems";
 
 export const ProblemsPage: React.FC = () => {
   const { data, isLoading } = useFetchProblems();
@@ -41,6 +42,7 @@ export const ProblemsPage: React.FC = () => {
           <>
             <Grid container spacing={2}>
               <Grid item xs={12}>
+                <TagItems problems={data} />
                 <FilterOptions
                   problem={chooseRandomIndex(data)}
                   classification={classification}
