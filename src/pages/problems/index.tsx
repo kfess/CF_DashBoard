@@ -42,7 +42,11 @@ export const ProblemsPage: React.FC = () => {
           <>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <TagItems problems={data} />
+                <TagItems
+                  problems={data}
+                  selectedTags={selectedTags}
+                  setSelectedTags={setSelectedTags}
+                />
                 <FilterOptions
                   problem={chooseRandomIndex(data)}
                   classification={classification}
