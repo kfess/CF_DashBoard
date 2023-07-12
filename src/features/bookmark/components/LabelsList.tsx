@@ -1,25 +1,20 @@
+// LabelItem component
 import React, { useState } from "react";
+import { TableCell, TableRow, Button, ButtonGroup, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
-import { labelSelectors } from "@features/bookmark/labelActions";
-import type { LabelState } from "@features/bookmark/label.atom";
 import { LabelNameChip } from "@features/bookmark/components/LabelIcon";
 import { LabelEditor } from "@features/bookmark/components/LabelEditer";
-import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
-import { HexaColor } from "@features/color/labelColor";
-import { ButtonGroup } from "@mui/material";
 import { useToggle } from "@hooks/index";
 import { labelActions } from "@features/bookmark/labelActions";
+import type { LabelState } from "@features/bookmark/label.atom";
+import { HexaColor } from "@features/color/labelColor";
 
 type Props = {
   label: LabelState;
 };
 
-export const LabelItem: React.FC<Props> = (props: Props) => {
-  const { label } = props;
+export const LabelItem: React.FC<Props> = ({ label }) => {
   const navigate = useNavigate();
   const [showBlock, toggleShowBlock] = useToggle(false, true);
 
@@ -42,47 +37,25 @@ export const LabelItem: React.FC<Props> = (props: Props) => {
   const deleteLabel = labelActions.useDeleteLabel();
 
   return (
-    <>
+    <TableRow>
       {!showBlock ? (
-        <Box
-          sx={{
-            p: 1,
-            paddingTop: "15px",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Box sx={{ width: "25%", textAlign: "left" }}>
+        <>
+          <TableCell>
             <LabelNameChip name={name.value} color={label.color} mode="View" />
-          </Box>
-          <Box sx={{ width: "40%", textAlign: "left", fontSize: "14px" }}>
-            {label.description}
-          </Box>
-          <Box
-            sx={{
-              width: "10%",
-              textAlign: "left",
-            }}
-          >
+          </TableCell>
+          <TableCell>{label.description}</TableCell>
+          <TableCell>
             <Button
               onClick={() => {
                 navigate(`/labels/${label.name}`);
               }}
             >
-              <CreateOutlinedIcon />
               {label.problems.length}
             </Button>
-          </Box>
-          <Box sx={{ width: "25%" }}>
+          </TableCell>
+          <TableCell>
             <ButtonGroup>
-              <Button
-                variant="text"
-                onClick={toggleShowBlock}
-                css={{
-                  textTransform: "none",
-                  "&:hover": { textDecorationLine: "underline" },
-                }}
-              >
+              <Button variant="text" onClick={toggleShowBlock}>
                 Edit
               </Button>
               <ButtonWithAlertDialog
@@ -93,85 +66,29 @@ export const LabelItem: React.FC<Props> = (props: Props) => {
                 deleteFn={deleteLabel}
               />
             </ButtonGroup>
-          </Box>
-        </Box>
+          </TableCell>
+        </>
       ) : (
-        <Box sx={{ p: 1, paddingTop: "15px" }}>
-          <LabelNameChip name={name.value} color={color} mode="View" />
-          <LabelEditor
-            id={label.id}
-            name={name}
-            setName={setName}
-            defaultName={defaultName}
-            description={description}
-            setDescription={setDescription}
-            defaultDescription={defaultDescription}
-            color={color as HexaColor}
-            setColor={setColor}
-            defaultColor={defaultColor as HexaColor}
-            toggleShowBlock={toggleShowBlock}
-          />
-        </Box>
+        <TableCell colSpan={4}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <LabelEditor
+                id={label.id}
+                name={name}
+                setName={setName}
+                defaultName={defaultName}
+                description={description}
+                setDescription={setDescription}
+                defaultDescription={defaultDescription}
+                color={color as HexaColor}
+                setColor={setColor}
+                defaultColor={defaultColor as HexaColor}
+                toggleShowBlock={toggleShowBlock}
+              />
+            </Grid>
+          </Grid>
+        </TableCell>
       )}
-    </>
+    </TableRow>
   );
 };
-
-// const sortOrders = [
-//   "Alphabetically",
-//   "Reverse Alphabetically",
-//   "Most Problems",
-//   "Fewest Problems",
-// ] as const;
-// type SortOrder = typeof sortOrders[number];
-
-// const sortLabels = (labels: LabelState[], order: SortOrder) => {
-//   return [...labels].sort((a, b) => {
-//     switch (order) {
-//       case "Alphabetically":
-//         return a.name.localeCompare(b.name);
-//       case "Reverse Alphabetically":
-//         return b.name.localeCompare(a.name);
-//       case "Most Problems":
-//         return b.problems.length - a.problems.length;
-//       case "Fewest Problems":
-//         return a.problems.length - b.problems.length;
-//     }
-//   });
-// };
-
-// export const LabelItems: React.FC = () => {
-//   const labels = labelSelectors.useLabels();
-//   const [order, setOrder] = useState<SortOrder>("Alphabetically");
-
-//   return (
-//     <Box sx={{ display: "flex", flexDirection: "column" }}>
-//       <Box
-//         sx={{
-//           p: 1,
-//           display: "flex",
-//           justifyContent: "space-between",
-//         }}
-//       >
-//         <Box>{labels.length} labels</Box>
-//         <Box>
-//           <DropDownMenuButton
-//             title="sort"
-//             items={sortOrders.map((so) => {
-//               return { item: so };
-//             })}
-//             selectedItem={order}
-//             setSelectedItem={setOrder}
-//           />
-//         </Box>
-//       </Box>
-//       <Divider />
-//       {sortLabels(labels, order).map((label) => (
-//         <>
-//           <LabelItem key={label.name} label={label} />
-//           <Divider />
-//         </>
-//       ))}
-//     </Box>
-//   );
-// };
