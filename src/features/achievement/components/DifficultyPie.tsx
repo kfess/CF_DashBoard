@@ -14,6 +14,7 @@ import {
   getACProblemSet,
   getNonACProblemSet,
 } from "@features/achievement/processSubmission";
+
 type RenderActiveShapeProps = {
   cx: number;
   cy: number;
@@ -41,6 +42,8 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
     value,
   } = props;
 
+  const fontSize = Math.min(outerRadius / 3.5, 14); // adjust this to suit your needs
+
   return (
     <g>
       <Sector
@@ -61,10 +64,24 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
         outerRadius={outerRadius + 4}
         fill={fill}
       />
-      <text x={cx} y={cy} dy={0} textAnchor="middle" fill={fill}>
+      <text
+        x={cx}
+        y={cy}
+        dy={0}
+        textAnchor="middle"
+        fill={fill}
+        fontSize={fontSize}
+      >
         {payload.name}: {value}
       </text>
-      <text x={cx} y={cy} dy={17} textAnchor="middle" fill={fill}>
+      <text
+        x={cx}
+        y={cy}
+        dy={17}
+        textAnchor="middle"
+        fill={fill}
+        fontSize={fontSize}
+      >
         {`${(percent * 100).toFixed(1)}%`}
       </text>
     </g>
@@ -114,7 +131,7 @@ export const DifficultyPie: React.FC<Props> = (props: Props) => {
   return (
     <Box sx={{ textAlign: "center" }}>
       <div>
-        <ResponsiveContainer width="100%" aspect={2.5}>
+        <ResponsiveContainer width="100%" aspect={1.5}>
           <PieChart>
             <Pie
               activeIndex={activeIndex}
@@ -137,7 +154,7 @@ export const DifficultyPie: React.FC<Props> = (props: Props) => {
       </div>
       <div>{ACProblemCount}/2000</div>
       <div>
-        Difficulty: {colorInfo.lowerBound}-{colorInfo.upperBound}
+        {colorInfo.lowerBound} ~ {colorInfo.upperBound}
       </div>
     </Box>
   );
