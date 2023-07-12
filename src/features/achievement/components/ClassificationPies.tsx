@@ -4,7 +4,6 @@ import type { Submission } from "@features/submission/submission";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import type { Classification } from "@features/contests/contest";
 import { classifications } from "@features/contests/contest";
-
 import { ClassificationPie } from "@features/achievement/components/ClassificationPie";
 
 type Props = {
