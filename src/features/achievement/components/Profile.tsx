@@ -8,14 +8,16 @@ import {
   calcFillPercent,
 } from "@features/color/ratingColor";
 import { UserInfo } from "@features/layout/userInfo";
+import { CF_PROFILE_URL } from "@constants/url";
 
 type Props = {
   userInfo?: UserInfo;
 };
 
+// url には色をつけない
 export const Profile: React.FC<Props> = ({ userInfo }) => {
   return (
-    <Box sx={{ p: 1 }}>
+    <Box sx={{ p: 1, marginBottom: 1 }}>
       <Box sx={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
         <ProfileIcon avatarUrl={userInfo?.avatar} />
         <Box sx={{ marginLeft: 2 }}>
@@ -31,7 +33,19 @@ export const Profile: React.FC<Props> = ({ userInfo }) => {
                 color={getColorCodeFromRating(userInfo?.rating)}
                 fillPercent={calcFillPercent(userInfo?.rating)}
               />
-              <Box sx={{ marginLeft: 1 }}>{userInfo?.handle}</Box>
+              <Box sx={{ marginLeft: 1 }}>
+                <a
+                  href={`${CF_PROFILE_URL}/${userInfo?.handle}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  css={{
+                    textDecoration: "none",
+                    color: getColorCodeFromRating(userInfo?.rating),
+                  }}
+                >
+                  {userInfo?.handle}
+                </a>
+              </Box>
             </Box>
           </Typography>
           <Typography variant="body1" color="text.secondary">
