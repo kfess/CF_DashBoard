@@ -24,7 +24,7 @@ export const LabelPage: React.FC = () => {
     <>
       <Container maxWidth="lg">
         <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
-          <HeadLine title={`${labelName} Problems`} />
+          <HeadLine title={`${labelName}`} />
           <Grid container spacing={2}>
             <Grid item xs={12}>
               {label && (
