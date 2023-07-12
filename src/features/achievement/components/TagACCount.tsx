@@ -21,7 +21,12 @@ export const TagACCount: React.FC<Props> = (props: Props) => {
   const readTagCounts = isReadMore ? tagCounts.slice(0, 5) : tagCounts;
 
   return (
-    <Box>
+    <Box
+      sx={{
+        marginTop: 1,
+        marginBottom: 1,
+      }}
+    >
       <Box sx={{ marginTop: 1, marginBottom: 1 }}>
         <Typography variant="h6" gutterBottom>
           Problem Tags

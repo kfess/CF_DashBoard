@@ -43,7 +43,6 @@ export const AchievementPage: React.FC = () => {
           <Box sx={{ display: { xs: "block", sm: "flex" } }} gap={1}>
             <Box
               sx={{
-                m: 1,
                 p: 2,
                 width: { sm: "300px" },
                 backgroundColor: "white",
@@ -66,7 +65,6 @@ export const AchievementPage: React.FC = () => {
             <Box sx={{ flex: { sm: 1 } }}>
               <Box
                 sx={{
-                  m: 1,
                   p: 2,
                   backgroundColor: "white",
                   borderRadius: 1,
@@ -82,8 +80,8 @@ export const AchievementPage: React.FC = () => {
               </Box>
               <Box
                 sx={{
-                  m: 1,
                   p: 2,
+                  marginTop: 2,
                   backgroundColor: "white",
                   borderRadius: 1,
                   boxShadow: [1, 1, 1, 1],

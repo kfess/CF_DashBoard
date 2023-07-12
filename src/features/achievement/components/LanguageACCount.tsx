@@ -54,7 +54,12 @@ export const LanguageACCount: React.FC<Props> = (props: Props) => {
     : languageCounts;
 
   return (
-    <Box>
+    <Box
+      sx={{
+        marginTop: 1,
+        marginBottom: 1,
+      }}
+    >
       <Box sx={{ marginTop: 1, marginBottom: 1 }}>
         <Typography variant="h6" gutterBottom>
           Language

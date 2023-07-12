@@ -61,7 +61,12 @@ export const Community: React.FC<Props> = (props: Props) => {
   const { contribution, friendsOfCount } = props;
 
   return (
-    <Box>
+    <Box
+      sx={{
+        marginTop: 2,
+        marginBottom: 2,
+      }}
+    >
       <Typography variant="h6" gutterBottom>
         Community
       </Typography>
