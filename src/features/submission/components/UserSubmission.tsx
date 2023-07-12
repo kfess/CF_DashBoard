@@ -89,62 +89,72 @@ export const UserSubmission: React.FC<Props> = ({
                     <TableCell>Detail</TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
-                  {filteredData
-                    .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-                    .map((d) => (
-                      <TableRow key={d.id}>
-                        <TableCell>
-                          {formatUnixTime(d.creationTimeSeconds)}
-                        </TableCell>
-                        <TableCell>
-                          <ContestLink
-                            contestId={d.contestId as number}
-                            contestName={
-                              contestIdNameMap[d.contestId as number]
-                            }
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <ProblemLink
-                            showDifficulty={true}
-                            contestId={d.contestId as number} // need to fix this.
-                            contestName={
-                              contestIdNameMap[d.contestId as number]
-                            }
-                            problemId={d.problem.index}
-                            problemName={d.problem.name}
-                            difficulty={d.problem.rating}
-                            solvedCount={d.problem.solvedCount}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={`https://codeforces.com/profile/${d.author.members[0].handle}`}
-                          >
-                            {d.author.members[0].handle}
-                          </a>
-                        </TableCell>
-                        <TableCell>
-                          <VerdictChip verdict={d.verdict} />
-                        </TableCell>
-                        <TableCell>
-                          {normalizeLanguage(d.programmingLanguage)}
-                        </TableCell>
-                        <TableCell>
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={`https://codeforces.com/contest/${d.contestId}/submission/${d.id}`}
-                          >
-                            detail
-                          </a>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
+                {filteredData.length > 0 ? (
+                  <TableBody>
+                    {filteredData
+                      .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
+                      .map((d) => (
+                        <TableRow key={d.id} hover>
+                          <TableCell>
+                            {formatUnixTime(d.creationTimeSeconds)}
+                          </TableCell>
+                          <TableCell>
+                            <ContestLink
+                              contestId={d.contestId as number}
+                              contestName={
+                                contestIdNameMap[d.contestId as number]
+                              }
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <ProblemLink
+                              showDifficulty={true}
+                              contestId={d.contestId as number} // need to fix this.
+                              contestName={
+                                contestIdNameMap[d.contestId as number]
+                              }
+                              problemId={d.problem.index}
+                              problemName={d.problem.name}
+                              difficulty={d.problem.rating}
+                              solvedCount={d.problem.solvedCount}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`https://codeforces.com/profile/${d.author.members[0].handle}`}
+                            >
+                              {d.author.members[0].handle}
+                            </a>
+                          </TableCell>
+                          <TableCell>
+                            <VerdictChip verdict={d.verdict} />
+                          </TableCell>
+                          <TableCell>
+                            {normalizeLanguage(d.programmingLanguage)}
+                          </TableCell>
+                          <TableCell>
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`https://codeforces.com/contest/${d.contestId}/submission/${d.id}`}
+                            >
+                              detail
+                            </a>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                ) : (
+                  <TableBody>
+                    <TableRow>
+                      <TableCell colSpan={7}>
+                        There is no Data to display.
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                )}
               </Table>
             </TableContainer>
           </Paper>
