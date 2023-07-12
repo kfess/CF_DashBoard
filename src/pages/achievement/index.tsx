@@ -35,6 +35,7 @@ export const AchievementPage: React.FC = () => {
     return (
       <Container maxWidth="lg">
         <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+          <HeadLine title="Achievement" />
           <SearchBar visible={true} />
         </Box>
       </Container>

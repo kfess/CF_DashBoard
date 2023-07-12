@@ -27,6 +27,8 @@ import BuildOutlinedIcon from "@mui/icons-material/BuildOutlined";
 import BuildIcon from "@mui/icons-material/Build";
 import FeedIcon from "@mui/icons-material/Feed";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
+import Tooltip from "@mui/material/Tooltip";
+import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
 
 const mainField = [
   "Contests",
@@ -72,16 +74,16 @@ export const mainItems: readonly Item[] = [
     notSelectedIcon: <ThumbUpAltOutlinedIcon />,
   },
   {
-    field: "Achievement",
-    link: "/achievement",
-    selectedIcon: <EmojiEventsIcon />,
-    notSelectedIcon: <EmojiEventsOutlinedIcon />,
-  },
-  {
     field: "Submission",
     link: "/submission",
     selectedIcon: <SendIcon />,
     notSelectedIcon: <SendOutlinedIcon />,
+  },
+  {
+    field: "Achievement",
+    link: "/achievement",
+    selectedIcon: <EmojiEventsIcon />,
+    notSelectedIcon: <EmojiEventsOutlinedIcon />,
   },
 ] as const;
 
@@ -142,17 +144,39 @@ type Props = Item & {
   toggleSideBar: Dispatch<SetStateAction<boolean>>;
 };
 
-export const SideNavigationItem: React.FC<Props> = (props: Props) => {
-  const {
-    field,
-    link,
-    selectedIcon,
-    notSelectedIcon,
-    isSelected,
-    setSelected,
-    isOpenSideBar,
-    toggleSideBar,
-  } = props;
+export const SideNavigationItem: React.FC<Props> = ({
+  field,
+  link,
+  selectedIcon,
+  notSelectedIcon,
+  isSelected,
+  setSelected,
+  isOpenSideBar,
+  toggleSideBar,
+}) => {
+  const userId = useQueryParams(QueryParamKeys.USERID);
+
+  if (field === "Achievement" && !userId) {
+    return (
+      <Tooltip
+        title={
+          <div css={{ fontSize: "15px" }}>
+            To view the Achievement page, you must first enter the codeforces
+            user ID in the navigation bar.
+          </div>
+        }
+      >
+        <ListItem key={field} disablePadding>
+          <ListItemButton disabled selected={isSelected}>
+            <CustomListItemIcon>
+              {isSelected ? selectedIcon : notSelectedIcon}
+            </CustomListItemIcon>
+            <CustomListItemText primary={field} />
+          </ListItemButton>
+        </ListItem>
+      </Tooltip>
+    );
+  }
 
   return (
     <NavLink
