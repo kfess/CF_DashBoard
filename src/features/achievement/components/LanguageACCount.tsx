@@ -1,6 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
 import { NormalizedLanguage } from "@features/language/language";
 import {
@@ -55,41 +56,44 @@ export const LanguageACCount: React.FC<Props> = (props: Props) => {
   return (
     <Box>
       <Box sx={{ marginTop: 1, marginBottom: 1 }}>
-        <strong>Language</strong>
+        <Typography variant="h6" gutterBottom>
+          Language
+        </Typography>
       </Box>
-      {readLabguageCounts.map((s) => (
-        <Stack key={s.language}>
-          <Stack
-            direction="row"
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              m: 0.1,
-            }}
-          >
-            <Chip_ label={s.language} />
-            <div>
-              <strong>{s.count.toLocaleString()}</strong>{" "}
-              <span css={{ fontSize: "14px", color: "gray" }}>
+      <Stack spacing={1}>
+        {readLabguageCounts.map((s) => (
+          <Stack key={s.language}>
+            <Stack
+              direction="row"
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Chip_ label={s.language} />
+              <Typography variant="body1">
+                <strong>{s.count.toLocaleString()}</strong>{" "}
                 {s.count > 1 ? "problems" : "problem"} solved
-              </span>
-            </div>
+              </Typography>
+            </Stack>
+            <Typography variant="body2" color="text.secondary" align="right">
+              Last AC Date: {s.lastACDate}
+            </Typography>
           </Stack>
-          <Box sx={{ fontSize: "14px", color: "gray", textAlign: "right" }}>
-            Last AC Date: {s.lastACDate}
-          </Box>
-        </Stack>
-      ))}
+        ))}
+      </Stack>
       {languageCounts.length > 3 && (
-        <div css={{ fontSize: "12px", color: "gray", textAlign: "center" }}>
+        <Box sx={{ display: "flex", justifyContent: "center", padding: 1 }}>
           <span onClick={toggleReadMore} css={{ cursor: "pointer" }}>
             {isReadMore ? "Show More" : "Show Less"}
           </span>
-        </div>
+        </Box>
       )}
       {languageCounts.length === 0 && (
-        <div css={{ fontSize: "14px", color: "gray" }}>No problems solved</div>
+        <Typography variant="body1" color="text.secondary" align="center">
+          No problems solved
+        </Typography>
       )}
     </Box>
   );
