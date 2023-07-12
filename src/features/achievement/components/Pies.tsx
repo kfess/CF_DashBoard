@@ -88,11 +88,20 @@ export const Pies: React.FC<Props> = (props: Props) => {
         <ToggleButtonGroup
           value={pieKind}
           exclusive
-          onChange={(_, value) => setPieKind(value)}
+          onChange={(_, value) => value && setPieKind(value)}
           size="small"
+          sx={{
+            "& .MuiToggleButtonGroup-grouped": {
+              borderColor: "grey.500",
+            },
+          }}
         >
-          <ToggleButton value="Difficulty">Difficulty</ToggleButton>
-          <ToggleButton value="Contest Type">Contest Type</ToggleButton>
+          <ToggleButton value="Difficulty" disableRipple>
+            Difficulty
+          </ToggleButton>
+          <ToggleButton value="Contest Type" disableRipple>
+            Contest Type
+          </ToggleButton>
         </ToggleButtonGroup>
       </Box>
       {pieKind === "Difficulty" && <DifficultyPies submissions={submissions} />}

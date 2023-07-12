@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import Button from "@mui/material/Button";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import Typography from "@mui/material/Typography";
 import {
   BarChart,
   Bar,
@@ -66,44 +67,45 @@ export const DailyChart: React.FC<Props> = (props: Props) => {
 
   return (
     <>
-      <Box sx={{ marginTop: 1, marginBottom: 1 }}>
-        <strong>Daily Progress</strong>
+      <Box
+        sx={{
+          m: 1,
+          p: 1,
+        }}
+      >
+        <Typography variant="h5" gutterBottom>
+          Daily Progress
+        </Typography>
       </Box>
-      <Box sx={{ display: "flex", p: 1 }}>
-        <ButtonGroup>
-          <Button
-            onClick={() => {
-              setDisplayColor("No Color");
-            }}
-            variant="contained"
-            color="inherit"
-            size="small"
-            sx={{ textTransform: "none" }}
-          >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: 2,
+        }}
+      >
+        <ToggleButtonGroup
+          value={displayColor}
+          exclusive
+          onChange={(_, value) => value && setDisplayColor(value)}
+          size="small"
+          sx={{
+            "& .MuiToggleButtonGroup-grouped": {
+              borderColor: "grey.500",
+            },
+          }}
+        >
+          <ToggleButton value="No Color" disableRipple>
             Simple
-          </Button>
-          <Button
-            onClick={() => {
-              setDisplayColor("Colored");
-            }}
-            variant="contained"
-            color="inherit"
-            size="small"
-            sx={{ textTransform: "none" }}
-          >
+          </ToggleButton>
+          <ToggleButton value="Colored" disableRipple>
             Color
-          </Button>
-        </ButtonGroup>
+          </ToggleButton>
+        </ToggleButtonGroup>
       </Box>
-      <ResponsiveContainer width="100%" aspect={2}>
+      <ResponsiveContainer width="95%" aspect={2.5}>
         <BarChart
           data={displayColor === "Colored" ? coloredCount : noColoredCount}
-          margin={{
-            top: 5,
-            right: 20,
-            left: 20,
-            bottom: 5,
-          }}
         >
           {displayColor === "Colored" ? (
             ratingColor.map((color) => (

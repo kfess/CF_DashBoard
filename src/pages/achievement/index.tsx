@@ -89,6 +89,17 @@ export const AchievementPage: React.FC = () => {
               >
                 {data && <Streak submissions={data} />}
               </Box>
+              <Box
+                sx={{
+                  p: 2,
+                  marginTop: 2,
+                  backgroundColor: "white",
+                  borderRadius: 1,
+                  boxShadow: [1, 1, 1, 1],
+                }}
+              >
+                {/* <HeatMap tableData={tableData} /> */}
+              </Box>
             </Box>
           </Box>
         </Container>
@@ -131,8 +142,8 @@ export const AchievementPage: React.FC = () => {
               }}
             >
               <DailyChart submissions={data} />
+              <Divider />
               <ClimbingChart submissions={data} />
-              {/* <HeatMap tableData={tableData} /> */}
             </Box>
           )}
         </>
