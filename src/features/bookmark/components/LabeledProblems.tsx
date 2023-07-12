@@ -35,7 +35,7 @@ export const LabeledProblems: React.FC<Props> = (props: Props) => {
             </TableHead>
             <TableBody>
               {label.problems.map((p) => (
-                <TableRow key={p.index}>
+                <TableRow key={p.index} hover>
                   <TableCell>
                     <ContestLink
                       contestId={p.contestId as number}
@@ -44,11 +44,12 @@ export const LabeledProblems: React.FC<Props> = (props: Props) => {
                   </TableCell>
                   <TableCell>
                     <ProblemLink
+                      showDifficulty={true}
                       contestId={p.contestId as number}
                       contestName={p.contestName}
                       problemId={p.index}
                       problemName={p.name}
-                      showDifficulty={true}
+                      // difficulty={p.difficulty}
                     />
                   </TableCell>
                   <TableCell>

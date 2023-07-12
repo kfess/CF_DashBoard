@@ -61,7 +61,6 @@ export const LabelsTable: React.FC = () => {
           setSelectedItem={setOrder}
         />
       </Box>
-      <Divider />
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
