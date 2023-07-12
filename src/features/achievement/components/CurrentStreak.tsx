@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React from "react";
-import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
 import {
   isACSubmission,
@@ -31,16 +32,16 @@ export const CurrentStreak: React.FC<Props> = (props: Props) => {
           .findIndex((n) => n !== 1) + 1;
 
   return (
-    <Stack direction="column" sx={{ alignItems: "center" }}>
-      <div>
-        <strong>Current Streak</strong>
-      </div>
-      <div>
-        <strong>{currentStreak.toLocaleString()}</strong>{" "}
-        <span css={{ fontSize: "14px", color: "gray" }}>
-          {currentStreak > 1 ? "days" : "day"}
-        </span>
-      </div>
-    </Stack>
+    <Box sx={{ textAlign: "center" }}>
+      <Typography variant="body1" color="text.secondary">
+        Current Streak
+      </Typography>
+      <Typography variant="h4" sx={{ color: "success.main" }}>
+        {currentStreak.toLocaleString()}
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        {currentStreak > 1 ? "days" : "day"}
+      </Typography>
+    </Box>
   );
 };

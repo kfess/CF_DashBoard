@@ -1,5 +1,6 @@
 import React from "react";
-import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
 import { isACSubmission, uniqueDateSet } from "../processSubmission";
 
@@ -11,16 +12,16 @@ export const StreakSum: React.FC<Props> = (props: Props) => {
   const uniqueACDate = uniqueDateSet(ACSubmissions);
 
   return (
-    <Stack direction="column" sx={{ alignItems: "center" }}>
-      <div>
-        <strong>Streak Sum</strong>
-      </div>
-      <div>
-        <strong>{uniqueACDate.size.toLocaleString()}</strong>{" "}
-        <span css={{ fontSize: "14px", color: "gray" }}>
-          {uniqueACDate.size > 1 ? "days" : "day"}
-        </span>
-      </div>
-    </Stack>
+    <Box sx={{ textAlign: "center" }}>
+      <Typography variant="body1" color="text.secondary">
+        Streak Sum
+      </Typography>
+      <Typography variant="h4" sx={{ color: "success.main" }}>
+        {uniqueACDate.size.toLocaleString()}
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        {uniqueACDate.size > 1 ? "days" : "day"}
+      </Typography>
+    </Box>
   );
 };

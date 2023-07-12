@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React from "react";
-import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
 import {
   isACSubmission,
@@ -36,16 +37,16 @@ export const LongestStreak: React.FC<Props> = (props: Props) => {
       : 0;
 
   return (
-    <Stack direction="column" sx={{ alignItems: "center" }}>
-      <div>
-        <strong>Max Streak</strong>
-      </div>
-      <div>
-        <strong>{maxStreak.toLocaleString()}</strong>{" "}
-        <span css={{ fontSize: "14px", color: "gray" }}>
-          {maxStreak > 1 ? "days" : "day"}
-        </span>
-      </div>
-    </Stack>
+    <Box sx={{ textAlign: "center" }}>
+      <Typography variant="body1" color="text.secondary">
+        Max Streak
+      </Typography>
+      <Typography variant="h4" sx={{ color: "success.main" }}>
+        {maxStreak.toLocaleString()}
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        {maxStreak > 1 ? "days" : "day"}
+      </Typography>
+    </Box>
   );
 };
