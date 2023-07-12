@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import {
   PieChart,
   Pie,
@@ -150,8 +151,10 @@ export const ClassificationPie: React.FC<Props> = (props: Props) => {
           </PieChart>
         </ResponsiveContainer>
       </div>
-      <div>{ACProblemCount}/2000</div>
-      <div>{classification}</div>
+      <Typography variant="body1" color="text.secondary">
+        {ACProblemCount}/2000
+      </Typography>
+      <Typography variant="h6">{classification}</Typography>
     </Box>
   );
 };

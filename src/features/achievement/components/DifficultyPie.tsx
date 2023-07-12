@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import {
   PieChart,
   Pie,
@@ -152,10 +153,14 @@ export const DifficultyPie: React.FC<Props> = (props: Props) => {
           </PieChart>
         </ResponsiveContainer>
       </div>
-      <div>{ACProblemCount}/2000</div>
-      <div>
+
+      <Typography variant="body1" color="text.secondary">
+        {ACProblemCount}/2000
+      </Typography>
+      <Typography variant="h6">
+        {" "}
         {colorInfo.lowerBound} ~ {colorInfo.upperBound}
-      </div>
+      </Typography>
     </Box>
   );
 };
