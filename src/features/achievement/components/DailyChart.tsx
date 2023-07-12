@@ -20,6 +20,7 @@ import {
 } from "@features/achievement/processSubmission";
 import type { RatingColor } from "@features/color/ratingColor";
 import { ratingColor, ratingColorInfo } from "@features/color/ratingColor";
+import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 type DailyEffort = {
   date: number;
@@ -58,6 +59,10 @@ export const DailyChart: React.FC<Props> = (props: Props) => {
     }, {} as { [C in RatingColor]: number });
     return { date: dayjs(date).unix() * 1000, ...colorCount };
   });
+
+  if (!submissions) {
+    return <CircularProgress />;
+  }
 
   return (
     <>
