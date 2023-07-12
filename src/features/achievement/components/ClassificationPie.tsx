@@ -42,6 +42,8 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
     value,
   } = props;
 
+  const fontSize = Math.min(outerRadius / 3, 14);
+
   return (
     <g>
       <Sector
@@ -62,10 +64,24 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
         outerRadius={outerRadius + 4}
         fill={fill}
       />
-      <text x={cx} y={cy} dy={-4} textAnchor="middle" fill={fill}>
+      <text
+        x={cx}
+        y={cy}
+        dy={-4}
+        textAnchor="middle"
+        fill={fill}
+        fontSize={fontSize}
+      >
         {payload.name}: {value}
       </text>
-      <text x={cx} y={cy} dy={18} textAnchor="middle" fill={fill}>
+      <text
+        x={cx}
+        y={cy}
+        dy={18}
+        textAnchor="middle"
+        fill={fill}
+        fontSize={fontSize}
+      >
         {`${(percent * 100).toFixed(2)}%`}
       </text>
     </g>
@@ -114,7 +130,7 @@ export const ClassificationPie: React.FC<Props> = (props: Props) => {
   return (
     <Box sx={{ textAlign: "center" }}>
       <div>
-        <ResponsiveContainer width="100%" aspect={2.5}>
+        <ResponsiveContainer width="100%" aspect={1.5}>
           <PieChart>
             <Pie
               activeIndex={activeIndex}

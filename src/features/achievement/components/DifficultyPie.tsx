@@ -42,7 +42,7 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
     value,
   } = props;
 
-  const fontSize = Math.min(outerRadius / 3.5, 14); // adjust this to suit your needs
+  const fontSize = Math.min(outerRadius / 3, 14);
 
   return (
     <g>
