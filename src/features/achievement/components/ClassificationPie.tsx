@@ -112,10 +112,18 @@ export const ClassificationPie: React.FC<Props> = (props: Props) => {
     { name: "Non-AC", value: nonACProblemCount, color: "#FFDD99" },
     {
       name: "No-Sub",
-      value: 2000 - ACProblemCount - nonACProblemCount,
+      value: problemsCount - ACProblemCount - nonACProblemCount,
       color: "#59606A",
     },
   ];
+
+  console.log(
+    problemsCount,
+    ACProblemCount,
+    nonACProblemCount,
+    submissions,
+    classification
+  );
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const onPieEnter = useCallback(
@@ -152,7 +160,7 @@ export const ClassificationPie: React.FC<Props> = (props: Props) => {
         </ResponsiveContainer>
       </div>
       <Typography variant="body1" color="text.secondary">
-        {ACProblemCount}/2000
+        {ACProblemCount}/{problemsCount}
       </Typography>
       <Typography variant="h6">{classification}</Typography>
     </Box>

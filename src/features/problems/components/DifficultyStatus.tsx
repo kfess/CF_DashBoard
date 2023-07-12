@@ -62,7 +62,7 @@ export const DifficultyStatus: React.FC<Props> = ({ problems }) => {
               <TableRow hover>
                 <TableCell>Difficulty</TableCell>
                 {ratingColor.map((color) => (
-                  <TableCell>
+                  <TableCell key={color}>
                     <div
                       css={{
                         display: "flex",
@@ -81,7 +81,7 @@ export const DifficultyStatus: React.FC<Props> = ({ problems }) => {
               <TableRow hover>
                 <TableCell>Total ({problems.length})</TableCell>
                 {ratingColor.map((color) => (
-                  <TableCell>
+                  <TableCell key={color}>
                     <div
                       css={{
                         display: "flex",
@@ -99,7 +99,7 @@ export const DifficultyStatus: React.FC<Props> = ({ problems }) => {
                 <TableRow hover>
                   <TableCell>{searchUserId}</TableCell>
                   {ratingColor.map((color) => (
-                    <TableCell>
+                    <TableCell key={color}>
                       <div
                         css={{
                           display: "flex",

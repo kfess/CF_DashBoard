@@ -12,8 +12,7 @@ type PieKinds = typeof pieKinds[number];
 
 type Props = { submissions: Submission[] };
 
-export const Pies: React.FC<Props> = (props: Props) => {
-  const { submissions } = props;
+export const Pies: React.FC<Props> = ({ submissions }) => {
   const [pieKind, setPieKind] = useState<PieKinds>("Difficulty");
 
   return (
