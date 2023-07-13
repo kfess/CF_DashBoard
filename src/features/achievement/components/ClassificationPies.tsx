@@ -24,7 +24,7 @@ export const ClassificationPies: React.FC<Props> = ({ submissions }) => {
 
   const { contestIdNameMap, isLoading: mapIsLoading } = useContestIdNameMap();
 
-  const classificationSubmissions = filterUniqueSubmissions(
+  const uniqueSubmissions = filterUniqueSubmissions(
     submissions.filter((submission) => {
       return (
         isACSubmission(submission) &&
@@ -32,15 +32,20 @@ export const ClassificationPies: React.FC<Props> = ({ submissions }) => {
         submission.problem.contestId !== undefined
       );
     })
-  ).reduce((obj, submission) => {
-    const classification = getClassification(
-      contestIdNameMap[submission.contestId as number] ?? ""
-    );
-    return {
-      ...obj,
-      [classification]: [...(obj[classification] ?? []), submission],
-    };
-  }, {} as { [C in Classification]: Submission[] });
+  );
+
+  const classificationSubmissions = uniqueSubmissions.reduce(
+    (obj, submission) => {
+      const classification = getClassification(
+        contestIdNameMap[submission.contestId as number] ?? ""
+      );
+      return {
+        ...obj,
+        [classification]: [...(obj[classification] ?? []), submission],
+      };
+    },
+    { All: uniqueSubmissions } as { [C in Classification]: Submission[] }
+  );
 
   const classificationProblems: ClassificationCount | undefined = data?.reduce(
     (obj, d) => {
@@ -50,10 +55,8 @@ export const ClassificationPies: React.FC<Props> = ({ submissions }) => {
           (obj[d.classification ?? "Others"] ?? 0) + 1,
       };
     },
-    {} as ClassificationCount
+    { All: data.length } as ClassificationCount
   );
-
-  console.log(classificationSubmissions);
 
   return (
     <>

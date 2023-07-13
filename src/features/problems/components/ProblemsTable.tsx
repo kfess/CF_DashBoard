@@ -59,8 +59,9 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
 
       // Difficulty filter
       const difficultyMatch =
-        (problem.rating ?? -1) >= lowerDifficulty &&
-        (problem.rating ?? -1) <= upperDifficulty;
+        !problem.rating ||
+        ((problem.rating ?? -1) >= lowerDifficulty &&
+          (problem.rating ?? -1) <= upperDifficulty);
 
       // Solved status filter
       let solvedStatusMatch = true;
@@ -90,6 +91,10 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
   const problemsLen = useMemo(
     () => filteredProblems.length,
     [filteredProblems]
+  );
+
+  console.log(
+    filteredProblems.filter((p) => p.classification === "Kotlin Heroes")
   );
 
   return (
