@@ -112,7 +112,6 @@ export const DifficultyPie: React.FC<Props> = (props: Props) => {
     { name: "Non-AC", value: nonACProblemCount, color: "#FFDD99" },
     {
       name: "No-Sub",
-      // value: problemsCount - ACProblemCount - nonACProblemCount,
       value: problemsCount - ACProblemCount - nonACProblemCount,
       color: "#59606A",
     },
