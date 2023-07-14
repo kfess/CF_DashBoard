@@ -113,7 +113,7 @@ export const DifficultyPie: React.FC<Props> = (props: Props) => {
     {
       name: "No-Sub",
       // value: problemsCount - ACProblemCount - nonACProblemCount,
-      value: 2000 - ACProblemCount - nonACProblemCount,
+      value: problemsCount - ACProblemCount - nonACProblemCount,
       color: "#59606A",
     },
   ];
@@ -155,7 +155,7 @@ export const DifficultyPie: React.FC<Props> = (props: Props) => {
       </div>
 
       <Typography variant="body1" color="text.secondary">
-        {ACProblemCount}/2000
+        {ACProblemCount} / {problemsCount}
       </Typography>
       <Typography variant="h6">
         {" "}
