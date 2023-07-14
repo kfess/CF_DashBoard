@@ -148,7 +148,7 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
           })),
         ]}
         selectedItem={selectedYear}
-        setSelectedItem={handleYearModeChange}
+        setSelectedItem={setSelectedYear}
       />
       <HeatMap heatMapData={heatMapData} heatMapContent={heatMapContent} />
     </>
