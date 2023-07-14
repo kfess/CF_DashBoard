@@ -22,6 +22,14 @@ const maxDifficultyToColor = (value: number | undefined) => {
   return value === undefined ? COLOR_GREY : getColorCodeFromRating(value);
 };
 
+// Define color samples for the legend
+const colorSamples = [
+  { color: "#9be9a8", value: "less" },
+  { color: "#40c463", value: "" },
+  { color: "#30a14e", value: "" },
+  { color: "#216e39", value: "more" },
+];
+
 const DAY_NAMES_SHORT = ["Mon", "Wed", "Fri"] as const;
 
 const BLOCK_WIDTH = 10;
@@ -46,61 +54,104 @@ type Props = {
 
 export const HeatMap: React.FC<Props> = ({ heatMapData, heatMapContent }) => {
   return (
-    <div css={{ width: "100%" }}>
-      <svg viewBox={`0 0 ${width} ${height}`} css={{ width: "100%" }}>
-        {DAY_NAMES_SHORT.map((dayName, i) => (
-          <text
-            key={dayName}
-            x={0}
-            y={yOffset * 0.7 + (2 * i + 2) * BLOCK_WIDTH}
-            fill="gray"
-            fontSize={7}
-          >
-            {dayName}
-          </text>
-        ))}
-        {heatMapData.map(({ date }, i) => {
-          const week = Math.floor(i / WEEKDAY);
-          const d = dayjs(date);
-          if (d.date() === 1) {
-            return (
-              <text
-                key={`text-${date}`}
-                x={xOffset + week * BLOCK_WIDTH}
-                y={yOffset * 0.7}
-                fill="gray"
-                fontSize={7}
-              >
-                {d.format("MMM")}
-              </text>
-            );
-          }
-          return null;
-        })}
-        {heatMapData.map(({ date, value, maxDifficulty }, i) => {
-          const color =
-            heatMapContent === "MaxDifficulty"
-              ? maxDifficultyToColor(maxDifficulty)
-              : valueToColor(value);
-          const week = Math.floor(i / WEEKDAY);
-          const day = i % WEEKDAY;
-          return (
-            <rect
-              key={date}
-              id={`rect-${date}`}
-              x={xOffset + week * BLOCK_WIDTH}
-              y={yOffset + day * BLOCK_WIDTH}
-              width={BLOCK_WIDTH * 0.9}
-              height={BLOCK_WIDTH * 0.9}
-              fill={color}
+    <>
+      <div>
+        {heatMapContent === "AllSubmissions" ? (
+          <div>
+            {heatMapData.reduce((prev, curr) => (prev += curr.value ?? 0), 0)}{" "}
+            Submissions
+          </div>
+        ) : (
+          <div>
+            {heatMapData.reduce((prev, curr) => (prev += curr.value ?? 0), 0)}{" "}
+            AC Submissions
+          </div>
+        )}
+      </div>
+      <div css={{ width: "100%" }}>
+        <svg viewBox={`0 0 ${width} ${height}`} css={{ width: "100%" }}>
+          {DAY_NAMES_SHORT.map((dayName, i) => (
+            <text
+              key={dayName}
+              x={0}
+              y={yOffset * 0.7 + (2 * i + 2) * BLOCK_WIDTH}
+              fill="gray"
+              fontSize={7}
             >
-              <title>{`Date: ${date}, Value: ${value ?? 0}, MaxDifficulty: ${
-                maxDifficulty ?? 0
-              }`}</title>
-            </rect>
-          );
-        })}
-      </svg>
-    </div>
+              {dayName}
+            </text>
+          ))}
+          {heatMapData.map(({ date }, i) => {
+            const week = Math.floor(i / WEEKDAY);
+            const d = dayjs(date);
+            if (d.date() === 1) {
+              return (
+                <text
+                  key={`text-${date}`}
+                  x={xOffset + week * BLOCK_WIDTH}
+                  y={yOffset * 0.7}
+                  fill="gray"
+                  fontSize={7}
+                >
+                  {d.format("MMM")}
+                </text>
+              );
+            }
+            return null;
+          })}
+          {heatMapData.map(({ date, value, maxDifficulty }, i) => {
+            const color =
+              heatMapContent === "MaxDifficulty"
+                ? maxDifficultyToColor(maxDifficulty)
+                : valueToColor(value);
+            const week = Math.floor(i / WEEKDAY);
+            const day = i % WEEKDAY;
+            return (
+              <rect
+                key={date}
+                id={`rect-${date}`}
+                x={xOffset + week * BLOCK_WIDTH}
+                y={yOffset + day * BLOCK_WIDTH}
+                width={BLOCK_WIDTH * 0.9}
+                height={BLOCK_WIDTH * 0.9}
+                fill={color}
+              >
+                <title>{`Date: ${date}, Value: ${value ?? 0}, MaxDifficulty: ${
+                  maxDifficulty ?? 0
+                }`}</title>
+              </rect>
+            );
+          })}
+        </svg>
+        <div
+          css={{
+            display: "flex",
+            justifyContent: "flex-start",
+            padding: "1rem",
+          }}
+        >
+          <svg viewBox={`0 0 ${width} 50`} css={{ width: "100%" }}>
+            {colorSamples.map(({ color, value }, i) => (
+              <g key={`colorSample-${i}`}>
+                <rect
+                  x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 2.5)} // Adjusted x position
+                  y={0} // Adjusted y position
+                  width={BLOCK_WIDTH * 0.9}
+                  height={BLOCK_WIDTH * 0.9}
+                  fill={color}
+                />
+                <text
+                  x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 2.5) - 5} // Adjusted x position
+                  y={25} // Adjusted y position
+                  fontSize={12}
+                >
+                  {value}
+                </text>
+              </g>
+            ))}
+          </svg>
+        </div>
+      </div>
+    </>
   );
 };
