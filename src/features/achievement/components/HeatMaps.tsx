@@ -141,7 +141,7 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
         setSelectedItem={setHeatMapContent}
       />
       <DropDownMenuButton
-        title={`Year : ${selectedYear}`}
+        title={`Year`}
         items={[
           ...years.map((year) => ({
             item: year,
