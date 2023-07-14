@@ -20,6 +20,7 @@ import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { TabItem, Tabs } from "@features/ui/component/Tabs";
 import { UserSubmissionPage } from "@pages/submission/user/index";
+import { HeatMaps } from "@features/achievement/components/HeatMaps";
 
 export const AchievementPage: React.FC = () => {
   const userId = useQueryParams(QueryParamKeys.USERID);
@@ -95,7 +96,7 @@ export const AchievementPage: React.FC = () => {
                 boxShadow: [1, 1, 1, 1],
               }}
             >
-              {/* <HeatMap tableData={tableData} /> */}
+              {data && <HeatMaps submissions={data} />}
             </Box>
           </Grid>
         </Grid>
