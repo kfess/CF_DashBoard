@@ -1,25 +1,50 @@
 import dayjs from "dayjs";
 import React from "react";
+import { HeatMapContent } from "@features/achievement/components/HeatMaps";
+import { getColorCodeFromRating } from "@features/color/ratingColor";
 
 const COLOR_GREY = "#ebedf0";
+const valueToColor = (value: number | undefined) => {
+  if (value === undefined) {
+    return COLOR_GREY;
+  } else if (value === 1) {
+    return "#9be9a8"; // Light green
+  } else if (value < 3) {
+    return "#40c463"; // Green
+  } else if (value < 5) {
+    return "#30a14e"; // Dark green
+  } else {
+    return "#216e39"; // Very dark green
+  }
+};
+
+const maxDifficultyToColor = (value: number | undefined) => {
+  return value === undefined ? COLOR_GREY : getColorCodeFromRating(value);
+};
+
 const DAY_NAMES_SHORT = ["Mon", "Wed", "Fri"] as const;
 
 const BLOCK_WIDTH = 10;
 const WEEKDAY = 7;
 const WEEKS = 53;
 
-type Props = {
-  tableData: { date: string; value?: number }[];
+const xOffset = BLOCK_WIDTH * 2;
+const yOffset = BLOCK_WIDTH;
+const width = xOffset + BLOCK_WIDTH * WEEKS + BLOCK_WIDTH * 0.5;
+const height = yOffset + BLOCK_WIDTH * WEEKDAY;
+
+export type HeatMapData = {
+  readonly date: string;
+  readonly value?: number;
+  readonly maxDifficulty?: number;
 };
 
-export const HeatMap: React.FC<Props> = (props: Props) => {
-  const { tableData } = props;
+type Props = {
+  heatMapData: HeatMapData[];
+  heatMapContent: HeatMapContent;
+};
 
-  const xOffset = BLOCK_WIDTH * 2;
-  const yOffset = BLOCK_WIDTH;
-  const width = xOffset + BLOCK_WIDTH * WEEKS + BLOCK_WIDTH * 0.5;
-  const height = yOffset + BLOCK_WIDTH * WEEKDAY;
-
+export const HeatMap: React.FC<Props> = ({ heatMapData, heatMapContent }) => {
   return (
     <div css={{ width: "100%" }}>
       <svg viewBox={`0 0 ${width} ${height}`} css={{ width: "100%" }}>
@@ -34,11 +59,10 @@ export const HeatMap: React.FC<Props> = (props: Props) => {
             {dayName}
           </text>
         ))}
-        {tableData.map(({ date }, i) => {
+        {heatMapData.map(({ date }, i) => {
           const week = Math.floor(i / WEEKDAY);
-          const day = i % WEEKS;
           const d = dayjs(date);
-          if (day === 0 && d.date() <= 7) {
+          if (d.date() === 1) {
             return (
               <text
                 key={`text-${date}`}
@@ -53,9 +77,11 @@ export const HeatMap: React.FC<Props> = (props: Props) => {
           }
           return null;
         })}
-        {tableData.map(({ date, value }, i) => {
-          if (dayjs().isAfter(date)) return null;
-          const color = value === undefined ? COLOR_GREY : "green";
+        {heatMapData.map(({ date, value, maxDifficulty }, i) => {
+          const color =
+            heatMapContent === "MaxDifficulty"
+              ? maxDifficultyToColor(maxDifficulty)
+              : valueToColor(value);
           const week = Math.floor(i / WEEKDAY);
           const day = i % WEEKDAY;
           return (
@@ -64,10 +90,14 @@ export const HeatMap: React.FC<Props> = (props: Props) => {
               id={`rect-${date}`}
               x={xOffset + week * BLOCK_WIDTH}
               y={yOffset + day * BLOCK_WIDTH}
-              width={BLOCK_WIDTH * 0.95}
-              height={BLOCK_WIDTH * 0.95}
+              width={BLOCK_WIDTH * 0.9}
+              height={BLOCK_WIDTH * 0.9}
               fill={color}
-            />
+            >
+              <title>{`Date: ${date}, Value: ${value ?? 0}, MaxDifficulty: ${
+                maxDifficulty ?? 0
+              }`}</title>
+            </rect>
           );
         })}
       </svg>
