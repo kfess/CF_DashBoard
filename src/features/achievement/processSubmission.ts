@@ -59,8 +59,7 @@ export const groupByLanguage = (
 
 export const getACProblemSet = (submissions: Submission[]): Set<string> => {
   const ACSubmissions = submissions.filter(isACSubmission);
-  const uniqueACSubmissions = filterUniqueSubmissions(ACSubmissions);
-  const ACProblemSet = uniqueACSubmissions.reduce((set, submission) => {
+  const ACProblemSet = ACSubmissions.reduce((set, submission) => {
     set.add(
       submission.contestId + submission.problem.index + submission.problem.name
     );

@@ -93,10 +93,6 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
     [filteredProblems]
   );
 
-  console.log(
-    filteredProblems.filter((p) => p.classification === "Kotlin Heroes")
-  );
-
   return (
     <>
       <TablePagination

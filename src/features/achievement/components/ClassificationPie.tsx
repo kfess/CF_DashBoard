@@ -117,6 +117,10 @@ export const ClassificationPie: React.FC<Props> = (props: Props) => {
     },
   ];
 
+  if (classification === "Div. 2") {
+    console.log(submissions);
+  }
+
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const onPieEnter = useCallback(
     (_: number, index: number) => {
