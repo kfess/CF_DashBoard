@@ -5,6 +5,7 @@ import type { Field } from "@features/layout/components/SideNavigationItems";
 import { HeaderBar } from "@features/layout/components/HeaderBar";
 import { SideNavigationBar } from "@features/layout/components/SideNavigationBar";
 import { pageMetaInfoMap } from "@helpers/pageMetaInfoMap";
+import { Footer } from "@features/layout/components/Footer";
 
 export const LayoutPage: React.FC = () => {
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
@@ -16,7 +17,7 @@ export const LayoutPage: React.FC = () => {
   const metaInfo = pageMetaInfoMap[path] ?? pageMetaInfoMap["default"];
 
   return (
-    <div>
+    <>
       <Helmet>
         <title>{metaInfo.title}</title>
         <meta name="description" content={metaInfo.description} />
@@ -35,7 +36,16 @@ export const LayoutPage: React.FC = () => {
           setSelectedItem={setSelectedItem}
         />
       )}
-      <Outlet />
-    </div>
+      <div
+        css={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+        }}
+      >
+        <Outlet />
+        <Footer />
+      </div>
+    </>
   );
 };

@@ -95,7 +95,13 @@ export const LinksPage: React.FC = () => {
           Competitive Programming Contests
         </Typography>
       </Box>
-      <Grid container spacing={2}>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          marginBottom: "2rem",
+        }}
+      >
         {contestResources.map((resource, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Card
@@ -131,7 +137,13 @@ export const LinksPage: React.FC = () => {
           Useful Resources
         </Typography>
       </Box>
-      <Grid container spacing={2}>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          marginBottom: "2rem",
+        }}
+      >
         {usefulResources.map((resource, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Card
