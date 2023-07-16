@@ -33,7 +33,7 @@ export const useFetchUserSubmission = ({
     enabled: !!userId,
   });
 
-  return { data, isError, error, isLoading };
+  return { data: data || [], isError, error, isLoading };
 };
 
 const fetchRecentSubmissions = async (): Promise<Submission[]> => {

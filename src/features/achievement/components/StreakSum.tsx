@@ -14,7 +14,7 @@ export const StreakSum: React.FC<Props> = (props: Props) => {
   return (
     <Box sx={{ textAlign: "center" }}>
       <Typography variant="body1" color="text.secondary">
-        Streak Sum
+        AC Streak Sum
       </Typography>
       <Typography variant="h4" sx={{ color: "success.main" }}>
         {uniqueACDate.size.toLocaleString()}

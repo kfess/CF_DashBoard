@@ -2,7 +2,6 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
 import { UniqueACCount } from "@features/achievement/components/UniqueACCount";
@@ -24,14 +23,10 @@ import { HeatMaps } from "@features/achievement/components/HeatMaps";
 
 export const AchievementPage: React.FC = () => {
   const userId = useQueryParams(QueryParamKeys.USERID);
-  const { data, isError, error, isLoading } = useFetchUserSubmission({
+  const { data } = useFetchUserSubmission({
     userId: userId,
   });
   const userInfo = useFetchUserInfo({ userId }).data;
-
-  if (isLoading) {
-    return <CircularProgress />;
-  }
 
   const tabItems: TabItem[] = [
     {
@@ -55,9 +50,9 @@ export const AchievementPage: React.FC = () => {
                 friendsOfCount={userInfo?.friendOfCount}
               />
               <Divider />
-              {data && <LanguageACCount submissions={data} />}
+              <LanguageACCount submissions={data} />
               <Divider />
-              {data && <TagACCount submissions={data} />}
+              <TagACCount submissions={data} />
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={8}>
@@ -69,12 +64,10 @@ export const AchievementPage: React.FC = () => {
                 boxShadow: [1, 1, 1, 1],
               }}
             >
-              {data && (
-                <>
-                  <UniqueACCount submissions={data} />
-                  <TotalRatingSum submissions={data} />
-                </>
-              )}
+              <>
+                <UniqueACCount submissions={data} />
+                <TotalRatingSum submissions={data} />
+              </>
             </Box>
             <Box
               sx={{
@@ -85,7 +78,7 @@ export const AchievementPage: React.FC = () => {
                 boxShadow: [1, 1, 1, 1],
               }}
             >
-              {data && <Streak submissions={data} />}
+              <Streak submissions={data} />
             </Box>
             <Box
               sx={{
@@ -96,7 +89,7 @@ export const AchievementPage: React.FC = () => {
                 boxShadow: [1, 1, 1, 1],
               }}
             >
-              {data && <HeatMaps submissions={data} />}
+              <HeatMaps submissions={data} />
             </Box>
           </Grid>
         </Grid>
@@ -109,19 +102,17 @@ export const AchievementPage: React.FC = () => {
       children: (
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            {data && (
-              <Box
-                sx={{
-                  m: 1,
-                  p: 1,
-                  backgroundColor: "white",
-                  borderRadius: 1,
-                  boxShadow: [1, 1, 1, 1],
-                }}
-              >
-                <Pies submissions={data} />
-              </Box>
-            )}
+            <Box
+              sx={{
+                m: 1,
+                p: 1,
+                backgroundColor: "white",
+                borderRadius: 1,
+                boxShadow: [1, 1, 1, 1],
+              }}
+            >
+              <Pies submissions={data} />
+            </Box>
           </Grid>
         </Grid>
       ),
@@ -133,21 +124,19 @@ export const AchievementPage: React.FC = () => {
       children: (
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            {data && (
-              <Box
-                sx={{
-                  m: 1,
-                  p: 1,
-                  backgroundColor: "white",
-                  borderRadius: 1,
-                  boxShadow: [1, 1, 1, 1],
-                }}
-              >
-                <DailyChart submissions={data} />
-                <Divider />
-                <ClimbingChart submissions={data} />
-              </Box>
-            )}
+            <Box
+              sx={{
+                m: 1,
+                p: 1,
+                backgroundColor: "white",
+                borderRadius: 1,
+                boxShadow: [1, 1, 1, 1],
+              }}
+            >
+              <DailyChart submissions={data} />
+              <Divider />
+              <ClimbingChart submissions={data} />
+            </Box>
           </Grid>
         </Grid>
       ),

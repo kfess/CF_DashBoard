@@ -34,7 +34,7 @@ export const CurrentStreak: React.FC<Props> = (props: Props) => {
   return (
     <Box sx={{ textAlign: "center" }}>
       <Typography variant="body1" color="text.secondary">
-        Current Streak
+        Current AC Streak
       </Typography>
       <Typography variant="h4" sx={{ color: "success.main" }}>
         {currentStreak.toLocaleString()}

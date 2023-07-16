@@ -19,6 +19,7 @@ import { LinksPage } from "@pages/links";
 import { TermsPage } from "@pages/terms";
 import { ApiPage } from "@pages/api";
 import { SettingPage } from "@pages/setting";
+import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 // const ProblemsPage = lazy(() => import("@pages/problems"));
 
@@ -29,7 +30,14 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <ContestsPage /> },
       { path: "/problems", element: <ProblemsPage /> },
-      { path: "/achievement", element: <AchievementPage /> },
+      {
+        path: "/achievement",
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <AchievementPage />
+          </Suspense>
+        ),
+      },
       { path: "/recommend", element: <RecommendationPage /> },
       { path: "labels", element: <LabelsPage /> },
       { path: "labels/:labelName", element: <LabelPage /> },

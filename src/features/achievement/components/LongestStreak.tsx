@@ -39,7 +39,7 @@ export const LongestStreak: React.FC<Props> = (props: Props) => {
   return (
     <Box sx={{ textAlign: "center" }}>
       <Typography variant="body1" color="text.secondary">
-        Max Streak
+        Max AC Streak
       </Typography>
       <Typography variant="h4" sx={{ color: "success.main" }}>
         {maxStreak.toLocaleString()}
