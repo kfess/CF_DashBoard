@@ -6,20 +6,16 @@ import {
   ACStreakSum,
   StreakSum,
 } from "@features/achievement/components/StreakSum";
-import {
-  CurrentACStreak,
-  CurrentStreak,
-} from "@features/achievement/components/CurrentStreak";
+import { CurrentStreak } from "@features/achievement/components/CurrentStreak";
 import {
   LongestACStreak,
   LongestStreak,
 } from "@features/achievement/components/LongestStreak";
+import { isACSubmission } from "../processSubmission";
 
 type Props = { submissions: Submission[] };
 
-export const Streak: React.FC<Props> = (props: Props) => {
-  const { submissions } = props;
-
+export const Streak: React.FC<Props> = ({ submissions }) => {
   return (
     <Box sx={{ padding: 1 }}>
       <Typography variant="h6" gutterBottom>
@@ -30,25 +26,42 @@ export const Streak: React.FC<Props> = (props: Props) => {
           display: "flex",
           justifyContent: "space-evenly",
           alignItems: "center",
-          width: "100%",
-          marginBottom: 2,
+          flexWrap: "wrap",
         }}
       >
-        <ACStreakSum submissions={submissions} />
-        <CurrentACStreak submissions={submissions} />
-        <LongestACStreak submissions={submissions} />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          width: "100%",
-        }}
-      >
-        <StreakSum submissions={submissions} />
-        <CurrentStreak submissions={submissions} />
-        <LongestStreak submissions={submissions} />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+            width: "100%",
+            marginBottom: 2,
+          }}
+        >
+          <ACStreakSum submissions={submissions} />
+          <CurrentStreak
+            submissions={submissions}
+            filterFunc={isACSubmission}
+            title="Current AC Streak"
+          />
+          <LongestACStreak submissions={submissions} />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <StreakSum submissions={submissions} />
+          <CurrentStreak
+            submissions={submissions}
+            filterFunc={() => true}
+            title="Current Streak"
+          />
+          <LongestStreak submissions={submissions} />
+        </Box>
       </Box>
     </Box>
   );
