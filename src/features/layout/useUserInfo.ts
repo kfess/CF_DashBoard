@@ -29,7 +29,7 @@ export const useFetchUserInfo = ({ userId }: { userId: string | null }) => {
     refetchOnMount: false,
     refetchOnReconnect: false,
     retry: false,
-    useErrorBoundary: false,
+    useErrorBoundary: false, // For now, we don't want to use ErrorBoundary
   });
 
   return { data, isError, error, isLoading, isSuccess };

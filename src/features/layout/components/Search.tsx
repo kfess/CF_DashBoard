@@ -15,13 +15,13 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
   const queryUserId = useQueryParams(QueryParamKeys.USERID);
   const [searchUserId, setSearchUserId] = useState(queryUserId);
 
-  const { data, isError, isSuccess } = useFetchUserInfo({
+  const { isError } = useFetchUserInfo({
     userId: queryUserId,
   });
 
   useEffect(() => {
     if (isError) {
-      navigate(generateUrlPath(pathname, ""));
+      navigate(generateUrlPath("/", ""));
     }
   }, [isError, navigate, pathname]);
 

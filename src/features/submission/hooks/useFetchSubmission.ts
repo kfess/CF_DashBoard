@@ -31,6 +31,7 @@ export const useFetchUserSubmission = ({
       }
     },
     enabled: !!userId,
+    useErrorBoundary: false, // For now, we don't want to use ErrorBoundary
   });
 
   return { data: data || [], isError, error, isLoading };
@@ -59,6 +60,7 @@ export const useFetchRecentSubmissions = () => {
     queryFn: fetchRecentSubmissions,
     refetchInterval: 1000 * 60 * 60 * 1,
     refetchOnWindowFocus: false,
+    useErrorBoundary: false, // For now, we don't want to use ErrorBoundary
   });
 
   return { data, isError, error, isLoading };

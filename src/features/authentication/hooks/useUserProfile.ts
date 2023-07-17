@@ -62,6 +62,7 @@ export const useUserProfile = () => {
     queryKey: ["userProfile"],
     queryFn: fetchUserProfile,
     retry: false,
+    useErrorBoundary: false, // For now, we don't want to use ErrorBoundary
   });
 
   // mutate user codeforces username
