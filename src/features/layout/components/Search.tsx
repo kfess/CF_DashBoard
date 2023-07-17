@@ -15,9 +15,15 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
   const queryUserId = useQueryParams(QueryParamKeys.USERID);
   const [searchUserId, setSearchUserId] = useState(queryUserId);
 
-  const { data, isError, isSuccess, isLoading } = useFetchUserInfo({
+  const { data, isError, isSuccess } = useFetchUserInfo({
     userId: queryUserId,
   });
+
+  useEffect(() => {
+    if (isError) {
+      navigate(generateUrlPath(pathname, ""));
+    }
+  }, [isError, navigate, pathname]);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchUserId(event.target.value);
@@ -32,12 +38,6 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
     },
     [navigate, pathname, searchUserId]
   );
-
-  useEffect(() => {
-    if (isError) {
-      navigate(generateUrlPath(pathname, ""));
-    }
-  }, [isError, navigate, pathname]);
 
   return visible ? (
     <Box css={{ width: "100%" }}>

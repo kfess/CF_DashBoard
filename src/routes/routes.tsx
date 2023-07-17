@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
 import { LayoutPage } from "@pages/layout";
 import { ContestsPage } from "@pages/contests";
 import { ProblemsPage } from "@pages/problems/";
@@ -26,7 +27,11 @@ import { CircularProgress } from "@features/ui/component/CircularProgress";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <LayoutPage />,
+    element: (
+      <Suspense fallback={<CircularProgress />}>
+        <LayoutPage />
+      </Suspense>
+    ),
     children: [
       {
         index: true,

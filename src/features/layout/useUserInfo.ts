@@ -29,6 +29,7 @@ export const useFetchUserInfo = ({ userId }: { userId: string | null }) => {
     refetchOnMount: false,
     refetchOnReconnect: false,
     retry: false,
+    useErrorBoundary: false,
   });
 
   return { data, isError, error, isLoading, isSuccess };
