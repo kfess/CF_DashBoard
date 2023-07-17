@@ -28,8 +28,22 @@ export const router = createBrowserRouter([
     path: "/",
     element: <LayoutPage />,
     children: [
-      { index: true, element: <ContestsPage /> },
-      { path: "/problems", element: <ProblemsPage /> },
+      {
+        index: true,
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <ContestsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/problems",
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <ProblemsPage />
+          </Suspense>
+        ),
+      },
       {
         path: "/achievement",
         element: (
@@ -38,30 +52,73 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      { path: "/recommend", element: <RecommendationPage /> },
-      { path: "labels", element: <LabelsPage /> },
-      { path: "labels/:labelName", element: <LabelPage /> },
-      { path: "/submission", element: <SubmissionPage /> },
+      {
+        path: "/recommend",
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <RecommendationPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "labels",
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <LabelsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "labels/:labelName",
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <LabelPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/submission",
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <SubmissionPage />
+          </Suspense>
+        ),
+      },
       // { path: "/ranking", element: <div>ranking</div> },
-      { path: "/custom-contest", element: <CustomContestPage /> },
+      {
+        path: "/custom-contest",
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <CustomContestPage />
+          </Suspense>
+        ),
+      },
       {
         path: "/custom-contest/show/:contestId",
-        element: <ShowCustomContestPage />,
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <ShowCustomContestPage />
+          </Suspense>
+        ),
       },
       {
         path: "/profile",
         element: (
-          <PrivateRoute>
-            <ProfilePage />
-          </PrivateRoute>
+          <Suspense fallback={<CircularProgress />}>
+            <PrivateRoute>
+              <ProfilePage />
+            </PrivateRoute>
+          </Suspense>
         ),
       },
       {
         path: "/custom-contest/create",
         element: (
-          <PrivateRoute>
-            <CreateCustomContestPage />
-          </PrivateRoute>
+          <Suspense fallback={<CircularProgress />}>
+            <PrivateRoute>
+              <CreateCustomContestPage />
+            </PrivateRoute>
+          </Suspense>
         ),
       },
       { path: "/api", element: <ApiPage /> },

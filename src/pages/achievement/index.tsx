@@ -28,6 +28,8 @@ export const AchievementPage: React.FC = () => {
   });
   const userInfo = useFetchUserInfo({ userId }).data;
 
+  if (!userId) return null;
+
   const tabItems: TabItem[] = [
     {
       label: "Summary",

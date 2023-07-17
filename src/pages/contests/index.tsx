@@ -9,14 +9,13 @@ import {
   getProblemIdxFromClassification,
 } from "@features/contests/helper";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
-import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { FilterChips } from "@features/contests/components/FilterChips";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { useFetchContests } from "@features/contests/hooks/useFetchContest";
 
 export const ContestsPage: React.FC = () => {
-  const { data, isError, error, isLoading } = useFetchContests();
+  const { data } = useFetchContests();
 
   const {
     state,
@@ -47,19 +46,6 @@ export const ContestsPage: React.FC = () => {
   );
 
   const { solvedSet, attemptedSet } = useSolvedStatus();
-
-  if (
-    isLoading ||
-    !contests ||
-    !problemIdxes ||
-    (!solvedSet && !attemptedSet)
-  ) {
-    return <CircularProgress />;
-  }
-
-  if (isError) {
-    return <span>Error: {error?.message}</span>;
-  }
 
   return (
     <Container maxWidth="lg">
