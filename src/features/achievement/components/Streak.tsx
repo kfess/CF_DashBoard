@@ -2,9 +2,18 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
-import { StreakSum } from "@features/achievement/components/StreakSum";
-import { CurrentStreak } from "@features/achievement/components/CurrentStreak";
-import { LongestStreak } from "@features/achievement/components/LongestStreak";
+import {
+  ACStreakSum,
+  StreakSum,
+} from "@features/achievement/components/StreakSum";
+import {
+  CurrentACStreak,
+  CurrentStreak,
+} from "@features/achievement/components/CurrentStreak";
+import {
+  LongestACStreak,
+  LongestStreak,
+} from "@features/achievement/components/LongestStreak";
 
 type Props = { submissions: Submission[] };
 
@@ -21,6 +30,20 @@ export const Streak: React.FC<Props> = (props: Props) => {
           display: "flex",
           justifyContent: "space-evenly",
           alignItems: "center",
+          width: "100%",
+          marginBottom: 2,
+        }}
+      >
+        <ACStreakSum submissions={submissions} />
+        <CurrentACStreak submissions={submissions} />
+        <LongestACStreak submissions={submissions} />
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          alignItems: "center",
+          width: "100%",
         }}
       >
         <StreakSum submissions={submissions} />

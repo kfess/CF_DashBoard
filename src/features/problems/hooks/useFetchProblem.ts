@@ -41,6 +41,7 @@ export const useFetchProblems = () => {
     refetchOnWindowFocus: false,
     refetchOnReconnect: true,
     retry: 3,
+    useErrorBoundary: false,
   });
 
   return { data, isError, error, isLoading };

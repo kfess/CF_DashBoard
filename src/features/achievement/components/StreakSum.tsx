@@ -6,8 +6,7 @@ import { isACSubmission, uniqueDateSet } from "../processSubmission";
 
 type Props = { submissions: Submission[] };
 
-export const StreakSum: React.FC<Props> = (props: Props) => {
-  const { submissions } = props;
+export const ACStreakSum: React.FC<Props> = ({ submissions }) => {
   const ACSubmissions = submissions.filter(isACSubmission);
   const uniqueACDate = uniqueDateSet(ACSubmissions);
 
@@ -15,6 +14,24 @@ export const StreakSum: React.FC<Props> = (props: Props) => {
     <Box sx={{ textAlign: "center" }}>
       <Typography variant="body1" color="text.secondary">
         AC Streak Sum
+      </Typography>
+      <Typography variant="h4" sx={{ color: "success.main" }}>
+        {uniqueACDate.size.toLocaleString()}
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        {uniqueACDate.size > 1 ? "days" : "day"}
+      </Typography>
+    </Box>
+  );
+};
+
+export const StreakSum: React.FC<Props> = ({ submissions }) => {
+  const uniqueACDate = uniqueDateSet(submissions);
+
+  return (
+    <Box sx={{ textAlign: "center" }}>
+      <Typography variant="body1" color="text.secondary">
+        Streak Sum
       </Typography>
       <Typography variant="h4" sx={{ color: "success.main" }}>
         {uniqueACDate.size.toLocaleString()}
