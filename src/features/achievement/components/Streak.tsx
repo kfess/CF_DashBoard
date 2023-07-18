@@ -2,15 +2,9 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
-import {
-  ACStreakSum,
-  StreakSum,
-} from "@features/achievement/components/StreakSum";
+import { StreakSum } from "@features/achievement/components/StreakSum";
 import { CurrentStreak } from "@features/achievement/components/CurrentStreak";
-import {
-  LongestACStreak,
-  LongestStreak,
-} from "@features/achievement/components/LongestStreak";
+import { LongestStreak } from "@features/achievement/components/LongestStreak";
 import { isACSubmission } from "../processSubmission";
 
 type Props = { submissions: Submission[] };
@@ -38,13 +32,21 @@ export const Streak: React.FC<Props> = ({ submissions }) => {
             marginBottom: 2,
           }}
         >
-          <ACStreakSum submissions={submissions} />
+          <StreakSum
+            submissions={submissions}
+            filterFunc={isACSubmission}
+            title="AC Streak Sum"
+          />
           <CurrentStreak
             submissions={submissions}
             filterFunc={isACSubmission}
             title="Current AC Streak"
           />
-          <LongestACStreak submissions={submissions} />
+          <LongestStreak
+            submissions={submissions}
+            filterFunc={isACSubmission}
+            title="Longest AC Streak"
+          />
         </Box>
         <Box
           sx={{
@@ -54,13 +56,21 @@ export const Streak: React.FC<Props> = ({ submissions }) => {
             width: "100%",
           }}
         >
-          <StreakSum submissions={submissions} />
+          <StreakSum
+            submissions={submissions}
+            filterFunc={() => true}
+            title="Streak Sum"
+          />
           <CurrentStreak
             submissions={submissions}
             filterFunc={() => true}
             title="Current Streak"
           />
-          <LongestStreak submissions={submissions} />
+          <LongestStreak
+            submissions={submissions}
+            filterFunc={() => true}
+            title="Longest Streak"
+          />
         </Box>
       </Box>
     </Box>

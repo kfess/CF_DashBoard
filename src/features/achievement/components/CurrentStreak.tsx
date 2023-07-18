@@ -7,7 +7,7 @@ import { uniqueDateSet } from "@features/achievement/processSubmission";
 
 const _calcCurrentStreak = (
   submissions: Submission[],
-  filterFunc: (submission: Submission) => boolean
+  filterFunc: (submission: Submission) => boolean // parent componentで useCallback して渡す
 ): number => {
   const today = dayjs().format("YYYY/MM/DD");
   const yesterday = dayjs().subtract(1, "day").format("YYYY/MM/DD");

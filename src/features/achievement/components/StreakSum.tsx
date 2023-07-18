@@ -1,43 +1,44 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
-import { isACSubmission, uniqueDateSet } from "../processSubmission";
+import { uniqueDateSet } from "../processSubmission";
 
-type Props = { submissions: Submission[] };
-
-export const ACStreakSum: React.FC<Props> = ({ submissions }) => {
-  const ACSubmissions = submissions.filter(isACSubmission);
-  const uniqueACDate = uniqueDateSet(ACSubmissions);
-
-  return (
-    <Box sx={{ textAlign: "center" }}>
-      <Typography variant="body1" color="text.secondary">
-        AC Streak Sum
-      </Typography>
-      <Typography variant="h4" sx={{ color: "success.main" }}>
-        {uniqueACDate.size.toLocaleString()}
-      </Typography>
-      <Typography variant="body2" color="text.secondary">
-        {uniqueACDate.size > 1 ? "days" : "day"}
-      </Typography>
-    </Box>
-  );
+const _calcStreakSum = (
+  submissions: Submission[],
+  filterFunc: (submission: Submission) => boolean // parent componentで useCallback して渡す
+) => {
+  const filteredSubmissions = submissions.filter(filterFunc);
+  const uniqueDate = uniqueDateSet(filteredSubmissions);
+  return uniqueDate.size;
 };
 
-export const StreakSum: React.FC<Props> = ({ submissions }) => {
-  const uniqueACDate = uniqueDateSet(submissions);
+type Props = {
+  submissions: Submission[];
+  filterFunc: (submission: Submission) => boolean;
+  title: string;
+};
+
+export const StreakSum: React.FC<Props> = ({
+  submissions,
+  filterFunc,
+  title,
+}) => {
+  const streakSum = useMemo(
+    () => _calcStreakSum(submissions, filterFunc),
+    [submissions, filterFunc]
+  );
 
   return (
     <Box sx={{ textAlign: "center" }}>
       <Typography variant="body1" color="text.secondary">
-        Streak Sum
+        {title}
       </Typography>
       <Typography variant="h4" sx={{ color: "success.main" }}>
-        {uniqueACDate.size.toLocaleString()}
+        {streakSum.toLocaleString()}
       </Typography>
       <Typography variant="body2" color="text.secondary">
-        {uniqueACDate.size > 1 ? "days" : "day"}
+        {streakSum > 1 ? "days" : "day"}
       </Typography>
     </Box>
   );
