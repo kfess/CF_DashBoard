@@ -30,9 +30,9 @@ const _calcLongestStreak = (
 };
 
 type Props = {
-  submissions: Submission[];
-  filterFunc: (submission: Submission) => boolean; // parent componentで useCallback して渡す
-  title: string;
+  readonly submissions: Submission[];
+  readonly filterFunc: (submission: Submission) => boolean; // parent component で useCallback して渡す
+  readonly title: string;
 };
 
 export const LongestStreak: React.FC<Props> = ({

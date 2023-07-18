@@ -10,10 +10,9 @@ import { useToggle } from "@hooks/index";
 
 type Props = { submissions: Submission[] };
 
-export const TagACCount: React.FC<Props> = (props: Props) => {
+export const TagACCount: React.FC<Props> = ({ submissions }) => {
   const [isReadMore, toggleReadMore] = useToggle(true, false);
 
-  const { submissions } = props;
   const tagMap = getACTagMap(submissions);
   const tagCounts = [...tags]
     .sort((a, b) => (tagMap.get(b) ?? 0) - (tagMap.get(a) ?? 0))

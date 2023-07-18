@@ -6,7 +6,7 @@ import { uniqueDateSet } from "../processSubmission";
 
 const _calcStreakSum = (
   submissions: Submission[],
-  filterFunc: (submission: Submission) => boolean // parent componentで useCallback して渡す
+  filterFunc: (submission: Submission) => boolean // parent component で useCallback して渡す
 ) => {
   const filteredSubmissions = submissions.filter(filterFunc);
   const uniqueDate = uniqueDateSet(filteredSubmissions);
@@ -14,9 +14,9 @@ const _calcStreakSum = (
 };
 
 type Props = {
-  submissions: Submission[];
-  filterFunc: (submission: Submission) => boolean;
-  title: string;
+  readonly submissions: Submission[];
+  readonly filterFunc: (submission: Submission) => boolean;
+  readonly title: string;
 };
 
 export const StreakSum: React.FC<Props> = ({

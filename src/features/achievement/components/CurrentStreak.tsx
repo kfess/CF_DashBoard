@@ -7,7 +7,7 @@ import { uniqueDateSet } from "@features/achievement/processSubmission";
 
 const _calcCurrentStreak = (
   submissions: Submission[],
-  filterFunc: (submission: Submission) => boolean // parent componentで useCallback して渡す
+  filterFunc: (submission: Submission) => boolean // parent component で useCallback して渡す
 ): number => {
   const today = dayjs().format("YYYY/MM/DD");
   const yesterday = dayjs().subtract(1, "day").format("YYYY/MM/DD");
@@ -34,9 +34,9 @@ const _calcCurrentStreak = (
 };
 
 type Props = {
-  submissions: Submission[];
-  filterFunc: (submission: Submission) => boolean;
-  title: string;
+  readonly submissions: Submission[];
+  readonly filterFunc: (submission: Submission) => boolean;
+  readonly title: string;
 };
 
 export const CurrentStreak: React.FC<Props> = ({

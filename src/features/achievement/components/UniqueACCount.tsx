@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -9,18 +9,46 @@ import {
 } from "@features/achievement/processSubmission";
 import { isLastMonth, isLastYear } from "@helpers/date";
 
-type Props = { submissions: Submission[] };
+const pluralize = (
+  count: number,
+  singular: string,
+  plural: string | null = null
+) => {
+  if (!Number.isInteger(count)) {
+    throw new Error("count must be an integer");
+  }
+  if (plural === null) {
+    plural = singular + "s";
+  }
+  return count <= 1 ? singular : plural;
+};
 
-export const UniqueACCount: React.FC<Props> = (props: Props) => {
-  const { submissions } = props;
-
-  const ACSubs = submissions.filter(isACSubmission);
-  const uniqueACSubs = filterUniqueSubmissions(ACSubs);
-  const lastYearUniqueACSubs = uniqueACSubs.filter((sub) =>
-    isLastYear(sub.creationTimeSeconds)
+const _filterSubmissions = (
+  submissions: Submission[],
+  filterFunc: (time: number) => boolean
+) => {
+  const filteredSubmissions = submissions.filter(isACSubmission);
+  const uniqueFilteredSubmissions =
+    filterUniqueSubmissions(filteredSubmissions);
+  return uniqueFilteredSubmissions.filter((sub) =>
+    filterFunc(sub.creationTimeSeconds)
   );
-  const lastMonthYniqueACSubs = uniqueACSubs.filter((sub) =>
-    isLastMonth(sub.creationTimeSeconds)
+};
+
+type Props = { readonly submissions: Submission[] };
+
+export const UniqueACCount: React.FC<Props> = ({ submissions }) => {
+  const uniqueACSubs = useMemo(
+    () => _filterSubmissions(submissions, () => true),
+    [submissions]
+  );
+  const lastYearUniqueACSubs = useMemo(
+    () => _filterSubmissions(submissions, isLastYear),
+    [submissions]
+  );
+  const lastMonthUniqueACSubs = useMemo(
+    () => _filterSubmissions(submissions, isLastMonth),
+    [submissions]
   );
 
   return (
@@ -46,7 +74,7 @@ export const UniqueACCount: React.FC<Props> = (props: Props) => {
             {uniqueACSubs.length.toLocaleString()}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {uniqueACSubs.length > 1 ? "problems" : "problem"} solved
+            {pluralize(uniqueACSubs.length, "problem")} solved
           </Typography>
         </Box>
         <Box sx={{ textAlign: "center" }}>
@@ -57,7 +85,7 @@ export const UniqueACCount: React.FC<Props> = (props: Props) => {
             {lastYearUniqueACSubs.length.toLocaleString()}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {lastYearUniqueACSubs.length > 1 ? "problems" : "problem"} solved
+            {pluralize(lastYearUniqueACSubs.length, "problem")} solved
           </Typography>
         </Box>
         <Box sx={{ textAlign: "center" }}>
@@ -65,10 +93,10 @@ export const UniqueACCount: React.FC<Props> = (props: Props) => {
             Last Month
           </Typography>
           <Typography variant="h4" sx={{ color: "success.main" }}>
-            {lastMonthYniqueACSubs.length.toLocaleString()}
+            {lastMonthUniqueACSubs.length.toLocaleString()}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {lastMonthYniqueACSubs.length > 1 ? "problems" : "problem"} solved
+            {pluralize(lastMonthUniqueACSubs.length, "problem")} solved
           </Typography>
         </Box>
       </Stack>
