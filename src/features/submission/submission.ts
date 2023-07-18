@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { problemSchema } from "@features/problems/problem";
+import { normalizedLanguage, normalizeLanguage,type NormalizedLanguage } from "@features/language/language";
 
 // https://codeforces.com/apiHelp/objects#Member
 // https://codeforces.com/apiHelp/objects#Party
@@ -138,6 +139,12 @@ const testset = [
 ] as const;
 type Testset = typeof testset[number];
 
+// normalize language from string to NormalizedLanguage
+const normalizedLanguageSchema = z.string().transform(normalizeLanguage).refine(
+  (val: string) => normalizedLanguage.includes(val as NormalizedLanguage),   // I don't want to use "as" assertion...
+  { message: "Invalid language" }
+);
+
 // submission
 const submissionSchema = z.object({
   id: z.number(),
@@ -146,7 +153,7 @@ const submissionSchema = z.object({
   relativeTimeSeconds: z.number(),
   problem: problemSchema,
   author: partySchema,
-  programmingLanguage: z.string(),
+  programmingLanguage: normalizedLanguageSchema,
   verdict: z.optional(verdictSchema),
   testset: testsetSchema,
   passedTestCount: z.number().optional(),

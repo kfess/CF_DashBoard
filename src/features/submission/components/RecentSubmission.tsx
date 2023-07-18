@@ -9,7 +9,6 @@ import Paper from "@mui/material/Paper";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { useFetchRecentSubmissions } from "@features/submission/hooks/useFetchSubmission";
-import { normalizeLanguage } from "@features/language/language";
 import { formatUnixTime } from "@helpers/date";
 import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
@@ -88,9 +87,7 @@ export const RecentSubmission: React.FC = () => {
                         <TableCell>
                           <VerdictChip verdict={d.verdict} />
                         </TableCell>
-                        <TableCell>
-                          {normalizeLanguage(d.programmingLanguage)}
-                        </TableCell>
+                        <TableCell>{d.programmingLanguage}</TableCell>
                         <TableCell>
                           <a
                             target="_blank"

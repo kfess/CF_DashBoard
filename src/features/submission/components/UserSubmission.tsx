@@ -8,7 +8,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
-import { normalizeLanguage } from "@features/language/language";
 import { formatUnixTime } from "@helpers/date";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
@@ -17,16 +16,15 @@ import { verdictMap } from "@helpers/verdict";
 import { VerdictFilter } from "./SolvedStatusFilter";
 import { LanguageFilter } from "./LanguageFilter";
 import { usePagination } from "@hooks/index";
-import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 import { Classification } from "@features/contests/contest";
 import { getClassification } from "@features/contests/utils/getClassification";
 
 type Props = {
-  userId: string;
-  classification: Classification;
-  solvedStatus: VerdictFilter;
-  language: LanguageFilter;
+  readonly userId: string;
+  readonly classification: Classification;
+  readonly solvedStatus: VerdictFilter;
+  readonly language: LanguageFilter;
 };
 
 export const UserSubmission: React.FC<Props> = ({
@@ -35,34 +33,29 @@ export const UserSubmission: React.FC<Props> = ({
   solvedStatus,
   language,
 }) => {
-  const { data, isError, error, isLoading } = useFetchUserSubmission({
+  const { data } = useFetchUserSubmission({
     userId: userId,
   });
 
-  const { contestIdNameMap, isLoading: mapIsLoading } = useContestIdNameMap();
+  const { contestIdNameMap } = useContestIdNameMap();
 
   const filteredData = useMemo(() => {
     return data?.filter((d) => {
       const contestClassification = getClassification(
         contestIdNameMap[d.contestId as number] ?? ""
       );
-      const normalizedLanguage = normalizeLanguage(d.programmingLanguage);
       const verdictStatus = verdictMap[d.verdict ?? "UNKNOWN"];
 
       return (
         (classification === "All" ||
           classification === contestClassification) &&
         (solvedStatus === "All" || solvedStatus === verdictStatus) &&
-        (language === "All" || language === normalizedLanguage)
+        (language === "All" || language === d.programmingLanguage)
       );
     });
   }, [data, contestIdNameMap, classification, solvedStatus, language]);
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
-
-  if (isLoading || mapIsLoading) {
-    return <CircularProgress />;
-  }
 
   return (
     <>
@@ -131,9 +124,7 @@ export const UserSubmission: React.FC<Props> = ({
                           <TableCell>
                             <VerdictChip verdict={d.verdict} />
                           </TableCell>
-                          <TableCell>
-                            {normalizeLanguage(d.programmingLanguage)}
-                          </TableCell>
+                          <TableCell>{d.programmingLanguage}</TableCell>
                           <TableCell>
                             <a
                               target="_blank"
