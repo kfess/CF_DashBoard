@@ -37,216 +37,57 @@ export const normalizedLanguage = [
 ] as const;
 
 export type NormalizedLanguage = typeof normalizedLanguage[number];
-
-export const normalizeLanguage = (language: string): NormalizedLanguage => {
-  return isC(language)
-    ? "C"
-    : isCplusplus(language)
-    ? "C++"
-    : isCsharp(language)
-    ? "C#"
-    : isD(language)
-    ? "D"
-    : isGo(language)
-    ? "Go"
-    : isHaskell(language)
-    ? "Haskell"
-    : isJava(language)
-    ? "Java"
-    : isKotlin(language)
-    ? "Kotlin"
-    : isOCaml(language)
-    ? "OCaml"
-    : isDelphi(language)
-    ? "Delphi"
-    : isFPC(language)
-    ? "FPC"
-    : isPascalABCNet(language)
-    ? "PascalABC.NET"
-    : isPerl(language)
-    ? "Perl"
-    : isPHP(language)
-    ? "PHP"
-    : isPython(language)
-    ? "Python"
-    : isPyPy(language)
-    ? "PyPy"
-    : isRuby(language)
-    ? "Ruby"
-    : isRust(language)
-    ? "Rust"
-    : isScala(language)
-    ? "Scala"
-    : isJavascript(language)
-    ? "JavaScript"
-    : isNodejs(language)
-    ? "Node.js"
-    : isTcl(language)
-    ? "Tcl"
-    : isIo(language)
-    ? "Io"
-    : isPike(language)
-    ? "Pike"
-    : isBefunge(language)
-    ? "Befungi"
-    : isCobol(language)
-    ? "Cobol"
-    : isFactor(language)
-    ? "Factor"
-    : isRoco(language)
-    ? "Roco"
-    : isAda(language)
-    ? "Ada"
-    : isPicat(language)
-    ? "Picat"
-    : isQsharp(language)
-    ? "Q#"
-    : isJ(language)
-    ? "J"
-    : isText(language)
-    ? "Text"
-    : isMysterious(language)
-    ? "Mysterious Language"
-    : "Other";
+export type LanguageDetector = {
+  [key in NormalizedLanguage]: (lang: string) => boolean;
 };
 
-const isC = (language: string) => {
-  return language.toLowerCase().includes("gnu c11");
+const languageDetector: LanguageDetector = {
+  C: (lang: string) => lang.includes("gnu c11"),
+  "C++": (lang: string) => {
+    const Cplusplus = ["clang++", "c++"] as const;
+    return Cplusplus.some((elem) => lang.includes(elem));
+  },
+  "C#": (lang: string) => lang.includes("c#"),
+  D: (lang: string) => lang === "D" && lang.length === 1,
+  Go: (lang: string) => lang.includes("go"),
+  Haskell: (lang: string) => lang.includes("haskell"),
+  Java: (lang: string) => lang.includes("java") && !lang.includes("javascript"),
+  Kotlin: (lang: string) => lang.includes("kotlin"),
+  OCaml: (lang: string) => lang.includes("ocaml"),
+  Delphi: (lang: string) => lang.includes("delphi"),
+  FPC: (lang: string) => lang.includes("fpc"),
+  "PascalABC.NET": (lang: string) => lang.includes("pascalabc.net"),
+  Perl: (lang: string) => lang.includes("perl"),
+  PHP: (lang: string) => lang.includes("php"),
+  Python: (lang: string) => lang.includes("python"),
+  PyPy: (lang: string) => lang.includes("pypy"),
+  Ruby: (lang: string) => lang.includes("ruby"),
+  Rust: (lang: string) => lang.includes("rust"),
+  Scala: (lang: string) => lang.includes("scala"),
+  JavaScript: (lang: string) => lang.includes("javascript"),
+  "Node.js": (lang: string) => lang.includes("node.js"),
+  Tcl: (lang: string) => lang.includes("tcl"),
+  Io: (lang: string) => lang.includes("io") && lang.length === 2,
+  Pike: (lang: string) => lang.includes("pike"),
+  Befungi: (lang: string) => lang.includes("befunge"),
+  Cobol: (lang: string) => lang.includes("cobol"),
+  Factor: (lang: string) => lang.includes("factor"),
+  Roco: (lang: string) => lang.includes("roco"),
+  Ada: (lang: string) => lang.includes("ada"),
+  Picat: (lang: string) => lang.includes("picat"),
+  "Q#": (lang: string) => lang.includes("q#"),
+  J: (lang: string) => lang.includes("j") && lang.length === 1,
+  Text: (lang: string) => lang.includes("text"),
+  "Mysterious Language": (lang: string) => lang.includes("mysterious"),
+  Other: (_lang: string) => true,
 };
 
-const isCplusplus = (language: string) => {
-  const Cplusplus = ["clang++", "c++"] as const;
-  return Cplusplus.some((elem) => language.toLowerCase().includes(elem));
-};
-
-const isCsharp = (language: string) => {
-  return language.toLowerCase().includes("c#");
-};
-
-const isD = (language: string) => {
-  return language.toLowerCase() === "d" && language.length === 1;
-};
-
-const isGo = (language: string) => {
-  return language.toLowerCase().includes("go");
-};
-
-const isHaskell = (language: string) => {
-  return language.toLowerCase().includes("haskell");
-};
-
-const isJava = (language: string) => {
-  return (
-    language.toLowerCase().includes("java") &&
-    !language.toLowerCase().includes("javascript")
-  );
-};
-
-const isKotlin = (language: string) => {
-  return language.toLowerCase().includes("kotlin");
-};
-
-const isOCaml = (language: string) => {
-  return language.toLowerCase().includes("ocaml");
-};
-
-const isDelphi = (language: string) => {
-  return language.toLowerCase().includes("delphi");
-};
-
-/** Free Pascal Compiler */
-const isFPC = (language: string) => {
-  return language.toLowerCase().includes("fpc");
-};
-
-const isPascalABCNet = (language: string) => {
-  return language.toLowerCase().includes("pascalabc.net");
-};
-
-const isPerl = (language: string) => {
-  return language.toLowerCase().includes("perl");
-};
-
-const isPHP = (language: string) => {
-  return language.toLowerCase().includes("php");
-};
-
-const isPython = (language: string) => {
-  return language.toLowerCase().includes("python");
-};
-
-const isPyPy = (language: string) => {
-  return language.toLowerCase().includes("pypy");
-};
-
-const isRuby = (language: string) => {
-  return language.toLowerCase().includes("ruby");
-};
-
-const isRust = (language: string) => {
-  return language.toLowerCase().includes("rust");
-};
-
-const isScala = (language: string) => {
-  return language.toLowerCase().includes("scala");
-};
-
-const isJavascript = (language: string) => {
-  return language.toLowerCase().includes("javascript");
-};
-
-const isNodejs = (language: string) => {
-  return language.toLowerCase().includes("node.js");
-};
-
-const isTcl = (language: string) => {
-  return language.toLowerCase().includes("tcl");
-};
-
-const isIo = (language: string) => {
-  return language.toLowerCase().includes("io") && language.length === 2;
-};
-
-const isPike = (language: string) => {
-  return language.toLowerCase().includes("pike");
-};
-
-const isBefunge = (language: string) => {
-  return language.toLowerCase().includes("befunge");
-};
-
-const isCobol = (language: string) => {
-  return language.toLowerCase().includes("cobol");
-};
-
-const isFactor = (language: string) => {
-  return language.toLowerCase().includes("factor");
-};
-
-const isRoco = (language: string) => {
-  return language.toLowerCase().includes("roco");
-};
-
-const isAda = (language: string) => {
-  return language.toLowerCase().includes("ada");
-};
-
-const isPicat = (language: string) => {
-  return language.toLowerCase().includes("picat");
-};
-
-const isJ = (language: string) => {
-  return language.toLowerCase().includes("j") && language.length === 1;
-};
-
-const isQsharp = (language: string) => {
-  return language.toLowerCase().includes("q#");
-};
-
-const isText = (language: string) => {
-  return language.toLowerCase().includes("text");
-};
-
-const isMysterious = (language: string) => {
-  return language.toLowerCase().includes("mysterious");
+export const normalizeLanguage = (lang: string): NormalizedLanguage => {
+  const lowerCasedLanguage = lang.toLowerCase();
+  for (const normalized of normalizedLanguage) {
+    if (languageDetector[normalized](lowerCasedLanguage)) {
+      return normalized;
+    }
+  }
+  return "Other";
 };
