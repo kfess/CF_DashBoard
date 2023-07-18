@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React from "react";
+import React, { useMemo } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
@@ -31,7 +31,7 @@ const _calcLongestStreak = (
 
 type Props = {
   submissions: Submission[];
-  filterFunc: (submission: Submission) => boolean;
+  filterFunc: (submission: Submission) => boolean; // parent componentで useCallback して渡す
   title: string;
 };
 
@@ -40,7 +40,10 @@ export const LongestStreak: React.FC<Props> = ({
   filterFunc,
   title,
 }) => {
-  const maxStreak = _calcLongestStreak(submissions, filterFunc);
+  const maxStreak = useMemo(
+    () => _calcLongestStreak(submissions, filterFunc),
+    [submissions, filterFunc]
+  );
 
   return (
     <Box sx={{ textAlign: "center" }}>
