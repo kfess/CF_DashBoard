@@ -8,20 +8,7 @@ import {
   filterUniqueSubmissions,
 } from "@features/achievement/processSubmission";
 import { isLastMonth, isLastYear } from "@helpers/date";
-
-const pluralize = (
-  count: number,
-  singular: string,
-  plural: string | null = null
-) => {
-  if (!Number.isInteger(count)) {
-    throw new Error("count must be an integer");
-  }
-  if (plural === null) {
-    plural = singular + "s";
-  }
-  return count <= 1 ? singular : plural;
-};
+import { pluralize } from "@helpers/index";
 
 const _filterSubmissions = (
   submissions: Submission[],

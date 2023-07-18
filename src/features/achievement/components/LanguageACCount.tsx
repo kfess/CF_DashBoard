@@ -12,46 +12,65 @@ import {
 import { formatUnixTime } from "@helpers/date";
 import { Chip_ } from "@features/ui/component/Chip";
 import { useToggle } from "@hooks/index";
+import { pluralize } from "@helpers/index";
 
 type Count = {
-  language: NormalizedLanguage;
-  count: number;
-  lastACDate: string;
+  readonly language: NormalizedLanguage;
+  readonly count: number;
+  readonly lastACDate: string;
 };
 
-type Props = { submissions: Submission[] };
+const LanguageStat: React.FC<Count> = ({ language, count, lastACDate }) => {
+  return (
+    <Stack key={language}>
+      <Stack
+        direction="row"
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Chip_ label={language} />
+        <Typography variant="body1">
+          <strong>{count.toLocaleString()}</strong>{" "}
+          {pluralize(count, "problem")} solved
+        </Typography>
+      </Stack>
+      <Typography variant="body2" color="text.secondary" align="right">
+        Last AC Date: {lastACDate}
+      </Typography>
+    </Stack>
+  );
+};
+
+type Props = { readonly submissions: Submission[] };
 
 // If you solve the same problem in the same programming language more than once,
 // it will not be recognized as new AC.
 // If you solve the same problem in different languages, it is recognized as new AC.
-export const LanguageACCount: React.FC<Props> = (props: Props) => {
+export const LanguageACCount: React.FC<Props> = ({ submissions }) => {
   const [isReadMore, toggleReadMore] = useToggle(true, false);
 
-  const { submissions } = props;
   const ACSubmissions = submissions.filter(isACSubmission);
-  const gLangSubs = groupByLanguage(ACSubmissions);
-  const languageCounts: Count[] = gLangSubs
-    .map((g) => {
-      const [lang, subs] = g;
-      const sortSubs = subs.sort(
+  const groupedSubmissionsByLanguage = groupByLanguage(ACSubmissions);
+
+  const languageCounts: Count[] = groupedSubmissionsByLanguage
+    .map(([lang, subs]) => {
+      const sortedSubs = subs.sort(
         (a, b) => a.creationTimeSeconds - b.creationTimeSeconds
       );
-      const uniSubs = filterUniqueSubmissions(sortSubs);
-      const lastACDate = formatUnixTime(
-        uniSubs[uniSubs.length - 1].creationTimeSeconds,
-        true
-      );
+      const uniqueSubs = filterUniqueSubmissions(sortedSubs);
       return {
         language: lang,
-        count: uniSubs.length,
-        lastACDate: lastACDate,
-      } as Count;
+        count: uniqueSubs.length,
+        lastACDate: formatUnixTime(
+          uniqueSubs[uniqueSubs.length - 1].creationTimeSeconds,
+          true
+        ),
+      };
     })
     .sort((a, b) => b.count - a.count);
-
-  const readLabguageCounts = isReadMore
-    ? languageCounts.slice(0, 3)
-    : languageCounts;
 
   return (
     <Box
@@ -66,27 +85,11 @@ export const LanguageACCount: React.FC<Props> = (props: Props) => {
         </Typography>
       </Box>
       <Stack spacing={1}>
-        {readLabguageCounts.map((s) => (
-          <Stack key={s.language}>
-            <Stack
-              direction="row"
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Chip_ label={s.language} />
-              <Typography variant="body1">
-                <strong>{s.count.toLocaleString()}</strong>{" "}
-                {s.count > 1 ? "problems" : "problem"} solved
-              </Typography>
-            </Stack>
-            <Typography variant="body2" color="text.secondary" align="right">
-              Last AC Date: {s.lastACDate}
-            </Typography>
-          </Stack>
-        ))}
+        {languageCounts.map((s, index) =>
+          (!isReadMore && index < 3) || isReadMore ? (
+            <LanguageStat {...s} />
+          ) : null
+        )}
       </Stack>
       {languageCounts.length > 3 && (
         <Box sx={{ display: "flex", justifyContent: "center", padding: 1 }}>
@@ -103,3 +106,20 @@ export const LanguageACCount: React.FC<Props> = (props: Props) => {
     </Box>
   );
 };
+
+// under development
+// const groupSubmissionsByLanguage = (submissions: Submission[]) => {
+//   const submissionsByLanguage = new Map<NormalizedLanguage, Submission[]>();
+//   submissions.forEach((sub) => {
+//     let subs =
+//       submissionsByLanguage.get(
+//         sub.programmingLanguage as NormalizedLanguage
+//       ) || [];
+//     subs = [...subs, sub];
+//     submissionsByLanguage.set(
+//       sub.programmingLanguage as NormalizedLanguage,
+//       subs
+//     );
+//   });
+//   return submissionsByLanguage;
+// };

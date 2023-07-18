@@ -7,3 +7,4 @@ export {
 } from "@helpers/random";
 export { generateUUIDv4 } from "@helpers/uuid";
 export { formatUnixTime, isLastYear, isLastMonth } from "@helpers/date";
+export { pluralize } from "@helpers/format";
