@@ -23,11 +23,12 @@ const fetchProblems = async (): Promise<Problem[]> => {
     const data = problemsSchema.parse(response.data);
 
     // データを localStorage にキャッシュ
-    localStorage.setItem("problems", JSON.stringify(data));
-    localStorage.setItem("problemsTimestamp", currentTime.toString());
+    // localStorage.setItem("problems", JSON.stringify(data));
+    // localStorage.setItem("problemsTimestamp", currentTime.toString());
 
     return data;
   } catch (error) {
+    console.log(error);
     throw new Error("An Error occurred while fetching problems");
   }
 };

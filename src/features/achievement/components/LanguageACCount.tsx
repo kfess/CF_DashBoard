@@ -87,7 +87,7 @@ export const LanguageACCount: React.FC<Props> = ({ submissions }) => {
       <Stack spacing={1}>
         {languageCounts.map((s, index) =>
           (!isReadMore && index < 3) || isReadMore ? (
-            <LanguageStat {...s} />
+            <LanguageStat key={s.language} {...s} />
           ) : null
         )}
       </Stack>
