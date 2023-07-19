@@ -50,7 +50,7 @@ type Props = { readonly submissions: Submission[] };
 // it will not be recognized as new AC.
 // If you solve the same problem in different languages, it is recognized as new AC.
 export const LanguageACCount: React.FC<Props> = ({ submissions }) => {
-  const [isReadMore, toggleReadMore] = useToggle(true, false);
+  const [isReadMore, toggleReadMore] = useToggle(false, true);
 
   const ACSubmissions = submissions.filter(isACSubmission);
   const groupedSubmissionsByLanguage = groupByLanguage(ACSubmissions);
@@ -94,7 +94,7 @@ export const LanguageACCount: React.FC<Props> = ({ submissions }) => {
       {languageCounts.length > 3 && (
         <Box sx={{ display: "flex", justifyContent: "center", padding: 1 }}>
           <span onClick={toggleReadMore} css={{ cursor: "pointer" }}>
-            {isReadMore ? "Show More" : "Show Less"}
+            {isReadMore ? "Show Less" : "Show More"}
           </span>
         </Box>
       )}
