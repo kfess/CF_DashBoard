@@ -10,11 +10,10 @@ import {
   Legend,
 } from "recharts";
 import { Submission } from "@features/submission/submission";
-import {
-  getACProblemSet,
-  getNonACProblemSet,
-} from "@features/achievement/processSubmission";
 import type { Classification } from "@features/contests/contest";
+import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
+import { getClassification } from "@features/contests/utils/getClassification";
+import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 
 type RenderActiveShapeProps = {
   cx: number;
@@ -91,7 +90,6 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
 
 type Props = {
   problemsCount: number;
-  submissions: Submission[];
   classification: Classification;
 };
 
@@ -102,10 +100,26 @@ type PieData = {
 };
 
 export const ClassificationPie: React.FC<Props> = (props: Props) => {
-  const { problemsCount, submissions, classification } = props;
+  const { problemsCount, classification } = props;
 
-  const ACProblemCount = getACProblemSet(submissions).size;
-  const nonACProblemCount = getNonACProblemSet(submissions).size;
+  const { contestIdNameMap } = useContestIdNameMap();
+
+  // filterFn は、特定の分類に対する提出だけを通す
+  const filterFn = useCallback(
+    (submission: Submission) => {
+      return classification === "All"
+        ? true
+        : getClassification(
+            contestIdNameMap[submission.contestId as number] ?? ""
+          ) === classification;
+    },
+    [classification]
+  );
+
+  // useSolvedStatus hook で AC & 非AC の提出を計算
+  const { solvedSet, attemptedSet } = useSolvedStatus(filterFn);
+  const ACProblemCount = solvedSet.size;
+  const nonACProblemCount = attemptedSet.size;
 
   const pieData: PieData[] = [
     { name: "AC", value: ACProblemCount, color: "#33CD34" },
@@ -116,10 +130,6 @@ export const ClassificationPie: React.FC<Props> = (props: Props) => {
       color: "#59606A",
     },
   ];
-
-  if (classification === "Div. 2") {
-    console.log(submissions);
-  }
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const onPieEnter = useCallback(

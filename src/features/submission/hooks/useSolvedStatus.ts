@@ -2,43 +2,44 @@ import { useMemo } from "react";
 import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
 import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
 import { getProblemKey } from "@features/problems/utils";
+import { Submission } from "@features/submission/submission";
 
-export const useSolvedStatus = () => {
+export const useSolvedStatus = (
+  filterFn: (submission: Submission) => boolean = () => true // filterFn must be inside of useCallback
+) => {
   const searchUserId = useQueryParams(QueryParamKeys.USERID);
-  const { data, isError, isLoading } = useFetchUserSubmission({
+  const { data: submissions } = useFetchUserSubmission({
     userId: searchUserId,
   });
 
-  const { solvedSet, attemptedSet } = useMemo(() => {
-    const solved = new Set<string>();
-    const attempted = new Set<string>();
+  return useMemo(() => {
+    const submissionMap = new Map<string, Submission[]>();
+    const solvedSet = new Set<string>();
+    const attemptedSet = new Set<string>();
 
-    if (!isError && data) {
-      data.forEach((sub) => {
-        const problemKey = getProblemKey(
-          sub.contestId,
-          sub.problem.index,
-          sub.problem.name
-        );
-        if (sub.verdict === "OK") {
-          solved.add(problemKey);
-        }
-      });
+    // group all submissions by problem key
+    submissions.forEach((sub) => {
+      const key = getProblemKey(
+        sub.contestId,
+        sub.problem.index,
+        sub.problem.name
+      );
+      const problemSubmissions = submissionMap.get(key) || [];
+      submissionMap.set(key, [...problemSubmissions, sub]);
+    });
 
-      data.forEach((sub) => {
-        const problemKey = getProblemKey(
-          sub.contestId,
-          sub.problem.index,
-          sub.problem.name
-        );
-        if (sub.verdict !== "OK" && !solved.has(problemKey)) {
-          attempted.add(problemKey);
-        }
-      });
-    }
+    // Check whether the problem is solved or not by any submission
+    submissionMap.forEach((submissions, key) => {
+      if (!submissions.some(filterFn)) {
+        return;
+      }
+      if (submissions.some((s) => s.verdict === "OK")) {
+        solvedSet.add(key);
+      } else {
+        attemptedSet.add(key);
+      }
+    });
 
-    return { solvedSet: solved, attemptedSet: attempted };
-  }, [data, isError]);
-
-  return { solvedSet, attemptedSet };
+    return { solvedSet, attemptedSet };
+  }, [submissions, filterFn]);
 };
