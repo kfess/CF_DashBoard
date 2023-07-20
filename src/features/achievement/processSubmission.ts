@@ -1,10 +1,10 @@
-import { NormalizedLanguage } from "./../language/language";
 import dayjs from "dayjs";
 import { groupBy } from "@helpers/arr-utils";
 import type { Submission } from "@features/submission/submission";
 import { getRatingColorInfo } from "@features/color/ratingColor";
 import { normalizeLanguage } from "@features/language/language";
 import { Tag } from "@features/problems/problem";
+import { getProblemKey } from "@features/problems/utils";
 
 export const isACSubmission = (submission: Submission): boolean =>
   submission.verdict === "OK";
@@ -18,7 +18,7 @@ export const filterUniqueSubmissions = (
   Array.from(
     new Map(
       submissions.map((s) => [
-        s.contestId + s.problem.index + s.problem.name,
+        getProblemKey(s.contestId, s.problem.index, s.problem.name),
         s,
       ])
     ).values()
@@ -33,35 +33,26 @@ export const uniqueDateSet = (submissions: Submission[]): Set<string> =>
     return set;
   }, new Set<string>());
 
-export const groupbyDate = (submissions: Submission[]) => {
-  const gSubmissions = groupBy(submissions, (s) =>
+export const groupbyDate = (submissions: Submission[]) =>
+  groupBy(submissions, (s) =>
     dayjs.unix(s.creationTimeSeconds).format("YYYY/MM/DD")
   );
-  return gSubmissions;
-};
 
-export const groupbyRatingColor = (submissions: Submission[]) => {
-  const gSubmissions = groupBy(
-    submissions,
-    (s) => getRatingColorInfo(s.problem.rating).name
-  );
-  return gSubmissions;
-};
+export const groupbyRatingColor = (submissions: Submission[]) =>
+  groupBy(submissions, (s) => getRatingColorInfo(s.problem.rating).name);
 
-export const groupByLanguage = (
-  submissions: Submission[]
-): [NormalizedLanguage, Submission[]][] => {
-  const gSubmissions = groupBy(submissions, (s) =>
-    normalizeLanguage(s.programmingLanguage)
-  );
-  return gSubmissions;
-};
+export const groupbyLanguage = (submissions: Submission[]) =>
+  groupBy(submissions, (s) => normalizeLanguage(s.programmingLanguage));
 
 export const getACProblemSet = (submissions: Submission[]): Set<string> => {
   const ACSubmissions = submissions.filter(isACSubmission);
   const ACProblemSet = ACSubmissions.reduce((set, submission) => {
     set.add(
-      submission.contestId + submission.problem.index + submission.problem.name
+      getProblemKey(
+        submission.contestId,
+        submission.problem.index,
+        submission.problem.name
+      )
     );
     return set;
   }, new Set<string>());
@@ -72,7 +63,11 @@ export const getNonACProblemSet = (submissions: Submission[]): Set<string> => {
   const uniqueSubmissions = filterUniqueSubmissions(submissions);
   const attmptedProblemSet = uniqueSubmissions.reduce((set, submission) => {
     set.add(
-      submission.contestId + submission.problem.index + submission.problem.name
+      getProblemKey(
+        submission.contestId,
+        submission.problem.index,
+        submission.problem.name
+      )
     );
     return set;
   }, new Set<string>());

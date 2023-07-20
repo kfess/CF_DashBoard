@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
 import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
+import { getProblemKey } from "@features/problems/utils";
 
 export const useSolvedStatus = () => {
   const searchUserId = useQueryParams(QueryParamKeys.USERID);
@@ -14,16 +15,22 @@ export const useSolvedStatus = () => {
 
     if (!isError && data) {
       data.forEach((sub) => {
-        const problemKey = `${sub.contestId}-${sub.problem.index}`;
-
+        const problemKey = getProblemKey(
+          sub.contestId,
+          sub.problem.index,
+          sub.problem.name
+        );
         if (sub.verdict === "OK") {
           solved.add(problemKey);
         }
       });
 
       data.forEach((sub) => {
-        const problemKey = `${sub.contestId}-${sub.problem.index}`;
-
+        const problemKey = getProblemKey(
+          sub.contestId,
+          sub.problem.index,
+          sub.problem.name
+        );
         if (sub.verdict !== "OK" && !solved.has(problemKey)) {
           attempted.add(problemKey);
         }

@@ -8,7 +8,7 @@ import { tags } from "@features/problems/problem";
 import { Chip_ } from "@features/ui/component/Chip";
 import { useToggle } from "@hooks/index";
 
-type Props = { submissions: Submission[] };
+type Props = { readonly submissions: Submission[] };
 
 export const TagACCount: React.FC<Props> = ({ submissions }) => {
   const [isReadMore, toggleReadMore] = useToggle(true, false);

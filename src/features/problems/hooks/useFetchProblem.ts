@@ -23,6 +23,7 @@ const fetchProblems = async (): Promise<Problem[]> => {
     const data = problemsSchema.parse(response.data);
 
     // データを localStorage にキャッシュ
+    // 容量が多過ぎてエラーメッセージが出るので、一旦キャッシュしない
     // localStorage.setItem("problems", JSON.stringify(data));
     // localStorage.setItem("problemsTimestamp", currentTime.toString());
 

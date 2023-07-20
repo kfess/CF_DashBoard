@@ -6,7 +6,7 @@ import type { Submission } from "@features/submission/submission";
 import { NormalizedLanguage } from "@features/language/language";
 import {
   isACSubmission,
-  groupByLanguage,
+  groupbyLanguage,
   filterUniqueSubmissions,
 } from "@features/achievement/processSubmission";
 import { formatUnixTime } from "@helpers/date";
@@ -53,7 +53,7 @@ export const LanguageACCount: React.FC<Props> = ({ submissions }) => {
   const [isReadMore, toggleReadMore] = useToggle(false, true);
 
   const ACSubmissions = submissions.filter(isACSubmission);
-  const groupedSubmissionsByLanguage = groupByLanguage(ACSubmissions);
+  const groupedSubmissionsByLanguage = groupbyLanguage(ACSubmissions);
 
   const languageCounts: Count[] = groupedSubmissionsByLanguage
     .map(([lang, subs]) => {

@@ -14,6 +14,7 @@ import { ProblemsTableRow } from "@features/problems/components/ProblemsTableRow
 import type { Classification } from "@features/contests/contest";
 import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
 import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
+import { getProblemKey } from "@features/problems/utils";
 
 type Props = {
   problems: Problem[];
@@ -42,7 +43,11 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
 
   const filteredProblems = useMemo(() => {
     return problems.filter((problem) => {
-      const problemKey = `${problem.contestId}-${problem.index}`;
+      const problemKey = getProblemKey(
+        problem.contestId,
+        problem.index,
+        problem.name
+      );
       const isSolved = solvedSet?.has(problemKey);
       const isAttempted = attemptedSet?.has(problemKey);
 
@@ -120,7 +125,11 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
                 {filteredProblems
                   .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                   .map((problem) => {
-                    const problemKey = `${problem.contestId}-${problem.index}`;
+                    const problemKey = getProblemKey(
+                      problem.contestId,
+                      problem.index,
+                      problem.name
+                    );
                     const isSolved = solvedSet?.has(problemKey);
                     const isAttempted = attemptedSet?.has(problemKey);
                     return (

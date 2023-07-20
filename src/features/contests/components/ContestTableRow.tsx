@@ -6,6 +6,7 @@ import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import { isAllProblemsSolved } from "@features/contests/helper";
+import { getProblemKey } from "@features/problems/utils";
 
 type Props = {
   contestId: number;
@@ -70,7 +71,7 @@ export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
               }}
             >
               {indexedProblems.map((p, index) => {
-                const problemKey = `${contestId}-${p.index}`;
+                const problemKey = getProblemKey(contestId, p.index, p.name);
                 const isSolved = solvedSet?.has(problemKey);
                 const isAttempted = attemptedSet?.has(problemKey);
                 const backgroundColor = isSolved
