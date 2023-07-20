@@ -124,7 +124,7 @@ export const ClassificationPie: React.FC<Props> = ({
 
   const pieData: PieData[] = [
     { name: "AC", value: ACProblemCount, color: "#33CD34" },
-    { name: "Non-AC", value: nonACProblemCount, color: "#FFDD99" },
+    { name: "Non-AC", value: nonACProblemCount, color: "#FFC653" },
     {
       name: "No-Sub",
       value: problemsCount - ACProblemCount - nonACProblemCount,
