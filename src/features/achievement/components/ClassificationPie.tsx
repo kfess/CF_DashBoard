@@ -99,9 +99,10 @@ type PieData = {
   readonly color: string;
 };
 
-export const ClassificationPie: React.FC<Props> = (props: Props) => {
-  const { problemsCount, classification } = props;
-
+export const ClassificationPie: React.FC<Props> = ({
+  problemsCount,
+  classification,
+}) => {
   const { contestIdNameMap } = useContestIdNameMap();
 
   // filterFn は、特定の分類に対する提出だけを通す

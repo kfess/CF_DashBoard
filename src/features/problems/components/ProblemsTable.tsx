@@ -48,8 +48,8 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
         problem.index,
         problem.name
       );
-      const isSolved = solvedSet?.has(problemKey);
-      const isAttempted = attemptedSet?.has(problemKey);
+      const isSolved = solvedSet.has(problemKey);
+      const isAttempted = attemptedSet.has(problemKey);
 
       // Tag filter
       const tagMatch =
@@ -98,6 +98,8 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
     [filteredProblems]
   );
 
+  console.log(solvedSet);
+
   return (
     <>
       <TablePagination
@@ -125,16 +127,16 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
                 {filteredProblems
                   .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                   .map((problem) => {
-                    const problemKey = getProblemKey(
+                    const key = getProblemKey(
                       problem.contestId,
                       problem.index,
                       problem.name
                     );
-                    const isSolved = solvedSet?.has(problemKey);
-                    const isAttempted = attemptedSet?.has(problemKey);
+                    const isSolved = solvedSet.has(key);
+                    const isAttempted = attemptedSet.has(key);
                     return (
                       <ProblemsTableRow
-                        key={problemKey}
+                        key={key}
                         problem={problem}
                         showTags={showTags}
                         isSolved={isSolved}
