@@ -15,6 +15,12 @@ import { PeriodWord, periodFilter } from "./components/PeriodFilter";
 const _normalizeProblemIndex = (idx: string) => {
   if (/^\d+$/.test(idx)) {
     return String.fromCharCode(parseInt(idx, 10) + 64);
+  } else if (idx === "GP1") {
+    // for ICPC 2022 Online Challenge powered by HUAWEI - Problem 1
+    return "A";
+  } else if (idx === "GP2") {
+    // for ICPC 2022 Online Challenge powered by HUAWEI - Problem 1
+    return "B";
   } else if (/^[A-Za-z]\d+/.test(idx)) {
     return idx.charAt(0);
   } else {
