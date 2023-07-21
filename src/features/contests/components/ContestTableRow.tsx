@@ -42,6 +42,7 @@ export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
         component="th"
         scope="row"
         css={{
+          borderRight: "1px solid rgba(224, 224, 224, 1)",
           backgroundColor: isAllProblemsSolved(
             problemIdxes,
             problemMap,
@@ -58,7 +59,13 @@ export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
         const problem = problemMap[idx];
         const indexedProblems = problem?.indexedProblems || [];
         return (
-          <TableCell key={idx} css={{ padding: 0 }}>
+          <TableCell
+            key={idx}
+            css={{
+              padding: 0,
+              borderRight: "1px solid rgba(224, 224, 224, 1)",
+            }}
+          >
             <div
               css={{
                 display: "grid",

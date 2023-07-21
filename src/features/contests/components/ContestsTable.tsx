@@ -19,10 +19,13 @@ type Props = {
   attemptedSet?: Set<string>;
 };
 
-export const ContestsTable: React.FC<Props> = (props: Props) => {
-  const { contests, problemIdxes, showDifficulty, solvedSet, attemptedSet } =
-    props;
-
+export const ContestsTable: React.FC<Props> = ({
+  contests,
+  problemIdxes,
+  showDifficulty,
+  solvedSet,
+  attemptedSet,
+}) => {
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(contests);
   const contestsLen = useMemo(() => contests.length, [contests]);
 
@@ -40,10 +43,25 @@ export const ContestsTable: React.FC<Props> = (props: Props) => {
           <Table stickyHeader css={{ height: "100%" }}>
             <TableHead>
               <TableRow>
-                <TableCell align="center">Contest</TableCell>
+                <TableCell
+                  align="center"
+                  sx={{
+                    borderRight: "1px solid rgba(224, 224, 224, 1)",
+                    borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                  }}
+                >
+                  <strong>Contest</strong>
+                </TableCell>
                 {problemIdxes.map((idx) => (
-                  <TableCell align="center" key={idx}>
-                    {idx}
+                  <TableCell
+                    align="center"
+                    key={idx}
+                    sx={{
+                      borderRight: "1px solid rgba(224, 224, 224, 1)",
+                      borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                    }}
+                  >
+                    <strong>{idx}</strong>
                   </TableCell>
                 ))}
               </TableRow>
