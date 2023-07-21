@@ -9,6 +9,19 @@ import { ReshapedProblem } from "@features/problems/problem";
 import { groupBy } from "@helpers/arr-utils";
 import { PeriodWord, periodFilter } from "./components/PeriodFilter";
 
+// used for some work in problem idx
+// In most cases, problem's "problem idx" is A, B, C, D, ...
+// but some problem's "problem idx" is 01, 02, 03, 04, ...
+const _normalizeProblemIndex = (idx: string) => {
+  if (/^\d+$/.test(idx)) {
+    return String.fromCharCode(parseInt(idx, 10) + 64);
+  } else if (/^[A-Za-z]\d+/.test(idx)) {
+    return idx.charAt(0);
+  } else {
+    return idx;
+  }
+};
+
 export const reshapeProblems = (problems: Problem[]) => {
   const groupedProblems = groupBy(problems, (problem) =>
     problem.index.replace(/[0-9]/g, "")
@@ -58,7 +71,7 @@ export const reshapeContests = (
 
   return filteredAndSortedContests.map((contest) => {
     const reshapedProblems = groupBy(contest.problems, (problem: Problem) =>
-      problem.index.replace(/[0-9]/g, "")
+      _normalizeProblemIndex(problem.index)
     ).map(([index, indexedProblems]) => {
       return {
         index,
@@ -82,7 +95,9 @@ export const getProblemIdxFromClassification = (
     const allIdxes = Array.from(
       new Set(
         contests.flatMap((contest) =>
-          contest.problems.map((problem) => problem.index.replace(/\d/g, ""))
+          contest.problems.map((problem) =>
+            _normalizeProblemIndex(problem.index)
+          )
         )
       )
     );
@@ -95,7 +110,7 @@ export const getProblemIdxFromClassification = (
   const idxes = Array.from(
     new Set(
       filteredContests.flatMap((contest) =>
-        contest.problems.map((problem) => problem.index.replace(/\d/g, ""))
+        contest.problems.map((problem) => _normalizeProblemIndex(problem.index))
       )
     )
   );
