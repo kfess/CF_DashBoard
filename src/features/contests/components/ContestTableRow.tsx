@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import type { ReshapedProblem } from "@features/problems/problem";
@@ -9,17 +9,17 @@ import { isAllProblemsSolved } from "@features/contests/helper";
 import { getProblemKey } from "@features/problems/utils";
 
 type Props = {
-  contestId: number;
-  contestName: string;
-  problemIdxes: string[];
-  problems: ReshapedProblem[];
-  showDifficulty: boolean;
-  solvedSet?: Set<string>;
-  attemptedSet?: Set<string>;
+  readonly contestId: number;
+  readonly contestName: string;
+  readonly problemIdxes: string[];
+  readonly problems: ReshapedProblem[];
+  readonly showDifficulty: boolean;
+  readonly solvedSet?: Set<string>;
+  readonly attemptedSet?: Set<string>;
 };
 
-export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
-  const {
+export const ContestTableRow: React.FC<Props> = React.memo(
+  ({
     contestId,
     contestName,
     problemIdxes,
@@ -27,93 +27,105 @@ export const ContestTableRow: React.FC<Props> = React.memo((props: Props) => {
     showDifficulty,
     solvedSet,
     attemptedSet,
-  } = props;
+  }) => {
+    const { theme } = useThemeContext();
 
-  const { theme } = useThemeContext();
+    const problemMap = useMemo(() => {
+      const map: Record<string, ReshapedProblem> = {};
+      problems.forEach((problem) => {
+        map[problem.index] = problem;
+      });
+      return map;
+    }, [problems]);
 
-  const problemMap: Record<string, ReshapedProblem> = {};
-  problems.forEach((problem) => {
-    problemMap[problem.index] = problem;
-  });
+    const rowColor = useMemo(() => {
+      return isAllProblemsSolved(problemIdxes, problemMap, solvedSet, contestId)
+        ? theme.colors.acColor
+        : "";
+    }, [problemIdxes, problemMap, solvedSet, contestId, theme.colors.acColor]);
 
-  return (
-    <TableRow key={contestId} hover>
-      <TableCell
-        component="th"
-        scope="row"
-        css={{
-          borderRight: "1px solid rgba(224, 224, 224, 1)",
-          backgroundColor: isAllProblemsSolved(
-            problemIdxes,
-            problemMap,
-            solvedSet,
-            contestId
-          )
-            ? theme.colors.acColor
-            : "",
-        }}
-      >
-        <ContestLink contestId={contestId} contestName={contestName} />
-      </TableCell>
-      {problemIdxes.map((idx) => {
+    const cellColors = useMemo(() => {
+      return problemIdxes.map((idx) => {
         const problem = problemMap[idx];
         const indexedProblems = problem?.indexedProblems || [];
-        return (
-          <TableCell
-            key={idx}
-            css={{
-              padding: 0,
-              borderRight: "1px solid rgba(224, 224, 224, 1)",
-            }}
-          >
-            <div
+        return indexedProblems.map((p) => {
+          const problemKey = getProblemKey(contestId, p.index, p.name);
+          const isSolved = solvedSet?.has(problemKey);
+          const isAttempted = attemptedSet?.has(problemKey);
+          return isSolved
+            ? theme.colors.acColor
+            : isAttempted
+            ? theme.colors.waColor
+            : "";
+        });
+      });
+    }, [problemIdxes, problemMap, solvedSet, contestId, theme.colors]);
+
+    return (
+      <TableRow key={contestId} hover>
+        <TableCell
+          component="th"
+          scope="row"
+          css={{
+            borderRight: "1px solid rgba(224, 224, 224, 1)",
+            backgroundColor: rowColor,
+          }}
+        >
+          <ContestLink contestId={contestId} contestName={contestName} />
+        </TableCell>
+        {problemIdxes.map((idx, cellIdx) => {
+          const problem = problemMap[idx];
+          const indexedProblems = problem?.indexedProblems || [];
+
+          return (
+            <TableCell
+              key={idx}
               css={{
-                display: "grid",
-                gridTemplateRows:
-                  indexedProblems.length > 1
-                    ? `repeat(${indexedProblems.length}, 1fr)`
-                    : "1fr",
-                width: "100%",
-                height: "100%",
+                padding: 0,
+                borderRight: "1px solid rgba(224, 224, 224, 1)",
               }}
             >
-              {indexedProblems.map((p, index) => {
-                const problemKey = getProblemKey(contestId, p.index, p.name);
-                const isSolved = solvedSet?.has(problemKey);
-                const isAttempted = attemptedSet?.has(problemKey);
-                const backgroundColor = isSolved
-                  ? theme.colors.acColor
-                  : isAttempted
-                  ? theme.colors.waColor
-                  : "";
-
-                return (
-                  <div
-                    key={p.index}
-                    css={{
-                      backgroundColor,
-                      gridRow: index + 1,
-                      padding: theme.spacing(1),
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <ProblemLink
-                      showDifficulty={showDifficulty}
-                      contestId={contestId}
-                      contestName={contestName}
-                      problemId={p.index}
-                      problemName={p.name}
-                      difficulty={p.rating}
-                      solvedCount={p.solvedCount}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </TableCell>
-        );
-      })}
-    </TableRow>
-  );
-});
+              <div
+                css={{
+                  display: "grid",
+                  gridTemplateRows:
+                    indexedProblems.length > 1
+                      ? `repeat(${indexedProblems.length}, 1fr)`
+                      : "1fr",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                {indexedProblems.map((p, index) => {
+                  const backgroundColor = cellColors[cellIdx][index];
+                  return (
+                    <div
+                      key={p.index}
+                      css={{
+                        backgroundColor,
+                        gridRow: index + 1,
+                        padding: theme.spacing(1),
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <ProblemLink
+                        showDifficulty={showDifficulty}
+                        contestId={contestId}
+                        contestName={contestName}
+                        problemId={p.index}
+                        problemName={p.name}
+                        difficulty={p.rating}
+                        solvedCount={p.solvedCount}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </TableCell>
+          );
+        })}
+      </TableRow>
+    );
+  }
+);
