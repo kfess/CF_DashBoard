@@ -5,12 +5,15 @@ import { CF_USER_SUBMISSION_URL } from "@constants/url";
 import type { Submission } from "@features/submission/submission";
 import { okSubmissionApiSchema } from "@features/submission/submission";
 import type { Problem } from "@features/problems/problem";
+import { getProblemKey } from "@features/problems/utils";
 
 type UserSubmissions = Record<string, Submission[]>;
 
 const createProblemSet = (problems: Problem[]): Set<string> => {
   return new Set(
-    problems.map(({ contestId, index }) => `${contestId}-${index}`)
+    problems.map(({ contestId, index, name }) =>
+      getProblemKey(contestId, index, name)
+    )
   );
 };
 
@@ -25,7 +28,13 @@ const filterSubmissions = (
       (submission) =>
         dayjs.unix(submission.creationTimeSeconds).isAfter(startDate) &&
         dayjs.unix(submission.creationTimeSeconds).isBefore(endDate) &&
-        problemSet.has(`${submission.contestId}-${submission.problem.index}`)
+        problemSet.has(
+          getProblemKey(
+            submission.contestId,
+            submission.problem.index,
+            submission.problem.name
+          )
+        )
     )
     .sort((a, b) => a.creationTimeSeconds - b.creationTimeSeconds);
 };
@@ -42,6 +51,7 @@ const fetchUserSubmissions = async (userId: string): Promise<Submission[]> => {
   }
 };
 
+// gpt-4 generated
 const fetchSubmissions = async (
   users: string[],
   problems: Problem[],
@@ -51,24 +61,28 @@ const fetchSubmissions = async (
   try {
     const problemSet = createProblemSet(problems);
 
-    const responses = await Promise.all(
-      users.map((userId) => fetchUserSubmissions(userId))
+    const results = await Promise.all(
+      users.map(async (userId) => {
+        const submissionsForUser = await fetchUserSubmissions(userId);
+        return {
+          userId,
+          submissions: filterSubmissions(
+            submissionsForUser,
+            problemSet,
+            startDate,
+            endDate
+          ),
+        };
+      })
     );
 
-    const allSubmissions = responses.flat();
-    const submissionsByUser: UserSubmissions = users.reduce<
-      Record<string, Submission[]>
-    >((acc, userId) => {
-      const submissionsForUser = filterSubmissions(
-        allSubmissions,
-        problemSet,
-        startDate,
-        endDate
-      ).filter((submission) =>
-        submission.author.members.some((member) => member.handle === userId)
-      );
-      return { ...acc, [userId]: submissionsForUser };
-    }, {});
+    const submissionsByUser: UserSubmissions = results.reduce(
+      (acc, { userId, submissions }) => ({
+        ...acc,
+        [userId]: submissions,
+      }),
+      {}
+    );
 
     return submissionsByUser;
   } catch (error) {

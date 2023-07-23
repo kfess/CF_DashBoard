@@ -27,6 +27,10 @@ export const ContestsTable: React.FC<Props> = ({
   attemptedSet,
 }) => {
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(contests);
+  const slicedContests = useMemo(
+    () => contests.slice(page * rowsPerPage, (page + 1) * rowsPerPage),
+    [contests, page]
+  );
   const contestsLen = useMemo(() => contests.length, [contests]);
 
   return (
@@ -67,22 +71,20 @@ export const ContestsTable: React.FC<Props> = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {[...contests]
-                .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-                .map((contest) => {
-                  return (
-                    <ContestTableRow
-                      key={contest.id}
-                      contestId={contest.id}
-                      contestName={contest.name}
-                      problemIdxes={problemIdxes}
-                      problems={contest.problems}
-                      showDifficulty={showDifficulty}
-                      solvedSet={solvedSet}
-                      attemptedSet={attemptedSet}
-                    />
-                  );
-                })}
+              {slicedContests.map((contest) => {
+                return (
+                  <ContestTableRow
+                    key={contest.id}
+                    contestId={contest.id}
+                    contestName={contest.name}
+                    problemIdxes={problemIdxes}
+                    problems={contest.problems}
+                    showDifficulty={showDifficulty}
+                    solvedSet={solvedSet}
+                    attemptedSet={attemptedSet}
+                  />
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>

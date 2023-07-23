@@ -76,33 +76,43 @@ export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
                 )}
               </TableRow>
             </TableHead>
-            <TableBody>
-              {customContests?.map((customContest) => {
-                switch (contestType) {
-                  case "Running":
-                    return (
-                      <RunningContestTableRow
-                        key={customContest.contestId}
-                        customContest={customContest}
-                      />
-                    );
-                  case "Upcoming":
-                    return (
-                      <UpcomingContestTableRow
-                        key={customContest.contestId}
-                        customContest={customContest}
-                      />
-                    );
-                  case "Finished":
-                    return (
-                      <FinishedContestTableRow
-                        key={customContest.contestId}
-                        customContest={customContest}
-                      />
-                    );
-                }
-              })}
-            </TableBody>
+            {contestsLen > 0 ? (
+              <TableBody>
+                {customContests?.map((customContest) => {
+                  switch (contestType) {
+                    case "Running":
+                      return (
+                        <RunningContestTableRow
+                          key={customContest.contestId}
+                          customContest={customContest}
+                        />
+                      );
+                    case "Upcoming":
+                      return (
+                        <UpcomingContestTableRow
+                          key={customContest.contestId}
+                          customContest={customContest}
+                        />
+                      );
+                    case "Finished":
+                      return (
+                        <FinishedContestTableRow
+                          key={customContest.contestId}
+                          customContest={customContest}
+                        />
+                      );
+                  }
+                })}
+              </TableBody>
+            ) : (
+              <TableBody>
+                <TableRow>
+                  <TableCell colSpan={6}>
+                    There is no Data to display.
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            )}
           </Table>
         </TableContainer>
       </Paper>

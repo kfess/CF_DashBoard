@@ -1,4 +1,6 @@
 import React, { useMemo } from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -15,19 +17,26 @@ import {
 } from "@features/custom_contests/utils/calculateStandings";
 import { CF_CONTEST_URL } from "@constants/url";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
+import { getProblemKey } from "@features/problems/utils";
+import { secondsToHms } from "@helpers/date";
 
 type Props = {
-  participants: string[];
-  problems: Problem[];
-  startDate: string;
-  endDate: string;
-  penalty: number;
+  readonly participants: string[];
+  readonly problems: Problem[];
+  readonly startDate: string;
+  readonly endDate: string;
+  readonly penalty: number;
 };
 
 // 各ユーザーのサブミッション状況は、codeforces API を直接叩いて取得する。
 
-export const Standings: React.FC<Props> = (props: Props) => {
-  const { problems, participants, startDate, endDate, penalty } = props;
+export const Standings: React.FC<Props> = ({
+  problems,
+  participants,
+  startDate,
+  endDate,
+  penalty,
+}) => {
   const numParticipants = participants.length;
 
   const [autoRefetch, toggleAutoRefetch] = useToggle(false, true);
@@ -58,17 +67,50 @@ export const Standings: React.FC<Props> = (props: Props) => {
 
   return (
     <>
-      <>{numParticipants} people participated</>
+      <Typography variant="h6" component="div" gutterBottom>
+        {numParticipants} people participated
+      </Typography>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer component={Paper}>
           <Table stickyHeader>
             <TableHead>
               <TableRow hover>
-                <TableCell>#</TableCell>
-                <TableCell>Participants</TableCell>
-                <TableCell>Score</TableCell>
+                <TableCell
+                  sx={{
+                    borderRight: "1px solid rgba(224, 224, 224, 1)",
+                    borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                  }}
+                >
+                  #
+                </TableCell>
+                <TableCell
+                  sx={{
+                    borderRight: "1px solid rgba(224, 224, 224, 1)",
+                    borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                  }}
+                >
+                  Participants
+                </TableCell>
+                <TableCell
+                  sx={{
+                    borderRight: "1px solid rgba(224, 224, 224, 1)",
+                    borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                  }}
+                >
+                  Score
+                </TableCell>
                 {problems.map((problem, idx) => (
-                  <TableCell key={problem.contestId + problem.index}>
+                  <TableCell
+                    key={getProblemKey(
+                      problem.contestId,
+                      problem.index,
+                      problem.name
+                    )}
+                    sx={{
+                      borderRight: "1px solid rgba(224, 224, 224, 1)",
+                      borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                    }}
+                  >
                     <a
                       rel="noopener noreferrer"
                       target="_blank"
@@ -81,46 +123,71 @@ export const Standings: React.FC<Props> = (props: Props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {participants
-                // .sort(
-                //   (a, b) =>
-                //     userStats[b.userId].totalScore -
-                //     userStats[a.userId].totalScore
-                // )
-                .map((participant, i) => {
-                  const stats = userStats[participant] || null;
-                  return (
-                    <TableRow hover key={participant}>
-                      <TableCell>{i + 1}</TableCell>
-                      <TableCell>{participant}</TableCell>
-                      <TableCell>
-                        {stats ? (
-                          <div>
-                            <span
-                              css={{ color: "#0000FF", fontWeight: "bold" }}
+              {participants.map((participant, i) => {
+                const stats = userStats[participant] || null;
+                return (
+                  <TableRow hover key={participant}>
+                    <TableCell
+                      sx={{
+                        borderRight: "1px solid rgba(224, 224, 224, 1)",
+                      }}
+                    >
+                      {i + 1}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        borderRight: "1px solid rgba(224, 224, 224, 1)",
+                      }}
+                    >
+                      {participant}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        borderRight: "1px solid rgba(224, 224, 224, 1)",
+                      }}
+                    >
+                      {stats ? (
+                        <Box display="flex" alignItems="center">
+                          <Typography
+                            variant="body1"
+                            color="success.main"
+                            fontWeight="fontWeightBold"
+                          >
+                            {stats.totalScore}
+                          </Typography>
+                          {stats.totalWrongAttempts > 0 && (
+                            <Typography
+                              variant="body1"
+                              color="error.main"
+                              css={{ marginLeft: "6px" }}
                             >
-                              {stats.totalScore}
-                            </span>
-                            {stats.totalWrongAttempts > 0 && (
-                              <span css={{ color: "red" }}>
-                                {" (" + stats.totalWrongAttempts + ")"}
-                              </span>
-                            )}
-                          </div>
-                        ) : (
-                          "-"
+                              {"(" + stats.totalWrongAttempts + ")"}
+                            </Typography>
+                          )}
+                        </Box>
+                      ) : (
+                        <Typography variant="body2" color="text.secondary">
+                          -
+                        </Typography>
+                      )}
+                    </TableCell>
+                    {problems.map((problem) => (
+                      <TableCell
+                        key={getProblemKey(
+                          problem.contestId,
+                          problem.index,
+                          problem.name
                         )}
+                        sx={{
+                          borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        }}
+                      >
+                        <Score problem={problem} stats={stats} />
                       </TableCell>
-                      {problems.map((problem) => (
-                        <TableCell
-                          key={`${problem.contestId}-${problem.index}`}
-                        >
-                          <Score problem={problem} stats={stats} />
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  );
-                })}
+                    ))}
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>
@@ -130,54 +197,56 @@ export const Standings: React.FC<Props> = (props: Props) => {
 };
 
 type ScoreProps = {
-  problem: Problem;
-  stats: UserStats | null;
+  readonly problem: Problem;
+  readonly stats: UserStats | null;
 };
 
-const Score: React.FC<ScoreProps> = (props: ScoreProps) => {
-  const { problem, stats } = props;
-
-  const key = `${problem.contestId}-${problem.index}`;
+const Score: React.FC<ScoreProps> = ({ problem, stats }) => {
+  const key = getProblemKey(problem.contestId, problem.index, problem.name);
   const problemStat = stats?.problemStats[key];
 
-  const minutes = Math.floor((problemStat?.timeToFirstAC ?? 0) / 60);
-  const remainingSeconds = (problemStat?.timeToFirstAC ?? 0) % 60;
-
-  if (!problemStat) {
-    return <div css={{ color: "gray" }}>-</div>;
-  }
+  const actime = problemStat?.timeToFirstAC
+    ? secondsToHms(problemStat?.timeToFirstAC)
+    : null;
 
   if (
-    problemStat.wrongAttemptBeforeAC === 0 &&
-    problemStat.timeToFirstAC === null
-  ) {
-    return <div css={{ color: "gray" }}>-</div>;
-  }
-
-  if (
-    problemStat.wrongAttemptBeforeAC > 0 &&
-    problemStat.timeToFirstAC === null
+    !problemStat ||
+    (problemStat.wrongAttemptBeforeAC === 0 &&
+      problemStat.timeToFirstAC === null)
   ) {
     return (
-      <div css={{ color: "red" }}>({problemStat.wrongAttemptBeforeAC})</div>
+      <Typography variant="body2" color="text.secondary">
+        -
+      </Typography>
     );
   }
 
+  const failedAttempts =
+    problemStat.wrongAttemptBeforeAC > 0
+      ? `(${problemStat.wrongAttemptBeforeAC})`
+      : "";
+
   return (
-    <div>
-      <div>
-        <span css={{ color: "#05AA3E", fontWeight: "bold" }}>
+    <Box>
+      <Box display="flex" alignItems="center">
+        <Typography
+          variant="body1"
+          color="success.main"
+          fontWeight="fontWeightBold"
+        >
           {problemStat.score}
-        </span>
-        <span css={{ color: "red" }}>
-          {problemStat.wrongAttemptBeforeAC > 0 && (
-            <span> ({problemStat.wrongAttemptBeforeAC})</span>
-          )}
-        </span>
-        <div css={{ color: "gray" }}>
-          {minutes + ":" + remainingSeconds.toString().padStart(2, "0")}
-        </div>
-      </div>
-    </div>
+        </Typography>
+        <Typography
+          variant="body1"
+          color="error.main"
+          sx={{ marginLeft: "6px" }}
+        >
+          {failedAttempts}
+        </Typography>
+      </Box>
+      <Typography variant="body2" color="text.secondary">
+        {actime}
+      </Typography>
+    </Box>
   );
 };

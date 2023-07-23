@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { Problem } from "@features/problems/problem";
 import { Submission } from "@features/submission/submission";
+import { getProblemKey } from "@features/problems/utils";
 
 // 各問題ごとの AC するまでの時間
 // 各問題ごとに AC するまでに WA となった回数
@@ -30,7 +31,7 @@ const calculateUserStats = (
   >(
     (acc, problem) => ({
       ...acc,
-      [`${problem.contestId}-${problem.index}`]: {
+      [`${getProblemKey(problem.contestId, problem.index, problem.name)}`]: {
         timeToFirstAC: null,
         wrongAttemptBeforeAC: 0,
         score: 0,
@@ -42,7 +43,7 @@ const calculateUserStats = (
   let totalWrongAttempts = 0;
 
   submissions.forEach((s) => {
-    const key = `${s.contestId}-${s.problem.index}`;
+    const key = getProblemKey(s.contestId, s.problem.index, s.problem.name);
     const stats: ProblemStats = problemStats[key];
 
     const submissionTime = dayjs.unix(s.creationTimeSeconds);
