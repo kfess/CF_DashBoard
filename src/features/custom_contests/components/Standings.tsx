@@ -14,11 +14,12 @@ import { useToggle } from "@hooks/index";
 import {
   UserStats,
   calculateAllUsersStats,
+  calculateFirstACs,
 } from "@features/custom_contests/utils/calculateStandings";
 import { CF_CONTEST_URL } from "@constants/url";
-import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { getProblemKey } from "@features/problems/utils";
 import { secondsToHms } from "@helpers/date";
+import { pluralize } from "@helpers/format";
 
 type Props = {
   readonly participants: string[];
@@ -29,7 +30,6 @@ type Props = {
 };
 
 // 各ユーザーのサブミッション状況は、codeforces API を直接叩いて取得する。
-
 export const Standings: React.FC<Props> = ({
   problems,
   participants,
@@ -41,7 +41,7 @@ export const Standings: React.FC<Props> = ({
 
   const [autoRefetch, toggleAutoRefetch] = useToggle(false, true);
 
-  const { submissionsByUser, isError, error, isLoading } = useFetchSubmissions(
+  const { submissionsByUser } = useFetchSubmissions(
     participants,
     problems,
     startDate,
@@ -59,16 +59,21 @@ export const Standings: React.FC<Props> = ({
       startDate,
       penalty
     );
-  }, [submissionsByUser, problems]);
+  }, [submissionsByUser]);
 
-  if (isLoading) {
-    return <CircularProgress />;
-  }
+  const firstACs = useMemo(() => {
+    if (!submissionsByUser) {
+      return {};
+    }
+    const allSubmissions = Object.values(submissionsByUser).flat();
+    return calculateFirstACs(allSubmissions, startDate);
+  }, [submissionsByUser]);
 
   return (
     <>
       <Typography variant="h6" component="div" gutterBottom>
-        {numParticipants} people participated
+        {numParticipants} {pluralize(numParticipants, "user")} are participating
+        in this contest.
       </Typography>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer component={Paper}>
@@ -147,24 +152,31 @@ export const Standings: React.FC<Props> = ({
                       }}
                     >
                       {stats ? (
-                        <Box display="flex" alignItems="center">
-                          <Typography
-                            variant="body1"
-                            color="success.main"
-                            fontWeight="fontWeightBold"
-                          >
-                            {stats.totalScore}
-                          </Typography>
-                          {stats.totalWrongAttempts > 0 && (
+                        <>
+                          <Box display="flex" alignItems="center">
                             <Typography
                               variant="body1"
-                              color="error.main"
-                              css={{ marginLeft: "6px" }}
+                              color="success.main"
+                              fontWeight="fontWeightBold"
                             >
-                              {"(" + stats.totalWrongAttempts + ")"}
+                              {stats.totalScore}
                             </Typography>
-                          )}
-                        </Box>
+                            {stats.totalWrongAttempts > 0 && (
+                              <Typography
+                                variant="body1"
+                                color="error.main"
+                                css={{ marginLeft: "6px" }}
+                              >
+                                {"(" + stats.totalWrongAttempts + ")"}
+                              </Typography>
+                            )}
+                          </Box>
+                          <Typography variant="body2" color="text.secondary">
+                            {stats.lastACTime
+                              ? secondsToHms(stats.lastACTime)
+                              : "-"}
+                          </Typography>
+                        </>
                       ) : (
                         <Typography variant="body2" color="text.secondary">
                           -
@@ -188,6 +200,54 @@ export const Standings: React.FC<Props> = ({
                   </TableRow>
                 );
               })}
+              <TableRow>
+                <TableCell
+                  colSpan={3}
+                  sx={{
+                    borderRight: "1px solid rgba(224, 224, 224, 1)",
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    fontWeight="fontWeightBold"
+                    sx={{ textAlign: "center" }}
+                  >
+                    First Acceptance
+                  </Typography>
+                </TableCell>
+                {problems.map((problem) => {
+                  const key = getProblemKey(
+                    problem.contestId,
+                    problem.index,
+                    problem.name
+                  );
+                  return (
+                    <TableCell
+                      key={key}
+                      sx={{
+                        borderRight: "1px solid rgba(224, 224, 224, 1)",
+                      }}
+                    >
+                      {firstACs[key] ? (
+                        <>
+                          <Typography
+                            variant="body1"
+                            color="success.main"
+                            fontWeight="fontWeightBold"
+                          >
+                            {firstACs[key].user}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            {secondsToHms(firstACs[key].time)}
+                          </Typography>
+                        </>
+                      ) : (
+                        "-"
+                      )}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>

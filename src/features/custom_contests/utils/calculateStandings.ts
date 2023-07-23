@@ -16,8 +16,8 @@ export type UserStats = {
   problemStats: Record<string, ProblemStats>;
   totalScore: number;
   totalWrongAttempts: number;
-  lastACTime: number;
-  lastACTimeWithPenalty: number;
+  lastACTime: number | null;
+  lastACTimeWithPenalty: number | null;
 };
 
 const calculateUserStats = (
@@ -74,18 +74,20 @@ const calculateUserStats = (
     0
   );
 
-  const lastACTime = Math.max(
-    ...Object.values(problemStats).map(
-      ({ timeToFirstAC }) => timeToFirstAC || 0
-    )
-  );
+  const lastACTime =
+    Math.max(
+      ...Object.values(problemStats).map(
+        ({ timeToFirstAC }) => timeToFirstAC || 0
+      )
+    ) || null;
 
-  const lastACTimeWithPenalty =
-    lastACTime +
-    Object.values(problemStats).reduce(
-      (acc, { wrongAttemptBeforeAC }) => acc + wrongAttemptBeforeAC * penalty,
-      0
-    );
+  const lastACTimeWithPenalty = lastACTime
+    ? lastACTime +
+      Object.values(problemStats).reduce(
+        (acc, { wrongAttemptBeforeAC }) => acc + wrongAttemptBeforeAC * penalty,
+        0
+      )
+    : null;
 
   return {
     problemStats,
@@ -111,4 +113,32 @@ export const calculateAllUsersStats = (
     },
     {}
   );
+};
+
+export const calculateFirstACs = (
+  submissions: Submission[],
+  startDate: string
+): Record<string, { time: number; user: string }> => {
+  const firstACs: Record<string, { time: number; user: string }> = {};
+
+  submissions.forEach((s) => {
+    const key = getProblemKey(s.contestId, s.problem.index, s.problem.name);
+
+    const submissionTime = dayjs.unix(s.creationTimeSeconds);
+    const relativeSubmissionTime = submissionTime.diff(
+      dayjs(startDate),
+      "seconds"
+    );
+
+    if (s.verdict === "OK") {
+      if (!firstACs[key] || firstACs[key].time > relativeSubmissionTime) {
+        firstACs[key] = {
+          time: relativeSubmissionTime,
+          user: s.author.members[0].handle,
+        };
+      }
+    }
+  });
+
+  return firstACs;
 };

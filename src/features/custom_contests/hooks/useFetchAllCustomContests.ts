@@ -18,6 +18,7 @@ const fetchAllCustomContests = async (): Promise<CustomContest[]> => {
       console.log(err);
       throw new Error("validation error");
     }
+    console.log(err);
     throw new Error("custom contest error");
   }
 };
