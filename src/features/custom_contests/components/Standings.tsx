@@ -84,6 +84,8 @@ export const Standings: React.FC<Props> = ({
                   sx={{
                     borderRight: "1px solid rgba(224, 224, 224, 1)",
                     borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                    textAlign: "center",
+                    fontWeight: "600",
                   }}
                 >
                   #
@@ -92,6 +94,8 @@ export const Standings: React.FC<Props> = ({
                   sx={{
                     borderRight: "1px solid rgba(224, 224, 224, 1)",
                     borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                    textAlign: "center",
+                    fontWeight: "600",
                   }}
                 >
                   Participants
@@ -100,6 +104,8 @@ export const Standings: React.FC<Props> = ({
                   sx={{
                     borderRight: "1px solid rgba(224, 224, 224, 1)",
                     borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                    textAlign: "center",
+                    fontWeight: "600",
                   }}
                 >
                   Score
@@ -114,6 +120,7 @@ export const Standings: React.FC<Props> = ({
                     sx={{
                       borderRight: "1px solid rgba(224, 224, 224, 1)",
                       borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                      textAlign: "center",
                     }}
                   >
                     <a
@@ -123,6 +130,10 @@ export const Standings: React.FC<Props> = ({
                     >
                       {idx + 1}
                     </a>
+
+                    <Typography variant="body2" color="text.secondary">
+                      {problem.rating}
+                    </Typography>
                   </TableCell>
                 ))}
               </TableRow>
@@ -135,6 +146,7 @@ export const Standings: React.FC<Props> = ({
                     <TableCell
                       sx={{
                         borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        textAlign: "center",
                       }}
                     >
                       {i + 1}
@@ -144,16 +156,18 @@ export const Standings: React.FC<Props> = ({
                         borderRight: "1px solid rgba(224, 224, 224, 1)",
                       }}
                     >
-                      <a
-                        href={`${CF_PROFILE_URL}/${participant}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        css={{
-                          textDecoration: "none",
-                        }}
-                      >
-                        {participant}
-                      </a>
+                      <Typography variant="body1" fontWeight="fontWeightBold">
+                        <a
+                          href={`${CF_PROFILE_URL}/${participant}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          css={{
+                            textDecoration: "none",
+                          }}
+                        >
+                          {participant}
+                        </a>
+                      </Typography>
                     </TableCell>
                     <TableCell
                       sx={{
@@ -162,25 +176,34 @@ export const Standings: React.FC<Props> = ({
                     >
                       {stats ? (
                         <>
-                          <Box display="flex" alignItems="center">
+                          <Box
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                          >
                             <Typography
                               variant="body1"
-                              color="success.main"
                               fontWeight="fontWeightBold"
+                              css={{ color: "#05AA02" }}
                             >
                               {stats.totalScore}
                             </Typography>
                             {stats.totalWrongAttempts > 0 && (
                               <Typography
                                 variant="body1"
-                                color="error.main"
-                                css={{ marginLeft: "6px" }}
+                                css={{ marginLeft: "6px", color: "red" }}
                               >
                                 {"(" + stats.totalWrongAttempts + ")"}
                               </Typography>
                             )}
                           </Box>
-                          <Typography variant="body2" color="text.secondary">
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            css={{
+                              textAlign: "center",
+                            }}
+                          >
                             {stats.lastACTime
                               ? secondsToHms(stats.lastACTime)
                               : "-"}
@@ -243,6 +266,7 @@ export const Standings: React.FC<Props> = ({
                             variant="body1"
                             color="success.main"
                             fontWeight="fontWeightBold"
+                            sx={{ textAlign: "center", color: "#05AA02" }}
                           >
                             {firstACs[key].user}
                           </Typography>
@@ -250,6 +274,7 @@ export const Standings: React.FC<Props> = ({
                             variant="body2"
                             color="text.secondary"
                             fontWeight="fontWeightBold"
+                            sx={{ textAlign: "center" }}
                           >
                             {secondsToHms(firstACs[key].time)}
                           </Typography>
@@ -287,7 +312,11 @@ const Score: React.FC<ScoreProps> = ({ problem, stats }) => {
     (problemStat.wrongAttemptBeforeAC === 0 && !problemStat.timeToFirstAC)
   ) {
     return (
-      <Typography variant="body2" color="text.secondary">
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        sx={{ textAlign: "center" }}
+      >
         -
       </Typography>
     );
@@ -300,23 +329,26 @@ const Score: React.FC<ScoreProps> = ({ problem, stats }) => {
 
   return (
     <Box>
-      <Box display="flex" alignItems="center">
+      <Box display="flex" alignItems="center" justifyContent="center">
         <Typography
           variant="body1"
-          color="success.main"
+          css={{ color: "#05AA02" }}
           fontWeight="fontWeightBold"
         >
           {problemStat.score}
         </Typography>
         <Typography
           variant="body1"
-          color="error.main"
-          sx={{ marginLeft: "6px" }}
+          sx={{ marginLeft: "6px", textAlign: "center", color: "red" }}
         >
           {failedAttempts}
         </Typography>
       </Box>
-      <Typography variant="body2" color="text.secondary">
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        sx={{ textAlign: "center" }}
+      >
         {actime}
       </Typography>
     </Box>

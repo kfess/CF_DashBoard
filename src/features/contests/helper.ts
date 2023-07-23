@@ -8,6 +8,7 @@ import type {
 import { ReshapedProblem } from "@features/problems/problem";
 import { groupBy } from "@helpers/arr-utils";
 import { PeriodWord, periodFilter } from "./components/PeriodFilter";
+import { getProblemKey } from "@features/problems/utils";
 
 // used for some work in problem idx
 // In most cases, problem's "problem idx" is A, B, C, D, ...
@@ -141,7 +142,7 @@ export const isAllProblemsSolved = (
     const problem = problemMap[idx];
     const indexedProblems = problem?.indexedProblems || [];
     return indexedProblems.every((p) =>
-      solvedSet?.has(`${contestId}-${p.index}`)
+      solvedSet?.has(getProblemKey(contestId, p.index, p.name))
     );
   });
 };
