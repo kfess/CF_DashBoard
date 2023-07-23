@@ -10,6 +10,7 @@ import type { ReshapedContest } from "@features/contests/contest";
 import { ContestTableRow } from "@features/contests/components/ContestTableRow";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { usePagination } from "@hooks/usePagination";
+import { Typography } from "@mui/material";
 
 type Props = {
   contests: ReshapedContest[];
@@ -54,7 +55,9 @@ export const ContestsTable: React.FC<Props> = ({
                     borderBottom: "2px solid rgba(224, 224, 224, 1)",
                   }}
                 >
-                  <strong>Contest</strong>
+                  <Typography variant="body1" fontWeight="fontWeightBold">
+                    Contest
+                  </Typography>
                 </TableCell>
                 {problemIdxes.map((idx) => (
                   <TableCell
@@ -65,7 +68,9 @@ export const ContestsTable: React.FC<Props> = ({
                       borderBottom: "2px solid rgba(224, 224, 224, 1)",
                     }}
                   >
-                    <strong>{idx}</strong>
+                    <Typography variant="body1" fontWeight="fontWeightBold">
+                      {idx}
+                    </Typography>
                   </TableCell>
                 ))}
               </TableRow>
