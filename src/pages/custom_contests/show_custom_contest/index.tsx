@@ -19,6 +19,7 @@ import { RegisterButton } from "@features/custom_contests/components/RegisterBut
 import { Divider } from "@mui/material";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { utcISOStringToLocal } from "@helpers/date";
+import { SocialShare } from "@features/custom_contests/components/SocialShare";
 
 export const ShowCustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
@@ -113,6 +114,7 @@ export const ShowCustomContestPage: React.FC = () => {
                   startDate={utcISOStringToLocal(data.startDate)}
                   endDate={data.endDate}
                 />
+                <SocialShare />
                 <RegisterButton />
 
                 <Box

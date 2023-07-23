@@ -16,7 +16,7 @@ import {
   calculateAllUsersStats,
   calculateFirstACs,
 } from "@features/custom_contests/utils/calculateStandings";
-import { CF_CONTEST_URL } from "@constants/url";
+import { CF_CONTEST_URL, CF_PROFILE_URL } from "@constants/url";
 import { getProblemKey } from "@features/problems/utils";
 import { secondsToHms } from "@helpers/date";
 import { pluralize } from "@helpers/format";
@@ -144,7 +144,16 @@ export const Standings: React.FC<Props> = ({
                         borderRight: "1px solid rgba(224, 224, 224, 1)",
                       }}
                     >
-                      {participant}
+                      <a
+                        href={`${CF_PROFILE_URL}/${participant}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        css={{
+                          textDecoration: "none",
+                        }}
+                      >
+                        {participant}
+                      </a>
                     </TableCell>
                     <TableCell
                       sx={{
@@ -237,7 +246,11 @@ export const Standings: React.FC<Props> = ({
                           >
                             {firstACs[key].user}
                           </Typography>
-                          <Typography variant="body2" color="text.secondary">
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            fontWeight="fontWeightBold"
+                          >
                             {secondsToHms(firstACs[key].time)}
                           </Typography>
                         </>
@@ -271,8 +284,7 @@ const Score: React.FC<ScoreProps> = ({ problem, stats }) => {
 
   if (
     !problemStat ||
-    (problemStat.wrongAttemptBeforeAC === 0 &&
-      problemStat.timeToFirstAC === null)
+    (problemStat.wrongAttemptBeforeAC === 0 && !problemStat.timeToFirstAC)
   ) {
     return (
       <Typography variant="body2" color="text.secondary">
