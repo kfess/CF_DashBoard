@@ -39,7 +39,7 @@ const mainField = [
 ] as const;
 type MainField = typeof mainField[number];
 
-const activityField = ["Labels", "Ranking", "Custom Contest"] as const;
+const activityField = ["Labels", "Ranking", "Custom Contest (beta)"] as const;
 type ActivityField = typeof activityField[number];
 
 const otherField = ["API", "Links", "FAQ", "Terms"] as const;
@@ -101,7 +101,7 @@ export const activityItems: readonly Item[] = [
   //   notSelectedIcon: <LeaderboardOutlinedIcon />,
   // },
   {
-    field: "Custom Contest",
+    field: "Custom Contest (beta)",
     link: "/custom-contest",
     selectedIcon: <WidgetsIcon />,
     notSelectedIcon: <WidgetsOutlinedIcon />,

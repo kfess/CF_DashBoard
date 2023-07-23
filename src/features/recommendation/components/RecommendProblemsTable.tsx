@@ -11,6 +11,7 @@ import { recommendDifficultyRange } from "@features/recommendation/helper";
 import type { Problem } from "@features/problems/problem";
 import { ProblemsTableRow } from "@features/problems/components/ProblemsTableRow";
 import { getRandomElements } from "@helpers/random";
+import { getProblemKey } from "@features/problems/utils";
 
 type Props = {
   level: RecommendLevel;
@@ -43,6 +44,7 @@ export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
           <Table stickyHeader>
             <TableHead>
               <TableRow>
+                <TableCell>Status</TableCell>
                 <TableCell>Problem</TableCell>
                 <TableCell>Contest</TableCell>
                 <TableCell>Difficulty</TableCell>
@@ -55,7 +57,11 @@ export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
                 .sort((a, b) => (a.rating ?? 0) - (b.rating ?? 0))
                 .map((problem) => (
                   <ProblemsTableRow
-                    key={problem.contestId + problem.index}
+                    key={getProblemKey(
+                      problem.contestId,
+                      problem.index,
+                      problem.name
+                    )}
                     problem={problem}
                     showTags={false}
                     backgroundColor=""
