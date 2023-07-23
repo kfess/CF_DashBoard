@@ -76,15 +76,13 @@ const calculateUserStats = (
 
   const lastACTime =
     Math.max(
-      ...Object.values(problemStats).map(
-        ({ timeToFirstAC }) => timeToFirstAC || 0
-      )
+      ...Object.values(problemStats).map((stats) => stats?.timeToFirstAC || 0)
     ) || null;
 
   const lastACTimeWithPenalty = lastACTime
     ? lastACTime +
       Object.values(problemStats).reduce(
-        (acc, { wrongAttemptBeforeAC }) => acc + wrongAttemptBeforeAC * penalty,
+        (acc, stats) => acc + (stats?.wrongAttemptBeforeAC || 0) * penalty,
         0
       )
     : null;

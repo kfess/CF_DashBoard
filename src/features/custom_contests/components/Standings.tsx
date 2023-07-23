@@ -280,7 +280,15 @@ export const Standings: React.FC<Props> = ({
                           </Typography>
                         </>
                       ) : (
-                        "-"
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          css={{
+                            textAlign: "center",
+                          }}
+                        >
+                          -
+                        </Typography>
                       )}
                     </TableCell>
                   );
