@@ -1,11 +1,14 @@
 import dayjs from "dayjs";
 import React, { useState, useMemo } from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { Submission } from "@features/submission/submission";
 import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { HeatMap, HeatMapData } from "@features/achievement/components/HeatMap";
-import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
+import { TabItem, Tabs } from "@features/ui/component/Tabs";
+import { List } from "@features/ui/component/List";
 
 type Props = {
   submissions: Submission[];
@@ -110,47 +113,73 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
 
   const [yearMode, setYearMode] = useState<YearMode>("CurrentDayToPastOneYear");
   const [selectedYear, setSelectedYear] = useState<Year>(currYear);
-  const [heatMapContent, setHeatMapContent] =
-    useState<HeatMapContent>("AllSubmissions");
 
-  const handleYearModeChange = () => {
-    setYearMode((prev) => {
-      if (prev === "CurrentDayToPastOneYear") {
-        setSelectedYear(currYear);
-        return "YearStartToEnd";
-      } else {
-        setSelectedYear(currYear);
-        return "CurrentDayToPastOneYear";
-      }
-    });
-  };
-
-  const heatMapData = useMemo(
-    () => makeHeatMapData(submissions, yearMode, selectedYear, heatMapContent),
-    [submissions, yearMode, selectedYear, heatMapContent]
+  const allSubsHeatMapData = useMemo(
+    () =>
+      makeHeatMapData(submissions, yearMode, selectedYear, "AllSubmissions"),
+    [submissions, yearMode, selectedYear]
   );
 
+  const allACSubsHeatMapData = useMemo(
+    () =>
+      makeHeatMapData(submissions, yearMode, selectedYear, "AllACSubmissions"),
+    [submissions, yearMode, selectedYear]
+  );
+
+  const maxDifficultyHeatMapData = useMemo(
+    () => makeHeatMapData(submissions, yearMode, selectedYear, "MaxDifficulty"),
+    [submissions, yearMode, selectedYear]
+  );
+
+  const tabItems: TabItem[] = [
+    {
+      label: "All Submission",
+      children: (
+        <HeatMap
+          heatMapData={allSubsHeatMapData}
+          heatMapContent="AllSubmissions"
+        />
+      ),
+      disabled: false,
+    },
+    {
+      label: "All AC Submission",
+      children: (
+        <HeatMap
+          heatMapData={allACSubsHeatMapData}
+          heatMapContent="AllACSubmissions"
+        />
+      ),
+      disabled: false,
+    },
+    {
+      label: "Max Difficulty",
+      children: (
+        <HeatMap
+          heatMapData={maxDifficultyHeatMapData}
+          heatMapContent="MaxDifficulty"
+        />
+      ),
+      disabled: false,
+    },
+  ];
+
   return (
-    <>
-      <DropDownMenuButton
-        title="HeatMap Type"
-        items={heatmapContents.map((content) => ({
-          item: content,
+    <Box sx={{ p: 1 }}>
+      <Typography variant="h6" gutterBottom>
+        Heat Map
+      </Typography>
+      <List
+        items={years.map((year) => ({
+          text: year.toString(),
+          onClick: () => {
+            setSelectedYear(year);
+            setYearMode("YearStartToEnd");
+          },
+          selected: year === selectedYear,
         }))}
-        selectedItem={heatMapContent}
-        setSelectedItem={setHeatMapContent}
       />
-      <DropDownMenuButton
-        title={`Year`}
-        items={[
-          ...years.map((year) => ({
-            item: year,
-          })),
-        ]}
-        selectedItem={selectedYear}
-        setSelectedItem={setSelectedYear}
-      />
-      <HeatMap heatMapData={heatMapData} heatMapContent={heatMapContent} />
-    </>
+      <Tabs tabItems={tabItems} />
+    </Box>
   );
 };

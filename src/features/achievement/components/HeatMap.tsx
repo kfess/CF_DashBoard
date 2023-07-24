@@ -1,7 +1,13 @@
 import dayjs from "dayjs";
 import React from "react";
+import Typography from "@mui/material/Typography";
 import { HeatMapContent } from "@features/achievement/components/HeatMaps";
-import { getColorCodeFromRating } from "@features/color/ratingColor";
+import {
+  getColorCodeFromRating,
+  ratingColorInfo,
+  ratingColor,
+} from "@features/color/ratingColor";
+import { pluralize } from "@helpers/format";
 
 const COLOR_GREY = "#ebedf0";
 const valueToColor = (value: number | undefined) => {
@@ -55,19 +61,27 @@ type Props = {
 export const HeatMap: React.FC<Props> = ({ heatMapData, heatMapContent }) => {
   return (
     <>
-      <div>
+      <Typography
+        variant="body1"
+        color="text.secondary"
+        css={{ marginBottom: "1rem" }}
+      >
         {heatMapContent === "AllSubmissions" ? (
           <div>
-            {heatMapData.reduce((prev, curr) => (prev += curr.value ?? 0), 0)}{" "}
-            Submissions
+            {heatMapData
+              .reduce((prev, curr) => (prev += curr.value ?? 0), 0)
+              .toLocaleString()}{" "}
+            {pluralize(heatMapData.length, "Submission")}
           </div>
         ) : (
           <div>
-            {heatMapData.reduce((prev, curr) => (prev += curr.value ?? 0), 0)}{" "}
-            AC Submissions
+            {heatMapData
+              .reduce((prev, curr) => (prev += curr.value ?? 0), 0)
+              .toLocaleString()}{" "}
+            {pluralize(heatMapData.length, "AC Submission")}
           </div>
         )}
-      </div>
+      </Typography>
       <div css={{ width: "100%" }}>
         <svg viewBox={`0 0 ${width} ${height}`} css={{ width: "100%" }}>
           {DAY_NAMES_SHORT.map((dayName, i) => (
@@ -131,24 +145,46 @@ export const HeatMap: React.FC<Props> = ({ heatMapData, heatMapContent }) => {
           }}
         >
           <svg viewBox={`0 0 ${width} 50`} css={{ width: "100%" }}>
-            {colorSamples.map(({ color, value }, i) => (
-              <g key={`colorSample-${i}`}>
-                <rect
-                  x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 2.5)} // Adjusted x position
-                  y={0} // Adjusted y position
-                  width={BLOCK_WIDTH * 0.9}
-                  height={BLOCK_WIDTH * 0.9}
-                  fill={color}
-                />
-                <text
-                  x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 2.5) - 5} // Adjusted x position
-                  y={25} // Adjusted y position
-                  fontSize={12}
-                >
-                  {value}
-                </text>
-              </g>
-            ))}
+            {(heatMapContent === "AllACSubmissions" || // color sample
+              heatMapContent === "AllSubmissions") &&
+              colorSamples.map(({ color, value }, i) => (
+                <g key={`colorSample-${i}`}>
+                  <rect
+                    x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 2.5)} // Adjusted x position
+                    y={0} // Adjusted y position
+                    width={BLOCK_WIDTH * 0.9}
+                    height={BLOCK_WIDTH * 0.9}
+                    fill={color}
+                  />
+                  <text
+                    x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 2.5) - 5} // Adjusted x position
+                    y={25} // Adjusted y position
+                    fontSize={12}
+                  >
+                    {value}
+                  </text>
+                </g>
+              ))}
+            {heatMapContent === "MaxDifficulty" &&
+              ratingColor.map((color, i) => (
+                <g key={`colorSample-${i}`}>
+                  <rect
+                    x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 1.8)} // Adjusted x position
+                    y={0} // Adjusted y position
+                    width={BLOCK_WIDTH * 0.9}
+                    height={BLOCK_WIDTH * 0.9}
+                    fill={ratingColorInfo[color].colorCode}
+                  />
+                  <text
+                    x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 1.8) - 5} // Adjusted x position
+                    y={25} // Adjusted y position
+                    fontSize={12}
+                  >
+                    {ratingColorInfo[color].name === "DeepRed" && "Hard"}
+                    {ratingColorInfo[color].name === "Gray" && "Easy"}
+                  </text>
+                </g>
+              ))}
           </svg>
         </div>
       </div>
