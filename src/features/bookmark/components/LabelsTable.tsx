@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import { labelSelectors } from "@features/bookmark/labelActions";
-import type { LabelState } from "@features/bookmark/label.atom";
-import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
-import { LabelItem } from "@features/bookmark/components/LabelsList";
 import {
   Table,
   TableBody,
@@ -14,6 +9,10 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
+import { ProblemLabelState } from "../_problemLabel.atom";
+import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
+import { LabelItem } from "@features/bookmark/components/LabelsList";
+import { useFetchLabelsAndProblems } from "../hooks/useProblemLabels";
 
 const sortOrders = [
   "Alphabetically",
@@ -24,7 +23,7 @@ const sortOrders = [
 
 type SortOrder = typeof sortOrders[number];
 
-const sortLabels = (labels: LabelState[], order: SortOrder) => {
+const sortLabels = (labels: ProblemLabelState[], order: SortOrder) => {
   return [...labels].sort((a, b) => {
     switch (order) {
       case "Alphabetically":
@@ -40,7 +39,7 @@ const sortLabels = (labels: LabelState[], order: SortOrder) => {
 };
 
 export const LabelsTable: React.FC = () => {
-  const labels = labelSelectors.useLabels();
+  const allLabels = useFetchLabelsAndProblems();
   const [order, setOrder] = useState<SortOrder>("Alphabetically");
 
   return (
@@ -65,18 +64,21 @@ export const LabelsTable: React.FC = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>
-                {labels.length} {labels.length > 1 ? "Labels" : "Label"}
-              </TableCell>
+              {allLabels && (
+                <TableCell>
+                  {allLabels.length} {allLabels.length > 1 ? "Labels" : "Label"}
+                </TableCell>
+              )}
               <TableCell>Description</TableCell>
               <TableCell>Problems</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {sortLabels(labels, order).map((label) => (
-              <LabelItem key={label.name} label={label} />
-            ))}
+            {allLabels &&
+              sortLabels(allLabels, order).map((label) => (
+                <LabelItem key={label.name} label={label} />
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

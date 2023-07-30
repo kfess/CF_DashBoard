@@ -67,7 +67,6 @@ export const AddLabelButton: React.FC<Props> = ({
             <MenuItem
               key={label.id}
               onClick={() => {
-                console.log(label.id, contestId, contestName, index, name);
                 db.addProblemLabel(label.id as number, {
                   contestId,
                   contestName,

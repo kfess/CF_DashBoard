@@ -1,4 +1,3 @@
-// LabelItem component
 import React, { useState } from "react";
 import { TableCell, TableRow, Button, ButtonGroup, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -6,12 +5,12 @@ import { LabelNameChip } from "@features/bookmark/components/LabelIcon";
 import { LabelEditor } from "@features/bookmark/components/LabelEditer";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { useToggle } from "@hooks/index";
-import { labelActions } from "@features/bookmark/labelActions";
-import type { LabelState } from "@features/bookmark/label.atom";
 import { HexaColor } from "@features/color/labelColor";
+import { ProblemLabelState } from "../_problemLabel.atom";
+import { db } from "@indexedDB/db";
 
 type Props = {
-  label: LabelState;
+  label: ProblemLabelState;
 };
 
 export const LabelItem: React.FC<Props> = ({ label }) => {
@@ -33,8 +32,6 @@ export const LabelItem: React.FC<Props> = ({ label }) => {
     label.description,
     label.color,
   ];
-
-  const deleteLabel = labelActions.useDeleteLabel();
 
   return (
     <TableRow>
@@ -62,8 +59,10 @@ export const LabelItem: React.FC<Props> = ({ label }) => {
                 title="Delete"
                 dialogText="Are you sure? Deleting a label will remove it from relevant problems."
                 dialogTitle="Confirmation"
-                deleteTarget={label.id}
-                deleteFn={deleteLabel}
+                deleteTarget={label.id as number}
+                deleteFn={() => {
+                  db.deleteLabel(label.id as number);
+                }}
               />
             </ButtonGroup>
           </TableCell>
@@ -73,7 +72,7 @@ export const LabelItem: React.FC<Props> = ({ label }) => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <LabelEditor
-                id={label.id}
+                id={label.id as number}
                 name={name}
                 setName={setName}
                 defaultName={defaultName}

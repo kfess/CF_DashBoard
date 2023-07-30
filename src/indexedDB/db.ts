@@ -14,6 +14,7 @@ export class CFDashboardDB extends Dexie {
     {
       labelId: number;
       contestId: number;
+      contestName: string;
       index: string;
       name: string;
       rating?: number;
@@ -49,6 +50,7 @@ export class CFDashboardDB extends Dexie {
     labelId: number,
     problem: {
       contestId: number;
+      contestName: string;
       index: string;
       name: string;
       rating?: number;
@@ -57,6 +59,7 @@ export class CFDashboardDB extends Dexie {
     await this.labelProblemMapping.add({
       labelId: labelId,
       contestId: problem.contestId,
+      contestName: problem.contestName,
       index: problem.index,
       name: problem.name,
       rating: problem.rating,
@@ -76,9 +79,41 @@ export class CFDashboardDB extends Dexie {
       .delete();
   }
 
-  async getProblemLabels(): Promise<ProblemLabelState[]> {
+  async getAllLabels(): Promise<ProblemLabelState[]> {
     const labels = await this.problemLabels.toArray();
     return labels;
+  }
+
+  async getLabelsAndProblems(): Promise<ProblemLabelState[]> {
+    const labels = await this.problemLabels.toArray();
+    for (let label of labels) {
+      const problems = await this.getProblemsByLabelId(label.id!);
+      label.problems = problems;
+    }
+    return labels;
+  }
+
+  async getLabelAndProblems(labelId: number): Promise<ProblemLabelState> {
+    const label = await this.problemLabels.get(labelId);
+    if (!label) throw new Error("Label not found");
+    const problems = await this.getProblemsByLabelId(labelId);
+    label.problems = problems;
+    return label;
+  }
+
+  async getProblemsByLabelId(labelId: number): Promise<
+    Array<{
+      contestId: number;
+      contestName: string;
+      index: string;
+      name: string;
+      rating?: number;
+    }>
+  > {
+    return await this.labelProblemMapping
+      .where("labelId")
+      .equals(labelId)
+      .toArray();
   }
 }
 

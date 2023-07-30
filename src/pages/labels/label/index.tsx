@@ -11,6 +11,7 @@ import { Typography } from "@mui/material";
 export const LabelPage: React.FC = () => {
   const navigate = useNavigate();
   const { labelName } = useParams(); // path = /labels/:labelName
+
   // const label = labelSelectors.useLabel(labelName ?? "");
 
   // useEffect(() => {
