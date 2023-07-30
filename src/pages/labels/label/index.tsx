@@ -11,18 +11,18 @@ import { Typography } from "@mui/material";
 export const LabelPage: React.FC = () => {
   const navigate = useNavigate();
   const { labelName } = useParams(); // path = /labels/:labelName
-  const label = labelSelectors.useLabel(labelName ?? "");
+  // const label = labelSelectors.useLabel(labelName ?? "");
 
-  useEffect(() => {
-    // if label does not exist, then go back to /labels page
-    if (!label) {
-      navigate("/labels");
-    }
-  }, []);
+  // useEffect(() => {
+  //   // if label does not exist, then go back to /labels page
+  //   if (!label) {
+  //     navigate("/labels");
+  //   }
+  // }, []);
 
   return (
     <>
-      <Container maxWidth="lg">
+      {/* <Container maxWidth="lg">
         <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
           <HeadLine title={`${labelName}`} />
           <Grid container spacing={2}>
@@ -58,7 +58,7 @@ export const LabelPage: React.FC = () => {
             </Grid>
           </Grid>
         </Box>
-      </Container>
+      </Container> */}
     </>
   );
 };

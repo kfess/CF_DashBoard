@@ -4,7 +4,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import StarIcon from "@mui/icons-material/Star";
 import { ColoredCircle } from "@features/color/components/ColoredCircle";
-import { labelActions, labelSelectors } from "@features/bookmark/labelActions";
+import { useFetchAllLabels } from "../hooks/useProblemLabels";
+import { db } from "@indexedDB/db";
 
 const circleCss = css({
   cursor: "pointer",
@@ -25,10 +26,13 @@ type Props = {
   name: string;
 };
 
-export const AddLabelButton: React.FC<Props> = (props: Props) => {
-  const { contestId, contestName, index, name } = props;
-  const labels = labelSelectors.useLabels();
-  const addProblem = labelActions.useAddProblem();
+export const AddLabelButton: React.FC<Props> = ({
+  contestId,
+  contestName,
+  index,
+  name,
+}) => {
+  const allLabels = useFetchAllLabels();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -44,7 +48,7 @@ export const AddLabelButton: React.FC<Props> = (props: Props) => {
       <div css={circleCss} id="label-button" onClick={handleClick}>
         <StarIcon fontSize="inherit" />
       </div>
-      {labels.length > 0 && (
+      {allLabels && allLabels.length > 0 && (
         <Menu
           open={open}
           onClose={handleClose}
@@ -59,11 +63,17 @@ export const AddLabelButton: React.FC<Props> = (props: Props) => {
             horizontal: "left",
           }}
         >
-          {labels.map((label) => (
+          {allLabels.map((label) => (
             <MenuItem
               key={label.id}
               onClick={() => {
-                addProblem(label.id, contestId, contestName, index, name);
+                console.log(label.id, contestId, contestName, index, name);
+                db.addProblemLabel(label.id as number, {
+                  contestId,
+                  contestName,
+                  index,
+                  name,
+                });
                 setAnchorEl(null);
               }}
               css={{ display: "block" }}

@@ -13,9 +13,9 @@ import {
 } from "@features/color/labelColor";
 import { LabelNameChip } from "./LabelIcon";
 import { ColorPalette } from "@features/color/components/ColorPalette";
-import { labelActions } from "@features/bookmark/labelActions";
 import { useToggle } from "@hooks/index";
 import { Input } from "@features/ui/component/Input";
+import { db } from "@indexedDB/db";
 
 export const LabelCreator: React.FC = () => {
   const [showBlock, toggleShowBlock] = useToggle(false, true);
@@ -27,13 +27,6 @@ export const LabelCreator: React.FC = () => {
     setName({ value: "", errorMsg: "" });
     setDescription({ value: "", errorMsg: "" });
     setColor(generateRandomHexaColor());
-  };
-
-  const addLabel = labelActions.useAddLabel();
-  const onClickCreateLabel = () => {
-    addLabel(name.value, color, description.value);
-    toggleShowBlock();
-    resetInput();
   };
 
   return (
@@ -122,7 +115,16 @@ export const LabelCreator: React.FC = () => {
           <Stack direction="row" justifyContent="flex-end" spacing={1}>
             <Button onClick={toggleShowBlock}>Cancel</Button>
             <Button
-              onClick={onClickCreateLabel}
+              onClick={() => {
+                db.createLabel({
+                  name: name.value,
+                  color: color,
+                  description: description.value,
+                  problems: [],
+                });
+                resetInput();
+                toggleShowBlock();
+              }}
               disabled={name.value.length === 0 || !isValidHexaColor(color)}
             >
               Create Label

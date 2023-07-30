@@ -4,6 +4,7 @@ import { localStorageEffect } from "@recoil/localStorageEffect";
 import { problemSchema } from "@features/problems/problem";
 import { RecoilAtomKeys, RecoilSelectorKeys } from "@recoil/RecoilKeys";
 
+// LabelState is a type of label object.
 export const labelStateSchema = z.object({
   id: z.number().min(0),
   name: z.string().trim().min(1, { message: "Name cannot be blank value." }),
@@ -14,7 +15,7 @@ export const labelStateSchema = z.object({
   color: z.string(),
   problems: z.array(
     problemSchema
-      .pick({ contestId: true, index: true, name: true })
+      .pick({ contestId: true, index: true, name: true, rating: true })
       .extend({ contestName: z.string() })
   ),
 });
