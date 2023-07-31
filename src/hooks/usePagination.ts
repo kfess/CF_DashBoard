@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const usePagination = (resetKey: any, initialValue: number = 50) => {
+export const usePagination = (resetKey: any, initialValue: number = 30) => {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(initialValue);
 
