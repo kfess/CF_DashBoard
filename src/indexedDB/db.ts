@@ -1,11 +1,11 @@
 import Dexie, { Table } from "dexie";
 import type { Problem } from "@features/problems/problem";
 import type { Contest } from "@features/contests/contest";
-import type { ProblemLabelState } from "@features/bookmark/problemLabel";
+import type { ProblemLabel } from "@features/bookmark/problemLabel";
 import type { ContestLabelState } from "@features/bookmark/_contestLabel.atom";
 
 export class CFDashboardDB extends Dexie {
-  problemLabels!: Table<ProblemLabelState, number>;
+  problemLabels!: Table<ProblemLabel, number>;
   contestLabels!: Table<ContestLabelState, number>;
   labelProblemMapping!: Table<
     {
@@ -32,8 +32,8 @@ export class CFDashboardDB extends Dexie {
   }
 
   private async attachProblemsToLabel(
-    label: ProblemLabelState
-  ): Promise<ProblemLabelState> {
+    label: ProblemLabel
+  ): Promise<ProblemLabel> {
     if (!label.id) {
       throw new Error("Label id is not defined");
     }
@@ -42,7 +42,7 @@ export class CFDashboardDB extends Dexie {
     return label;
   }
 
-  async createLabel(label: ProblemLabelState): Promise<void> {
+  async createLabel(label: ProblemLabel): Promise<void> {
     await this.problemLabels.add(label);
   }
 
@@ -53,7 +53,7 @@ export class CFDashboardDB extends Dexie {
 
   async updateLabel(
     labelId: number,
-    label: Omit<ProblemLabelState, "id" | "problems">
+    label: Omit<ProblemLabel, "id" | "problems">
   ): Promise<void> {
     await this.problemLabels.update(labelId, label);
   }
@@ -87,18 +87,18 @@ export class CFDashboardDB extends Dexie {
       .delete();
   }
 
-  async getAllLabels(): Promise<ProblemLabelState[]> {
+  async getAllLabels(): Promise<ProblemLabel[]> {
     return await this.problemLabels.toArray();
   }
 
-  async getLabelsAndProblems(): Promise<ProblemLabelState[]> {
+  async getLabelsAndProblems(): Promise<ProblemLabel[]> {
     const labels = await this.getAllLabels();
     return Promise.all(
       labels.map((label) => this.attachProblemsToLabel(label))
     );
   }
 
-  async getLabelAndProblems(labelId: number): Promise<ProblemLabelState> {
+  async getLabelAndProblems(labelId: number): Promise<ProblemLabel> {
     const label = await this.problemLabels.get(labelId);
     if (!label) throw new Error("Label not found");
     return await this.attachProblemsToLabel(label);
@@ -119,7 +119,9 @@ export class CFDashboardDB extends Dexie {
       .toArray();
   }
 
-  async getLabelAndProblemsByName(name: string): Promise<ProblemLabelState | undefined> {
+  async getLabelAndProblemsByName(
+    name: string
+  ): Promise<ProblemLabel | undefined> {
     const label = await this.problemLabels.where("name").equals(name).first();
     return label ? this.attachProblemsToLabel(label) : undefined;
   }

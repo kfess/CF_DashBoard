@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { problemSchema } from "@features/problems/problem";
+import { isValidHexaColor } from "@features/color/labelColor";
 
 // 保存に必要な情報だけを抽出したスキーマ
 const partialProblemSchema = problemSchema
@@ -20,7 +21,9 @@ export const problemLabelSchema = z.object({
     .string()
     .max(256, { message: "Description message is too long." })
     .optional(),
-  color: z.string(),
+  color: z.string().refine(isValidHexaColor, {
+    message: "The specified color is not valid.",
+  }),
   problems: z.array(partialProblemSchema),
 });
 export type ProblemLabel = z.infer<typeof problemLabelSchema>;

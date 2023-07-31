@@ -9,7 +9,7 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import type { ProblemLabelState } from "@features/bookmark/problemLabel";
+import type { ProblemLabel } from "@features/bookmark/problemLabel";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { LabelItem } from "@features/bookmark/components/LabelsList";
 import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
@@ -23,7 +23,7 @@ const sortOrders = [
 
 type SortOrder = typeof sortOrders[number];
 
-const sortLabels = (labels: ProblemLabelState[], order: SortOrder) => {
+const sortLabels = (labels: ProblemLabel[], order: SortOrder) => {
   return [...labels].sort((a, b) => {
     switch (order) {
       case "Alphabetically":

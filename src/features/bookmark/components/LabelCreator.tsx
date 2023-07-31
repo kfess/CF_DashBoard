@@ -1,20 +1,20 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import { Button } from "@features/ui/component/Button";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useToggle } from "@hooks/index";
+import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useProblemLabels";
 import {
   generateRandomHexaColor,
   isValidHexaColor,
 } from "@features/color/labelColor";
-import { LabelNameChip } from "./LabelIcon";
-import { useToggle } from "@hooks/index";
-import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useProblemLabels";
 import {
   ProblemLabelForm,
   problemLabelFormSchema,
 } from "@features/bookmark/problemLabel";
+import { Button } from "@features/ui/component/Button";
+import { LabelNameChip } from "./LabelIcon";
 import { Name } from "@features/bookmark/components/Name";
 import { Description } from "@features/bookmark/components/Description";
 import { Color } from "@features/bookmark/components/Color";
@@ -28,6 +28,7 @@ const getDefaultValues = (): ProblemLabelForm => ({
 export const LabelCreator: React.FC = () => {
   const { createLabel } = useIndexedDBForProblemLabel();
   const [showBlock, toggleShowBlock] = useToggle(false, true);
+
   const {
     control,
     getValues,
@@ -39,6 +40,7 @@ export const LabelCreator: React.FC = () => {
     resolver: zodResolver(problemLabelFormSchema),
     defaultValues: getDefaultValues(),
   });
+  const watchName = watch("name");
   const watchedColor = watch("color");
 
   const onCancel = () => {
@@ -46,8 +48,8 @@ export const LabelCreator: React.FC = () => {
     toggleShowBlock();
   };
 
-  const onSubmit = () => {
-    createLabel({
+  const onSubmit = async () => {
+    await createLabel({
       name: getValues("name"),
       color: watchedColor,
       description: getValues("description"),
@@ -75,7 +77,7 @@ export const LabelCreator: React.FC = () => {
             }}
           >
             <LabelNameChip
-              name={getValues("name")}
+              name={watchName}
               color={isValidHexaColor(watchedColor) ? watchedColor : "#000000"}
               mode="Preview"
             />
