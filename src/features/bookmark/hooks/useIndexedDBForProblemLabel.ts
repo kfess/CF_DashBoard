@@ -26,7 +26,8 @@ export const useIndexedDBForProblemLabel = () => {
   };
 
   // ラベルを作成
-  const createLabel = async (label: ProblemLabel) => db.createProblemLabel(label);
+  const createLabel = async (label: ProblemLabel) =>
+    db.createProblemLabel(label);
 
   // ラベルを削除
   const deleteLabel = async (labelId: number) => db.deleteProblemLabel(labelId);
