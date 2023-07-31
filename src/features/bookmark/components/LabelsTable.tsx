@@ -9,7 +9,7 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import { ProblemLabelState } from "../_problemLabel.atom";
+import type { ProblemLabelState } from "@features/bookmark/problemLabel";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { LabelItem } from "@features/bookmark/components/LabelsList";
 import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
@@ -39,7 +39,7 @@ const sortLabels = (labels: ProblemLabelState[], order: SortOrder) => {
 };
 
 export const LabelsTable: React.FC = () => {
-  const { allLabels } = useIndexedDBForProblemLabel();
+  const { labelsAndProblems } = useIndexedDBForProblemLabel();
   const [order, setOrder] = useState<SortOrder>("Alphabetically");
 
   return (
@@ -64,9 +64,10 @@ export const LabelsTable: React.FC = () => {
         <Table>
           <TableHead>
             <TableRow>
-              {allLabels && (
+              {labelsAndProblems && (
                 <TableCell>
-                  {allLabels.length} {allLabels.length > 1 ? "Labels" : "Label"}
+                  {labelsAndProblems.length}{" "}
+                  {labelsAndProblems.length > 1 ? "Labels" : "Label"}
                 </TableCell>
               )}
               <TableCell>Description</TableCell>
@@ -75,8 +76,8 @@ export const LabelsTable: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {allLabels &&
-              sortLabels(allLabels, order).map((label) => (
+            {labelsAndProblems &&
+              sortLabels(labelsAndProblems, order).map((label) => (
                 <LabelItem key={label.name} label={label} />
               ))}
           </TableBody>

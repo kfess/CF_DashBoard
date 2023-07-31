@@ -6,7 +6,7 @@ import { LabelEditor } from "@features/bookmark/components/LabelEditer";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { useToggle } from "@hooks/index";
 import { HexaColor } from "@features/color/labelColor";
-import { ProblemLabelState } from "../_problemLabel.atom";
+import type { ProblemLabelState } from "@features/bookmark/problemLabel";
 import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
 
 type Props = {

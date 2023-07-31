@@ -1,7 +1,7 @@
 import Dexie, { Table } from "dexie";
 import type { Problem } from "@features/problems/problem";
 import type { Contest } from "@features/contests/contest";
-import type { ProblemLabelState } from "@features/bookmark/_problemLabel.atom";
+import type { ProblemLabelState } from "@features/bookmark/problemLabel";
 import type { ContestLabelState } from "@features/bookmark/_contestLabel.atom";
 
 export class CFDashboardDB extends Dexie {

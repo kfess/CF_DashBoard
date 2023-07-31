@@ -1,6 +1,6 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "@indexedDB/db";
-import { ProblemLabelState } from "../_problemLabel.atom";
+import type { ProblemLabelState } from "@features/bookmark/problemLabel";
 
 export const useIndexedDBForProblemLabel = () => {
   // 作成した問題ラベルの個数を取得
