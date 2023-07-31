@@ -1,5 +1,6 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
+import { TableCell, Grid } from "@mui/material";
 import { Control, FieldErrors } from "react-hook-form";
 import { isValidHexaColor } from "@features/color/labelColor";
 import { Button } from "@features/ui/component/Button";
@@ -27,29 +28,40 @@ export const Editer: React.FC<Props> = ({
   onCancel,
 }) => {
   return (
-    <form onSubmit={handleSubmit}>
-      <Stack spacing={0.5} padding={2}>
-        <LabelNameChip
-          name={watchedName}
-          color={isValidHexaColor(watchedColor) ? watchedColor : "#000000"}
-          mode="Preview"
-        />
-        <Stack direction={{ xs: "column", sm: "row", md: "row" }} spacing={2}>
-          <div>
-            <Name control={control} errors={errors} />
-          </div>
-          <div>
-            <Description control={control} errors={errors} />
-          </div>
-          <div>
-            <Color control={control} errors={errors} />
-          </div>
-        </Stack>
-        <Stack direction="row" justifyContent="flex-end" spacing={1}>
-          <Button onClick={onCancel}>Cancel</Button>
-          <Button type="submit">Save Changes</Button>
-        </Stack>
-      </Stack>
-    </form>
+    <TableCell colSpan={4}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <form onSubmit={handleSubmit}>
+            <Stack spacing={0.5} padding={2}>
+              <LabelNameChip
+                name={watchedName}
+                color={
+                  isValidHexaColor(watchedColor) ? watchedColor : "#000000"
+                }
+                mode="Preview"
+              />
+              <Stack
+                direction={{ xs: "column", sm: "row", md: "row" }}
+                spacing={2}
+              >
+                <div>
+                  <Name control={control} errors={errors} />
+                </div>
+                <div>
+                  <Description control={control} errors={errors} />
+                </div>
+                <div>
+                  <Color control={control} errors={errors} />
+                </div>
+              </Stack>
+              <Stack direction="row" justifyContent="flex-end" spacing={1}>
+                <Button onClick={onCancel}>Cancel</Button>
+                <Button type="submit">Save Changes</Button>
+              </Stack>
+            </Stack>
+          </form>
+        </Grid>
+      </Grid>
+    </TableCell>
   );
 };
