@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "@indexedDB/db";
 
@@ -34,4 +35,17 @@ export const useFetchLabelAndProblems = (labelId: number) => {
   });
 
   return labelAndProblems;
+};
+
+export const useFetchLabelAndProblemsByName = (name: string) => {
+  const labelAndProblems = useLiveQuery(async () => {
+    try {
+      const label = await db.getLabelByName(name);
+      return label;
+    } catch (error) {
+      return undefined;
+    }
+  }, [name]);
+
+  return { labelAndProblems };
 };

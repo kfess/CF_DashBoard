@@ -115,6 +115,15 @@ export class CFDashboardDB extends Dexie {
       .equals(labelId)
       .toArray();
   }
+
+  async getLabelByName(name: string): Promise<ProblemLabelState | undefined> {
+    const label = await this.problemLabels.where("name").equals(name).first();
+    if (label) {
+      const problems = await this.getProblemsByLabelId(label.id!);
+      label.problems = problems;
+    }
+    return label;
+  }
 }
 
 export const db = new CFDashboardDB();

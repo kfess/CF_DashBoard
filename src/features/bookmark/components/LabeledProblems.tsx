@@ -10,17 +10,14 @@ import {
 } from "@mui/material";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
-import { LabelState } from "@features/bookmark/label.atom";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
-import { labelActions } from "@features/bookmark/labelActions";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
+import { ProblemLabelState } from "../_problemLabel.atom";
+import { db } from "@indexedDB/db";
 
-type Props = { label: LabelState };
+type Props = { label: ProblemLabelState };
 
-export const LabeledProblems: React.FC<Props> = (props: Props) => {
-  const { label } = props;
-  const deleteProblem = labelActions.useDeleteProblem();
-
+export const LabeledProblems: React.FC<Props> = ({ label }) => {
   return (
     <>
       {label.problems.length > 0 ? (
@@ -57,14 +54,12 @@ export const LabeledProblems: React.FC<Props> = (props: Props) => {
                       title="Delete"
                       dialogText="Are you sure to delete this problem from this label?"
                       dialogTitle="Confirmation"
-                      deleteTarget={label.id}
+                      deleteTarget={label.id as number}
                       deleteFn={() =>
-                        deleteProblem(
-                          label.name,
-                          p.contestId as number,
-                          p.index,
-                          p.name
-                        )
+                        db.deleteProblemLabel(label.id as number, {
+                          contestId: p.contestId as number,
+                          index: p.index,
+                        })
                       }
                     />
                   </TableCell>
