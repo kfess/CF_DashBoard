@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToggle } from "@hooks/index";
-import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useProblemLabels";
+import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
 import {
   generateRandomHexaColor,
   isValidHexaColor,

@@ -7,7 +7,7 @@ export const useIndexedDBForProblemLabel = () => {
   const labelsCount = useLiveQuery(async () => db.problemLabels.count());
 
   // 全ての問題ラベルのみを取得
-  const allLabels = useLiveQuery(async () => db.getAllLabels());
+  const allLabels = useLiveQuery(async () => db.getAllProblemLabels());
 
   // 全ての問題ラベルとその問題を取得
   const labelsAndProblems = useLiveQuery(async () => db.getLabelsAndProblems());
@@ -26,16 +26,16 @@ export const useIndexedDBForProblemLabel = () => {
   };
 
   // ラベルを作成
-  const createLabel = async (label: ProblemLabel) => db.createLabel(label);
+  const createLabel = async (label: ProblemLabel) => db.createProblemLabel(label);
 
   // ラベルを削除
-  const deleteLabel = async (labelId: number) => db.deleteLabel(labelId);
+  const deleteLabel = async (labelId: number) => db.deleteProblemLabel(labelId);
 
   // ラベルを更新
   const updateLabel = async (
     labelId: number,
     label: Omit<ProblemLabel, "id" | "problems">
-  ) => db.updateLabel(labelId, label);
+  ) => db.updateProblemLabel(labelId, label);
 
   // 問題をラベルに追加
   const addProblemToLabel = async (

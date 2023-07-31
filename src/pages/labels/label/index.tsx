@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { LabeledProblems } from "@features/bookmark/components/LabeledProblems";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { Typography } from "@mui/material";
-import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useProblemLabels";
+import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
 
 export const LabelPage: React.FC = () => {
   const navigate = useNavigate();

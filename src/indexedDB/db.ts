@@ -2,11 +2,11 @@ import Dexie, { Table } from "dexie";
 import type { Problem } from "@features/problems/problem";
 import type { Contest } from "@features/contests/contest";
 import type { ProblemLabel } from "@features/bookmark/problemLabel";
-import type { ContestLabelState } from "@features/bookmark/_contestLabel.atom";
+import type { ContestLabel } from "@features/bookmark/contestLabel";
+import type { Classification } from "@features/contests/contest";
 
 export class CFDashboardDB extends Dexie {
   problemLabels!: Table<ProblemLabel, number>;
-  contestLabels!: Table<ContestLabelState, number>;
   labelProblemMapping!: Table<
     {
       labelId: number;
@@ -19,14 +19,29 @@ export class CFDashboardDB extends Dexie {
     [number, number, string]
   >;
 
+  contestLabels!: Table<ContestLabel, number>;
+  labelContestMapping!: Table<
+    {
+      labelId: number;
+      contestId: number;
+      contestName: string;
+      classification: Classification;
+    },
+    [number, number]
+  >;
+
   constructor() {
     super("CFDashboardDB");
     this.version(1).stores({
       problemLabels: "++id, name, description, color",
       labelProblemMapping: "[labelId+contestId+index]",
+
+      contestLabels: "++id, name, description, color",
+      labelContestMapping: "[labelId+contestId]",
     });
   }
 
+  // for problem labels
   private async deleteRelatedProblems(labelId: number): Promise<void> {
     await this.labelProblemMapping.where("labelId").equals(labelId).delete();
   }
@@ -42,16 +57,16 @@ export class CFDashboardDB extends Dexie {
     return label;
   }
 
-  async createLabel(label: ProblemLabel): Promise<void> {
+  async createProblemLabel(label: ProblemLabel): Promise<void> {
     await this.problemLabels.add(label);
   }
 
-  async deleteLabel(labelId: number): Promise<void> {
+  async deleteProblemLabel(labelId: number): Promise<void> {
     await this.problemLabels.delete(labelId);
     await this.deleteRelatedProblems(labelId);
   }
 
-  async updateLabel(
+  async updateProblemLabel(
     labelId: number,
     label: Omit<ProblemLabel, "id" | "problems">
   ): Promise<void> {
@@ -87,12 +102,12 @@ export class CFDashboardDB extends Dexie {
       .delete();
   }
 
-  async getAllLabels(): Promise<ProblemLabel[]> {
+  async getAllProblemLabels(): Promise<ProblemLabel[]> {
     return await this.problemLabels.toArray();
   }
 
   async getLabelsAndProblems(): Promise<ProblemLabel[]> {
-    const labels = await this.getAllLabels();
+    const labels = await this.getAllProblemLabels();
     return Promise.all(
       labels.map((label) => this.attachProblemsToLabel(label))
     );
@@ -124,6 +139,101 @@ export class CFDashboardDB extends Dexie {
   ): Promise<ProblemLabel | undefined> {
     const label = await this.problemLabels.where("name").equals(name).first();
     return label ? this.attachProblemsToLabel(label) : undefined;
+  }
+
+  // for contest labels
+  private async deleteRelatedContests(labelId: number): Promise<void> {
+    await this.labelContestMapping.where("labelId").equals(labelId).delete();
+  }
+
+  private async attachContestsToLabel(
+    label: ContestLabel
+  ): Promise<ContestLabel> {
+    if (!label.id) {
+      throw new Error("Label id is not defined");
+    }
+    const contests = await this.getContestsByLabelId(label.id);
+    label.contests = contests;
+    return label;
+  }
+
+  async createContestLabel(label: ContestLabel): Promise<void> {
+    await this.contestLabels.add(label);
+  }
+
+  async deleteContestLabel(labelId: number): Promise<void> {
+    await this.contestLabels.delete(labelId);
+    await this.deleteRelatedContests(labelId);
+  }
+
+  async updateContestLabel(
+    labelId: number,
+    label: Omit<ContestLabel, "id" | "contests">
+  ): Promise<void> {
+    await this.contestLabels.update(labelId, label);
+  }
+
+  async addContestToLabel(
+    labelId: number,
+    contest: {
+      contestId: number;
+      contestName: string;
+      classification: Classification;
+    }
+  ): Promise<void> {
+    await this.labelContestMapping.add({
+      labelId: labelId,
+      ...contest,
+    });
+  }
+
+  async deleteContestFromLabel(
+    labelId: number,
+    contest: {
+      contestId: number;
+    }
+  ): Promise<void> {
+    await this.labelContestMapping
+      .where("[labelId+contestId]")
+      .equals([labelId, contest.contestId])
+      .delete();
+  }
+
+  async getAllContestLabels(): Promise<ContestLabel[]> {
+    return await this.contestLabels.toArray();
+  }
+
+  async getLabelsAndContests(): Promise<ContestLabel[]> {
+    const labels = await this.getAllContestLabels();
+    return Promise.all(
+      labels.map((label) => this.attachContestsToLabel(label))
+    );
+  }
+
+  async getLabelAndContests(labelId: number): Promise<ContestLabel> {
+    const label = await this.contestLabels.get(labelId);
+    if (!label) throw new Error("Label not found");
+    return await this.attachContestsToLabel(label);
+  }
+
+  async getContestsByLabelId(labelId: number): Promise<
+    Array<{
+      contestId: number;
+      contestName: string;
+      classification: Classification;
+    }>
+  > {
+    return await this.labelContestMapping
+      .where("labelId")
+      .equals(labelId)
+      .toArray();
+  }
+
+  async getLabelAndContestsByName(
+    name: string
+  ): Promise<ContestLabel | undefined> {
+    const label = await this.contestLabels.where("name").equals(name).first();
+    return label ? this.attachContestsToLabel(label) : undefined;
   }
 }
 

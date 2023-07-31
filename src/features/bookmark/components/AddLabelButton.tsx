@@ -4,7 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import StarIcon from "@mui/icons-material/Star";
 import { ColoredCircle } from "@features/color/components/ColoredCircle";
-import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
+import { useIndexedDBForProblemLabel } from "../hooks/useIndexedDBForProblemLabel";
 
 const circleCss = css({
   cursor: "pointer",

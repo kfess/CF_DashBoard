@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { useToggle } from "@hooks/index";
-import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
+import { useIndexedDBForProblemLabel } from "../hooks/useIndexedDBForProblemLabel";
 import { Editor } from "./Editor";
 import {
   ProblemLabelForm,

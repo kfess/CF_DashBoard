@@ -13,7 +13,7 @@ import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
 import { ProblemLabel } from "@features/bookmark/problemLabel";
-import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
+import { useIndexedDBForProblemLabel } from "../hooks/useIndexedDBForProblemLabel";
 
 type Props = { label: ProblemLabel };
 

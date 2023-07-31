@@ -2,7 +2,7 @@ import { z } from "zod";
 import { contestSchema } from "@features/contests/contest";
 import { isValidHexaColor } from "@features/color/labelColor";
 
-export const contestLabelStateSchema = z.object({
+export const contestLabelSchema = z.object({
   id: z.number().min(0).optional(),
   name: z
     .string()
@@ -24,4 +24,4 @@ export const contestLabelStateSchema = z.object({
     })
   ),
 });
-export type ContestLabelState = z.infer<typeof contestLabelStateSchema>;
+export type ContestLabel = z.infer<typeof contestLabelSchema>;
