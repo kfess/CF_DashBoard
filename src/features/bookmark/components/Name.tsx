@@ -32,6 +32,6 @@ export const Name: React.FC<Props> = ({ control, errors }) => {
           <ErrorMessage message={errors.name?.message} />
         </FormControl>
       )}
-    ></Controller>
+    />
   );
 };

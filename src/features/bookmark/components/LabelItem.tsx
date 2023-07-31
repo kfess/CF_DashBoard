@@ -3,7 +3,7 @@ import { TableCell, TableRow, Button, ButtonGroup } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import { LabelNameChip } from "@features/bookmark/components/LabelIcon";
+import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { useToggle } from "@hooks/index";
 import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";

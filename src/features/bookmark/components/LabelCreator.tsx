@@ -14,7 +14,7 @@ import {
   problemLabelFormSchema,
 } from "@features/bookmark/problemLabel";
 import { Button } from "@features/ui/component/Button";
-import { LabelNameChip } from "./LabelIcon";
+import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
 import { Name } from "@features/bookmark/components/Name";
 import { Description } from "@features/bookmark/components/Description";
 import { Color } from "@features/bookmark/components/Color";
@@ -67,7 +67,6 @@ export const LabelCreator: React.FC = () => {
         </Box>
         {showBlock && (
           <Stack
-            spacing={0.5}
             padding={2}
             sx={{
               border: 1,
@@ -82,22 +81,51 @@ export const LabelCreator: React.FC = () => {
               mode="Preview"
             />
             <Stack
-              direction={{ xs: "column", sm: "row", md: "row" }}
+              direction={{
+                xs: "column",
+                md: "row",
+              }}
+              sx={{ justifyContent: "space-between" }}
               spacing={2}
             >
-              <div>
-                <Name control={control} errors={errors} />
-              </div>
-              <div>
-                <Description control={control} errors={errors} />
-              </div>
-              <div>
-                <Color control={control} errors={errors} />
-              </div>
-            </Stack>
-            <Stack direction="row" justifyContent="flex-end" spacing={1}>
-              <Button onClick={onCancel}>Cancel</Button>
-              <Button type="submit">Create Label</Button>
+              <Stack
+                direction={{
+                  xs: "column",
+                  md: "row",
+                }}
+                spacing={1}
+              >
+                <div>
+                  <Name control={control} errors={errors} />
+                </div>
+                <div>
+                  <Description control={control} errors={errors} />
+                </div>
+                <div>
+                  <Color control={control} errors={errors} />
+                </div>
+              </Stack>
+              <Stack direction="column" spacing={1}>
+                <Box sx={{ height: { xs: "0px", md: "1.8rem" } }} />
+                <Stack direction="row" spacing={1} justifyContent="flex-end">
+                  <div>
+                    <Button onClick={onCancel}>Cancel</Button>
+                  </div>
+                  <div>
+                    <Button
+                      type="submit"
+                      css={{ whiteSpace: "nowrap" }}
+                      disabled={
+                        watchedName === "" ||
+                        watchedColor === "" ||
+                        Object.keys(errors).length > 0
+                      }
+                    >
+                      Create label
+                    </Button>
+                  </div>
+                </Stack>
+              </Stack>
             </Stack>
           </Stack>
         )}
