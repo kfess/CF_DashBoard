@@ -76,6 +76,6 @@ export const Color: React.FC<Props> = ({ control, errors }) => {
           <ErrorMessage message={errors.color?.message} />
         </FormControl>
       )}
-    ></Controller>
+    />
   );
 };

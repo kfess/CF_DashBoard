@@ -18,25 +18,33 @@ type Props = {
   watchedName: string;
   watchedColor: string;
   onCancel: () => void;
+  onDelete: () => void;
 };
 
-export const Editer: React.FC<Props> = ({
+export const Editor: React.FC<Props> = ({
   control,
   errors,
   handleSubmit,
   watchedName,
   watchedColor,
   onCancel,
+  onDelete,
 }) => {
   return (
     <TableCell colSpan={4}>
       <form onSubmit={handleSubmit}>
         <Stack spacing={0.5} padding={2}>
-          <LabelNameChip
-            name={watchedName}
-            color={isValidHexaColor(watchedColor) ? watchedColor : "#000000"}
-            mode="Preview"
-          />
+          <Stack direction="row" justifyContent="space-between">
+            <LabelNameChip
+              name={watchedName}
+              color={isValidHexaColor(watchedColor) ? watchedColor : "#000000"}
+              mode="Preview"
+            />
+            <div>
+              <Button onClick={onDelete}>Delete</Button>
+            </div>
+          </Stack>
+
           <Stack
             direction={{
               xs: "column",

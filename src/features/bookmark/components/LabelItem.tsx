@@ -7,7 +7,7 @@ import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { useToggle } from "@hooks/index";
 import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
-import { Editer } from "./Editer";
+import { Editor } from "./Editor";
 import {
   ProblemLabelForm,
   problemLabelFormSchema,
@@ -53,7 +53,7 @@ export const LabelItem: React.FC<Props> = ({ label }) => {
   return (
     <TableRow>
       {showBlock ? (
-        <Editer
+        <Editor
           control={control}
           errors={errors}
           handleSubmit={handleSubmit(onSubmit)}
@@ -61,6 +61,10 @@ export const LabelItem: React.FC<Props> = ({ label }) => {
           watchedColor={watchedColor}
           onCancel={() => {
             reset();
+            toggleShowBlock();
+          }}
+          onDelete={async () => {
+            await deleteLabel(label.id as number);
             toggleShowBlock();
           }}
         />

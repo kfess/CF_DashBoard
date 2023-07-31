@@ -32,6 +32,6 @@ export const Description: React.FC<Props> = ({ control, errors }) => {
           <ErrorMessage message={errors.description?.message} />
         </FormControl>
       )}
-    ></Controller>
+    />
   );
 };

@@ -86,7 +86,7 @@ export const LabelCreator: React.FC = () => {
                 md: "row",
               }}
               sx={{ justifyContent: "space-between" }}
-              spacing={2}
+              spacing={1}
             >
               <Stack
                 direction={{
