@@ -6,11 +6,11 @@ import { LabelEditor } from "@features/bookmark/components/LabelEditer";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { useToggle } from "@hooks/index";
 import { HexaColor } from "@features/color/labelColor";
-import type { ProblemLabelState } from "@features/bookmark/problemLabel";
+import type { ProblemLabel } from "@features/bookmark/problemLabel";
 import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
 
 type Props = {
-  label: ProblemLabelState;
+  label: ProblemLabel;
 };
 
 export const LabelItem: React.FC<Props> = ({ label }) => {

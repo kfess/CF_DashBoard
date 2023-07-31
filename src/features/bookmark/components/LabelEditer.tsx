@@ -10,7 +10,6 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import Tooltip from "@mui/material/Tooltip";
 import { HexaColor, generateRandomHexaColor } from "@features/color/labelColor";
 import { ColorPalette } from "@features/color/components/ColorPalette";
-// import { db } from "@indexedDB/db";
 import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
 
 type NameProps = {

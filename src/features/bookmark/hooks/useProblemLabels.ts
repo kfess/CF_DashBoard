@@ -1,6 +1,6 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "@indexedDB/db";
-import type { ProblemLabelState } from "@features/bookmark/problemLabel";
+import type { ProblemLabel } from "@features/bookmark/problemLabel";
 
 export const useIndexedDBForProblemLabel = () => {
   // 作成した問題ラベルの個数を取得
@@ -26,7 +26,7 @@ export const useIndexedDBForProblemLabel = () => {
   };
 
   // ラベルを作成
-  const createLabel = async (label: ProblemLabelState) => db.createLabel(label);
+  const createLabel = async (label: ProblemLabel) => db.createLabel(label);
 
   // ラベルを削除
   const deleteLabel = async (labelId: number) => db.deleteLabel(labelId);
@@ -34,7 +34,7 @@ export const useIndexedDBForProblemLabel = () => {
   // ラベルを更新
   const updateLabel = async (
     labelId: number,
-    label: Omit<ProblemLabelState, "id" | "problems">
+    label: Omit<ProblemLabel, "id" | "problems">
   ) => db.updateLabel(labelId, label);
 
   // 問題をラベルに追加

@@ -12,10 +12,10 @@ import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
-import { ProblemLabelState } from "@features/bookmark/problemLabel";
+import { ProblemLabel } from "@features/bookmark/problemLabel";
 import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
 
-type Props = { label: ProblemLabelState };
+type Props = { label: ProblemLabel };
 
 export const LabeledProblems: React.FC<Props> = ({ label }) => {
   const { deleteProblemFromLabel } = useIndexedDBForProblemLabel();

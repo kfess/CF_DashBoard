@@ -13,7 +13,7 @@ const partialProblemSchema = problemSchema
 export type PartialProblem = z.infer<typeof partialProblemSchema>;
 
 // for existing label
-export const problemLabelStateSchema = z.object({
+export const problemLabelSchema = z.object({
   id: z.number().min(0).optional(),
   name: z.string().trim().min(1, { message: "Name cannot be blank value." }),
   description: z
@@ -23,4 +23,12 @@ export const problemLabelStateSchema = z.object({
   color: z.string(),
   problems: z.array(partialProblemSchema),
 });
-export type ProblemLabelState = z.infer<typeof problemLabelStateSchema>;
+export type ProblemLabel = z.infer<typeof problemLabelSchema>;
+
+// for creating new label
+export const problemLabelFormSchema = problemLabelSchema.pick({
+  name: true,
+  description: true,
+  color: true,
+});
+export type ProblemLabelForm = z.infer<typeof problemLabelFormSchema>;
