@@ -1,10 +1,7 @@
 import Dexie, { Table } from "dexie";
 import type { Problem } from "@features/problems/problem";
 import type { Contest } from "@features/contests/contest";
-import type {
-  ProblemLabelState,
-  // PartialProblem,
-} from "@features/bookmark/_problemLabel.atom";
+import type { ProblemLabelState } from "@features/bookmark/_problemLabel.atom";
 import type { ContestLabelState } from "@features/bookmark/_contestLabel.atom";
 
 export class CFDashboardDB extends Dexie {
@@ -30,23 +27,38 @@ export class CFDashboardDB extends Dexie {
     });
   }
 
-  async createLabel(label: ProblemLabelState): Promise<number> {
-    return await this.problemLabels.add(label);
+  private async deleteRelatedProblems(labelId: number): Promise<void> {
+    await this.labelProblemMapping.where("labelId").equals(labelId).delete();
+  }
+
+  private async attachProblemsToLabel(
+    label: ProblemLabelState
+  ): Promise<ProblemLabelState> {
+    if (!label.id) {
+      throw new Error("Label id is not defined");
+    }
+    const problems = await this.getProblemsByLabelId(label.id);
+    label.problems = problems;
+    return label;
+  }
+
+  async createLabel(label: ProblemLabelState): Promise<void> {
+    await this.problemLabels.add(label);
   }
 
   async deleteLabel(labelId: number): Promise<void> {
     await this.problemLabels.delete(labelId);
-    await this.labelProblemMapping.where("labelId").equals(labelId).delete();
+    await this.deleteRelatedProblems(labelId);
   }
 
   async updateLabel(
     labelId: number,
-    label: Omit<ProblemLabelState, "id">
+    label: Omit<ProblemLabelState, "id" | "problems">
   ): Promise<void> {
     await this.problemLabels.update(labelId, label);
   }
 
-  async addProblemLabel(
+  async addProblemToLabel(
     labelId: number,
     problem: {
       contestId: number;
@@ -58,15 +70,11 @@ export class CFDashboardDB extends Dexie {
   ): Promise<void> {
     await this.labelProblemMapping.add({
       labelId: labelId,
-      contestId: problem.contestId,
-      contestName: problem.contestName,
-      index: problem.index,
-      name: problem.name,
-      rating: problem.rating,
+      ...problem,
     });
   }
 
-  async deleteProblemLabel(
+  async deleteProblemFromLabel(
     labelId: number,
     problem: {
       contestId: number;
@@ -80,25 +88,20 @@ export class CFDashboardDB extends Dexie {
   }
 
   async getAllLabels(): Promise<ProblemLabelState[]> {
-    const labels = await this.problemLabels.toArray();
-    return labels;
+    return await this.problemLabels.toArray();
   }
 
   async getLabelsAndProblems(): Promise<ProblemLabelState[]> {
-    const labels = await this.problemLabels.toArray();
-    for (let label of labels) {
-      const problems = await this.getProblemsByLabelId(label.id!);
-      label.problems = problems;
-    }
-    return labels;
+    const labels = await this.getAllLabels();
+    return Promise.all(
+      labels.map((label) => this.attachProblemsToLabel(label))
+    );
   }
 
   async getLabelAndProblems(labelId: number): Promise<ProblemLabelState> {
     const label = await this.problemLabels.get(labelId);
     if (!label) throw new Error("Label not found");
-    const problems = await this.getProblemsByLabelId(labelId);
-    label.problems = problems;
-    return label;
+    return await this.attachProblemsToLabel(label);
   }
 
   async getProblemsByLabelId(labelId: number): Promise<
@@ -116,13 +119,9 @@ export class CFDashboardDB extends Dexie {
       .toArray();
   }
 
-  async getLabelByName(name: string): Promise<ProblemLabelState | undefined> {
+  async getLabelAndProblemsByName(name: string): Promise<ProblemLabelState | undefined> {
     const label = await this.problemLabels.where("name").equals(name).first();
-    if (label) {
-      const problems = await this.getProblemsByLabelId(label.id!);
-      label.problems = problems;
-    }
-    return label;
+    return label ? this.attachProblemsToLabel(label) : undefined;
   }
 }
 

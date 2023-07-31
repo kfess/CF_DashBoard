@@ -15,7 +15,7 @@ import { LabelNameChip } from "./LabelIcon";
 import { ColorPalette } from "@features/color/components/ColorPalette";
 import { useToggle } from "@hooks/index";
 import { Input } from "@features/ui/component/Input";
-import { db } from "@indexedDB/db";
+import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
 
 export const LabelCreator: React.FC = () => {
   const [showBlock, toggleShowBlock] = useToggle(false, true);
@@ -28,6 +28,8 @@ export const LabelCreator: React.FC = () => {
     setDescription({ value: "", errorMsg: "" });
     setColor(generateRandomHexaColor());
   };
+
+  const { createLabel } = useIndexedDBForProblemLabel();
 
   return (
     <>
@@ -116,7 +118,7 @@ export const LabelCreator: React.FC = () => {
             <Button onClick={toggleShowBlock}>Cancel</Button>
             <Button
               onClick={() => {
-                db.createLabel({
+                createLabel({
                   name: name.value,
                   color: color,
                   description: description.value,

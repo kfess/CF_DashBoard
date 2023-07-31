@@ -12,7 +12,7 @@ import {
 import { ProblemLabelState } from "../_problemLabel.atom";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { LabelItem } from "@features/bookmark/components/LabelsList";
-import { useFetchLabelsAndProblems } from "../hooks/useProblemLabels";
+import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
 
 const sortOrders = [
   "Alphabetically",
@@ -39,7 +39,7 @@ const sortLabels = (labels: ProblemLabelState[], order: SortOrder) => {
 };
 
 export const LabelsTable: React.FC = () => {
-  const allLabels = useFetchLabelsAndProblems();
+  const { allLabels } = useIndexedDBForProblemLabel();
   const [order, setOrder] = useState<SortOrder>("Alphabetically");
 
   return (

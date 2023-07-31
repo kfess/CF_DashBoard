@@ -10,7 +10,8 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import Tooltip from "@mui/material/Tooltip";
 import { HexaColor, generateRandomHexaColor } from "@features/color/labelColor";
 import { ColorPalette } from "@features/color/components/ColorPalette";
-import { labelActions } from "@features/bookmark/labelActions";
+// import { db } from "@indexedDB/db";
+import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
 
 type NameProps = {
   value: string;
@@ -36,22 +37,20 @@ type Props = {
   toggleShowBlock: () => void;
 };
 
-export const LabelEditor: React.FC<Props> = (props: Props) => {
-  const {
-    id,
-    name,
-    setName,
-    defaultName,
-    description,
-    setDescription,
-    defaultDescription,
-    color,
-    setColor,
-    defaultColor,
-    toggleShowBlock,
-  } = props;
-
-  const editLabel = labelActions.useEditLabel();
+export const LabelEditor: React.FC<Props> = ({
+  id,
+  name,
+  setName,
+  defaultName,
+  description,
+  setDescription,
+  defaultDescription,
+  color,
+  setColor,
+  defaultColor,
+  toggleShowBlock,
+}) => {
+  const { updateLabel } = useIndexedDBForProblemLabel();
 
   const resetLabel = () => {
     setName({ value: defaultName, errorMsg: "" });
@@ -134,7 +133,11 @@ export const LabelEditor: React.FC<Props> = (props: Props) => {
           </Button>
           <Button
             onClick={() => {
-              editLabel(id, name.value, color);
+              updateLabel(id, {
+                name: name.value,
+                description: description.value,
+                color: color,
+              });
               toggleShowBlock();
             }}
             disabled={name.value.length === 0}

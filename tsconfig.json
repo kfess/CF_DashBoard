@@ -28,7 +28,8 @@
       "@mock/*": ["mock/*"],
       "@hooks/*": ["hooks/*"],
       "@recoil/*": ["recoil/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@indexedDB/*": ["indexedDB/*"]
     },
     "types": [
       "@emotion/react/types/css-prop",

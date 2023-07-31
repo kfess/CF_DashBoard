@@ -7,13 +7,15 @@ import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { useToggle } from "@hooks/index";
 import { HexaColor } from "@features/color/labelColor";
 import { ProblemLabelState } from "../_problemLabel.atom";
-import { db } from "@indexedDB/db";
+import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
 
 type Props = {
   label: ProblemLabelState;
 };
 
 export const LabelItem: React.FC<Props> = ({ label }) => {
+  const { deleteLabel } = useIndexedDBForProblemLabel();
+
   const navigate = useNavigate();
   const [showBlock, toggleShowBlock] = useToggle(false, true);
 
@@ -61,7 +63,7 @@ export const LabelItem: React.FC<Props> = ({ label }) => {
                 dialogTitle="Confirmation"
                 deleteTarget={label.id as number}
                 deleteFn={() => {
-                  db.deleteLabel(label.id as number);
+                  deleteLabel(label.id as number);
                 }}
               />
             </ButtonGroup>

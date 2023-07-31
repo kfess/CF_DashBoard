@@ -6,22 +6,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { LabeledProblems } from "@features/bookmark/components/LabeledProblems";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { Typography } from "@mui/material";
-import { useFetchLabelAndProblemsByName } from "@features/bookmark/hooks/useProblemLabels";
+import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useProblemLabels";
 
 export const LabelPage: React.FC = () => {
   const navigate = useNavigate();
   const { labelName } = useParams(); // path = /labels/:labelName
-  const { labelAndProblems: label } = useFetchLabelAndProblemsByName(
-    labelName ?? ""
-  );
-
-  // useEffect(() => {
-  //   // if label does not exist, then go back to /labels page
-  //   if (!label && !isExist) {
-  //     console.log(label, isExist);
-  //     navigate("/labels");
-  //   }
-  // }, [label, isExist]);
+  const { fetchLabelAndProblemsByName } = useIndexedDBForProblemLabel();
+  const label = fetchLabelAndProblemsByName(labelName ?? "");
 
   return (
     <>

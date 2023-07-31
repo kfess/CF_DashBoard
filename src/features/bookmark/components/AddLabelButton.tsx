@@ -4,8 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import StarIcon from "@mui/icons-material/Star";
 import { ColoredCircle } from "@features/color/components/ColoredCircle";
-import { useFetchAllLabels } from "../hooks/useProblemLabels";
-import { db } from "@indexedDB/db";
+import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
 
 const circleCss = css({
   cursor: "pointer",
@@ -32,7 +31,7 @@ export const AddLabelButton: React.FC<Props> = ({
   index,
   name,
 }) => {
-  const allLabels = useFetchAllLabels();
+  const { allLabels, addProblemToLabel } = useIndexedDBForProblemLabel();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -67,7 +66,7 @@ export const AddLabelButton: React.FC<Props> = ({
             <MenuItem
               key={label.id}
               onClick={() => {
-                db.addProblemLabel(label.id as number, {
+                addProblemToLabel(label.id as number, {
                   contestId,
                   contestName,
                   index,

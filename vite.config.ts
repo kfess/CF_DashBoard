@@ -18,6 +18,7 @@ export default defineConfig({
       "@hooks": path.resolve(__dirname, "src/hooks/"),
       "@recoil": path.resolve(__dirname, "src/recoil/"),
       "@assets": path.resolve(__dirname, "src/assets/"),
+      "@indexedDB": path.resolve(__dirname, "src/indexedDB/"),
     },
   },
   optimizeDeps: {

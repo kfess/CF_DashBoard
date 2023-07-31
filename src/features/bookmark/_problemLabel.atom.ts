@@ -1,7 +1,5 @@
-import { atom, selector, selectorFamily } from "recoil";
 import { z } from "zod";
 import { problemSchema } from "@features/problems/problem";
-import { RecoilAtomKeys, RecoilSelectorKeys } from "@recoil/RecoilKeys";
 
 // 保存に必要な情報だけを抽出したスキーマ
 const partialProblemSchema = problemSchema
@@ -26,25 +24,3 @@ export const problemLabelStateSchema = z.object({
   problems: z.array(partialProblemSchema),
 });
 export type ProblemLabelState = z.infer<typeof problemLabelStateSchema>;
-
-// export const problemLabelsState = atom<ProblemLabelState[]>({
-//   key: RecoilAtomKeys.PROBLEM_LABELS_STATE,
-//   default: [],
-// });
-
-// // Read all labels
-// export const labelsSelector = selector<LabelState[]>({
-//   key: RecoilSelectorKeys.LABELS,
-//   get: ({ get }) => get(labelsState),
-// });
-
-// // Read label specified by "label name"
-// export const labelSelector = selectorFamily<LabelState | undefined, string>({
-//   key: RecoilSelectorKeys.LABEL,
-//   get:
-//     (name) =>
-//     ({ get }) => {
-//       const labels = get(labelsState);
-//       return labels.find((label) => label.name === name);
-//     },
-// });

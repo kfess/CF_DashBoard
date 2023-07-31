@@ -2,15 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import StarBorderOutlined from "@mui/icons-material/StarBorderOutlined";
 import { Chip_ } from "@features/ui/component/Chip";
-import { useLabelsCount } from "../hooks/useProblemLabels";
+import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
 
 export const LabelsChip: React.FC = () => {
   const navigate = useNavigate();
-  const count = useLabelsCount();
+  const { labelsCount } = useIndexedDBForProblemLabel();
 
   return (
     <Chip_
-      label={<div>{count || 0} Labels</div>}
+      label={<div>{labelsCount || 0} Labels</div>}
       onClick={() => {
         navigate("/labels");
       }}

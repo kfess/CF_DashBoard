@@ -13,11 +13,13 @@ import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
 import { ProblemLabelState } from "../_problemLabel.atom";
-import { db } from "@indexedDB/db";
+import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
 
 type Props = { label: ProblemLabelState };
 
 export const LabeledProblems: React.FC<Props> = ({ label }) => {
+  const { deleteProblemFromLabel } = useIndexedDBForProblemLabel();
+
   return (
     <>
       {label.problems.length > 0 ? (
@@ -56,7 +58,7 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
                       dialogTitle="Confirmation"
                       deleteTarget={label.id as number}
                       deleteFn={() =>
-                        db.deleteProblemLabel(label.id as number, {
+                        deleteProblemFromLabel(label.id as number, {
                           contestId: p.contestId as number,
                           index: p.index,
                         })
