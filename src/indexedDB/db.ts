@@ -153,7 +153,11 @@ export class CFDashboardDB extends Dexie {
       throw new Error("Label id is not defined");
     }
     const contests = await this.getContestsByLabelId(label.id);
-    label.contests = contests;
+    label.contests = contests.map((contest) => ({
+      id: contest.contestId,
+      name: contest.contestName,
+      classification: contest.classification,
+    }));
     return label;
   }
 
