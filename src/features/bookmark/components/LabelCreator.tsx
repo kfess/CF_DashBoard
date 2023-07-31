@@ -40,7 +40,7 @@ export const LabelCreator: React.FC = () => {
     resolver: zodResolver(problemLabelFormSchema),
     defaultValues: getDefaultValues(),
   });
-  const watchName = watch("name");
+  const watchedName = watch("name");
   const watchedColor = watch("color");
 
   const onCancel = () => {
@@ -77,7 +77,7 @@ export const LabelCreator: React.FC = () => {
             }}
           >
             <LabelNameChip
-              name={watchName}
+              name={watchedName}
               color={isValidHexaColor(watchedColor) ? watchedColor : "#000000"}
               mode="Preview"
             />

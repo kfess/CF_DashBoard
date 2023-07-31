@@ -16,7 +16,7 @@ export type PartialProblem = z.infer<typeof partialProblemSchema>;
 // for existing label
 export const problemLabelSchema = z.object({
   id: z.number().min(0).optional(),
-  name: z.string().trim().min(1, { message: "Name cannot be blank value." }),
+  name: z.string().trim().min(1, { message: "Name can't be blank value." }),
   description: z
     .string()
     .max(256, { message: "Description message is too long." })

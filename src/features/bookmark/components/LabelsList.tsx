@@ -1,46 +1,83 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  ProblemLabelForm,
+  problemLabelFormSchema,
+} from "@features/bookmark/problemLabel";
 import { TableCell, TableRow, Button, ButtonGroup, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { LabelNameChip } from "@features/bookmark/components/LabelIcon";
-import { LabelEditor } from "@features/bookmark/components/LabelEditer";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { useToggle } from "@hooks/index";
-import { HexaColor } from "@features/color/labelColor";
 import type { ProblemLabel } from "@features/bookmark/problemLabel";
 import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
+import { Editer } from "./Editer";
 
 type Props = {
   label: ProblemLabel;
 };
 
 export const LabelItem: React.FC<Props> = ({ label }) => {
-  const { deleteLabel } = useIndexedDBForProblemLabel();
-
-  const navigate = useNavigate();
+  const { updateLabel, deleteLabel } = useIndexedDBForProblemLabel();
   const [showBlock, toggleShowBlock] = useToggle(false, true);
 
-  const [name, setName] = useState({
-    value: label.name,
-    errorMsg: "",
+  const {
+    control,
+    handleSubmit,
+    getValues,
+    watch,
+    formState: { errors },
+    reset,
+  } = useForm<ProblemLabelForm>({
+    resolver: zodResolver(problemLabelFormSchema),
+    defaultValues: {
+      name: label.name,
+      description: label.description,
+      color: label.color,
+    },
   });
-  const [description, setDescription] = useState({
-    value: label.description,
-    errorMsg: "",
-  });
-  const [color, setColor] = useState(label.color);
+  const watchedName = watch("name");
+  const watchedColor = watch("color");
 
-  const [defaultName, defaultDescription, defaultColor] = [
-    label.name,
-    label.description,
-    label.color,
-  ];
+  const onSubmit = async () => {
+    await updateLabel(label.id as number, {
+      name: watchedName,
+      color: watchedColor,
+      description: getValues("description"),
+    });
+    toggleShowBlock();
+  };
+
+  const navigate = useNavigate();
 
   return (
     <TableRow>
-      {!showBlock ? (
+      {showBlock ? (
+        <TableCell colSpan={4}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Editer
+                control={control}
+                errors={errors}
+                handleSubmit={handleSubmit(onSubmit)}
+                watchedName={watchedName}
+                watchedColor={watchedColor}
+                onCancel={() => {
+                  toggleShowBlock();
+                }}
+              />
+            </Grid>
+          </Grid>
+        </TableCell>
+      ) : (
         <>
           <TableCell>
-            <LabelNameChip name={name.value} color={label.color} mode="View" />
+            <LabelNameChip
+              name={watchedName}
+              color={watchedColor}
+              mode="View"
+            />
           </TableCell>
           <TableCell>{label.description}</TableCell>
           <TableCell>
@@ -69,26 +106,6 @@ export const LabelItem: React.FC<Props> = ({ label }) => {
             </ButtonGroup>
           </TableCell>
         </>
-      ) : (
-        <TableCell colSpan={4}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <LabelEditor
-                id={label.id as number}
-                name={name}
-                setName={setName}
-                defaultName={defaultName}
-                description={description}
-                setDescription={setDescription}
-                defaultDescription={defaultDescription}
-                color={color as HexaColor}
-                setColor={setColor}
-                defaultColor={defaultColor as HexaColor}
-                toggleShowBlock={toggleShowBlock}
-              />
-            </Grid>
-          </Grid>
-        </TableCell>
       )}
     </TableRow>
   );

@@ -21,7 +21,7 @@ export const Name: React.FC<Props> = ({ control, errors }) => {
             htmlFor="name-input"
             css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
           >
-            Title
+            Name
           </label>
           <Input
             {...field}

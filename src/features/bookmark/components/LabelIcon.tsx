@@ -5,12 +5,17 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 
 type Mode = "Preview" | "View";
-type LabelNameProps = { name: string; color: string; mode: Mode };
+type Props = {
+  readonly name: string;
+  readonly color: string;
+  readonly mode: Mode;
+};
 
-export const LabelNameChip: React.FC<LabelNameProps> = (
-  props: LabelNameProps
-) => {
-  const { name, color, mode = "View" } = props;
+export const LabelNameChip: React.FC<Props> = ({
+  name,
+  color,
+  mode = "View",
+}) => {
   const navigate = useNavigate();
 
   return (
