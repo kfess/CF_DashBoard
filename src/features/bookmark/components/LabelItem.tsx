@@ -1,8 +1,8 @@
 import React from "react";
 import { TableCell, TableRow, Button, ButtonGroup } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
 import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { useToggle } from "@hooks/index";
@@ -13,6 +13,7 @@ import {
   problemLabelFormSchema,
   ProblemLabel,
 } from "@features/bookmark/problemLabel";
+import { pluralize } from "@helpers/format";
 
 type Props = {
   label: ProblemLabel;
@@ -21,7 +22,6 @@ type Props = {
 export const LabelItem: React.FC<Props> = ({ label }) => {
   const { updateLabel, deleteLabel } = useIndexedDBForProblemLabel();
   const [showBlock, toggleShowBlock] = useToggle(false, true);
-  const navigate = useNavigate();
 
   const {
     control,
@@ -75,7 +75,6 @@ export const LabelItem: React.FC<Props> = ({ label }) => {
           watchedColor={watchedColor}
           onEdit={toggleShowBlock}
           onDelete={() => deleteLabel(label.id as number)}
-          onView={() => navigate(`/labels/${label.name}`)}
         />
       )}
     </TableRow>
@@ -88,17 +87,23 @@ const DefaultView: React.FC<{
   watchedColor: string;
   onEdit: () => void;
   onDelete: () => void;
-  onView: () => void;
-}> = ({ label, watchedName, watchedColor, onEdit, onDelete, onView }) => (
+}> = ({ label, watchedName, watchedColor, onEdit, onDelete }) => (
   <>
-    <TableCell>
+    <TableCell sx={{ py: 1 }}>
       <LabelNameChip name={watchedName} color={watchedColor} mode="View" />
     </TableCell>
-    <TableCell>{label.description}</TableCell>
-    <TableCell>
-      <Button onClick={onView}>{label.problems.length}</Button>
+    <TableCell sx={{ py: 1 }}>{label.description}</TableCell>
+    <TableCell sx={{ py: 1 }}>
+      <Link
+        to={{
+          pathname: `/labels/${label.name}`,
+        }}
+        css={{ whiteSpace: "nowrap" }}
+      >
+        {label.problems.length} {pluralize(label.problems.length, "problem")}
+      </Link>
     </TableCell>
-    <TableCell>
+    <TableCell sx={{ py: 1 }}>
       <ButtonGroup>
         <Button variant="text" onClick={onEdit}>
           Edit

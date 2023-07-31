@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import {
   Table,
   TableBody,
@@ -43,12 +44,12 @@ export const LabelsTable: React.FC = () => {
   const [order, setOrder] = useState<SortOrder>("Alphabetically");
 
   return (
-    <Box>
+    <Box sx={{ p: 2 }}>
       <Box
         sx={{
           display: "flex",
           justifyContent: "flex-end",
-          padding: 2,
+          paddingBottom: 2,
         }}
       >
         <DropDownMenuButton
@@ -66,13 +67,22 @@ export const LabelsTable: React.FC = () => {
             <TableRow>
               {labelsAndProblems && (
                 <TableCell>
-                  {labelsAndProblems.length}{" "}
-                  {labelsAndProblems.length > 1 ? "Labels" : "Label"}
+                  <Typography variant="body2">
+                    {`${labelsAndProblems.length} ${
+                      labelsAndProblems.length > 1 ? "Labels" : "Label"
+                    }`}
+                  </Typography>
                 </TableCell>
               )}
-              <TableCell>Description</TableCell>
-              <TableCell>Problems</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>
+                <Typography variant="body2">Description</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body2">Problems</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="body2">Actions </Typography>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

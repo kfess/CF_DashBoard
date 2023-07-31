@@ -31,7 +31,7 @@ export const Editor: React.FC<Props> = ({
   onDelete,
 }) => {
   return (
-    <TableCell colSpan={4}>
+    <TableCell colSpan={4} sx={{ py: 0 }}>
       <form onSubmit={handleSubmit}>
         <Stack spacing={0.5} padding={2}>
           <Stack direction="row" justifyContent="space-between">
