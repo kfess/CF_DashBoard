@@ -12,7 +12,7 @@ import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
-import { ProblemLabelState } from "../_problemLabel.atom";
+import { ProblemLabelState } from "@features/bookmark/problemLabel";
 import { useIndexedDBForProblemLabel } from "../hooks/useProblemLabels";
 
 type Props = { label: ProblemLabelState };
