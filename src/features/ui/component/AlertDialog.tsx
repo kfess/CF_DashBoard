@@ -6,6 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
+import { _Button } from "@features/ui/component/Button";
 
 type Props<T extends string | number> = {
   title: string;
@@ -31,16 +32,16 @@ export const ButtonWithAlertDialog = <T extends string | number>(
 
   return (
     <>
-      <Button
-        variant="text"
+      <_Button
         onClick={handleClickOpen}
         css={{
           textTransform: "none",
           "&:hover": { textDecorationLine: "underline" },
         }}
+        color="#E55B66"
       >
         {title}
-      </Button>
+      </_Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <DialogContentText>
@@ -51,18 +52,19 @@ export const ButtonWithAlertDialog = <T extends string | number>(
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} css={{ textTransform: "none" }}>
+          <_Button onClick={handleClose} css={{ textTransform: "none" }}>
             Cancel
-          </Button>
-          <Button
+          </_Button>
+          <_Button
             onClick={() => {
               deleteFn(deleteTarget);
               setOpen(false);
             }}
+            color="#E55B66"
             css={{ textTransform: "none" }}
           >
             OK
-          </Button>
+          </_Button>
         </DialogActions>
       </Dialog>
     </>

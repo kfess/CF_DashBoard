@@ -34,23 +34,29 @@ export const Color: React.FC<Props> = ({ control, errors }) => {
           >
             Generate Color
           </label>
-          <Stack direction="row" alignItems="center">
+          <Stack direction="row" alignItems="center" spacing={1}>
             <IconButton
               aria-label="generate"
               onClick={() => {
                 field.onChange(generateRandomHexaColor());
               }}
-            >
-              <ReplayIcon
-                fontSize="inherit"
-                css={{
-                  color: isValidHexaColor(field.value)
+              size="small"
+              disableTouchRipple
+              sx={{
+                borderRadius: "10px",
+                backgroundColor: isValidHexaColor(field.value)
+                  ? field.value
+                  : "#000000",
+                "&:hover": {
+                  backgroundColor: isValidHexaColor(field.value)
                     ? field.value
                     : "#000000",
-                }}
-              />
+                },
+                color: "white",
+              }}
+            >
+              <ReplayIcon fontSize="inherit" />
             </IconButton>
-
             <Tooltip
               title={<ColorPalette setColor={field.onChange} />}
               arrow

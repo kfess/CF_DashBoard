@@ -1,5 +1,5 @@
 import React from "react";
-import { TableCell, TableRow, Button, ButtonGroup } from "@mui/material";
+import { TableCell, TableRow, Button, ButtonGroup, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +14,7 @@ import {
   ProblemLabel,
 } from "@features/bookmark/problemLabel";
 import { pluralize } from "@helpers/format";
+import { _Button } from "@features/ui/component/Button";
 
 type Props = {
   label: ProblemLabel;
@@ -104,10 +105,8 @@ const DefaultView: React.FC<{
       </Link>
     </TableCell>
     <TableCell sx={{ py: 1 }}>
-      <ButtonGroup>
-        <Button variant="text" onClick={onEdit}>
-          Edit
-        </Button>
+      <Stack direction="row" spacing={1}>
+        <_Button onClick={onEdit}>Edit</_Button>
         <ButtonWithAlertDialog
           title="Delete"
           dialogText="Are you sure? Deleting a label will remove it from relevant problems."
@@ -115,7 +114,7 @@ const DefaultView: React.FC<{
           deleteTarget={label.id as number}
           deleteFn={onDelete}
         />
-      </ButtonGroup>
+      </Stack>
     </TableCell>
   </>
 );

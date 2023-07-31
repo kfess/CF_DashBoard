@@ -13,7 +13,7 @@ import {
   ProblemLabelForm,
   problemLabelFormSchema,
 } from "@features/bookmark/problemLabel";
-import { Button } from "@features/ui/component/Button";
+import { _Button } from "@features/ui/component/Button";
 import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
 import { Name } from "@features/bookmark/components/Name";
 import { Description } from "@features/bookmark/components/Description";
@@ -62,8 +62,10 @@ export const LabelCreator: React.FC = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Box sx={{ p: 1, display: "flex", justifyContent: "flex-end" }}>
-          <Button onClick={toggleShowBlock}>New Label</Button>
+        <Box sx={{ py: 1, display: "flex", justifyContent: "flex-end" }}>
+          <_Button onClick={toggleShowBlock} color="#1E883E">
+            New Label
+          </_Button>
         </Box>
         {showBlock && (
           <Stack
@@ -73,6 +75,7 @@ export const LabelCreator: React.FC = () => {
               borderColor: "divider",
               borderRadius: "4px",
               backgroundColor: "white",
+              mb: 1,
             }}
           >
             <LabelNameChip
@@ -93,7 +96,7 @@ export const LabelCreator: React.FC = () => {
                   xs: "column",
                   md: "row",
                 }}
-                spacing={1}
+                spacing={2}
               >
                 <div>
                   <Name control={control} errors={errors} />
@@ -109,12 +112,13 @@ export const LabelCreator: React.FC = () => {
                 <Box sx={{ height: { xs: "0px", md: "1.8rem" } }} />
                 <Stack direction="row" spacing={1} justifyContent="flex-end">
                   <div>
-                    <Button onClick={onCancel}>Cancel</Button>
+                    <_Button onClick={onCancel}>Cancel</_Button>
                   </div>
                   <div>
-                    <Button
+                    <_Button
                       type="submit"
                       css={{ whiteSpace: "nowrap" }}
+                      color="#1E883E"
                       disabled={
                         watchedName === "" ||
                         watchedColor === "" ||
@@ -122,7 +126,7 @@ export const LabelCreator: React.FC = () => {
                       }
                     >
                       Create label
-                    </Button>
+                    </_Button>
                   </div>
                 </Stack>
               </Stack>

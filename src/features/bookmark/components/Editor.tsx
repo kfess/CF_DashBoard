@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import { TableCell } from "@mui/material";
 import { Control, FieldErrors } from "react-hook-form";
 import { isValidHexaColor } from "@features/color/labelColor";
-import { Button } from "@features/ui/component/Button";
+import { _Button } from "@features/ui/component/Button";
 import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
 import { ProblemLabelForm } from "../problemLabel";
 import { Name } from "@features/bookmark/components/Name";
@@ -41,7 +41,9 @@ export const Editor: React.FC<Props> = ({
               mode="Preview"
             />
             <div>
-              <Button onClick={onDelete}>Delete</Button>
+              <_Button onClick={onDelete} color="#E55B66">
+                Delete
+              </_Button>
             </div>
           </Stack>
 
@@ -74,10 +76,10 @@ export const Editor: React.FC<Props> = ({
               <Box sx={{ height: { xs: "0px", md: "1.8rem" } }} />
               <Stack direction="row" spacing={1} justifyContent="flex-end">
                 <div>
-                  <Button onClick={onCancel}>Cancel</Button>
+                  <_Button onClick={onCancel}>Cancel</_Button>
                 </div>
                 <div>
-                  <Button
+                  <_Button
                     type="submit"
                     css={{ whiteSpace: "nowrap" }}
                     disabled={
@@ -85,9 +87,10 @@ export const Editor: React.FC<Props> = ({
                       watchedColor === "" ||
                       Object.keys(errors).length > 0
                     }
+                    color="#1E883E"
                   >
                     Save Changes
-                  </Button>
+                  </_Button>
                 </div>
               </Stack>
             </Stack>
