@@ -33,7 +33,7 @@ export const Editor: React.FC<Props> = ({
   return (
     <TableCell colSpan={4} sx={{ py: 0 }}>
       <form onSubmit={handleSubmit}>
-        <Stack spacing={0.5} padding={2}>
+        <Stack spacing={0.5} padding={1.5}>
           <Stack direction="row" justifyContent="space-between">
             <LabelNameChip
               name={watchedName}

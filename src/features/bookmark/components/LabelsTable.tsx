@@ -44,12 +44,12 @@ export const LabelsTable: React.FC = () => {
   const [order, setOrder] = useState<SortOrder>("Alphabetically");
 
   return (
-    <Box sx={{ p: 2 }}>
+    <Box>
       <Box
         sx={{
           display: "flex",
           justifyContent: "flex-end",
-          paddingBottom: 2,
+          paddingBottom: 1,
         }}
       >
         <DropDownMenuButton
@@ -67,7 +67,7 @@ export const LabelsTable: React.FC = () => {
             <TableRow>
               {labelsAndProblems && (
                 <TableCell>
-                  <Typography variant="body2">
+                  <Typography variant="body2" fontWeight="bold">
                     {`${labelsAndProblems.length} ${
                       labelsAndProblems.length > 1 ? "Labels" : "Label"
                     }`}
@@ -75,13 +75,19 @@ export const LabelsTable: React.FC = () => {
                 </TableCell>
               )}
               <TableCell>
-                <Typography variant="body2">Description</Typography>
+                <Typography variant="body2" fontWeight="bold">
+                  Description
+                </Typography>
               </TableCell>
               <TableCell>
-                <Typography variant="body2">Problems</Typography>
+                <Typography variant="body2" fontWeight="bold">
+                  Problems
+                </Typography>
               </TableCell>
               <TableCell>
-                <Typography variant="body2">Actions </Typography>
+                <Typography variant="body2" fontWeight="bold">
+                  Actions{" "}
+                </Typography>
               </TableCell>
             </TableRow>
           </TableHead>
