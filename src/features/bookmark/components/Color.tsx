@@ -43,7 +43,7 @@ export const Color: React.FC<Props> = ({ control, errors }) => {
               size="small"
               disableTouchRipple
               sx={{
-                borderRadius: "10px",
+                borderRadius: "6px",
                 backgroundColor: isValidHexaColor(field.value)
                   ? field.value
                   : "#000000",

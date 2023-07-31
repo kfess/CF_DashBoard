@@ -25,7 +25,7 @@ export const Name: React.FC<Props> = ({ control, errors }) => {
           </label>
           <Input
             {...field}
-            placeholder="Label Name"
+            placeholder="Label name"
             id="name-input"
             type="text"
           />
