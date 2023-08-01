@@ -31,7 +31,6 @@ export const AddLabelButton: React.FC<Props> = ({
     isProblemAddedToLabel,
   } = useIndexedDBForProblemLabel();
 
-  // 特定の問題が、各ラベルに追加されているかどうかを判定する
   const [isAddedToLabel, setIsAddedToLabel] = useState<boolean[]>([]);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -44,9 +43,7 @@ export const AddLabelButton: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (!open) {
-      return;
-    }
+    if (!open) return;
 
     const fetch = async () => {
       const checks = await Promise.all(

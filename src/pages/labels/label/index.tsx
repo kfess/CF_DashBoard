@@ -24,29 +24,27 @@ export const ProblemLabelPage: React.FC = () => {
             <Grid item xs={12}>
               {label && (
                 <>
-                  {label.problems.length > 0 && (
-                    <Box
-                      sx={{
-                        p: 2,
-                        marginTop: "20px",
-                        marginBottom: "20px",
-                        display: "flex",
-                        flexWrap: "wrap",
-                        fontSize: "1.1rem",
-                        backgroundColor: "#ffffff",
-                        borderStyle: "solid",
-                        borderRadius: "4px",
-                        borderColor: "#c0c0c0",
-                        borderWidth: "0.8px",
-                        borderLeftColor: "green",
-                        borderLeftWidth: "5px",
-                      }}
-                    >
-                      <Typography variant="body1" color="text.main">
-                        {label?.description}
-                      </Typography>
-                    </Box>
-                  )}
+                  <Box
+                    sx={{
+                      p: 2,
+                      marginTop: "20px",
+                      marginBottom: "20px",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      fontSize: "1.1rem",
+                      backgroundColor: "#ffffff",
+                      borderStyle: "solid",
+                      borderRadius: "4px",
+                      borderColor: "#c0c0c0",
+                      borderWidth: "0.8px",
+                      borderLeftColor: "green",
+                      borderLeftWidth: "5px",
+                    }}
+                  >
+                    <Typography variant="body1" color="text.main">
+                      {label?.description || "No description provided."}
+                    </Typography>
+                  </Box>
                   <LabeledProblems label={label} />
                 </>
               )}
@@ -72,29 +70,27 @@ export const ContestLabelPage: React.FC = () => {
             <Grid item xs={12}>
               {label && (
                 <>
-                  {label.contests.length > 0 && (
-                    <Box
-                      sx={{
-                        p: 2,
-                        marginTop: "20px",
-                        marginBottom: "20px",
-                        display: "flex",
-                        flexWrap: "wrap",
-                        fontSize: "1.1rem",
-                        backgroundColor: "#ffffff",
-                        borderStyle: "solid",
-                        borderRadius: "4px",
-                        borderColor: "#c0c0c0",
-                        borderWidth: "0.8px",
-                        borderLeftColor: "green",
-                        borderLeftWidth: "5px",
-                      }}
-                    >
-                      <Typography variant="body1" color="text.main">
-                        {label?.description}
-                      </Typography>
-                    </Box>
-                  )}
+                  <Box
+                    sx={{
+                      p: 2,
+                      marginTop: "20px",
+                      marginBottom: "20px",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      fontSize: "1.1rem",
+                      backgroundColor: "#ffffff",
+                      borderStyle: "solid",
+                      borderRadius: "4px",
+                      borderColor: "#c0c0c0",
+                      borderWidth: "0.8px",
+                      borderLeftColor: "green",
+                      borderLeftWidth: "5px",
+                    }}
+                  >
+                    <Typography variant="body1" color="text.main">
+                      {label?.description || "No description provided."}
+                    </Typography>
+                  </Box>
                   <LabeledContests label={label} />
                 </>
               )}
