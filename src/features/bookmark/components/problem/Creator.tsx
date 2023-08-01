@@ -48,7 +48,7 @@ export const Creator: React.FC = () => {
   const [customError, setCustomError] = useState<string | null>(null);
   const resetCustomError = () => setCustomError(null);
   const isUniqueName =
-    allLabelNames && !allLabelNames.includes(watchedName.trim());
+    allLabelNames && !allLabelNames.includes(trimFullWhiteSpace(watchedName));
 
   const onCancel = () => {
     reset();

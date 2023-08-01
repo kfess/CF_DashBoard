@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { useForm } from "react-hook-form";
@@ -18,6 +18,7 @@ import { LabelNameChip } from "@features/bookmark/components/contest/LabelNameCh
 import { Name } from "@features/bookmark/components/contest/Name";
 import { Description } from "@features/bookmark/components/contest/Description";
 import { Color } from "@features/bookmark/components/contest/Color";
+import { trimFullWhiteSpace } from "@helpers/format";
 
 const getDefaultValues = (): ContestLabelForm => ({
   name: "",
@@ -26,7 +27,7 @@ const getDefaultValues = (): ContestLabelForm => ({
 });
 
 export const Creator: React.FC = () => {
-  const { createLabel } = useIndexedDBForContestLabel();
+  const { createLabel, allLabelNames } = useIndexedDBForContestLabel();
   const [showBlock, toggleShowBlock] = useToggle(false, true);
 
   const {
@@ -43,12 +44,25 @@ export const Creator: React.FC = () => {
   const watchedName = watch("name");
   const watchedColor = watch("color");
 
+  // for name unique validation
+  const [customError, setCustomError] = useState<string | null>(null);
+  const resetCustomError = () => setCustomError(null);
+  const isUniqueName =
+    allLabelNames && !allLabelNames.includes(trimFullWhiteSpace(watchedName));
+
   const onCancel = () => {
     reset();
+    resetCustomError();
     toggleShowBlock();
   };
 
   const onSubmit = async () => {
+    resetCustomError();
+    if (!isUniqueName) {
+      setCustomError("This name is already used.");
+      return;
+    }
+
     await createLabel({
       name: watchedName,
       color: watchedColor,
@@ -79,7 +93,7 @@ export const Creator: React.FC = () => {
             }}
           >
             <LabelNameChip
-              name={watchedName}
+              name={trimFullWhiteSpace(watchedName)}
               color={isValidHexaColor(watchedColor) ? watchedColor : "#000000"}
               mode="Preview"
             />
@@ -99,7 +113,12 @@ export const Creator: React.FC = () => {
                 spacing={2}
               >
                 <div>
-                  <Name control={control} errors={errors} />
+                  <Name
+                    control={control}
+                    errors={errors}
+                    customError={customError}
+                    resetCustomError={resetCustomError}
+                  />
                 </div>
                 <div>
                   <Description control={control} errors={errors} />

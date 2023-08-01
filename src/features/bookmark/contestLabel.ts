@@ -1,14 +1,16 @@
 import { z } from "zod";
 import { contestSchema } from "@features/contests/contest";
 import { isValidHexaColor } from "@features/color/labelColor";
+import { trimFullWhiteSpace } from "@helpers/format";
 
 export const contestLabelSchema = z.object({
   id: z.number().min(0).optional(),
   name: z
     .string()
-    .trim()
-    .min(1, { message: "Name can't be blank value." })
-    .max(20, { message: "Name is too long." }),
+    .transform(trimFullWhiteSpace)
+    .refine((name) => name.length >= 1 && name.length <= 20, {
+      message: "Name must be between 1 and 20 characters long.",
+    }),
   description: z
     .string()
     .max(256, { message: "Description message is too long." })
