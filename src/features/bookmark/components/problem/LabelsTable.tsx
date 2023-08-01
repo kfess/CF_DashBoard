@@ -92,10 +92,41 @@ export const LabelsTable: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {labelsAndProblems &&
+            {labelsAndProblems && labelsAndProblems.length > 0 ? (
               sortLabels(labelsAndProblems, order).map((label) => (
                 <LabelItem key={label.name} label={label} />
-              ))}
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={4}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      minHeight: 200,
+                      color: "grey.600",
+                    }}
+                  >
+                    <Typography variant="h5" align="center" gutterBottom>
+                      Welcome to Problem Labels!
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      align="center"
+                      sx={{ whiteSpace: "pre-wrap" }}
+                    >
+                      Problem Labels are used to manage and classify problems.{" "}
+                      {"\n"}
+                      As labels are created, they’ll appear here in a searchable
+                      and filterable list. {"\n"}
+                      To get started, you should create a problem label.
+                    </Typography>
+                  </Box>
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
