@@ -2,11 +2,13 @@ import React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import { HeadLine } from "@features/layout/components/HeadLine";
 import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
-import { LabelCreator } from "@features/bookmark/components/LabelCreator";
-import { LabelsTable } from "@features/bookmark/components/LabelsTable";
-import { HeadLine } from "@features/layout/components/HeadLine";
+import { Creator as ProblemLabelCreator } from "@features/bookmark/components/problem/Creator";
+import { LabelsTable as ProblemLabelsTable } from "@features/bookmark/components/problem/LabelsTable";
+import { Creator as ContestLabelCreator } from "@features/bookmark/components/contest/Creator";
+import { LabelsTable as ContestLabelsTable } from "@features/bookmark/components/contest/LabelsTable";
 
 export const LabelsPage: React.FC = () => {
   const tabItems: TabItem[] = [
@@ -14,13 +16,22 @@ export const LabelsPage: React.FC = () => {
       label: "Problem Labels",
       children: (
         <>
-          <LabelCreator />
-          <LabelsTable />
+          <ProblemLabelCreator />
+          <ProblemLabelsTable />
         </>
       ),
       disabled: false,
     },
-    { label: "Contest Labels", children: <></>, disabled: false },
+    {
+      label: "Contest Labels",
+      children: (
+        <>
+          <ContestLabelCreator />
+          <ContestLabelsTable />
+        </>
+      ),
+      disabled: false,
+    },
   ];
 
   return (

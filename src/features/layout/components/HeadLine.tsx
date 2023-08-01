@@ -2,7 +2,7 @@ import React from "react";
 import { css } from "@emotion/react";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { LabelsChip } from "@features/bookmark/components/LabelsChip";
+import { LabelsChip } from "@features/bookmark/components/problem/LabelsChip";
 import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
 import { DeletableChip } from "@features/ui/component/Chip";
 

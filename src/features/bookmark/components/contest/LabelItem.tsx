@@ -3,7 +3,7 @@ import { TableCell, TableRow, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
+import { LabelNameChip } from "@features/bookmark/components/contest/LabelNameChip";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { useToggle } from "@hooks/index";
 import { useIndexedDBForContestLabel } from "@features/bookmark/hooks/useIndexedDBForContestLabel";

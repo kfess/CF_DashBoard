@@ -32,7 +32,7 @@ export class CFDashboardDB extends Dexie {
 
   constructor() {
     super("CFDashboardDB");
-    this.version(1).stores({
+    this.version(2).stores({
       problemLabels: "++id, name, description, color",
       labelProblemMapping: "[labelId+contestId+index]",
 

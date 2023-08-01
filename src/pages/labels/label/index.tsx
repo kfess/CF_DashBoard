@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { useNavigate, useParams } from "react-router-dom";
-import { LabeledProblems } from "@features/bookmark/components/LabeledProblems";
+import { LabeledProblems } from "@features/bookmark/components/problem/LabeledProblems";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { Typography } from "@mui/material";
 import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
