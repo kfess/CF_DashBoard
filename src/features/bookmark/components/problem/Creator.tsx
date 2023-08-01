@@ -51,6 +51,7 @@ export const Creator: React.FC = () => {
 
   const onCancel = () => {
     reset();
+    resetCustomError();
     toggleShowBlock();
   };
 
