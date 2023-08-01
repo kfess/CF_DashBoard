@@ -5,7 +5,7 @@ import { LayoutPage } from "@pages/layout";
 import { ContestsPage } from "@pages/contests";
 import { ProblemsPage } from "@pages/problems/";
 import { LabelsPage } from "@pages/labels/index";
-import { LabelPage } from "@pages/labels/label/index";
+import { ProblemLabelPage } from "@pages/labels/label/index";
 import { SubmissionPage } from "@pages/submission";
 import { AchievementPage } from "@pages/achievement";
 import { RecommendationPage } from "@pages/recommendation";
@@ -74,10 +74,18 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "labels/:labelName",
+        path: "labels/problem/:labelName",
         element: (
           <Suspense fallback={<CircularProgress />}>
-            <LabelPage />
+            <ProblemLabelPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "labels/contest/:labelName",
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <ProblemLabelPage />
           </Suspense>
         ),
       },

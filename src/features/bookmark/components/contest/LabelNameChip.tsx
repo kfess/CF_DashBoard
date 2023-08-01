@@ -42,7 +42,7 @@ export const LabelNameChip: React.FC<Props> = ({
             fontWeight: "bold",
           }}
           onClick={() => {
-            navigate(`/labels/${name}`);
+            navigate(`/labels/contest/${name}`);
           }}
         />
       )}
