@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { useForm } from "react-hook-form";
@@ -26,7 +26,7 @@ const getDefaultValues = (): ProblemLabelForm => ({
 });
 
 export const Creator: React.FC = () => {
-  const { createLabel } = useIndexedDBForProblemLabel();
+  const { createLabel, allLabelNames } = useIndexedDBForProblemLabel();
   const [showBlock, toggleShowBlock] = useToggle(false, true);
 
   const {
@@ -43,12 +43,24 @@ export const Creator: React.FC = () => {
   const watchedName = watch("name");
   const watchedColor = watch("color");
 
+  // for name unique validation
+  const [customError, setCustomError] = useState<string | null>(null);
+  const resetCustomError = () => setCustomError(null);
+  const isUniqueName =
+    allLabelNames && !allLabelNames.includes(watchedName.trim());
+
   const onCancel = () => {
     reset();
     toggleShowBlock();
   };
 
   const onSubmit = async () => {
+    resetCustomError();
+    if (!isUniqueName) {
+      setCustomError("This name is already used.");
+      return;
+    }
+
     await createLabel({
       name: getValues("name"),
       color: watchedColor,
@@ -99,7 +111,12 @@ export const Creator: React.FC = () => {
                 spacing={2}
               >
                 <div>
-                  <Name control={control} errors={errors} />
+                  <Name
+                    control={control}
+                    errors={errors}
+                    customError={customError}
+                    resetCustomError={resetCustomError}
+                  />
                 </div>
                 <div>
                   <Description control={control} errors={errors} />

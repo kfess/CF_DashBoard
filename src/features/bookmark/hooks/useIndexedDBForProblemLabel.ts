@@ -9,6 +9,12 @@ export const useIndexedDBForProblemLabel = () => {
   // 全ての問題ラベルのみを取得
   const allLabels = useLiveQuery(async () => db.getAllProblemLabels());
 
+  // 全てのラベルの名前のみを取得
+  const allLabelNames = useLiveQuery(async () => {
+    const allLabels = await db.getAllProblemLabels();
+    return allLabels.map((label) => label.name);
+  });
+
   // 全ての問題ラベルとその問題を取得
   const labelsAndProblems = useLiveQuery(async () => db.getLabelsAndProblems());
 
@@ -71,6 +77,7 @@ export const useIndexedDBForProblemLabel = () => {
   return {
     labelsCount,
     allLabels,
+    allLabelNames,
     labelsAndProblems,
     fetchLabelAndProblemsById,
     fetchLabelAndProblemsByName,

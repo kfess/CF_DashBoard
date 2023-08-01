@@ -8,9 +8,16 @@ import { ProblemLabelForm } from "@features/bookmark/problemLabel";
 type Props = {
   control: Control<ProblemLabelForm>;
   errors: FieldErrors<ProblemLabelForm>;
+  customError: string | null;
+  resetCustomError: () => void;
 };
 
-export const Name: React.FC<Props> = ({ control, errors }) => {
+export const Name: React.FC<Props> = ({
+  control,
+  errors,
+  customError,
+  resetCustomError,
+}) => {
   return (
     <Controller
       name="name"
@@ -25,11 +32,15 @@ export const Name: React.FC<Props> = ({ control, errors }) => {
           </label>
           <Input
             {...field}
+            onChange={(e) => {
+              resetCustomError();
+              field.onChange(e);
+            }}
             placeholder="Label name"
             id="name-input"
             type="text"
           />
-          <ErrorMessage message={errors.name?.message} />
+          <ErrorMessage message={errors.name?.message || customError} />
         </FormControl>
       )}
     />
