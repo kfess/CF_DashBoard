@@ -10,6 +10,12 @@ export const useIndexedDBForContestLabel = () => {
   // 全てのコンテストラベルのみを取得
   const allLabels = useLiveQuery(async () => db.getAllContestLabels());
 
+  // 全てのラベルの名前のみを取得
+  const allLabelNames = useLiveQuery(async () => {
+    const allLabels = await db.getAllContestLabels();
+    return allLabels.map((label) => label.name);
+  });
+
   // 全てのコンテストラベルとそのコンテストを取得
   const labelsAndContests = useLiveQuery(async () => db.getLabelsAndContests());
 
@@ -57,9 +63,14 @@ export const useIndexedDBForContestLabel = () => {
     }
   ) => db.deleteContestFromLabel(labelId, contest);
 
+  // 特定のコンテストがラベルに含まれているかどうかを判定
+  const isContestAddedToLabel = async (labelId: number, contestId: number) =>
+    db.isContestAddedToLabel(labelId, { contestId });
+
   return {
     labelsCount,
     allLabels,
+    allLabelNames,
     labelsAndContests,
     fetchLabelAndContestsById,
     fetchLabelAndContestsByName,
@@ -68,5 +79,6 @@ export const useIndexedDBForContestLabel = () => {
     updateLabel,
     addContestToLabel,
     deleteContestFromLabel,
+    isContestAddedToLabel,
   };
 };

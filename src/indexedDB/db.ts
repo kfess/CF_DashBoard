@@ -253,6 +253,20 @@ export class CFDashboardDB extends Dexie {
     const label = await this.contestLabels.where("name").equals(name).first();
     return label ? this.attachContestsToLabel(label) : undefined;
   }
+
+  async isContestAddedToLabel(
+    labelId: number,
+    contest: {
+      contestId: number;
+    }
+  ): Promise<boolean> {
+    const record = await this.labelContestMapping
+      .where("[labelId+contestId]")
+      .equals([labelId, contest.contestId])
+      .first();
+
+    return !!record;
+  }
 }
 
 export const db = new CFDashboardDB();
