@@ -59,6 +59,30 @@ export const _AddLabelButton: React.FC<Props> = ({
     fetch();
   }, [open]);
 
+  const handleAdd = async (labelId: number, idx: number) => {
+    await addProblemToLabel(labelId, {
+      contestId,
+      contestName,
+      index,
+      name,
+      rating,
+    });
+    setIsAddedToLabel((prev) => {
+      const next = [...prev];
+      next[idx] = !prev[idx];
+      return next;
+    });
+  };
+
+  const handleRemove = async (labelId: number, idx: number) => {
+    await deleteProblemFromLabel(labelId, { contestId, index });
+    setIsAddedToLabel((prev) => {
+      const next = [...prev];
+      next[idx] = !prev[idx];
+      return next;
+    });
+  };
+
   return (
     <div>
       <Box
@@ -120,28 +144,9 @@ export const _AddLabelButton: React.FC<Props> = ({
                   color={isAddedToLabel[i] ? "#E55B66" : ""}
                   onClick={() => {
                     if (isAddedToLabel[i]) {
-                      deleteProblemFromLabel(label.id as number, {
-                        contestId,
-                        index,
-                      });
-                      setIsAddedToLabel((prev) => {
-                        const next = [...prev];
-                        next[i] = !prev[i];
-                        return next;
-                      });
+                      handleRemove(label.id as number, i);
                     } else {
-                      addProblemToLabel(label.id as number, {
-                        contestId,
-                        contestName,
-                        index,
-                        name,
-                        rating,
-                      });
-                      setIsAddedToLabel((prev) => {
-                        const next = [...prev];
-                        next[i] = !prev[i];
-                        return next;
-                      });
+                      handleAdd(label.id as number, i);
                     }
                   }}
                 >

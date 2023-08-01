@@ -44,7 +44,6 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
                     <ContestLink
                       contestId={p.contestId as number}
                       contestName={p.contestName}
-                      // classification={p.}
                     />
                   </TableCell>
                   <TableCell>

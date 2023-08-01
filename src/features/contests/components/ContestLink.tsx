@@ -7,7 +7,7 @@ import { AddLabelButton } from "@features/bookmark/components/contest/AddLabelBu
 type Props = {
   readonly contestId: number;
   readonly contestName: string;
-  readonly classification: Classification;
+  readonly classification?: Classification;
 };
 
 export const ContestLink: React.FC<Props> = ({
