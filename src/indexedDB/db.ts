@@ -41,7 +41,7 @@ export class CFDashboardDB extends Dexie {
     });
   }
 
-  // for problem labels
+  // for problem labels //////////////////////////////////////////////////
   private async deleteRelatedProblems(labelId: number): Promise<void> {
     await this.labelProblemMapping.where("labelId").equals(labelId).delete();
   }
@@ -141,7 +141,21 @@ export class CFDashboardDB extends Dexie {
     return label ? this.attachProblemsToLabel(label) : undefined;
   }
 
-  // for contest labels
+  async isProblemAddedToLabel(
+    labelId: number,
+    problem: {
+      contestId: number;
+      index: string;
+    }
+  ): Promise<boolean> {
+    const record = await this.labelProblemMapping
+      .where("[labelId+contestId+index]")
+      .equals([labelId, problem.contestId, problem.index])
+      .first();
+    return !!record;
+  }
+
+  // for contest labels //////////////////////////////////////////////////
   private async deleteRelatedContests(labelId: number): Promise<void> {
     await this.labelContestMapping.where("labelId").equals(labelId).delete();
   }

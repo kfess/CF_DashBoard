@@ -4,7 +4,7 @@ import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { TopcoderLikeCircle } from "@features/color/components/TopCoderLikeCircle";
 import { CF_CONTEST_URL, CF_GYM_URL } from "@constants/url";
 import { useThemeContext } from "@features/color/themeColor.hook";
-import { AddLabelButton } from "@features/bookmark/components/problem/AddLabelButton";
+import { _AddLabelButton } from "@features/bookmark/components/problem/_AddLabelButton";
 
 type Props = {
   readonly showDifficulty: boolean;
@@ -58,11 +58,12 @@ export const ProblemLink: React.FC<Props> = (props: Props) => {
           {problemId + ". " + problemName}
         </a>
       </div>
-      <AddLabelButton
+      <_AddLabelButton
         contestId={contestId}
         contestName={contestName}
         index={problemId}
         name={problemName}
+        rating={difficulty}
       />
     </Box>
   );

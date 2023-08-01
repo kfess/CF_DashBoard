@@ -12,7 +12,6 @@ import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { Chip_ } from "@features/ui/component/Chip";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import { CF_CONTEST_URL } from "@constants/url";
-import { getProblemKey } from "@features/problems/utils";
 
 type Props = {
   problem: Problem;

@@ -14,12 +14,14 @@ import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
 import { ProblemLabel } from "@features/bookmark/problemLabel";
 import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
+import { getProblemKey } from "@features/problems/utils";
 
 type Props = { label: ProblemLabel };
 
 export const LabeledProblems: React.FC<Props> = ({ label }) => {
   const { deleteProblemFromLabel } = useIndexedDBForProblemLabel();
 
+  console.log(label.problems);
   return (
     <>
       {label.problems.length > 0 ? (
@@ -34,11 +36,15 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
             </TableHead>
             <TableBody>
               {label.problems.map((p) => (
-                <TableRow key={p.index} hover>
+                <TableRow
+                  key={getProblemKey(p.contestId, p.index, p.contestName)}
+                  hover
+                >
                   <TableCell>
                     <ContestLink
                       contestId={p.contestId as number}
                       contestName={p.contestName}
+                      // classification={p.}
                     />
                   </TableCell>
                   <TableCell>
@@ -48,7 +54,7 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
                       contestName={p.contestName}
                       problemId={p.index}
                       problemName={p.name}
-                      // difficulty={p.difficulty}
+                      difficulty={p.rating as number}
                     />
                   </TableCell>
                   <TableCell>

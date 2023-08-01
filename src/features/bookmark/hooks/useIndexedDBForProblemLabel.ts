@@ -59,6 +59,15 @@ export const useIndexedDBForProblemLabel = () => {
     }
   ) => db.deleteProblemFromLabel(labelId, problem);
 
+  // 特定の問題が、特定のラベルに含まれているかどうかを判定
+  const isProblemAddedToLabel = async (
+    labelId: number,
+    problem: {
+      contestId: number;
+      index: string;
+    }
+  ) => db.isProblemAddedToLabel(labelId, problem);
+
   return {
     labelsCount,
     allLabels,
@@ -70,5 +79,6 @@ export const useIndexedDBForProblemLabel = () => {
     updateLabel,
     addProblemToLabel,
     deleteProblemFromLabel,
+    isProblemAddedToLabel,
   };
 };
