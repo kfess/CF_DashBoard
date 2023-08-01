@@ -14,7 +14,7 @@ import {
   contestLabelFormSchema,
 } from "@features/bookmark/contestLabel";
 import { _Button } from "@features/ui/component/Button";
-import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
+import { LabelNameChip } from "@features/bookmark/components/contest/LabelNameChip";
 import { Name } from "@features/bookmark/components/contest/Name";
 import { Description } from "@features/bookmark/components/contest/Description";
 import { Color } from "@features/bookmark/components/contest/Color";

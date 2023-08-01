@@ -14,10 +14,10 @@ import {
   problemLabelFormSchema,
 } from "@features/bookmark/problemLabel";
 import { _Button } from "@features/ui/component/Button";
-import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
-import { Name } from "@features/bookmark/components/Name";
-import { Description } from "@features/bookmark/components/Description";
-import { Color } from "@features/bookmark/components/Color";
+import { LabelNameChip } from "@features/bookmark/components/problem/LabelNameChip";
+import { Name } from "@features/bookmark/components/problem/Name";
+import { Description } from "@features/bookmark/components/problem/Description";
+import { Color } from "@features/bookmark/components/problem/Color";
 
 const getDefaultValues = (): ProblemLabelForm => ({
   name: "",
@@ -25,7 +25,7 @@ const getDefaultValues = (): ProblemLabelForm => ({
   color: generateRandomHexaColor(),
 });
 
-export const LabelCreator: React.FC = () => {
+export const Creator: React.FC = () => {
   const { createLabel } = useIndexedDBForProblemLabel();
   const [showBlock, toggleShowBlock] = useToggle(false, true);
 

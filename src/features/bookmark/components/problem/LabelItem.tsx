@@ -3,10 +3,10 @@ import { TableCell, TableRow, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
+import { LabelNameChip } from "@features/bookmark/components/problem/LabelNameChip";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { useToggle } from "@hooks/index";
-import { useIndexedDBForProblemLabel } from "../hooks/useIndexedDBForProblemLabel";
+import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
 import { Editor } from "./Editor";
 import {
   ProblemLabelForm,

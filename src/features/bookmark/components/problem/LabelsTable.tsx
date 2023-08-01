@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import type { ProblemLabel } from "@features/bookmark/problemLabel";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
-import { LabelItem } from "@features/bookmark/components/LabelItem";
-import { useIndexedDBForProblemLabel } from "../hooks/useIndexedDBForProblemLabel";
+import { LabelItem } from "@features/bookmark/components/problem/LabelItem";
+import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
 
 const sortOrders = [
   "Alphabetically",

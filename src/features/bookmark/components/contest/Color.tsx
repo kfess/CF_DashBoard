@@ -8,7 +8,7 @@ import { Control, Controller, FieldErrors } from "react-hook-form";
 import { Input } from "@features/ui/component/Input";
 import { FormControl } from "@features/ui/component/FormControl";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
-import { ContestLabelForm } from "@features/bookmark/contestLabel"; 
+import { ContestLabelForm } from "@features/bookmark/contestLabel";
 import { ColorPalette } from "@features/color/components/ColorPalette";
 import {
   HexaColor,

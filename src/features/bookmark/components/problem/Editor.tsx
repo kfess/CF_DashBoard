@@ -5,11 +5,11 @@ import { TableCell } from "@mui/material";
 import { Control, FieldErrors } from "react-hook-form";
 import { isValidHexaColor } from "@features/color/labelColor";
 import { _Button } from "@features/ui/component/Button";
-import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
-import { ProblemLabelForm } from "../problemLabel";
-import { Name } from "@features/bookmark/components/Name";
-import { Description } from "@features/bookmark/components/Description";
-import { Color } from "@features/bookmark/components/Color";
+import { LabelNameChip } from "@features/bookmark/components/problem/LabelNameChip";
+import { ProblemLabelForm } from "@features/bookmark/problemLabel";
+import { Name } from "@features/bookmark/components/problem/Name";
+import { Description } from "@features/bookmark/components/problem/Description";
+import { Color } from "@features/bookmark/components/problem/Color";
 
 type Props = {
   control: Control<ProblemLabelForm>;

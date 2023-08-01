@@ -5,7 +5,7 @@ import { TableCell } from "@mui/material";
 import { Control, FieldErrors } from "react-hook-form";
 import { isValidHexaColor } from "@features/color/labelColor";
 import { _Button } from "@features/ui/component/Button";
-import { LabelNameChip } from "@features/bookmark/components/LabelNameChip";
+import { LabelNameChip } from "@features/bookmark/components/contest/LabelNameChip";
 import { ContestLabelForm } from "@features/bookmark/contestLabel";
 import { Name } from "@features/bookmark/components/contest/Name";
 import { Description } from "@features/bookmark/components/contest/Description";
