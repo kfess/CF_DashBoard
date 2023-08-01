@@ -34,7 +34,7 @@ export const ProblemLink: React.FC<Props> = (props: Props) => {
   const { theme } = useThemeContext();
 
   return (
-    <Box css={{ display: "inline-flex", alignItems: "center" }}>
+    <Box sx={{ display: "inline-flex", alignItems: "center" }}>
       {showDifficulty && (
         <TopcoderLikeCircle
           displayPurpose="difficulty"

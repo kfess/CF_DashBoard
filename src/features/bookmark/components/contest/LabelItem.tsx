@@ -97,7 +97,7 @@ const DefaultView: React.FC<{
     <TableCell sx={{ py: 1 }}>
       <Link
         to={{
-          pathname: `/labels/${label.name}`,
+          pathname: `/labels/contest/${label.name}`,
         }}
         css={{ whiteSpace: "nowrap" }}
       >

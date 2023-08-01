@@ -7,10 +7,12 @@ import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import { isAllProblemsSolved } from "@features/contests/helper";
 import { getProblemKey } from "@features/problems/utils";
+import { Classification } from "@features/contests/contest";
 
 type Props = {
   readonly contestId: number;
   readonly contestName: string;
+  readonly classification: Classification;
   readonly problemIdxes: string[];
   readonly problems: ReshapedProblem[];
   readonly showDifficulty: boolean;
@@ -22,6 +24,7 @@ export const ContestTableRow: React.FC<Props> = React.memo(
   ({
     contestId,
     contestName,
+    classification,
     problemIdxes,
     problems,
     showDifficulty,
@@ -71,7 +74,11 @@ export const ContestTableRow: React.FC<Props> = React.memo(
             backgroundColor: rowColor,
           }}
         >
-          <ContestLink contestId={contestId} contestName={contestName} />
+          <ContestLink
+            contestId={contestId}
+            contestName={contestName}
+            classification={classification}
+          />
         </TableCell>
         {problemIdxes.map((idx, cellIdx) => {
           const problem = problemMap[idx];

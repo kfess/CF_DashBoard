@@ -82,6 +82,7 @@ export const ContestsTable: React.FC<Props> = ({
                     key={contest.id}
                     contestId={contest.id}
                     contestName={contest.name}
+                    classification={contest.classification}
                     problemIdxes={problemIdxes}
                     problems={contest.problems}
                     showDifficulty={showDifficulty}

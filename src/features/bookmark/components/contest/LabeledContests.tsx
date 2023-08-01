@@ -27,6 +27,7 @@ export const LabeledContests: React.FC<Props> = ({ label }) => {
             <TableHead>
               <TableRow>
                 <TableCell>Contest</TableCell>
+                <TableCell>Classification</TableCell>
                 <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
@@ -37,8 +38,10 @@ export const LabeledContests: React.FC<Props> = ({ label }) => {
                     <ContestLink
                       contestId={c.id as number}
                       contestName={c.name}
+                      classification={c.classification}
                     />
                   </TableCell>
+                  <TableCell>{c.classification}</TableCell>
                   <TableCell>
                     <ButtonWithAlertDialog
                       title="Delete"
