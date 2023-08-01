@@ -11,3 +11,6 @@ export const pluralize = (
   }
   return count <= 1 ? singular : plural;
 };
+
+export const trimFullWhiteSpace = (str: string) =>
+  str.replace(/^[\s\u3000]*(.*?)[\s\u3000]*$/g, "$1");

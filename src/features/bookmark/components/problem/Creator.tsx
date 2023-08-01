@@ -18,6 +18,7 @@ import { LabelNameChip } from "@features/bookmark/components/problem/LabelNameCh
 import { Name } from "@features/bookmark/components/problem/Name";
 import { Description } from "@features/bookmark/components/problem/Description";
 import { Color } from "@features/bookmark/components/problem/Color";
+import { trimFullWhiteSpace } from "@helpers/format";
 
 const getDefaultValues = (): ProblemLabelForm => ({
   name: "",
@@ -92,7 +93,7 @@ export const Creator: React.FC = () => {
             }}
           >
             <LabelNameChip
-              name={watchedName}
+              name={trimFullWhiteSpace(watchedName)}
               color={isValidHexaColor(watchedColor) ? watchedColor : "#000000"}
               mode="Preview"
             />

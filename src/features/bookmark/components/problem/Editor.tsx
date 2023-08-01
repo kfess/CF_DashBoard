@@ -10,6 +10,7 @@ import { ProblemLabelForm } from "@features/bookmark/problemLabel";
 import { Name } from "@features/bookmark/components/problem/Name";
 import { Description } from "@features/bookmark/components/problem/Description";
 import { Color } from "@features/bookmark/components/problem/Color";
+import { trimFullWhiteSpace } from "@helpers/format";
 
 type Props = {
   control: Control<ProblemLabelForm>;
@@ -19,6 +20,8 @@ type Props = {
   watchedColor: string;
   onCancel: () => void;
   onDelete: () => void;
+  customError: string | null;
+  resetCustomError: () => void;
 };
 
 export const Editor: React.FC<Props> = ({
@@ -29,6 +32,8 @@ export const Editor: React.FC<Props> = ({
   watchedColor,
   onCancel,
   onDelete,
+  customError,
+  resetCustomError,
 }) => {
   return (
     <TableCell colSpan={4} sx={{ py: 0 }}>
@@ -36,7 +41,7 @@ export const Editor: React.FC<Props> = ({
         <Stack spacing={0.5} padding={1.5}>
           <Stack direction="row" justifyContent="space-between">
             <LabelNameChip
-              name={watchedName}
+              name={trimFullWhiteSpace(watchedName)}
               color={isValidHexaColor(watchedColor) ? watchedColor : "#000000"}
               mode="Preview"
             />
@@ -63,7 +68,12 @@ export const Editor: React.FC<Props> = ({
               spacing={1}
             >
               <div>
-                <Name control={control} errors={errors} />
+                <Name
+                  control={control}
+                  errors={errors}
+                  customError={customError}
+                  resetCustomError={resetCustomError}
+                />
               </div>
               <div>
                 <Description control={control} errors={errors} />

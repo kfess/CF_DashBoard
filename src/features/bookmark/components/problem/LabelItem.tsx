@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TableCell, TableRow, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -15,13 +15,15 @@ import {
 } from "@features/bookmark/problemLabel";
 import { pluralize } from "@helpers/format";
 import { _Button } from "@features/ui/component/Button";
+import { trimFullWhiteSpace } from "@helpers/format";
 
 type Props = {
   label: ProblemLabel;
 };
 
 export const LabelItem: React.FC<Props> = ({ label }) => {
-  const { updateLabel, deleteLabel } = useIndexedDBForProblemLabel();
+  const { updateLabel, deleteLabel, allLabelNames } =
+    useIndexedDBForProblemLabel();
   const [showBlock, toggleShowBlock] = useToggle(false, true);
 
   const {
@@ -42,7 +44,21 @@ export const LabelItem: React.FC<Props> = ({ label }) => {
   const watchedName = watch("name");
   const watchedColor = watch("color");
 
+  // for name unique validation
+  const [customError, setCustomError] = useState<string | null>(null);
+  const resetCustomError = () => setCustomError(null);
+  const isUniqueName =
+    allLabelNames &&
+    (!allLabelNames.includes(watchedName.trim()) ||
+      label.name.trim() === watchedName.trim());
+
   const onSubmit = async () => {
+    resetCustomError();
+    if (!isUniqueName) {
+      setCustomError("This name is already used.");
+      return;
+    }
+
     await updateLabel(label.id as number, {
       name: watchedName,
       color: watchedColor,
@@ -68,6 +84,8 @@ export const LabelItem: React.FC<Props> = ({ label }) => {
             await deleteLabel(label.id as number);
             toggleShowBlock();
           }}
+          customError={customError}
+          resetCustomError={resetCustomError}
         />
       ) : (
         <DefaultView
@@ -91,9 +109,15 @@ const DefaultView: React.FC<{
 }> = ({ label, watchedName, watchedColor, onEdit, onDelete }) => (
   <>
     <TableCell sx={{ py: 1 }}>
-      <LabelNameChip name={watchedName} color={watchedColor} mode="View" />
+      <LabelNameChip
+        name={trimFullWhiteSpace(watchedName)}
+        color={watchedColor}
+        mode="View"
+      />
     </TableCell>
-    <TableCell sx={{ py: 1 }}>{label.description || "No description provided"}</TableCell>
+    <TableCell sx={{ py: 1 }}>
+      {label.description || "No description provided"}
+    </TableCell>
     <TableCell sx={{ py: 1 }}>
       <Link
         to={{
