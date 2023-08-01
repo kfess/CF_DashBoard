@@ -25,3 +25,11 @@ export const contestLabelSchema = z.object({
   ),
 });
 export type ContestLabel = z.infer<typeof contestLabelSchema>;
+
+// for creating new label
+export const contestLabelFormSchema = contestLabelSchema.pick({
+  name: true,
+  description: true,
+  color: true,
+});
+export type ContestLabelForm = z.infer<typeof contestLabelFormSchema>;
