@@ -42,22 +42,20 @@ export const ProblemLink: React.FC<Props> = (props: Props) => {
           solvedCount={solvedCount}
         />
       )}
-      <div>
-        <a
-          href={problemUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          css={{
-            color: showDifficulty
-              ? getColorCodeFromRating(difficulty)
-              : theme.colors.fontColor,
-            textDecoration: "underline",
-            paddingRight: theme.spacing(1),
-          }}
-        >
-          {problemId + ". " + problemName}
-        </a>
-      </div>
+      <a
+        href={problemUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        css={{
+          color: showDifficulty
+            ? getColorCodeFromRating(difficulty)
+            : theme.colors.fontColor,
+          textDecoration: "underline",
+          paddingRight: theme.spacing(1),
+        }}
+      >
+        {problemId + ". " + problemName}
+      </a>
       <AddLabelButton
         contestId={contestId}
         contestName={contestName}

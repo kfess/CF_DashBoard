@@ -27,8 +27,9 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Contest</TableCell>
             <TableCell>Problem</TableCell>
+            <TableCell>Contest</TableCell>
+            <TableCell>Difficulty</TableCell>
             <TableCell>Action</TableCell>
           </TableRow>
         </TableHead>
@@ -40,12 +41,6 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
                 hover
               >
                 <TableCell>
-                  <ContestLink
-                    contestId={p.contestId as number}
-                    contestName={p.contestName}
-                  />
-                </TableCell>
-                <TableCell>
                   <ProblemLink
                     showDifficulty={true}
                     contestId={p.contestId as number}
@@ -55,6 +50,13 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
                     difficulty={p.rating as number}
                   />
                 </TableCell>
+                <TableCell>
+                  <ContestLink
+                    contestId={p.contestId as number}
+                    contestName={p.contestName}
+                  />
+                </TableCell>
+                <TableCell>{p.rating}</TableCell>
                 <TableCell>
                   <ButtonWithAlertDialog
                     title="Delete"

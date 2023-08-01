@@ -1,13 +1,13 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import { CF_CONTEST_URL } from "@constants/url";
+import Stack from "@mui/material/Stack";
 import type { Classification } from "@features/contests/contest";
+import { CF_CONTEST_URL } from "@constants/url";
 import { AddLabelButton } from "@features/bookmark/components/contest/AddLabelButton";
 
 type Props = {
   readonly contestId: number;
   readonly contestName: string;
-  readonly classification?: Classification;
+  readonly classification: Classification;
 };
 
 export const ContestLink: React.FC<Props> = ({
@@ -16,26 +16,23 @@ export const ContestLink: React.FC<Props> = ({
   classification,
 }) => {
   return (
-    <Box sx={{ display: "inline-flex", alignItems: "center" }}>
-      <div>
-        <a
-          href={`${CF_CONTEST_URL}/${contestId}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          css={{
-            color: "inherit",
-            textDecoration: "underline",
-            paddingRight: 8,
-          }}
-        >
-          {contestName}
-        </a>
-      </div>
+    <Stack direction="row" spacing={1} alignItems="center">
+      <a
+        href={`${CF_CONTEST_URL}/${contestId}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        css={{
+          color: "inherit",
+          textDecoration: "underline",
+        }}
+      >
+        {contestName}
+      </a>
       <AddLabelButton
         contestId={contestId}
         contestName={contestName}
         classification={classification}
       />
-    </Box>
+    </Stack>
   );
 };

@@ -106,7 +106,7 @@ export const AddLabelButton: React.FC<Props> = ({
           horizontal: "left",
         }}
       >
-        <Typography variant="body2" sx={{ p: 1, textAlign: "center" }}>
+        <Typography variant="body2" sx={{ p: 1.5 }}>
           Add or Remove contest
         </Typography>
         <Divider />
