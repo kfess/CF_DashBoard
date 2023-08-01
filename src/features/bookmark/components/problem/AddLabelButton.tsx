@@ -139,6 +139,7 @@ export const AddLabelButton: React.FC<Props> = ({
                 </Typography>
                 <_Button
                   color={isAddedToLabel[i] ? "#E55B66" : ""}
+                  size="small"
                   onClick={() => {
                     if (isAddedToLabel[i]) {
                       handleRemove(label.id as number, i);
@@ -147,7 +148,7 @@ export const AddLabelButton: React.FC<Props> = ({
                     }
                   }}
                 >
-                  {isAddedToLabel[i] ? "Remove" : "Add"}
+                  {isAddedToLabel[i] ? "Delete" : "Add"}
                 </_Button>
               </Box>
               <Divider />

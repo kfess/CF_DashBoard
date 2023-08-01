@@ -73,8 +73,26 @@ export const Button: React.FC<Props> = (props) => {
   );
 };
 
-const CustomButtonRoot = styled(ButtonUnstyled)(
-  ({ theme, color }) => `
+const sizeStyles = {
+  small: `
+    padding: 0.125rem 0.25rem;
+    font-size: 0.75rem;
+    line-height: 0.875rem;
+  `,
+  medium: `
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1rem;
+  `,
+  large: `
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.25rem;
+  `,
+};
+const CustomButtonRoot = styled(ButtonUnstyled)<ButtonProps>(
+  ({ theme, color, size = "medium" }) => `
+    ${sizeStyles[size]}
     background-color: ${color ? darken(color, 0.1) : "#E5E5E5"};
     padding: 0.375rem 0.75rem;
     line-height: 1.25rem;
@@ -103,7 +121,10 @@ const CustomButtonRoot = styled(ButtonUnstyled)(
   `
 );
 
-type ButtonProps = ButtonUnstyledProps & { color?: string };
+type ButtonProps = ButtonUnstyledProps & {
+  color?: string;
+  size?: "small" | "medium" | "large";
+};
 
 export const _Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   function Button(props, ref) {

@@ -93,7 +93,9 @@ const DefaultView: React.FC<{
     <TableCell sx={{ py: 1 }}>
       <LabelNameChip name={watchedName} color={watchedColor} mode="View" />
     </TableCell>
-    <TableCell sx={{ py: 1 }}>{label.description}</TableCell>
+    <TableCell sx={{ py: 1 }}>
+      {label.description || "No description provided"}
+    </TableCell>
     <TableCell sx={{ py: 1 }}>
       <Link
         to={{

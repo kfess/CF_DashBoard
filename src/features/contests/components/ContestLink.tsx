@@ -22,6 +22,11 @@ export const ContestLink: React.FC<Props> = ({
           href={`${CF_CONTEST_URL}/${contestId}`}
           target="_blank"
           rel="noopener noreferrer"
+          css={{
+            color: "inherit",
+            textDecoration: "underline",
+            paddingRight: 8,
+          }}
         >
           {contestName}
         </a>
