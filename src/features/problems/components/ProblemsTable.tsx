@@ -6,15 +6,17 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
+import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import { Problem, Tag } from "@features/problems/problem";
-import { usePagination } from "@hooks/index";
+import { usePagination } from "@hooks/usePagination";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { ProblemsTableRow } from "@features/problems/components/ProblemsTableRow";
 import type { Classification } from "@features/contests/contest";
 import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
 import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
 import { getProblemKey } from "@features/problems/utils";
+import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 
 type Props = {
   problems: Problem[];
@@ -37,7 +39,7 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
     solvedStatus,
   } = props;
 
-  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
+  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(problems);
 
   const { solvedSet, attemptedSet } = useSolvedStatus();
 
@@ -112,12 +114,36 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
           <Table stickyHeader css={{ height: "100%" }}>
             <TableHead>
               <TableRow>
-                <TableCell>Status</TableCell>
-                <TableCell>Problem</TableCell>
-                <TableCell>Contest</TableCell>
-                <TableCell>Difficulty</TableCell>
-                <TableCell>Solved Count</TableCell>
-                <TableCell>Solution</TableCell>
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Status
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Problem
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Contest
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Difficulty
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Solved
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Solution
+                  </Typography>
+                </TableCell>
               </TableRow>
             </TableHead>
             {problemsLen > 0 ? (
@@ -147,7 +173,10 @@ export const ProblemsTable: React.FC<Props> = (props: Props) => {
               <TableBody>
                 <TableRow>
                   <TableCell colSpan={6}>
-                    There is no Data to display.
+                    <NoDataMessage
+                      title="No Problems Found"
+                      message="Please check your filter options."
+                    />
                   </TableCell>
                 </TableRow>
               </TableBody>

@@ -6,6 +6,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 import type { RecommendLevel } from "@features/recommendation/recommend";
 import { recommendDifficultyRange } from "@features/recommendation/helper";
 import type { Problem } from "@features/problems/problem";
@@ -44,12 +45,36 @@ export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
           <Table stickyHeader>
             <TableHead>
               <TableRow>
-                <TableCell>Status</TableCell>
-                <TableCell>Problem</TableCell>
-                <TableCell>Contest</TableCell>
-                <TableCell>Difficulty</TableCell>
-                <TableCell>Solved Count</TableCell>
-                <TableCell>Solution</TableCell>
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Status
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Problem
+                  </Typography>
+                </TableCell>{" "}
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Contest
+                  </Typography>
+                </TableCell>{" "}
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Difficulty
+                  </Typography>
+                </TableCell>{" "}
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Solved
+                  </Typography>
+                </TableCell>{" "}
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Solution
+                  </Typography>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

@@ -35,7 +35,7 @@ export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
       <TableCell>
         {isSolved ? (
           <Tooltip title="Solved">
-            <TaskAltOutlinedIcon fontSize="small" />
+            <TaskAltOutlinedIcon fontSize="small" color="success" />
           </Tooltip>
         ) : isAttempted ? (
           <Tooltip title="Attempting">
@@ -65,6 +65,7 @@ export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
         <ContestLink
           contestId={problem.contestId ?? 0} // need to change!
           contestName={problem.contestName ?? "unknown"} // need to change!
+          classification={problem.classification || "Others"}
         />
       </TableCell>
       <TableCell>

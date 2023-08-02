@@ -5,6 +5,7 @@ import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
@@ -15,10 +16,11 @@ import { VerdictChip } from "@features/submission/components/VerdictChip";
 import { verdictMap } from "@helpers/verdict";
 import { VerdictFilter } from "./SolvedStatusFilter";
 import { LanguageFilter } from "./LanguageFilter";
-import { usePagination } from "@hooks/index";
+import { usePagination } from "@hooks/usePagination";
 import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 import { Classification } from "@features/contests/contest";
 import { getClassification } from "@features/contests/utils/getClassification";
+import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 
 type Props = {
   readonly userId: string;
@@ -55,7 +57,7 @@ export const UserSubmission: React.FC<Props> = ({
     });
   }, [data, contestIdNameMap, classification, solvedStatus, language]);
 
-  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
+  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(data);
 
   return (
     <>
@@ -70,16 +72,44 @@ export const UserSubmission: React.FC<Props> = ({
           />
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer component={Paper}>
-              <Table stickyHeader size="small">
+              <Table stickyHeader>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Contest</TableCell>
-                    <TableCell>Problem</TableCell>
-                    <TableCell>User</TableCell>
-                    <TableCell>Status</TableCell>
-                    <TableCell>Language</TableCell>
-                    <TableCell>Detail</TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        Date
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        Contest
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        Problem
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        User
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        Status
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        Language
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        Detail
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 {filteredData.length > 0 ? (
@@ -97,6 +127,8 @@ export const UserSubmission: React.FC<Props> = ({
                               contestName={
                                 contestIdNameMap[d.contestId as number]
                               }
+                              classification={classification}
+                              showBookmarked={false}
                             />
                           </TableCell>
                           <TableCell>
@@ -110,29 +142,34 @@ export const UserSubmission: React.FC<Props> = ({
                               problemName={d.problem.name}
                               difficulty={d.problem.rating}
                               solvedCount={d.problem.solvedCount}
+                              showBookmarked={false}
                             />
                           </TableCell>
                           <TableCell>
-                            <a
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              href={`https://codeforces.com/profile/${d.author.members[0].handle}`}
-                            >
-                              {d.author.members[0].handle}
-                            </a>
+                            <Typography variant="body2">
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={`https://codeforces.com/profile/${d.author.members[0].handle}`}
+                              >
+                                {d.author.members[0].handle}
+                              </a>
+                            </Typography>
                           </TableCell>
                           <TableCell>
                             <VerdictChip verdict={d.verdict} />
                           </TableCell>
                           <TableCell>{d.programmingLanguage}</TableCell>
                           <TableCell>
-                            <a
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              href={`https://codeforces.com/contest/${d.contestId}/submission/${d.id}`}
-                            >
-                              detail
-                            </a>
+                            <Typography variant="body2">
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={`https://codeforces.com/contest/${d.contestId}/submission/${d.id}`}
+                              >
+                                detail
+                              </a>
+                            </Typography>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -141,7 +178,10 @@ export const UserSubmission: React.FC<Props> = ({
                   <TableBody>
                     <TableRow>
                       <TableCell colSpan={7}>
-                        There is no Data to display.
+                        <NoDataMessage
+                          title="No Submissions Found"
+                          message="Please check your filter options."
+                        />
                       </TableCell>
                     </TableRow>
                   </TableBody>

@@ -6,6 +6,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { useFetchRecentSubmissions } from "@features/submission/hooks/useFetchSubmission";
@@ -13,11 +14,11 @@ import { formatUnixTime } from "@helpers/date";
 import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
-import { usePagination } from "@hooks/index";
+import { usePagination } from "@hooks/usePagination";
 
 export const RecentSubmission: React.FC = () => {
   const { data } = useFetchRecentSubmissions();
-  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
+  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(data);
 
   const { contestIdNameMap } = useContestIdNameMap();
 
@@ -37,13 +38,41 @@ export const RecentSubmission: React.FC = () => {
               <Table stickyHeader>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Contest</TableCell>
-                    <TableCell>Problem</TableCell>
-                    <TableCell>User</TableCell>
-                    <TableCell>Status</TableCell>
-                    <TableCell>Language</TableCell>
-                    <TableCell>Detail</TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        Date
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        Contest
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        Problem
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        User
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        Status
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        Language
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="fontWeightBold">
+                        Detail
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -60,6 +89,7 @@ export const RecentSubmission: React.FC = () => {
                             contestName={
                               contestIdNameMap[d.contestId as number]
                             }
+                            showBookmarked={false}
                           />
                         </TableCell>
                         <TableCell>
@@ -72,7 +102,8 @@ export const RecentSubmission: React.FC = () => {
                             problemId={d.problem.index}
                             problemName={d.problem.name}
                             difficulty={d.problem.rating}
-                            // solvedCount={}
+                            solvedCount={d.problem.solvedCount}
+                            showBookmarked={false}
                           />
                         </TableCell>
                         <TableCell>
@@ -87,15 +118,21 @@ export const RecentSubmission: React.FC = () => {
                         <TableCell>
                           <VerdictChip verdict={d.verdict} />
                         </TableCell>
-                        <TableCell>{d.programmingLanguage}</TableCell>
                         <TableCell>
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={`https://codeforces.com/contest/${d.contestId}/submission/${d.id}`}
-                          >
-                            detail
-                          </a>
+                          <Typography variant="body2">
+                            {d.programmingLanguage}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="body2">
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`https://codeforces.com/contest/${d.contestId}/submission/${d.id}`}
+                            >
+                              detail
+                            </a>
+                          </Typography>
                         </TableCell>
                       </TableRow>
                     ))}
