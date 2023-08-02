@@ -17,7 +17,7 @@ import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 
 export const ContestsPage: React.FC = () => {
   const { data } = useFetchContests();
-
+  const { solvedSet, attemptedSet } = useSolvedStatus();
   const {
     classification,
     showDifficulty,
@@ -33,16 +33,13 @@ export const ContestsPage: React.FC = () => {
 
   const contests = useMemo(
     () => (data ? reshapeContests(data, classification, reverse, period) : []),
-    [data, classification, period, reverse]
+    [data, classification, period, reverse, solvedStatus]
   );
-
   const problemIdxes = useMemo(
     () =>
       data ? getProblemIdxFromClassification(contests, classification) : [],
-    [data, classification, period, reverse]
+    [data, classification, period, reverse, solvedStatus]
   );
-
-  const { solvedSet, attemptedSet } = useSolvedStatus();
 
   return (
     <Container maxWidth="lg">
@@ -78,7 +75,7 @@ export const ContestsPage: React.FC = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            {contests.length > 0 && (
+            {contests.length > 0 ? (
               <ContestsTable
                 contests={contests}
                 problemIdxes={problemIdxes}
@@ -86,8 +83,7 @@ export const ContestsPage: React.FC = () => {
                 solvedSet={solvedSet}
                 attemptedSet={attemptedSet}
               />
-            )}
-            {contests.length === 0 && (
+            ) : (
               <NoDataMessage
                 title="No Contests Found"
                 message="Please check your filter options."

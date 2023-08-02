@@ -29,7 +29,8 @@ const LabelRow: React.FC<LabelRowProps> = React.memo(
       </Stack>
       <Stack direction="row" alignItems="center" px={1} py={0.75} spacing={2}>
         <Typography
-          variant="caption"
+          variant="body2"
+          color={label.description ? "initial" : "text.secondary"}
           sx={{ flex: 1, ml: 1, mr: 1, maxWidth: 300 }}
         >
           {label.description || "No description provided"}

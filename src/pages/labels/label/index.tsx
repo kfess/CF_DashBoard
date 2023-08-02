@@ -41,9 +41,13 @@ export const ProblemLabelPage: React.FC = () => {
                       borderLeftWidth: "5px",
                     }}
                   >
-                    <Typography variant="body1" color="text.main">
-                      {label?.description || "No description provided."}
-                    </Typography>
+                    {label.description ? (
+                      <Typography>{label.description}</Typography>
+                    ) : (
+                      <Typography color="text.secondary">
+                        No description provided
+                      </Typography>
+                    )}
                   </Box>
                   <LabeledProblems label={label} />
                 </>

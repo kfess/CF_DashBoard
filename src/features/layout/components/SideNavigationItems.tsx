@@ -28,6 +28,7 @@ import BuildIcon from "@mui/icons-material/Build";
 import FeedIcon from "@mui/icons-material/Feed";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
 
 const mainField = [
@@ -160,10 +161,10 @@ export const SideNavigationItem: React.FC<Props> = ({
     return (
       <Tooltip
         title={
-          <div css={{ fontSize: "15px" }}>
+          <Typography variant="body2">
             To view the Achievement page, you must first enter the codeforces
             user ID in the navigation bar.
-          </div>
+          </Typography>
         }
       >
         <ListItem key={field} disablePadding>
