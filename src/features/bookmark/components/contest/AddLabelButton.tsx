@@ -1,14 +1,57 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import Stack from "@mui/material/Stack";
 import Box from "@mui/system/Box";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import Popover from "@mui/material/Popover";
+import IconButton from "@mui/material/IconButton";
 import StarIcon from "@mui/icons-material/Star";
 import { Link } from "react-router-dom";
 import { ColoredCircle } from "@features/color/components/ColoredCircle";
 import { useIndexedDBForContestLabel } from "@features/bookmark/hooks/useIndexedDBForContestLabel";
 import { _Button } from "@features/ui/component/Button";
 import { Classification } from "@features/contests/contest";
+import type { ContestLabel } from "@features/bookmark/contestLabel";
+
+type LabelRowProps = {
+  readonly label: ContestLabel;
+  readonly isAdded: boolean;
+  readonly handleRemove: (labelId: number) => void;
+  readonly handleAdd: (labelId: number) => void;
+};
+
+const LabelRow: React.FC<LabelRowProps> = React.memo(
+  ({ label, isAdded, handleRemove, handleAdd }) => (
+    <Box key={label.name} sx={{ p: 1 }}>
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <ColoredCircle color={label.color} />
+        {label.name}
+      </Stack>
+      <Stack direction="row" alignItems="center" px={1} py={0.75} spacing={2}>
+        <Typography
+          variant="caption"
+          sx={{ flex: 1, ml: 1, mr: 1, maxWidth: 300 }}
+        >
+          {label.description || "No description provided"}
+        </Typography>
+        <_Button
+          color={isAdded ? "#E55B66" : ""}
+          size="small"
+          onClick={() => {
+            if (isAdded) {
+              handleRemove(label.id as number);
+            } else {
+              handleAdd(label.id as number);
+            }
+          }}
+        >
+          {isAdded ? "Delete" : "Add"}
+        </_Button>
+      </Stack>
+      <Divider />
+    </Box>
+  )
+);
 
 type Props = {
   contestId: number;
@@ -28,8 +71,9 @@ export const AddLabelButton: React.FC<Props> = ({
     isContestAddedToLabel,
   } = useIndexedDBForContestLabel();
 
-  const [isAddedToLabel, setIsAddedToLabel] = useState<boolean[]>([]);
-
+  const [isAdded, setIsAdded] = useState<Record<number, boolean>>(
+    {} as Record<number, boolean>
+  );
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -44,115 +88,81 @@ export const AddLabelButton: React.FC<Props> = ({
 
     const fetch = async () => {
       const checks = await Promise.all(
-        (allLabels ?? []).map((label) =>
-          isContestAddedToLabel(label.id as number, contestId)
+        (allLabels ?? []).map(async (label) => {
+          const isAdded = await isContestAddedToLabel(
+            label.id as number,
+            contestId
+          );
+          return { id: label.id, isAdded };
+        })
+      );
+      setIsAdded(
+        checks.reduce(
+          (acc, { id, isAdded }) => ({ ...acc, [id as number]: isAdded }),
+          {}
         )
       );
-      setIsAddedToLabel(checks);
     };
     fetch();
   }, [open]);
 
-  const handleAdd = async (labelId: number, idx: number) => {
+  const handleAdd = useCallback(async (labelId: number) => {
     await addContestToLabel(labelId, {
       contestId,
       contestName,
       classification,
     });
-    setIsAddedToLabel((prev) => {
-      const next = [...prev];
-      next[idx] = !prev[idx];
-      return next;
-    });
-  };
+    setIsAdded((prev) => ({ ...prev, [labelId]: true }));
+  }, []);
 
-  const handleRemove = async (labelId: number, idx: number) => {
+  const handleRemove = useCallback(async (labelId: number) => {
     await deleteContestFromLabel(labelId, { contestId });
-    setIsAddedToLabel((prev) => {
-      const next = [...prev];
-      next[idx] = !prev[idx];
-      return next;
-    });
-  };
+    setIsAdded((prev) => ({ ...prev, [labelId]: false }));
+  }, []);
 
   return (
-    <div>
-      <Box
-        sx={{
-          cursor: "pointer",
-          borderRadius: "50%",
-          display: "inline-block",
-          pt: "3px",
-          pl: "4px",
-          pr: "4px",
-          backgroundColor: "#EFEFEF",
-          color: "#93A1B0",
-          "&:hover": {
-            color: "#666",
-          },
-        }}
+    <Box>
+      <IconButton
         id="label-button"
         onClick={handleClick}
-      >
-        <StarIcon fontSize="inherit" />
-      </Box>
-      <Popover
-        id="label-button"
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
+        disableRipple
+        sx={{
+          padding: "0.2rem",
+          color: open ? "#FFB700" : "#93A1B0",
+          backgroundColor: "#EFEFEF",
         }}
       >
-        <Typography variant="body2" sx={{ p: 1.5 }}>
-          Add or Remove contest
-        </Typography>
-        <Divider />
-        {allLabels &&
-          allLabels.length > 0 &&
-          allLabels.map((label, i) => (
-            <Box key={label.name} sx={{ p: 1 }}>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <ColoredCircle color={label.color} />
-                {label.name}
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  p: 1,
-                }}
-              >
-                <Typography
-                  variant="caption"
-                  sx={{ flex: 1, ml: 1, mr: 1, maxWidth: 300 }}
-                >
-                  {label.description || "No description provided"}
-                </Typography>
-                <_Button
-                  color={isAddedToLabel[i] ? "#E55B66" : ""}
-                  size="small"
-                  onClick={() => {
-                    if (isAddedToLabel[i]) {
-                      handleRemove(label.id as number, i);
-                    } else {
-                      handleAdd(label.id as number, i);
-                    }
-                  }}
-                >
-                  {isAddedToLabel[i] ? "Delete" : "Add"}
-                </_Button>
-              </Box>
-              <Divider />
-            </Box>
+        <StarIcon sx={{ fontSize: "1rem" }} />
+      </IconButton>
+      {open && (
+        <Popover
+          id="label-button"
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+        >
+          <Typography variant="body2" sx={{ p: 1.5 }}>
+            Add or Remove contest
+          </Typography>
+          <Divider />
+          {(allLabels ?? []).map((label) => (
+            <LabelRow
+              key={label.id}
+              label={label}
+              isAdded={isAdded[label.id as number]}
+              handleRemove={handleRemove}
+              handleAdd={handleAdd}
+            />
           ))}
-        <Typography variant="body2" sx={{ p: 1, textAlign: "center" }}>
-          <Link to="/labels">view all labels</Link>
-        </Typography>
-      </Popover>
-    </div>
+          <Typography variant="body2" sx={{ p: 1, textAlign: "center" }}>
+            <Link to="/labels">view all labels</Link>
+          </Typography>
+        </Popover>
+      )}
+    </Box>
   );
 };
