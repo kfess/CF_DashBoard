@@ -71,6 +71,7 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
                   <ContestLink
                     contestId={p.contestId as number}
                     contestName={p.contestName}
+                    showBookmarked={false}
                   />
                 </TableCell>
                 <TableCell>{p.rating || "?"}</TableCell>

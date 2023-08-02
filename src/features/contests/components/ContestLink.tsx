@@ -8,12 +8,14 @@ type Props = {
   readonly contestId: number;
   readonly contestName: string;
   readonly classification: Classification;
+  readonly showBookmarked?: boolean;
 };
 
 export const ContestLink: React.FC<Props> = ({
   contestId,
   contestName,
   classification,
+  showBookmarked = true,
 }) => {
   return (
     <Stack direction="row" spacing={1} alignItems="center">
@@ -28,11 +30,13 @@ export const ContestLink: React.FC<Props> = ({
       >
         {contestName}
       </a>
-      <AddLabelButton
-        contestId={contestId}
-        contestName={contestName}
-        classification={classification}
-      />
+      {showBookmarked && (
+        <AddLabelButton
+          contestId={contestId}
+          contestName={contestName}
+          classification={classification}
+        />
+      )}
     </Stack>
   );
 };

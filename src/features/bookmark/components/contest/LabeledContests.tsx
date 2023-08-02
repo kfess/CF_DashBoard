@@ -51,6 +51,7 @@ export const LabeledContests: React.FC<Props> = ({ label }) => {
                     contestId={c.id as number}
                     contestName={c.name}
                     classification={c.classification}
+                    showBookmarked={false}
                   />
                 </TableCell>
                 <TableCell>{c.classification}</TableCell>
