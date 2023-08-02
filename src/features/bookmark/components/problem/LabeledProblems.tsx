@@ -64,6 +64,7 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
                     problemId={p.index}
                     problemName={p.name}
                     difficulty={p.rating as number}
+                    showBookmarked={false}
                   />
                 </TableCell>
                 <TableCell>
@@ -72,7 +73,7 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
                     contestName={p.contestName}
                   />
                 </TableCell>
-                <TableCell>{p.rating}</TableCell>
+                <TableCell>{p.rating || "?"}</TableCell>
                 <TableCell>
                   <ButtonWithAlertDialog
                     title="Delete"

@@ -14,19 +14,19 @@ type Props = {
   readonly problemName: string;
   readonly difficulty?: number;
   readonly solvedCount?: number;
+  readonly showBookmarked?: boolean;
 };
 
-export const ProblemLink: React.FC<Props> = (props: Props) => {
-  const {
-    showDifficulty,
-    contestId,
-    contestName,
-    problemId,
-    problemName,
-    difficulty,
-    solvedCount,
-  } = props;
-
+export const ProblemLink: React.FC<Props> = ({
+  showDifficulty,
+  contestId,
+  contestName,
+  problemId,
+  problemName,
+  difficulty,
+  solvedCount,
+  showBookmarked = true,
+}) => {
   const problemUrl = `${
     contestId >= 100001 ? CF_GYM_URL : CF_CONTEST_URL
   }/${contestId}/problem/${problemId}`;
@@ -56,13 +56,15 @@ export const ProblemLink: React.FC<Props> = (props: Props) => {
       >
         {problemId + ". " + problemName}
       </a>
-      <AddLabelButton
-        contestId={contestId}
-        contestName={contestName}
-        index={problemId}
-        name={problemName}
-        rating={difficulty}
-      />
+      {showBookmarked && (
+        <AddLabelButton
+          contestId={contestId}
+          contestName={contestName}
+          index={problemId}
+          name={problemName}
+          rating={difficulty}
+        />
+      )}
     </Box>
   );
 };
