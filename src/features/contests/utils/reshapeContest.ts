@@ -11,12 +11,15 @@ import {
   periodFilter,
 } from "@features/contests/components/PeriodFilter";
 import { normalizeProblemIndex } from "@features/contests/utils/problemIdxes";
+import { SolvedStatus } from "@features/contests/components/SolvedStatusFilter";
+import { calcSolvedStatus } from "@features/contests/utils/solvedStatus";
 
 const filterAndSortContests = (
   contests: Contest[],
   classification: Classification,
   reverse: boolean,
-  period: PeriodWord
+  period: PeriodWord,
+  solvedStatus: SolvedStatus
 ): Contest[] => {
   return contests
     .filter((contest) => {
@@ -26,6 +29,7 @@ const filterAndSortContests = (
       const isAfterPeriodStart = dayjs
         .unix(contest.startTimeSeconds)
         .isAfter(periodFilter[period].from);
+
       return isFinished && isClassificationMatch && isAfterPeriodStart;
     })
     .sort((a, b) =>
@@ -39,13 +43,15 @@ export const reshapeContests = (
   contests: Contest[],
   classification: Classification,
   reverse: boolean,
-  period: PeriodWord
+  period: PeriodWord,
+  solvedStatus: SolvedStatus
 ): ReshapedContest[] => {
   const filteredAndSortedContests = filterAndSortContests(
     contests,
     classification,
     reverse,
-    period
+    period,
+    solvedStatus
   );
 
   return filteredAndSortedContests.map((contest) => {

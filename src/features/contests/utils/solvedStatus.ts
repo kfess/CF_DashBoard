@@ -1,5 +1,5 @@
 import { SolvedStatus } from "@features/contests/components/SolvedStatusFilter";
-import { ReshapedProblem } from "@features/problems/problem";
+import type { ReshapedProblem } from "@features/problems/problem";
 import { getProblemKey } from "@features/problems/utils";
 
 // 特定のコンテストについて、問題の解いた状態を返す
@@ -19,7 +19,6 @@ export const calcSolvedStatus = (
 
   let isAllSolved = true;
   let isAnySolved = false;
-
   for (const idx of problemIdxes) {
     const problem = problemMap[idx];
     const indexedProblems = problem?.indexedProblems || [];

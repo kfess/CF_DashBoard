@@ -2,15 +2,15 @@ import React, { useMemo } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import { useFetchContests } from "@features/contests/hooks/useFetchContest";
 import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
 import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
-import { reshapeContests } from "@features/contests/helper";
+import { reshapeContests } from "@features/contests/utils/reshapeContest";
 import { getProblemIdxFromClassification } from "@features/contests/utils/problemIdxes";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
 import { FilterChips } from "@features/contests/components/FilterChips";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
 import { HeadLine } from "@features/layout/components/HeadLine";
-import { useFetchContests } from "@features/contests/hooks/useFetchContest";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 
 export const ContestsPage: React.FC = () => {
@@ -30,9 +30,13 @@ export const ContestsPage: React.FC = () => {
   } = useFilterOptionsState();
 
   const contests = useMemo(
-    () => (data ? reshapeContests(data, classification, reverse, period) : []),
+    () =>
+      data
+        ? reshapeContests(data, classification, reverse, period, solvedStatus)
+        : [],
     [data, classification, period, reverse, solvedStatus]
   );
+
   const problemIdxes = useMemo(
     () =>
       data ? getProblemIdxFromClassification(contests, classification) : [],
