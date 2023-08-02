@@ -4,10 +4,8 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
 import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
-import {
-  reshapeContests,
-  getProblemIdxFromClassification,
-} from "@features/contests/helper";
+import { reshapeContests } from "@features/contests/helper";
+import { getProblemIdxFromClassification } from "@features/contests/utils/problemIdxes";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
 import { FilterChips } from "@features/contests/components/FilterChips";
 import { ContestsTable } from "@features/contests/components/ContestsTable";

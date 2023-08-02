@@ -5,10 +5,8 @@ import type {
   Classification,
   ReshapedContest,
 } from "@features/contests/contest";
-import { ReshapedProblem } from "@features/problems/problem";
 import { groupBy } from "@helpers/arr-utils";
 import { PeriodWord, periodFilter } from "./components/PeriodFilter";
-import { getProblemKey } from "@features/problems/utils";
 import { normalizeProblemIndex } from "@features/contests/utils/problemIdxes";
 
 const filterAndSortContests = (
@@ -58,28 +56,5 @@ export const reshapeContests = (
     });
 
     return { ...contest, problems: reshapedProblems } as ReshapedContest;
-  });
-};
-
-export const isAllProblemsSolved = (
-  problemIdxes: string[],
-  problemMap: Record<string, ReshapedProblem>,
-  solvedSet: Set<string> | undefined,
-  contestId: number
-) => {
-  const hasValidProblem = problemIdxes.some(
-    (idx) => problemMap[idx] !== undefined && problemMap[idx] !== null
-  );
-
-  if (!hasValidProblem) {
-    return false;
-  }
-
-  return problemIdxes.every((idx) => {
-    const problem = problemMap[idx];
-    const indexedProblems = problem?.indexedProblems || [];
-    return indexedProblems.every((p) =>
-      solvedSet?.has(getProblemKey(contestId, p.index, p.name))
-    );
   });
 };

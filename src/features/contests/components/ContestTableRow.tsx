@@ -5,9 +5,9 @@ import type { ReshapedProblem } from "@features/problems/problem";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { useThemeContext } from "@features/color/themeColor.hook";
-import { isAllProblemsSolved } from "@features/contests/helper";
 import { getProblemKey } from "@features/problems/utils";
 import { Classification } from "@features/contests/contest";
+import { calcSolvedStatus } from "@features/contests/utils/solvedStatus";
 
 type Props = {
   readonly contestId: number;
@@ -42,7 +42,12 @@ export const ContestTableRow: React.FC<Props> = React.memo(
     }, [problems]);
 
     const rowColor = useMemo(() => {
-      return isAllProblemsSolved(problemIdxes, problemMap, solvedSet, contestId)
+      return calcSolvedStatus(
+        problemIdxes,
+        problemMap,
+        solvedSet,
+        contestId
+      ) === "Completed"
         ? theme.colors.acColor
         : "";
     }, [problemIdxes, problemMap, solvedSet, contestId, theme.colors.acColor]);
