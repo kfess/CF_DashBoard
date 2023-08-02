@@ -6,7 +6,10 @@ import type {
   ReshapedContest,
 } from "@features/contests/contest";
 import { groupBy } from "@helpers/arr-utils";
-import { PeriodWord, periodFilter } from "./components/PeriodFilter";
+import {
+  PeriodWord,
+  periodFilter,
+} from "@features/contests/components/PeriodFilter";
 import { normalizeProblemIndex } from "@features/contests/utils/problemIdxes";
 
 const filterAndSortContests = (
