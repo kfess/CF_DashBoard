@@ -16,6 +16,7 @@ import { ProblemLabel } from "@features/bookmark/problemLabel";
 import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
 import { getProblemKey } from "@features/problems/utils";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
+import { getColorCodeFromRating } from "@features/color/ratingColor";
 
 type Props = { label: ProblemLabel };
 
@@ -74,7 +75,11 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
                     showBookmarked={false}
                   />
                 </TableCell>
-                <TableCell>{p.rating || "?"}</TableCell>
+                <TableCell>
+                  <span css={{ color: getColorCodeFromRating(p.rating) }}>
+                    {p.rating ?? "no data"}
+                  </span>
+                </TableCell>
                 <TableCell>
                   <ButtonWithAlertDialog
                     title="Delete"

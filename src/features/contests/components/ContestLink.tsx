@@ -25,7 +25,7 @@ export const ContestLink: React.FC<Props> = ({
         rel="noopener noreferrer"
         css={{
           color: "inherit",
-          textDecoration: "underline",
+          textDecoration: "none",
         }}
       >
         {contestName}

@@ -50,7 +50,7 @@ export const ProblemLink: React.FC<Props> = ({
           color: showDifficulty
             ? getColorCodeFromRating(difficulty)
             : theme.colors.fontColor,
-          textDecoration: "underline",
+          textDecoration: "none",
           paddingRight: theme.spacing(1),
         }}
       >
