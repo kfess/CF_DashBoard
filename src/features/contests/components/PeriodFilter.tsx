@@ -33,9 +33,7 @@ type Props = {
   setPeriod: (arg: PeriodWord) => void;
 };
 
-export const PeriodFilterButton: React.FC<Props> = (props: Props) => {
-  const { period, setPeriod } = props;
-
+export const PeriodFilterButton: React.FC<Props> = ({ period, setPeriod }) => {
   return (
     <DropDownMenuButton
       title="Period"

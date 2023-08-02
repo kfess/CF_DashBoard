@@ -25,6 +25,7 @@ export const ContestsPage: React.FC = () => {
     pinTableHeader,
     reverse,
     period,
+    solvedStatus,
     setClassification,
     setPeriod,
     setSolvedStatus,
@@ -36,7 +37,7 @@ export const ContestsPage: React.FC = () => {
 
   const contests = useMemo(
     () => (data ? reshapeContests(data, classification, reverse, period) : []),
-    [data, state.classification, state.reverse, period]
+    [data, classification, reverse, period]
   );
 
   const problemIdxes = useMemo(
@@ -59,8 +60,8 @@ export const ContestsPage: React.FC = () => {
               pinTableHeader={pinTableHeader}
               reverse={reverse}
               classification={classification}
-              period={state.period}
-              solvedStatus={state.solvedStatus}
+              period={period}
+              solvedStatus={solvedStatus}
               setClassification={setClassification}
               setPeriod={setPeriod}
               setSolvedStatus={setSolvedStatus}
@@ -72,15 +73,15 @@ export const ContestsPage: React.FC = () => {
           </Grid>
           <Grid item xs={12}>
             <FilterChips
-              classification={state.classification}
+              classification={classification}
               setDefaultClassification={() => {
                 setClassification("All");
               }}
-              period={state.period}
+              period={period}
               setPeriod={() => {
                 setPeriod("All Period");
               }}
-              solvedStatus={state.solvedStatus}
+              solvedStatus={solvedStatus}
               setSolvedStatus={setSolvedStatus}
             />
           </Grid>

@@ -16,16 +16,14 @@ type Props = {
   setSolvedStatus: (arg: SolvedStatus) => void;
 };
 
-export const FilterChips: React.FC<Props> = (props: Props) => {
-  const {
-    classification,
-    setDefaultClassification,
-    period,
-    setPeriod,
-    solvedStatus,
-    setSolvedStatus,
-  } = props;
-
+export const FilterChips: React.FC<Props> = ({
+  classification,
+  setDefaultClassification,
+  period,
+  setPeriod,
+  solvedStatus,
+  setSolvedStatus,
+}) => {
   const [startColor, endColor] = getColorCodeFromClassification(classification);
 
   return (

@@ -10,9 +10,10 @@ type Props = {
   setClassification: (arg: Classification) => void;
 };
 
-export const ContestTypeFilter: React.FC<Props> = (props: Props) => {
-  const { classification, setClassification } = props;
-
+export const ContestTypeFilter: React.FC<Props> = ({
+  classification,
+  setClassification,
+}) => {
   const items = classifications.map((classification) => {
     const [startColor, endColor] =
       getColorCodeFromClassification(classification);

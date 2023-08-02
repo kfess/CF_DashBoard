@@ -1,18 +1,11 @@
 import React from "react";
-import { css } from "@emotion/react";
+import Stack from "@mui/material/Stack";
 import type { Classification } from "@features/contests/contest";
 import { ContestTypeFilter } from "./ContestTypeFilter";
 import { SolvedStatus, SolvedStatusFilter } from "./SolvedStatusFilter";
 import { PeriodFilterButton, PeriodWord } from "./PeriodFilter";
 import { ResetFilterButton } from "@features/contests/components/ResetFilter";
-import { ViewFilter } from "./ViewFilter";
-
-const buttonsCss = css({
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "0.5rem",
-  marginTop: "0.5rem",
-});
+import { ViewFilter } from "@features/contests/components/ViewFilter";
 
 type Props = {
   showDifficulty: boolean;
@@ -31,8 +24,8 @@ type Props = {
   toggleReverse: () => void;
 };
 
-export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
-  const {
+export const FilterOptions: React.FC<Props> = React.memo(
+  ({
     showDifficulty,
     showACStatus,
     pinTableHeader,
@@ -47,34 +40,34 @@ export const FilterOptions: React.FC<Props> = React.memo((props: Props) => {
     toggleShowACStatus,
     togglePinTableHeader,
     toggleReverse,
-  } = props;
-
-  return (
-    <div css={buttonsCss}>
-      <ContestTypeFilter
-        classification={classification}
-        setClassification={setClassification}
-      />
-      <PeriodFilterButton period={period} setPeriod={setPeriod} />
-      <SolvedStatusFilter
-        solvedStatus={solvedStatus}
-        setSolvedStatus={setSolvedStatus}
-      />
-      <ViewFilter
-        showDifficulty={showDifficulty}
-        showACStatus={showACStatus}
-        pinTableHeader={pinTableHeader}
-        reverse={reverse}
-        toggleShowDifficulty={toggleShowDifficulty}
-        toggleShowACStatus={toggleShowACStatus}
-        toggleReverse={toggleReverse}
-        togglePinTableHeader={togglePinTableHeader}
-      />
-      <ResetFilterButton
-        setClassification={setClassification}
-        setPeriod={setPeriod}
-        setSolvedStatus={setSolvedStatus}
-      />
-    </div>
-  );
-});
+  }) => {
+    return (
+      <Stack direction="row" spacing={2} sx={{ py: 1 }}>
+        <ContestTypeFilter
+          classification={classification}
+          setClassification={setClassification}
+        />
+        <PeriodFilterButton period={period} setPeriod={setPeriod} />
+        <SolvedStatusFilter
+          solvedStatus={solvedStatus}
+          setSolvedStatus={setSolvedStatus}
+        />
+        <ViewFilter
+          showDifficulty={showDifficulty}
+          showACStatus={showACStatus}
+          pinTableHeader={pinTableHeader}
+          reverse={reverse}
+          toggleShowDifficulty={toggleShowDifficulty}
+          toggleShowACStatus={toggleShowACStatus}
+          toggleReverse={toggleReverse}
+          togglePinTableHeader={togglePinTableHeader}
+        />
+        <ResetFilterButton
+          setClassification={setClassification}
+          setPeriod={setPeriod}
+          setSolvedStatus={setSolvedStatus}
+        />
+      </Stack>
+    );
+  }
+);

@@ -11,9 +11,11 @@ type Props = {
   setSolvedStatus: (arg: SolvedStatus) => void;
 };
 
-export const ResetFilterButton: React.FC<Props> = (props: Props) => {
-  const { setClassification, setPeriod, setSolvedStatus } = props;
-
+export const ResetFilterButton: React.FC<Props> = ({
+  setClassification,
+  setPeriod,
+  setSolvedStatus,
+}) => {
   const onClickReset = () => {
     setClassification("All");
     setPeriod("All Period");
