@@ -9,23 +9,15 @@ const ITEM_HEIGHT = 48;
 
 type Props = {
   showDifficulty: boolean;
-  showACStatus: boolean;
-  pinTableHeader: boolean;
   reverse: boolean;
   toggleShowDifficulty: () => void;
-  toggleShowACStatus: () => void;
-  togglePinTableHeader: () => void;
   toggleReverse: () => void;
 };
 
 export const ViewFilter: React.FC<Props> = ({
   showDifficulty,
-  showACStatus,
-  pinTableHeader,
   reverse,
   toggleShowDifficulty,
-  toggleShowACStatus,
-  togglePinTableHeader,
   toggleReverse,
 }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -61,20 +53,6 @@ export const ViewFilter: React.FC<Props> = ({
             label="Show Difficulty"
             checked={showDifficulty}
             onChange={toggleShowDifficulty}
-          />
-        </MenuItem>
-        <MenuItem>
-          <Switch
-            label="Show AC Status"
-            checked={showACStatus}
-            onChange={toggleShowACStatus}
-          />
-        </MenuItem>
-        <MenuItem>
-          <Switch
-            label="Pin Header"
-            checked={pinTableHeader}
-            onChange={togglePinTableHeader}
           />
         </MenuItem>
         <MenuItem>

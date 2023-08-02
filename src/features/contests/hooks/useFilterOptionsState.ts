@@ -8,8 +8,6 @@ export type FilterOptionsState = {
   period: PeriodWord;
   solvedStatus: SolvedStatus;
   showDifficulty: boolean;
-  showACStatus: boolean;
-  pinTableHeader: boolean;
   reverse: boolean;
 };
 
@@ -18,8 +16,6 @@ type FilterOptionsAction =
   | { type: "setPeriod"; period: PeriodWord }
   | { type: "setSolvedStatus"; solvedStatus: SolvedStatus }
   | { type: "toggleShowDifficulty" }
-  | { type: "toggleShowACStatus" }
-  | { type: "togglePinTableHeader" }
   | { type: "toggleReverse" }
   | { type: "reset" };
 
@@ -28,8 +24,6 @@ const initialState: FilterOptionsState = {
   period: "All Period",
   solvedStatus: "All Contests",
   showDifficulty: true,
-  showACStatus: false,
-  pinTableHeader: false,
   reverse: false,
 };
 
@@ -46,10 +40,6 @@ const filterOptionsReducer = (
       return { ...state, solvedStatus: action.solvedStatus };
     case "toggleShowDifficulty":
       return { ...state, showDifficulty: !state.showDifficulty };
-    case "toggleShowACStatus":
-      return { ...state, showACStatus: !state.showACStatus };
-    case "togglePinTableHeader":
-      return { ...state, pinTableHeader: !state.pinTableHeader };
     case "toggleReverse":
       return { ...state, reverse: !state.reverse };
     case "reset":
@@ -72,8 +62,6 @@ export const useFilterOptionsState = () => {
   const setSolvedStatus = (solvedStatus: SolvedStatus) =>
     dispatch({ type: "setSolvedStatus", solvedStatus });
   const toggleShowDifficulty = () => dispatch({ type: "toggleShowDifficulty" });
-  const toggleShowACStatus = () => dispatch({ type: "toggleShowACStatus" });
-  const togglePinTableHeader = () => dispatch({ type: "togglePinTableHeader" });
   const toggleReverse = () => dispatch({ type: "toggleReverse" });
   const resetFilterOptions = useCallback(() => {
     dispatch({ type: "reset" });
@@ -83,8 +71,6 @@ export const useFilterOptionsState = () => {
     state,
     classification: state.classification,
     showDifficulty: state.showDifficulty,
-    showACStatus: state.showACStatus,
-    pinTableHeader: state.pinTableHeader,
     reverse: state.reverse,
     period: state.period,
     solvedStatus: state.solvedStatus,
@@ -92,8 +78,6 @@ export const useFilterOptionsState = () => {
     setPeriod,
     setSolvedStatus,
     toggleShowDifficulty,
-    toggleShowACStatus,
-    togglePinTableHeader,
     toggleReverse,
     resetFilterOptions,
   };

@@ -9,8 +9,6 @@ import { ViewFilter } from "@features/contests/components/ViewFilter";
 
 type Props = {
   showDifficulty: boolean;
-  showACStatus: boolean;
-  pinTableHeader: boolean;
   reverse: boolean;
   classification: Classification;
   period: PeriodWord;
@@ -19,16 +17,12 @@ type Props = {
   setPeriod: (arg: PeriodWord) => void;
   setSolvedStatus: (arg: SolvedStatus) => void;
   toggleShowDifficulty: () => void;
-  toggleShowACStatus: () => void;
-  togglePinTableHeader: () => void;
   toggleReverse: () => void;
 };
 
 export const FilterOptions: React.FC<Props> = React.memo(
   ({
     showDifficulty,
-    showACStatus,
-    pinTableHeader,
     reverse,
     classification,
     period,
@@ -37,8 +31,6 @@ export const FilterOptions: React.FC<Props> = React.memo(
     setPeriod,
     setSolvedStatus,
     toggleShowDifficulty,
-    toggleShowACStatus,
-    togglePinTableHeader,
     toggleReverse,
   }) => {
     return (
@@ -54,13 +46,9 @@ export const FilterOptions: React.FC<Props> = React.memo(
         />
         <ViewFilter
           showDifficulty={showDifficulty}
-          showACStatus={showACStatus}
-          pinTableHeader={pinTableHeader}
           reverse={reverse}
           toggleShowDifficulty={toggleShowDifficulty}
-          toggleShowACStatus={toggleShowACStatus}
           toggleReverse={toggleReverse}
-          togglePinTableHeader={togglePinTableHeader}
         />
         <ResetFilterButton
           setClassification={setClassification}

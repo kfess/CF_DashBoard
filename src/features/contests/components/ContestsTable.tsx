@@ -45,7 +45,7 @@ export const ContestsTable: React.FC<Props> = ({
       />
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer component={Paper}>
-          <Table stickyHeader css={{ height: "100%" }}>
+          <Table>
             <TableHead>
               <TableRow>
                 <TableCell

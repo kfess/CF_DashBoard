@@ -13,16 +13,14 @@ import { FilterChips } from "@features/contests/components/FilterChips";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { useFetchContests } from "@features/contests/hooks/useFetchContest";
+import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 
 export const ContestsPage: React.FC = () => {
   const { data } = useFetchContests();
 
   const {
-    state,
     classification,
     showDifficulty,
-    showACStatus,
-    pinTableHeader,
     reverse,
     period,
     solvedStatus,
@@ -30,20 +28,18 @@ export const ContestsPage: React.FC = () => {
     setPeriod,
     setSolvedStatus,
     toggleShowDifficulty,
-    toggleShowACStatus,
-    togglePinTableHeader,
     toggleReverse,
   } = useFilterOptionsState();
 
   const contests = useMemo(
     () => (data ? reshapeContests(data, classification, reverse, period) : []),
-    [data, classification, reverse, period]
+    [data, classification, period, reverse]
   );
 
   const problemIdxes = useMemo(
     () =>
       data ? getProblemIdxFromClassification(contests, classification) : [],
-    [data, classification]
+    [data, classification, period, reverse]
   );
 
   const { solvedSet, attemptedSet } = useSolvedStatus();
@@ -56,8 +52,6 @@ export const ContestsPage: React.FC = () => {
           <Grid item xs={12}>
             <FilterOptions
               showDifficulty={showDifficulty}
-              showACStatus={showACStatus}
-              pinTableHeader={pinTableHeader}
               reverse={reverse}
               classification={classification}
               period={period}
@@ -66,8 +60,6 @@ export const ContestsPage: React.FC = () => {
               setPeriod={setPeriod}
               setSolvedStatus={setSolvedStatus}
               toggleShowDifficulty={toggleShowDifficulty}
-              toggleShowACStatus={toggleShowACStatus}
-              togglePinTableHeader={togglePinTableHeader}
               toggleReverse={toggleReverse}
             />
           </Grid>
@@ -86,13 +78,19 @@ export const ContestsPage: React.FC = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            {contests.length > 0 && problemIdxes.length > 0 && (
+            {contests.length > 0 && (
               <ContestsTable
                 contests={contests}
                 problemIdxes={problemIdxes}
-                showDifficulty={state.showDifficulty}
+                showDifficulty={showDifficulty}
                 solvedSet={solvedSet}
                 attemptedSet={attemptedSet}
+              />
+            )}
+            {contests.length === 0 && (
+              <NoDataMessage
+                title="No Contests Found"
+                message="Please check your filter options."
               />
             )}
           </Grid>
