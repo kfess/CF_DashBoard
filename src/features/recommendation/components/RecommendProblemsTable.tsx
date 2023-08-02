@@ -13,6 +13,7 @@ import type { Problem } from "@features/problems/problem";
 import { ProblemsTableRow } from "@features/problems/components/ProblemsTableRow";
 import { getRandomElements } from "@helpers/random";
 import { getProblemKey } from "@features/problems/utils";
+import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 
 type Props = {
   level: RecommendLevel;
@@ -78,20 +79,31 @@ export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredProblems
-                .sort((a, b) => (a.rating ?? 0) - (b.rating ?? 0))
-                .map((problem) => (
-                  <ProblemsTableRow
-                    key={getProblemKey(
-                      problem.contestId,
-                      problem.index,
-                      problem.name
-                    )}
-                    problem={problem}
-                    showTags={false}
-                    backgroundColor=""
-                  />
-                ))}
+              {filteredProblems.length > 0 ? (
+                filteredProblems
+                  .sort((a, b) => (a.rating ?? 0) - (b.rating ?? 0))
+                  .map((problem) => (
+                    <ProblemsTableRow
+                      key={getProblemKey(
+                        problem.contestId,
+                        problem.index,
+                        problem.name
+                      )}
+                      problem={problem}
+                      showTags={false}
+                      backgroundColor=""
+                    />
+                  ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={6}>
+                    <NoDataMessage
+                      title="No Recommendations Found"
+                      message="Your rating may be too low or too high for this recommendation level."
+                    />
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </TableContainer>
