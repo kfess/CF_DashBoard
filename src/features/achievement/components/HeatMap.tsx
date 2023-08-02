@@ -14,13 +14,13 @@ const valueToColor = (value: number | undefined) => {
   if (value === undefined) {
     return COLOR_GREY;
   } else if (value === 1) {
-    return "#9be9a8"; // Light green
+    return "#d2baff"; // Light purple
   } else if (value < 3) {
-    return "#40c463"; // Green
+    return "#b094ff"; // Purple
   } else if (value < 5) {
-    return "#30a14e"; // Dark green
+    return "#9246ff"; // Dark purple
   } else {
-    return "#216e39"; // Very dark green
+    return "#7112cc"; // Very dark purple
   }
 };
 
@@ -30,10 +30,10 @@ const maxDifficultyToColor = (value: number | undefined) => {
 
 // Define color samples for the legend
 const colorSamples = [
-  { color: "#9be9a8", value: "less" },
-  { color: "#40c463", value: "" },
-  { color: "#30a14e", value: "" },
-  { color: "#216e39", value: "more" },
+  { color: "#d2baff", value: "less" },
+  { color: "#b094ff", value: "" },
+  { color: "#9246ff", value: "" },
+  { color: "#7112cc", value: "more" },
 ];
 
 const DAY_NAMES_SHORT = ["Mon", "Wed", "Fri"] as const;

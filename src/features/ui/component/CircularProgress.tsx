@@ -12,7 +12,7 @@ export const CircularProgress: React.FC = () => {
         height: "10vh",
       }}
     >
-      <MUICircularProgress />
+      <MUICircularProgress sx={{color:"#9246FF"}} />
     </Box>
   );
 };

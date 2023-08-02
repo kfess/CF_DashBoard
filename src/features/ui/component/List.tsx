@@ -1,30 +1,40 @@
 import React from "react";
-import { List as MUIList } from "@mui/material";
-import { ListItem, ListItemButton, ListItemText } from "@mui/material";
-import { styled } from "@mui/system";
+import {
+  List as MUIList,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  ListProps as MUIListProps,
+  ListItemProps,
+} from "@mui/material";
 
-const HorizontalList = styled(MUIList)`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  width: 100%;
-  overflow: auto;
-`;
+type HorizontalListProps = MUIListProps & {
+  children?: React.ReactNode;
+};
 
-const CustomListItem = styled(ListItem)`
-  padding: 0px 3px; // padding between ListItems
-`;
+const HorizontalList: React.FC<HorizontalListProps> = (props) => (
+  <MUIList
+    sx={{
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "nowrap",
+      width: "100%",
+      overflow: "auto",
+    }}
+    {...props}
+  />
+);
 
-const CustomListItemButton = styled(ListItemButton)`
-  background-color: ${({ selected }) => (selected ? "#e9edf1" : "transparent")};
-  border-radius: 6px;
-  &:hover {
-    background-color: #e9edf1;
-  }
-  &:focus {
-    outline: 2px solid #80bfff;
-  }
-`;
+type CustomListItemProps = ListItemProps & {
+  children?: React.ReactNode;
+};
+
+const CustomListItem: React.FC<CustomListItemProps> = (props) => (
+  <ListItem
+    sx={{ padding: "0px 3px" }} // padding between ListItems
+    {...props}
+  />
+);
 
 type Props = {
   items: {
@@ -39,15 +49,25 @@ export const List: React.FC<Props> = ({ items }) => (
   <HorizontalList>
     {items.map((item, index) => (
       <CustomListItem key={index}>
-        <CustomListItemButton
+        <ListItemButton
           onClick={item.onClick}
           disabled={item.disabled ?? false}
-          selected={item.selected}
+          sx={{
+            backgroundColor: item.selected ? "#9246FF" : "transparent",
+            color: item.selected ? "#ffffff" : "#9246FF",
+            "&:hover": {
+              backgroundColor: "#9246FF",
+              color: "#ffffff",
+            },
+            borderRadius: "6px",
+            "&.Mui-focusVisible": {
+              outline: "2px solid #7112CC",
+            },
+          }}
           disableRipple
-          disableTouchRipple
         >
           <ListItemText>{item.text}</ListItemText>
-        </CustomListItemButton>
+        </ListItemButton>
       </CustomListItem>
     ))}
   </HorizontalList>
