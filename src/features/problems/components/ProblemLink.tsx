@@ -52,6 +52,9 @@ export const ProblemLink: React.FC<Props> = ({
             : theme.colors.fontColor,
           textDecoration: "none",
           paddingRight: theme.spacing(1),
+          ":hover": {
+            color: "#9246FF",
+          },
         }}
       >
         {problemId + ". " + problemName}

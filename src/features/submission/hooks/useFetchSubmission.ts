@@ -25,6 +25,7 @@ export const useFetchUserSubmission = ({
         return userSubmission.result;
       } catch (err) {
         if (err instanceof ZodError) {
+          console.log(err);
           throw new Error("validation error");
         }
         throw new Error("user submission error");

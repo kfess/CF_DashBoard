@@ -2,6 +2,10 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import IconButton from "@mui/material/IconButton";
 import { Submission } from "@features/submission/submission";
 import { getACTagMap } from "@features/achievement/processSubmission";
 import { tags } from "@features/problems/problem";
@@ -26,11 +30,14 @@ export const TagACCount: React.FC<Props> = ({ submissions }) => {
         marginBottom: 1,
       }}
     >
-      <Box sx={{ marginTop: 1, marginBottom: 1 }}>
+      <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Typography variant="h6" gutterBottom>
           Problem Tags
         </Typography>
-      </Box>
+        <IconButton>
+          <OpenInNewIcon fontSize="small" />
+        </IconButton>
+      </Stack>
       <Stack spacing={1}>
         {readTagCounts.map((tag) => (
           <Stack key={tag} direction="row" spacing={1} alignItems="center">
@@ -47,11 +54,30 @@ export const TagACCount: React.FC<Props> = ({ submissions }) => {
             onClick={toggleReadMore}
             css={{
               cursor: "pointer",
-              color: "text.secondary",
+              color: "#5C17C5",
+              fontWeight: "bold",
               fontSize: "body2.fontSize",
             }}
           >
-            {isReadMore ? "Show More" : "Show Less"}
+            {isReadMore ? (
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <div>Show More</div>
+                <KeyboardDoubleArrowDownIcon />
+              </Stack>
+            ) : (
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <div>Show Less</div>
+                <KeyboardDoubleArrowUpIcon />
+              </Stack>
+            )}
           </span>
         </Box>
       ) : (

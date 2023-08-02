@@ -59,32 +59,32 @@ export const mainItems: readonly Item[] = [
   {
     field: "Contests",
     link: "/",
-    selectedIcon: <HomeIcon />,
-    notSelectedIcon: <HomeOutlinedIcon />,
+    selectedIcon: <HomeIcon sx={{ color: "#9146FF" }} />,
+    notSelectedIcon: <HomeOutlinedIcon sx={{ color: "#9146FF" }} />,
   },
   {
     field: "Problems",
     link: "/problems",
-    selectedIcon: <CreateIcon />,
-    notSelectedIcon: <CreateOutlinedIcon />,
+    selectedIcon: <CreateIcon sx={{ color: "#9146FF" }} />,
+    notSelectedIcon: <CreateOutlinedIcon sx={{ color: "#9146FF" }} />,
   },
   {
     field: "Recommend",
     link: "/recommend",
-    selectedIcon: <ThumbUpIcon />,
-    notSelectedIcon: <ThumbUpAltOutlinedIcon />,
+    selectedIcon: <ThumbUpIcon sx={{ color: "#9146FF" }} />,
+    notSelectedIcon: <ThumbUpAltOutlinedIcon sx={{ color: "#9146FF" }} />,
   },
   {
     field: "Submission",
     link: "/submission",
-    selectedIcon: <SendIcon />,
-    notSelectedIcon: <SendOutlinedIcon />,
+    selectedIcon: <SendIcon sx={{ color: "#9146FF" }} />,
+    notSelectedIcon: <SendOutlinedIcon sx={{ color: "#9146FF" }} />,
   },
   {
     field: "Achievement",
     link: "/achievement",
-    selectedIcon: <EmojiEventsIcon />,
-    notSelectedIcon: <EmojiEventsOutlinedIcon />,
+    selectedIcon: <EmojiEventsIcon sx={{ color: "#9146FF" }} />,
+    notSelectedIcon: <EmojiEventsOutlinedIcon sx={{ color: "#9146FF" }} />,
   },
 ] as const;
 
@@ -92,8 +92,8 @@ export const activityItems: readonly Item[] = [
   {
     field: "Labels",
     link: "/labels",
-    selectedIcon: <StarIcon />,
-    notSelectedIcon: <StarBorderOutlinedIcon />,
+    selectedIcon: <StarIcon sx={{ color: "#9146FF" }} />,
+    notSelectedIcon: <StarBorderOutlinedIcon sx={{ color: "#9146FF" }} />,
   },
   // {
   //   field: "Ranking",
@@ -104,8 +104,8 @@ export const activityItems: readonly Item[] = [
   {
     field: "Custom Contest (beta)",
     link: "/custom-contest",
-    selectedIcon: <WidgetsIcon />,
-    notSelectedIcon: <WidgetsOutlinedIcon />,
+    selectedIcon: <WidgetsIcon sx={{ color: "#9146FF" }} />,
+    notSelectedIcon: <WidgetsOutlinedIcon sx={{ color: "#9146FF" }} />,
   },
 ] as const;
 
@@ -113,20 +113,20 @@ export const otherItems: readonly Item[] = [
   {
     field: "API",
     link: "/api",
-    selectedIcon: <HubIcon />,
-    notSelectedIcon: <HubOutlinedIcon />,
+    selectedIcon: <HubIcon sx={{ color: "#9146FF" }}/>,
+    notSelectedIcon: <HubOutlinedIcon sx={{ color: "#9146FF" }}/>,
   },
   {
     field: "Links",
     link: "/links",
-    selectedIcon: <BuildIcon />,
-    notSelectedIcon: <BuildOutlinedIcon />,
+    selectedIcon: <BuildIcon sx={{ color: "#9146FF" }}/>,
+    notSelectedIcon: <BuildOutlinedIcon sx={{ color: "#9146FF" }}/>,
   },
   {
     field: "Terms",
     link: "/terms",
-    selectedIcon: <FeedIcon />,
-    notSelectedIcon: <FeedOutlinedIcon />,
+    selectedIcon: <FeedIcon sx={{ color: "#9146FF" }}/>,
+    notSelectedIcon: <FeedOutlinedIcon sx={{ color: "#9146FF" }}/>,
   },
 ] as const;
 
@@ -183,9 +183,9 @@ export const SideNavigationItem: React.FC<Props> = ({
     <NavLink
       to={link}
       css={{
-        color: isSelected ? "#0d47a1" : "inherit",
+        color: isSelected ? "#5C17C5" : "inherit",
         "&:hover": {
-          color: isSelected ? "#0d47a1" : "inherit",
+          color: isSelected ? "#5C17C5" : "inherit",
         },
       }}
     >

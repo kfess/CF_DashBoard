@@ -55,7 +55,7 @@ const TabIndicator = styled("div")`
   position: absolute;
   bottom: 0;
   height: 2px;
-  background-color: #fe9600;
+  background-color: #9246ff;
   transition: left 0s;
 `;
 

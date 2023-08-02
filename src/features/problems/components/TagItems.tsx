@@ -69,10 +69,10 @@ export const TagItems: React.FC<Props> = ({
                 justifyContent: "space-between",
                 cursor: "pointer",
                 color: selectedTags.includes(tagItem.tag)
-                  ? "#1890ff"
+                  ? "#9246FF"
                   : "inherit",
                 "&:hover": {
-                  color: "#1890ff",
+                  color: "#9246FF",
                 },
               }}
             >
@@ -96,7 +96,7 @@ export const TagItems: React.FC<Props> = ({
             justifyContent: "flex-end",
             alignItems: "center",
             "&:hover": {
-              color: "#1890ff",
+              color: "#9246FF",
             },
           }}
         >

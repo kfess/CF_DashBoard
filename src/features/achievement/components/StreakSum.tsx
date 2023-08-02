@@ -34,7 +34,7 @@ export const StreakSum: React.FC<Props> = ({
       <Typography variant="body1" color="text.secondary">
         {title}
       </Typography>
-      <Typography variant="h4" sx={{ color: "success.main" }}>
+      <Typography variant="h4" sx={{ color: "#9246FF" }}>
         {streakSum.toLocaleString()}
       </Typography>
       <Typography variant="body2" color="text.secondary">

@@ -101,9 +101,11 @@ type PieData = {
   readonly color: string;
 };
 
-export const DifficultyPie: React.FC<Props> = (props: Props) => {
-  const { colorInfo, problemsCount, submissions } = props;
-
+export const DifficultyPie: React.FC<Props> = ({
+  colorInfo,
+  problemsCount,
+  submissions,
+}) => {
   const ACProblemCount = getACProblemSet(submissions).size;
   const nonACProblemCount = getNonACProblemSet(submissions).size;
 

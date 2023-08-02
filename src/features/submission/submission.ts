@@ -31,7 +31,7 @@ type ParticipantType = typeof participantType[number];
 
 // party
 const partySchema = z.object({
-  contestId: z.number(),
+  contestId: z.number().optional(),
   members: z.array(memberSchema),
   participantType: participantTypeSchema,
   teamId: z.number().optional(),

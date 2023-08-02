@@ -10,13 +10,14 @@ type Props = {
   readonly friendsOfCount?: number;
 };
 
-export const Community: React.FC<Props> = (props: Props) => {
-  const { contribution, friendsOfCount } = props;
-
+export const Community: React.FC<Props> = ({
+  contribution,
+  friendsOfCount,
+}) => {
   return (
     <Box
       sx={{
-        marginTop: 2,
+        marginTop: 1,
         marginBottom: 2,
       }}
     >
@@ -30,7 +31,7 @@ export const Community: React.FC<Props> = (props: Props) => {
             color="primary"
             sx={{ marginRight: "10px" }}
           />
-          <Typography variant="body1">
+          <Typography variant="body1" color="#9246FF">
             {(contribution ?? 0).toLocaleString()}
           </Typography>
           <Typography
@@ -47,7 +48,7 @@ export const Community: React.FC<Props> = (props: Props) => {
             color="success"
             sx={{ marginRight: "10px" }}
           />
-          <Typography variant="body1">
+          <Typography variant="body1" color="#9246FF">
             {(friendsOfCount ?? 0).toLocaleString()}
           </Typography>
           <Typography

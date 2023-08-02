@@ -16,21 +16,20 @@ type Props = {
 
 // url には色をつけない
 export const Profile: React.FC<Props> = ({ userInfo }) => {
+  const userColor = getColorCodeFromRating(userInfo?.rating);
+
   return (
     <Box sx={{ p: 1, marginBottom: 1 }}>
       <Box sx={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
         <ProfileIcon avatarUrl={userInfo?.avatar} />
         <Box sx={{ marginLeft: 2 }}>
-          <Typography variant="subtitle1" color="text.secondary">
+          <Typography variant="subtitle1" sx={{ color: userColor }}>
             {userInfo?.rank}
           </Typography>
-          <Typography
-            variant="h6"
-            sx={{ color: getColorCodeFromRating(userInfo?.rating) }}
-          >
+          <Typography variant="h6" sx={{ color: userColor }}>
             <Box sx={{ display: "inline-flex", alignItems: "center" }}>
               <ColoredCircle
-                color={getColorCodeFromRating(userInfo?.rating)}
+                color={userColor}
                 fillPercent={calcFillPercent(userInfo?.rating)}
               />
               <Box sx={{ marginLeft: 1 }}>
@@ -40,7 +39,7 @@ export const Profile: React.FC<Props> = ({ userInfo }) => {
                   rel="noopener noreferrer"
                   css={{
                     textDecoration: "none",
-                    color: getColorCodeFromRating(userInfo?.rating),
+                    color: userColor,
                   }}
                 >
                   {userInfo?.handle}
@@ -48,7 +47,12 @@ export const Profile: React.FC<Props> = ({ userInfo }) => {
               </Box>
             </Box>
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography
+            variant="body1"
+            sx={{
+              color: getColorCodeFromRating(userInfo?.rating),
+            }}
+          >
             Rating: {userInfo?.rating}
           </Typography>
         </Box>

@@ -57,7 +57,7 @@ export const UniqueACCount: React.FC<Props> = ({ submissions }) => {
           <Typography variant="body1" color="text.secondary">
             Total
           </Typography>
-          <Typography variant="h4" sx={{ color: "success.main" }}>
+          <Typography variant="h4" sx={{ color: "#9246FF" }}>
             {uniqueACSubs.length.toLocaleString()}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -68,7 +68,7 @@ export const UniqueACCount: React.FC<Props> = ({ submissions }) => {
           <Typography variant="body1" color="text.secondary">
             Last Year
           </Typography>
-          <Typography variant="h4" sx={{ color: "success.main" }}>
+          <Typography variant="h4" sx={{ color: "#9246FF" }}>
             {lastYearUniqueACSubs.length.toLocaleString()}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -79,7 +79,7 @@ export const UniqueACCount: React.FC<Props> = ({ submissions }) => {
           <Typography variant="body1" color="text.secondary">
             Last Month
           </Typography>
-          <Typography variant="h4" sx={{ color: "success.main" }}>
+          <Typography variant="h4" sx={{ color: "#9246FF" }}>
             {lastMonthUniqueACSubs.length.toLocaleString()}
           </Typography>
           <Typography variant="body2" color="text.secondary">

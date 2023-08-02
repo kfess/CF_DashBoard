@@ -2,6 +2,8 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import type { Submission } from "@features/submission/submission";
 import { NormalizedLanguage } from "@features/language/language";
 import {
@@ -13,8 +15,9 @@ import { formatUnixTime } from "@helpers/date";
 import { Chip_ } from "@features/ui/component/Chip";
 import { useToggle } from "@hooks/index";
 import { pluralize } from "@helpers/index";
+import { LanguageACCountPie } from "@features/achievement/components/LanguageACCountPie";
 
-type Count = {
+export type Count = {
   readonly language: NormalizedLanguage;
   readonly count: number;
   readonly lastACDate: string;
@@ -79,11 +82,12 @@ export const LanguageACCount: React.FC<Props> = ({ submissions }) => {
         marginBottom: 1,
       }}
     >
-      <Box sx={{ marginTop: 1, marginBottom: 1 }}>
+      <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Typography variant="h6" gutterBottom>
           Language
         </Typography>
-      </Box>
+        <LanguageACCountPie languageCounts={languageCounts} />
+      </Stack>
       <Stack spacing={1}>
         {languageCounts.map((s, index) =>
           (!isReadMore && index < 3) || isReadMore ? (
@@ -93,8 +97,29 @@ export const LanguageACCount: React.FC<Props> = ({ submissions }) => {
       </Stack>
       {languageCounts.length > 3 && (
         <Box sx={{ display: "flex", justifyContent: "center", padding: 1 }}>
-          <span onClick={toggleReadMore} css={{ cursor: "pointer" }}>
-            {isReadMore ? "Show Less" : "Show More"}
+          <span
+            onClick={toggleReadMore}
+            css={{ cursor: "pointer", color: "#5C17C5", fontWeight: "bold" }}
+          >
+            {isReadMore ? (
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <div>Show Less</div>
+                <KeyboardDoubleArrowUpIcon />
+              </Stack>
+            ) : (
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <div>Show More</div>
+                <KeyboardDoubleArrowDownIcon />
+              </Stack>
+            )}
           </span>
         </Box>
       )}
@@ -106,20 +131,3 @@ export const LanguageACCount: React.FC<Props> = ({ submissions }) => {
     </Box>
   );
 };
-
-// under development
-// const groupSubmissionsByLanguage = (submissions: Submission[]) => {
-//   const submissionsByLanguage = new Map<NormalizedLanguage, Submission[]>();
-//   submissions.forEach((sub) => {
-//     let subs =
-//       submissionsByLanguage.get(
-//         sub.programmingLanguage as NormalizedLanguage
-//       ) || [];
-//     subs = [...subs, sub];
-//     submissionsByLanguage.set(
-//       sub.programmingLanguage as NormalizedLanguage,
-//       subs
-//     );
-//   });
-//   return submissionsByLanguage;
-// };

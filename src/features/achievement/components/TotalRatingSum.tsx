@@ -25,7 +25,7 @@ export const TotalRatingSum: React.FC<Props> = ({ submissions }) => {
       <Typography variant="h6" gutterBottom>
         Rated Point Sum
       </Typography>
-      <Typography variant="h4" sx={{ color: "success.main" }}>
+      <Typography variant="h4" sx={{ color: "#9246FF" }}>
         {ratingSum.toLocaleString()}{" "}
         <Typography variant="body2" color="text.secondary" component="span">
           points

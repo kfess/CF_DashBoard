@@ -32,3 +32,4 @@ export const isDarkish = (color: string): boolean => {
   const brightness = Math.sqrt(r * r * 0.241 + g * g * 0.691 + b * b * 0.068);
   return brightness >= 100;
 };
+
