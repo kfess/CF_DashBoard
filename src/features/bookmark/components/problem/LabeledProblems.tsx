@@ -7,15 +7,15 @@ import {
   TableHead,
   TableContainer,
   Paper,
-  Typography,
-  Box,
 } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { ProblemLabel } from "@features/bookmark/problemLabel";
 import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
 import { getProblemKey } from "@features/problems/utils";
+import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 
 type Props = { label: ProblemLabel };
 
@@ -27,10 +27,26 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Problem</TableCell>
-            <TableCell>Contest</TableCell>
-            <TableCell>Difficulty</TableCell>
-            <TableCell>Action</TableCell>
+            <TableCell>
+              <Typography variant="body2" fontWeight="bold">
+                Problem
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body2" fontWeight="bold">
+                Contest
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body2" fontWeight="bold">
+                Difficulty
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body2" fontWeight="bold">
+                Action
+              </Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -75,21 +91,11 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={3}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    minHeight: 100,
-                    color: "grey.600",
-                  }}
-                >
-                  <Typography variant="body1" align="center">
-                    No problems have been added to this label.
-                  </Typography>
-                </Box>
+              <TableCell colSpan={4}>
+                <NoDataMessage
+                  title={`Welcome to label - ${label.name}!`}
+                  message="No problems have been added to this label."
+                />
               </TableCell>
             </TableRow>
           )}

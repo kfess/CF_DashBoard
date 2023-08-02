@@ -7,13 +7,13 @@ import {
   TableHead,
   TableContainer,
   Paper,
-  Typography,
-  Box,
 } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ButtonWithAlertDialog } from "@features/ui/component/AlertDialog";
 import { ContestLabel } from "@features/bookmark/contestLabel";
 import { useIndexedDBForContestLabel } from "@features/bookmark/hooks/useIndexedDBForContestLabel";
+import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 
 type Props = { label: ContestLabel };
 
@@ -25,9 +25,21 @@ export const LabeledContests: React.FC<Props> = ({ label }) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Contest</TableCell>
-            <TableCell>Classification</TableCell>
-            <TableCell>Action</TableCell>
+            <TableCell>
+              <Typography variant="body2" fontWeight="bold">
+                Contests
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body2" fontWeight="bold">
+                Classification
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body2" fontWeight="bold">
+                Action
+              </Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -60,20 +72,10 @@ export const LabeledContests: React.FC<Props> = ({ label }) => {
           ) : (
             <TableRow>
               <TableCell colSpan={3}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    minHeight: 100,
-                    color: "grey.600",
-                  }}
-                >
-                  <Typography variant="body1" align="center">
-                    No contests have been added to this label.
-                  </Typography>
-                </Box>
+                <NoDataMessage
+                  title={`Welcome to label - ${label.name}!`}
+                  message="No contests have been added to this label."
+                />
               </TableCell>
             </TableRow>
           )}
