@@ -14,6 +14,7 @@ import type { ContestLabel } from "@features/bookmark/contestLabel";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { LabelItem } from "@features/bookmark/components/contest/LabelItem";
 import { useIndexedDBForContestLabel } from "@features/bookmark/hooks/useIndexedDBForContestLabel";
+import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 
 const sortOrders = [
   "Alphabetically",
@@ -42,6 +43,13 @@ const sortLabels = (labels: ContestLabel[], order: SortOrder) => {
 export const LabelsTable: React.FC = () => {
   const { labelsAndContests } = useIndexedDBForContestLabel();
   const [order, setOrder] = useState<SortOrder>("Alphabetically");
+
+  const noDataTitle = "Welcome to Contest Labels!";
+  const noDataMessage = `
+    Contest Labels are used to manage and classify contests.
+    As labels are created, they’ll appear here in a searchable
+    and filterable list. To get started, you should create a contest label.
+  `;
 
   return (
     <Box>
@@ -99,31 +107,7 @@ export const LabelsTable: React.FC = () => {
             ) : (
               <TableRow>
                 <TableCell colSpan={4}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      minHeight: 200,
-                      color: "grey.600",
-                    }}
-                  >
-                    <Typography variant="h5" align="center" gutterBottom>
-                      Welcome to Contest Labels!
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      align="center"
-                      sx={{ whiteSpace: "pre-wrap" }}
-                    >
-                      Contest Labels are used to manage and classify contests.{" "}
-                      {"\n"}
-                      As labels are created, they’ll appear here in a searchable
-                      and filterable list. {"\n"}
-                      To get started, you should create a contest label.
-                    </Typography>
-                  </Box>
+                  <NoDataMessage title={noDataTitle} message={noDataMessage} />
                 </TableCell>
               </TableRow>
             )}

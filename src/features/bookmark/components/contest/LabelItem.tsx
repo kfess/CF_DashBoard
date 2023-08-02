@@ -1,4 +1,5 @@
 import React from "react";
+import Typography from "@mui/material/Typography";
 import { TableCell, TableRow, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -94,16 +95,17 @@ const DefaultView: React.FC<{
       <LabelNameChip name={watchedName} color={watchedColor} mode="View" />
     </TableCell>
     <TableCell sx={{ py: 1 }}>
-      {label.description || "No description provided"}
+      {label.description ? (
+        <Typography>{label.description}</Typography>
+      ) : (
+        <Typography color="text.secondary">No description provided</Typography>
+      )}
     </TableCell>
     <TableCell sx={{ py: 1 }}>
-      <Link
-        to={{
-          pathname: `/labels/contest/${label.name}`,
-        }}
-        css={{ whiteSpace: "nowrap" }}
-      >
-        {label.contests.length} {pluralize(label.contests.length, "contest")}
+      <Link to={{ pathname: `/labels/contest/${label.name}` }}>
+        <Typography noWrap>
+          {label.contests.length} {pluralize(label.contests.length, "contest")}
+        </Typography>
       </Link>
     </TableCell>
     <TableCell sx={{ py: 1 }}>

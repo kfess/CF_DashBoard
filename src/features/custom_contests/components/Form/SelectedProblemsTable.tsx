@@ -12,7 +12,7 @@ import { usePagination } from "@hooks/index";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ContestLink } from "@features/contests/components/ContestLink";
-import { NoDataBlock } from "@features/ui/component/NoDataBlock";
+import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 import { ControllerRenderProps } from "react-hook-form";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 
@@ -92,16 +92,20 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
         </>
       )}
       {selectedProblems.length === 0 && (
-        <NoDataBlock
-          children={
-            <>
-              <div>You have not added any problems yet. </div>
-              <div css={{ fontSize: "16px" }}>
-                Generated problems are listed here.
-              </div>
-            </>
-          }
-        />
+        <TableContainer component={Paper}>
+          <Table>
+            <TableBody>
+              <TableRow>
+                <TableCell colSpan={4}>
+                  <NoDataMessage
+                    title="You have not added any problems yet."
+                    message="Generated problems are listed here."
+                  />
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
     </>
   );

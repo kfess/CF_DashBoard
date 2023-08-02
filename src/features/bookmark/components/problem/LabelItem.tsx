@@ -124,13 +124,8 @@ const DefaultView: React.FC<{
       )}
     </TableCell>
     <TableCell sx={{ py: 1 }}>
-      <Link
-        to={{
-          pathname: `/labels/problem/${label.name}`,
-        }}
-        css={{ whiteSpace: "nowrap" }}
-      >
-        <Typography>
+      <Link to={{ pathname: `/labels/problem/${label.name}` }}>
+        <Typography noWrap>
           {label.problems.length} {pluralize(label.problems.length, "problem")}
         </Typography>
       </Link>

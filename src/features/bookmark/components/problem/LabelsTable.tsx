@@ -14,6 +14,7 @@ import type { ProblemLabel } from "@features/bookmark/problemLabel";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { LabelItem } from "@features/bookmark/components/problem/LabelItem";
 import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
+import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 
 const sortOrders = [
   "Alphabetically",
@@ -42,6 +43,13 @@ const sortLabels = (labels: ProblemLabel[], order: SortOrder) => {
 export const LabelsTable: React.FC = () => {
   const { labelsAndProblems } = useIndexedDBForProblemLabel();
   const [order, setOrder] = useState<SortOrder>("Alphabetically");
+
+  const noDataTitle = "Welcome to Problem Labels!";
+  const noDataMessage = `
+    Problem Labels are used to manage and classify problems.
+    As labels are created, they’ll appear here in a searchable
+    and filterable list. To get started, you should create a problem label.
+  `;
 
   return (
     <Box>
@@ -86,7 +94,7 @@ export const LabelsTable: React.FC = () => {
               </TableCell>
               <TableCell>
                 <Typography variant="body2" fontWeight="bold">
-                  Actions{" "}
+                  Actions
                 </Typography>
               </TableCell>
             </TableRow>
@@ -99,31 +107,7 @@ export const LabelsTable: React.FC = () => {
             ) : (
               <TableRow>
                 <TableCell colSpan={4}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      minHeight: 200,
-                      color: "grey.600",
-                    }}
-                  >
-                    <Typography variant="h5" align="center" gutterBottom>
-                      Welcome to Problem Labels!
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      align="center"
-                      sx={{ whiteSpace: "pre-wrap" }}
-                    >
-                      Problem Labels are used to manage and classify problems.{" "}
-                      {"\n"}
-                      As labels are created, they’ll appear here in a searchable
-                      and filterable list. {"\n"}
-                      To get started, you should create a problem label.
-                    </Typography>
-                  </Box>
+                  <NoDataMessage title={noDataTitle} message={noDataMessage} />
                 </TableCell>
               </TableRow>
             )}
