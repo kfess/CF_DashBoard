@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Typography from "@mui/material/Typography";
 import { TableCell, TableRow, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -116,7 +117,11 @@ const DefaultView: React.FC<{
       />
     </TableCell>
     <TableCell sx={{ py: 1 }}>
-      {label.description || "No description provided"}
+      {label.description ? (
+        <Typography>{label.description}</Typography>
+      ) : (
+        <Typography color="text.secondary">No description provided</Typography>
+      )}
     </TableCell>
     <TableCell sx={{ py: 1 }}>
       <Link
@@ -125,7 +130,9 @@ const DefaultView: React.FC<{
         }}
         css={{ whiteSpace: "nowrap" }}
       >
-        {label.problems.length} {pluralize(label.problems.length, "problem")}
+        <Typography>
+          {label.problems.length} {pluralize(label.problems.length, "problem")}
+        </Typography>
       </Link>
     </TableCell>
     <TableCell sx={{ py: 1 }}>

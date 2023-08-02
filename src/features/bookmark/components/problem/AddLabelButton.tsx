@@ -140,33 +140,35 @@ export const AddLabelButton: React.FC<Props> = ({
       >
         <StarIcon sx={{ fontSize: "1rem" }} />
       </IconButton>
-      <Popover
-        id="label-popover"
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-      >
-        <Typography variant="body2" sx={{ p: 1.5 }}>
-          Add or Remove problem
-        </Typography>
-        <Divider />
-        {(allLabels ?? []).map((label) => (
-          <LabelRow
-            key={label.id}
-            label={label}
-            isAdded={isAdded[label.id as number]}
-            handleRemove={handleRemove}
-            handleAdd={handleAdd}
-          />
-        ))}
-        <Typography variant="body2" sx={{ p: 1, textAlign: "center" }}>
-          <Link to="/labels">view all labels</Link>
-        </Typography>
-      </Popover>
+      {open && (
+        <Popover
+          id="label-popover"
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+        >
+          <Typography variant="body2" sx={{ p: 1.5 }}>
+            Add or Remove problem
+          </Typography>
+          <Divider />
+          {(allLabels ?? []).map((label) => (
+            <LabelRow
+              key={label.id}
+              label={label}
+              isAdded={isAdded[label.id as number]}
+              handleRemove={handleRemove}
+              handleAdd={handleAdd}
+            />
+          ))}
+          <Typography variant="body2" sx={{ p: 1, textAlign: "center" }}>
+            <Link to="/labels">view all labels</Link>
+          </Typography>
+        </Popover>
+      )}
     </Box>
   );
 };
