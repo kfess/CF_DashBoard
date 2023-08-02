@@ -103,7 +103,12 @@ const DefaultView: React.FC<{
     </TableCell>
     <TableCell sx={{ py: 1 }}>
       <Link to={{ pathname: `/labels/contest/${label.name}` }}>
-        <Typography noWrap>
+        <Typography
+          noWrap
+          sx={{
+            ":hover": { color: "#9246FF" },
+          }}
+        >
           {label.contests.length} {pluralize(label.contests.length, "contest")}
         </Typography>
       </Link>

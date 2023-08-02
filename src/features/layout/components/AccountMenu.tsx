@@ -36,19 +36,19 @@ export const commonItems: AccountMenuItem[] = [
     isExternal: true,
   },
   {
-    icon: <SettingsOutlinedIcon sx={{ color: "#9246FF" }}  />,
+    icon: <SettingsOutlinedIcon sx={{ color: "#9246FF" }} />,
     title: "Setting",
     to: "/setting",
     isExternal: false,
   },
   {
-    icon: <OutlinedFlagIcon sx={{ color: "#9246FF" }}  />,
+    icon: <OutlinedFlagIcon sx={{ color: "#9246FF" }} />,
     title: "Feedback",
     to: GITHUB_ISSUE_URL,
     isExternal: true,
   },
   {
-    icon: <FavoriteBorderOutlinedIcon sx={{ color: "#9246FF" }}  />,
+    icon: <FavoriteBorderOutlinedIcon sx={{ color: "#9246FF" }} />,
     title: "Sponsor",
     to: GITHUB_SPONSOR_URL,
     isExternal: true,

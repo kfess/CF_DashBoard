@@ -152,7 +152,7 @@ export const AddLabelButton: React.FC<Props> = ({
             horizontal: "left",
           }}
         >
-          <Typography variant="body2" sx={{ p: 1.5 }}>
+          <Typography variant="body2" sx={{ p: 1.5, color: "#9246FF" }}>
             Add or Remove problem
           </Typography>
           <Divider />

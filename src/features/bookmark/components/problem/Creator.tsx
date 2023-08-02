@@ -77,7 +77,7 @@ export const Creator: React.FC = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ py: 1, display: "flex", justifyContent: "flex-end" }}>
-          <_Button onClick={toggleShowBlock} color="#1E883E">
+          <_Button onClick={toggleShowBlock} color="#9246FF">
             New Label
           </_Button>
         </Box>
@@ -137,7 +137,7 @@ export const Creator: React.FC = () => {
                     <_Button
                       type="submit"
                       css={{ whiteSpace: "nowrap" }}
-                      color="#1E883E"
+                      color="#9246FF"
                       disabled={
                         watchedName === "" ||
                         watchedColor === "" ||

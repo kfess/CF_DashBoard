@@ -117,11 +117,12 @@ export const LinksPage: React.FC = () => {
               }}
             >
               <CardContent sx={{ flexGrow: 1 }}>
-                <Typography variant="h6" gutterBottom>
+                <Typography variant="h5" gutterBottom>
                   <a
                     href={resource.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    css={{ color: "#9246FF" }}
                   >
                     {resource.title}
                   </a>
@@ -164,6 +165,7 @@ export const LinksPage: React.FC = () => {
                     href={resource.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    css={{ color: "#9246FF" }}
                   >
                     {resource.title}
                   </a>

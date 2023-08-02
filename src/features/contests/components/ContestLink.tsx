@@ -25,6 +25,9 @@ export const ContestLink: React.FC<Props> = ({
         rel="noopener noreferrer"
         css={{
           color: "inherit",
+          ":hover": {
+            color: "#9246FF",
+          },
           textDecoration: "none",
         }}
       >
