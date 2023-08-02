@@ -30,25 +30,25 @@ export type AccountMenuItem = {
 
 export const commonItems: AccountMenuItem[] = [
   {
-    icon: <HelpOutlineIcon />,
+    icon: <HelpOutlineIcon sx={{ color: "#9246FF" }} />,
     title: "User Guide",
     to: USER_GUIDE_URL,
     isExternal: true,
   },
   {
-    icon: <SettingsOutlinedIcon />,
+    icon: <SettingsOutlinedIcon sx={{ color: "#9246FF" }}  />,
     title: "Setting",
     to: "/setting",
     isExternal: false,
   },
   {
-    icon: <OutlinedFlagIcon />,
+    icon: <OutlinedFlagIcon sx={{ color: "#9246FF" }}  />,
     title: "Feedback",
     to: GITHUB_ISSUE_URL,
     isExternal: true,
   },
   {
-    icon: <FavoriteBorderOutlinedIcon />,
+    icon: <FavoriteBorderOutlinedIcon sx={{ color: "#9246FF" }}  />,
     title: "Sponsor",
     to: GITHUB_SPONSOR_URL,
     isExternal: true,
@@ -56,21 +56,21 @@ export const commonItems: AccountMenuItem[] = [
 ];
 
 export const profileItem: AccountMenuItem = {
-  icon: <PermIdentityIcon />,
+  icon: <PermIdentityIcon sx={{ color: "#9246FF" }} />,
   title: "Profile",
   to: "/profile",
   isExternal: false,
 };
 
 export const signInItem: AccountMenuItem = {
-  icon: <ExitToAppIcon />,
+  icon: <ExitToAppIcon sx={{ color: "#9246FF" }} />,
   title: "Sign in",
   to: "/login",
   isExternal: false,
 };
 
 export const signOutItem: AccountMenuItem = {
-  icon: <LogoutIcon />,
+  icon: <LogoutIcon sx={{ color: "#9246FF" }} />,
   title: "Sign Out",
   to: "/",
   isExternal: false,

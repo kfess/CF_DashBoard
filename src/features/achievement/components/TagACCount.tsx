@@ -43,7 +43,14 @@ export const TagACCount: React.FC<Props> = ({ submissions }) => {
           <Stack key={tag} direction="row" spacing={1} alignItems="center">
             <Chip_ label={tag} />
             <Typography variant="body2" color="text.secondary">
-              × {tagMap.get(tag)?.toLocaleString()}
+              ×
+            </Typography>
+            <Typography
+              variant="body2"
+              color="#9246FF"
+              fontWeight="fontWeightBold"
+            >
+              {tagMap.get(tag)?.toLocaleString()}{" "}
             </Typography>
           </Stack>
         ))}

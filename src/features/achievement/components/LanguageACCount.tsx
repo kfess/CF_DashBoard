@@ -35,10 +35,18 @@ const LanguageStat: React.FC<Count> = ({ language, count, lastACDate }) => {
         }}
       >
         <Chip_ label={language} />
-        <Typography variant="body1">
-          <strong>{count.toLocaleString()}</strong>{" "}
-          {pluralize(count, "problem")} solved
-        </Typography>
+        <Stack direction="row" alignItems="center">
+          <Typography
+            variant="body1"
+            color="#9246FF"
+            fontWeight="fontWeightBold"
+          >
+            {count.toLocaleString()}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ marginLeft: "8px" }}>
+            {pluralize(count, "problem")} solved
+          </Typography>
+        </Stack>
       </Stack>
       <Typography variant="body2" color="text.secondary" align="right">
         Last AC Date: {lastACDate}

@@ -31,7 +31,11 @@ export const Community: React.FC<Props> = ({
             color="primary"
             sx={{ marginRight: "10px" }}
           />
-          <Typography variant="body1" color="#9246FF">
+          <Typography
+            variant="body1"
+            color="#9246FF"
+            fontWeight="fontWeightBold"
+          >
             {(contribution ?? 0).toLocaleString()}
           </Typography>
           <Typography
@@ -48,7 +52,11 @@ export const Community: React.FC<Props> = ({
             color="success"
             sx={{ marginRight: "10px" }}
           />
-          <Typography variant="body1" color="#9246FF">
+          <Typography
+            variant="body1"
+            color="#9246FF"
+            fontWeight="fontWeightBold"
+          >
             {(friendsOfCount ?? 0).toLocaleString()}
           </Typography>
           <Typography
