@@ -100,7 +100,7 @@ export const AchievementPage: React.FC = () => {
     },
 
     {
-      label: "Solved Problems",
+      label: "Pie Charts",
       children: (
         <Grid container spacing={2}>
           <Grid item xs={12}>

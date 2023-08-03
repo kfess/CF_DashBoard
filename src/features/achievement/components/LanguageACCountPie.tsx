@@ -160,13 +160,19 @@ export const LanguageACCountPie: React.FC<Props> = ({ languageCounts }) => {
             border: "1px solid #000",
             boxShadow: "24px",
             p: 4,
-            width: "80%",
-            height: "80%",
+            width: {
+              xs: "80%", // extra small devices and up
+              md: "80%", // medium devices and up
+            },
+            height: {
+              xs: "50%", // extra small devices and up
+              md: "80%", // medium devices and up
+            },
             overflow: "auto",
           }}
         >
           <div>
-            <ResponsiveContainer width="100%" aspect={1.5}>
+            <ResponsiveContainer aspect={1.5}>
               <PieChart>
                 <Pie
                   activeIndex={activeIndex}

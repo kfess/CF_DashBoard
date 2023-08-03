@@ -43,7 +43,6 @@ export const HeaderBar: React.FC<Props> = ({
               edge="start"
               aria-label="menu"
               onClick={() => toggleSideBar(!isOpenSideBar)}
-              css={{ margin: theme.spacing(0, 1, 0, 0) }}
             >
               <MenuIcon />
             </IconButton>

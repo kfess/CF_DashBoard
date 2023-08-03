@@ -6,6 +6,7 @@ import { SolvedStatus, SolvedStatusFilter } from "./SolvedStatusFilter";
 import { PeriodFilterButton, PeriodWord } from "./PeriodFilter";
 import { ResetFilterButton } from "@features/contests/components/ResetFilter";
 import { ViewFilter } from "@features/contests/components/ViewFilter";
+import { Box } from "@mui/material";
 
 type Props = {
   showDifficulty: boolean;
@@ -34,27 +35,38 @@ export const FilterOptions: React.FC<Props> = React.memo(
     toggleReverse,
   }) => {
     return (
-      <Stack direction="row" spacing={2} sx={{ py: 1 }}>
-        <ContestTypeFilter
-          classification={classification}
-          setClassification={setClassification}
-        />
-        <PeriodFilterButton period={period} setPeriod={setPeriod} />
-        <SolvedStatusFilter
-          solvedStatus={solvedStatus}
-          setSolvedStatus={setSolvedStatus}
-        />
-        <ViewFilter
-          showDifficulty={showDifficulty}
-          reverse={reverse}
-          toggleShowDifficulty={toggleShowDifficulty}
-          toggleReverse={toggleReverse}
-        />
-        <ResetFilterButton
-          setClassification={setClassification}
-          setPeriod={setPeriod}
-          setSolvedStatus={setSolvedStatus}
-        />
+      <Stack direction="row" flexWrap="wrap" spacing={1} sx={{ py: 1 }}>
+        <Box sx={{ py: 0.5 }}>
+          <ContestTypeFilter
+            classification={classification}
+            setClassification={setClassification}
+          />
+        </Box>
+        <Box sx={{ py: 0.5 }}>
+          <PeriodFilterButton period={period} setPeriod={setPeriod} />
+        </Box>
+
+        <Box sx={{ py: 0.5 }}>
+          <SolvedStatusFilter
+            solvedStatus={solvedStatus}
+            setSolvedStatus={setSolvedStatus}
+          />
+        </Box>
+        <Box sx={{ py: 0.5 }}>
+          <ViewFilter
+            showDifficulty={showDifficulty}
+            reverse={reverse}
+            toggleShowDifficulty={toggleShowDifficulty}
+            toggleReverse={toggleReverse}
+          />
+        </Box>
+        <Box sx={{ py: 0.5 }}>
+          <ResetFilterButton
+            setClassification={setClassification}
+            setPeriod={setPeriod}
+            setSolvedStatus={setSolvedStatus}
+          />
+        </Box>
       </Stack>
     );
   }
