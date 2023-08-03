@@ -2,10 +2,8 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import IconButton from "@mui/material/IconButton";
 import { Submission } from "@features/submission/submission";
 import { getACTagMap } from "@features/achievement/processSubmission";
 import { tags } from "@features/problems/problem";
@@ -44,9 +42,6 @@ export const TagACCount: React.FC<Props> = ({ submissions }) => {
         <Typography variant="h6" gutterBottom>
           Problem Tags
         </Typography>
-        <IconButton>
-          <OpenInNewIcon fontSize="small" />
-        </IconButton>
         <TagACCountPie tagACCounts={tagCounts} />
       </Stack>
       <Stack spacing={1}>
