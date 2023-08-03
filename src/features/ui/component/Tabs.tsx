@@ -9,10 +9,11 @@ import TabUnstyled, { tabUnstyledClasses } from "@mui/base/TabUnstyled";
 const Tab = styled(TabUnstyled)`
   font-size: 0.875rem;
   font-weight: 400;
+  white-space: nowrap;
   color: #7241b9; // デフォルトの文字色を少し暗いパープルに設定
   background-color: transparent;
   cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
-  margin: 6px 6px;
+  margin: 6px 2px;
   border: none;
   border-radius: 6px;
   display: flex;
@@ -53,6 +54,12 @@ const TabsList = styled(TabsListUnstyled)`
   margin-bottom: 16px;
   display: flex;
   position: relative;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; // Hide scrollbar for IE and Edge
+  &::-webkit-scrollbar {
+    display: none; // Hide scrollbar for Chrome, Safari and Opera
+  }
 `;
 
 const TabIndicator = styled("div")`

@@ -62,7 +62,7 @@ export const HeatMap: React.FC<Props> = ({ heatMapData, heatMapContent }) => {
   return (
     <>
       <Typography
-        variant="body1"
+        variant="h6"
         color="text.secondary"
         css={{ marginBottom: "1rem" }}
       >

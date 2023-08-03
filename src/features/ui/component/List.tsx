@@ -63,6 +63,7 @@ export const List: React.FC<Props> = ({ items }) => (
             "&.Mui-focusVisible": {
               outline: "2px solid #7112CC",
             },
+            padding: "2px 10px",
           }}
           disableRipple
         >
