@@ -12,7 +12,7 @@ const Tab = styled(TabUnstyled)`
   font-size: 0.875rem;
   font-weight: 400;
   white-space: nowrap;
-  color: #7241b9; // デフォルトの文字色を少し暗いパープルに設定
+  color: #7241b9;
   background-color: transparent;
   cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
   margin: 6px 2px;
@@ -24,7 +24,7 @@ const Tab = styled(TabUnstyled)`
   &:hover {
     color: #fff; // ホバー時の文字色を白に設定
     background-color: ${({ disabled }) =>
-      disabled ? "transparent" : "#9246FF"}; // ホバー時の背景色を基調色に設定
+      disabled ? "transparent" : "#A165FF"};
   }
 
   &:focus {

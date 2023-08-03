@@ -26,6 +26,7 @@ export const ContestLink: React.FC<Props> = ({
         css={{
           color: "#9246FF",
           ":hover": {
+            color: "#9246FF",
             textDecoration: "underline",
           },
         }}

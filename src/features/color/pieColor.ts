@@ -1,4 +1,4 @@
-export const languageColors = [
+export const pieColors = [
   "#4169e1",
   "#FF6D6A",
   "#48C774",

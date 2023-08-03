@@ -11,6 +11,12 @@ import { getACTagMap } from "@features/achievement/processSubmission";
 import { tags } from "@features/problems/problem";
 import { Chip_ } from "@features/ui/component/Chip";
 import { useToggle } from "@hooks/index";
+import { TagACCountPie } from "@features/achievement/components/TagACCountPie";
+
+export type Count = {
+  readonly name: string;
+  readonly count: number;
+};
 
 type Props = { readonly submissions: Submission[] };
 
@@ -18,9 +24,13 @@ export const TagACCount: React.FC<Props> = ({ submissions }) => {
   const [isReadMore, toggleReadMore] = useToggle(true, false);
 
   const tagMap = getACTagMap(submissions);
-  const tagCounts = [...tags]
+  const tagCounts: Count[] = [...tags]
     .sort((a, b) => (tagMap.get(b) ?? 0) - (tagMap.get(a) ?? 0))
-    .filter((tag) => (tagMap.get(tag) ?? 0) > 0);
+    .filter((tag) => (tagMap.get(tag) ?? 0) > 0)
+    .map((tag) => ({
+      name: tag,
+      count: tagMap.get(tag) ?? 0,
+    }));
   const readTagCounts = isReadMore ? tagCounts.slice(0, 5) : tagCounts;
 
   return (
@@ -37,11 +47,12 @@ export const TagACCount: React.FC<Props> = ({ submissions }) => {
         <IconButton>
           <OpenInNewIcon fontSize="small" />
         </IconButton>
+        <TagACCountPie tagACCounts={tagCounts} />
       </Stack>
       <Stack spacing={1}>
         {readTagCounts.map((tag) => (
-          <Stack key={tag} direction="row" spacing={1} alignItems="center">
-            <Chip_ label={tag} />
+          <Stack key={tag.name} direction="row" spacing={1} alignItems="center">
+            <Chip_ label={tag.name} />
             <Typography variant="body2" color="text.secondary">
               ×
             </Typography>
@@ -50,7 +61,7 @@ export const TagACCount: React.FC<Props> = ({ submissions }) => {
               color="#9246FF"
               fontWeight="fontWeightBold"
             >
-              {tagMap.get(tag)?.toLocaleString()}{" "}
+              {tag.count.toLocaleString()}{" "}
             </Typography>
           </Stack>
         ))}

@@ -43,7 +43,11 @@ const LanguageStat: React.FC<Count> = ({ language, count, lastACDate }) => {
           >
             {count.toLocaleString()}
           </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ marginLeft: "8px" }}>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ marginLeft: "8px" }}
+          >
             {pluralize(count, "problem")} solved
           </Typography>
         </Stack>

@@ -54,6 +54,7 @@ export const ProblemLink: React.FC<Props> = ({
           paddingRight: theme.spacing(1),
           ":hover": {
             color: "#9246FF",
+            textDecoration: "underline",
           },
         }}
       >

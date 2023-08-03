@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import type { Count } from "@features/achievement/components/LanguageACCount";
+import type { Count } from "@features/achievement/components/TagACCount";
 import { pieColors } from "@features/color/pieColor";
 
 type RenderActiveShapeProps = {
@@ -64,7 +64,7 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
         fill={fill}
         fontSize={fontSize}
       >
-        {payload.language}
+        {payload.name}
       </text>
       <Sector
         cx={cx}
@@ -112,10 +112,10 @@ const renderActiveShape = (props: RenderActiveShapeProps) => {
 };
 
 type Props = {
-  languageCounts: Count[];
+  tagACCounts: Count[];
 };
 
-export const LanguageACCountPie: React.FC<Props> = ({ languageCounts }) => {
+export const TagACCountPie: React.FC<Props> = ({ tagACCounts }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -171,7 +171,7 @@ export const LanguageACCountPie: React.FC<Props> = ({ languageCounts }) => {
                   activeShape={renderActiveShape}
                   dataKey="count"
                   nameKey="language"
-                  data={languageCounts}
+                  data={tagACCounts}
                   onMouseEnter={onPieEnter}
                   onMouseLeave={onPieLeave}
                   fill="#8884d8"
@@ -179,9 +179,9 @@ export const LanguageACCountPie: React.FC<Props> = ({ languageCounts }) => {
                   outerRadius="80%"
                   labelLine={false}
                 >
-                  {languageCounts.map((entry, index) => (
+                  {tagACCounts.map((entry, index) => (
                     <Cell
-                      key={`cell-${entry.language}`}
+                      key={`cell-${entry.name}`}
                       fill={pieColors[index % pieColors.length]}
                     />
                   ))}
