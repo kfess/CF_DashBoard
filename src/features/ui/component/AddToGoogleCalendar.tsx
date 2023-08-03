@@ -34,14 +34,19 @@ export const AddToGoogleCalendarLink: React.FC<Props> = ({
   }, [title, description, startDate, endDate]);
 
   return (
-    <a
-      href={googleCalendarUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      css={linkStyles}
-    >
-      <CalendarMonthIcon css={iconStyle} aria-label="Add to Google Calendar" />
-      <span>Add to Google Calendar</span>
-    </a>
+    <div>
+      <a
+        href={googleCalendarUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        css={linkStyles}
+      >
+        <CalendarMonthIcon
+          css={iconStyle}
+          aria-label="Add to Google Calendar"
+        />
+        <span>Add to Google Calendar</span>
+      </a>
+    </div>
   );
 };

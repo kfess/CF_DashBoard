@@ -71,7 +71,7 @@ export const Standings: React.FC<Props> = ({
 
   return (
     <>
-      <Typography variant="h6" component="div" gutterBottom>
+      <Typography variant="subtitle1" component="div" gutterBottom>
         {numParticipants} {pluralize(numParticipants, "user")}{" "}
         {numParticipants > 1 ? "are " : "is "}
         participating in this contest.

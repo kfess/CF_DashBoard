@@ -13,9 +13,12 @@ type Props = {
   readonly endDate: string;
 };
 
-export const CountdownScheduler: React.FC<Props> = (props: Props) => {
-  const { title, description, startDate, endDate } = props;
-
+export const CountdownScheduler: React.FC<Props> = ({
+  title,
+  description,
+  startDate,
+  endDate,
+}) => {
   const [isUpcoming, isRunning, isFinished] = useMemo(() => {
     const now = dayjs();
     return [
@@ -42,6 +45,7 @@ export const CountdownScheduler: React.FC<Props> = (props: Props) => {
         marginTop: "20px",
         marginBottom: "20px",
         display: "flex",
+        alignItems: "center",
         flexWrap: "wrap",
         fontSize: "1.1rem",
         backgroundColor: "#ffffff",
@@ -57,14 +61,12 @@ export const CountdownScheduler: React.FC<Props> = (props: Props) => {
       {isRunning && <RunningContestMessage endDate={endDate} />}
       {isFinished && <FinishedContestMessage />}
       {!isFinished && (
-        <div>
-          <AddToGoogleCalendarLink
-            title={title}
-            description={description}
-            startDate={startDate}
-            endDate={endDate}
-          />
-        </div>
+        <AddToGoogleCalendarLink
+          title={title}
+          description={description}
+          startDate={startDate}
+          endDate={endDate}
+        />
       )}
     </Box>
   );
@@ -73,7 +75,7 @@ export const CountdownScheduler: React.FC<Props> = (props: Props) => {
 const UpcomingContestMessage: React.FC<Pick<Props, "startDate">> = ({
   startDate,
 }) => (
-  <Stack direction="row" alignItems="center">
+  <>
     <Typography>The contest will start in </Typography>
     <Typography>
       {dayjs(startDate).diff(dayjs(), "hours") >= 24 ? (
@@ -84,16 +86,20 @@ const UpcomingContestMessage: React.FC<Pick<Props, "startDate">> = ({
         <Timer toDate={startDate} />
       )}
     </Typography>
-  </Stack>
+  </>
 );
 
 const RunningContestMessage: React.FC<Pick<Props, "endDate">> = ({
   endDate,
 }) => (
-  <Typography color="text.secondary">
-    The contest has started. It will end in
-    <Timer toDate={endDate} />
-  </Typography>
+  <Stack direction="row" flexWrap="wrap">
+    <Typography color="text.secondary">
+      The contest has started. It will end in
+    </Typography>
+    <Typography fontWeight="fontWeightBold">
+      <Timer toDate={endDate} />
+    </Typography>
+  </Stack>
 );
 
 const FinishedContestMessage: React.FC = () => (

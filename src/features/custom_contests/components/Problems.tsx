@@ -23,7 +23,7 @@ export const Problems: React.FC<Props> = (props: Props) => {
               <TableRow hover>
                 <TableCell>#</TableCell>
                 <TableCell>Problem</TableCell>
-                <TableCell>Score</TableCell>
+                <TableCell>DIfficulty</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
