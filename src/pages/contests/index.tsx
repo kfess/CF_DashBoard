@@ -45,9 +45,9 @@ export const ContestsPage: React.FC = () => {
 
   return (
     <Container maxWidth="lg">
-      <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+      <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }}>
         <HeadLine title="Contests" />
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
           <Grid item xs={12}>
             <FilterOptions
               showDifficulty={showDifficulty}
