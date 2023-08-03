@@ -19,6 +19,8 @@ type Props = {
   watchedColor: string;
   onCancel: () => void;
   onDelete: () => void;
+  customError: string | null;
+  resetCustomError: () => void;
 };
 
 export const Editor: React.FC<Props> = ({
@@ -29,6 +31,8 @@ export const Editor: React.FC<Props> = ({
   watchedColor,
   onCancel,
   onDelete,
+  customError,
+  resetCustomError,
 }) => {
   return (
     <TableCell colSpan={4} sx={{ py: 0 }}>
@@ -63,7 +67,12 @@ export const Editor: React.FC<Props> = ({
               spacing={1}
             >
               <div>
-                <Name control={control} errors={errors} />
+                <Name
+                  control={control}
+                  errors={errors}
+                  customError={customError}
+                  resetCustomError={resetCustomError}
+                />
               </div>
               <div>
                 <Description control={control} errors={errors} />
@@ -87,7 +96,7 @@ export const Editor: React.FC<Props> = ({
                       watchedColor === "" ||
                       Object.keys(errors).length > 0
                     }
-                    color="#1E883E"
+                    color="#9246FF"
                   >
                     Save Changes
                   </_Button>

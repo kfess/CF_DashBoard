@@ -97,7 +97,7 @@ export const Editor: React.FC<Props> = ({
                       watchedColor === "" ||
                       Object.keys(errors).length > 0
                     }
-                    color="#1E883E"
+                    color="#9246FF"
                   >
                     Save Changes
                   </_Button>

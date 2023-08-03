@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import { TableCell, TableRow, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -22,7 +22,8 @@ type Props = {
 };
 
 export const LabelItem: React.FC<Props> = ({ label }) => {
-  const { updateLabel, deleteLabel } = useIndexedDBForContestLabel();
+  const { updateLabel, deleteLabel, allLabelNames } =
+    useIndexedDBForContestLabel();
   const [showBlock, toggleShowBlock] = useToggle(false, true);
 
   const {
@@ -43,7 +44,21 @@ export const LabelItem: React.FC<Props> = ({ label }) => {
   const watchedName = watch("name");
   const watchedColor = watch("color");
 
+  // for name unique validation
+  const [customError, setCustomError] = useState<string | null>(null);
+  const resetCustomError = () => setCustomError(null);
+  const isUniqueName =
+    allLabelNames &&
+    (!allLabelNames.includes(watchedName.trim()) ||
+      label.name.trim() === watchedName.trim());
+
   const onSubmit = async () => {
+    resetCustomError();
+    if (!isUniqueName) {
+      setCustomError("This name is already used.");
+      return;
+    }
+
     await updateLabel(label.id as number, {
       name: watchedName,
       color: watchedColor,
@@ -69,6 +84,8 @@ export const LabelItem: React.FC<Props> = ({ label }) => {
             await deleteLabel(label.id as number);
             toggleShowBlock();
           }}
+          customError={customError}
+          resetCustomError={resetCustomError}
         />
       ) : (
         <DefaultView

@@ -157,18 +157,10 @@ export const LanguageACCountPie: React.FC<Props> = ({ languageCounts }) => {
           sx={{
             textAlign: "center",
             backgroundColor: "white",
-            border: "1px solid #000",
-            boxShadow: "24px",
-            p: 4,
-            width: {
-              xs: "80%", // extra small devices and up
-              md: "80%", // medium devices and up
-            },
-            height: {
-              xs: "50%", // extra small devices and up
-              md: "80%", // medium devices and up
-            },
-            overflow: "auto",
+            border: "1px solid grey",
+            p: 2,
+            width: "80%",
+            height: "100%",
           }}
         >
           <div>
@@ -185,6 +177,7 @@ export const LanguageACCountPie: React.FC<Props> = ({ languageCounts }) => {
                   fill="#8884d8"
                   innerRadius="60%"
                   outerRadius="80%"
+                  labelLine={false}
                 >
                   {languageCounts.map((entry, index) => (
                     <Cell
@@ -193,7 +186,13 @@ export const LanguageACCountPie: React.FC<Props> = ({ languageCounts }) => {
                     />
                   ))}
                 </Pie>
-                <Legend />
+                <Legend
+                  onMouseOver={onPieEnter}
+                  onMouseLeave={onPieLeave}
+                  iconType="square"
+                  iconSize={10}
+                  wrapperStyle={{ bottom: -20 }}
+                />
               </PieChart>
             </ResponsiveContainer>
           </div>

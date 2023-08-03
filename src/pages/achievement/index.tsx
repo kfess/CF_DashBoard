@@ -106,7 +106,6 @@ export const AchievementPage: React.FC = () => {
           <Grid item xs={12}>
             <Box
               sx={{
-                m: 1,
                 p: 1,
                 backgroundColor: "white",
                 borderRadius: 1,
@@ -128,7 +127,6 @@ export const AchievementPage: React.FC = () => {
           <Grid item xs={12}>
             <Box
               sx={{
-                m: 1,
                 p: 1,
                 backgroundColor: "white",
                 borderRadius: 1,

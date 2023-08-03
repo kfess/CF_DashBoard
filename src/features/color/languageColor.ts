@@ -1,6 +1,6 @@
 export const languageColors = [
+  "#4169e1",
   "#FF6D6A",
-  "#29B6F6",
   "#48C774",
   "#FFD54F",
   "#FF9800",
