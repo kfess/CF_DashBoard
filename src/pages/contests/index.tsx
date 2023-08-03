@@ -98,7 +98,7 @@ export const ContestsPage: React.FC = () => {
           </Grid>
           <Grid item xs={12}>
             {isSmallScreen ? (
-              contests ? (
+              contests && contests.length > 0 ? (
                 <VerticalContestTable
                   contests={contests as Contest[]}
                   showDifficulty={showDifficulty}

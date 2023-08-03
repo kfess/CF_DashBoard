@@ -6,6 +6,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 import { Problem } from "@features/problems/problem";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 
@@ -21,9 +22,21 @@ export const Problems: React.FC<Props> = (props: Props) => {
           <Table stickyHeader>
             <TableHead>
               <TableRow hover>
-                <TableCell>#</TableCell>
-                <TableCell>Problem</TableCell>
-                <TableCell>DIfficulty</TableCell>
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    #
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Problem
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body2" fontWeight="fontWeightBold">
+                    Difficulty
+                  </Typography>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

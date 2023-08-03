@@ -8,10 +8,10 @@ import { CreateContest } from "@features/custom_contests/components/Form/CreateC
 export const CreateCustomContestPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
-      <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+      <Box pt={{ xs: 2, md: 4 }}>
         <HeadLine title="Create Custom Contest" />
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid xs={12} sx={{ py: 1 }}>
             <CreateContest />
           </Grid>
         </Grid>
