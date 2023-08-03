@@ -8,7 +8,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { usePagination } from "@hooks/index";
+import { usePagination } from "@hooks/usePagination";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ContestLink } from "@features/contests/components/ContestLink";
@@ -26,7 +26,8 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
     field.onChange(selectedProblems.filter((_, idx) => index !== idx));
   };
 
-  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination();
+  const [page, setPage, rowsPerPage, setRowsPerPage] =
+    usePagination(selectedProblems);
 
   return (
     <>

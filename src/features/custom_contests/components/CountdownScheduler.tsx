@@ -1,8 +1,10 @@
 import dayjs from "dayjs";
 import React, { useMemo } from "react";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import { AddToGoogleCalendarLink } from "@features/ui/component/AddToGoogleCalendar";
 import { Timer } from "@features/ui/component/Timer";
+import Typography from "@mui/material/Typography";
 
 type Props = {
   readonly title: string;
@@ -71,9 +73,9 @@ export const CountdownScheduler: React.FC<Props> = (props: Props) => {
 const UpcomingContestMessage: React.FC<Pick<Props, "startDate">> = ({
   startDate,
 }) => (
-  <>
-    <span>The contest will start in </span>
-    <span>
+  <Stack direction="row" alignItems="center">
+    <Typography>The contest will start in </Typography>
+    <Typography>
       {dayjs(startDate).diff(dayjs(), "hours") >= 24 ? (
         <span css={{ marginLeft: "6px" }}>
           {dayjs(startDate).diff(dayjs(), "days")} days
@@ -81,19 +83,19 @@ const UpcomingContestMessage: React.FC<Pick<Props, "startDate">> = ({
       ) : (
         <Timer toDate={startDate} />
       )}
-    </span>
-  </>
+    </Typography>
+  </Stack>
 );
 
 const RunningContestMessage: React.FC<Pick<Props, "endDate">> = ({
   endDate,
 }) => (
-  <>
+  <Typography color="text.secondary">
     The contest has started. It will end in
     <Timer toDate={endDate} />
-  </>
+  </Typography>
 );
 
 const FinishedContestMessage: React.FC = () => (
-  <span>The contest has ended.</span>
+  <Typography color="text.secondary">The contest has ended.</Typography>
 );

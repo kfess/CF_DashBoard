@@ -7,6 +7,7 @@ const linkStyles = css({
   alignItems: "center",
   justifyContent: "center",
   textDecoration: "none",
+  color: "#9246FF",
 });
 
 const iconStyle = css({ marginLeft: "6px", marginRight: "6px" });
@@ -18,9 +19,12 @@ type Props = {
   readonly endDate: string;
 };
 
-export const AddToGoogleCalendarLink: React.FC<Props> = (props: Props) => {
-  const { title, description, startDate, endDate } = props;
-
+export const AddToGoogleCalendarLink: React.FC<Props> = ({
+  title,
+  description,
+  startDate,
+  endDate,
+}) => {
   const googleCalendarUrl: string = useMemo(() => {
     const titleParam = encodeURIComponent(title);
     const descriptionParam = encodeURIComponent(description ?? "");
