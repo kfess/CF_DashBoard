@@ -102,6 +102,8 @@ export const ContestsPage: React.FC = () => {
                 <VerticalContestTable
                   contests={contests as Contest[]}
                   showDifficulty={showDifficulty}
+                  solvedSet={solvedSet}
+                  attemptedSet={attemptedSet}
                 />
               ) : (
                 <NoDataMessage

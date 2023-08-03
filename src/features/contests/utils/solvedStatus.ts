@@ -1,7 +1,9 @@
 import { SolvedStatus } from "@features/contests/components/SolvedStatusFilter";
 import type { ReshapedProblem } from "@features/problems/problem";
 import { getProblemKey } from "@features/problems/utils";
+import { Contest } from "../contest";
 
+// for resolved contest
 // 特定のコンテストについて、問題の解いた状態を返す
 export const calcSolvedStatus = (
   problemIdxes: string[],
@@ -37,6 +39,40 @@ export const calcSolvedStatus = (
       }
     }
 
+    if (isAnySolved && !isAllSolved) {
+      break;
+    }
+  }
+
+  if (isAllSolved) {
+    return "Completed";
+  } else if (isAnySolved) {
+    return "Attempting";
+  } else {
+    return "Not Solved yet";
+  }
+};
+
+// for virtical contest
+export const calcSolvedStatusForVirticalContest = (
+  contest: Contest,
+  solvedSet: Set<string> | undefined
+): SolvedStatus => {
+  if (contest.problems.length === 0) {
+    return "Not Solved yet";
+  }
+
+  let isAllSolved = true;
+  let isAnySolved = false;
+  for (const problem of contest.problems) {
+    const isSolved = solvedSet?.has(
+      getProblemKey(contest.id, problem.index, problem.name)
+    );
+    if (!isSolved) {
+      isAllSolved = false;
+    } else if (!isAnySolved) {
+      isAnySolved = true;
+    }
     if (isAnySolved && !isAllSolved) {
       break;
     }
