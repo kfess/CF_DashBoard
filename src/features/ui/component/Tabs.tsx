@@ -15,7 +15,7 @@ const Tab = styled(TabUnstyled)`
   color: #7241b9;
   background-color: transparent;
   cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
-  margin: 6px 2px;
+  margin: 6px 0px;
   border: none;
   border-radius: 6px;
   display: flex;
@@ -69,7 +69,8 @@ const TabIndicator = styled("div")`
   bottom: 0;
   height: 2px;
   background-color: #9246ff; // インジケータの色を基調色に設定
-  transition: left 0s;
+  // transition: left 0s;
+  transition: left 0s, width 0s; // width の transition を追加
 `;
 
 const TabPanel = styled(TabPanelUnstyled)`

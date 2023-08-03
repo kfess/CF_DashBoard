@@ -38,7 +38,7 @@ export const CustomContestPage: React.FC = () => {
         <HeadLine title="Custom Contest" />
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Box py={1}>
+            <Box py={1.5} display="flex" justifyContent="flex-end">
               <NavLink to={loggedIn ? "/custom-contest/create" : "#"}>
                 <_Button color="#9246FF" disabled={!loggedIn}>
                   Create New Contest
