@@ -5,6 +5,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { usePagination } from "@hooks/usePagination";
 import type { Contest } from "@features/contests/contest";
@@ -54,7 +55,7 @@ export const VerticalContestTable: React.FC<Props> = ({
                   .sort((a, b) => a.index.localeCompare(b.index))
                   .map((p) => (
                     <TableRow key={p.index}>
-                      <TableCell>{p.index}</TableCell>
+                      <TableCell sx={{ width: "1%", p: 0 }}></TableCell>
                       <TableCell>
                         <ProblemLink
                           key={p.index}

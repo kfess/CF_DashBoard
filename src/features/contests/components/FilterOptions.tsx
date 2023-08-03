@@ -35,24 +35,24 @@ export const FilterOptions: React.FC<Props> = React.memo(
     toggleReverse,
   }) => {
     return (
-      <Stack direction="row" flexWrap="wrap" spacing={1} sx={{ py: 1 }}>
-        <Box sx={{ py: 0.5 }}>
+      <Stack direction="row" flexWrap="wrap" sx={{ py: 1, gap: "0.5rem" }}>
+        <Box>
           <ContestTypeFilter
             classification={classification}
             setClassification={setClassification}
           />
         </Box>
-        <Box sx={{ py: 0.5 }}>
+        <Box>
           <PeriodFilterButton period={period} setPeriod={setPeriod} />
         </Box>
 
-        <Box sx={{ py: 0.5 }}>
+        <Box>
           <SolvedStatusFilter
             solvedStatus={solvedStatus}
             setSolvedStatus={setSolvedStatus}
           />
         </Box>
-        <Box sx={{ py: 0.5 }}>
+        <Box>
           <ViewFilter
             showDifficulty={showDifficulty}
             reverse={reverse}
@@ -60,7 +60,7 @@ export const FilterOptions: React.FC<Props> = React.memo(
             toggleReverse={toggleReverse}
           />
         </Box>
-        <Box sx={{ py: 0.5 }}>
+        <Box>
           <ResetFilterButton
             setClassification={setClassification}
             setPeriod={setPeriod}
