@@ -70,6 +70,7 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
                           <ContestLink
                             contestId={p.contestId ?? 0}
                             contestName={p.contestName ?? ""}
+                            classification={p.classification ?? "Others"}
                           />
                         </TableCell>
                         <TableCell>{p.rating}</TableCell>
