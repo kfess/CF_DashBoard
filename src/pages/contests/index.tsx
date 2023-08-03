@@ -5,7 +5,10 @@ import Grid from "@mui/material/Grid";
 import { useFetchContests } from "@features/contests/hooks/useFetchContest";
 import { useFilterOptionsState } from "@features/contests/hooks/useFilterOptionsState";
 import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
-import { reshapeContests } from "@features/contests/utils/reshapeContest";
+import {
+  reshapeContests,
+  filterAndSortContests,
+} from "@features/contests/utils/reshapeContest";
 import { getProblemIdxFromClassification } from "@features/contests/utils/problemIdxes";
 import { FilterOptions } from "@features/contests/components/FilterOptions";
 import { FilterChips } from "@features/contests/components/FilterChips";
@@ -14,6 +17,7 @@ import { HeadLine } from "@features/layout/components/HeadLine";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 import { VerticalContestTable } from "@features/contests/components/VerticalContestTable";
 import { useMediaQuery } from "@mui/material";
+import type { Contest, ReshapedContest } from "@features/contests/contest";
 
 export const ContestsPage: React.FC = () => {
   const isSmallScreen = useMediaQuery("(max-width: 600px)");
@@ -33,21 +37,27 @@ export const ContestsPage: React.FC = () => {
     toggleReverse,
   } = useFilterOptionsState();
 
-  const reshapedContests = useMemo(
-    () =>
-      data
-        ? reshapeContests(data, classification, reverse, period, solvedStatus)
-        : [],
-    [data, classification, period, reverse, solvedStatus]
-  );
+  const contests = useMemo(() => {
+    if (!data) return [];
+    if (isSmallScreen) {
+      return filterAndSortContests(
+        data,
+        classification,
+        reverse,
+        period,
+        solvedStatus
+      );
+    }
+    return reshapeContests(data, classification, reverse, period, solvedStatus);
+  }, [data, classification, period, reverse, solvedStatus, isSmallScreen]);
 
-  const problemIdxes = useMemo(
-    () =>
-      data
-        ? getProblemIdxFromClassification(reshapedContests, classification)
-        : [],
-    [data, classification, period, reverse, solvedStatus]
-  );
+  const problemIdxes = useMemo(() => {
+    if (!data || isSmallScreen) return [];
+    return getProblemIdxFromClassification(
+      contests as ReshapedContest[],
+      classification
+    );
+  }, [data, classification, period, reverse, solvedStatus, isSmallScreen]);
 
   return (
     <Container maxWidth="lg">
@@ -88,9 +98,9 @@ export const ContestsPage: React.FC = () => {
           </Grid>
           <Grid item xs={12}>
             {isSmallScreen ? (
-              data ? (
+              contests ? (
                 <VerticalContestTable
-                  contests={data}
+                  contests={contests as Contest[]}
                   showDifficulty={showDifficulty}
                 />
               ) : (
@@ -99,9 +109,9 @@ export const ContestsPage: React.FC = () => {
                   message="Please check your filter options."
                 />
               )
-            ) : reshapedContests.length > 0 ? (
+            ) : contests.length > 0 ? (
               <ContestsTable
-                contests={reshapedContests}
+                contests={contests as ReshapedContest[]}
                 problemIdxes={problemIdxes}
                 showDifficulty={showDifficulty}
                 solvedSet={solvedSet}

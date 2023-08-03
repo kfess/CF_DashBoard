@@ -14,7 +14,7 @@ import { normalizeProblemIndex } from "@features/contests/utils/problemIdxes";
 import { SolvedStatus } from "@features/contests/components/SolvedStatusFilter";
 import { calcSolvedStatus } from "@features/contests/utils/solvedStatus";
 
-const filterAndSortContests = (
+export const filterAndSortContests = (
   contests: Contest[],
   classification: Classification,
   reverse: boolean,
