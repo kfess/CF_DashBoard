@@ -9,7 +9,9 @@ import { DeletableChip } from "@features/ui/component/Chip";
 const headLineCss = css({
   display: "flex",
   justifyContent: "space-between",
+  alignItems: "center",
   marginBottom: "0.5rem",
+  flexWrap: "wrap",
 });
 
 type Props = { readonly title: string };

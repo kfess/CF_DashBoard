@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
       sx={{
         marginTop: "auto",
         width: "100%", // Reset to 100%
-        minHeight: "5rem",
+        minHeight: "8rem",
         position: "relative",
         bottom: 0,
         padding: "1rem",
