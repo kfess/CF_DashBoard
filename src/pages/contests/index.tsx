@@ -46,7 +46,11 @@ export const ContestsPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }}>
-        <HeadLine title="Contests" />
+        <HeadLine
+          title={`Contest${
+            classification !== "All" ? " - " + classification : ""
+          }`}
+        />
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <FilterOptions
