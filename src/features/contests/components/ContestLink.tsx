@@ -24,11 +24,10 @@ export const ContestLink: React.FC<Props> = ({
         target="_blank"
         rel="noopener noreferrer"
         css={{
-          color: "inherit",
+          color: "#9246FF",
           ":hover": {
-            color: "#9246FF",
+            textDecoration: "underline",
           },
-          textDecoration: "none",
         }}
       >
         {contestName}

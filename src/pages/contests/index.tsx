@@ -12,8 +12,12 @@ import { FilterChips } from "@features/contests/components/FilterChips";
 import { ContestsTable } from "@features/contests/components/ContestsTable";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
+import { VerticalContestTable } from "@features/contests/components/VerticalContestTable";
+import { useMediaQuery } from "@mui/material";
 
 export const ContestsPage: React.FC = () => {
+  const isSmallScreen = useMediaQuery("(max-width: 600px)");
+
   const { data } = useFetchContests();
   const { solvedSet, attemptedSet } = useSolvedStatus();
   const {
@@ -29,7 +33,7 @@ export const ContestsPage: React.FC = () => {
     toggleReverse,
   } = useFilterOptionsState();
 
-  const contests = useMemo(
+  const reshapedContests = useMemo(
     () =>
       data
         ? reshapeContests(data, classification, reverse, period, solvedStatus)
@@ -39,7 +43,9 @@ export const ContestsPage: React.FC = () => {
 
   const problemIdxes = useMemo(
     () =>
-      data ? getProblemIdxFromClassification(contests, classification) : [],
+      data
+        ? getProblemIdxFromClassification(reshapedContests, classification)
+        : [],
     [data, classification, period, reverse, solvedStatus]
   );
 
@@ -81,9 +87,21 @@ export const ContestsPage: React.FC = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            {contests.length > 0 ? (
+            {isSmallScreen ? (
+              data ? (
+                <VerticalContestTable
+                  contests={data}
+                  showDifficulty={showDifficulty}
+                />
+              ) : (
+                <NoDataMessage
+                  title="No Contests Found"
+                  message="Please check your filter options."
+                />
+              )
+            ) : reshapedContests.length > 0 ? (
               <ContestsTable
-                contests={contests}
+                contests={reshapedContests}
                 problemIdxes={problemIdxes}
                 showDifficulty={showDifficulty}
                 solvedSet={solvedSet}
