@@ -20,6 +20,7 @@ import { HeadLine } from "@features/layout/components/HeadLine";
 import { TabItem, Tabs } from "@features/ui/component/Tabs";
 import { UserSubmissionPage } from "@pages/submission/user/index";
 import { HeatMaps } from "@features/achievement/components/HeatMaps";
+import { Rating } from "@features/achievement/components/Rating";
 
 export const AchievementPage: React.FC = () => {
   const userId = useQueryParams(QueryParamKeys.USERID);
@@ -58,9 +59,20 @@ export const AchievementPage: React.FC = () => {
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={8}>
+            {/* <Box
+              sx={{
+                p: 2,
+                backgroundColor: "white",
+                borderRadius: 1,
+                boxShadow: [1, 1, 1, 1],
+              }}
+            >
+              <Rating />
+            </Box> */}
             <Box
               sx={{
                 p: 2,
+                // marginTop: 2,
                 backgroundColor: "white",
                 borderRadius: 1,
                 boxShadow: [1, 1, 1, 1],
