@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { Control, Controller, FieldErrors, useWatch } from "react-hook-form";
-import { Button } from "@features/ui/component/Button";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import { useToggle } from "@hooks/index";
@@ -11,6 +10,7 @@ import { ProblemsDifficulty } from "@features/custom_contests/components/Form/Pr
 import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsTag";
 import { ExpectedParticipants } from "@features/custom_contests/components/Form/ExpectedParticipants";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
+import { _Button } from "@features/ui/component/Button";
 
 type Props = {
   control: Control<CreateCustomContest>;
@@ -72,7 +72,6 @@ export const SelectProblems: React.FC<Props> = ({
 
   return (
     <>
-      <h3>Problems Form</h3>
       <ProblemsCount control={control} errors={errors} />
       <ProblemsDifficulty control={control} errors={errors} />
       <ProblemsTag control={control} errors={errors} />
@@ -82,14 +81,14 @@ export const SelectProblems: React.FC<Props> = ({
         excludeSolved={excludeSolved}
         toggleExcludeSolved={toggleExcludeSolved}
       />
-      <Button
+      <_Button
         onClick={() => {
           data && setValue("problems", selectProblems(data));
         }}
         disabled={!data}
       >
         Generate Problems
-      </Button>
+      </_Button>
       <Controller
         name="problems"
         control={control}

@@ -3,14 +3,6 @@ import { InputUnstyledProps } from "@mui/base/InputUnstyled";
 import InputUnstyled from "@mui/base/InputUnstyled";
 import { styled } from "@mui/system";
 
-const blue = {
-  100: "#DAECFF",
-  200: "#80BFFF",
-  400: "#3399FF",
-  500: "#007FFF",
-  600: "#0072E5",
-};
-
 const grey = {
   50: "#F3F6F9",
   100: "#E7EBF0",
@@ -29,9 +21,9 @@ const StyledTextareaElement = styled("textarea")<InputUnstyledProps>(
   resize: vertical;
   min-height: 50px;
   width: 100%;
+  box-sizing: border-box;
   font-size: 1rem;
-  padding: 0.4rem;
-  padding-left:0.875rem;
+  padding: ${theme.spacing(1, 1.2)};
   border-radius: 0.375rem;
   color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
   background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
@@ -40,15 +32,8 @@ const StyledTextareaElement = styled("textarea")<InputUnstyledProps>(
     theme.palette.mode === "dark" ? grey[900] : grey[50]
   };
 
-  &:hover {
-    border-color: ${blue[400]};
-  }
-
   &:focus {
-    border-color: ${blue[600]};
-    box-shadow: 0 0 0 2px ${
-      theme.palette.mode === "dark" ? blue[500] : blue[400]
-    };
+    box-shadow: 0 0 0 0.2rem #9246FF;
   }
 
   // firefox

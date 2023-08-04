@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
         bottom: 0,
         padding: "1rem",
         color: "#fff",
-        backgroundColor: "#5C17C5",
+        backgroundColor: "#2E3436",
         boxSizing: "border-box", // Added this line
       }}
     >
