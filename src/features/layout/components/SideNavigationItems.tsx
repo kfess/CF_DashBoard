@@ -21,8 +21,6 @@ import EmojiEventsOutlinedIcon from "@mui/icons-material/EmojiEventsOutlined";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import WidgetsIcon from "@mui/icons-material/Widgets";
-import HubOutlinedIcon from "@mui/icons-material/HubOutlined";
-import HubIcon from "@mui/icons-material/Hub";
 import BuildOutlinedIcon from "@mui/icons-material/BuildOutlined";
 import BuildIcon from "@mui/icons-material/Build";
 import FeedIcon from "@mui/icons-material/Feed";
@@ -43,7 +41,7 @@ type MainField = typeof mainField[number];
 const activityField = ["Labels", "Ranking", "Custom Contest (beta)"] as const;
 type ActivityField = typeof activityField[number];
 
-const otherField = ["API", "Links", "FAQ", "Terms"] as const;
+const otherField = ["Links", "FAQ", "Terms"] as const;
 type OtherField = typeof otherField[number];
 
 export type Field = MainField | ActivityField | OtherField;
@@ -111,22 +109,16 @@ export const activityItems: readonly Item[] = [
 
 export const otherItems: readonly Item[] = [
   {
-    field: "API",
-    link: "/api",
-    selectedIcon: <HubIcon sx={{ color: "#9146FF" }}/>,
-    notSelectedIcon: <HubOutlinedIcon sx={{ color: "#9146FF" }}/>,
-  },
-  {
     field: "Links",
     link: "/links",
-    selectedIcon: <BuildIcon sx={{ color: "#9146FF" }}/>,
-    notSelectedIcon: <BuildOutlinedIcon sx={{ color: "#9146FF" }}/>,
+    selectedIcon: <BuildIcon sx={{ color: "#9146FF" }} />,
+    notSelectedIcon: <BuildOutlinedIcon sx={{ color: "#9146FF" }} />,
   },
   {
     field: "Terms",
     link: "/terms",
-    selectedIcon: <FeedIcon sx={{ color: "#9146FF" }}/>,
-    notSelectedIcon: <FeedOutlinedIcon sx={{ color: "#9146FF" }}/>,
+    selectedIcon: <FeedIcon sx={{ color: "#9146FF" }} />,
+    notSelectedIcon: <FeedOutlinedIcon sx={{ color: "#9146FF" }} />,
   },
 ] as const;
 

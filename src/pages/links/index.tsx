@@ -109,9 +109,11 @@ export const LinksPage: React.FC = () => {
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                boxShadow: 1,
+                boxShadow: 3,
+                borderRadius: 2,
+                backgroundColor: "#f5f5f5",
                 "&:hover": {
-                  boxShadow: 3,
+                  boxShadow: "0px 0px 20px rgba(0,0,0,0.15)",
                 },
                 transition: "box-shadow .3s",
               }}
@@ -158,9 +160,11 @@ export const LinksPage: React.FC = () => {
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                boxShadow: 1,
+                boxShadow: 3,
+                borderRadius: 2,
+                backgroundColor: "#f5f5f5",
                 "&:hover": {
-                  boxShadow: 3,
+                  boxShadow: "0px 0px 20px rgba(0,0,0,0.15)",
                 },
                 transition: "box-shadow .3s",
               }}
