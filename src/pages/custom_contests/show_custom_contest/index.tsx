@@ -16,7 +16,7 @@ import { Problems } from "@features/custom_contests/components/Problems";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { RegisterButton } from "@features/custom_contests/components/RegisterButton";
-import { Divider } from "@mui/material";
+import { Divider, Stack } from "@mui/material";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { utcISOStringToLocal } from "@helpers/date";
 import { SocialShare } from "@features/custom_contests/components/SocialShare";
@@ -85,27 +85,11 @@ export const ShowCustomContestPage: React.FC = () => {
             <HeadLine title={data.title} />
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: { xs: "column", md: "row" },
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      gap: 1,
-                    }}
-                  >
-                    <Chip_ label={data.visibility} />
-                    <Chip_ label={data.mode} />
-                    <Chip_ label={"Created by: " + data.owner} />
-                  </Box>
-                </Box>
+                <Stack direction="row" spacing={1} py={1}>
+                  <Chip_ label={data.visibility} />
+                  <Chip_ label={data.mode} />
+                  <Chip_ label={"Created by: " + data.owner} />
+                </Stack>
               </Grid>
               <Grid item xs={12}>
                 <CountdownScheduler
@@ -114,8 +98,14 @@ export const ShowCustomContestPage: React.FC = () => {
                   startDate={utcISOStringToLocal(data.startDate)}
                   endDate={data.endDate}
                 />
-                <SocialShare />
-                <RegisterButton />
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <RegisterButton />
+                  <SocialShare />
+                </Stack>
 
                 <Box
                   sx={{
@@ -164,7 +154,10 @@ export const ShowCustomContestPage: React.FC = () => {
                     flexWrap: "wrap",
                   }}
                 >
-                  <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
+                  <Typography
+                    fontWeight="fontWeightBold"
+                    sx={{ mt: 2, flex: 4 }}
+                  >
                     Penalty
                   </Typography>
                   <Typography sx={{ mt: 2, flex: 8 }}>

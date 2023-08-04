@@ -3,11 +3,14 @@ import { css } from "@emotion/react";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const linkStyles = css({
-  display: "inline-flex",
+  display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  textDecoration: "none",
   color: "#9246FF",
+  ":hover": {
+    color: "#9246FF",
+    textDecoration: "underline",
+  },
 });
 
 const iconStyle = css({ marginLeft: "6px", marginRight: "6px" });

@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
 import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { useAddParticipantToContest } from "@features/custom_contests/hooks/useAddParticipantToContest";
 import { useFetchCustomContestByContestId } from "@features/custom_contests/hooks/useFetchCustomContestByContestId";
+import { _Button } from "@features/ui/component/Button";
 
 type RouteParams = {
   readonly contestId?: string;
@@ -36,11 +36,9 @@ export const RegisterButton: React.FC = () => {
     <>
       {isUserRegistered === false && isBeforeContestEnd && (
         <Box sx={{ m: 1, textAlign: "right" }}>
-          <Button
-            variant="contained"
-            color="success"
+          <_Button
             size="small"
-            css={{ textTransform: "none" }}
+            color="#9246FF"
             disabled={
               !loggedIn ||
               !codeforcesUsername ||
@@ -52,7 +50,7 @@ export const RegisterButton: React.FC = () => {
             }}
           >
             Register to Participate
-          </Button>
+          </_Button>
         </Box>
       )}
     </>
