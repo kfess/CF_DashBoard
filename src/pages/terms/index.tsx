@@ -6,17 +6,8 @@ import Typography from "@mui/material/Typography";
 
 export const TermsPage: React.FC = () => {
   return (
-    <Container maxWidth="md">
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          padding: {
-            xs: 0,
-            sm: 1,
-          },
-        }}
-      >
+    <Container maxWidth="lg">
+      <Grid container spacing={2} sx={{ p: { xs: 0, sm: 1 } }}>
         <Grid item>
           <Box my={4}>
             <Typography variant="h4" component="h1" gutterBottom>

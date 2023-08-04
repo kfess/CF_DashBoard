@@ -25,6 +25,8 @@ import BuildOutlinedIcon from "@mui/icons-material/BuildOutlined";
 import BuildIcon from "@mui/icons-material/Build";
 import FeedIcon from "@mui/icons-material/Feed";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
+import PrivacyTipIcon from "@mui/icons-material/PrivacyTip";
+import PrivacyTipOutlinedIcon from "@mui/icons-material/PrivacyTipOutlined";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
@@ -41,7 +43,7 @@ type MainField = typeof mainField[number];
 const activityField = ["Labels", "Ranking", "Custom Contest (beta)"] as const;
 type ActivityField = typeof activityField[number];
 
-const otherField = ["Links", "FAQ", "Terms"] as const;
+const otherField = ["Links", "FAQ", "Terms", "Privacy Policy"] as const;
 type OtherField = typeof otherField[number];
 
 export type Field = MainField | ActivityField | OtherField;
@@ -119,6 +121,12 @@ export const otherItems: readonly Item[] = [
     link: "/terms",
     selectedIcon: <FeedIcon sx={{ color: "#9146FF" }} />,
     notSelectedIcon: <FeedOutlinedIcon sx={{ color: "#9146FF" }} />,
+  },
+  {
+    field: "Privacy Policy",
+    link: "/privacy-policy",
+    selectedIcon: <PrivacyTipIcon sx={{ color: "#9146FF" }} />,
+    notSelectedIcon: <PrivacyTipOutlinedIcon sx={{ color: "#9146FF" }} />,
   },
 ] as const;
 

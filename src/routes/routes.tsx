@@ -21,6 +21,7 @@ import { TermsPage } from "@pages/terms";
 import { ApiPage } from "@pages/api";
 import { SettingPage } from "@pages/setting";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
+import { PrivacyPolicyPage } from "@pages/privacy_policy";
 
 // const ProblemsPage = lazy(() => import("@pages/problems"));
 
@@ -140,6 +141,7 @@ export const router = createBrowserRouter([
       { path: "/login", element: <LoginPage /> },
       { path: "/callback", element: <Callback /> },
       { path: "/terms", element: <TermsPage /> },
+      { path: "/privacy-policy", element: <PrivacyPolicyPage /> },
       { path: "*", element: <Navigate to="/" /> },
     ],
   },
