@@ -6,7 +6,7 @@ import { localToUtcISOString } from "@helpers/date";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Container, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { _Button } from "@features/ui/component/Button";
 import { Chip_ } from "@features/ui/component/Chip";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
@@ -89,7 +89,7 @@ export const _CreateContest: React.FC = () => {
   };
 
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Typography
         variant="h6"
         sx={{
@@ -161,16 +161,10 @@ export const _CreateContest: React.FC = () => {
           backgroundColor: "white",
         }}
       >
-        <Stack>
-          <Typography variant="h5" fontWeight="fontWeightBold">
-            Selected Problems
-          </Typography>
-          <SelectProblems
-            control={control}
-            setValue={setValue}
-            errors={errors}
-          />
-        </Stack>
+        <Typography variant="h5" fontWeight="fontWeightBold">
+          Selected Problems
+        </Typography>
+        <SelectProblems control={control} setValue={setValue} errors={errors} />
       </Box>
 
       <Stack direction="row" justifyContent="flex-end">
@@ -178,6 +172,6 @@ export const _CreateContest: React.FC = () => {
           Create Contest
         </_Button>
       </Stack>
-    </>
+    </form>
   );
 };

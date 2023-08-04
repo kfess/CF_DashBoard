@@ -1,4 +1,6 @@
 import React, { useCallback } from "react";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import { Control, Controller, FieldErrors, useWatch } from "react-hook-form";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
@@ -72,23 +74,28 @@ export const SelectProblems: React.FC<Props> = ({
 
   return (
     <>
-      <ProblemsCount control={control} errors={errors} />
-      <ProblemsDifficulty control={control} errors={errors} />
-      <ProblemsTag control={control} errors={errors} />
-      <ExpectedParticipants
-        control={control}
-        errors={errors}
-        excludeSolved={excludeSolved}
-        toggleExcludeSolved={toggleExcludeSolved}
-      />
-      <_Button
-        onClick={() => {
-          data && setValue("problems", selectProblems(data));
-        }}
-        disabled={!data}
-      >
-        Generate Problems
-      </_Button>
+      <Stack direction="column">
+        <ProblemsCount control={control} errors={errors} />
+        <ProblemsDifficulty control={control} errors={errors} />
+        <ProblemsTag control={control} errors={errors} />
+        <ExpectedParticipants
+          control={control}
+          errors={errors}
+          excludeSolved={excludeSolved}
+          toggleExcludeSolved={toggleExcludeSolved}
+        />
+      </Stack>
+      <Stack direction="row" justifyContent="flex-end" sx={{ my: 2 }}>
+        <_Button
+          onClick={() => {
+            data && setValue("problems", selectProblems(data));
+          }}
+          disabled={!data}
+          color="#9246FF"
+        >
+          Generate Problems
+        </_Button>
+      </Stack>
       <Controller
         name="problems"
         control={control}

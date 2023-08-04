@@ -54,6 +54,7 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
                 <TableBody>
                   {selectedProblems
                     .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
+                    .sort((a, b) => (a.rating || 0) - (b.rating || 0))
                     .map((p, index) => (
                       <TableRow key={p.name} hover>
                         <TableCell>
@@ -64,6 +65,7 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
                             problemName={p.name}
                             difficulty={p.rating}
                             showDifficulty={true}
+                            showBookmarked={false}
                           />
                         </TableCell>
                         <TableCell>
@@ -71,9 +73,10 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
                             contestId={p.contestId ?? 0}
                             contestName={p.contestName ?? ""}
                             classification={p.classification ?? "Others"}
+                            showBookmarked={false}
                           />
                         </TableCell>
-                        <TableCell>{p.rating}</TableCell>
+                        <TableCell>{p.rating || "no data"}</TableCell>
                         <TableCell>
                           <IconButton
                             onClick={() => {

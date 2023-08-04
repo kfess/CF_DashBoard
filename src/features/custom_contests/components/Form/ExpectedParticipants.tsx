@@ -20,7 +20,7 @@ export const ExpectedParticipants: React.FC<Props> = ({
   return (
     <>
       <Checkbox
-        title="Restriction of Problems"
+        title="Restriction "
         label="Don't suggest problems solved by expected participants"
         toggle={toggleExcludeSolved}
         description="When you check this, problems solved by expected participants are excluded"
