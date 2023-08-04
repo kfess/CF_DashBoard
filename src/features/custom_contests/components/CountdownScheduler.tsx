@@ -42,6 +42,7 @@ export const CountdownScheduler: React.FC<Props> = ({
     <Box
       sx={{
         p: 2,
+        my: 1,
         display: "flex",
         alignItems: "center",
         flexWrap: "wrap",
