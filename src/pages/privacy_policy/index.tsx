@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 export const PrivacyPolicyPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
-      <Grid container spacing={3} sx={{ my: 4 }}>
+      <Grid container spacing={2} sx={{ my: 2 }}>
         <Grid item xs={12}>
           <Typography variant="h4" component="h1" gutterBottom>
             Privacy Policy
@@ -41,9 +41,11 @@ export const PrivacyPolicyPage: React.FC = () => {
             <Typography variant="h5" component="h2" gutterBottom>
               Updates
             </Typography>
-            <Typography variant="body1">
+            <Typography component="div">
               <ul style={{ listStyle: "disc", paddingLeft: "20px" }}>
-                <li>2023/08/03</li>
+                <Typography component="li" variant="body1">
+                  2023/08/03
+                </Typography>
               </ul>
             </Typography>
           </Box>

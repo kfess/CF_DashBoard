@@ -10,14 +10,14 @@ export const Footer: React.FC = () => {
     <Box
       sx={{
         marginTop: "auto",
-        width: "100%", // Reset to 100%
+        width: "100%",
         minHeight: "8rem",
         position: "relative",
         bottom: 0,
         padding: "1rem",
         color: "#fff",
         backgroundColor: "#2E3436",
-        boxSizing: "border-box", // Added this line
+        boxSizing: "border-box",
       }}
     >
       <Container maxWidth="lg">
@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
           }}
         >
           <Typography variant="body1" mb={["0.5rem", "0"]}>
-            © 2023 CF-Dashboard
+            © 2023 CF-DashBoard
           </Typography>
           <Stack direction="row" spacing={1}>
             <GitHubButton
@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
               data-icon="octicon-star"
               data-size="small"
               data-show-count="true"
-              aria-label="Star kfes/CF_DashBoard on GitHub"
+              aria-label="Star kfess/CF_DashBoard on GitHub"
             >
               Star
             </GitHubButton>
@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
               href="https://github.com/kfess"
               data-size="small"
               data-show-count="true"
-              aria-label="Follow @kfes on GitHub"
+              aria-label="Follow @kfess on GitHub"
             >
               Follow @kfess
             </GitHubButton>

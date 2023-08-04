@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Box } from "@mui/material";
-import { Button } from "@features/ui/component/Button";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 import { Input } from "@features/ui/component/Input";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { HeadLine } from "@features/layout/components/HeadLine";
+import { _Button } from "@features/ui/component/Button";
 
 export const Profile: React.FC = () => {
   const { githubId, githubUserName, codeforcesUsername, updateUsername } =
@@ -34,11 +36,15 @@ export const Profile: React.FC = () => {
   return (
     <>
       <HeadLine title="Profile" />
-      <p>GitHub ID: {githubId}</p>
-      <p>GitHub Name: {githubUserName}</p>
-      <p>Codeforces Username: {codeforcesUsername}</p>
+      <Box sx={{ my: 3 }}>
+        <Typography variant="body1">GitHub ID: {githubId}</Typography>
+        <Typography variant="body1">GitHub Name: {githubUserName}</Typography>
+        <Typography variant="body1">
+          Codeforces Username: {codeforcesUsername}
+        </Typography>
+      </Box>
       <form onSubmit={handleSubmit}>
-        <Box sx={{ width: "50%" }}>
+        <Stack direction="row" spacing={1}>
           <Input
             type="text"
             id="codeforcesUsername"
@@ -46,10 +52,10 @@ export const Profile: React.FC = () => {
             value={newUsername}
             onChange={handleChange}
           />
-        </Box>
-        <Box sx={{ p: 1 }}>
-          <Button type="submit">Update</Button>
-        </Box>
+          <_Button type="submit" color="#9246FF">
+            Update
+          </_Button>
+        </Stack>
       </form>
     </>
   );

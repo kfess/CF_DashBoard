@@ -75,7 +75,7 @@ export const LabelsTable: React.FC = () => {
             <TableRow>
               {labelsAndProblems && (
                 <TableCell>
-                  <Typography variant="body2" fontWeight="bold">
+                  <Typography variant="body2" fontWeight="bold" noWrap={true}>
                     {`${labelsAndProblems.length} ${
                       labelsAndProblems.length > 1 ? "Labels" : "Label"
                     }`}
