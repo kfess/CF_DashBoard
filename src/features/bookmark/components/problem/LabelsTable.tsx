@@ -9,12 +9,14 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Stack,
 } from "@mui/material";
 import type { ProblemLabel } from "@features/bookmark/problemLabel";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { LabelItem } from "@features/bookmark/components/problem/LabelItem";
 import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
+import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 
 const sortOrders = [
   "Alphabetically",
@@ -75,11 +77,16 @@ export const LabelsTable: React.FC = () => {
             <TableRow>
               {labelsAndProblems && (
                 <TableCell>
-                  <Typography variant="body2" fontWeight="bold" noWrap={true}>
-                    {`${labelsAndProblems.length} ${
-                      labelsAndProblems.length > 1 ? "Labels" : "Label"
-                    }`}
-                  </Typography>
+                  <Stack direction="row" alignItems="center" spacing={1}>
+                    <Typography variant="body2" fontWeight="bold" noWrap={true}>
+                      {`${labelsAndProblems.length} ${
+                        labelsAndProblems.length > 1 ? "Labels" : "Label"
+                      }`}
+                    </Typography>
+                    <div>
+                      <HelpToolTip title="Labels are saved in your browser. If you clear your browser's cache, your labels will be deleted. This is a requirement for saving labels without logging in." />
+                    </div>
+                  </Stack>
                 </TableCell>
               )}
               <TableCell>

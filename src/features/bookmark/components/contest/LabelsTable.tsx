@@ -9,12 +9,14 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Stack,
 } from "@mui/material";
 import type { ContestLabel } from "@features/bookmark/contestLabel";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { LabelItem } from "@features/bookmark/components/contest/LabelItem";
 import { useIndexedDBForContestLabel } from "@features/bookmark/hooks/useIndexedDBForContestLabel";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
+import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 
 const sortOrders = [
   "Alphabetically",
@@ -75,11 +77,16 @@ export const LabelsTable: React.FC = () => {
             <TableRow>
               {labelsAndContests && (
                 <TableCell>
-                  <Typography variant="body2" fontWeight="bold" noWrap={true}>
-                    {`${labelsAndContests.length} ${
-                      labelsAndContests.length > 1 ? "Labels" : "Label"
-                    }`}
-                  </Typography>
+                  <Stack direction="row" alignItems="center" spacing={1}>
+                    <Typography variant="body2" fontWeight="bold" noWrap={true}>
+                      {`${labelsAndContests.length} ${
+                        labelsAndContests.length > 1 ? "Labels" : "Label"
+                      }`}
+                    </Typography>
+                    <div>
+                      <HelpToolTip title="Labels are saved in your browser. If you clear your browser's cache, your labels will be deleted. This is a requirement for saving labels without logging in." />
+                    </div>
+                  </Stack>
                 </TableCell>
               )}
               <TableCell>
@@ -94,7 +101,7 @@ export const LabelsTable: React.FC = () => {
               </TableCell>
               <TableCell>
                 <Typography variant="body2" fontWeight="bold">
-                  Actions{" "}
+                  Actions
                 </Typography>
               </TableCell>
             </TableRow>
