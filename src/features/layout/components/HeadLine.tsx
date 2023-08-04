@@ -1,18 +1,10 @@
 import React from "react";
-import { css } from "@emotion/react";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { LabelsChip } from "@features/bookmark/components/problem/LabelsChip";
 import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
 import { DeletableChip } from "@features/ui/component/Chip";
-
-const headLineCss = css({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginBottom: "0.5rem",
-  flexWrap: "wrap",
-});
 
 type Props = { readonly title: string };
 
@@ -21,11 +13,17 @@ export const HeadLine: React.FC<Props> = ({ title }) => {
 
   return (
     <>
-      <div css={headLineCss}>
+      <Stack
+        direction="row"
+        flexWrap="wrap"
+        alignItems="center"
+        justifyContent="space-between"
+        marginBottom="0.5rem"
+      >
         <Typography variant="h4" component="h1">
           {title}
         </Typography>
-        <div css={{ display: "flex" }}>
+        <Stack direction="row" spacing={1}>
           {queryUserId && (
             <DeletableChip
               label={`query: ${queryUserId}`}
@@ -33,8 +31,8 @@ export const HeadLine: React.FC<Props> = ({ title }) => {
             />
           )}
           <LabelsChip />
-        </div>
-      </div>
+        </Stack>
+      </Stack>
       <Divider />
     </>
   );

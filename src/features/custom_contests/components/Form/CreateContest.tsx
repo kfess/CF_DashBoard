@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import { alpha } from "@mui/material";
 import { localToUtcISOString } from "@helpers/date";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Container } from "@mui/material";
-import { Button } from "@features/ui/component/Button";
+import { Typography } from "@mui/material";
+import { _Button } from "@features/ui/component/Button";
 import { Chip_ } from "@features/ui/component/Chip";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import {
@@ -59,12 +62,15 @@ export const CreateContest: React.FC = () => {
     getValues,
     setValue,
     handleSubmit,
+    watch,
     formState: { errors },
     reset,
   } = useForm<CreateCustomContest>({
     resolver: zodResolver(createCustomContestSchema),
     defaultValues: defaultValues,
   });
+  const watchedVisibility = watch("visibility");
+  const watchedMode = watch("mode");
 
   useEffect(() => {
     reset(defaultValues);
@@ -83,23 +89,89 @@ export const CreateContest: React.FC = () => {
   };
 
   return (
-    <Container>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div css={{ marginTop: "1rem", marginBottom: "1rem" }}>
-          Organize Custom Contest as <Chip_ label={codeforcesUsername} />
-          <Button onClick={() => {}}>Change CF user</Button>
-        </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Typography
+        variant="h6"
+        sx={{
+          fontWeight: "bold",
+          my: 2,
+          color: "#9246FF",
+          boxSizing: "border-box",
+        }}
+      >
+        Create your own contest with your own problems.
+      </Typography>
 
-        <Visibility control={control} errors={errors} />
-        <Mode control={control} errors={errors} />
-        <Title control={control} errors={errors} />
-        <Description control={control} errors={errors} />
-        <ContestDate control={control} errors={errors} />
-        <Penalty control={control} errors={errors} />
+      <div css={{ marginTop: "1rem", marginBottom: "1rem" }}>
+        Organize Custom Contest as{" "}
+        <Chip_ label={codeforcesUsername} onClick={() => {}} />
+        <_Button onClick={() => {}}>Change CF user</_Button>
+      </div>
+
+      <Box
+        sx={{
+          p: { xs: 2 },
+          mx: { sm: 0, md: 2 },
+          my: 2,
+          border: 1,
+          borderColor: "divider",
+          borderRadius: "4px",
+          backgroundColor: "white",
+        }}
+      >
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <Typography variant="h5" fontWeight="fontWeightBold">
+            Contest Details
+          </Typography>
+          <Chip_
+            label={watchedVisibility}
+            sx={{
+              color: "#9246FF",
+              borderColor: "black",
+              backgroundColor: alpha("#9246FF", 0.15),
+            }}
+          />
+          <Chip_
+            label={watchedMode}
+            sx={{
+              color: "#9246FF",
+              borderColor: "black",
+              backgroundColor: alpha("#9246FF", 0.15),
+            }}
+          />
+        </Stack>
+
+        <Stack>
+          <Title control={control} errors={errors} />
+          <Description control={control} errors={errors} />
+          <ContestDate control={control} errors={errors} />
+          <Visibility control={control} errors={errors} />
+          <Penalty control={control} errors={errors} />
+          <Mode control={control} errors={errors} />
+        </Stack>
+      </Box>
+      <Box
+        sx={{
+          p: { xs: 2 },
+          mx: { sm: 0, md: 2 },
+          my: 2,
+          border: 1,
+          borderColor: "divider",
+          borderRadius: "4px",
+          backgroundColor: "white",
+        }}
+      >
+        <Typography variant="h5" fontWeight="fontWeightBold">
+          Selected Problems
+        </Typography>
         <SelectProblems control={control} setValue={setValue} errors={errors} />
+      </Box>
 
-        <Button type="submit">Submit</Button>
-      </form>
-    </Container>
+      <Stack direction="row" justifyContent="flex-end">
+        <_Button type="submit" color="#9246FF">
+          Create Contest
+        </_Button>
+      </Stack>
+    </form>
   );
 };
