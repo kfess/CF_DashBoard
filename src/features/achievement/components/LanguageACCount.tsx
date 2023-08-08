@@ -32,7 +32,7 @@ const LanguageStat: React.FC<Count> = ({ language, count, lastACDate }) => {
           alignItems: "center",
         }}
       >
-        <Chip_ label={language} />
+        <Chip_ label={language} onClick={() => {}} />
         <Stack direction="row" alignItems="center">
           <Typography
             variant="body1"

@@ -4,30 +4,18 @@ import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
 import { uniqueDateSet } from "../processSubmission";
 
-const _calcStreakSum = (
-  submissions: Submission[],
-  filterFunc: (submission: Submission) => boolean // parent component で useCallback して渡す
-) => {
-  const filteredSubmissions = submissions.filter(filterFunc);
-  const uniqueDate = uniqueDateSet(filteredSubmissions);
+const _calcStreakSum = (submissions: Submission[]) => {
+  const uniqueDate = uniqueDateSet(submissions);
   return uniqueDate.size;
 };
 
 type Props = {
   readonly submissions: Submission[];
-  readonly filterFunc: (submission: Submission) => boolean;
   readonly title: string;
 };
 
-export const StreakSum: React.FC<Props> = ({
-  submissions,
-  filterFunc,
-  title,
-}) => {
-  const streakSum = useMemo(
-    () => _calcStreakSum(submissions, filterFunc),
-    [submissions, filterFunc]
-  );
+export const StreakSum: React.FC<Props> = ({ submissions, title }) => {
+  const streakSum = useMemo(() => _calcStreakSum(submissions), [submissions]);
 
   return (
     <Box sx={{ textAlign: "center" }}>

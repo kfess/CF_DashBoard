@@ -5,11 +5,10 @@ import type { Submission } from "@features/submission/submission";
 import { StreakSum } from "@features/achievement/components/StreakSum";
 import { CurrentStreak } from "@features/achievement/components/CurrentStreak";
 import { LongestStreak } from "@features/achievement/components/LongestStreak";
-import { isACSubmission } from "../processSubmission";
 
-type Props = { submissions: Submission[] };
+type Props = { allSubmissions: Submission[]; acSubmissions: Submission[] };
 
-export const Streak: React.FC<Props> = ({ submissions }) => {
+export const Streak: React.FC<Props> = ({ allSubmissions, acSubmissions }) => {
   return (
     <Box sx={{ padding: 1 }}>
       <Typography variant="h6" gutterBottom>
@@ -32,19 +31,13 @@ export const Streak: React.FC<Props> = ({ submissions }) => {
             marginBottom: 2,
           }}
         >
-          <StreakSum
-            submissions={submissions}
-            filterFunc={isACSubmission}
-            title="AC Streak Sum"
-          />
+          <StreakSum submissions={acSubmissions} title="AC Streak Sum" />
           <CurrentStreak
-            submissions={submissions}
-            filterFunc={isACSubmission}
+            submissions={acSubmissions}
             title="Current AC Streak"
           />
           <LongestStreak
-            submissions={submissions}
-            filterFunc={isACSubmission}
+            submissions={acSubmissions}
             title="Longest AC Streak"
           />
         </Box>
@@ -56,21 +49,9 @@ export const Streak: React.FC<Props> = ({ submissions }) => {
             width: "100%",
           }}
         >
-          <StreakSum
-            submissions={submissions}
-            filterFunc={() => true}
-            title="Streak Sum"
-          />
-          <CurrentStreak
-            submissions={submissions}
-            filterFunc={() => true}
-            title="Current Streak"
-          />
-          <LongestStreak
-            submissions={submissions}
-            filterFunc={() => true}
-            title="Longest Streak"
-          />
+          <StreakSum submissions={allSubmissions} title="Streak Sum" />
+          <CurrentStreak submissions={allSubmissions} title="Current Streak" />
+          <LongestStreak submissions={allSubmissions} title="Longest Streak" />
         </Box>
       </Box>
     </Box>

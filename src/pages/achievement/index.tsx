@@ -86,7 +86,10 @@ export const AchievementPage: React.FC = () => {
                 boxShadow: [1, 1, 1, 1],
               }}
             >
-              <Streak submissions={allSubmissions} />
+              <Streak
+                allSubmissions={allSubmissions}
+                acSubmissions={acSubmissions}
+              />
             </Box>
             <Box
               sx={{

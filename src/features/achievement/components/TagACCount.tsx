@@ -18,7 +18,7 @@ export type Count = {
 
 const TagStats: React.FC<Count> = ({ name, count }) => (
   <Stack direction="row" spacing={1} alignItems="center">
-    <Chip_ label={name} />
+    <Chip_ label={name} onClick={() => {}} />
     <Typography variant="body2" color="text.secondary">
       ×
     </Typography>
@@ -35,7 +35,6 @@ export const TagACCount: React.FC<Props> = ({ submissions }) => {
   const [isReadMore, toggleReadMore] = useToggle(true, false);
 
   const tagMap = useMemo(() => getACTagMap(submissions), [submissions]);
-
   const tagCounts: Count[] = useMemo(
     () =>
       [...tags]

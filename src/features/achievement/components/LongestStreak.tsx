@@ -5,12 +5,8 @@ import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
 import { uniqueDateSet } from "@features/achievement/processSubmission";
 
-const _calcLongestStreak = (
-  submissions: Submission[],
-  filterFunc: (submission: Submission) => boolean
-) => {
-  const filteredSubmissions = submissions.filter(filterFunc);
-  const uniqueACDate = uniqueDateSet(filteredSubmissions);
+const _calcLongestStreak = (submissions: Submission[]) => {
+  const uniqueACDate = uniqueDateSet(submissions);
   const sortedDate = Array.from(uniqueACDate).sort((a, b) =>
     b.localeCompare(a)
   );
@@ -31,18 +27,13 @@ const _calcLongestStreak = (
 
 type Props = {
   readonly submissions: Submission[];
-  readonly filterFunc: (submission: Submission) => boolean; // parent component で useCallback して渡す
   readonly title: string;
 };
 
-export const LongestStreak: React.FC<Props> = ({
-  submissions,
-  filterFunc,
-  title,
-}) => {
+export const LongestStreak: React.FC<Props> = ({ submissions, title }) => {
   const maxStreak = useMemo(
-    () => _calcLongestStreak(submissions, filterFunc),
-    [submissions, filterFunc]
+    () => _calcLongestStreak(submissions),
+    [submissions]
   );
 
   return (
