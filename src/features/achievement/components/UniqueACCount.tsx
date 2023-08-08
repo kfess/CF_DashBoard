@@ -3,10 +3,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
-import {
-  isACSubmission,
-  filterUniqueSubmissions,
-} from "@features/achievement/processSubmission";
+import { filterUniqueSubmissions } from "@features/achievement/processSubmission";
 import { isLastMonth, isLastYear } from "@helpers/date";
 import { pluralize } from "@helpers/index";
 
@@ -14,9 +11,7 @@ const _filterSubmissions = (
   submissions: Submission[],
   filterFunc: (time: number) => boolean
 ) => {
-  const filteredSubmissions = submissions.filter(isACSubmission);
-  const uniqueFilteredSubmissions =
-    filterUniqueSubmissions(filteredSubmissions);
+  const uniqueFilteredSubmissions = filterUniqueSubmissions(submissions);
   return uniqueFilteredSubmissions.filter((sub) =>
     filterFunc(sub.creationTimeSeconds)
   );

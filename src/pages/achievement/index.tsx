@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -20,16 +20,21 @@ import { HeadLine } from "@features/layout/components/HeadLine";
 import { TabItem, Tabs } from "@features/ui/component/Tabs";
 import { UserSubmissionPage } from "@pages/submission/user/index";
 import { HeatMaps } from "@features/achievement/components/HeatMaps";
-import { Rating } from "@features/achievement/components/Rating";
+import { isACSubmission } from "@features/achievement/processSubmission";
 
 export const AchievementPage: React.FC = () => {
   const userId = useQueryParams(QueryParamKeys.USERID);
-  const { data } = useFetchUserSubmission({
+  if (!userId) return null;
+
+  const { data: allSubmissions } = useFetchUserSubmission({
     userId: userId,
   });
-  const userInfo = useFetchUserInfo({ userId }).data;
+  const acSubmissions = useMemo(
+    () => allSubmissions?.filter(isACSubmission),
+    [allSubmissions]
+  );
 
-  if (!userId) return null;
+  const userInfo = useFetchUserInfo({ userId }).data;
 
   const tabItems: TabItem[] = [
     {
@@ -53,34 +58,23 @@ export const AchievementPage: React.FC = () => {
                 friendsOfCount={userInfo?.friendOfCount}
               />
               <Divider />
-              <LanguageACCount submissions={data} />
+              <LanguageACCount submissions={acSubmissions} />
               <Divider />
-              <TagACCount submissions={data} />
+              <TagACCount submissions={acSubmissions} />
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={8}>
-            {/* <Box
-              sx={{
-                p: 2,
-                backgroundColor: "white",
-                borderRadius: 1,
-                boxShadow: [1, 1, 1, 1],
-              }}
-            >
-              <Rating />
-            </Box> */}
             <Box
               sx={{
                 p: 2,
-                // marginTop: 2,
                 backgroundColor: "white",
                 borderRadius: 1,
                 boxShadow: [1, 1, 1, 1],
               }}
             >
               <>
-                <UniqueACCount submissions={data} />
-                <TotalRatingSum submissions={data} />
+                <UniqueACCount submissions={acSubmissions} />
+                <TotalRatingSum submissions={acSubmissions} />
               </>
             </Box>
             <Box
@@ -92,7 +86,7 @@ export const AchievementPage: React.FC = () => {
                 boxShadow: [1, 1, 1, 1],
               }}
             >
-              <Streak submissions={data} />
+              <Streak submissions={allSubmissions} />
             </Box>
             <Box
               sx={{
@@ -103,7 +97,7 @@ export const AchievementPage: React.FC = () => {
                 boxShadow: [1, 1, 1, 1],
               }}
             >
-              <HeatMaps submissions={data} />
+              <HeatMaps submissions={allSubmissions} />
             </Box>
           </Grid>
         </Grid>
@@ -124,7 +118,7 @@ export const AchievementPage: React.FC = () => {
                 boxShadow: [1, 1, 1, 1],
               }}
             >
-              <Pies submissions={data} />
+              <Pies submissions={allSubmissions} />
             </Box>
           </Grid>
         </Grid>
@@ -145,9 +139,9 @@ export const AchievementPage: React.FC = () => {
                 boxShadow: [1, 1, 1, 1],
               }}
             >
-              <DailyChart submissions={data} />
+              <DailyChart submissions={allSubmissions} />
               <Divider />
-              <ClimbingChart submissions={data} />
+              <ClimbingChart submissions={allSubmissions} />
             </Box>
           </Grid>
         </Grid>

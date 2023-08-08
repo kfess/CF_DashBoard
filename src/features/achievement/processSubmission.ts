@@ -14,15 +14,19 @@ export const isGymSubmission = (submission: Submission | undefined): boolean =>
 
 export const filterUniqueSubmissions = (
   submissions: Submission[]
-): Submission[] =>
-  Array.from(
-    new Map(
-      submissions.map((s) => [
-        getProblemKey(s.contestId, s.problem.index, s.problem.name),
-        s,
-      ])
-    ).values()
-  );
+): Submission[] => {
+  const uniqueMap = submissions.reduce((acc, submission) => {
+    const key = getProblemKey(
+      submission.contestId,
+      submission.problem.index,
+      submission.problem.name
+    );
+    acc[key] = submission;
+    return acc;
+  }, {} as Record<string, Submission>);
+
+  return Object.values(uniqueMap);
+};
 
 export const sumSubmissionsRating = (submissions: Submission[]): number =>
   submissions.reduce((sum, s) => sum + (s.problem.rating ?? 0), 0);

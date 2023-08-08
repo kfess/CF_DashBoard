@@ -7,30 +7,44 @@ import {
   CF_USER_SUBMISSION_URL,
   CF_RECENT_SUBMISSION_URL,
 } from "@constants/url";
+import { isGymSubmission } from "@features/achievement/processSubmission";
+import { useCallback } from "react";
 
-const isMockMode = false;
+const fetchUserSubmissions = async (
+  userId: string | null
+): Promise<Submission[]> => {
+  try {
+    const url = `${CF_USER_SUBMISSION_URL}?handle=${userId}`;
+    const response = await axios.get(url);
+    const userSubmission = okSubmissionApiSchema.parse(response.data);
+    return userSubmission.result;
+  } catch (err) {
+    if (err instanceof ZodError) {
+      throw new Error("validation error");
+    }
+    throw new Error("user submission error");
+  }
+};
 
 export const useFetchUserSubmission = ({
   userId,
+  excludeGym = true,
 }: {
   userId: string | null;
+  excludeGym?: boolean;
 }) => {
   const { data, isError, error, isLoading } = useQuery<Submission[], Error>({
-    queryKey: ["user-submissions", userId],
+    queryKey: ["user-submissions", userId, excludeGym],
     queryFn: async (): Promise<Submission[]> => {
-      try {
-        const url = `${CF_USER_SUBMISSION_URL}?handle=${userId}`;
-        const response = await axios.get(url);
-        const userSubmission = okSubmissionApiSchema.parse(response.data);
-        return userSubmission.result;
-      } catch (err) {
-        if (err instanceof ZodError) {
-          console.log(err);
-          throw new Error("validation error");
-        }
-        throw new Error("user submission error");
-      }
+      return await fetchUserSubmissions(userId);
     },
+    select: useCallback((data: Submission[]) => {
+      if (excludeGym) {
+        return data.filter((s) => !isGymSubmission(s));
+      } else {
+        return data;
+      }
+    }, []),
     enabled: !!userId,
     useErrorBoundary: false, // For now, we don't want to use ErrorBoundary
   });
@@ -38,6 +52,7 @@ export const useFetchUserSubmission = ({
   return { data: data || [], isError, error, isLoading };
 };
 
+const isMockMode = false;
 const fetchRecentSubmissions = async (): Promise<Submission[]> => {
   try {
     await new Promise((resolve) => setTimeout(resolve, 300));

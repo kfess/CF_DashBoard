@@ -3,15 +3,13 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
 import {
-  isACSubmission,
   filterUniqueSubmissions,
   sumSubmissionsRating,
 } from "@features/achievement/processSubmission";
 
-const _calcRatingSum = (submissions: Submission[]) => {
-  const ACSubmissions = submissions.filter(isACSubmission);
-  const uniqueACSubmissions = filterUniqueSubmissions(ACSubmissions);
-  const sum = sumSubmissionsRating(uniqueACSubmissions) ?? 0;
+const _calcRatingSum = (submissions: Submission[]): number => {
+  const uniqueSubmissions = filterUniqueSubmissions(submissions);
+  const sum = sumSubmissionsRating(uniqueSubmissions) || 0;
   return sum;
 };
 

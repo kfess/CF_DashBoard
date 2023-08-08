@@ -30,6 +30,7 @@ export const useFetchUserInfo = ({ userId }: { userId: string | null }) => {
     refetchOnReconnect: false,
     retry: false,
     useErrorBoundary: false, // For now, we don't want to use ErrorBoundary
+    keepPreviousData: true,
   });
 
   return { data, isError, error, isLoading, isSuccess };
