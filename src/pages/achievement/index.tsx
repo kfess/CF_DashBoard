@@ -30,7 +30,7 @@ export const AchievementPage: React.FC = () => {
     userId: userId,
   });
   const acSubmissions = useMemo(
-    () => allSubmissions?.filter(isACSubmission),
+    () => allSubmissions.filter(isACSubmission),
     [allSubmissions]
   );
 
@@ -139,9 +139,9 @@ export const AchievementPage: React.FC = () => {
                 boxShadow: [1, 1, 1, 1],
               }}
             >
-              <DailyChart submissions={allSubmissions} />
+              <DailyChart submissions={acSubmissions} />
               <Divider />
-              <ClimbingChart submissions={allSubmissions} />
+              <ClimbingChart submissions={acSubmissions} />
             </Box>
           </Grid>
         </Grid>

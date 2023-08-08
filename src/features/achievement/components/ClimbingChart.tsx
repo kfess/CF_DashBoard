@@ -15,7 +15,6 @@ import {
 } from "recharts";
 import { Submission } from "@features/submission/submission";
 import {
-  isACSubmission,
   groupbyRatingColor,
   groupbyDate,
   filterUniqueSubmissions,
@@ -36,11 +35,9 @@ type DisplayColor = typeof displayColors[number];
 
 type Props = { submissions: Submission[] };
 
-export const ClimbingChart: React.FC<Props> = (props: Props) => {
-  const { submissions } = props;
+export const ClimbingChart: React.FC<Props> = ({ submissions }) => {
   const [displayColor, setDisplayColor] = useState<DisplayColor>("No Color");
-  const ACSubmissions = submissions.filter(isACSubmission);
-  const uniqueACSubmissions = filterUniqueSubmissions(ACSubmissions).sort(
+  const uniqueACSubmissions = filterUniqueSubmissions(submissions).sort(
     (a, b) => a.creationTimeSeconds - b.creationTimeSeconds
   );
 

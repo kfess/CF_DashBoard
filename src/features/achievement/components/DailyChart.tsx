@@ -15,7 +15,6 @@ import {
 } from "recharts";
 import type { Submission } from "@features/submission/submission";
 import {
-  isACSubmission,
   groupbyRatingColor,
   groupbyDate,
 } from "@features/achievement/processSubmission";
@@ -34,13 +33,12 @@ type DisplayColor = typeof displayColors[number];
 
 type Props = { submissions: Submission[] };
 
-export const DailyChart: React.FC<Props> = (props: Props) => {
-  const { submissions } = props;
+export const DailyChart: React.FC<Props> = ({ submissions }) => {
   const [displayColor, setDisplayColor] = useState<DisplayColor>("No Color");
 
-  const ACSubmissions = submissions
-    .filter(isACSubmission)
-    .sort((a, b) => a.creationTimeSeconds - b.creationTimeSeconds);
+  const ACSubmissions = submissions.sort(
+    (a, b) => a.creationTimeSeconds - b.creationTimeSeconds
+  );
 
   const gDateSubmissions = groupbyDate(ACSubmissions);
 
