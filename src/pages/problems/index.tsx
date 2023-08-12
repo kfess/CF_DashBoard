@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import { chooseRandomIndex } from "@helpers/random";
 import { ProblemsTable } from "@features/problems/components/ProblemsTable";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
-import { Tag } from "@features/problems/problem";
+import type { Tag } from "@features/problems/problem";
 import type { Classification } from "@features/contests/contest";
 import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
 import { ratingColorInfo } from "@features/color/ratingColor";
@@ -15,19 +15,27 @@ import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { TagItems } from "@features/problems/components/TagItems";
 import { DifficultyStatus } from "@features/problems/components/DifficultyStatus";
+import { useURLQuery } from "@hooks/useQueryParams";
 
 export const ProblemsPage: React.FC = () => {
+  const { queryParams } = useURLQuery();
+
   const { data: problems, isLoading } = useFetchProblems();
 
-  const [classification, setClassification] = useState<Classification>("All");
-  const [solvedStatus, setSolvedStatus] =
-    useState<SolvedStatus>("All Problems");
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  const [classification, setClassification] = useState<Classification>(
+    queryParams.classification || "All"
+  );
+  const [solvedStatus, setSolvedStatus] = useState<SolvedStatus>(
+    queryParams.solvedStatus || "All Problems"
+  );
+  const [selectedTags, setSelectedTags] = useState<Tag[]>(
+    queryParams.tags || []
+  );
   const [lowerDifficulty, setLowerDifficulty] = useState(
-    ratingColorInfo.Gray.lowerBound
+    queryParams.fromDifficulty || ratingColorInfo.Gray.lowerBound
   );
   const [upperDifficulty, setUpperDifficulty] = useState(
-    ratingColorInfo.DeepRed.upperBound
+    queryParams.toDifficulty || ratingColorInfo.DeepRed.upperBound
   );
   const [showTags, toggleShowTags, setShowTags] = useToggle(false, true);
 

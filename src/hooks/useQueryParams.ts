@@ -15,17 +15,49 @@ export const useQueryParams = (param: QueryParams): string | null => {
   return urlQueries.get(param);
 };
 
+/////////////////////////////////
 // under development
+import type { Classification } from "@features/contests/contest";
+import type { Tag } from "@features/problems/problem";
+import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
+
 type _QueryParams = {
-  [key: string]: string | number | string[] | number[] | undefined;
+  userId?: string;
+  classification?: Classification;
+  fromDifficulty?: number;
+  toDifficulty?: number;
+  tags?: Tag[];
+  solvedStatus?: SolvedStatus;
+  [key: string]:
+    | string
+    | number
+    | Tag[]
+    | Classification
+    | SolvedStatus
+    | undefined;
+};
+
+const castToQueryParams = (params: Record<string, string>): _QueryParams => {
+  return {
+    userId: params.userId ? params.userId : undefined,
+    classification: params.classification as Classification,
+    fromDifficulty: params.fromDifficulty
+      ? Number(params.fromDifficulty)
+      : undefined,
+    toDifficulty: params.toDifficulty ? Number(params.toDifficulty) : undefined,
+    tags: params.tags ? (params.tags.split(",") as Tag[]) : undefined,
+    solvedStatus: params.solvedStatus as SolvedStatus,
+  };
 };
 
 export const useURLQuery = (basePath: string = "") => {
   const { search } = useLocation();
   const navigate = useNavigate();
 
-  const getQueryParams = () =>
-    Object.fromEntries(new URLSearchParams(search).entries());
+  const getQueryParams = () => {
+    const rawParams = Object.fromEntries(new URLSearchParams(search).entries());
+    return castToQueryParams(rawParams);
+  };
 
   const setURLQuery = (newQueryParams: _QueryParams) => {
     const updatedQueries = new URLSearchParams();
@@ -47,5 +79,8 @@ export const useURLQuery = (basePath: string = "") => {
     navigate(`${basePath}?${updatedQueries.toString()}`);
   };
 
-  return { queryParams: getQueryParams(), setURLQuery };
+  return {
+    queryParams: getQueryParams(),
+    setURLQuery,
+  };
 };
