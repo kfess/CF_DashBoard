@@ -26,7 +26,7 @@ export const ProblemsPage: React.FC = () => {
     queryParams.classification || "All"
   );
   const [solvedStatus, setSolvedStatus] = useState<SolvedStatus>(
-    queryParams.solvedStatus || "All Problems"
+    queryParams.problemSolvedStatus || "All Problems"
   );
   const [selectedTags, setSelectedTags] = useState<Tag[]>(
     queryParams.tags || []

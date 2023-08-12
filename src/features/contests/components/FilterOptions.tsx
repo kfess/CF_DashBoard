@@ -1,4 +1,5 @@
 import React from "react";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import type { Classification } from "@features/contests/contest";
 import { ContestTypeFilter } from "./ContestTypeFilter";
@@ -6,7 +7,7 @@ import { SolvedStatus, SolvedStatusFilter } from "./SolvedStatusFilter";
 import { PeriodFilterButton, PeriodWord } from "./PeriodFilter";
 import { ResetFilterButton } from "@features/contests/components/ResetFilter";
 import { ViewFilter } from "@features/contests/components/ViewFilter";
-import { Box } from "@mui/material";
+import { useURLQuery } from "@hooks/useQueryParams";
 
 type Props = {
   showDifficulty: boolean;
@@ -34,22 +35,39 @@ export const FilterOptions: React.FC<Props> = React.memo(
     toggleShowDifficulty,
     toggleReverse,
   }) => {
+    const { setURLQuery } = useURLQuery();
+
+    const onSelectClassification = (classification: Classification) => {
+      setClassification(classification);
+      setURLQuery({ classification: classification });
+    };
+
+    const onSelectPeriod = (period: PeriodWord) => {
+      setPeriod(period);
+      setURLQuery({ period: period });
+    };
+
+    const onSelectSolvedStatus = (solvedStatus: SolvedStatus) => {
+      setSolvedStatus(solvedStatus);
+      setURLQuery({ contestSolvedStatus: solvedStatus });
+    };
+
     return (
       <Stack direction="row" flexWrap="wrap" sx={{ py: 1, gap: "0.5rem" }}>
         <Box>
           <ContestTypeFilter
             classification={classification}
-            setClassification={setClassification}
+            onSelectClassification={onSelectClassification}
           />
         </Box>
         <Box>
-          <PeriodFilterButton period={period} setPeriod={setPeriod} />
+          <PeriodFilterButton period={period} onSelectPeriod={onSelectPeriod} />
         </Box>
 
         <Box>
           <SolvedStatusFilter
             solvedStatus={solvedStatus}
-            setSolvedStatus={setSolvedStatus}
+            onSelectSolvedStatus={onSelectSolvedStatus}
           />
         </Box>
         <Box>

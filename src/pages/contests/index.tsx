@@ -18,9 +18,12 @@ import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 import { VerticalContestTable } from "@features/contests/components/VerticalContestTable";
 import { useMediaQuery } from "@mui/material";
 import type { Contest, ReshapedContest } from "@features/contests/contest";
+import { useURLQuery } from "@hooks/useQueryParams";
 
 export const ContestsPage: React.FC = () => {
   const isSmallScreen = useMediaQuery("(max-width: 600px)");
+
+  const { setURLQuery } = useURLQuery();
 
   const { data } = useFetchContests();
   const { solvedSet, attemptedSet } = useSolvedStatus();
@@ -87,10 +90,12 @@ export const ContestsPage: React.FC = () => {
               classification={classification}
               setDefaultClassification={() => {
                 setClassification("All");
+                setURLQuery({ classification: undefined });
               }}
               period={period}
               setPeriod={() => {
                 setPeriod("All Period");
+                setURLQuery({ period: undefined });
               }}
               solvedStatus={solvedStatus}
               setSolvedStatus={setSolvedStatus}

@@ -14,12 +14,12 @@ export type SolvedStatus = typeof solvedStatuses[number];
 
 type Props = {
   solvedStatus: SolvedStatus;
-  setSolvedStatus: (arg: SolvedStatus) => void;
+  onSelectSolvedStatus: (arg: SolvedStatus) => void;
 };
 
 export const SolvedStatusFilter: React.FC<Props> = ({
   solvedStatus,
-  setSolvedStatus,
+  onSelectSolvedStatus,
 }) => {
   const searchUserId = useQueryParams(QueryParamKeys.USERID);
 
@@ -32,7 +32,7 @@ export const SolvedStatusFilter: React.FC<Props> = ({
             return { item: ss };
           })}
           selectedItem={solvedStatus}
-          setSelectedItem={setSolvedStatus}
+          onSelect={onSelectSolvedStatus}
           disabled={!searchUserId}
         />
       ) : (
@@ -51,7 +51,7 @@ export const SolvedStatusFilter: React.FC<Props> = ({
                 return { item: ss };
               })}
               selectedItem={solvedStatus}
-              setSelectedItem={setSolvedStatus}
+              onSelect={onSelectSolvedStatus}
               disabled={!searchUserId}
             />
           </div>

@@ -30,10 +30,13 @@ export const periodFilter: PeriodFilter = {
 
 type Props = {
   period: PeriodWord;
-  setPeriod: (arg: PeriodWord) => void;
+  onSelectPeriod: (arg: PeriodWord) => void;
 };
 
-export const PeriodFilterButton: React.FC<Props> = ({ period, setPeriod }) => {
+export const PeriodFilterButton: React.FC<Props> = ({
+  period,
+  onSelectPeriod,
+}) => {
   return (
     <DropDownMenuButton
       title="Period"
@@ -41,7 +44,7 @@ export const PeriodFilterButton: React.FC<Props> = ({ period, setPeriod }) => {
         return { item: periodWord };
       })}
       selectedItem={period}
-      setSelectedItem={setPeriod}
+      onSelect={onSelectPeriod}
     />
   );
 };

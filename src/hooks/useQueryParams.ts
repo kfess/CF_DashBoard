@@ -19,7 +19,8 @@ export const useQueryParams = (param: QueryParams): string | null => {
 // under development
 import type { Classification } from "@features/contests/contest";
 import type { Tag } from "@features/problems/problem";
-import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
+import type { SolvedStatus as ProblemSolvedStatus } from "@features/problems/components/SolvedStatusFilter";
+import type { SolvedStatus as ContestSolvedStatus } from "@features/contests/components/SolvedStatusFilter";
 
 type _QueryParams = {
   userId?: string;
@@ -27,13 +28,14 @@ type _QueryParams = {
   fromDifficulty?: number;
   toDifficulty?: number;
   tags?: Tag[];
-  solvedStatus?: SolvedStatus;
+  problemSolvedStatus?: ProblemSolvedStatus;
+  contestSolvedStatus?: ContestSolvedStatus;
   [key: string]:
     | string
     | number
     | Tag[]
     | Classification
-    | SolvedStatus
+    | ProblemSolvedStatus
     | undefined;
 };
 
@@ -62,7 +64,8 @@ const castToQueryParams = (params: Record<string, string>): _QueryParams => {
       : undefined,
     toDifficulty: params.toDifficulty ? Number(params.toDifficulty) : undefined,
     tags: params.tags ? (params.tags.split(",") as Tag[]) : undefined,
-    solvedStatus: params.solvedStatus as SolvedStatus,
+    problemSolvedStatus: params.solvedStatus as ProblemSolvedStatus,
+    contestSolvedStatus: params.solvedStatus as ContestSolvedStatus,
   };
 };
 
