@@ -18,25 +18,23 @@ type Props = {
   selectedTags: Tag[];
   removeTag: (tag: Tag) => void;
   lowerDifficulty: number;
-  setLowerDifficulty: (arg: number) => void;
+  onResetFromDifficulty: () => void;
   upperDifficulty: number;
-  setUpperDifficulty: (arg: number) => void;
+  onResetToDifficulty: () => void;
 };
 
-export const FilterChips: React.FC<Props> = (props: Props) => {
-  const {
-    classification,
-    setDefaultClassification,
-    solvedStatus,
-    setDefaultSolvedStatus,
-    selectedTags,
-    removeTag,
-    lowerDifficulty,
-    setLowerDifficulty,
-    upperDifficulty,
-    setUpperDifficulty,
-  } = props;
-
+export const FilterChips: React.FC<Props> = ({
+  classification,
+  setDefaultClassification,
+  solvedStatus,
+  setDefaultSolvedStatus,
+  selectedTags,
+  removeTag,
+  lowerDifficulty,
+  onResetFromDifficulty,
+  upperDifficulty,
+  onResetToDifficulty,
+}) => {
   const [startColor, endColor] = getColorCodeFromClassification(classification);
 
   return (
@@ -66,7 +64,7 @@ export const FilterChips: React.FC<Props> = (props: Props) => {
           icon={
             <ColoredCircle color={getColorCodeFromRating(lowerDifficulty)} />
           }
-          onDelete={() => setLowerDifficulty(0)}
+          onDelete={onResetFromDifficulty}
         />
       )}
       {upperDifficulty !== 5000 && (
@@ -75,7 +73,7 @@ export const FilterChips: React.FC<Props> = (props: Props) => {
           icon={
             <ColoredCircle color={getColorCodeFromRating(upperDifficulty)} />
           }
-          onDelete={() => setUpperDifficulty(5000)}
+          onDelete={onResetToDifficulty}
         />
       )}
 

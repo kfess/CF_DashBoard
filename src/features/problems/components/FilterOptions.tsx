@@ -67,9 +67,20 @@ export const FilterOptions: React.FC<Props> = ({
     setLowerDifficulty(item);
     setURLQuery({ fromDifficulty: item });
   };
+
+  const onResetFromDifficulty = () => {
+    setLowerDifficulty(0);
+    setURLQuery({ fromDifficulty: undefined });
+  };
+
   const onSelectToDifficulty = (item: number) => {
     setUpperDifficulty(item);
     setURLQuery({ toDifficulty: item });
+  };
+
+  const onResetToDifficulty = () => {
+    setUpperDifficulty(5000);
+    setURLQuery({ toDifficulty: undefined });
   };
 
   const setDefaultClassification = () => {
@@ -155,9 +166,9 @@ export const FilterOptions: React.FC<Props> = ({
         selectedTags={selectedTags}
         removeTag={removeTag}
         lowerDifficulty={lowerDifficulty}
-        setLowerDifficulty={setLowerDifficulty}
         upperDifficulty={upperDifficulty}
-        setUpperDifficulty={setUpperDifficulty}
+        onResetFromDifficulty={onResetFromDifficulty}
+        onResetToDifficulty={onResetToDifficulty}
       />
     </>
   );
