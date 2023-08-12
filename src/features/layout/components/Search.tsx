@@ -1,10 +1,14 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
-import { generateUrlPath } from "@features/layout/helper";
 import { useFetchUserInfo } from "../useUserInfo";
-import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
+import {
+  useQueryParams,
+  QueryParamKeys,
+  addQueryParamsToPath,
+} from "@hooks/useQueryParams";
 import { Input } from "@features/ui/component/Input";
+import { normalizeSearchUser } from "../searchUser";
 
 type Props = { visible: boolean };
 
@@ -21,7 +25,7 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
 
   useEffect(() => {
     if (isError) {
-      navigate(generateUrlPath("/", ""));
+      navigate("/");
     }
   }, [isError, navigate, pathname]);
 
@@ -33,7 +37,11 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (searchUserId) {
-        navigate(generateUrlPath(pathname, searchUserId));
+        navigate(
+          addQueryParamsToPath(pathname, {
+            userId: normalizeSearchUser(searchUserId),
+          }) // no query params other than userId
+        );
       }
     },
     [navigate, pathname, searchUserId]
