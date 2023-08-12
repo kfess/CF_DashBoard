@@ -12,6 +12,7 @@ import { FilterChips } from "@features/problems/components/FilterChips";
 import { ViewFilter } from "./ViewFilter";
 import { Problem } from "@features/problems/problem";
 import { PickOneButton } from "@features/problems/components/PickOneButton";
+import { useURLQuery } from "@hooks/useQueryParams";
 
 const buttonsCss = css({
   display: "flex",
@@ -37,46 +38,80 @@ type Props = {
   setShowTags: (arg: boolean) => void;
 };
 
-export const FilterOptions: React.FC<Props> = (props: Props) => {
-  const {
-    problem,
-    classification,
-    setClassification,
-    solvedStatus,
-    setSolvedStatus,
-    selectedTags,
-    setSelectedTags,
-    lowerDifficulty,
-    setLowerDifficulty,
-    upperDifficulty,
-    setUpperDifficulty,
-    showTags,
-    toggleShowTags,
-    setShowTags,
-  } = props;
+export const FilterOptions: React.FC<Props> = ({
+  problem,
+  classification,
+  setClassification,
+  solvedStatus,
+  setSolvedStatus,
+  selectedTags,
+  setSelectedTags,
+  lowerDifficulty,
+  setLowerDifficulty,
+  upperDifficulty,
+  setUpperDifficulty,
+  showTags,
+  toggleShowTags,
+  setShowTags,
+}) => {
+  const { setURLQuery } = useURLQuery();
+
+  const onSelectClassification = (classification: Classification) => {
+    setClassification(classification);
+    setURLQuery({
+      classification: classification === "All" ? undefined : classification,
+    });
+  };
+
+  const onSelectFromDifficulty = (item: number) => {
+    setLowerDifficulty(item);
+    setURLQuery({ fromDifficulty: item });
+  };
+  const onSelectToDifficulty = (item: number) => {
+    setUpperDifficulty(item);
+    setURLQuery({ toDifficulty: item });
+  };
 
   const setDefaultClassification = () => {
     setClassification("All");
+    setURLQuery({ classification: undefined });
   };
 
   const setDefaultSolvedStatus = () => {
     setSolvedStatus("All Problems");
+    setURLQuery({ solvedStatus: undefined });
+  };
+
+  const addTag = (tag: Tag) => {
+    const newTags = [...selectedTags, tag];
+    setSelectedTags(newTags);
+    setURLQuery({ tags: newTags });
   };
 
   const removeTag = (tag: Tag) => {
-    setSelectedTags([
-      ...selectedTags.filter((selectedTag) => selectedTag !== tag),
-    ]);
+    const newTags = selectedTags.filter((selectedTag) => selectedTag !== tag);
+    setSelectedTags(newTags);
+    setURLQuery({ tags: newTags.length ? newTags : undefined });
   };
-  const addOrRemoveTag = (tag: Tag) => {
-    selectedTags.includes(tag)
-      ? setSelectedTags([
-          ...selectedTags.filter((selectedTag) => selectedTag !== tag),
-        ])
-      : setSelectedTags([...selectedTags, tag]);
-  };
+
   const removeAllTags = () => {
     setSelectedTags([]);
+    setURLQuery({ tags: undefined });
+  };
+
+  const onSelectTag = (tag: Tag) => {
+    if (selectedTags.includes(tag)) {
+      removeTag(tag);
+    } else {
+      addTag(tag);
+    }
+  };
+
+  const onSelectSolvedStatus = (solvedStatus: SolvedStatus) => {
+    setSolvedStatus(solvedStatus);
+    setURLQuery({
+      solvedStatus: solvedStatus === "All Problems" ? undefined : solvedStatus,
+    });
   };
 
   return (
@@ -84,22 +119,22 @@ export const FilterOptions: React.FC<Props> = (props: Props) => {
       <div css={buttonsCss}>
         <ContestTypeFilter
           classification={classification}
-          setClassification={setClassification}
+          onSelectClassification={onSelectClassification}
         />
         <DifficultyButton
           lowerDifficulty={lowerDifficulty}
-          setLowerDifficulty={setLowerDifficulty}
+          onSelectFromDifficulty={onSelectFromDifficulty}
           upperDifficulty={upperDifficulty}
-          setUpperDifficulty={setUpperDifficulty}
+          onSelectToDifficulty={onSelectToDifficulty}
         />
         <TagsButton
           selectedTags={selectedTags}
-          addOrRemoveTag={addOrRemoveTag}
+          onSelectTag={onSelectTag}
           removeAllTags={removeAllTags}
         />
         <SolvedStatusFilter
           solvedStatus={solvedStatus}
-          setSolvedStatus={setSolvedStatus}
+          onSelectSolvedStatus={onSelectSolvedStatus}
         />
         <ViewFilter showTags={showTags} toggleShowTags={toggleShowTags} />
         <ResetFilterButton

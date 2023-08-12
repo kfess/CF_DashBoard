@@ -17,19 +17,17 @@ const upperDifficulties = ratingColor.map(
 
 type Props = {
   lowerDifficulty: number;
-  setLowerDifficulty: (arg: number) => void;
+  onSelectFromDifficulty: (arg: number) => void;
   upperDifficulty: number;
-  setUpperDifficulty: (arg: number) => void;
+  onSelectToDifficulty: (arg: number) => void;
 };
 
-export const DifficultyButton: React.FC<Props> = (props: Props) => {
-  const {
-    lowerDifficulty,
-    setLowerDifficulty,
-    upperDifficulty,
-    setUpperDifficulty,
-  } = props;
-
+export const DifficultyButton: React.FC<Props> = ({
+  lowerDifficulty,
+  onSelectFromDifficulty,
+  upperDifficulty,
+  onSelectToDifficulty,
+}) => {
   return (
     <>
       <DropDownMenuButton
@@ -41,7 +39,7 @@ export const DifficultyButton: React.FC<Props> = (props: Props) => {
           };
         })}
         selectedItem={lowerDifficulty}
-        setSelectedItem={setLowerDifficulty}
+        onSelect={onSelectFromDifficulty}
       />
       <DropDownMenuButton
         title="To Difficulty"
@@ -52,7 +50,7 @@ export const DifficultyButton: React.FC<Props> = (props: Props) => {
           };
         })}
         selectedItem={upperDifficulty}
-        setSelectedItem={setUpperDifficulty}
+        onSelect={onSelectToDifficulty}
       />
     </>
   );

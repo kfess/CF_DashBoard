@@ -13,11 +13,13 @@ export type SolvedStatus = typeof solvedStatuses[number];
 
 type Props = {
   solvedStatus: SolvedStatus;
-  setSolvedStatus: (arg: SolvedStatus) => void;
+  onSelectSolvedStatus: (arg: SolvedStatus) => void;
 };
 
-export const SolvedStatusFilter: React.FC<Props> = (props: Props) => {
-  const { solvedStatus, setSolvedStatus } = props;
+export const SolvedStatusFilter: React.FC<Props> = ({
+  solvedStatus,
+  onSelectSolvedStatus,
+}) => {
   const searchUserId = useQueryParams(QueryParamKeys.USERID);
 
   return (
@@ -29,7 +31,7 @@ export const SolvedStatusFilter: React.FC<Props> = (props: Props) => {
             return { item: ss };
           })}
           selectedItem={solvedStatus}
-          setSelectedItem={setSolvedStatus}
+          onSelect={onSelectSolvedStatus}
         />
       ) : (
         <Tooltip title="To enable this Solved Status button, you need to enter the user name.">
@@ -40,7 +42,7 @@ export const SolvedStatusFilter: React.FC<Props> = (props: Props) => {
                 return { item: ss };
               })}
               selectedItem={solvedStatus}
-              setSelectedItem={setSolvedStatus}
+              onSelect={onSelectSolvedStatus}
               disabled={!searchUserId}
             />
           </div>

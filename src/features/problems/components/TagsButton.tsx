@@ -10,18 +10,21 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import { tags } from "@features/problems/problem";
 import type { Tag } from "@features/problems/problem";
 import { Button } from "@features/ui/component/Button";
+import { Chip_ } from "@features/ui/component/Chip";
 
 const ITEM_HEIGHT = 48;
 
 type Props = {
   selectedTags: Tag[];
-  addOrRemoveTag: (item: Tag) => void;
+  onSelectTag: (item: Tag) => void;
   removeAllTags: () => void;
 };
 
-export const TagsButton: React.FC<Props> = (props: Props) => {
-  const { selectedTags, addOrRemoveTag, removeAllTags } = props;
-
+export const TagsButton: React.FC<Props> = ({
+  selectedTags,
+  onSelectTag,
+  removeAllTags,
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -38,7 +41,8 @@ export const TagsButton: React.FC<Props> = (props: Props) => {
         onClick={handleClick}
         endIcon={open ? <ArrowDropDownIcon /> : <ArrowLeftIcon />}
       >
-        Tags {selectedTags.length > 0 && `(${selectedTags.length})`}
+        Tags{" "}
+        {selectedTags.length > 0 && <Chip_ label={`${selectedTags.length}`} />}
       </Button>
       <Menu
         anchorEl={anchorEl}
@@ -51,7 +55,7 @@ export const TagsButton: React.FC<Props> = (props: Props) => {
             key={tag}
             onClick={() => {
               setAnchorEl(null);
-              addOrRemoveTag(tag);
+              onSelectTag(tag);
             }}
             dense
           >

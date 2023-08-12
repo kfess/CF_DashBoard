@@ -3,6 +3,7 @@ import { Button } from "@features/ui/component/Button";
 import ReplayIcon from "@mui/icons-material/Replay";
 import type { Classification } from "@features/contests/contest";
 import { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
+import { useURLQuery } from "@hooks/useQueryParams";
 
 type Props = {
   setClassification: (arg: Classification) => void;
@@ -13,15 +14,15 @@ type Props = {
   setShowTags: (arg: boolean) => void;
 };
 
-export const ResetFilterButton: React.FC<Props> = (props: Props) => {
-  const {
-    setClassification,
-    setSolvedStatus,
-    removeAllTags,
-    setLowerDifficulty,
-    setUpperDifficulty,
-    setShowTags,
-  } = props;
+export const ResetFilterButton: React.FC<Props> = ({
+  setClassification,
+  setSolvedStatus,
+  removeAllTags,
+  setLowerDifficulty,
+  setUpperDifficulty,
+  setShowTags,
+}) => {
+  const { setURLQuery } = useURLQuery();
 
   const onClickReset = () => {
     setClassification("All");
@@ -30,6 +31,13 @@ export const ResetFilterButton: React.FC<Props> = (props: Props) => {
     setLowerDifficulty(0);
     setUpperDifficulty(5000);
     setShowTags(false);
+    setURLQuery({
+      classification: undefined,
+      solvedStatus: undefined,
+      tags: undefined,
+      fromDifficulty: undefined,
+      toDifficulty: undefined,
+    });
   };
 
   return (

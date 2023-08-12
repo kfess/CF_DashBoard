@@ -17,7 +17,7 @@ import { TagItems } from "@features/problems/components/TagItems";
 import { DifficultyStatus } from "@features/problems/components/DifficultyStatus";
 
 export const ProblemsPage: React.FC = () => {
-  const { data, isLoading } = useFetchProblems();
+  const { data: problems, isLoading } = useFetchProblems();
 
   const [classification, setClassification] = useState<Classification>("All");
   const [solvedStatus, setSolvedStatus] =
@@ -39,24 +39,24 @@ export const ProblemsPage: React.FC = () => {
     <Container maxWidth="lg">
       <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
         <HeadLine title="Difficulty Table" />
-        {data && (
+        {problems && (
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <DifficultyStatus problems={data} />
+              <DifficultyStatus problems={problems} />
             </Grid>
           </Grid>
         )}
         <HeadLine title="Problem List" />
-        {data && (
+        {problems && (
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TagItems
-                problems={data}
+                problems={problems}
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
               />
               <FilterOptions
-                problem={chooseRandomIndex(data)}
+                problem={chooseRandomIndex(problems)}
                 classification={classification}
                 setClassification={setClassification}
                 solvedStatus={solvedStatus}
@@ -74,7 +74,7 @@ export const ProblemsPage: React.FC = () => {
             </Grid>
             <Grid item xs={12}>
               <ProblemsTable
-                problems={data}
+                problems={problems}
                 selectedTags={selectedTags}
                 classification={classification}
                 lowerDifficulty={lowerDifficulty}

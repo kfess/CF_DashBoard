@@ -7,12 +7,12 @@ import { getColorCodeFromClassification } from "@features/color/ratingColor";
 
 type Props = {
   classification: Classification;
-  setClassification: (arg: Classification) => void;
+  onSelectClassification: (arg: Classification) => void;
 };
 
 export const ContestTypeFilter: React.FC<Props> = ({
   classification,
-  setClassification,
+  onSelectClassification,
 }) => {
   const items = classifications.map((classification) => {
     const [startColor, endColor] =
@@ -33,7 +33,7 @@ export const ContestTypeFilter: React.FC<Props> = ({
       title="Contest Type"
       items={items}
       selectedItem={classification}
-      setSelectedItem={setClassification}
+      onSelect={onSelectClassification}
     />
   );
 };
