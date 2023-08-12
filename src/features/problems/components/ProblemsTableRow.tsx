@@ -1,4 +1,5 @@
 import React from "react";
+import Stack from "@mui/material/Stack";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import { Problem } from "@features/problems/problem";
@@ -41,9 +42,7 @@ export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
           <Tooltip title="Attempting">
             <HourglassEmptyOutlinedIcon fontSize="small" />
           </Tooltip>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </TableCell>
       <TableCell>
         <ProblemLink
@@ -55,11 +54,22 @@ export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
           showDifficulty={true}
           solvedCount={problem.solvedCount}
         />
-        <div>
+        <Stack
+          direction="row"
+          flexWrap="wrap"
+          gap="0.5rem"
+          sx={{
+            marginTop: "0.5rem",
+          }}
+        >
           {showTags &&
             problem.tags.length > 0 &&
-            problem.tags.map((tag) => <Chip_ label={tag} />)}
-        </div>
+            problem.tags.map((tag) => (
+              <div>
+                <Chip_ key={tag} label={tag} />
+              </div>
+            ))}
+        </Stack>
       </TableCell>
       <TableCell>
         <ContestLink
