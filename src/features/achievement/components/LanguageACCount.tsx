@@ -91,6 +91,10 @@ export const LanguageACCount: React.FC<Props> = ({ submissions }) => {
     [groupedSubmissionsByLanguage]
   );
 
+  const displayLanguageCounts = isReadMore
+    ? languageCounts
+    : languageCounts.slice(0, 3);
+
   return (
     <Box
       sx={{
@@ -105,11 +109,9 @@ export const LanguageACCount: React.FC<Props> = ({ submissions }) => {
         <LanguageACCountPie languageCounts={languageCounts} />
       </Stack>
       <Stack spacing={1}>
-        {languageCounts.map((s, index) =>
-          (!isReadMore && index < 3) || isReadMore ? (
-            <LanguageStat key={s.language} {...s} />
-          ) : null
-        )}
+        {displayLanguageCounts.map((s) => (
+          <LanguageStat key={s.language} {...s} />
+        ))}
       </Stack>
       <ReadMoreLess
         expanded={isReadMore}

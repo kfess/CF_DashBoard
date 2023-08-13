@@ -32,7 +32,7 @@ const TagStats: React.FC<Count> = ({ name, count }) => (
 type Props = { readonly submissions: Submission[] };
 
 export const TagACCount: React.FC<Props> = ({ submissions }) => {
-  const [isReadMore, toggleReadMore] = useToggle(true, false);
+  const [isReadMore, toggleReadMore] = useToggle(false, true);
 
   const tagMap = useMemo(() => getACTagMap(submissions), [submissions]);
   const tagCounts: Count[] = useMemo(
@@ -46,7 +46,6 @@ export const TagACCount: React.FC<Props> = ({ submissions }) => {
         })),
     [tagMap]
   );
-
   const displayedTagCounts = isReadMore ? tagCounts : tagCounts.slice(0, 5);
 
   return (
