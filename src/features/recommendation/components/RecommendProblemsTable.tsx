@@ -55,22 +55,22 @@ export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
                   <Typography variant="body2" fontWeight="fontWeightBold">
                     Problem
                   </Typography>
-                </TableCell>{" "}
+                </TableCell>
                 <TableCell>
                   <Typography variant="body2" fontWeight="fontWeightBold">
                     Contest
                   </Typography>
-                </TableCell>{" "}
+                </TableCell>
                 <TableCell>
                   <Typography variant="body2" fontWeight="fontWeightBold">
                     Difficulty
                   </Typography>
-                </TableCell>{" "}
+                </TableCell>
                 <TableCell>
                   <Typography variant="body2" fontWeight="fontWeightBold">
                     Solved
                   </Typography>
-                </TableCell>{" "}
+                </TableCell>
                 <TableCell>
                   <Typography variant="body2" fontWeight="fontWeightBold">
                     Solution

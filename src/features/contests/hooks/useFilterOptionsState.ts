@@ -2,6 +2,7 @@ import { useReducer, useCallback } from "react";
 import type { Classification } from "../contest";
 import type { PeriodWord } from "../components/PeriodFilter";
 import type { SolvedStatus } from "../components/SolvedStatusFilter";
+import { useURLQuery } from "@hooks/useQueryParams";
 
 export type FilterOptionsState = {
   classification: Classification;
@@ -50,10 +51,15 @@ const filterOptionsReducer = (
 };
 
 export const useFilterOptionsState = () => {
-  const [state, dispatch] = useReducer(filterOptionsReducer, initialState) as [
-    FilterOptionsState,
-    React.Dispatch<FilterOptionsAction>
-  ];
+  const { queryParams } = useURLQuery();
+
+  const [state, dispatch] = useReducer(filterOptionsReducer, {
+    classification: queryParams.classification || initialState.classification,
+    period: queryParams.period || initialState.period,
+    solvedStatus: queryParams.contestSolvedStatus || initialState.solvedStatus,
+    showDifficulty: initialState.showDifficulty,
+    reverse: initialState.reverse,
+  }) as [FilterOptionsState, React.Dispatch<FilterOptionsAction>];
 
   const setClassification = (classification: Classification) =>
     dispatch({ type: "setClassification", classification });
@@ -68,7 +74,6 @@ export const useFilterOptionsState = () => {
   }, []);
 
   return {
-    state,
     classification: state.classification,
     showDifficulty: state.showDifficulty,
     reverse: state.reverse,

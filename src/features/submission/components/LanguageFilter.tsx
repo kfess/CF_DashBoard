@@ -21,7 +21,7 @@ export const LanguageFilterButton: React.FC<Props> = (props: Props) => {
           return { item: lang };
         })}
         selectedItem={language}
-        setSelectedItem={setLanguage}
+        onSelect={setLanguage}
       />
     </>
   );

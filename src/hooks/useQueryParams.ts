@@ -21,10 +21,16 @@ import type { Classification } from "@features/contests/contest";
 import type { Tag } from "@features/problems/problem";
 import type { SolvedStatus as ProblemSolvedStatus } from "@features/problems/components/SolvedStatusFilter";
 import type { SolvedStatus as ContestSolvedStatus } from "@features/contests/components/SolvedStatusFilter";
+import type { PeriodWord } from "@features/contests/components/PeriodFilter";
+import type { LanguageFilter } from "@features/submission/components/LanguageFilter";
+import type { VerdictFilter } from "@features/submission/components/SolvedStatusFilter";
 
 type _QueryParams = {
   userId?: string;
   classification?: Classification;
+  period?: PeriodWord;
+  verdict?: VerdictFilter;
+  language?: LanguageFilter;
   fromDifficulty?: number;
   toDifficulty?: number;
   tags?: Tag[];
@@ -59,6 +65,9 @@ const castToQueryParams = (params: Record<string, string>): _QueryParams => {
   return {
     userId: params.userId ? params.userId : undefined,
     classification: params.classification as Classification,
+    period: params.period as PeriodWord,
+    language: params.language as LanguageFilter,
+    verdict: params.verdict as VerdictFilter,
     fromDifficulty: params.fromDifficulty
       ? Number(params.fromDifficulty)
       : undefined,

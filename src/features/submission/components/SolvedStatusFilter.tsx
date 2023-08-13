@@ -19,7 +19,7 @@ export const SolvedStatusFilterButton: React.FC<Props> = (props: Props) => {
         return { item: verdict };
       })}
       selectedItem={solvedStatus}
-      setSelectedItem={setSolvedStatus}
+      onSelect={setSolvedStatus}
     />
   );
 };
