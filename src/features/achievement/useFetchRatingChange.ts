@@ -5,7 +5,7 @@ import { CF_RATING_CHANGE_URL } from "@constants/url";
 import { okRatingChangeApiSchema } from "@features/achievement/ratingChange";
 import type { RatingChange } from "@features/achievement/ratingChange";
 
-export const useFetchRatingChange = ({ userId }: { userId: string | null }) => {
+export const useFetchRatingChange = ({ userId }: { userId?: string }) => {
   const { data, isError, error, isLoading, isSuccess } = useQuery<
     RatingChange[],
     Error

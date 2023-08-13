@@ -8,10 +8,12 @@ import { TabItem, Tabs } from "@features/ui/component/Tabs";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
-import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
+import { useURLQuery } from "@hooks/useQueryParams";
 
 export const SubmissionPage: React.FC = () => {
-  const userId = useQueryParams(QueryParamKeys.USERID);
+  const { queryParams } = useURLQuery();
+  const userId = queryParams["userId"];
+
   const { loggedIn } = useLoggedIn();
   const { codeforcesUsername } = useUserProfile();
 

@@ -2,7 +2,7 @@ import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
-import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
+import { useURLQuery } from "@hooks/useQueryParams";
 
 const solvedStatuses = [
   "All Contests",
@@ -21,7 +21,8 @@ export const SolvedStatusFilter: React.FC<Props> = ({
   solvedStatus,
   onSelectSolvedStatus,
 }) => {
-  const searchUserId = useQueryParams(QueryParamKeys.USERID);
+  const { queryParams } = useURLQuery();
+  const searchUserId = queryParams["userId"];
 
   return (
     <>

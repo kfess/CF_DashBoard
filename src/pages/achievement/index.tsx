@@ -15,7 +15,7 @@ import { Divider } from "@mui/material";
 import { Community } from "@features/achievement/components/Community";
 import { Streak } from "@features/achievement/components/Streak";
 import { Pies } from "@features/achievement/components/Pies";
-import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
+import { useURLQuery } from "@hooks/useQueryParams";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { TabItem, Tabs } from "@features/ui/component/Tabs";
 import { UserSubmissionPage } from "@pages/submission/user/index";
@@ -23,7 +23,9 @@ import { HeatMaps } from "@features/achievement/components/HeatMaps";
 import { isACSubmission } from "@features/achievement/processSubmission";
 
 export const AchievementPage: React.FC = () => {
-  const userId = useQueryParams(QueryParamKeys.USERID);
+  const { queryParams } = useURLQuery();
+  const userId = queryParams["userId"];
+
   if (!userId) return null;
 
   const { data: allSubmissions } = useFetchUserSubmission({

@@ -1,13 +1,15 @@
 import { useMemo } from "react";
 import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
-import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
+import { useURLQuery } from "@hooks/useQueryParams";
 import { getProblemKey } from "@features/problems/utils";
 import { Submission } from "@features/submission/submission";
 
 export const useSolvedStatus = (
   filterFn: (submission: Submission) => boolean = () => true // filterFn must be inside of useCallback
 ) => {
-  const searchUserId = useQueryParams(QueryParamKeys.USERID);
+  const { queryParams } = useURLQuery();
+  const searchUserId = queryParams["userId"];
+
   const { data: submissions } = useFetchUserSubmission({
     userId: searchUserId,
   });

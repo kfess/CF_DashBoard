@@ -14,7 +14,7 @@ import {
 } from "recharts";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
+import { useURLQuery } from "@hooks/useQueryParams";
 import { useFetchRatingChange } from "@features/achievement/useFetchRatingChange";
 import { RatingChange } from "@features/achievement/ratingChange";
 import {
@@ -52,7 +52,9 @@ const CustomTooltip: React.FC<TooltipProps<number, string>> = ({
 };
 
 export const Rating: React.FC = () => {
-  const userId = useQueryParams(QueryParamKeys.USERID);
+  const { queryParams } = useURLQuery();
+  const userId = queryParams["userId"];
+
   const { data }: { data?: RatingChange[] } = useFetchRatingChange({
     userId,
   });

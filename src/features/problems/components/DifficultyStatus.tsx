@@ -16,7 +16,7 @@ import {
 import type { RatingColor } from "@features/color/ratingColor";
 import { ColoredCircle } from "@features/color/components/ColoredCircle";
 import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
-import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
+import { useURLQuery } from "@hooks/useQueryParams";
 import {
   filterUniqueSubmissions,
   isACSubmission,
@@ -30,7 +30,9 @@ type Props = {
 type ColorCount = { [C in RatingColor]: number };
 
 export const DifficultyStatus: React.FC<Props> = ({ problems }) => {
-  const searchUserId = useQueryParams(QueryParamKeys.USERID);
+  const { queryParams } = useURLQuery();
+  const searchUserId = queryParams["userId"];
+
   const {
     data: submission,
     isError,

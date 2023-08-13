@@ -29,7 +29,7 @@ import PrivacyTipIcon from "@mui/icons-material/PrivacyTip";
 import PrivacyTipOutlinedIcon from "@mui/icons-material/PrivacyTipOutlined";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
+import { useURLQuery } from "@hooks/useQueryParams";
 
 const mainField = [
   "Contests",
@@ -155,7 +155,8 @@ export const SideNavigationItem: React.FC<Props> = ({
   isOpenSideBar,
   toggleSideBar,
 }) => {
-  const userId = useQueryParams(QueryParamKeys.USERID);
+  const { queryParams } = useURLQuery();
+  const userId = queryParams["userId"];
 
   if (field === "Achievement" && !userId) {
     return (

@@ -3,13 +3,14 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { LabelsChip } from "@features/bookmark/components/problem/LabelsChip";
-import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
+import { useURLQuery } from "@hooks/useQueryParams";
 import { DeletableChip } from "@features/ui/component/Chip";
 
 type Props = { readonly title: string };
 
 export const HeadLine: React.FC<Props> = ({ title }) => {
-  const queryUserId = useQueryParams(QueryParamKeys.USERID);
+  const { queryParams } = useURLQuery();
+  const queryUserId = queryParams["userId"];
 
   return (
     <>

@@ -11,7 +11,7 @@ import { isGymSubmission } from "@features/achievement/processSubmission";
 import { useCallback } from "react";
 
 const fetchUserSubmissions = async (
-  userId: string | null
+  userId: string | undefined
 ): Promise<Submission[]> => {
   try {
     const url = `${CF_USER_SUBMISSION_URL}?handle=${userId}`;
@@ -30,7 +30,7 @@ export const useFetchUserSubmission = ({
   userId,
   excludeGym = true,
 }: {
-  userId: string | null;
+  userId: string | undefined;
   excludeGym?: boolean;
 }) => {
   const { data, isError, error, isLoading } = useQuery<Submission[], Error>({

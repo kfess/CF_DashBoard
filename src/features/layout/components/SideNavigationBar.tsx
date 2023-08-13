@@ -13,7 +13,7 @@ import {
 } from "@features/layout/components/SideNavigationItems";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import { generateUrlPath } from "@features/layout/helper";
-import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
+import { useURLQuery } from "@hooks/useQueryParams";
 
 type Props = {
   isOpenSideBar: boolean;
@@ -25,7 +25,9 @@ type Props = {
 export const SideNavigationBar: React.FC<Props> = (props: Props) => {
   const { isOpenSideBar, toggleSideBar, selectedItem, setSelectedItem } = props;
   const { theme } = useThemeContext();
-  const userId = useQueryParams(QueryParamKeys.USERID) ?? "";
+
+  const { queryParams } = useURLQuery();
+  const userId = queryParams["userId"] || "";
 
   return (
     <Box role="presentation">

@@ -9,10 +9,11 @@ import { recommendLevels } from "@features/recommendation/recommend";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { Tabs } from "@features/ui/component/Tabs";
-import { QueryParamKeys, useQueryParams } from "@hooks/useQueryParams";
+import { useURLQuery } from "@hooks/useQueryParams";
 
 export const RecommendationPage: React.FC = () => {
-  const queryUserId = useQueryParams(QueryParamKeys.USERID);
+  const { queryParams } = useURLQuery();
+  const queryUserId = queryParams["userId"];
 
   const {
     data: userData,

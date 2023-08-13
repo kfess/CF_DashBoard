@@ -3,7 +3,7 @@ import React, { useState, useMemo } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Submission } from "@features/submission/submission";
-import { useQueryParams, QueryParamKeys } from "@hooks/useQueryParams";
+import { useURLQuery } from "@hooks/useQueryParams";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { HeatMap, HeatMapData } from "@features/achievement/components/HeatMap";
@@ -97,7 +97,9 @@ const makeHeatMapData = (
 };
 
 export const HeatMaps: React.FC<Props> = ({ submissions }) => {
-  const userId = useQueryParams(QueryParamKeys.USERID);
+  const { queryParams } = useURLQuery();
+  const userId = queryParams["userId"];
+
   const { data: userInfo, isLoading } = useFetchUserInfo({ userId });
 
   if (isLoading || !userInfo) {

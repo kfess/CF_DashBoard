@@ -2,11 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { useFetchUserInfo } from "../useUserInfo";
-import {
-  useQueryParams,
-  QueryParamKeys,
-  addQueryParamsToPath,
-} from "@hooks/useQueryParams";
+import { addQueryParamsToPath, useURLQuery } from "@hooks/useQueryParams";
 import { Input } from "@features/ui/component/Input";
 import { normalizeSearchUser } from "../searchUser";
 
@@ -16,7 +12,8 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const queryUserId = useQueryParams(QueryParamKeys.USERID);
+  const { queryParams } = useURLQuery();
+  const queryUserId = queryParams["userId"];
   const [searchUserId, setSearchUserId] = useState(queryUserId);
 
   const { isError } = useFetchUserInfo({

@@ -1,23 +1,5 @@
-import { useLocation, useNavigate } from "react-router-dom";
-
-// クエリパラメータの一覧を管理する
-export type QueryParams = "userId" | "someOthers";
-type QueryParamMap = { [K in Uppercase<QueryParams>]: QueryParams };
-
-export const QueryParamKeys: QueryParamMap = {
-  USERID: "userId",
-  SOMEOTHERS: "someOthers",
-};
-
-export const useQueryParams = (param: QueryParams): string | null => {
-  const { search } = useLocation();
-  const urlQueries = new URLSearchParams(search);
-  return urlQueries.get(param);
-};
-
-/////////////////////////////////
-// under development
 import { useCallback } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import type { Classification } from "@features/contests/contest";
 import type { Tag } from "@features/problems/problem";
 import type { SolvedStatus as ProblemSolvedStatus } from "@features/problems/components/SolvedStatusFilter";
