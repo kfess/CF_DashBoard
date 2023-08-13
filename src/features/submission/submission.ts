@@ -70,7 +70,7 @@ export const verdicts = {
   RUNTIME_ERROR: "RE",
   WRONG_ANSWER: "WA",
   PRESENTATION_ERROR: "PE",
-  TIME_LIMIT_EXCEEDED: "TESTING",
+  TIME_LIMIT_EXCEEDED: "TLE",
   IDLENESS_LIMIT_EXCEEDED: "ILE",
   SECURITY_VIOLATED: "SV",
   CRASHED: "CRASHED",
@@ -86,7 +86,7 @@ export const verdicts = {
 export type Verdict = keyof typeof verdicts;
 export type VerdictAbbr = typeof verdicts[Verdict];
 
-export const verdictAbbrFilter = [...Object.values(verdicts), "All"] as const;
+export const verdictAbbrFilter = ["All", ...Object.values(verdicts)] as const;
 export type VerdictFilter = typeof verdictAbbrFilter[number];
 
 // testset
