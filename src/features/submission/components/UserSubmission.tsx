@@ -25,14 +25,14 @@ import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 type Props = {
   readonly userId: string;
   readonly classification: Classification;
-  readonly solvedStatus: VerdictFilter;
+  readonly verdictStatus: VerdictFilter;
   readonly language: LanguageFilter;
 };
 
 export const UserSubmission: React.FC<Props> = ({
   userId,
   classification,
-  solvedStatus,
+  verdictStatus,
   language,
 }) => {
   const { data } = useFetchUserSubmission({
@@ -46,16 +46,16 @@ export const UserSubmission: React.FC<Props> = ({
       const contestClassification = getClassification(
         contestIdNameMap[d.contestId as number] ?? ""
       );
-      const verdictStatus = verdicts[d.verdict ?? "UNKNOWN"];
+      const v = verdicts[d.verdict ?? "UNKNOWN"];
 
       return (
         (classification === "All" ||
           classification === contestClassification) &&
-        (solvedStatus === "All" || solvedStatus === verdictStatus) &&
+        (verdictStatus === "All" || verdictStatus === v) &&
         (language === "All" || language === d.programmingLanguage)
       );
     });
-  }, [data, contestIdNameMap, classification, solvedStatus, language]);
+  }, [data, contestIdNameMap, classification, verdictStatus, language]);
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(data);
 

@@ -4,13 +4,13 @@ import type { VerdictFilter } from "@features/submission/submission";
 import { verdictAbbrFilter } from "@features/submission/submission";
 
 type Props = {
-  solvedStatus: VerdictFilter;
-  setSolvedStatus: (arg: VerdictFilter) => void;
+  verdictStatus: VerdictFilter;
+  setVerdictStatus: (arg: VerdictFilter) => void;
 };
 
 export const VerdictFilterButton: React.FC<Props> = ({
-  solvedStatus,
-  setSolvedStatus,
+  verdictStatus,
+  setVerdictStatus,
 }) => {
   return (
     <DropDownMenuButton
@@ -18,8 +18,8 @@ export const VerdictFilterButton: React.FC<Props> = ({
       items={verdictAbbrFilter.map((verdict) => {
         return { item: verdict };
       })}
-      selectedItem={solvedStatus}
-      onSelect={setSolvedStatus}
+      selectedItem={verdictStatus}
+      onSelect={setVerdictStatus}
     />
   );
 };

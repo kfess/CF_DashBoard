@@ -15,7 +15,7 @@ type Props = { userId?: string };
 export const UserSubmissionPage: React.FC<Props> = ({ userId }) => {
   const { queryParams, setURLQuery } = useURLQuery();
 
-  const [solvedStatus, setSolvedStatus] = useState<VerdictFilter>(
+  const [verdictStatus, setVerdictStatus] = useState<VerdictFilter>(
     queryParams.verdict || "All"
   );
   const [language, setLanguage] = useState<LanguageFilter>(
@@ -35,13 +35,13 @@ export const UserSubmissionPage: React.FC<Props> = ({ userId }) => {
     setURLQuery({ classification: undefined });
   };
 
-  const onSelectSolvedStatus = (solvedStatus: VerdictFilter) => {
-    setSolvedStatus(solvedStatus);
-    setURLQuery({ verdict: solvedStatus });
+  const onSelectVerdictStatus = (verdictStatus: VerdictFilter) => {
+    setVerdictStatus(verdictStatus);
+    setURLQuery({ verdict: verdictStatus });
   };
 
-  const onSelectDefaultSolvedStatus = () => {
-    setSolvedStatus("All");
+  const onSelectDefaultVerdictStatus = () => {
+    setVerdictStatus("All");
     setURLQuery({ verdict: undefined });
   };
 
@@ -63,8 +63,8 @@ export const UserSubmissionPage: React.FC<Props> = ({ userId }) => {
           onSelectClassification={onSelectClassification}
         />
         <VerdictFilterButton
-          solvedStatus={solvedStatus}
-          setSolvedStatus={onSelectSolvedStatus}
+          verdictStatus={verdictStatus}
+          setVerdictStatus={onSelectVerdictStatus}
         />
         <LanguageFilterButton
           language={language}
@@ -75,8 +75,8 @@ export const UserSubmissionPage: React.FC<Props> = ({ userId }) => {
         <FilterChips
           classification={classification}
           setClassification={onSelectDefaultClassification}
-          solvedStatus={solvedStatus}
-          setSolvedStatus={onSelectDefaultSolvedStatus}
+          verdictStatus={verdictStatus}
+          setVerdictStatus={onSelectDefaultVerdictStatus}
           language={language}
           setLanguage={onSelectDefaultLanguage}
         />
@@ -85,7 +85,7 @@ export const UserSubmissionPage: React.FC<Props> = ({ userId }) => {
         <UserSubmission
           userId={userId}
           classification={classification}
-          solvedStatus={solvedStatus}
+          verdictStatus={verdictStatus}
           language={language}
         />
       )}

@@ -1,7 +1,7 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
 import { DeletableChip } from "@features/ui/component/Chip";
-import { VerdictFilter } from "./SolvedStatusFilter";
+import type { VerdictFilter } from "../submission";
 import type { LanguageFilter } from "@features/submission/components/LanguageFilter";
 import { Classification } from "@features/contests/contest";
 import { ColoredCircle } from "@features/color/components/ColoredCircle";
@@ -10,8 +10,8 @@ import { getColorCodeFromClassification } from "@features/color/ratingColor";
 type Props = {
   classification: Classification;
   setClassification: (arg: Classification) => void;
-  solvedStatus: VerdictFilter;
-  setSolvedStatus: (arg: VerdictFilter) => void;
+  verdictStatus: VerdictFilter;
+  setVerdictStatus: (arg: VerdictFilter) => void;
   language: LanguageFilter;
   setLanguage: (arg: LanguageFilter) => void;
 };
@@ -19,8 +19,8 @@ type Props = {
 export const FilterChips: React.FC<Props> = ({
   classification,
   setClassification,
-  solvedStatus,
-  setSolvedStatus,
+  verdictStatus,
+  setVerdictStatus,
   language,
   setLanguage,
 }) => {
@@ -42,11 +42,11 @@ export const FilterChips: React.FC<Props> = ({
           }
         />
       )}
-      {solvedStatus !== "All" && (
+      {verdictStatus !== "All" && (
         <DeletableChip
-          label={solvedStatus}
+          label={verdictStatus}
           onDelete={() => {
-            setSolvedStatus("All");
+            setVerdictStatus("All");
           }}
         />
       )}
