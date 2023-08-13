@@ -1,51 +1,33 @@
 import dayjs from "dayjs";
-import React from "react";
+import React, { useMemo } from "react";
 import Typography from "@mui/material/Typography";
-import { HeatMapContent } from "@features/achievement/components/HeatMaps";
-import {
-  getColorCodeFromRating,
-  ratingColorInfo,
-  ratingColor,
-} from "@features/color/ratingColor";
+import type { HeatMapContent } from "@features/achievement/components/HeatMaps";
 import { pluralize } from "@helpers/format";
+import { HeatMapColorSample } from "./HeatMapColorSample";
+import {
+  valueToColor,
+  maxDifficultyToColor,
+} from "@features/color/heatmapColor";
 
-const COLOR_GREY = "#ebedf0";
-const valueToColor = (value: number | undefined) => {
-  if (value === undefined) {
-    return COLOR_GREY;
-  } else if (value === 1) {
-    return "#d2baff"; // Light purple
-  } else if (value < 3) {
-    return "#b094ff"; // Purple
-  } else if (value < 5) {
-    return "#9246ff"; // Dark purple
-  } else {
-    return "#7112cc"; // Very dark purple
-  }
-};
-
-const maxDifficultyToColor = (value: number | undefined) => {
-  return value === undefined ? COLOR_GREY : getColorCodeFromRating(value);
-};
-
-// Define color samples for the legend
-const colorSamples = [
-  { color: "#d2baff", value: "less" },
-  { color: "#b094ff", value: "" },
-  { color: "#9246ff", value: "" },
-  { color: "#7112cc", value: "more" },
-];
-
+// constants for heatmap
 const DAY_NAMES_SHORT = ["Mon", "Wed", "Fri"] as const;
-
 const BLOCK_WIDTH = 10;
 const WEEKDAY = 7;
 const WEEKS = 53;
-
 const xOffset = BLOCK_WIDTH * 2;
 const yOffset = BLOCK_WIDTH;
 const width = xOffset + BLOCK_WIDTH * WEEKS + BLOCK_WIDTH * 0.5;
 const height = yOffset + BLOCK_WIDTH * WEEKDAY;
+
+const getFillColor = (
+  content: HeatMapContent,
+  value?: number,
+  maxDifficulty?: number
+) => {
+  return content === "MaxDifficulty"
+    ? maxDifficultyToColor(maxDifficulty)
+    : valueToColor(value);
+};
 
 export type HeatMapData = {
   readonly date: string;
@@ -59,135 +41,70 @@ type Props = {
 };
 
 export const HeatMap: React.FC<Props> = ({ heatMapData, heatMapContent }) => {
+  const totalSubmissions = useMemo(
+    () => heatMapData.reduce((prev, curr) => (prev += curr.value ?? 0), 0),
+    [heatMapData]
+  );
+
   return (
     <>
-      <Typography
-        variant="h6"
-        color="text.secondary"
-        css={{ marginBottom: "1rem" }}
-      >
-        {heatMapContent === "AllSubmissions" ? (
-          <div>
-            {heatMapData
-              .reduce((prev, curr) => (prev += curr.value ?? 0), 0)
-              .toLocaleString()}{" "}
-            {pluralize(heatMapData.length, "Submission")}
-          </div>
-        ) : (
-          <div>
-            {heatMapData
-              .reduce((prev, curr) => (prev += curr.value ?? 0), 0)
-              .toLocaleString()}{" "}
-            {pluralize(heatMapData.length, "AC Submission")}
-          </div>
-        )}
+      <Typography variant="h6" color="text.secondary" my={1}>
+        {totalSubmissions} {pluralize(totalSubmissions, "submission")}
       </Typography>
-      <div css={{ width: "100%" }}>
-        <svg viewBox={`0 0 ${width} ${height}`} css={{ width: "100%" }}>
-          {DAY_NAMES_SHORT.map((dayName, i) => (
-            <text
-              key={dayName}
-              x={0}
-              y={yOffset * 0.7 + (2 * i + 2) * BLOCK_WIDTH}
-              fill="gray"
-              fontSize={7}
-            >
-              {dayName}
-            </text>
-          ))}
-          {heatMapData.map(({ date }, i) => {
-            const week = Math.floor(i / WEEKDAY);
-            const d = dayjs(date);
-            if (d.date() === 1) {
-              return (
-                <text
-                  key={`text-${date}`}
-                  x={xOffset + week * BLOCK_WIDTH}
-                  y={yOffset * 0.7}
-                  fill="gray"
-                  fontSize={7}
-                >
-                  {d.format("MMM")}
-                </text>
-              );
-            }
-            return null;
-          })}
-          {heatMapData.map(({ date, value, maxDifficulty }, i) => {
-            const color =
-              heatMapContent === "MaxDifficulty"
-                ? maxDifficultyToColor(maxDifficulty)
-                : valueToColor(value);
-            const week = Math.floor(i / WEEKDAY);
-            const day = i % WEEKDAY;
-            return (
-              <rect
-                key={date}
-                id={`rect-${date}`}
-                x={xOffset + week * BLOCK_WIDTH}
-                y={yOffset + day * BLOCK_WIDTH}
-                width={BLOCK_WIDTH * 0.9}
-                height={BLOCK_WIDTH * 0.9}
-                fill={color}
+      <div css={{ width: "100%", overflowX: "scroll" }}>
+        <div>
+          <svg width={800} viewBox={`0 0 ${width} ${height}`}>
+            {DAY_NAMES_SHORT.map((dayName, i) => (
+              <text
+                key={dayName}
+                x={0}
+                y={yOffset * 0.7 + (2 * i + 2) * BLOCK_WIDTH}
+                fill="gray"
+                fontSize={8}
               >
-                <title>{`Date: ${date}, Value: ${value ?? 0}, MaxDifficulty: ${
-                  maxDifficulty ?? 0
-                }`}</title>
-              </rect>
-            );
-          })}
-        </svg>
-        <div
-          css={{
-            display: "flex",
-            justifyContent: "flex-start",
-            padding: "1rem",
-          }}
-        >
-          <svg viewBox={`0 0 ${width} 50`} css={{ width: "100%" }}>
-            {(heatMapContent === "AllACSubmissions" || // color sample
-              heatMapContent === "AllSubmissions") &&
-              colorSamples.map(({ color, value }, i) => (
-                <g key={`colorSample-${i}`}>
+                {dayName}
+              </text>
+            ))}
+            {heatMapData.map(({ date, value, maxDifficulty }, i) => {
+              const week = Math.floor(i / WEEKDAY);
+              const day = i % WEEKDAY;
+              const d = dayjs(date);
+              const color = getFillColor(heatMapContent, value, maxDifficulty);
+
+              return (
+                <React.Fragment key={date}>
+                  {d.date() === 1 && (
+                    <text
+                      key={`text-${date}`}
+                      x={xOffset + week * BLOCK_WIDTH}
+                      y={yOffset * 0.7}
+                      fill="gray"
+                      fontSize={8}
+                    >
+                      {d.format("MMM")}
+                    </text>
+                  )}
                   <rect
-                    x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 2.5)} // Adjusted x position
-                    y={0} // Adjusted y position
+                    id={`rect-${date}`}
+                    x={xOffset + week * BLOCK_WIDTH}
+                    y={yOffset + day * BLOCK_WIDTH}
                     width={BLOCK_WIDTH * 0.9}
                     height={BLOCK_WIDTH * 0.9}
                     fill={color}
-                  />
-                  <text
-                    x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 2.5) - 5} // Adjusted x position
-                    y={25} // Adjusted y position
-                    fontSize={12}
+                    rx={2}
+                    ry={2}
                   >
-                    {value}
-                  </text>
-                </g>
-              ))}
-            {heatMapContent === "MaxDifficulty" &&
-              ratingColor.map((color, i) => (
-                <g key={`colorSample-${i}`}>
-                  <rect
-                    x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 1.8)} // Adjusted x position
-                    y={0} // Adjusted y position
-                    width={BLOCK_WIDTH * 0.9}
-                    height={BLOCK_WIDTH * 0.9}
-                    fill={ratingColorInfo[color].colorCode}
-                  />
-                  <text
-                    x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 1.8) - 5} // Adjusted x position
-                    y={25} // Adjusted y position
-                    fontSize={12}
-                  >
-                    {ratingColorInfo[color].name === "DeepRed" && "Hard"}
-                    {ratingColorInfo[color].name === "Gray" && "Easy"}
-                  </text>
-                </g>
-              ))}
+                    <title>{`Date: ${date}, Value: ${
+                      value || 0
+                    }, MaxDifficulty: ${maxDifficulty || 0}`}</title>
+                  </rect>
+                </React.Fragment>
+              );
+            })}
           </svg>
         </div>
       </div>
+      <HeatMapColorSample heatMapContent={heatMapContent} />
     </>
   );
 };
