@@ -13,8 +13,8 @@ import { formatUnixTime } from "@helpers/date";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
-import { verdictMap } from "@helpers/verdict";
-import { VerdictFilter } from "./VerdictFilter";
+import { VerdictFilter } from "../submission";
+import { verdicts } from "../submission";
 import { LanguageFilter } from "./LanguageFilter";
 import { usePagination } from "@hooks/usePagination";
 import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
@@ -46,7 +46,7 @@ export const UserSubmission: React.FC<Props> = ({
       const contestClassification = getClassification(
         contestIdNameMap[d.contestId as number] ?? ""
       );
-      const verdictStatus = verdictMap[d.verdict ?? "UNKNOWN"];
+      const verdictStatus = verdicts[d.verdict ?? "UNKNOWN"];
 
       return (
         (classification === "All" ||

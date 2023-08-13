@@ -1,14 +1,14 @@
 import React from "react";
 import Chip from "@mui/material/Chip";
 import type { Verdict } from "@features/submission/submission";
-import { verdictMap } from "@helpers/verdict";
+import { verdicts } from "@features/submission/submission";
 
-type Props = { verdict?: Verdict };
+type Props = { readonly verdict?: Verdict };
 
 export const VerdictChip: React.FC<Props> = ({ verdict }) => {
   return (
     <Chip
-      label={verdict ? verdictMap[verdict] : verdictMap["UNKNOWN"]}
+      label={verdict ? verdicts[verdict] : verdicts["UNKNOWN"]}
       color={
         verdict
           ? verdict === "OK"

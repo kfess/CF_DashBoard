@@ -61,52 +61,33 @@ const verdictSchema = z.union([
   z.literal("TESTING"),
   z.literal("REJECTED"),
 ]);
-const verdict = [
-  "FAILED",
-  "OK",
-  "PARTIAL",
-  "COMPILATION_ERROR",
-  "RUNTIME_ERROR",
-  "WRONG_ANSWER",
-  "PRESENTATION_ERROR",
-  "TIME_LIMIT_EXCEEDED",
-  "MEMORY_LIMIT_EXCEEDED",
-  "IDLENESS_LIMIT_EXCEEDED",
-  "SECURITY_VIOLATED",
-  "CRASHED",
-  "INPUT_PREPARATION_CRASHED",
-  "CHALLENGED",
-  "SKIPPED",
-  "TESTING",
-  "REJECTED",
-  "UNKNOWN",
-] as const;
-export type Verdict = typeof verdict[number];
 
-export const verdictAbbr = [
-  "AC",
-  "FAILED",
-  "PARTIAL",
-  "CE",
-  "RE",
-  "WA",
-  "PE",
-  "TLE",
-  "ILE",
-  "SV",
-  "CRASHED",
-  "IPC",
-  "CHALLENGED",
-  "SKIPPED",
-  "TESTING",
-  "REJECTED",
-  "MLE",
-  "UNKNOWN",
-] as const;
-export type VerdictAbbr = typeof verdictAbbr[number];
+export const verdicts = {
+  OK: "AC",
+  FAILED: "FAILED",
+  PARTIAL: "PARTIAL",
+  COMPILATION_ERROR: "CE",
+  RUNTIME_ERROR: "RE",
+  WRONG_ANSWER: "WA",
+  PRESENTATION_ERROR: "PE",
+  TIME_LIMIT_EXCEEDED: "TESTING",
+  IDLENESS_LIMIT_EXCEEDED: "ILE",
+  SECURITY_VIOLATED: "SV",
+  CRASHED: "CRASHED",
+  INPUT_PREPARATION_CRASHED: "IPC",
+  CHALLENGED: "CHALLENGED",
+  SKIPPED: "SKIPPED",
+  TESTING: "TESTING",
+  REJECTED: "REJECTED",
+  MEMORY_LIMIT_EXCEEDED: "MLE",
+  UNKNOWN: "UNKNOWN",
+} as const;
 
-export const verdictAbbrFilter = [...verdictAbbr, "All"] as const;
-export type VerdictFilter = VerdictAbbr | "All";
+export type Verdict = keyof typeof verdicts;
+export type VerdictAbbr = typeof verdicts[Verdict];
+
+export const verdictAbbrFilter = [...Object.values(verdicts), "All"] as const;
+export type VerdictFilter = typeof verdictAbbrFilter[number];
 
 // testset
 const testsetSchema = z.union([
