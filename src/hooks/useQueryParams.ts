@@ -17,6 +17,7 @@ export const useQueryParams = (param: QueryParams): string | null => {
 
 /////////////////////////////////
 // under development
+import { useCallback } from "react";
 import type { Classification } from "@features/contests/contest";
 import type { Tag } from "@features/problems/problem";
 import type { SolvedStatus as ProblemSolvedStatus } from "@features/problems/components/SolvedStatusFilter";
@@ -25,7 +26,7 @@ import type { PeriodWord } from "@features/contests/components/PeriodFilter";
 import type { LanguageFilter } from "@features/submission/components/LanguageFilter";
 import type { VerdictFilter } from "@features/submission/components/SolvedStatusFilter";
 
-type _QueryParams = {
+type KnownQueryParams = {
   userId?: string;
   classification?: Classification;
   period?: PeriodWord;
@@ -36,13 +37,10 @@ type _QueryParams = {
   tags?: Tag[];
   problemSolvedStatus?: ProblemSolvedStatus;
   contestSolvedStatus?: ContestSolvedStatus;
-  [key: string]:
-    | string
-    | number
-    | Tag[]
-    | Classification
-    | ProblemSolvedStatus
-    | undefined;
+};
+
+type _QueryParams = KnownQueryParams & {
+  [key: string]: string | number | Tag[] | undefined;
 };
 
 export const addQueryParamsToPath = (
@@ -82,30 +80,33 @@ export const useURLQuery = (basePath: string = "") => {
   const { search } = useLocation();
   const navigate = useNavigate();
 
-  const getQueryParams = () => {
+  const getQueryParams = useCallback(() => {
     const rawParams = Object.fromEntries(new URLSearchParams(search).entries());
     return castToQueryParams(rawParams);
-  };
+  }, [search]);
 
-  const setURLQuery = (newQueryParams: _QueryParams) => {
-    const updatedQueries = new URLSearchParams();
-    const currentQueryParams = getQueryParams();
-    const combinedParams = { ...currentQueryParams, ...newQueryParams };
+  const setURLQuery = useCallback(
+    (newQueryParams: _QueryParams) => {
+      const updatedQueries = new URLSearchParams();
+      const currentQueryParams = getQueryParams();
+      const combinedParams = { ...currentQueryParams, ...newQueryParams };
 
-    for (const key in combinedParams) {
-      const value = combinedParams[key];
-      if (value !== undefined) {
-        if (Array.isArray(value)) {
-          updatedQueries.set(key, value.join(","));
+      for (const key in combinedParams) {
+        const value = combinedParams[key as keyof KnownQueryParams];
+        if (value !== undefined) {
+          if (Array.isArray(value)) {
+            updatedQueries.set(key, value.join(","));
+          } else {
+            updatedQueries.set(key, String(value));
+          }
         } else {
-          updatedQueries.set(key, String(value));
+          updatedQueries.delete(key);
         }
-      } else {
-        updatedQueries.delete(key);
       }
-    }
-    navigate(`${basePath}?${updatedQueries.toString()}`);
-  };
+      navigate(`${basePath}?${updatedQueries.toString()}`);
+    },
+    [getQueryParams]
+  );
 
   return {
     queryParams: getQueryParams(),
