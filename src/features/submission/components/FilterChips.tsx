@@ -27,11 +27,7 @@ export const FilterChips: React.FC<Props> = ({
   const [startColor, endColor] = getColorCodeFromClassification(classification);
 
   return (
-    <Stack
-      direction="row"
-      spacing={1}
-      sx={{ flexWrap: "wrap", marginTop: "0.5rem" }}
-    >
+    <Stack direction="row" flexWrap="wrap" spacing={1} sx={{ my: 2 }}>
       {classification !== "All" && (
         <DeletableChip
           label={classification}

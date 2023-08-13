@@ -30,14 +30,29 @@ export const UserSubmissionPage: React.FC<Props> = ({ userId }) => {
     setURLQuery({ classification: classification });
   };
 
+  const onSelectDefaultClassification = () => {
+    setClassification("All");
+    setURLQuery({ classification: undefined });
+  };
+
   const onSelectSolvedStatus = (solvedStatus: VerdictFilter) => {
     setSolvedStatus(solvedStatus);
     setURLQuery({ verdict: solvedStatus });
   };
 
+  const onSelectDefaultSolvedStatus = () => {
+    setSolvedStatus("All");
+    setURLQuery({ verdict: undefined });
+  };
+
   const onSelectLanguage = (language: LanguageFilter) => {
     setLanguage(language);
     setURLQuery({ language: language });
+  };
+
+  const onSelectDefaultLanguage = () => {
+    setLanguage("All");
+    setURLQuery({ language: undefined });
   };
 
   return (
@@ -59,11 +74,11 @@ export const UserSubmissionPage: React.FC<Props> = ({ userId }) => {
       <div>
         <FilterChips
           classification={classification}
-          setClassification={setClassification}
+          setClassification={onSelectDefaultClassification}
           solvedStatus={solvedStatus}
-          setSolvedStatus={setSolvedStatus}
+          setSolvedStatus={onSelectDefaultSolvedStatus}
           language={language}
-          setLanguage={setLanguage}
+          setLanguage={onSelectDefaultLanguage}
         />
       </div>
       {userId && (
