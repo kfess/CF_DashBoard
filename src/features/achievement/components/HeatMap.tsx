@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React, { useMemo } from "react";
 import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
 import type { HeatMapContent } from "@features/achievement/components/HeatMaps";
 import { pluralize } from "@helpers/format";
 import { HeatMapColorSample } from "./HeatMapColorSample";
@@ -84,20 +85,23 @@ export const HeatMap: React.FC<Props> = ({ heatMapData, heatMapContent }) => {
                       {d.format("MMM")}
                     </text>
                   )}
-                  <rect
-                    id={`rect-${date}`}
-                    x={xOffset + week * BLOCK_WIDTH}
-                    y={yOffset + day * BLOCK_WIDTH}
-                    width={BLOCK_WIDTH * 0.9}
-                    height={BLOCK_WIDTH * 0.9}
-                    fill={color}
-                    rx={2}
-                    ry={2}
-                  >
-                    <title>{`Date: ${date}, Value: ${
+                  <Tooltip
+                    title={`Date: ${date}, ${
                       value || 0
-                    }, MaxDifficulty: ${maxDifficulty || 0}`}</title>
-                  </rect>
+                    } submissions, maxDifficulty: ${maxDifficulty || "-"}`}
+                    arrow
+                  >
+                    <rect
+                      id={`rect-${date}`}
+                      x={xOffset + week * BLOCK_WIDTH}
+                      y={yOffset + day * BLOCK_WIDTH}
+                      width={BLOCK_WIDTH * 0.9}
+                      height={BLOCK_WIDTH * 0.9}
+                      fill={color}
+                      rx={2}
+                      ry={2}
+                    />
+                  </Tooltip>
                 </React.Fragment>
               );
             })}

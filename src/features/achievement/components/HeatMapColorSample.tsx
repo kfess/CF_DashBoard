@@ -38,7 +38,7 @@ export const HeatMapColorSample: React.FC<Props> = memo(
                     fontSize={9}
                   >
                     {color === "#ebedf0" && "less"}
-                    {color === "#7112cc" && "more"}
+                    {color === "#196127" && "more"}
                   </text>
                 </g>
               ))}
