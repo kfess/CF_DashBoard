@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { problemSchema } from "@features/problems/problem";
-import { normalizedLanguage, normalizeLanguage,type NormalizedLanguage } from "@features/language/language";
+import { normalizedLanguage, normalizeLanguage, type NormalizedLanguage } from "@features/language/language";
 
 // https://codeforces.com/apiHelp/objects#Member
 // https://codeforces.com/apiHelp/objects#Party

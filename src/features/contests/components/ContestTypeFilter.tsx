@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import type { Classification } from "@features/contests/contest";
 import { DropDownMenuButton } from "@features/ui/component/DropDownMenuButton";
 import { ColoredCircle } from "@features/color/components/ColoredCircle";
@@ -14,19 +14,23 @@ export const ContestTypeFilter: React.FC<Props> = ({
   classification,
   onSelectClassification,
 }) => {
-  const items = classifications.map((classification) => {
-    const [startColor, endColor] =
-      getColorCodeFromClassification(classification);
-    return {
-      item: classification,
-      startIcon: (
-        <>
-          <ColoredCircle color={startColor} />-
-          <ColoredCircle color={endColor} />
-        </>
-      ),
-    };
-  });
+  const items = useMemo(
+    () =>
+      classifications.map((classification) => {
+        const [startColor, endColor] =
+          getColorCodeFromClassification(classification);
+        return {
+          item: classification,
+          startIcon: (
+            <>
+              <ColoredCircle color={startColor} />-
+              <ColoredCircle color={endColor} />
+            </>
+          ),
+        };
+      }),
+    []
+  );
 
   return (
     <DropDownMenuButton
