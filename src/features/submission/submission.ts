@@ -105,6 +105,9 @@ export const verdictAbbr = [
 ] as const;
 export type VerdictAbbr = typeof verdictAbbr[number];
 
+export const verdictAbbrFilter = [...verdictAbbr, "All"] as const;
+export type VerdictFilter = VerdictAbbr | "All";
+
 // testset
 const testsetSchema = z.union([
   z.literal("SAMPLES"),

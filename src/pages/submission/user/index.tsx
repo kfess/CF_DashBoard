@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
 import { UserSubmission } from "@features/submission/components/UserSubmission";
-import type { VerdictFilter } from "@features/submission/components/SolvedStatusFilter";
-import { SolvedStatusFilterButton } from "@features/submission/components/SolvedStatusFilter";
+import type { VerdictFilter } from "@features/submission/submission";
+import { VerdictFilterButton } from "@features/submission/components/VerdictFilter";
 import type { LanguageFilter } from "@features/submission/components/LanguageFilter";
 import { LanguageFilterButton } from "@features/submission/components/LanguageFilter";
 import { ContestTypeFilter } from "@features/contests/components/ContestTypeFilter";
@@ -10,7 +10,7 @@ import { Classification } from "@features/contests/contest";
 import { FilterChips } from "@features/submission/components/FilterChips";
 import { useURLQuery } from "@hooks/useQueryParams";
 
-type Props = { userId: string | null | undefined };
+type Props = { userId?: string };
 
 export const UserSubmissionPage: React.FC<Props> = ({ userId }) => {
   const { queryParams, setURLQuery } = useURLQuery();
@@ -62,7 +62,7 @@ export const UserSubmissionPage: React.FC<Props> = ({ userId }) => {
           classification={classification}
           onSelectClassification={onSelectClassification}
         />
-        <SolvedStatusFilterButton
+        <VerdictFilterButton
           solvedStatus={solvedStatus}
           setSolvedStatus={onSelectSolvedStatus}
         />

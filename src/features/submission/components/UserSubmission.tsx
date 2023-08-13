@@ -14,7 +14,7 @@ import { TablePagination } from "@features/ui/component/TablePagination";
 import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
 import { verdictMap } from "@helpers/verdict";
-import { VerdictFilter } from "./SolvedStatusFilter";
+import { VerdictFilter } from "./VerdictFilter";
 import { LanguageFilter } from "./LanguageFilter";
 import { usePagination } from "@hooks/usePagination";
 import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";

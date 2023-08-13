@@ -5,9 +5,7 @@ import { verdictMap } from "@helpers/verdict";
 
 type Props = { verdict?: Verdict };
 
-export const VerdictChip: React.FC<Props> = (props: Props) => {
-  const { verdict } = props;
-
+export const VerdictChip: React.FC<Props> = ({ verdict }) => {
   return (
     <Chip
       label={verdict ? verdictMap[verdict] : verdictMap["UNKNOWN"]}
