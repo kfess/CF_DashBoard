@@ -48,6 +48,11 @@ export const groupbyRatingColor = (submissions: Submission[]) =>
 export const groupbyLanguage = (submissions: Submission[]) =>
   groupBy(submissions, (s) => normalizeLanguage(s.programmingLanguage));
 
+export const groupByProblem = (submissions: Submission[]) =>
+  groupBy(submissions, (s) =>
+    getProblemKey(s.contestId, s.problem.index, s.problem.name)
+  );
+
 export const getACProblemSet = (submissions: Submission[]): Set<string> => {
   const ACSubmissions = submissions.filter(isACSubmission);
   const ACProblemSet = ACSubmissions.reduce((set, submission) => {

@@ -15,15 +15,18 @@ import { useThemeContext } from "@features/color/themeColor.hook";
 import { CF_CONTEST_URL } from "@constants/url";
 
 type Props = {
-  problem: Problem;
-  showTags: boolean;
-  isSolved: boolean;
-  isAttempted: boolean;
+  readonly problem: Problem;
+  readonly showTags: boolean;
+  readonly isSolved: boolean;
+  readonly isAttempted: boolean;
 };
 
-export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
-  const { problem, showTags, isSolved, isAttempted } = props;
-
+export const ProblemsTableRow: React.FC<Props> = ({
+  problem,
+  showTags,
+  isSolved,
+  isAttempted,
+}) => {
   const { theme } = useThemeContext();
   const backgroundColor = isSolved
     ? theme.colors.acColor
@@ -64,11 +67,7 @@ export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
         >
           {showTags &&
             problem.tags.length > 0 &&
-            problem.tags.map((tag) => (
-              <div>
-                <Chip_ key={tag} label={tag} />
-              </div>
-            ))}
+            problem.tags.map((tag) => <Chip_ key={tag} label={tag} />)}
         </Stack>
       </TableCell>
       <TableCell>
@@ -89,6 +88,13 @@ export const ProblemsTableRow: React.FC<Props> = (props: Props) => {
             href={`${CF_CONTEST_URL}/${problem.contestId}/status`}
             target="_blank"
             rel="noopener noreferrer"
+            css={{
+              color: "#9246FF",
+              "&:hover": {
+                color: "#9246FF",
+                textDecoration: "underline",
+              },
+            }}
           >
             {problem.solvedCount}
           </a>

@@ -1,5 +1,5 @@
 import React from "react";
-import { css } from "@emotion/react";
+import Stack from "@mui/material/Stack";
 import type { Tag } from "@features/problems/problem";
 import type { Classification } from "@features/contests/contest";
 import type { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
@@ -13,13 +13,6 @@ import { ViewFilter } from "./ViewFilter";
 import { Problem } from "@features/problems/problem";
 import { PickOneButton } from "@features/problems/components/PickOneButton";
 import { useURLQuery } from "@hooks/useQueryParams";
-
-const buttonsCss = css({
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "0.5rem",
-  marginTop: "0.5rem",
-});
 
 type Props = {
   problem: Problem;
@@ -127,7 +120,7 @@ export const FilterOptions: React.FC<Props> = ({
 
   return (
     <>
-      <div css={buttonsCss}>
+      <Stack direction="row" flexWrap="wrap" gap="0.5rem" my={1}>
         <ContestTypeFilter
           classification={classification}
           onSelectClassification={onSelectClassification}
@@ -157,7 +150,7 @@ export const FilterOptions: React.FC<Props> = ({
           setShowTags={setShowTags}
         />
         {problem && <PickOneButton problem={problem} />}
-      </div>
+      </Stack>
       <FilterChips
         classification={classification}
         setDefaultClassification={setDefaultClassification}

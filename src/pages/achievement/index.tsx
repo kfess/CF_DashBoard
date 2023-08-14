@@ -21,6 +21,7 @@ import { TabItem, Tabs } from "@features/ui/component/Tabs";
 import { UserSubmissionPage } from "@pages/submission/user/index";
 import { HeatMaps } from "@features/achievement/components/HeatMaps";
 import { isACSubmission } from "@features/achievement/processSubmission";
+import { Accuracy } from "@features/achievement/components/Accuracy";
 
 export const AchievementPage: React.FC = () => {
   const { queryParams } = useURLQuery();
@@ -78,6 +79,20 @@ export const AchievementPage: React.FC = () => {
                 <UniqueACCount submissions={acSubmissions} />
                 <TotalRatingSum submissions={acSubmissions} />
               </>
+            </Box>
+            <Box
+              sx={{
+                p: 2,
+                marginTop: 2,
+                backgroundColor: "white",
+                borderRadius: 1,
+                boxShadow: [1, 1, 1, 1],
+              }}
+            >
+              <Accuracy
+                allSubmissions={allSubmissions}
+                acSubmissions={acSubmissions}
+              />
             </Box>
             <Box
               sx={{

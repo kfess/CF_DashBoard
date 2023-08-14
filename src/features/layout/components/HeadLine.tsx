@@ -27,7 +27,7 @@ export const HeadLine: React.FC<Props> = ({ title }) => {
         <Stack direction="row" spacing={1}>
           {queryUserId && (
             <DeletableChip
-              label={`query: ${queryUserId}`}
+              label={`userId: ${queryUserId}`}
               onDelete={() => {}}
             />
           )}

@@ -1,11 +1,11 @@
 import React from "react";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import { CF_CONTEST_URL } from "@constants/url";
-import { Button } from "@features/ui/component/Button";
 import { Problem } from "@features/problems/problem";
+import { Button } from "@features/ui/component/Button";
 
 type Props = {
-  problem: Problem;
+  readonly problem: Problem;
 };
 
 export const PickOneButton: React.FC<Props> = ({ problem }) => {

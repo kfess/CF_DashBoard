@@ -90,6 +90,7 @@ export const HeatMap: React.FC<Props> = ({ heatMapData, heatMapContent }) => {
                       value || 0
                     } submissions, maxDifficulty: ${maxDifficulty || "-"}`}
                     arrow
+                    enterTouchDelay={0}
                   >
                     <rect
                       id={`rect-${date}`}

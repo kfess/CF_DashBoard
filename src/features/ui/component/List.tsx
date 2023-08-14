@@ -67,7 +67,7 @@ export const List: React.FC<Props> = ({ items }) => (
           }}
           disableRipple
         >
-          <ListItemText>{item.text}</ListItemText>
+          <ListItemText sx={{ textAlign: "center" }}>{item.text}</ListItemText>
         </ListItemButton>
       </CustomListItem>
     ))}
