@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import { useNavigate } from "react-router-dom";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";
 import { UniqueACCount } from "@features/achievement/components/UniqueACCount";
@@ -27,7 +28,12 @@ export const AchievementPage: React.FC = () => {
   const { queryParams } = useURLQuery();
   const userId = queryParams["userId"];
 
-  if (!userId) return null;
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!userId) {
+      navigate("/");
+    }
+  }, [userId]);
 
   const { data: allSubmissions } = useFetchUserSubmission({
     userId: userId,
@@ -89,10 +95,7 @@ export const AchievementPage: React.FC = () => {
                 boxShadow: [1, 1, 1, 1],
               }}
             >
-              <Accuracy
-                allSubmissions={allSubmissions}
-                acSubmissions={acSubmissions}
-              />
+              <Accuracy allSubmissions={allSubmissions} />
             </Box>
             <Box
               sx={{

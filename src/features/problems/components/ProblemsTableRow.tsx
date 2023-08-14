@@ -67,7 +67,9 @@ export const ProblemsTableRow: React.FC<Props> = ({
         >
           {showTags &&
             problem.tags.length > 0 &&
-            problem.tags.map((tag) => <Chip_ key={tag} label={tag} />)}
+            problem.tags.map((tag) => (
+              <Chip_ key={tag} label={tag} onClick={() => {}} />
+            ))}
         </Stack>
       </TableCell>
       <TableCell>

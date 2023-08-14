@@ -9,7 +9,7 @@ import { DeletableChip } from "@features/ui/component/Chip";
 type Props = { readonly title: string };
 
 export const HeadLine: React.FC<Props> = ({ title }) => {
-  const { queryParams } = useURLQuery();
+  const { queryParams, setURLQuery } = useURLQuery();
   const queryUserId = queryParams["userId"];
 
   return (
@@ -28,7 +28,10 @@ export const HeadLine: React.FC<Props> = ({ title }) => {
           {queryUserId && (
             <DeletableChip
               label={`userId: ${queryUserId}`}
-              onDelete={() => {}}
+              onDelete={() => {
+                setURLQuery({ userId: undefined });
+              }}
+              onClick={() => {}}
             />
           )}
           <LabelsChip />

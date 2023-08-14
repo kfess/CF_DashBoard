@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
 import { UserSubmission } from "@features/submission/components/UserSubmission";
 import type { VerdictFilter } from "@features/submission/submission";
 import { VerdictFilterButton } from "@features/submission/components/VerdictFilter";
@@ -13,6 +14,13 @@ import { useURLQuery } from "@hooks/useQueryParams";
 type Props = { userId?: string };
 
 export const UserSubmissionPage: React.FC<Props> = ({ userId }) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!userId) {
+      navigate("/");
+    }
+  }, [userId]);
+
   const { queryParams, setURLQuery } = useURLQuery();
 
   const [verdictStatus, setVerdictStatus] = useState<VerdictFilter>(

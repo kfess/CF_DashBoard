@@ -28,17 +28,15 @@ type Props = {
   solvedStatus: SolvedStatus;
 };
 
-export const ProblemsTable: React.FC<Props> = (props: Props) => {
-  const {
-    problems,
-    selectedTags,
-    classification,
-    lowerDifficulty,
-    upperDifficulty,
-    showTags,
-    solvedStatus,
-  } = props;
-
+export const ProblemsTable: React.FC<Props> = ({
+  problems,
+  selectedTags,
+  classification,
+  lowerDifficulty,
+  upperDifficulty,
+  showTags,
+  solvedStatus,
+}) => {
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(problems);
 
   const { solvedSet, attemptedSet } = useSolvedStatus();
