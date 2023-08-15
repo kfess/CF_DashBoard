@@ -5,11 +5,7 @@ import { CF_USER_INFO_URL } from "@constants/url";
 import { okUserInfoApiSchema } from "@features/layout/userInfo";
 import type { UserInfo } from "@features/layout/userInfo";
 
-export const useFetchUserInfo = ({
-  userId,
-}: {
-  userId: string | undefined;
-}) => {
+export const useFetchUserInfo = ({ userId }: { userId?: string }) => {
   const { data, isError, error, isLoading, isSuccess } = useQuery<
     UserInfo,
     Error
@@ -19,13 +15,21 @@ export const useFetchUserInfo = ({
       try {
         const url = `${CF_USER_INFO_URL}?handles=${userId}`;
         const response = await axios.get(url);
+
+        if (
+          typeof response.data === "string" &&
+          response.data.includes("Codeforces is temporarily unavailable.")
+        ) {
+          throw new Error("Codeforces is temporarily unavailable.");
+        }
+
         const userInfo = okUserInfoApiSchema.parse(response.data);
         return userInfo.result[0];
       } catch (err) {
         if (err instanceof ZodError) {
           throw new Error("validation error");
         }
-        throw new Error("user fetch error");
+        throw err;
       }
     },
     enabled: !!userId,
@@ -33,8 +37,8 @@ export const useFetchUserInfo = ({
     refetchOnMount: false,
     refetchOnReconnect: false,
     retry: false,
+    suspense: false, // For now, we don't want to use suspense
     useErrorBoundary: false, // For now, we don't want to use ErrorBoundary
-    keepPreviousData: true,
   });
 
   return { data, isError, error, isLoading, isSuccess };

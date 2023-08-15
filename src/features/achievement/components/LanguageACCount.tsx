@@ -24,14 +24,7 @@ export type Count = {
 const LanguageStat: React.FC<Count> = ({ language, count, lastACDate }) => {
   return (
     <Stack key={language}>
-      <Stack
-        direction="row"
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+      <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Chip_ label={language} onClick={() => {}} />
         <Stack direction="row" alignItems="center">
           <Typography

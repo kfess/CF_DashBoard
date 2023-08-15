@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -19,7 +18,7 @@ type Props<T extends string | number> = {
 export const ButtonWithAlertDialog = <T extends string | number>(
   props: Props<T>
 ) => {
-  const { title, dialogTitle, dialogText, deleteTarget, deleteFn } = props;
+  const { title, dialogText, deleteTarget, deleteFn } = props;
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -44,11 +43,8 @@ export const ButtonWithAlertDialog = <T extends string | number>(
       </_Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          <DialogContentText>
-            <Alert severity="error">
-              <AlertTitle>{dialogTitle}</AlertTitle>
-              {dialogText}
-            </Alert>
+          <DialogContentText fontWeight="fontWeightBold" sx={{ color: "red" }}>
+            {dialogText}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -73,9 +69,7 @@ export const ButtonWithAlertDialog = <T extends string | number>(
 
 type MessageProps = { title: string; message: string };
 
-export const AlertMessage: React.FC<MessageProps> = (props: MessageProps) => {
-  const { title, message } = props;
-
+export const AlertMessage: React.FC<MessageProps> = ({ title, message }) => {
   const [open, setOpen] = useState(true);
   const handleClose = () => {
     setOpen(false);
