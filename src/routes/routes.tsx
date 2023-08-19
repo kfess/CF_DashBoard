@@ -28,11 +28,7 @@ import { PrivacyPolicyPage } from "@pages/privacy_policy";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <Suspense fallback={<CircularProgress />}>
-        <LayoutPage />
-      </Suspense>
-    ),
+    element: <LayoutPage />,
     children: [
       {
         index: true,
