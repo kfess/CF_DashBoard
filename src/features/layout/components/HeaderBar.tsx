@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -46,11 +46,13 @@ export const HeaderBar: React.FC<Props> = ({
             >
               <MenuIcon />
             </IconButton>
-            <NavLink to="/">
+            <a href="/">
               <Typography
                 variant="h6"
                 component="div"
-                onClick={() => setSelectedItem("Contests")}
+                onClick={() => {
+                  setSelectedItem("Contests");
+                }}
                 noWrap
                 sx={{ display: { xs: "none", sm: "block" } }}
                 css={{
@@ -59,7 +61,7 @@ export const HeaderBar: React.FC<Props> = ({
               >
                 CF DashBoard
               </Typography>
-            </NavLink>
+            </a>
           </Box>
           <Box
             sx={{
