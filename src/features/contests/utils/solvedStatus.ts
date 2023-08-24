@@ -5,7 +5,7 @@ import { Contest } from "../contest";
 
 // for resolved contest
 // 特定のコンテストについて、問題の解いた状態を返す
-export const calcSolvedStatus = (
+export const calcSolvedStatusWithIdxes = (
   problemIdxes: string[],
   problemMap: Record<string, ReshapedProblem>,
   solvedSet: Set<string> | undefined,
@@ -54,7 +54,7 @@ export const calcSolvedStatus = (
 };
 
 // for virtical contest
-export const calcSolvedStatusForVirticalContest = (
+export const calcSolvedStatus = (
   contest: Contest,
   solvedSet: Set<string> | undefined
 ): SolvedStatus => {

@@ -19,8 +19,9 @@ export const filterAndSortContests = (
   classification: Classification,
   reverse: boolean,
   period: PeriodWord,
-  solvedStatus: SolvedStatus
-  // userId?: string
+  solvedStatus: SolvedStatus,
+  solvedSet?: Set<string> | undefined,
+  userId?: string
 ): Contest[] => {
   return contests
     .filter((contest) => {
@@ -30,8 +31,16 @@ export const filterAndSortContests = (
       const isAfterPeriodStart = dayjs
         .unix(contest.startTimeSeconds)
         .isAfter(periodFilter[period].from);
+      const isSolvedStatusMatch =
+        solvedStatus === "All Contests" ||
+        (userId && calcSolvedStatus(contest, solvedSet) === solvedStatus);
 
-      return isFinished && isClassificationMatch && isAfterPeriodStart;
+      return (
+        isFinished &&
+        isClassificationMatch &&
+        isAfterPeriodStart &&
+        isSolvedStatusMatch
+      );
     })
     .sort((a, b) =>
       reverse
@@ -45,14 +54,18 @@ export const reshapeContests = (
   classification: Classification,
   reverse: boolean,
   period: PeriodWord,
-  solvedStatus: SolvedStatus
+  solvedStatus: SolvedStatus,
+  solvedSet?: Set<string> | undefined,
+  userId?: string
 ): ReshapedContest[] => {
   const filteredAndSortedContests = filterAndSortContests(
     contests,
     classification,
     reverse,
     period,
-    solvedStatus
+    solvedStatus,
+    solvedSet,
+    userId
   );
 
   return filteredAndSortedContests.map((contest) => {

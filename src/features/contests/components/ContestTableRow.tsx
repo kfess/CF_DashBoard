@@ -7,7 +7,7 @@ import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import { getProblemKey } from "@features/problems/utils";
 import { Classification } from "@features/contests/contest";
-import { calcSolvedStatus } from "@features/contests/utils/solvedStatus";
+import { calcSolvedStatusWithIdxes } from "@features/contests/utils/solvedStatus";
 import type { SolvedStatus } from "@features/contests/components/SolvedStatusFilter";
 
 type Props = {
@@ -48,7 +48,12 @@ export const ContestTableRow: React.FC<Props> = React.memo(
 
     const userSolvedStatus: SolvedStatus = useMemo(() => {
       if (!userId) return "All Contests";
-      return calcSolvedStatus(problemIdxes, problemMap, solvedSet, contestId);
+      return calcSolvedStatusWithIdxes(
+        problemIdxes,
+        problemMap,
+        solvedSet,
+        contestId
+      );
     }, [problemIdxes, problemMap, solvedSet, contestId]);
 
     const rowColor = useMemo(() => {

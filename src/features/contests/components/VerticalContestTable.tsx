@@ -12,7 +12,7 @@ import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { getProblemKey } from "@features/problems/utils";
 import { useThemeContext } from "@features/color/themeColor.hook";
-import { calcSolvedStatusForVirticalContest } from "@features/contests/utils/solvedStatus";
+import { calcSolvedStatus } from "@features/contests/utils/solvedStatus";
 
 type Props = {
   contests: Contest[];
@@ -85,7 +85,7 @@ const VerticalContestTableRow: React.FC<VerticalContestTableRow> = ({
   const { theme } = useThemeContext();
 
   const rowColor = useMemo(() => {
-    return calcSolvedStatusForVirticalContest(contest, solvedSet) ===
+    return calcSolvedStatus(contest, solvedSet) ===
       "Completed"
       ? theme.colors.acColor
       : "";

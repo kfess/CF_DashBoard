@@ -21,6 +21,9 @@ import type { Contest, ReshapedContest } from "@features/contests/contest";
 import { useURLQuery } from "@hooks/useQueryParams";
 
 export const ContestsPage: React.FC = () => {
+  const { queryParams } = useURLQuery();
+  const userId = queryParams["userId"];
+
   const isSmallScreen = useMediaQuery("(max-width: 600px)");
 
   const { setURLQuery } = useURLQuery();
@@ -48,11 +51,30 @@ export const ContestsPage: React.FC = () => {
         classification,
         reverse,
         period,
-        solvedStatus
+        solvedStatus,
+        solvedSet,
+        userId
       );
     }
-    return reshapeContests(data, classification, reverse, period, solvedStatus);
-  }, [data, classification, period, reverse, solvedStatus, isSmallScreen]);
+    return reshapeContests(
+      data,
+      classification,
+      reverse,
+      period,
+      solvedStatus,
+      solvedSet,
+      userId
+    );
+  }, [
+    data,
+    classification,
+    period,
+    reverse,
+    solvedStatus,
+    isSmallScreen,
+    userId,
+    solvedSet,
+  ]);
 
   const problemIdxes = useMemo(() => {
     if (!data || isSmallScreen) return [];
