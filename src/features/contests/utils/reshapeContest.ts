@@ -20,6 +20,7 @@ export const filterAndSortContests = (
   reverse: boolean,
   period: PeriodWord,
   solvedStatus: SolvedStatus
+  // userId?: string
 ): Contest[] => {
   return contests
     .filter((contest) => {

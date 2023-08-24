@@ -8,26 +8,31 @@ import { useThemeContext } from "@features/color/themeColor.hook";
 import { getProblemKey } from "@features/problems/utils";
 import { Classification } from "@features/contests/contest";
 import { calcSolvedStatus } from "@features/contests/utils/solvedStatus";
+import type { SolvedStatus } from "@features/contests/components/SolvedStatusFilter";
 
 type Props = {
+  readonly userId?: string;
   readonly contestId: number;
   readonly contestName: string;
   readonly classification: Classification;
   readonly problemIdxes: string[];
   readonly problems: ReshapedProblem[];
   readonly showDifficulty: boolean;
+  readonly solvedStatus: SolvedStatus;
   readonly solvedSet?: Set<string>;
   readonly attemptedSet?: Set<string>;
 };
 
 export const ContestTableRow: React.FC<Props> = React.memo(
   ({
+    userId,
     contestId,
     contestName,
     classification,
     problemIdxes,
     problems,
     showDifficulty,
+    solvedStatus,
     solvedSet,
     attemptedSet,
   }) => {
@@ -41,15 +46,13 @@ export const ContestTableRow: React.FC<Props> = React.memo(
       return map;
     }, [problems]);
 
+    const userSolvedStatus: SolvedStatus = useMemo(() => {
+      if (!userId) return "All Contests";
+      return calcSolvedStatus(problemIdxes, problemMap, solvedSet, contestId);
+    }, [problemIdxes, problemMap, solvedSet, contestId]);
+
     const rowColor = useMemo(() => {
-      return calcSolvedStatus(
-        problemIdxes,
-        problemMap,
-        solvedSet,
-        contestId
-      ) === "Completed"
-        ? theme.colors.acColor
-        : "";
+      return userSolvedStatus === "Completed" ? theme.colors.acColor : "";
     }, [problemIdxes, problemMap, solvedSet, contestId, theme.colors.acColor]);
 
     const cellColors = useMemo(() => {
@@ -68,6 +71,15 @@ export const ContestTableRow: React.FC<Props> = React.memo(
         });
       });
     }, [problemIdxes, problemMap, solvedSet, contestId, theme.colors]);
+
+    // これではバグる
+    // if (
+    //   userId &&
+    //   solvedStatus !== "All Contests" &&
+    //   userSolvedStatus !== solvedStatus
+    // ) {
+    //   return null;
+    // }
 
     return (
       <TableRow key={contestId} hover>

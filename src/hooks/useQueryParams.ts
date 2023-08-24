@@ -6,7 +6,7 @@ import type { SolvedStatus as ProblemSolvedStatus } from "@features/problems/com
 import type { SolvedStatus as ContestSolvedStatus } from "@features/contests/components/SolvedStatusFilter";
 import type { PeriodWord } from "@features/contests/components/PeriodFilter";
 import type { LanguageFilter } from "@features/submission/components/LanguageFilter";
-import type { VerdictFilter } from "@features/submission/components/SolvedStatusFilter";
+import type { VerdictFilter } from "@features/submission/submission";
 
 type KnownQueryParams = {
   userId?: string;

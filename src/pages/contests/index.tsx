@@ -121,6 +121,7 @@ export const ContestsPage: React.FC = () => {
                 contests={contests as ReshapedContest[]}
                 problemIdxes={problemIdxes}
                 showDifficulty={showDifficulty}
+                solvedStatus={solvedStatus}
                 solvedSet={solvedSet}
                 attemptedSet={attemptedSet}
               />
