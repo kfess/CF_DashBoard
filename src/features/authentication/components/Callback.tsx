@@ -14,7 +14,6 @@ export default function Callback() {
       const params = new URLSearchParams(window.location.search);
       const state = params.get("state");
       const code = params.get("code");
-      console.log("here!");
       githubOauth.mutate({ code, state });
     }
   }, []);
