@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { NavLink } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { Drawer, Box, Toolbar, Divider, List } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
@@ -47,7 +46,7 @@ export const SideNavigationBar: React.FC<Props> = (props: Props) => {
           >
             <MenuIcon />
           </IconButton>
-          <NavLink to="/">
+          <a href="/" rel="noopener noreferrer">
             <Typography
               variant="h6"
               noWrap
@@ -61,7 +60,7 @@ export const SideNavigationBar: React.FC<Props> = (props: Props) => {
             >
               CF DashBoard
             </Typography>
-          </NavLink>
+          </a>
         </Toolbar>
         <Divider />
         <List>
