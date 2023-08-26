@@ -46,7 +46,7 @@ export const HeaderBar: React.FC<Props> = ({
             >
               <MenuIcon />
             </IconButton>
-            <a href="/">
+            <a href="/" rel="noopener noreferrer">
               <Typography
                 variant="h6"
                 component="div"
