@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { useFetchUserInfo } from "../useUserInfo";
-import { addQueryParamsToPath, useURLQuery } from "@hooks/useQueryParams";
+import { useURLQuery } from "@hooks/useQueryParams";
 import { Input } from "@features/ui/component/Input";
 import { normalizeSearchUser } from "../searchUser";
 import { Snackbar } from "@features/ui/component/Snackbar";
@@ -13,7 +13,7 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const { queryParams } = useURLQuery();
+  const { queryParams, setURLQuery } = useURLQuery();
   const queryUserId = queryParams["userId"];
   const [searchUserId, setSearchUserId] = useState(queryUserId);
 
@@ -41,11 +41,7 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (searchUserId) {
-        navigate(
-          addQueryParamsToPath(pathname, {
-            userId: normalizeSearchUser(searchUserId),
-          }) // no query params other than userId
-        );
+        setURLQuery({ userId: normalizeSearchUser(searchUserId) });
       }
     },
     [navigate, pathname, searchUserId]

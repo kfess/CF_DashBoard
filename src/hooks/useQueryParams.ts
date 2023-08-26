@@ -25,22 +25,6 @@ type _QueryParams = KnownQueryParams & {
   [key: string]: string | number | Tag[] | undefined;
 };
 
-export const addQueryParamsToPath = (
-  currentPath: string,
-  newParams: _QueryParams
-): string => {
-  const url = new URL(currentPath, window.location.origin);
-  const urlSearchParams = new URLSearchParams(url.search);
-
-  for (const [key, value] of Object.entries(newParams)) {
-    if (value !== undefined) {
-      urlSearchParams.set(key, String(value));
-    }
-  }
-
-  return `${url.pathname}?${urlSearchParams.toString()}`;
-};
-
 const castToQueryParams = (params: Record<string, string>): _QueryParams => {
   return {
     userId: params.userId ? params.userId : undefined,
