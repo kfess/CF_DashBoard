@@ -58,7 +58,7 @@ export const SideNavigationBar: React.FC<Props> = (props: Props) => {
               sx={{ display: { xs: "none", sm: "block" } }}
               css={{ color: theme.colors.foregroundColor }}
             >
-              CF DashBoard
+              CF-DashBoard
             </Typography>
           </a>
         </Toolbar>

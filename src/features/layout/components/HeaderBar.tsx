@@ -59,7 +59,7 @@ export const HeaderBar: React.FC<Props> = ({
                   color: theme.colors.header.foregroundColor,
                 }}
               >
-                CF DashBoard
+                CF-DashBoard
               </Typography>
             </a>
           </Box>
