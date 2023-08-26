@@ -28,9 +28,6 @@ const CustomButton = styled(ButtonUnstyled)(
     transition: all 150ms ease;
     cursor: pointer;
     border: none;
-    box-shadow: 0px 4px 30px ${
-      theme.palette.mode === "dark" ? other[900] : other[100]
-    };
     &:hover {
       background-color: ${gray[600]};
     }
@@ -129,14 +126,8 @@ type ButtonProps = ButtonUnstyledProps & {
 };
 
 export const _Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (props, ref) => {
-    const { startIcon, endIcon, ...otherProps } = props;
-
-    return (
-      <Button ref={ref} startIcon={startIcon} endIcon={endIcon} {...otherProps}>
-        {props.children}
-      </Button>
-    );
+  function Button(props, ref) {
+    return <CustomButtonRoot ref={ref} {...props} />;
   }
 );
 
