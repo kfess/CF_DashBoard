@@ -22,6 +22,7 @@ import { ApiPage } from "@pages/api";
 import { SettingPage } from "@pages/setting";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { PrivacyPolicyPage } from "@pages/privacy_policy";
+import { ErrorFallback } from "@features/ui/component/ErrorBoundary";
 
 // const ProblemsPage = lazy(() => import("@pages/problems"));
 
@@ -33,102 +34,126 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Suspense fallback={<CircularProgress />}>
-            <ContestsPage />
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<CircularProgress />}>
+              <ContestsPage />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: "/problems",
         element: (
-          <Suspense fallback={<CircularProgress />}>
-            <ProblemsPage />
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<CircularProgress />}>
+              <ProblemsPage />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: "/achievement",
         element: (
-          <Suspense fallback={<CircularProgress />}>
-            <AchievementPage />
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<CircularProgress />}>
+              <AchievementPage />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: "/recommend",
         element: (
-          <Suspense fallback={<CircularProgress />}>
-            <RecommendationPage />
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<CircularProgress />}>
+              <RecommendationPage />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: "labels",
         element: (
-          <Suspense fallback={<CircularProgress />}>
-            <LabelsPage />
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<CircularProgress />}>
+              <LabelsPage />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: "labels/problem/:labelName",
         element: (
-          <Suspense fallback={<CircularProgress />}>
-            <ProblemLabelPage />
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<CircularProgress />}>
+              <ProblemLabelPage />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: "labels/contest/:labelName",
         element: (
-          <Suspense fallback={<CircularProgress />}>
-            <ContestLabelPage />
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<CircularProgress />}>
+              <ContestLabelPage />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: "/submission",
         element: (
-          <Suspense fallback={<CircularProgress />}>
-            <SubmissionPage />
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<CircularProgress />}>
+              <SubmissionPage />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       // { path: "/ranking", element: <div>ranking</div> },
       {
         path: "/custom-contest",
         element: (
-          <Suspense fallback={<CircularProgress />}>
-            <CustomContestPage />
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<CircularProgress />}>
+              <CustomContestPage />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: "/custom-contest/show/:contestId",
         element: (
-          <Suspense fallback={<CircularProgress />}>
-            <ShowCustomContestPage />
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<CircularProgress />}>
+              <ShowCustomContestPage />
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: "/profile",
         element: (
-          <Suspense fallback={<CircularProgress />}>
-            <PrivateRoute>
-              <ProfilePage />
-            </PrivateRoute>
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<CircularProgress />}>
+              <PrivateRoute>
+                <ProfilePage />
+              </PrivateRoute>
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       {
         path: "/custom-contest/create",
         element: (
-          <Suspense fallback={<CircularProgress />}>
-            <PrivateRoute>
-              <CreateCustomContestPage />
-            </PrivateRoute>
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<CircularProgress />}>
+              <PrivateRoute>
+                <CreateCustomContestPage />
+              </PrivateRoute>
+            </Suspense>
+          </ErrorBoundary>
         ),
       },
       { path: "/api", element: <ApiPage /> },
