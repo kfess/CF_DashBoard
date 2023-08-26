@@ -2,11 +2,9 @@
 
 CF DashBoard is a web application to help Codeforces users to solve problems and manage progress more efficiently.
 
-https://user-images.githubusercontent.com/3
 
-Uploading cf-dashboard_explanation.mp4…
+https://github.com/kfess/CF_DashBoard/assets/35001425/558b08f7-ea1c-4a2a-999a-d9e4d704c16d
 
-5001425/232385894-6d5221a4-2cc4-446e-b121-03909203a7d1.mp4
 
 # Application
 
