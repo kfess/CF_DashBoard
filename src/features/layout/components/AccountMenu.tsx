@@ -170,6 +170,9 @@ export const AccountMenu: React.FC = () => {
                   alignItems: "center",
                   textDecoration: "none",
                   color: "inherit",
+                  "&:hover": {
+                    color: "#9246FF",
+                  },
                 }}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>
@@ -183,6 +186,9 @@ export const AccountMenu: React.FC = () => {
                   alignItems: "center",
                   textDecoration: "none",
                   color: "inherit",
+                  "&:hover": {
+                    color: "#9246FF",
+                  },
                 }}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>
