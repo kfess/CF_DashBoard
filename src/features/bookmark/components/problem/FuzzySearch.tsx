@@ -1,7 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Input } from "@features/ui/component/Input";
-import useDebounce from "@hooks/useDebounce"
-
+import useDebounce from "@hooks/useDebounce";
 
 type Props = {
   query: string;
@@ -9,14 +8,21 @@ type Props = {
 };
 
 export const FuzzySearch: React.FC<Props> = ({ query, setQuery }) => {
-    const [debouncedValue, setDebouncedValue] = useState("")
-    const [, cancel] = useDebounce(() =>{setQuery(val)}, [val])
+  const [debouncedValue, setDebouncedValue] = useState("");
+  const [, cancel] = useDebounce(
+    () => {
+      console.log("aaaaa");
+      setDebouncedValue(query);
+    },
+    2000, // ms
+    [query]
+  );
 
-    return (
+  return (
     <Input
       id="fuzzy-search"
       value={query}
-      onChange={(e) => setDebouncedValue(e.target.value)}
+      onChange={({ currentTarget }) => setQuery(currentTarget.value)}
       placeholder="Search Label"
       type="text"
     />
