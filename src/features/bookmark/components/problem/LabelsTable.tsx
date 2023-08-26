@@ -19,7 +19,6 @@ import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 import { FuzzySearch } from "@features/bookmark/components/problem/FuzzySearch";
 
-
 // fuzzy search (Easy implementation)
 const matchLabel = (label: string, query: string) => {
   const labelWords = label.toLowerCase().split(" ");
@@ -60,7 +59,11 @@ export const LabelsTable: React.FC = () => {
 
   const [query, setQuery] = useState<string>(""); // pseudo fuzzy search
   const filteredLabelsAndProblems = query
-    ? labelsAndProblems?.filter((label) => matchLabel(label.name, query))
+    ? labelsAndProblems?.filter(
+        (label) =>
+          matchLabel(label.name, query) ||
+          matchLabel(label.description || "", query)
+      )
     : labelsAndProblems;
 
   const [order, setOrder] = useState<SortOrder>("Alphabetically");

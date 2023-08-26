@@ -17,6 +17,18 @@ import { LabelItem } from "@features/bookmark/components/contest/LabelItem";
 import { useIndexedDBForContestLabel } from "@features/bookmark/hooks/useIndexedDBForContestLabel";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 import { HelpToolTip } from "@features/ui/component/HelpToolTip";
+import { FuzzySearch } from "@features/bookmark/components/contest/FuzzySearch";
+
+// fuzzy search (Easy implementation)
+const matchLabel = (label: string, query: string) => {
+  const labelWords = label.toLowerCase().split(" ");
+  const queryWords = query.toLowerCase().split(" ");
+  return queryWords.every((queryWord) => {
+    return labelWords.some((labelWord) => {
+      return labelWord.includes(queryWord);
+    });
+  });
+};
 
 const sortOrders = [
   "Alphabetically",
@@ -44,6 +56,16 @@ const sortLabels = (labels: ContestLabel[], order: SortOrder) => {
 
 export const LabelsTable: React.FC = () => {
   const { labelsAndContests } = useIndexedDBForContestLabel();
+
+  const [query, setQuery] = useState<string>(""); // pseudo fuzzy search
+  const filteredLabelsAndContests = query
+    ? labelsAndContests?.filter(
+        (label) =>
+          matchLabel(label.name, query) ||
+          matchLabel(label.description || "", query)
+      )
+    : labelsAndContests;
+
   const [order, setOrder] = useState<SortOrder>("Alphabetically");
 
   const noDataTitle = "Welcome to Contest Labels!";
@@ -61,26 +83,32 @@ export const LabelsTable: React.FC = () => {
           justifyContent: "flex-end",
           paddingBottom: 1,
         }}
+        gap={2}
       >
+        <Box sx={{ flexGrow: 1 }}>
+          <FuzzySearch query={query} setQuery={setQuery} />
+        </Box>
         <DropDownMenuButton
           title="sort"
           items={sortOrders.map((so) => {
             return { item: so };
           })}
           selectedItem={order}
-          setSelectedItem={setOrder}
+          onSelect={setOrder}
         />
       </Box>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              {labelsAndContests && (
+              {filteredLabelsAndContests && (
                 <TableCell>
                   <Stack direction="row" alignItems="center" spacing={1}>
                     <Typography variant="body2" fontWeight="bold" noWrap={true}>
-                      {`${labelsAndContests.length} ${
-                        labelsAndContests.length > 1 ? "Labels" : "Label"
+                      {`${filteredLabelsAndContests.length} ${
+                        filteredLabelsAndContests.length > 1
+                          ? "Labels"
+                          : "Label"
                       }`}
                     </Typography>
                     <div>
@@ -107,8 +135,9 @@ export const LabelsTable: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {labelsAndContests && labelsAndContests.length > 0 ? (
-              sortLabels(labelsAndContests, order).map((label) => (
+            {filteredLabelsAndContests &&
+            filteredLabelsAndContests.length > 0 ? (
+              sortLabels(filteredLabelsAndContests, order).map((label) => (
                 <LabelItem key={label.name} label={label} />
               ))
             ) : (
