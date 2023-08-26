@@ -17,6 +17,19 @@ import { LabelItem } from "@features/bookmark/components/problem/LabelItem";
 import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 import { HelpToolTip } from "@features/ui/component/HelpToolTip";
+import { FuzzySearch } from "@features/bookmark/components/problem/FuzzySearch";
+
+
+// fuzzy search (Easy implementation)
+const matchLabel = (label: string, query: string) => {
+  const labelWords = label.toLowerCase().split(" ");
+  const queryWords = query.toLowerCase().split(" ");
+  return queryWords.every((queryWord) => {
+    return labelWords.some((labelWord) => {
+      return labelWord.includes(queryWord);
+    });
+  });
+};
 
 const sortOrders = [
   "Alphabetically",
@@ -44,6 +57,12 @@ const sortLabels = (labels: ProblemLabel[], order: SortOrder) => {
 
 export const LabelsTable: React.FC = () => {
   const { labelsAndProblems } = useIndexedDBForProblemLabel();
+
+  const [query, setQuery] = useState<string>(""); // pseudo fuzzy search
+  const filteredLabelsAndProblems = query
+    ? labelsAndProblems?.filter((label) => matchLabel(label.name, query))
+    : labelsAndProblems;
+
   const [order, setOrder] = useState<SortOrder>("Alphabetically");
 
   const noDataTitle = "Welcome to Problem Labels!";
@@ -61,26 +80,32 @@ export const LabelsTable: React.FC = () => {
           justifyContent: "flex-end",
           paddingBottom: 1,
         }}
+        gap={2}
       >
+        <Box sx={{ flexGrow: 1 }}>
+          <FuzzySearch query={query} setQuery={setQuery} />
+        </Box>
         <DropDownMenuButton
           title="sort"
           items={sortOrders.map((so) => {
             return { item: so };
           })}
           selectedItem={order}
-          setSelectedItem={setOrder}
+          onSelect={setOrder}
         />
       </Box>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              {labelsAndProblems && (
+              {filteredLabelsAndProblems && (
                 <TableCell>
                   <Stack direction="row" alignItems="center" spacing={1}>
                     <Typography variant="body2" fontWeight="bold" noWrap={true}>
-                      {`${labelsAndProblems.length} ${
-                        labelsAndProblems.length > 1 ? "Labels" : "Label"
+                      {`${filteredLabelsAndProblems.length} ${
+                        filteredLabelsAndProblems.length > 1
+                          ? "Labels"
+                          : "Label"
                       }`}
                     </Typography>
                     <div>
@@ -107,8 +132,9 @@ export const LabelsTable: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {labelsAndProblems && labelsAndProblems.length > 0 ? (
-              sortLabels(labelsAndProblems, order).map((label) => (
+            {filteredLabelsAndProblems &&
+            filteredLabelsAndProblems.length > 0 ? (
+              sortLabels(filteredLabelsAndProblems, order).map((label) => (
                 <LabelItem key={label.name} label={label} />
               ))
             ) : (
