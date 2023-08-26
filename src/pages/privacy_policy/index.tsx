@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-export const PrivacyPolicyPage: React.FC = () => {
+const PrivacyPolicyPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       <Grid container spacing={2} sx={{ my: 2 }}>
@@ -54,3 +54,5 @@ export const PrivacyPolicyPage: React.FC = () => {
     </Container>
   );
 };
+
+export default PrivacyPolicyPage;

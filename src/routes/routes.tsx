@@ -16,15 +16,13 @@ import Callback from "@features/authentication/components/Callback";
 import { PrivateRoute } from "@features/authentication/components/PrivateRoute";
 import { ProfilePage } from "@pages/authentication/profile";
 import { LoginPage } from "@pages/authentication/login";
-import { LinksPage } from "@pages/links";
 import { TermsPage } from "@pages/terms";
-import { ApiPage } from "@pages/api";
 import { SettingPage } from "@pages/setting";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
-import { PrivacyPolicyPage } from "@pages/privacy_policy";
 import { ErrorFallback } from "@features/ui/component/ErrorBoundary";
 
-// const ProblemsPage = lazy(() => import("@pages/problems"));
+const PrivacyPolicyPage = lazy(() => import("@pages/privacy_policy"));
+const LinksPage = lazy(() => import("@pages/links"));
 
 export const router = createBrowserRouter([
   {
@@ -156,13 +154,33 @@ export const router = createBrowserRouter([
           </ErrorBoundary>
         ),
       },
-      { path: "/api", element: <ApiPage /> },
-      { path: "/links", element: <LinksPage /> },
+      {
+        path: "/links",
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <LinksPage />
+          </Suspense>
+        ),
+      },
       { path: "/setting", element: <SettingPage /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/callback", element: <Callback /> },
-      { path: "/terms", element: <TermsPage /> },
-      { path: "/privacy-policy", element: <PrivacyPolicyPage /> },
+      {
+        path: "/terms",
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <TermsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/privacy-policy",
+        element: (
+          <Suspense fallback={<CircularProgress />}>
+            <PrivacyPolicyPage />
+          </Suspense>
+        ),
+      },
       { path: "*", element: <Navigate to="/" /> },
     ],
   },

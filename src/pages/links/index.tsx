@@ -87,7 +87,7 @@ const usefulResources: Resource[] = [
       "AOJ-ICPC features unofficial difficulty rankings of problems from the Aizu Online Judge, including those from the ICPC Japan Regional contests, Asia Regional contests, and JAG programming contests, all evaluated by volunteers.",
   },
 ];
-export const LinksPage: React.FC = () => {
+const LinksPage: React.FC = () => {
   return (
     <Container maxWidth="md">
       <Box my={4}>
@@ -195,3 +195,5 @@ export const LinksPage: React.FC = () => {
     </Container>
   );
 };
+
+export default LinksPage;
