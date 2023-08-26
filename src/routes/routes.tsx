@@ -27,7 +27,13 @@ const LinksPage = lazy(() => import("@pages/links"));
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <LayoutPage />,
+    element: (
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Suspense>
+          <LayoutPage />
+        </Suspense>
+      </ErrorBoundary>
+    ),
     children: [
       {
         index: true,
@@ -164,7 +170,10 @@ export const router = createBrowserRouter([
       },
       { path: "/setting", element: <SettingPage /> },
       { path: "/login", element: <LoginPage /> },
-      { path: "/callback", element: <Callback /> },
+      {
+        path: "/callback",
+        element: <Callback />,
+      },
       {
         path: "/terms",
         element: (

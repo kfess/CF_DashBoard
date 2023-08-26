@@ -1,15 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useGithubOauth } from "@features/authentication/hooks/useGithubOauth";
-import CircularProgress from "@mui/material/CircularProgress";
+import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 export default function Callback() {
+  const initial = useRef<boolean>(false);
+
   const githubOauth = useGithubOauth();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const state = params.get("state");
-    const code = params.get("code");
-    githubOauth.mutate({ code, state });
+    if (!initial.current) {
+      initial.current = true;
+
+      const params = new URLSearchParams(window.location.search);
+      const state = params.get("state");
+      const code = params.get("code");
+      console.log("here!");
+      githubOauth.mutate({ code, state });
+    }
   }, []);
 
   return (

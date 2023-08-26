@@ -15,7 +15,7 @@ export const LayoutPage: React.FC = () => {
   const location = useLocation();
   const path = location.pathname;
   const [selectedItem, setSelectedItem] = useState(
-    getFieldFromLink(path) as Field
+    (getFieldFromLink(path) as Field) || "Contests"
   );
 
   const metaInfo = pageMetaInfoMap[path] ?? pageMetaInfoMap["default"];
