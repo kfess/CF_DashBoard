@@ -124,11 +124,19 @@ const CustomButtonRoot = styled(ButtonUnstyled)<ButtonProps>(
 type ButtonProps = ButtonUnstyledProps & {
   color?: string;
   size?: "small" | "medium" | "large";
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
 };
 
 export const _Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  function Button(props, ref) {
-    return <CustomButtonRoot ref={ref} {...props} />;
+  (props, ref) => {
+    const { startIcon, endIcon, ...otherProps } = props;
+
+    return (
+      <Button ref={ref} startIcon={startIcon} endIcon={endIcon} {...otherProps}>
+        {props.children}
+      </Button>
+    );
   }
 );
 

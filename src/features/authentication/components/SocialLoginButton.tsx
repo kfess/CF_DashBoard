@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "@mui/material/Button";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
+import { _Button } from "@features/ui/component/Button";
 
 const GITHUB_CLIENT_ID = import.meta.env.VITE_GITHUB_CLIENT_ID;
 
@@ -29,13 +29,12 @@ export const SocialLoginButton: React.FC<Props> = ({ provider }) => {
   return (
     <>
       {!loggedIn && (
-        <Button
+        <_Button
           onClick={handleLogin}
           startIcon={provider === "github" ? <GitHubIcon /> : null}
-          sx={{
+          css={{
             backgroundColor: "#24292e",
             color: "#ffffff",
-            textTransform: "none",
             "&:hover": {
               backgroundColor: "#3b434a",
               "@media (hover: none)": {
@@ -43,12 +42,9 @@ export const SocialLoginButton: React.FC<Props> = ({ provider }) => {
               },
             },
           }}
-          variant="contained"
-          size="large"
-          fullWidth
         >
           Sign in with {provider}
-        </Button>
+        </_Button>
       )}
     </>
   );
