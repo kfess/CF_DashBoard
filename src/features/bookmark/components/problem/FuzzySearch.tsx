@@ -11,7 +11,6 @@ export const FuzzySearch: React.FC<Props> = ({ query, setQuery }) => {
   const [debouncedValue, setDebouncedValue] = useState("");
   const [, cancel] = useDebounce(
     () => {
-      console.log("aaaaa");
       setDebouncedValue(query);
     },
     2000, // ms
