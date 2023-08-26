@@ -87,6 +87,7 @@ export const Standings: React.FC<Props> = ({
                     borderBottom: "2px solid rgba(224, 224, 224, 1)",
                     textAlign: "center",
                     fontWeight: "600",
+                    padding: "0px",
                   }}
                 >
                   #
@@ -97,6 +98,7 @@ export const Standings: React.FC<Props> = ({
                     borderBottom: "2px solid rgba(224, 224, 224, 1)",
                     textAlign: "center",
                     fontWeight: "600",
+                    padding: "0px",
                   }}
                 >
                   Participants
@@ -107,6 +109,7 @@ export const Standings: React.FC<Props> = ({
                     borderBottom: "2px solid rgba(224, 224, 224, 1)",
                     textAlign: "center",
                     fontWeight: "600",
+                    padding: "0px",
                   }}
                 >
                   Score
@@ -122,6 +125,7 @@ export const Standings: React.FC<Props> = ({
                       borderRight: "1px solid rgba(224, 224, 224, 1)",
                       borderBottom: "2px solid rgba(224, 224, 224, 1)",
                       textAlign: "center",
+                      padding: "0px",
                     }}
                   >
                     <a
@@ -148,6 +152,7 @@ export const Standings: React.FC<Props> = ({
                       sx={{
                         borderRight: "1px solid rgba(224, 224, 224, 1)",
                         textAlign: "center",
+                        padding: "2px",
                       }}
                     >
                       {i + 1}
@@ -155,6 +160,7 @@ export const Standings: React.FC<Props> = ({
                     <TableCell
                       sx={{
                         borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        padding: "8px",
                       }}
                     >
                       <Typography variant="body1" fontWeight="fontWeightBold">
@@ -173,6 +179,7 @@ export const Standings: React.FC<Props> = ({
                     <TableCell
                       sx={{
                         borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        padding: "2px",
                       }}
                     >
                       {stats ? (
@@ -225,6 +232,7 @@ export const Standings: React.FC<Props> = ({
                         )}
                         sx={{
                           borderRight: "1px solid rgba(224, 224, 224, 1)",
+                          padding: "2px",
                         }}
                       >
                         <Score problem={problem} stats={stats} />
@@ -238,6 +246,7 @@ export const Standings: React.FC<Props> = ({
                   colSpan={3}
                   sx={{
                     borderRight: "1px solid rgba(224, 224, 224, 1)",
+                    padding: "8px",
                   }}
                 >
                   <Typography
@@ -259,6 +268,7 @@ export const Standings: React.FC<Props> = ({
                       key={key}
                       sx={{
                         borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        padding: "8px",
                       }}
                     >
                       {firstACs[key] ? (
