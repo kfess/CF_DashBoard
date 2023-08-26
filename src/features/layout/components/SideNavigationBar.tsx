@@ -21,8 +21,12 @@ type Props = {
   setSelectedItem: Dispatch<SetStateAction<Field>>;
 };
 
-export const SideNavigationBar: React.FC<Props> = (props: Props) => {
-  const { isOpenSideBar, toggleSideBar, selectedItem, setSelectedItem } = props;
+export const SideNavigationBar: React.FC<Props> = ({
+  isOpenSideBar,
+  toggleSideBar,
+  selectedItem,
+  setSelectedItem,
+}) => {
   const { theme } = useThemeContext();
 
   const { queryParams } = useURLQuery();
