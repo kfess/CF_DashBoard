@@ -15,6 +15,7 @@ import {
   UserStats,
   calculateAllUsersStats,
   calculateFirstACs,
+  calculateSolverCount,
 } from "@features/custom_contests/utils/calculateStandings";
 import { CF_CONTEST_URL, CF_PROFILE_URL } from "@constants/url";
 import { getProblemKey } from "@features/problems/utils";
@@ -67,6 +68,10 @@ export const Standings: React.FC<Props> = ({
     }
     const allSubmissions = Object.values(submissionsByUser).flat();
     return calculateFirstACs(allSubmissions, startDate);
+  }, [submissionsByUser]);
+
+  const solvedCount = useMemo(() => {
+    return calculateSolverCount(submissionsByUser || {}, problems);
   }, [submissionsByUser]);
 
   return (
@@ -249,11 +254,7 @@ export const Standings: React.FC<Props> = ({
                     padding: "8px",
                   }}
                 >
-                  <Typography
-                    variant="body1"
-                    fontWeight="fontWeightBold"
-                    sx={{ textAlign: "center" }}
-                  >
+                  <Typography variant="body2" sx={{ textAlign: "center" }}>
                     First Acceptance
                   </Typography>
                 </TableCell>
@@ -301,6 +302,40 @@ export const Standings: React.FC<Props> = ({
                           -
                         </Typography>
                       )}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+              <TableRow>
+                <TableCell
+                  colSpan={3}
+                  sx={{
+                    borderRight: "1px solid rgba(224, 224, 224, 1)",
+                    padding: "8px",
+                  }}
+                >
+                  <Typography variant="body2" sx={{ textAlign: "center" }}>
+                    Solvers
+                  </Typography>
+                </TableCell>
+                {problems.map((problem) => {
+                  const key = getProblemKey(
+                    problem.contestId,
+                    problem.index,
+                    problem.name
+                  );
+                  return (
+                    <TableCell
+                      key={key}
+                      sx={{
+                        borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        padding: "8px",
+                      }}
+                    >
+                      <Typography variant="body2" sx={{ textAlign: "center" }}>
+                        {solvedCount[key]["totalSolvers"].size} /{" "}
+                        {solvedCount[key]["totalSubmitters"].size}
+                      </Typography>
                     </TableCell>
                   );
                 })}

@@ -140,3 +140,33 @@ export const calculateFirstACs = (
 
   return firstACs;
 };
+
+export const calculateSolverCount = (
+  submissionsByUser: Record<string, Submission[]>,
+  problems: Problem[]
+) => {
+  const count: Record<
+    string,
+    { totalSubmitters: Set<string>; totalSolvers: Set<string> }
+  > = {};
+
+  problems.forEach((p) => {
+    const key = getProblemKey(p.contestId, p.index, p.name);
+    count[key] = {
+      totalSubmitters: new Set(),
+      totalSolvers: new Set(),
+    };
+  });
+
+  Object.values(submissionsByUser).forEach((submissions) => {
+    submissions.forEach((s) => {
+      const key = getProblemKey(s.contestId, s.problem.index, s.problem.name);
+      count[key].totalSubmitters.add(s.author.members[0].handle);
+      if (s.verdict === "OK") {
+        count[key].totalSolvers.add(s.author.members[0].handle);
+      }
+    });
+  });
+
+  return count;
+};
