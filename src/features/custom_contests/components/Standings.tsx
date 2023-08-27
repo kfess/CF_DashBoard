@@ -92,7 +92,7 @@ export const Standings: React.FC<Props> = ({
                     borderBottom: "2px solid rgba(224, 224, 224, 1)",
                     textAlign: "center",
                     fontWeight: "600",
-                    padding: "8px",
+                    padding: "0px",
                   }}
                 >
                   rank
@@ -369,9 +369,10 @@ const Score: React.FC<ScoreProps> = ({ problem, stats }) => {
   const key = getProblemKey(problem.contestId, problem.index, problem.name);
   const problemStat = stats?.problemStats[key];
 
-  const actime = problemStat?.timeToFirstAC
-    ? secondsToHms(problemStat?.timeToFirstAC)
-    : null;
+  const actime =
+    problemStat && problemStat?.timeToFirstAC
+      ? secondsToHms(problemStat?.timeToFirstAC)
+      : null;
 
   if (
     !problemStat ||
