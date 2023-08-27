@@ -37,7 +37,7 @@ export const ProblemLabelPage: React.FC = () => {
                       borderRadius: "4px",
                       borderColor: "#c0c0c0",
                       borderWidth: "0.8px",
-                      borderLeftColor: "green",
+                      borderLeftColor: label.color,
                       borderLeftWidth: "5px",
                     }}
                   >

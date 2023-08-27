@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { alpha } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import TableContainer from "@mui/material/TableContainer";
@@ -141,6 +142,11 @@ export const TrainingStandings: React.FC<Props> = ({
                     >
                       <Chip_
                         label={`${userStats[participant].totalScore} / ${numProblems}`}
+                        sx={{
+                          color: "#9246FF",
+                          borderColor: "black",
+                          backgroundColor: alpha("#9246FF", 0.15),
+                        }}
                       />
                     </TableCell>
                     <TableCell
