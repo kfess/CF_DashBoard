@@ -12,9 +12,7 @@ import { ProblemLink } from "@features/problems/components/ProblemLink";
 
 type Props = { problems: Problem[] };
 
-export const Problems: React.FC<Props> = (props: Props) => {
-  const { problems } = props;
-
+export const Problems: React.FC<Props> = ({ problems }) => {
   return (
     <>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>

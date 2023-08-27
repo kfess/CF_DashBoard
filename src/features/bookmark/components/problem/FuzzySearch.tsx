@@ -22,7 +22,7 @@ export const FuzzySearch: React.FC<Props> = ({ query, setQuery }) => {
       id="fuzzy-search"
       value={query}
       onChange={({ currentTarget }) => setQuery(currentTarget.value)}
-      placeholder="Search Label"
+      placeholder="Search Label ..."
       type="text"
     />
   );
