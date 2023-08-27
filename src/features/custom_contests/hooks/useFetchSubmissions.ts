@@ -10,11 +10,7 @@ import { getProblemKey } from "@features/problems/utils";
 type UserSubmissions = Record<string, Submission[]>;
 
 const createProblemSet = (problems: Problem[]): Set<string> => {
-  return new Set(
-    problems.map(({ contestId, index, name }) =>
-      getProblemKey(contestId, index, name)
-    )
-  );
+  return new Set(problems.map((problem) => getProblemKey(problem)));
 };
 
 const filterSubmissions = (
@@ -28,13 +24,7 @@ const filterSubmissions = (
       (submission) =>
         dayjs.unix(submission.creationTimeSeconds).isAfter(startDate) &&
         dayjs.unix(submission.creationTimeSeconds).isBefore(endDate) &&
-        problemSet.has(
-          getProblemKey(
-            submission.contestId,
-            submission.problem.index,
-            submission.problem.name
-          )
-        )
+        problemSet.has(getProblemKey(submission))
     )
     .sort((a, b) => a.creationTimeSeconds - b.creationTimeSeconds);
 };

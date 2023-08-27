@@ -84,11 +84,7 @@ export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
                   .sort((a, b) => (a.rating ?? 0) - (b.rating ?? 0))
                   .map((problem) => (
                     <ProblemsTableRow
-                      key={getProblemKey(
-                        problem.contestId,
-                        problem.index,
-                        problem.name
-                      )}
+                      key={getProblemKey(problem)}
                       problem={problem}
                       showTags={false}
                       backgroundColor=""

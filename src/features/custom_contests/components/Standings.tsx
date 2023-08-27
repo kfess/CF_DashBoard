@@ -121,11 +121,7 @@ export const Standings: React.FC<Props> = ({
                 </TableCell>
                 {problems.map((problem, idx) => (
                   <TableCell
-                    key={getProblemKey(
-                      problem.contestId,
-                      problem.index,
-                      problem.name
-                    )}
+                    key={getProblemKey(problem)}
                     sx={{
                       borderRight: "1px solid rgba(224, 224, 224, 1)",
                       borderBottom: "2px solid rgba(224, 224, 224, 1)",
@@ -242,11 +238,7 @@ export const Standings: React.FC<Props> = ({
                       </TableCell>
                       {problems.map((problem) => (
                         <TableCell
-                          key={getProblemKey(
-                            problem.contestId,
-                            problem.index,
-                            problem.name
-                          )}
+                          key={getProblemKey(problem)}
                           sx={{
                             borderRight: "1px solid rgba(224, 224, 224, 1)",
                             padding: "2px",
@@ -271,11 +263,7 @@ export const Standings: React.FC<Props> = ({
                   </Typography>
                 </TableCell>
                 {problems.map((problem) => {
-                  const key = getProblemKey(
-                    problem.contestId,
-                    problem.index,
-                    problem.name
-                  );
+                  const key = getProblemKey(problem);
                   return (
                     <TableCell
                       key={key}
@@ -331,11 +319,7 @@ export const Standings: React.FC<Props> = ({
                   </Typography>
                 </TableCell>
                 {problems.map((problem) => {
-                  const key = getProblemKey(
-                    problem.contestId,
-                    problem.index,
-                    problem.name
-                  );
+                  const key = getProblemKey(problem);
                   return (
                     <TableCell
                       key={key}
@@ -366,7 +350,7 @@ type ScoreProps = {
 };
 
 const Score: React.FC<ScoreProps> = ({ problem, stats }) => {
-  const key = getProblemKey(problem.contestId, problem.index, problem.name);
+  const key = getProblemKey(problem);
   const problemStat = stats?.problemStats[key];
 
   const actime =

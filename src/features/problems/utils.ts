@@ -1,7 +1,13 @@
+import type { Submission } from "@features/submission/submission";
+import type { Problem } from "@features/problems/problem";
+
+// オーバーロードのシグネチャ
+export function getProblemKey(submissions: Submission): string;
+export function getProblemKey(problem: Problem): string;
+
+// 実装
 // To get the unique key of a problem
-// Edge case: some submission's problem name has a trailing space
-export const getProblemKey = (
-  contestId: number | undefined,
-  index: string,
-  name: string
-) => `${contestId ? contestId : "contestId"}-${index}-${name.trim()}`;
+export function getProblemKey(args: Problem | Submission): string {
+  const { contestId, index, name } = "problem" in args ? args.problem : args;
+  return `${contestId ? contestId : "contestId"}-${index}-${name.trim()}`;
+}

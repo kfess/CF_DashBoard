@@ -31,7 +31,7 @@ const calculateUserStats = (
   >(
     (acc, problem) => ({
       ...acc,
-      [`${getProblemKey(problem.contestId, problem.index, problem.name)}`]: {
+      [`${getProblemKey(problem)}`]: {
         timeToFirstAC: null,
         wrongAttemptBeforeAC: 0,
         score: 0,
@@ -43,7 +43,7 @@ const calculateUserStats = (
   let totalWrongAttempts = 0;
 
   submissions.forEach((s) => {
-    const key = getProblemKey(s.contestId, s.problem.index, s.problem.name);
+    const key = getProblemKey(s);
     const stats: ProblemStats = problemStats[key];
 
     const submissionTime = dayjs.unix(s.creationTimeSeconds);
@@ -120,7 +120,7 @@ export const calculateFirstACs = (
   const firstACs: Record<string, { time: number; user: string }> = {};
 
   submissions.forEach((s) => {
-    const key = getProblemKey(s.contestId, s.problem.index, s.problem.name);
+    const key = getProblemKey(s);
 
     const submissionTime = dayjs.unix(s.creationTimeSeconds);
     const relativeSubmissionTime = submissionTime.diff(
@@ -151,7 +151,7 @@ export const calculateSolverCount = (
   > = {};
 
   problems.forEach((p) => {
-    const key = getProblemKey(p.contestId, p.index, p.name);
+    const key = getProblemKey(p);
     count[key] = {
       totalSubmitters: new Set(),
       totalSolvers: new Set(),
@@ -160,7 +160,7 @@ export const calculateSolverCount = (
 
   Object.values(submissionsByUser).forEach((submissions) => {
     submissions.forEach((s) => {
-      const key = getProblemKey(s.contestId, s.problem.index, s.problem.name);
+      const key = getProblemKey(s);
       count[key].totalSubmitters.add(s.author.members[0].handle);
       if (s.verdict === "OK") {
         count[key].totalSolvers.add(s.author.members[0].handle);

@@ -53,10 +53,7 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
         <TableBody>
           {label.problems.length > 0 ? (
             label.problems.map((p) => (
-              <TableRow
-                key={getProblemKey(p.contestId, p.index, p.contestName)}
-                hover
-              >
+              <TableRow key={getProblemKey(p)} hover>
                 <TableCell>
                   <ProblemLink
                     showDifficulty={true}
