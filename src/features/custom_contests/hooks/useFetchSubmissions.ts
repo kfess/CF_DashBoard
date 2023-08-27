@@ -41,7 +41,6 @@ const fetchUserSubmissions = async (userId: string): Promise<Submission[]> => {
   }
 };
 
-// gpt-4 generated
 const fetchSubmissions = async (
   users: string[],
   problems: Problem[],
