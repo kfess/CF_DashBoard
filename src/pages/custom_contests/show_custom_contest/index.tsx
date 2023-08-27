@@ -170,7 +170,7 @@ export const ShowCustomContestPage: React.FC = () => {
                     Penalty
                   </Typography>
                   <Typography sx={{ mt: 2, flex: 8 }}>
-                    {data.penalty} seconds
+                    {data.penalty} seconds per wrong submission
                   </Typography>
                 </Box>
                 <Box sx={{ mt: 2 }}>

@@ -33,6 +33,7 @@ export const HeaderBar: React.FC<Props> = ({
       <AppBar
         css={{ backgroundColor: theme.colors.header.backgroundColor }}
         position="fixed"
+        elevation={0} // remove shadow
       >
         <Toolbar
           variant="dense"
