@@ -10,7 +10,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useToggle } from "@hooks/index";
-import { CF_CONTEST_URL, CF_GYM_URL } from "@constants/url";
+import { CF_CONTEST_URL, CF_GYM_URL, CF_PROFILE_URL } from "@constants/url";
 import { useFetchSubmissions } from "@features/custom_contests/hooks/useFetchSubmissions";
 import type { Problem } from "@features/problems/problem";
 import { pluralize } from "@helpers/format";
@@ -131,7 +131,16 @@ export const TrainingStandings: React.FC<Props> = ({
                         padding: "6px",
                       }}
                     >
-                      {participant}
+                      <a
+                        href={`${CF_PROFILE_URL}/${participant}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        css={{
+                          textDecoration: "none",
+                        }}
+                      >
+                        {participant}
+                      </a>
                     </TableCell>
                     <TableCell
                       sx={{
