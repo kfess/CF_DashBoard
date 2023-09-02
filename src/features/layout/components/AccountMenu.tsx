@@ -1,5 +1,6 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
+import Stack from "@mui/material/Stack";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -13,12 +14,14 @@ import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import LogoutIcon from "@mui/icons-material/Logout";
+import LaunchIcon from "@mui/icons-material/Launch";
 import {
   USER_GUIDE_URL,
   GITHUB_SPONSOR_URL,
   GITHUB_ISSUE_URL,
 } from "@constants/url";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
+import { Box } from "@mui/material";
 
 export type AccountMenuItem = {
   icon: React.ReactNode;
@@ -36,12 +39,6 @@ export const commonItems: AccountMenuItem[] = [
     isExternal: true,
   },
   {
-    icon: <SettingsOutlinedIcon sx={{ color: "#9246FF" }} />,
-    title: "Setting",
-    to: "/setting",
-    isExternal: false,
-  },
-  {
     icon: <OutlinedFlagIcon sx={{ color: "#9246FF" }} />,
     title: "Feedback",
     to: GITHUB_ISSUE_URL,
@@ -52,6 +49,12 @@ export const commonItems: AccountMenuItem[] = [
     title: "Sponsor",
     to: GITHUB_SPONSOR_URL,
     isExternal: true,
+  },
+  {
+    icon: <SettingsOutlinedIcon sx={{ color: "#9246FF" }} />,
+    title: "Setting",
+    to: "/setting",
+    isExternal: false,
   },
 ];
 
@@ -173,7 +176,10 @@ export const AccountMenu: React.FC = () => {
                 }}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <Typography>{item.title}</Typography>
+                <Stack direction="row" alignItems="center" spacing={0.5}>
+                  <Box>{item.title}</Box>
+                  <LaunchIcon fontSize="small" />
+                </Stack>
               </a>
             ) : (
               <NavLink

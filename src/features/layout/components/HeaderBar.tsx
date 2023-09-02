@@ -1,7 +1,14 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  IconButton,
+  Toolbar,
+  Typography,
+  Stack,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useThemeContext } from "@features/color/themeColor.hook";
 import { isMainField } from "@features/layout/helper";
@@ -33,6 +40,7 @@ export const HeaderBar: React.FC<Props> = ({
       <AppBar
         css={{ backgroundColor: theme.colors.header.backgroundColor }}
         position="fixed"
+        elevation={0}
       >
         <Toolbar
           variant="dense"
@@ -63,18 +71,10 @@ export const HeaderBar: React.FC<Props> = ({
               </Typography>
             </a>
           </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-start",
-              width: "40%",
-            }}
-          >
+          <Stack direction="row" spacing={2} flexGrow={1} pl={2}>
             <SearchBar visible={isMainField(pathname)} />
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <AccountMenu />
-          </Box>
+          </Stack>
+          <AccountMenu />
         </Toolbar>
       </AppBar>
       <Offset />
