@@ -38,7 +38,12 @@ export const HeaderBar: React.FC<Props> = ({
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar color="default" position="fixed" elevation={0}>
+      <AppBar
+        color="default"
+        position="fixed"
+        elevation={0}
+        sx={{ borderBottom: "1px solid", borderColor: "divider" }}
+      >
         <Toolbar
           variant="dense"
           sx={{ display: "flex", justifyContent: "space-between" }}
@@ -61,7 +66,7 @@ export const HeaderBar: React.FC<Props> = ({
                 noWrap
                 sx={{
                   display: { xs: "none", sm: "block" },
-                  color: theme.palette.grey[800],
+                  color: theme.palette.mode === "light" ? "#000000" : "#ffffff",
                 }}
               >
                 CF-DashBoard

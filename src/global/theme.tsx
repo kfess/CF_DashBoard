@@ -3,6 +3,7 @@ import { ReactNode, useCallback } from "react";
 import { useTheme } from "@mui/material/styles";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { Theme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const lightTheme = createTheme({
   palette: {
@@ -30,8 +31,18 @@ const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#000000",
+      main: "#320064",
+      contrastText: "#353535",
     },
+    background: {
+      paper: "#0D1116",
+      default: "#0D1116",
+    },
+  },
+
+  colors: {
+    acColor: "#4a9f63",
+    waColor: "#FFEEBA",
   },
 });
 
@@ -49,6 +60,7 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Context.Provider value={{ toggleTheme }}>{children}</Context.Provider>
     </ThemeProvider>
   );

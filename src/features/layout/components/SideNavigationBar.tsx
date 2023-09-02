@@ -55,7 +55,10 @@ export const SideNavigationBar: React.FC<Props> = ({
                 setSelectedItem("Contests");
                 toggleSideBar(!isOpenSideBar);
               }}
-              sx={{ display: { xs: "none", sm: "block" } }}
+              sx={{
+                display: { xs: "none", sm: "block" },
+                color: theme.palette.mode === "light" ? "#000000" : "#ffffff",
+              }}
             >
               CF-DashBoard
             </Typography>

@@ -4,8 +4,11 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import GitHubButton from "react-github-btn";
+import { useTheme } from "@mui/material/styles";
 
 export const Footer: React.FC = () => {
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
@@ -15,24 +18,18 @@ export const Footer: React.FC = () => {
         position: "relative",
         bottom: 0,
         padding: "1rem",
-        color: "#fff",
-        backgroundColor: "#2E3436",
-        boxSizing: "border-box",
+        borderTop: "1px solid",
+        borderColor: "divider",
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Container maxWidth="lg">
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: ["column", "row"],
-            justifyContent: "space-between",
-            alignItems: "center",
-            textAlign: ["center", "initial"],
-          }}
+        <Stack
+          direction={["column", "row"]}
+          justifyContent="space-between"
+          alignItems={["center", "initial"]}
         >
-          <Typography variant="body1" mb={["0.5rem", "0"]}>
-            © 2023 CF-DashBoard
-          </Typography>
+          <Typography variant="body1">© 2023 CF-DashBoard</Typography>
           <Stack direction="row" spacing={1}>
             <GitHubButton
               href="https://github.com/kfess/CF_DashBoard"
@@ -52,7 +49,7 @@ export const Footer: React.FC = () => {
               Follow @kfess
             </GitHubButton>
           </Stack>
-        </Box>
+        </Stack>
       </Container>
     </Box>
   );
