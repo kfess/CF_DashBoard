@@ -1,8 +1,7 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { ReactNode, useCallback } from "react";
 import { useTheme } from "@mui/material/styles";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { Theme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 const lightTheme = createTheme({
@@ -39,7 +38,6 @@ const darkTheme = createTheme({
       default: "#0D1116",
     },
   },
-
   colors: {
     acColor: "#4a9f63",
     waColor: "#FFEEBA",
@@ -51,12 +49,24 @@ const Context = createContext<{ toggleTheme: () => void }>({
 });
 
 export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<Theme>(lightTheme);
+  const [theme, setTheme] = useState(() => {
+    const storedTheme = localStorage.getItem("theme");
+    return storedTheme === "dark" ? darkTheme : lightTheme;
+  });
+
   const toggleTheme = useCallback(() => {
-    setTheme((prevTheme) =>
-      prevTheme === lightTheme ? darkTheme : lightTheme
-    );
-  }, [theme]);
+    setTheme((currentTheme) => {
+      const newTheme =
+        currentTheme.palette.mode === "dark" ? lightTheme : darkTheme;
+      localStorage.setItem("theme", newTheme.palette.mode);
+      return newTheme;
+    });
+  }, []);
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    setTheme(storedTheme === "dark" ? darkTheme : lightTheme);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

@@ -152,8 +152,7 @@ const CustomListItemText = styled(ListItemText)`
 type Props = Item & {
   isSelected: boolean;
   setSelected: Dispatch<SetStateAction<Field>>;
-  isOpenSideBar: boolean;
-  toggleSideBar: Dispatch<SetStateAction<boolean>>;
+  toggleSideBar: () => void;
 };
 
 export const SideNavigationItem: React.FC<Props> = ({
@@ -163,7 +162,6 @@ export const SideNavigationItem: React.FC<Props> = ({
   notSelectedIcon,
   isSelected,
   setSelected,
-  isOpenSideBar,
   toggleSideBar,
 }) => {
   const { queryParams } = useURLQuery();
@@ -206,7 +204,7 @@ export const SideNavigationItem: React.FC<Props> = ({
           selected={isSelected}
           onClick={() => {
             setSelected(field);
-            toggleSideBar(!isOpenSideBar);
+            toggleSideBar();
           }}
         >
           <CustomListItemIcon>

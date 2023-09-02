@@ -16,7 +16,7 @@ import { useTheme } from "@mui/material/styles";
 
 type Props = {
   isOpenSideBar: boolean;
-  toggleSideBar: Dispatch<SetStateAction<boolean>>;
+  toggleSideBar: () => void;
   selectedItem: Field;
   setSelectedItem: Dispatch<SetStateAction<Field>>;
 };
@@ -39,7 +39,7 @@ export const SideNavigationBar: React.FC<Props> = ({
           <IconButton
             edge="start"
             aria-label="menu"
-            onClick={() => toggleSideBar(!isOpenSideBar)}
+            onClick={() => toggleSideBar()}
             css={{
               margin: theme.spacing(0, 1, 0, 0),
             }}
@@ -53,7 +53,7 @@ export const SideNavigationBar: React.FC<Props> = ({
               component="div"
               onClick={() => {
                 setSelectedItem("Contests");
-                toggleSideBar(!isOpenSideBar);
+                toggleSideBar();
               }}
               sx={{
                 display: { xs: "none", sm: "block" },
@@ -76,7 +76,6 @@ export const SideNavigationBar: React.FC<Props> = ({
                 notSelectedIcon={item.notSelectedIcon}
                 isSelected={selectedItem === item.field}
                 setSelected={setSelectedItem}
-                isOpenSideBar={isOpenSideBar}
                 toggleSideBar={toggleSideBar}
               />
             );
@@ -94,7 +93,6 @@ export const SideNavigationBar: React.FC<Props> = ({
               notSelectedIcon={item.notSelectedIcon}
               isSelected={selectedItem === item.field}
               setSelected={setSelectedItem}
-              isOpenSideBar={isOpenSideBar}
               toggleSideBar={toggleSideBar}
             />
           ))}
@@ -111,7 +109,6 @@ export const SideNavigationBar: React.FC<Props> = ({
               notSelectedIcon={item.notSelectedIcon}
               isSelected={selectedItem === item.field}
               setSelected={setSelectedItem}
-              isOpenSideBar={isOpenSideBar}
               toggleSideBar={toggleSideBar}
             />
           ))}

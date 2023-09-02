@@ -13,11 +13,8 @@ export const Footer: React.FC = () => {
     <Box
       sx={{
         marginTop: "auto",
-        width: "100%",
-        minHeight: "8rem",
-        position: "relative",
-        bottom: 0,
-        padding: "1rem",
+        minHeight: "10rem",
+        p: 2,
         borderTop: "1px solid",
         borderColor: "divider",
         backgroundColor: theme.palette.background.default,

@@ -7,10 +7,10 @@ import { HeaderBar } from "@features/layout/components/HeaderBar";
 import { SideNavigationBar } from "@features/layout/components/SideNavigationBar";
 import { pageMetaInfoMap } from "@helpers/pageMetaInfoMap";
 import { Footer } from "@features/layout/components/Footer";
+import { useToggle } from "@hooks/useToggle";
 
 export const LayoutPage: React.FC = () => {
-  const [isOpenSideBar, setIsOpenSideBar] = useState(false);
-  const toggleSideBar = () => setIsOpenSideBar(!isOpenSideBar);
+  const [isOpenSideBar, toggleSideBar] = useToggle(false, true);
 
   const location = useLocation();
   const path = location.pathname;
