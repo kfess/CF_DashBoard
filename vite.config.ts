@@ -19,6 +19,7 @@ export default defineConfig({
       "@recoil": path.resolve(__dirname, "src/recoil/"),
       "@assets": path.resolve(__dirname, "src/assets/"),
       "@indexedDB": path.resolve(__dirname, "src/indexedDB/"),
+      "@global": path.resolve(__dirname, "src/global/"),
     },
   },
   optimizeDeps: {

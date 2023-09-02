@@ -40,9 +40,7 @@ export const SideNavigationBar: React.FC<Props> = ({
             edge="start"
             aria-label="menu"
             onClick={() => toggleSideBar()}
-            css={{
-              margin: theme.spacing(0, 1, 0, 0),
-            }}
+            sx={{ mr: 1 }}
           >
             <MenuIcon />
           </IconButton>
@@ -81,7 +79,6 @@ export const SideNavigationBar: React.FC<Props> = ({
             );
           })}
         </List>
-        <Toolbar />
         <Divider />
         <List>
           {activityItems.map((item) => (
@@ -97,7 +94,6 @@ export const SideNavigationBar: React.FC<Props> = ({
             />
           ))}
         </List>
-        <Toolbar />
         <Divider />
         <List>
           {otherItems.map((item) => (

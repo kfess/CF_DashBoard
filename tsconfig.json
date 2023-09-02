@@ -29,7 +29,8 @@
       "@hooks/*": ["hooks/*"],
       "@recoil/*": ["recoil/*"],
       "@assets/*": ["assets/*"],
-      "@indexedDB/*": ["indexedDB/*"]
+      "@indexedDB/*": ["indexedDB/*"],
+      "@global/*": ["global/*"]
     },
     "types": [
       "@emotion/react/types/css-prop",

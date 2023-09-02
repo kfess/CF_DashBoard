@@ -21,7 +21,12 @@ export const Link: React.FC<Props> = ({ href, label, color }) => {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      css={{ color: textColor }}
+      css={{
+        color: textColor,
+        "&:hover": {
+          color: theme.palette.primary.main,
+        },
+      }}
     >
       {label}
     </a>

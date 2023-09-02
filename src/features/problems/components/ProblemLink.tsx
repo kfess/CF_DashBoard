@@ -35,7 +35,7 @@ export const ProblemLink: React.FC<Props> = ({
   const theme = useTheme();
 
   return (
-    <Stack direction="row" alignItems="center" spacing={1} p={0.5}>
+    <Stack direction="row" alignItems="center" spacing={1} px={1}>
       {showDifficulty && (
         <TopcoderLikeCircle
           displayPurpose="difficulty"

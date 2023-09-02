@@ -39,8 +39,8 @@ const darkTheme = createTheme({
     },
   },
   colors: {
-    acColor: "#4a9f63",
-    waColor: "#FFEEBA",
+    acColor: "rgba(56, 142, 60, 0.3)",
+    waColor: "rgba(255, 238, 186, 0.6)",
   },
 });
 

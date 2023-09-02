@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
+import Box from "@mui/material/Box";
 import { styled } from "@mui/system";
 import {
   ListItem,
@@ -30,6 +31,7 @@ import PrivacyTipOutlinedIcon from "@mui/icons-material/PrivacyTipOutlined";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useURLQuery } from "@hooks/useQueryParams";
+import { useTheme } from "@mui/material/styles";
 
 const mainField = [
   "Contests",
@@ -59,32 +61,32 @@ export const mainItems: readonly Item[] = [
   {
     field: "Contests",
     link: "/",
-    selectedIcon: <HomeIcon sx={{ color: "#9146FF" }} />,
-    notSelectedIcon: <HomeOutlinedIcon sx={{ color: "#9146FF" }} />,
+    selectedIcon: <HomeIcon />,
+    notSelectedIcon: <HomeOutlinedIcon />,
   },
   {
     field: "Problems",
     link: "/problems",
-    selectedIcon: <CreateIcon sx={{ color: "#9146FF" }} />,
-    notSelectedIcon: <CreateOutlinedIcon sx={{ color: "#9146FF" }} />,
+    selectedIcon: <CreateIcon />,
+    notSelectedIcon: <CreateOutlinedIcon />,
   },
   {
     field: "Recommend",
     link: "/recommend",
-    selectedIcon: <ThumbUpIcon sx={{ color: "#9146FF" }} />,
-    notSelectedIcon: <ThumbUpAltOutlinedIcon sx={{ color: "#9146FF" }} />,
+    selectedIcon: <ThumbUpIcon />,
+    notSelectedIcon: <ThumbUpAltOutlinedIcon />,
   },
   {
     field: "Submission",
     link: "/submission",
-    selectedIcon: <SendIcon sx={{ color: "#9146FF" }} />,
-    notSelectedIcon: <SendOutlinedIcon sx={{ color: "#9146FF" }} />,
+    selectedIcon: <SendIcon />,
+    notSelectedIcon: <SendOutlinedIcon />,
   },
   {
     field: "Achievement",
     link: "/achievement",
-    selectedIcon: <EmojiEventsIcon sx={{ color: "#9146FF" }} />,
-    notSelectedIcon: <EmojiEventsOutlinedIcon sx={{ color: "#9146FF" }} />,
+    selectedIcon: <EmojiEventsIcon />,
+    notSelectedIcon: <EmojiEventsOutlinedIcon />,
   },
 ] as const;
 
@@ -92,8 +94,8 @@ export const activityItems: readonly Item[] = [
   {
     field: "Labels",
     link: "/labels",
-    selectedIcon: <StarIcon sx={{ color: "#9146FF" }} />,
-    notSelectedIcon: <StarBorderOutlinedIcon sx={{ color: "#9146FF" }} />,
+    selectedIcon: <StarIcon />,
+    notSelectedIcon: <StarBorderOutlinedIcon />,
   },
   // {
   //   field: "Ranking",
@@ -104,8 +106,8 @@ export const activityItems: readonly Item[] = [
   {
     field: "Custom Contest (beta)",
     link: "/custom-contest",
-    selectedIcon: <WidgetsIcon sx={{ color: "#9146FF" }} />,
-    notSelectedIcon: <WidgetsOutlinedIcon sx={{ color: "#9146FF" }} />,
+    selectedIcon: <WidgetsIcon />,
+    notSelectedIcon: <WidgetsOutlinedIcon />,
   },
 ] as const;
 
@@ -113,40 +115,31 @@ export const otherItems: readonly Item[] = [
   {
     field: "Links",
     link: "/links",
-    selectedIcon: <BuildIcon sx={{ color: "#9146FF" }} />,
-    notSelectedIcon: <BuildOutlinedIcon sx={{ color: "#9146FF" }} />,
+    selectedIcon: <BuildIcon />,
+    notSelectedIcon: <BuildOutlinedIcon />,
   },
   {
     field: "Terms",
     link: "/terms",
-    selectedIcon: <FeedIcon sx={{ color: "#9146FF" }} />,
-    notSelectedIcon: <FeedOutlinedIcon sx={{ color: "#9146FF" }} />,
+    selectedIcon: <FeedIcon />,
+    notSelectedIcon: <FeedOutlinedIcon />,
   },
   {
     field: "Privacy Policy",
     link: "/privacy-policy",
-    selectedIcon: <PrivacyTipIcon sx={{ color: "#9146FF" }} />,
-    notSelectedIcon: <PrivacyTipOutlinedIcon sx={{ color: "#9146FF" }} />,
+    selectedIcon: <PrivacyTipIcon />,
+    notSelectedIcon: <PrivacyTipOutlinedIcon />,
   },
 ] as const;
 
 const linkToFieldMap: Record<string, string> = {};
-
-// mainItems, activityItems, otherItems を一つずつループしてマッピングオブジェクトを作成
 [...mainItems, ...activityItems, ...otherItems].forEach((item) => {
   linkToFieldMap[item.link] = item.field;
 });
 
-// 与えられた link から field を見つける関数
+// 与えられた link から field を見つける
 export const getFieldFromLink = (link: string): string | undefined =>
   linkToFieldMap[link];
-
-const CustomListItemIcon = styled(ListItemIcon)`
-  margin-right: 8px;
-`;
-const CustomListItemText = styled(ListItemText)`
-  margin-left: -20px;
-`;
 
 type Props = Item & {
   isSelected: boolean;
@@ -166,6 +159,8 @@ export const SideNavigationItem: React.FC<Props> = ({
   const { queryParams } = useURLQuery();
   const userId = queryParams["userId"];
 
+  const theme = useTheme();
+
   if (field === "Achievement" && !userId) {
     return (
       <Tooltip
@@ -178,10 +173,10 @@ export const SideNavigationItem: React.FC<Props> = ({
       >
         <ListItem key={field} disablePadding>
           <ListItemButton disabled selected={isSelected}>
-            <CustomListItemIcon>
+            <ListItemIcon sx={{ pr: 2 }}>
               {isSelected ? selectedIcon : notSelectedIcon}
-            </CustomListItemIcon>
-            <CustomListItemText primary={field} />
+            </ListItemIcon>
+            <ListItemText primary={field} sx={{ ml: "-10px" }} />
           </ListItemButton>
         </ListItem>
       </Tooltip>
@@ -192,10 +187,8 @@ export const SideNavigationItem: React.FC<Props> = ({
     <NavLink
       to={link}
       css={{
-        color: isSelected ? "#5C17C5" : "inherit",
-        "&:hover": {
-          color: isSelected ? "#5C17C5" : "inherit",
-        },
+        color: isSelected ? theme.palette.primary.main : "inherit",
+        "&:hover": { color: theme.palette.primary.main },
       }}
     >
       <ListItem key={field} disablePadding>
@@ -206,10 +199,12 @@ export const SideNavigationItem: React.FC<Props> = ({
             toggleSideBar();
           }}
         >
-          <CustomListItemIcon>
-            {isSelected ? selectedIcon : notSelectedIcon}
-          </CustomListItemIcon>
-          <CustomListItemText primary={field} />
+          <ListItemIcon sx={{ pr: 2 }}>
+            <div css={{ color: theme.palette.primary.main }}>
+              {isSelected ? selectedIcon : notSelectedIcon}
+            </div>
+          </ListItemIcon>
+          <ListItemText primary={field} sx={{ ml: "-10px" }} />
         </ListItemButton>
       </ListItem>
     </NavLink>
