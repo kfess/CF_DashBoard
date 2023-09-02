@@ -19,6 +19,10 @@ const lightTheme = createTheme({
       dark: "#145f2a",
       contrastText: "#ffffff",
     },
+    background: {
+      paper: "#ffffff",
+      default: "#f7f8f8",
+    },
   },
   colors: {
     acColor: "#c3e6cb",
@@ -34,7 +38,7 @@ const darkTheme = createTheme({
       contrastText: "#353535",
     },
     background: {
-      paper: "#0D1116",
+      paper: "#1D1D1D",
       default: "#0D1116",
     },
   },

@@ -14,6 +14,7 @@ import { useToggle } from "@hooks/index";
 import { pluralize } from "@helpers/index";
 import { LanguageACCountPie } from "@features/achievement/components/LanguageACCountPie";
 import { ReadMoreLess } from "@features/ui/component/ReadMoreLess";
+import { useTheme } from "@mui/material";
 
 export type Count = {
   readonly language: NormalizedLanguage;
@@ -22,6 +23,8 @@ export type Count = {
 };
 
 const LanguageStat: React.FC<Count> = ({ language, count, lastACDate }) => {
+  const theme = useTheme();
+
   return (
     <Stack key={language}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -29,16 +32,12 @@ const LanguageStat: React.FC<Count> = ({ language, count, lastACDate }) => {
         <Stack direction="row" alignItems="center">
           <Typography
             variant="body1"
-            color="#9246FF"
+            color={theme.palette.primary.main}
             fontWeight="fontWeightBold"
           >
             {count.toLocaleString()}
           </Typography>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{ marginLeft: "8px" }}
-          >
+          <Typography variant="body2" color="text.secondary" ml={1}>
             {pluralize(count, "problem")} solved
           </Typography>
         </Stack>

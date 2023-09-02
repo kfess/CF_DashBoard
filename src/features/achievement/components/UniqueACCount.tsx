@@ -6,6 +6,7 @@ import type { Submission } from "@features/submission/submission";
 import { filterUniqueSubmissions } from "@features/achievement/processSubmission";
 import { isLastMonth, isLastYear } from "@helpers/date";
 import { pluralize } from "@helpers/index";
+import { useTheme } from "@mui/material";
 
 const _filterSubmissions = (
   submissions: Submission[],
@@ -20,6 +21,8 @@ const _filterSubmissions = (
 type Props = { readonly submissions: Submission[] };
 
 export const UniqueACCount: React.FC<Props> = ({ submissions }) => {
+  const theme = useTheme();
+
   const uniqueACSubs = useMemo(
     () => _filterSubmissions(submissions, () => true),
     [submissions]
@@ -52,7 +55,7 @@ export const UniqueACCount: React.FC<Props> = ({ submissions }) => {
           <Typography variant="body1" color="text.secondary">
             Total
           </Typography>
-          <Typography variant="h4" sx={{ color: "#9246FF" }}>
+          <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
             {uniqueACSubs.length.toLocaleString()}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -63,7 +66,7 @@ export const UniqueACCount: React.FC<Props> = ({ submissions }) => {
           <Typography variant="body1" color="text.secondary">
             Last Year
           </Typography>
-          <Typography variant="h4" sx={{ color: "#9246FF" }}>
+          <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
             {lastYearUniqueACSubs.length.toLocaleString()}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -74,7 +77,7 @@ export const UniqueACCount: React.FC<Props> = ({ submissions }) => {
           <Typography variant="body1" color="text.secondary">
             Last Month
           </Typography>
-          <Typography variant="h4" sx={{ color: "#9246FF" }}>
+          <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
             {lastMonthUniqueACSubs.length.toLocaleString()}
           </Typography>
           <Typography variant="body2" color="text.secondary">

@@ -19,7 +19,7 @@ export const Streak: React.FC<Props> = ({ allSubmissions, acSubmissions }) => {
         direction="row"
         justifyContent="space-evenly"
         alignItems="center"
-        sx={{ my: 3 }}
+        my={3}
       >
         <StreakSum submissions={acSubmissions} title="AC Streak Sum" />
         <CurrentStreak submissions={acSubmissions} title="Current AC Streak" />

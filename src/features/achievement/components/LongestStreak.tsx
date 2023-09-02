@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
 import { uniqueDateSet } from "@features/achievement/processSubmission";
+import { useTheme } from "@mui/material";
 
 const _calcLongestStreak = (submissions: Submission[]) => {
   const uniqueACDate = uniqueDateSet(submissions);
@@ -31,6 +32,8 @@ type Props = {
 };
 
 export const LongestStreak: React.FC<Props> = ({ submissions, title }) => {
+  const theme = useTheme();
+
   const maxStreak = useMemo(
     () => _calcLongestStreak(submissions),
     [submissions]
@@ -41,7 +44,7 @@ export const LongestStreak: React.FC<Props> = ({ submissions, title }) => {
       <Typography variant="body1" color="text.secondary">
         {title}
       </Typography>
-      <Typography variant="h4" sx={{ color: "#9246FF" }}>
+      <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
         {maxStreak.toLocaleString()}
       </Typography>
       <Typography variant="body2" color="text.secondary">

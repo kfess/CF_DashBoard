@@ -9,6 +9,7 @@ import { Chip_ } from "@features/ui/component/Chip";
 import { useToggle } from "@hooks/index";
 import { TagACCountPie } from "@features/achievement/components/TagACCountPie";
 import { ReadMoreLess } from "@features/ui/component/ReadMoreLess";
+import { useTheme } from "@mui/material";
 
 // 各タグごとの AC 数をカウント
 export type Count = {
@@ -16,17 +17,25 @@ export type Count = {
   readonly count: number;
 };
 
-const TagStats: React.FC<Count> = ({ name, count }) => (
-  <Stack direction="row" spacing={1} alignItems="center">
-    <Chip_ label={name} onClick={() => {}} />
-    <Typography variant="body2" color="text.secondary">
-      ×
-    </Typography>
-    <Typography variant="body2" color="#9246FF" fontWeight="fontWeightBold">
-      {count.toLocaleString()}
-    </Typography>
-  </Stack>
-);
+const TagStats: React.FC<Count> = ({ name, count }) => {
+  const theme = useTheme();
+
+  return (
+    <Stack direction="row" spacing={1} alignItems="center">
+      <Chip_ label={name} onClick={() => {}} />
+      <Typography variant="body2" color="text.secondary">
+        ×
+      </Typography>
+      <Typography
+        variant="body2"
+        color={theme.palette.primary.main}
+        fontWeight="fontWeightBold"
+      >
+        {count.toLocaleString()}
+      </Typography>
+    </Stack>
+  );
+};
 
 // 全タグの AC 数をカウント
 type Props = { readonly submissions: Submission[] };

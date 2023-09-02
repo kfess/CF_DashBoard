@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
 import { groupByProblem } from "@features/achievement/processSubmission";
 import { pluralize } from "@helpers/format";
+import { useTheme } from "@mui/material";
 
 type Props = {
   allSubmissions: Submission[];
@@ -62,6 +63,8 @@ const calcSubmissionStats = (allSubmissions: Submission[]): SubmissionStats => {
 };
 
 export const Accuracy: React.FC<Props> = ({ allSubmissions }) => {
+  const theme = useTheme();
+
   // AC するまでの submission 数
   // 1回 で AC することができた submission 数
   const { aveSubmissionsBeforeAC, firstTryACCount, acCount } = useMemo(
@@ -79,7 +82,7 @@ export const Accuracy: React.FC<Props> = ({ allSubmissions }) => {
           <Typography variant="body1" color="text.secondary">
             Average Attempts
           </Typography>
-          <Typography variant="h4" sx={{ color: "#9246FF" }}>
+          <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
             {aveSubmissionsBeforeAC.toFixed(2)}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -90,7 +93,7 @@ export const Accuracy: React.FC<Props> = ({ allSubmissions }) => {
           <Typography variant="body1" color="text.secondary">
             First Try AC
           </Typography>
-          <Typography variant="h4" sx={{ color: "#9246FF" }}>
+          <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
             {firstTryACCount.toLocaleString()}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -101,7 +104,7 @@ export const Accuracy: React.FC<Props> = ({ allSubmissions }) => {
           <Typography variant="body1" color="text.secondary">
             First Try AC Rate
           </Typography>
-          <Typography variant="h4" sx={{ color: "#9246FF" }}>
+          <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
             {!acCount ? "-" : ((firstTryACCount / acCount) * 100).toFixed(1)}
           </Typography>
           <Typography variant="body2" color="text.secondary">

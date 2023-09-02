@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
 import { uniqueDateSet } from "../processSubmission";
+import { useTheme } from "@mui/material";
 
 const _calcStreakSum = (submissions: Submission[]) => {
   const uniqueDate = uniqueDateSet(submissions);
@@ -15,6 +16,7 @@ type Props = {
 };
 
 export const StreakSum: React.FC<Props> = ({ submissions, title }) => {
+  const theme = useTheme();
   const streakSum = useMemo(() => _calcStreakSum(submissions), [submissions]);
 
   return (
@@ -22,7 +24,7 @@ export const StreakSum: React.FC<Props> = ({ submissions, title }) => {
       <Typography variant="body1" color="text.secondary">
         {title}
       </Typography>
-      <Typography variant="h4" sx={{ color: "#9246FF" }}>
+      <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
         {streakSum.toLocaleString()}
       </Typography>
       <Typography variant="body2" color="text.secondary">
