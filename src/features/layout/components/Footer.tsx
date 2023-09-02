@@ -37,7 +37,7 @@ export const Footer: React.FC = () => {
             <GitHubButton
               href="https://github.com/kfess/CF_DashBoard"
               data-icon="octicon-star"
-              data-size="small"
+              data-size="large"
               data-show-count="true"
               aria-label="Star kfess/CF_DashBoard on GitHub"
             >
@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
             </GitHubButton>
             <GitHubButton
               href="https://github.com/kfess"
-              data-size="small"
+              data-size="large"
               data-show-count="true"
               aria-label="Follow @kfess on GitHub"
             >

@@ -48,15 +48,17 @@ const StyledInputElement = styled(InputBase)(({ theme }) => ({
 }));
 
 export const Input = React.forwardRef(function CustomInput(
-  props: InputUnstyledProps,
+  props: InputProps,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
-  const { value, ...otherProps } = props;
+  const { value, startAdornment, ...otherProps } = props;
   const inputValue = value === null || value === undefined ? "" : value;
 
   return (
     <InputUnstyled
-      slots={{ input: StyledInputElement }}
+      slots={{
+        input: StyledInputElement,
+      }}
       {...otherProps}
       value={inputValue}
       ref={ref}

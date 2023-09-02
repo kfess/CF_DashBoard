@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
+import SearchIcon from "@mui/icons-material/Search";
 import { useFetchUserInfo } from "../useUserInfo";
 import { useURLQuery } from "@hooks/useQueryParams";
 import { Input } from "@features/ui/component/Input";
