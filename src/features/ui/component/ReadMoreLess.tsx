@@ -2,6 +2,7 @@ import React from "react";
 import Stack from "@mui/material/Stack";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import { useTheme } from "@mui/material";
 
 type Props = {
   readonly expanded: boolean;
@@ -22,6 +23,8 @@ export const ReadMoreLess: React.FC<Props> = ({
 }) => {
   if (itemsCount <= threshold) return null;
 
+  const theme = useTheme();
+
   return (
     <Stack
       onClick={toggleExpanded}
@@ -30,10 +33,10 @@ export const ReadMoreLess: React.FC<Props> = ({
       justifyContent="center"
       sx={{
         cursor: "pointer",
-        color: "#9246FF",
-        padding: 1,
+        color: theme.palette.primary.main,
+        p: 1,
         "&:hover": {
-          color: "#5C17C5",
+          color: theme.palette.primary.dark,
         },
       }}
       fontWeight="fontWeightBold"
