@@ -16,11 +16,7 @@ export const filterUniqueSubmissions = (
   submissions: Submission[]
 ): Submission[] => {
   const uniqueMap = submissions.reduce((acc, submission) => {
-    const key = getProblemKey(
-      submission.contestId,
-      submission.problem.index,
-      submission.problem.name
-    );
+    const key = getProblemKey(submission);
     acc[key] = submission;
     return acc;
   }, {} as Record<string, Submission>);
@@ -49,20 +45,12 @@ export const groupbyLanguage = (submissions: Submission[]) =>
   groupBy(submissions, (s) => normalizeLanguage(s.programmingLanguage));
 
 export const groupByProblem = (submissions: Submission[]) =>
-  groupBy(submissions, (s) =>
-    getProblemKey(s.contestId, s.problem.index, s.problem.name)
-  );
+  groupBy(submissions, (s) => getProblemKey(s));
 
 export const getACProblemSet = (submissions: Submission[]): Set<string> => {
   const ACSubmissions = submissions.filter(isACSubmission);
   const ACProblemSet = ACSubmissions.reduce((set, submission) => {
-    set.add(
-      getProblemKey(
-        submission.contestId,
-        submission.problem.index,
-        submission.problem.name
-      )
-    );
+    set.add(getProblemKey(submission));
     return set;
   }, new Set<string>());
   return ACProblemSet;
@@ -71,13 +59,7 @@ export const getACProblemSet = (submissions: Submission[]): Set<string> => {
 export const getNonACProblemSet = (submissions: Submission[]): Set<string> => {
   const uniqueSubmissions = filterUniqueSubmissions(submissions);
   const attmptedProblemSet = uniqueSubmissions.reduce((set, submission) => {
-    set.add(
-      getProblemKey(
-        submission.contestId,
-        submission.problem.index,
-        submission.problem.name
-      )
-    );
+    set.add(getProblemKey(submission));
     return set;
   }, new Set<string>());
 

@@ -15,6 +15,7 @@ import {
   UserStats,
   calculateAllUsersStats,
   calculateFirstACs,
+  calculateSolverCount,
 } from "@features/custom_contests/utils/calculateStandings";
 import { CF_CONTEST_URL, CF_PROFILE_URL } from "@constants/url";
 import { getProblemKey } from "@features/problems/utils";
@@ -69,6 +70,10 @@ export const Standings: React.FC<Props> = ({
     return calculateFirstACs(allSubmissions, startDate);
   }, [submissionsByUser]);
 
+  const solvedCount = useMemo(() => {
+    return calculateSolverCount(submissionsByUser || {}, problems);
+  }, [submissionsByUser]);
+
   return (
     <>
       <Typography variant="subtitle1" component="div" gutterBottom>
@@ -87,9 +92,10 @@ export const Standings: React.FC<Props> = ({
                     borderBottom: "2px solid rgba(224, 224, 224, 1)",
                     textAlign: "center",
                     fontWeight: "600",
+                    padding: "0px",
                   }}
                 >
-                  #
+                  rank
                 </TableCell>
                 <TableCell
                   sx={{
@@ -97,6 +103,7 @@ export const Standings: React.FC<Props> = ({
                     borderBottom: "2px solid rgba(224, 224, 224, 1)",
                     textAlign: "center",
                     fontWeight: "600",
+                    padding: "0px",
                   }}
                 >
                   Participants
@@ -107,21 +114,19 @@ export const Standings: React.FC<Props> = ({
                     borderBottom: "2px solid rgba(224, 224, 224, 1)",
                     textAlign: "center",
                     fontWeight: "600",
+                    padding: "0px",
                   }}
                 >
                   Score
                 </TableCell>
                 {problems.map((problem, idx) => (
                   <TableCell
-                    key={getProblemKey(
-                      problem.contestId,
-                      problem.index,
-                      problem.name
-                    )}
+                    key={getProblemKey(problem)}
                     sx={{
                       borderRight: "1px solid rgba(224, 224, 224, 1)",
                       borderBottom: "2px solid rgba(224, 224, 224, 1)",
                       textAlign: "center",
+                      padding: "0px",
                     }}
                   >
                     <a
@@ -140,125 +145,131 @@ export const Standings: React.FC<Props> = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {participants.map((participant, i) => {
-                const stats = userStats[participant] || null;
-                return (
-                  <TableRow hover key={participant}>
-                    <TableCell
-                      sx={{
-                        borderRight: "1px solid rgba(224, 224, 224, 1)",
-                        textAlign: "center",
-                      }}
-                    >
-                      {i + 1}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        borderRight: "1px solid rgba(224, 224, 224, 1)",
-                      }}
-                    >
-                      <Typography variant="body1" fontWeight="fontWeightBold">
-                        <a
-                          href={`${CF_PROFILE_URL}/${participant}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          css={{
-                            textDecoration: "none",
-                          }}
-                        >
-                          {participant}
-                        </a>
-                      </Typography>
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        borderRight: "1px solid rgba(224, 224, 224, 1)",
-                      }}
-                    >
-                      {stats ? (
-                        <>
-                          <Box
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="center"
-                          >
-                            <Typography
-                              variant="body1"
-                              fontWeight="fontWeightBold"
-                              css={{ color: "#05AA02" }}
-                            >
-                              {stats.totalScore}
-                            </Typography>
-                            {stats.totalWrongAttempts > 0 && (
-                              <Typography
-                                variant="body1"
-                                css={{ marginLeft: "6px", color: "red" }}
-                              >
-                                {"(" + stats.totalWrongAttempts + ")"}
-                              </Typography>
-                            )}
-                          </Box>
-                          <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            css={{
-                              textAlign: "center",
-                            }}
-                          >
-                            {stats.lastACTime
-                              ? secondsToHms(stats.lastACTime)
-                              : "-"}
-                          </Typography>
-                        </>
-                      ) : (
-                        <Typography variant="body2" color="text.secondary">
-                          -
-                        </Typography>
-                      )}
-                    </TableCell>
-                    {problems.map((problem) => (
+              {participants
+                .sort((a, b) => {
+                  const aStats = userStats[a] || null;
+                  const bStats = userStats[b] || null;
+                  if (!aStats || !bStats) {
+                    return 0;
+                  }
+                  if (bStats.totalScore > aStats.totalScore) {
+                    return 1;
+                  }
+                  return bStats.totalWrongAttempts - aStats.totalWrongAttempts;
+                })
+                .map((participant, i) => {
+                  const stats = userStats[participant] || null;
+                  return (
+                    <TableRow hover key={participant}>
                       <TableCell
-                        key={getProblemKey(
-                          problem.contestId,
-                          problem.index,
-                          problem.name
-                        )}
                         sx={{
                           borderRight: "1px solid rgba(224, 224, 224, 1)",
+                          textAlign: "center",
+                          padding: "2px",
                         }}
                       >
-                        <Score problem={problem} stats={stats} />
+                        {i + 1}
                       </TableCell>
-                    ))}
-                  </TableRow>
-                );
-              })}
+                      <TableCell
+                        sx={{
+                          borderRight: "1px solid rgba(224, 224, 224, 1)",
+                          padding: "8px",
+                        }}
+                      >
+                        <Typography variant="body1" fontWeight="fontWeightBold">
+                          <a
+                            href={`${CF_PROFILE_URL}/${participant}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            css={{
+                              textDecoration: "none",
+                            }}
+                          >
+                            {participant}
+                          </a>
+                        </Typography>
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          borderRight: "1px solid rgba(224, 224, 224, 1)",
+                          padding: "2px",
+                        }}
+                      >
+                        {stats ? (
+                          <>
+                            <Box
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="center"
+                            >
+                              <Typography
+                                variant="body1"
+                                fontWeight="fontWeightBold"
+                                css={{ color: "#05AA02" }}
+                              >
+                                {stats.totalScore}
+                              </Typography>
+                              {stats.totalWrongAttempts > 0 && (
+                                <Typography
+                                  variant="body1"
+                                  css={{ marginLeft: "6px", color: "red" }}
+                                >
+                                  {"(" + stats.totalWrongAttempts + ")"}
+                                </Typography>
+                              )}
+                            </Box>
+                            <Typography
+                              variant="body2"
+                              color="text.secondary"
+                              css={{
+                                textAlign: "center",
+                              }}
+                            >
+                              {stats.lastACTime
+                                ? secondsToHms(stats.lastACTime)
+                                : "-"}
+                            </Typography>
+                          </>
+                        ) : (
+                          <Typography variant="body2" color="text.secondary">
+                            -
+                          </Typography>
+                        )}
+                      </TableCell>
+                      {problems.map((problem) => (
+                        <TableCell
+                          key={getProblemKey(problem)}
+                          sx={{
+                            borderRight: "1px solid rgba(224, 224, 224, 1)",
+                            padding: "2px",
+                          }}
+                        >
+                          <Score problem={problem} stats={stats} />
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  );
+                })}
               <TableRow>
                 <TableCell
                   colSpan={3}
                   sx={{
                     borderRight: "1px solid rgba(224, 224, 224, 1)",
+                    padding: "8px",
                   }}
                 >
-                  <Typography
-                    variant="body1"
-                    fontWeight="fontWeightBold"
-                    sx={{ textAlign: "center" }}
-                  >
+                  <Typography variant="body2" sx={{ textAlign: "center" }}>
                     First Acceptance
                   </Typography>
                 </TableCell>
                 {problems.map((problem) => {
-                  const key = getProblemKey(
-                    problem.contestId,
-                    problem.index,
-                    problem.name
-                  );
+                  const key = getProblemKey(problem);
                   return (
                     <TableCell
                       key={key}
                       sx={{
                         borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        padding: "8px",
                       }}
                     >
                       {firstACs[key] ? (
@@ -295,6 +306,36 @@ export const Standings: React.FC<Props> = ({
                   );
                 })}
               </TableRow>
+              <TableRow>
+                <TableCell
+                  colSpan={3}
+                  sx={{
+                    borderRight: "1px solid rgba(224, 224, 224, 1)",
+                    padding: "8px",
+                  }}
+                >
+                  <Typography variant="body2" sx={{ textAlign: "center" }}>
+                    Solvers
+                  </Typography>
+                </TableCell>
+                {problems.map((problem) => {
+                  const key = getProblemKey(problem);
+                  return (
+                    <TableCell
+                      key={key}
+                      sx={{
+                        borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        padding: "8px",
+                      }}
+                    >
+                      <Typography variant="body2" sx={{ textAlign: "center" }}>
+                        {solvedCount[key]["totalSolvers"].size} /{" "}
+                        {solvedCount[key]["totalSubmitters"].size}
+                      </Typography>
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
@@ -309,12 +350,13 @@ type ScoreProps = {
 };
 
 const Score: React.FC<ScoreProps> = ({ problem, stats }) => {
-  const key = getProblemKey(problem.contestId, problem.index, problem.name);
+  const key = getProblemKey(problem);
   const problemStat = stats?.problemStats[key];
 
-  const actime = problemStat?.timeToFirstAC
-    ? secondsToHms(problemStat?.timeToFirstAC)
-    : null;
+  const actime =
+    problemStat && problemStat?.timeToFirstAC
+      ? secondsToHms(problemStat?.timeToFirstAC)
+      : null;
 
   if (
     !problemStat ||

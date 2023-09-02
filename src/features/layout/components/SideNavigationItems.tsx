@@ -130,6 +130,17 @@ export const otherItems: readonly Item[] = [
   },
 ] as const;
 
+const linkToFieldMap: Record<string, string> = {};
+
+// mainItems, activityItems, otherItems を一つずつループしてマッピングオブジェクトを作成
+[...mainItems, ...activityItems, ...otherItems].forEach((item) => {
+  linkToFieldMap[item.link] = item.field;
+});
+
+// 与えられた link から field を見つける関数
+export const getFieldFromLink = (link: string): string | undefined =>
+  linkToFieldMap[link];
+
 const CustomListItemIcon = styled(ListItemIcon)`
   margin-right: 8px;
 `;

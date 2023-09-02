@@ -25,9 +25,7 @@ export const calcSolvedStatusWithIdxes = (
     const problem = problemMap[idx];
     const indexedProblems = problem?.indexedProblems || [];
     for (const p of indexedProblems) {
-      const isSolved = solvedSet?.has(
-        getProblemKey(contestId, p.index, p.name)
-      );
+      const isSolved = solvedSet?.has(getProblemKey(p));
       if (!isSolved) {
         isAllSolved = false;
       } else if (!isAnySolved) {
@@ -65,9 +63,7 @@ export const calcSolvedStatus = (
   let isAllSolved = true;
   let isAnySolved = false;
   for (const problem of contest.problems) {
-    const isSolved = solvedSet?.has(
-      getProblemKey(contest.id, problem.index, problem.name)
-    );
+    const isSolved = solvedSet?.has(getProblemKey(problem));
     if (!isSolved) {
       isAllSolved = false;
     } else if (!isAnySolved) {

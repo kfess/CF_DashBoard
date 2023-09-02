@@ -65,7 +65,7 @@ export const ContestTableRow: React.FC<Props> = React.memo(
         const problem = problemMap[idx];
         const indexedProblems = problem?.indexedProblems || [];
         return indexedProblems.map((p) => {
-          const problemKey = getProblemKey(contestId, p.index, p.name);
+          const problemKey = getProblemKey(p);
           const isSolved = solvedSet?.has(problemKey);
           const isAttempted = attemptedSet?.has(problemKey);
           return isSolved

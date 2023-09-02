@@ -20,6 +20,7 @@ import { Divider, Stack } from "@mui/material";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { utcISOStringToLocal } from "@helpers/date";
 import { SocialShare } from "@features/custom_contests/components/SocialShare";
+import { TrainingStandings } from "@features/custom_contests/components/TrainingStandings";
 
 export const ShowCustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
@@ -40,15 +41,23 @@ export const ShowCustomContestPage: React.FC = () => {
         },
         {
           label: "Standings",
-          children: (
-            <Standings
-              participants={data.participants}
-              problems={data.problems}
-              startDate={data.startDate}
-              endDate={data.endDate}
-              penalty={data.penalty}
-            />
-          ),
+          children:
+            data.mode === "Normal" ? (
+              <Standings
+                participants={data.participants}
+                problems={data.problems}
+                startDate={data.startDate}
+                endDate={data.endDate}
+                penalty={data.penalty}
+              />
+            ) : (
+              <TrainingStandings
+                participants={data.participants}
+                problems={data.problems}
+                startDate={data.startDate}
+                endDate={data.endDate}
+              />
+            ),
           disabled: false,
         },
       ]
@@ -161,7 +170,7 @@ export const ShowCustomContestPage: React.FC = () => {
                     Penalty
                   </Typography>
                   <Typography sx={{ mt: 2, flex: 8 }}>
-                    {data.penalty} seconds
+                    {data.penalty} seconds per wrong submission
                   </Typography>
                 </Box>
                 <Box sx={{ mt: 2 }}>

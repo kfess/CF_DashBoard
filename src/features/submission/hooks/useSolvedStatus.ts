@@ -21,11 +21,7 @@ export const useSolvedStatus = (
 
     // group all submissions by problem key
     submissions.forEach((sub) => {
-      const key = getProblemKey(
-        sub.contestId,
-        sub.problem.index,
-        sub.problem.name
-      );
+      const key = getProblemKey(sub);
       const problemSubmissions = submissionMap.get(key) || [];
       submissionMap.set(key, [...problemSubmissions, sub]);
     });

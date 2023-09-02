@@ -85,8 +85,7 @@ const VerticalContestTableRow: React.FC<VerticalContestTableRow> = ({
   const { theme } = useThemeContext();
 
   const rowColor = useMemo(() => {
-    return calcSolvedStatus(contest, solvedSet) ===
-      "Completed"
+    return calcSolvedStatus(contest, solvedSet) === "Completed"
       ? theme.colors.acColor
       : "";
   }, [contest.problems, solvedSet]);
@@ -95,7 +94,7 @@ const VerticalContestTableRow: React.FC<VerticalContestTableRow> = ({
     return contest.problems
       .sort((a, b) => a.index.localeCompare(b.index))
       .map((p) => {
-        const problemKey = getProblemKey(contest.id, p.index, p.name);
+        const problemKey = getProblemKey(p);
         const isSolved = solvedSet?.has(problemKey);
         const isAttempted = attemptedSet?.has(problemKey);
         return isSolved

@@ -43,11 +43,7 @@ export const ProblemsTable: React.FC<Props> = ({
 
   const filteredProblems = useMemo(() => {
     return problems.filter((problem) => {
-      const problemKey = getProblemKey(
-        problem.contestId,
-        problem.index,
-        problem.name
-      );
+      const problemKey = getProblemKey(problem);
       const isSolved = solvedSet.has(problemKey);
       const isAttempted = attemptedSet.has(problemKey);
 
@@ -149,11 +145,7 @@ export const ProblemsTable: React.FC<Props> = ({
                 {filteredProblems
                   .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                   .map((problem) => {
-                    const key = getProblemKey(
-                      problem.contestId,
-                      problem.index,
-                      problem.name
-                    );
+                    const key = getProblemKey(problem);
                     const isSolved = solvedSet.has(key);
                     const isAttempted = attemptedSet.has(key);
                     return (

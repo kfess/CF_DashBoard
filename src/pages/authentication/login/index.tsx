@@ -20,21 +20,24 @@ export const LoginPage: React.FC = () => {
       container
       justifyContent="center"
       alignItems="center"
-      minHeight="20vh"
+      minHeight="40vh"
       spacing={2}
+      px={2}
     >
       <Grid item xs={12} sm={8} md={6} lg={4}>
         <Card>
           <CardContent>
             <Typography variant="h5" align="center">
-              CF DashBoard
+              CF-DashBoard
             </Typography>
           </CardContent>
           <CardContent>
             <Typography variant="h6" align="center" gutterBottom>
-              Sign in with
+              Authentication
             </Typography>
-            <SocialLoginButton provider="github" />
+            <Typography align="center">
+              <SocialLoginButton provider="github" />
+            </Typography>
           </CardContent>
         </Card>
       </Grid>

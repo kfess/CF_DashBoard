@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -10,6 +11,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import { alpha } from "@mui/material";
 import { Timer } from "@features/ui/component/Timer";
 import { Chip_ } from "@features/ui/component/Chip";
 import { TablePagination } from "@features/ui/component/TablePagination";
@@ -58,7 +60,6 @@ export const MyContestTable: React.FC = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell align="center">Title</TableCell>
-                    <TableCell align="center">Owner</TableCell>
                     <TableCell align="center">Description</TableCell>
                     <TableCell align="center">Start</TableCell>
                     <TableCell align="center">End</TableCell>
@@ -84,14 +85,22 @@ export const MyContestTable: React.FC = () => {
                       return (
                         <TableRow hover key={contest.contestId}>
                           <TableCell>
-                            <NavLink
-                              to={`/custom-contest/show/${contest.contestId}`}
-                            >
-                              {contest.title}
-                            </NavLink>
-                            <Chip_ label={contest.visibility} />
+                            <Stack direction="row" spacing={0.5}>
+                              <NavLink
+                                to={`/custom-contest/show/${contest.contestId}`}
+                              >
+                                {contest.title}
+                              </NavLink>
+                              <Chip_
+                                label={contest.visibility}
+                                sx={{
+                                  color: "#9246FF",
+                                  borderColor: "black",
+                                  backgroundColor: alpha("#9246FF", 0.15),
+                                }}
+                              />
+                            </Stack>
                           </TableCell>
-                          <TableCell>{contest.owner}</TableCell>
                           <TableCell>{contest.description}</TableCell>
                           <TableCell>
                             {utcISOStringToLocal(contest.startDate)}
@@ -106,7 +115,19 @@ export const MyContestTable: React.FC = () => {
                             :{(length % 60).toString().padStart(2, "0")}
                           </TableCell>
                           <TableCell>
-                            <Chip_ label={judgeContestType(contest)} />
+                            <Chip_
+                              label={judgeContestType(contest)}
+                              sx={{
+                                color:
+                                  judgeContestType(contest) === "Running"
+                                    ? "#9246FF"
+                                    : "",
+                                backgroundColor:
+                                  judgeContestType(contest) === "Running"
+                                    ? alpha("#9246FF", 0.15)
+                                    : "",
+                              }}
+                            />
                             {judgeContestType(contest) === "Running" && (
                               <Timer toDate={contest.endDate} />
                             )}
@@ -179,12 +200,21 @@ export const MyContestTable: React.FC = () => {
                       return (
                         <TableRow hover key={contest.contestId}>
                           <TableCell>
-                            <NavLink
-                              to={`/custom-contest/show/${contest.contestId}`}
-                            >
-                              {contest.title}
-                            </NavLink>
-                            <Chip_ label={contest.visibility} />
+                            <Stack direction="row" spacing={0.5}>
+                              <NavLink
+                                to={`/custom-contest/show/${contest.contestId}`}
+                              >
+                                {contest.title}
+                              </NavLink>
+                              <Chip_
+                                label={contest.visibility}
+                                sx={{
+                                  color: "#9246FF",
+                                  borderColor: "black",
+                                  backgroundColor: alpha("#9246FF", 0.15),
+                                }}
+                              />
+                            </Stack>
                           </TableCell>
                           <TableCell>{contest.owner}</TableCell>
                           <TableCell>{contest.description}</TableCell>
@@ -201,7 +231,19 @@ export const MyContestTable: React.FC = () => {
                             :{(length % 60).toString().padStart(2, "0")}
                           </TableCell>
                           <TableCell>
-                            <Chip_ label={judgeContestType(contest)} />
+                            <Chip_
+                              label={judgeContestType(contest)}
+                              sx={{
+                                color:
+                                  judgeContestType(contest) === "Running"
+                                    ? "#9246FF"
+                                    : "",
+                                backgroundColor:
+                                  judgeContestType(contest) === "Running"
+                                    ? alpha("#9246FF", 0.15)
+                                    : "",
+                              }}
+                            />
                             {judgeContestType(contest) === "Running" && (
                               <Timer toDate={contest.endDate} />
                             )}

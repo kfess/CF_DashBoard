@@ -24,12 +24,12 @@ const visibilitySchema = z
 export type Visibility = typeof visibilities[number];
 
 // mode of contest
-export const modes = ["Normal", "Lockout", "Training"] as const;
+export const modes = ["Normal", "Training"] as const;
 const modeSchema = z.enum(modes).refine(
   (val) => {
     return modes.includes(val);
   },
-  { message: "Mode must be 'Normal' or 'Lockout' or 'Training'" }
+  { message: "Mode must be 'Normal' or 'Training'" }
 );
 export type Mode = typeof modes[number];
 

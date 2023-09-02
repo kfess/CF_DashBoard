@@ -81,7 +81,7 @@ export const LabelsTable: React.FC = () => {
         sx={{
           display: "flex",
           justifyContent: "flex-end",
-          paddingBottom: 1,
+          paddingBottom: 1.5,
         }}
         gap={2}
       >

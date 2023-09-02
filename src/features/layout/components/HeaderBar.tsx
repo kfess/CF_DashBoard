@@ -41,6 +41,7 @@ export const HeaderBar: React.FC<Props> = ({
         css={{ backgroundColor: theme.colors.header.backgroundColor }}
         position="fixed"
         elevation={0}
+        elevation={0} // remove shadow
       >
         <Toolbar
           variant="dense"
@@ -67,7 +68,7 @@ export const HeaderBar: React.FC<Props> = ({
                   color: theme.colors.header.foregroundColor,
                 }}
               >
-                CF DashBoard
+                CF-DashBoard
               </Typography>
             </a>
           </Box>

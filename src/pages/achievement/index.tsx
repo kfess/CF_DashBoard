@@ -56,7 +56,6 @@ export const AchievementPage: React.FC = () => {
                 p: 2,
                 backgroundColor: "white",
                 borderRadius: 1,
-                boxShadow: [1, 1, 1, 1],
                 marginBottom: "auto",
               }}
             >
@@ -78,7 +77,6 @@ export const AchievementPage: React.FC = () => {
                 p: 2,
                 backgroundColor: "white",
                 borderRadius: 1,
-                boxShadow: [1, 1, 1, 1],
               }}
             >
               <>
@@ -92,7 +90,6 @@ export const AchievementPage: React.FC = () => {
                 marginTop: 2,
                 backgroundColor: "white",
                 borderRadius: 1,
-                boxShadow: [1, 1, 1, 1],
               }}
             >
               <Accuracy allSubmissions={allSubmissions} />
@@ -103,7 +100,6 @@ export const AchievementPage: React.FC = () => {
                 marginTop: 2,
                 backgroundColor: "white",
                 borderRadius: 1,
-                boxShadow: [1, 1, 1, 1],
               }}
             >
               <Streak
@@ -117,7 +113,6 @@ export const AchievementPage: React.FC = () => {
                 marginTop: 2,
                 backgroundColor: "white",
                 borderRadius: 1,
-                boxShadow: [1, 1, 1, 1],
               }}
             >
               <HeatMaps submissions={allSubmissions} />
@@ -138,7 +133,6 @@ export const AchievementPage: React.FC = () => {
                 p: 1,
                 backgroundColor: "white",
                 borderRadius: 1,
-                boxShadow: [1, 1, 1, 1],
               }}
             >
               <Pies submissions={allSubmissions} />
@@ -159,7 +153,6 @@ export const AchievementPage: React.FC = () => {
                 p: 1,
                 backgroundColor: "white",
                 borderRadius: 1,
-                boxShadow: [1, 1, 1, 1],
               }}
             >
               <DailyChart submissions={acSubmissions} />
