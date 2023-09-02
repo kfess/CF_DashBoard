@@ -10,9 +10,9 @@ import {
   otherItems,
   SideNavigationItem,
 } from "@features/layout/components/SideNavigationItems";
-import { useThemeContext } from "@features/color/themeColor.hook";
 import { generateUrlPath } from "@features/layout/helper";
 import { useURLQuery } from "@hooks/useQueryParams";
+import { useTheme } from "@mui/material/styles";
 
 type Props = {
   isOpenSideBar: boolean;
@@ -27,7 +27,7 @@ export const SideNavigationBar: React.FC<Props> = ({
   selectedItem,
   setSelectedItem,
 }) => {
-  const { theme } = useThemeContext();
+  const theme = useTheme();
 
   const { queryParams } = useURLQuery();
   const userId = queryParams["userId"] || "";
@@ -35,16 +35,12 @@ export const SideNavigationBar: React.FC<Props> = ({
   return (
     <Box role="presentation">
       <Drawer anchor="left" open={isOpenSideBar} onClose={toggleSideBar}>
-        <Toolbar
-          css={{ backgroundColor: theme.colors.header.backgroundColor }}
-          variant="dense"
-        >
+        <Toolbar variant="dense">
           <IconButton
             edge="start"
             aria-label="menu"
             onClick={() => toggleSideBar(!isOpenSideBar)}
             css={{
-              color: theme.colors.foregroundColor,
               margin: theme.spacing(0, 1, 0, 0),
             }}
           >
@@ -60,7 +56,6 @@ export const SideNavigationBar: React.FC<Props> = ({
                 toggleSideBar(!isOpenSideBar);
               }}
               sx={{ display: { xs: "none", sm: "block" } }}
-              css={{ color: theme.colors.foregroundColor }}
             >
               CF-DashBoard
             </Typography>

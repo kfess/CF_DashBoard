@@ -1,10 +1,14 @@
-import React from "react";
-import { useThemeContext } from "@features/color/themeColor.hook";
-import { makeStyles } from "@mui/material";
+import { useThemeContext } from "@global/theme";
+import { IconButton } from "@mui/material";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import ModeNightIcon from "@mui/icons-material/ModeNight";
 
-export const ThemeSelector: React.FC = () => {
-  const { theme, setBaseTheme, setDarkTheme, setGreenTheme, setPurpleTheme } =
-    useThemeContext();
+export const ThemeSelector = () => {
+  const { theme, toggleTheme } = useThemeContext();
 
-  return <></>;
+  return (
+    <IconButton onClick={toggleTheme}>
+      {theme.palette.mode === "light" ? <ModeNightIcon /> : <LightModeIcon />}
+    </IconButton>
+  );
 };

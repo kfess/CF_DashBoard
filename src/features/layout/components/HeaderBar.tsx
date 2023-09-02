@@ -10,11 +10,12 @@ import {
   Stack,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useThemeContext } from "@features/color/themeColor.hook";
+import { useTheme } from "@mui/material/styles";
 import { isMainField } from "@features/layout/helper";
 import { SearchBar } from "@features/layout/components/Search";
 import { AccountMenu } from "@features/layout/components/AccountMenu";
 import type { Field } from "@features/layout/components/SideNavigationItems";
+import { ThemeSelector } from "@features/layout/components/ThemeSelector";
 
 // Without this offset, some part of the content to be invisible behind the header
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
@@ -32,17 +33,12 @@ export const HeaderBar: React.FC<Props> = ({
   selectedItem,
   setSelectedItem,
 }) => {
-  const { theme } = useThemeContext();
+  const theme = useTheme();
   const { pathname } = useLocation();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        css={{ backgroundColor: theme.colors.header.backgroundColor }}
-        position="fixed"
-        elevation={0}
-        elevation={0} // remove shadow
-      >
+      <AppBar color="default" position="fixed" elevation={0}>
         <Toolbar
           variant="dense"
           sx={{ display: "flex", justifyContent: "space-between" }}
@@ -63,18 +59,19 @@ export const HeaderBar: React.FC<Props> = ({
                   setSelectedItem("Contests");
                 }}
                 noWrap
-                sx={{ display: { xs: "none", sm: "block" } }}
-                css={{
-                  color: theme.colors.header.foregroundColor,
+                sx={{
+                  display: { xs: "none", sm: "block" },
+                  color: theme.palette.grey[800],
                 }}
               >
                 CF-DashBoard
               </Typography>
             </a>
           </Box>
-          <Stack direction="row" spacing={2} flexGrow={1} pl={2}>
+          <Stack direction="row" spacing={2} flexGrow={1} px={2}>
             <SearchBar visible={isMainField(pathname)} />
           </Stack>
+          <ThemeSelector />
           <AccountMenu />
         </Toolbar>
       </AppBar>

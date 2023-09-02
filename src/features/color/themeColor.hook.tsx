@@ -1,56 +1,40 @@
-import {
-  useState,
-  Dispatch,
-  SetStateAction,
-  useContext,
-  createContext,
-  ReactNode,
-  useCallback,
-} from "react";
-import { Theme, ThemeProvider } from "@mui/material/styles";
-import { useTheme } from "@mui/material/styles";
-import {
-  baseTheme,
-  purpleTheme,
-  greenTheme,
-  darkTheme,
-} from "@features/color/themeColor";
+// import {
+//   useState,
+//   useContext,
+//   createContext,
+//   ReactNode,
+//   useCallback,
+// } from "react";
+// import { Theme, ThemeProvider } from "@mui/material/styles";
+// import { useTheme } from "@mui/material/styles";
+// // import { baseTheme, darkTheme } from "@features/color/themeColor";
 
-const Context = createContext<{
-  setBaseTheme: () => void;
-  setPurpleTheme: () => void;
-  setGreenTheme: () => void;
-  setDarkTheme: () => void;
-}>({
-  setBaseTheme: () => {},
-  setPurpleTheme: () => {},
-  setGreenTheme: () => {},
-  setDarkTheme: () => {},
-});
+// const Context = createContext<{
+//   setBaseTheme: () => void;
+//   setDarkTheme: () => void;
+// }>({
+//   setBaseTheme: () => {},
+//   setDarkTheme: () => {},
+// });
 
-export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<Theme>(baseTheme);
+// export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
+//   const [theme, setTheme] = useState<Theme>(baseTheme);
 
-  const setBaseTheme = useCallback(() => setTheme(baseTheme), [theme]);
-  const setPurpleTheme = useCallback(() => setTheme(purpleTheme), [theme]);
-  const setGreenTheme = useCallback(() => setTheme(greenTheme), [theme]);
-  const setDarkTheme = useCallback(() => setTheme(darkTheme), [theme]);
+//   const setBaseTheme = useCallback(() => setTheme(baseTheme), [theme]);
+//   const setDarkTheme = useCallback(() => setTheme(darkTheme), [theme]);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Context.Provider
-        value={{ setBaseTheme, setPurpleTheme, setGreenTheme, setDarkTheme }}
-      >
-        {children}
-      </Context.Provider>
-    </ThemeProvider>
-  );
-};
+//   return (
+//     <ThemeProvider theme={theme}>
+//       <Context.Provider value={{ setBaseTheme, setDarkTheme }}>
+//         {children}
+//       </Context.Provider>
+//     </ThemeProvider>
+//   );
+// };
 
-export const useThemeContext = () => {
-  const theme = useTheme();
-  const { setBaseTheme, setPurpleTheme, setGreenTheme, setDarkTheme } =
-    useContext(Context);
+// export const useThemeContext = () => {
+//   const theme = useTheme();
+//   const { setBaseTheme, setDarkTheme } = useContext(Context);
 
-  return { theme, setBaseTheme, setPurpleTheme, setGreenTheme, setDarkTheme };
-};
+//   return { theme, setBaseTheme, setDarkTheme };
+// };

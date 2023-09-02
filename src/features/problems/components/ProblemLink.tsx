@@ -3,7 +3,8 @@ import Box from "@mui/material/Box";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { TopcoderLikeCircle } from "@features/color/components/TopCoderLikeCircle";
 import { CF_CONTEST_URL, CF_GYM_URL } from "@constants/url";
-import { useThemeContext } from "@features/color/themeColor.hook";
+import { useTheme } from "@mui/material";
+// import { useThemeContext } from "@features/color/themeColor.hook";
 import { AddLabelButton } from "@features/bookmark/components/problem/AddLabelButton";
 
 type Props = {
@@ -31,7 +32,7 @@ export const ProblemLink: React.FC<Props> = ({
     contestId >= 100001 ? CF_GYM_URL : CF_CONTEST_URL
   }/${contestId}/problem/${problemId}`;
 
-  const { theme } = useThemeContext();
+  const theme = useTheme();
 
   return (
     <Box sx={{ display: "inline-flex", alignItems: "center" }}>

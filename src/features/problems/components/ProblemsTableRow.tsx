@@ -11,7 +11,8 @@ import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { SolutionLink } from "./SolutionLink";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { Chip_ } from "@features/ui/component/Chip";
-import { useThemeContext } from "@features/color/themeColor.hook";
+import { useTheme } from "@mui/material";
+// import { useThemeContext } from "@features/color/themeColor.hook";
 import { CF_CONTEST_URL } from "@constants/url";
 
 type Props = {
@@ -27,7 +28,7 @@ export const ProblemsTableRow: React.FC<Props> = ({
   isSolved,
   isAttempted,
 }) => {
-  const { theme } = useThemeContext();
+  const theme = useTheme();
   const backgroundColor = isSolved
     ? theme.colors.acColor
     : isAttempted

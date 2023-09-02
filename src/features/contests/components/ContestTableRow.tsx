@@ -4,11 +4,11 @@ import TableCell from "@mui/material/TableCell";
 import type { ReshapedProblem } from "@features/problems/problem";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
-import { useThemeContext } from "@features/color/themeColor.hook";
 import { getProblemKey } from "@features/problems/utils";
 import { Classification } from "@features/contests/contest";
 import { calcSolvedStatusWithIdxes } from "@features/contests/utils/solvedStatus";
 import type { SolvedStatus } from "@features/contests/components/SolvedStatusFilter";
+import { useTheme } from "@mui/material";
 
 type Props = {
   readonly userId?: string;
@@ -36,7 +36,7 @@ export const ContestTableRow: React.FC<Props> = React.memo(
     solvedSet,
     attemptedSet,
   }) => {
-    const { theme } = useThemeContext();
+    const theme = useTheme();
 
     const problemMap = useMemo(() => {
       const map: Record<string, ReshapedProblem> = {};
@@ -58,7 +58,7 @@ export const ContestTableRow: React.FC<Props> = React.memo(
 
     const rowColor = useMemo(() => {
       return userSolvedStatus === "Completed" ? theme.colors.acColor : "";
-    }, [problemIdxes, problemMap, solvedSet, contestId, theme.colors.acColor]);
+    }, [problemIdxes, problemMap, solvedSet, contestId]);
 
     const cellColors = useMemo(() => {
       return problemIdxes.map((idx) => {

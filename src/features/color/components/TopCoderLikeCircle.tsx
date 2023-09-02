@@ -1,6 +1,7 @@
 import React from "react";
 import Tooltip from "@mui/material/Tooltip";
-import { useThemeContext } from "@features/color/themeColor.hook";
+import { useTheme } from "@mui/material";
+// import { useThemeContext } from "@features/color/themeColor.hook";
 import {
   getColorCodeFromRating,
   calcFillPercent,
@@ -19,7 +20,7 @@ export const TopcoderLikeCircle: React.FC<Props> = ({
   rating,
   solvedCount,
 }) => {
-  const { theme } = useThemeContext();
+  const theme = useTheme();
   const color = getColorCodeFromRating(rating, theme.themeColor);
   const fillPercent = calcFillPercent(rating);
 
