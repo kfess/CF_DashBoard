@@ -1,11 +1,11 @@
 import React from "react";
-import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { TopcoderLikeCircle } from "@features/color/components/TopCoderLikeCircle";
 import { CF_CONTEST_URL, CF_GYM_URL } from "@constants/url";
 import { useTheme } from "@mui/material";
-// import { useThemeContext } from "@features/color/themeColor.hook";
 import { AddLabelButton } from "@features/bookmark/components/problem/AddLabelButton";
+import { Link } from "@features/ui/component/Link";
 
 type Props = {
   readonly showDifficulty: boolean;
@@ -35,7 +35,7 @@ export const ProblemLink: React.FC<Props> = ({
   const theme = useTheme();
 
   return (
-    <Box sx={{ display: "inline-flex", alignItems: "center" }}>
+    <Stack direction="row" alignItems="center" spacing={1} p={0.5}>
       {showDifficulty && (
         <TopcoderLikeCircle
           displayPurpose="difficulty"
@@ -43,24 +43,15 @@ export const ProblemLink: React.FC<Props> = ({
           solvedCount={solvedCount}
         />
       )}
-      <a
+      <Link
         href={problemUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        css={{
-          color: showDifficulty
-            ? getColorCodeFromRating(difficulty)
-            : theme.colors.fontColor,
-          textDecoration: "none",
-          paddingRight: theme.spacing(1),
-          ":hover": {
-            color: "#9246FF",
-            textDecoration: "underline",
-          },
-        }}
-      >
-        {problemId + ". " + problemName}
-      </a>
+        label={`${problemId}. ${problemName}`}
+        color={
+          showDifficulty
+            ? getColorCodeFromRating(difficulty, theme.palette.mode)
+            : ""
+        }
+      />
       {showBookmarked && (
         <AddLabelButton
           contestId={contestId}
@@ -70,6 +61,6 @@ export const ProblemLink: React.FC<Props> = ({
           rating={difficulty}
         />
       )}
-    </Box>
+    </Stack>
   );
 };

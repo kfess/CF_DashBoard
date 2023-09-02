@@ -144,7 +144,6 @@ export const getFieldFromLink = (link: string): string | undefined =>
 const CustomListItemIcon = styled(ListItemIcon)`
   margin-right: 8px;
 `;
-
 const CustomListItemText = styled(ListItemText)`
   margin-left: -20px;
 `;

@@ -13,12 +13,6 @@ const gray = {
   700: "#D8D8D8",
 };
 
-const other = {
-  100: "#eaeef2",
-  300: "#afb8c1",
-  900: "#24292f",
-};
-
 const CustomButton = styled(ButtonUnstyled)(
   ({ theme }) => `
     background-color: ${gray[500]};

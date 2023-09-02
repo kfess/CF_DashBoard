@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import type { Classification } from "@features/contests/contest";
 import { CF_CONTEST_URL } from "@constants/url";
 import { AddLabelButton } from "@features/bookmark/components/contest/AddLabelButton";
+import { Link } from "@features/ui/component/Link";
 
 type Props = {
   readonly contestId: number;
@@ -19,20 +20,7 @@ export const ContestLink: React.FC<Props> = ({
 }) => {
   return (
     <Stack direction="row" spacing={1} alignItems="center">
-      <a
-        href={`${CF_CONTEST_URL}/${contestId}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        css={{
-          color: "#9246FF",
-          ":hover": {
-            color: "#9246FF",
-            textDecoration: "underline",
-          },
-        }}
-      >
-        {contestName}
-      </a>
+      <Link href={`${CF_CONTEST_URL}/${contestId}`} label={contestName} />
       {showBookmarked && (
         <AddLabelButton
           contestId={contestId}

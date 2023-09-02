@@ -1,7 +1,7 @@
 // This file is required for the override of mui Theme
 import "@mui/material/styles";
 
-export type ThemeColor = "base" | "dark";
+export type Mode = "light" | "dark";
 type AdditionalPalette = {
   acColor: string;
   waColor: string;
@@ -9,12 +9,12 @@ type AdditionalPalette = {
 
 declare module "@mui/material/styles" {
   interface Theme {
-    themeColor: ThemeColor;
+    themeColor: Mode;
     colors: AdditionalPalette;
   }
 
   interface ThemeOptions {
-    themeColor?: ThemeColor;
+    themeColor?: Mode;
     colors?: AdditionalPalette;
   }
 }

@@ -1,4 +1,4 @@
-import { ThemeColor } from "@features/color/@types/theme";
+import { Mode } from "@features/color/@types/theme";
 import type { Classification } from "@features/contests/contest";
 
 export const ratingColor = [
@@ -32,17 +32,17 @@ export type ColorCode =
 
 // for therme color (dark)
 type DarkColorCode =
-  | "#1a1a1a" // Black
-  | "#7F8081" // Gray // need Change!
-  | "#008000" // Green // need Change!
-  | "#22AEA6" // Cyan // need Change!
-  | "#0F06FF" // Blue // need Change!
-  | "#AA00AA" // Violet // need Change!
-  | "#E3CA0F" // LightOrange // need Change!
-  | "#FF8E0E" // DeepOrange // need Change!
-  | "#FF7777" // LightRed // need Change!
-  | "#FE0A04" // Red // need Change!
-  | "#AA0100"; // DeepRed // need Change!
+  | "#ffffff" // Black
+  | "#9FA0A1" // Gray // need Change!
+  | "#00A600" // Green // need Change!
+  | "#33C0B9" // Cyan // need Change!
+  | "#3F46FF" // Blue // need Change!
+  | "#CC00CC" // Violet // need Change!
+  | "#FFE44D" // LightOrange // need Change!
+  | "#FFA632" // DeepOrange // need Change!
+  | "#FF9999" // LightRed // need Change!
+  | "#FF2C18" // Red // need Change!
+  | "#CC0300"; // DeepRed // need Change!
 
 type Title =
   | "Legendary Grandmaster" // DeepRed
@@ -75,7 +75,7 @@ export const ratingColorInfo: RatingColorInfo = {
   Black: {
     name: "Black",
     colorCode: "#1a1a1a",
-    darkColorCode: "#1a1a1a",
+    darkColorCode: "#ffffff",
     lowerBound: NO_RATING,
     upperBound: NO_RATING,
     title: "No Data",
@@ -83,7 +83,7 @@ export const ratingColorInfo: RatingColorInfo = {
   Gray: {
     name: "Gray",
     colorCode: "#7F8081",
-    darkColorCode: "#7F8081",
+    darkColorCode: "#9FA0A1",
     lowerBound: 0,
     upperBound: 1199,
     title: "Newbie",
@@ -91,7 +91,7 @@ export const ratingColorInfo: RatingColorInfo = {
   Green: {
     name: "Green",
     colorCode: "#008000",
-    darkColorCode: "#008000",
+    darkColorCode: "#00A600",
     lowerBound: 1200,
     upperBound: 1399,
     title: "Pupil",
@@ -99,7 +99,7 @@ export const ratingColorInfo: RatingColorInfo = {
   Cyan: {
     name: "Cyan",
     colorCode: "#22AEA6",
-    darkColorCode: "#22AEA6",
+    darkColorCode: "#33C0B9",
     lowerBound: 1400,
     upperBound: 1599,
     title: "Specialist",
@@ -107,7 +107,7 @@ export const ratingColorInfo: RatingColorInfo = {
   Blue: {
     name: "Blue",
     colorCode: "#0F06FF",
-    darkColorCode: "#0F06FF",
+    darkColorCode: "#3F46FF",
     lowerBound: 1600,
     upperBound: 1899,
     title: "Expert",
@@ -115,7 +115,7 @@ export const ratingColorInfo: RatingColorInfo = {
   Violet: {
     name: "Violet",
     colorCode: "#AA00AA",
-    darkColorCode: "#AA00AA",
+    darkColorCode: "#CC00CC",
     lowerBound: 1900,
     upperBound: 2099,
     title: "Candidate Master",
@@ -123,7 +123,7 @@ export const ratingColorInfo: RatingColorInfo = {
   LightOrange: {
     name: "LightOrange",
     colorCode: "#E3CA0F",
-    darkColorCode: "#E3CA0F",
+    darkColorCode: "#FFE44D",
     lowerBound: 2100,
     upperBound: 2299,
     title: "Master",
@@ -131,7 +131,7 @@ export const ratingColorInfo: RatingColorInfo = {
   DeepOrange: {
     name: "DeepOrange",
     colorCode: "#FF8E0E",
-    darkColorCode: "#FF8E0E",
+    darkColorCode: "#FFA632",
     lowerBound: 2300,
     upperBound: 2399,
     title: "International Master",
@@ -139,7 +139,7 @@ export const ratingColorInfo: RatingColorInfo = {
   LightRed: {
     name: "LightRed",
     colorCode: "#FF7777",
-    darkColorCode: "#FF7777",
+    darkColorCode: "#FF9999",
     lowerBound: 2400,
     upperBound: 2599,
     title: "Grandmaster",
@@ -147,7 +147,7 @@ export const ratingColorInfo: RatingColorInfo = {
   Red: {
     name: "Red",
     colorCode: "#FE0A04",
-    darkColorCode: "#FE0A04",
+    darkColorCode: "#FF2C18",
     lowerBound: 2600,
     upperBound: 2999,
     title: "International Grandmaster",
@@ -155,7 +155,7 @@ export const ratingColorInfo: RatingColorInfo = {
   DeepRed: {
     name: "DeepRed",
     colorCode: "#AA0100",
-    darkColorCode: "#AA0100",
+    darkColorCode: "#CC0300",
     lowerBound: 3000,
     upperBound: MAX_RATING,
     title: "Legendary Grandmaster",
@@ -164,7 +164,7 @@ export const ratingColorInfo: RatingColorInfo = {
 
 export const getRatingColorInfo = (
   rating?: number,
-  themeColor: ThemeColor = "base"
+  themeColor: Mode = "light"
 ) => {
   const colorInfo = Object.values(ratingColorInfo).find((info) => {
     if (rating === undefined) {
@@ -177,7 +177,7 @@ export const getRatingColorInfo = (
     return {
       ...colorInfo,
       colorCode:
-        themeColor === "dark" ? colorInfo.colorCode : colorInfo.darkColorCode,
+        themeColor === "light" ? colorInfo.colorCode : colorInfo.darkColorCode,
     };
   }
   return ratingColorInfo["Black"];
@@ -189,7 +189,7 @@ export const getColorNameFromRating = (rating?: number): RatingColor => {
 
 export const getColorCodeFromRating = (
   rating?: number,
-  themeColor: ThemeColor = "base"
+  themeColor: Mode = "light"
 ): ColorCode | DarkColorCode => {
   return getRatingColorInfo(rating, themeColor).colorCode;
 };

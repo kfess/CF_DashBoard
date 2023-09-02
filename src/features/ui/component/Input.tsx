@@ -30,7 +30,7 @@ const StyledInputElement = styled(InputBase)(({ theme }) => ({
   backgroundColor:
     theme.palette.mode === "dark" ? theme.palette.grey[900] : "#fff",
   "&.Mui-focused": {
-    boxShadow: `0 0 0 0.2rem #9246FF`,
+    boxShadow: `0 0 0 0.13rem ${theme.palette.primary.main}`,
   },
   "&.Mui-error": {
     borderColor: theme.palette.error.main,
