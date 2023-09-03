@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
 import { groupByProblem } from "@features/achievement/processSubmission";
 import { pluralize } from "@helpers/format";
-import { useTheme } from "@mui/material";
 
 type Props = {
   allSubmissions: Submission[];
@@ -63,8 +62,6 @@ const calcSubmissionStats = (allSubmissions: Submission[]): SubmissionStats => {
 };
 
 export const Accuracy: React.FC<Props> = ({ allSubmissions }) => {
-  const theme = useTheme();
-
   // AC するまでの submission 数
   // 1回 で AC することができた submission 数
   const { aveSubmissionsBeforeAC, firstTryACCount, acCount } = useMemo(
@@ -73,38 +70,47 @@ export const Accuracy: React.FC<Props> = ({ allSubmissions }) => {
   );
 
   return (
-    <Box sx={{ p: 1 }}>
+    <Box p={1}>
       <Typography variant="h6" gutterBottom>
         Accuracy
       </Typography>
       <Stack direction="row" justifyContent="space-evenly" alignItems="center">
-        <Box sx={{ textAlign: "center" }}>
+        <Box textAlign="center">
           <Typography variant="body1" color="text.secondary">
             Average Attempts
           </Typography>
-          <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
+          <Typography
+            variant="h4"
+            sx={{ color: (theme) => theme.palette.primary.main }}
+          >
             {aveSubmissionsBeforeAC.toFixed(2)}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             submissions before First AC
           </Typography>
         </Box>
-        <Box sx={{ textAlign: "center" }}>
+        <Box textAlign="center">
           <Typography variant="body1" color="text.secondary">
             First Try AC
           </Typography>
-          <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
+          <Typography
+            variant="h4"
+            sx={{ color: (theme) => theme.palette.primary.main }}
+          >
             {firstTryACCount.toLocaleString()}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {pluralize(firstTryACCount, "problem")}
           </Typography>
         </Box>
-        <Box sx={{ textAlign: "center" }}>
+        <Box textAlign="center">
           <Typography variant="body1" color="text.secondary">
             First Try AC Rate
           </Typography>
-          <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
+          <Typography
+            variant="h4"
+            sx={{ color: (theme) => theme.palette.primary.main }}
+          >
             {!acCount ? "-" : ((firstTryACCount / acCount) * 100).toFixed(1)}
           </Typography>
           <Typography variant="body2" color="text.secondary">

@@ -4,20 +4,17 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import GitHubButton from "react-github-btn";
-import { useTheme } from "@mui/material/styles";
 
 export const Footer: React.FC = () => {
-  const theme = useTheme();
-
   return (
     <Box
       sx={{
+        p: 2,
         marginTop: "auto",
         minHeight: "10rem",
-        p: 2,
         borderTop: "1px solid",
         borderColor: "divider",
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: (theme) => theme.palette.background.default,
       }}
     >
       <Container maxWidth="lg">

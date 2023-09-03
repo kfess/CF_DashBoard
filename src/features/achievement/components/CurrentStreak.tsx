@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Submission } from "@features/submission/submission";
 import { uniqueDateSet } from "@features/achievement/processSubmission";
-import { useTheme } from "@mui/material";
 
 const _calcCurrentStreak = (submissions: Submission[]): number => {
   const today = dayjs().format("YYYY/MM/DD");
@@ -36,8 +35,6 @@ type Props = {
 };
 
 export const CurrentStreak: React.FC<Props> = ({ submissions, title }) => {
-  const theme = useTheme();
-
   const currentStreak = useMemo(
     () => _calcCurrentStreak(submissions),
     [submissions]
@@ -48,7 +45,10 @@ export const CurrentStreak: React.FC<Props> = ({ submissions, title }) => {
       <Typography variant="body1" color="text.secondary">
         {title}
       </Typography>
-      <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
+      <Typography
+        variant="h4"
+        sx={{ color: (theme) => theme.palette.primary.main }}
+      >
         {currentStreak.toLocaleString()}
       </Typography>
       <Typography variant="body2" color="text.secondary">

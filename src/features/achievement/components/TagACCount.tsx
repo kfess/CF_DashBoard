@@ -9,7 +9,6 @@ import { Chip_ } from "@features/ui/component/Chip";
 import { useToggle } from "@hooks/index";
 import { TagACCountPie } from "@features/achievement/components/TagACCountPie";
 import { ReadMoreLess } from "@features/ui/component/ReadMoreLess";
-import { useTheme } from "@mui/material";
 
 // 各タグごとの AC 数をカウント
 export type Count = {
@@ -18,8 +17,6 @@ export type Count = {
 };
 
 const TagStats: React.FC<Count> = ({ name, count }) => {
-  const theme = useTheme();
-
   return (
     <Stack direction="row" spacing={1} alignItems="center">
       <Chip_ label={name} onClick={() => {}} />
@@ -28,7 +25,7 @@ const TagStats: React.FC<Count> = ({ name, count }) => {
       </Typography>
       <Typography
         variant="body2"
-        color={theme.palette.primary.main}
+        color={(theme) => theme.palette.primary.main}
         fontWeight="fontWeightBold"
       >
         {count.toLocaleString()}
@@ -58,7 +55,7 @@ export const TagACCount: React.FC<Props> = ({ submissions }) => {
   const displayedTagCounts = isReadMore ? tagCounts : tagCounts.slice(0, 5);
 
   return (
-    <Box sx={{ marginTop: 1, marginBottom: 1 }}>
+    <Box my={1}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Typography variant="h6" gutterBottom>
           Problem Tags

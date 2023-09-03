@@ -145,7 +145,6 @@ export const TagACCountPie: React.FC<Props> = ({ tagACCounts }) => {
         onClick={handleClickOpen}
         aria-label="tag-button"
       />
-
       <Modal
         open={open}
         onClose={handleClose}

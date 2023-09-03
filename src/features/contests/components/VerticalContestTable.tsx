@@ -12,7 +12,6 @@ import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { getProblemKey } from "@features/problems/utils";
 import { useTheme } from "@mui/material";
-// import { useThemeContext } from "@features/color/themeColor.hook";
 import { calcSolvedStatus } from "@features/contests/utils/solvedStatus";
 
 type Props = {

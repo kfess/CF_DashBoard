@@ -4,7 +4,6 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import ExtensionIcon from "@mui/icons-material/Extension";
 import GroupIcon from "@mui/icons-material/Group";
-import { useTheme } from "@mui/material";
 
 type Props = {
   readonly contribution?: number;
@@ -15,15 +14,8 @@ export const Community: React.FC<Props> = ({
   contribution,
   friendsOfCount,
 }) => {
-  const theme = useTheme();
-
   return (
-    <Box
-      sx={{
-        marginTop: 1,
-        marginBottom: 2,
-      }}
-    >
+    <Box mt={1} mb={2}>
       <Typography variant="h6" gutterBottom>
         Community
       </Typography>
@@ -32,7 +24,7 @@ export const Community: React.FC<Props> = ({
           <ExtensionIcon fontSize="small" color="primary" sx={{ mr: 1 }} />
           <Typography
             variant="body1"
-            color={theme.palette.primary.main}
+            color={(theme) => theme.palette.primary.main}
             fontWeight="fontWeightBold"
           >
             {(contribution ?? 0).toLocaleString()}
@@ -49,7 +41,7 @@ export const Community: React.FC<Props> = ({
           <GroupIcon fontSize="small" color="success" sx={{ mr: 1 }} />
           <Typography
             variant="body1"
-            color={theme.palette.primary.main}
+            color={(theme) => theme.palette.primary.main}
             fontWeight="fontWeightBold"
           >
             {(friendsOfCount ?? 0).toLocaleString()}

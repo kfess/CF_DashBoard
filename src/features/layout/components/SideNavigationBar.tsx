@@ -11,7 +11,6 @@ import {
 } from "@features/layout/components/SideNavigationItems";
 import { generateUrlPath } from "@features/layout/helper";
 import { useURLQuery } from "@hooks/useQueryParams";
-import { useTheme } from "@mui/material/styles";
 import { IconButton } from "@features/ui/component/IconButton";
 
 type Props = {
@@ -27,8 +26,6 @@ export const SideNavigationBar: React.FC<Props> = ({
   selectedItem,
   setSelectedItem,
 }) => {
-  const theme = useTheme();
-
   const { queryParams } = useURLQuery();
   const userId = queryParams["userId"] || "";
 
@@ -40,7 +37,7 @@ export const SideNavigationBar: React.FC<Props> = ({
         onClose={toggleSideBar}
         PaperProps={{
           sx: {
-            backgroundColor: theme.palette.background.default,
+            backgroundColor: (theme) => theme.palette.background.default,
           },
         }}
       >
@@ -64,7 +61,8 @@ export const SideNavigationBar: React.FC<Props> = ({
               }}
               sx={{
                 display: { xs: "none", sm: "block" },
-                color: theme.palette.mode === "light" ? "#000000" : "#ffffff",
+                color: (theme) =>
+                  theme.palette.mode === "light" ? "#000000" : "#ffffff",
               }}
             >
               CF-DashBoard
