@@ -6,7 +6,6 @@ import {
   filterUniqueSubmissions,
   sumSubmissionsRating,
 } from "@features/achievement/processSubmission";
-import { useTheme } from "@mui/material";
 
 const _calcRatingSum = (submissions: Submission[]): number => {
   const uniqueSubmissions = filterUniqueSubmissions(submissions);
@@ -17,8 +16,6 @@ const _calcRatingSum = (submissions: Submission[]): number => {
 type Props = { readonly submissions: Submission[] };
 
 export const TotalRatingSum: React.FC<Props> = ({ submissions }) => {
-  const theme = useTheme();
-
   const ratingSum = useMemo(() => _calcRatingSum(submissions), [submissions]);
 
   return (
@@ -26,7 +23,10 @@ export const TotalRatingSum: React.FC<Props> = ({ submissions }) => {
       <Typography variant="h6" gutterBottom>
         Rated Point Sum
       </Typography>
-      <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
+      <Typography
+        variant="h4"
+        sx={{ color: (theme) => theme.palette.primary.main }}
+      >
         {ratingSum.toLocaleString()}{" "}
         <Typography variant="body2" color="text.secondary" component="span">
           points

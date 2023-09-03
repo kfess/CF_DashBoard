@@ -91,7 +91,7 @@ export const Creator: React.FC = () => {
               border: 1,
               borderColor: "divider",
               borderRadius: "4px",
-              backgroundColor: theme.palette.background.paper,
+              backgroundColor: (theme) => theme.palette.background.paper,
               mb: 1.5,
             }}
           >

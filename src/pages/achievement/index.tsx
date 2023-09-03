@@ -23,11 +23,8 @@ import { UserSubmissionPage } from "@pages/submission/user/index";
 import { HeatMaps } from "@features/achievement/components/HeatMaps";
 import { isACSubmission } from "@features/achievement/processSubmission";
 import { Accuracy } from "@features/achievement/components/Accuracy";
-import { useTheme } from "@mui/material";
 
 export const AchievementPage: React.FC = () => {
-  const theme = useTheme();
-
   const { queryParams } = useURLQuery();
   const userId = queryParams["userId"];
 
@@ -57,7 +54,7 @@ export const AchievementPage: React.FC = () => {
             <Box
               sx={{
                 p: 2,
-                backgroundColor: theme.palette.background.paper,
+                backgroundColor: (theme) => theme.palette.background.paper,
                 borderRadius: 1,
                 marginBottom: "auto",
               }}
@@ -78,7 +75,7 @@ export const AchievementPage: React.FC = () => {
             <Box
               sx={{
                 p: 2,
-                backgroundColor: theme.palette.background.paper,
+                backgroundColor: (theme) => theme.palette.background.paper,
                 borderRadius: 1,
               }}
             >
@@ -91,7 +88,7 @@ export const AchievementPage: React.FC = () => {
               sx={{
                 p: 2,
                 mt: 2,
-                backgroundColor: theme.palette.background.paper,
+                backgroundColor: (theme) => theme.palette.background.paper,
                 borderRadius: 1,
               }}
             >
@@ -101,7 +98,7 @@ export const AchievementPage: React.FC = () => {
               sx={{
                 p: 2,
                 mt: 2,
-                backgroundColor: theme.palette.background.paper,
+                backgroundColor: (theme) => theme.palette.background.paper,
                 borderRadius: 1,
               }}
             >
@@ -114,7 +111,7 @@ export const AchievementPage: React.FC = () => {
               sx={{
                 p: 2,
                 mt: 2,
-                backgroundColor: theme.palette.background.paper,
+                backgroundColor: (theme) => theme.palette.background.paper,
                 borderRadius: 1,
               }}
             >
@@ -134,7 +131,7 @@ export const AchievementPage: React.FC = () => {
             <Box
               sx={{
                 p: 1,
-                backgroundColor: theme.palette.background.paper,
+                backgroundColor: (theme) => theme.palette.background.paper,
                 borderRadius: 1,
               }}
             >
@@ -154,7 +151,7 @@ export const AchievementPage: React.FC = () => {
             <Box
               sx={{
                 p: 1,
-                backgroundColor: theme.palette.background.paper,
+                backgroundColor: (theme) => theme.palette.background.paper,
                 borderRadius: 1,
               }}
             >
