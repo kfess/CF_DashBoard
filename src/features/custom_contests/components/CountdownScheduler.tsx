@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import React, { useMemo } from "react";
-import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { AddToGoogleCalendarLink } from "@features/ui/component/AddToGoogleCalendar";
 import { Timer } from "@features/ui/component/Timer";
@@ -39,21 +39,13 @@ export const CountdownScheduler: React.FC<Props> = ({
   }, [isUpcoming, isRunning]);
 
   return (
-    <Box
+    <Paper
+      elevation={0}
       sx={{
+        my: 2,
         p: 2,
-        my: 1,
-        display: "flex",
-        alignItems: "center",
-        flexWrap: "wrap",
-        fontSize: "1.1rem",
-        backgroundColor: "#ffffff",
-        borderStyle: "solid",
-        borderRadius: "4px",
-        borderColor: "#c0c0c0",
-        borderWidth: "0.8px",
-        borderLeftColor: borderColor,
-        borderLeftWidth: "5px",
+        border: (theme) => `1px solid ${theme.palette.divider}`,
+        borderLeft: `5px solid ${borderColor}`,
       }}
     >
       {isUpcoming && <UpcomingContestMessage startDate={startDate} />}
@@ -67,7 +59,7 @@ export const CountdownScheduler: React.FC<Props> = ({
           endDate={endDate}
         />
       )}
-    </Box>
+    </Paper>
   );
 };
 

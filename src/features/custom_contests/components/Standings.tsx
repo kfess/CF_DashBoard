@@ -88,8 +88,7 @@ export const Standings: React.FC<Props> = ({
               <TableRow hover>
                 <TableCell
                   sx={{
-                    borderRight: "1px solid rgba(224, 224, 224, 1)",
-                    borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
                     padding: "0px",
@@ -99,8 +98,7 @@ export const Standings: React.FC<Props> = ({
                 </TableCell>
                 <TableCell
                   sx={{
-                    borderRight: "1px solid rgba(224, 224, 224, 1)",
-                    borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
                     padding: "0px",
@@ -110,8 +108,7 @@ export const Standings: React.FC<Props> = ({
                 </TableCell>
                 <TableCell
                   sx={{
-                    borderRight: "1px solid rgba(224, 224, 224, 1)",
-                    borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
                     padding: "0px",
@@ -123,8 +120,7 @@ export const Standings: React.FC<Props> = ({
                   <TableCell
                     key={getProblemKey(problem)}
                     sx={{
-                      borderRight: "1px solid rgba(224, 224, 224, 1)",
-                      borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                      border: (theme) => `0.5px solid ${theme.palette.divider}`,
                       textAlign: "center",
                       padding: "0px",
                     }}
@@ -163,7 +159,8 @@ export const Standings: React.FC<Props> = ({
                     <TableRow hover key={participant}>
                       <TableCell
                         sx={{
-                          borderRight: "1px solid rgba(224, 224, 224, 1)",
+                          border: (theme) =>
+                            `0.5px solid ${theme.palette.divider}`,
                           textAlign: "center",
                           padding: "2px",
                         }}
@@ -172,7 +169,8 @@ export const Standings: React.FC<Props> = ({
                       </TableCell>
                       <TableCell
                         sx={{
-                          borderRight: "1px solid rgba(224, 224, 224, 1)",
+                          border: (theme) =>
+                            `0.5px solid ${theme.palette.divider}`,
                           padding: "8px",
                         }}
                       >
@@ -191,7 +189,8 @@ export const Standings: React.FC<Props> = ({
                       </TableCell>
                       <TableCell
                         sx={{
-                          borderRight: "1px solid rgba(224, 224, 224, 1)",
+                          border: (theme) =>
+                            `0.5px solid ${theme.palette.divider}`,
                           padding: "2px",
                         }}
                       >
@@ -240,7 +239,8 @@ export const Standings: React.FC<Props> = ({
                         <TableCell
                           key={getProblemKey(problem)}
                           sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
+                            border: (theme) =>
+                              `0.5px solid ${theme.palette.divider}`,
                             padding: "2px",
                           }}
                         >
@@ -254,7 +254,7 @@ export const Standings: React.FC<Props> = ({
                 <TableCell
                   colSpan={3}
                   sx={{
-                    borderRight: "1px solid rgba(224, 224, 224, 1)",
+                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
                     padding: "8px",
                   }}
                 >
@@ -268,7 +268,8 @@ export const Standings: React.FC<Props> = ({
                     <TableCell
                       key={key}
                       sx={{
-                        borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        border: (theme) =>
+                          `0.5px solid ${theme.palette.divider}`,
                         padding: "8px",
                       }}
                     >
@@ -310,7 +311,7 @@ export const Standings: React.FC<Props> = ({
                 <TableCell
                   colSpan={3}
                   sx={{
-                    borderRight: "1px solid rgba(224, 224, 224, 1)",
+                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
                     padding: "8px",
                   }}
                 >
@@ -324,7 +325,8 @@ export const Standings: React.FC<Props> = ({
                     <TableCell
                       key={key}
                       sx={{
-                        borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        border: (theme) =>
+                          `0.5px solid ${theme.palette.divider}`,
                         padding: "8px",
                       }}
                     >
