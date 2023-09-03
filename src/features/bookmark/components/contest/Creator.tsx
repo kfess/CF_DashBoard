@@ -80,7 +80,7 @@ export const Creator: React.FC = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ py: 1, display: "flex", justifyContent: "flex-end" }}>
-          <_Button onClick={toggleShowBlock} color="#9246FF">
+          <_Button onClick={toggleShowBlock} color={theme.palette.primary.main}>
             New Label
           </_Button>
         </Box>
@@ -101,20 +101,11 @@ export const Creator: React.FC = () => {
               mode="Preview"
             />
             <Stack
-              direction={{
-                xs: "column",
-                md: "row",
-              }}
-              sx={{ justifyContent: "space-between" }}
+              direction={{ xs: "column", md: "row" }}
+              justifyContent="space-between"
               spacing={1}
             >
-              <Stack
-                direction={{
-                  xs: "column",
-                  md: "row",
-                }}
-                spacing={2}
-              >
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                 <div>
                   <Name
                     control={control}
@@ -140,7 +131,7 @@ export const Creator: React.FC = () => {
                     <_Button
                       type="submit"
                       css={{ whiteSpace: "nowrap" }}
-                      color="#9246FF"
+                      color={theme.palette.primary.main}
                       disabled={
                         watchedName === "" ||
                         watchedColor === "" ||

@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import { useTheme } from "@mui/material";
+import { Link } from "@features/ui/component/Link";
 
 type Resource = {
   readonly title: string;
@@ -88,6 +90,8 @@ const usefulResources: Resource[] = [
   },
 ];
 const LinksPage: React.FC = () => {
+  const theme = useTheme();
+
   return (
     <Container maxWidth="md">
       <Box my={4}>
@@ -95,13 +99,7 @@ const LinksPage: React.FC = () => {
           Competitive Programming Contests
         </Typography>
       </Box>
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          marginBottom: "2rem",
-        }}
-      >
+      <Grid container spacing={2} mb={2}>
         {contestResources.map((resource, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Card
@@ -109,31 +107,16 @@ const LinksPage: React.FC = () => {
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                boxShadow: 3,
                 borderRadius: 2,
-                backgroundColor: "#f5f5f5",
-                "&:hover": {
-                  boxShadow: "0px 0px 20px rgba(0,0,0,0.15)",
-                },
-                transition: "box-shadow .3s",
               }}
             >
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography variant="h5" gutterBottom>
-                  <a
+                  <Link
                     href={resource.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    css={{
-                      color: "#9246FF",
-                      ":hover": {
-                        color: "#9246FF",
-                        textDecoration: "underline",
-                      },
-                    }}
-                  >
-                    {resource.title}
-                  </a>
+                    label={resource.title}
+                    color={theme.palette.primary.main}
+                  />
                 </Typography>
                 <Typography variant="body1">{resource.description}</Typography>
               </CardContent>
@@ -160,31 +143,16 @@ const LinksPage: React.FC = () => {
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                boxShadow: 3,
                 borderRadius: 2,
-                backgroundColor: "#f5f5f5",
-                "&:hover": {
-                  boxShadow: "0px 0px 20px rgba(0,0,0,0.15)",
-                },
-                transition: "box-shadow .3s",
               }}
             >
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography variant="h5" gutterBottom>
-                  <a
+                  <Link
                     href={resource.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    css={{
-                      color: "#9246FF",
-                      ":hover": {
-                        color: "#9246FF",
-                        textDecoration: "underline",
-                      },
-                    }}
-                  >
-                    {resource.title}
-                  </a>
+                    label={resource.title}
+                    color={theme.palette.primary.main}
+                  />
                 </Typography>
                 <Typography variant="body1">{resource.description}</Typography>
               </CardContent>

@@ -81,6 +81,7 @@ const sizeStyles = {
     line-height: 1.25rem;
   `,
 };
+
 const CustomButtonRoot = styled(ButtonUnstyled)<ButtonProps>(
   ({ theme, color, size = "medium" }) => `
     ${sizeStyles[size]}

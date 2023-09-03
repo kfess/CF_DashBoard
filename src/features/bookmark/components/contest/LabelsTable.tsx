@@ -97,7 +97,12 @@ export const LabelsTable: React.FC = () => {
           onSelect={setOrder}
         />
       </Box>
-      <TableContainer component={Paper}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          borderColor: "divider",
+        }}
+      >
         <Table>
           <TableHead>
             <TableRow>
