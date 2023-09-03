@@ -98,7 +98,9 @@ export const LabelsTable: React.FC = () => {
         />
       </Box>
       <TableContainer component={Paper}>
-        <Table>
+        <Table
+          sx={{ border: (theme) => `0.5px solid ${theme.palette.divider}` }}
+        >
           <TableHead>
             <TableRow>
               {filteredLabelsAndProblems && (

@@ -103,7 +103,9 @@ export const LabelsTable: React.FC = () => {
           borderColor: "divider",
         }}
       >
-        <Table>
+        <Table
+          sx={{ border: (theme) => `0.5px solid ${theme.palette.divider}` }}
+        >
           <TableHead>
             <TableRow>
               {filteredLabelsAndContests && (

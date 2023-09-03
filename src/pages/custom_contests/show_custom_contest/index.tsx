@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
@@ -16,7 +17,7 @@ import { Problems } from "@features/custom_contests/components/Problems";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { RegisterButton } from "@features/custom_contests/components/RegisterButton";
-import { Divider, Stack } from "@mui/material";
+import { Divider } from "@mui/material";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { utcISOStringToLocal } from "@helpers/date";
 import { SocialShare } from "@features/custom_contests/components/SocialShare";
@@ -116,15 +117,12 @@ export const ShowCustomContestPage: React.FC = () => {
                   <SocialShare />
                 </Stack>
 
-                <Box
-                  sx={{
-                    p: 1,
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                    flexWrap: "wrap",
-                  }}
+                <Stack
+                  p={1}
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  flexWrap="wrap"
                 >
                   <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
                     Description
@@ -132,17 +130,14 @@ export const ShowCustomContestPage: React.FC = () => {
                   <Typography sx={{ mt: 2, flex: 8 }}>
                     {data.description}
                   </Typography>
-                </Box>
+                </Stack>
                 <Divider />
-                <Box
-                  sx={{
-                    p: 1,
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                    flexWrap: "wrap",
-                  }}
+                <Stack
+                  p={1}
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  flexWrap="wrap"
                 >
                   <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
                     Period
@@ -151,17 +146,14 @@ export const ShowCustomContestPage: React.FC = () => {
                     {utcISOStringToLocal(data.startDate)} ~{" "}
                     {utcISOStringToLocal(data.endDate)}
                   </Typography>
-                </Box>
+                </Stack>
                 <Divider />
-                <Box
-                  sx={{
-                    p: 1,
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                    flexWrap: "wrap",
-                  }}
+                <Stack
+                  p={1}
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  flexWrap="wrap"
                 >
                   <Typography
                     fontWeight="fontWeightBold"
@@ -172,7 +164,7 @@ export const ShowCustomContestPage: React.FC = () => {
                   <Typography sx={{ mt: 2, flex: 8 }}>
                     {data.penalty} seconds per wrong submission
                   </Typography>
-                </Box>
+                </Stack>
                 <Box sx={{ mt: 2 }}>
                   <Tabs tabItems={tabItems} />
                 </Box>
