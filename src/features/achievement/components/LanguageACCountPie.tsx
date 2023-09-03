@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
 import Box from "@mui/material/Box";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import IconButton from "@mui/material/IconButton";
 import Modal from "@mui/material/Modal";
 import {
   PieChart,
@@ -13,6 +12,7 @@ import {
 } from "recharts";
 import type { Count } from "@features/achievement/components/LanguageACCount";
 import { pieColors } from "@features/color/pieColor";
+import { IconButton } from "@features/ui/component/IconButton";
 
 type RenderActiveShapeProps = {
   cx: number;
@@ -139,9 +139,12 @@ export const LanguageACCountPie: React.FC<Props> = ({ languageCounts }) => {
 
   return (
     <Box>
-      <IconButton id="language-button" onClick={handleClickOpen}>
-        <OpenInNewIcon fontSize="small" />
-      </IconButton>
+      <IconButton
+        icon={<OpenInNewIcon fontSize="small" />}
+        id="language-button"
+        onClick={handleClickOpen}
+        aria-controls="language-modal"
+      />
       <Modal
         open={open}
         onClose={handleClose}

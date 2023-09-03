@@ -1,7 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import IconButton from "@mui/material/IconButton";
 import ReplayIcon from "@mui/icons-material/Replay";
 import Tooltip from "@mui/material/Tooltip";
 import { Control, Controller, FieldErrors } from "react-hook-form";
@@ -15,6 +14,7 @@ import {
   generateRandomHexaColor,
   isValidHexaColor,
 } from "@features/color/labelColor";
+import { IconButton } from "@features/ui/component/IconButton";
 
 type Props = {
   control: Control<ContestLabelForm>;
@@ -36,12 +36,12 @@ export const Color: React.FC<Props> = ({ control, errors }) => {
           </label>
           <Stack direction="row" alignItems="center" spacing={1}>
             <IconButton
+              icon={<ReplayIcon />}
               aria-label="generate"
               onClick={() => {
                 field.onChange(generateRandomHexaColor());
               }}
               size="small"
-              disableTouchRipple
               sx={{
                 borderRadius: "6px",
                 backgroundColor: isValidHexaColor(field.value)
@@ -54,9 +54,8 @@ export const Color: React.FC<Props> = ({ control, errors }) => {
                 },
                 color: "white",
               }}
-            >
-              <ReplayIcon fontSize="inherit" />
-            </IconButton>
+            />
+
             <Tooltip
               title={<ColorPalette setColor={field.onChange} />}
               arrow

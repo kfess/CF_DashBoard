@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import Typography from "@mui/material/Typography";
 import { Drawer, Box, Toolbar, Divider, List } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import type { Field } from "@features/layout/components/SideNavigationItems";
 import {
@@ -13,6 +12,7 @@ import {
 import { generateUrlPath } from "@features/layout/helper";
 import { useURLQuery } from "@hooks/useQueryParams";
 import { useTheme } from "@mui/material/styles";
+import { IconButton } from "@features/ui/component/IconButton";
 
 type Props = {
   isOpenSideBar: boolean;
@@ -46,13 +46,13 @@ export const SideNavigationBar: React.FC<Props> = ({
       >
         <Toolbar variant="dense">
           <IconButton
+            icon={<MenuIcon />}
+            onClick={() => toggleSideBar()}
             edge="start"
             aria-label="menu"
-            onClick={() => toggleSideBar()}
             sx={{ mr: 1 }}
-          >
-            <MenuIcon />
-          </IconButton>
+          />
+
           <a href="/" rel="noopener noreferrer">
             <Typography
               variant="h6"

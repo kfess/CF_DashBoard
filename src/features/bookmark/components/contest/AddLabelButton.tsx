@@ -4,7 +4,7 @@ import Box from "@mui/system/Box";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import Popover from "@mui/material/Popover";
-import IconButton from "@mui/material/IconButton";
+// import IconButton from "@mui/material/IconButton";
 import StarIcon from "@mui/icons-material/Star";
 import { Link } from "react-router-dom";
 import { ColoredCircle } from "@features/color/components/ColoredCircle";
@@ -12,6 +12,7 @@ import { useIndexedDBForContestLabel } from "@features/bookmark/hooks/useIndexed
 import { _Button } from "@features/ui/component/Button";
 import { Classification } from "@features/contests/contest";
 import type { ContestLabel } from "@features/bookmark/contestLabel";
+import { IconButton } from "@features/ui/component/IconButton";
 
 type LabelRowProps = {
   readonly label: ContestLabel;
@@ -124,6 +125,7 @@ export const AddLabelButton: React.FC<Props> = ({
   return (
     <Box>
       <IconButton
+        icon={<StarIcon sx={{ fontSize: "1rem" }} />}
         id="label-button"
         onClick={handleClick}
         disableRipple
@@ -132,9 +134,7 @@ export const AddLabelButton: React.FC<Props> = ({
           color: open ? "#FFB700" : "#93A1B0",
           backgroundColor: "#EFEFEF",
         }}
-      >
-        <StarIcon sx={{ fontSize: "1rem" }} />
-      </IconButton>
+      />
       {open && (
         <Popover
           id="label-button"

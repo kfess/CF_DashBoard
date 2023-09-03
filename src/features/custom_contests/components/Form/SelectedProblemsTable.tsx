@@ -1,5 +1,4 @@
 import React from "react";
-import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -15,6 +14,7 @@ import { ContestLink } from "@features/contests/components/ContestLink";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 import { ControllerRenderProps } from "react-hook-form";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
+import { IconButton } from "@features/ui/component/IconButton";
 
 type Props = {
   field: ControllerRenderProps<CreateCustomContest, "problems">;
@@ -79,14 +79,13 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
                         <TableCell>{p.rating || "no data"}</TableCell>
                         <TableCell>
                           <IconButton
+                            icon={<DeleteIcon />}
                             onClick={() => {
                               removeProblem(index);
                             }}
                             size="small"
-                            sx={{ borderRadius: "20%" }}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
+                            aria-label="delete problems"
+                          />
                         </TableCell>
                       </TableRow>
                     ))}

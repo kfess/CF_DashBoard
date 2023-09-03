@@ -1,26 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import { Snackbar as MUISnackbar } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from "@features/ui/component/IconButton";
 
-type Props = {
+interface Props extends React.ComponentProps<typeof MUISnackbar> {
   readonly open: boolean;
   readonly message: string;
   readonly onClose: () => void;
-};
+}
 
-export const Snackbar: React.FC<Props> = ({ open, message, onClose }) => {
+export const Snackbar: React.FC<Props> = ({
+  open,
+  message,
+  onClose,
+  ...restProps
+}) => {
   const action = (
-    <>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={onClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </>
+    <IconButton
+      icon={<CloseIcon />}
+      size="small"
+      aria-label="close"
+      color="inherit"
+      onClick={onClose}
+    />
   );
 
   return (
@@ -31,6 +33,7 @@ export const Snackbar: React.FC<Props> = ({ open, message, onClose }) => {
       onClose={onClose}
       message={message}
       action={action}
+      {...restProps}
     />
   );
 };

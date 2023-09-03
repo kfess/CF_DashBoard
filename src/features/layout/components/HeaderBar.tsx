@@ -1,14 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import {
-  AppBar,
-  Box,
-  IconButton,
-  Toolbar,
-  Typography,
-  Stack,
-} from "@mui/material";
+import { AppBar, Box, Toolbar, Typography, Stack } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import MenuIcon from "@mui/icons-material/Menu";
 import { isMainField } from "@features/layout/helper";
@@ -17,6 +10,7 @@ import { AccountMenu } from "@features/layout/components/AccountMenu";
 import type { Field } from "@features/layout/components/SideNavigationItems";
 import { ThemeSelector } from "@features/layout/components/ThemeSelector";
 import { HeaderNavigationItems } from "./HeaderNavigationItems";
+import { IconButton } from "@features/ui/component/IconButton";
 
 // Without this offset, some part of the content to be invisible behind the header
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
@@ -50,13 +44,12 @@ export const HeaderBar: React.FC<Props> = ({
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <IconButton
+              icon={<MenuIcon />}
               edge="start"
               aria-label="menu"
               onClick={() => toggleSideBar(!isOpenSideBar)}
               sx={{ mr: 1 }}
-            >
-              <MenuIcon />
-            </IconButton>
+            />
             <a href="/" rel="noopener noreferrer">
               <Typography
                 variant="h6"

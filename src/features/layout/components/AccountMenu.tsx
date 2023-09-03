@@ -4,7 +4,6 @@ import Stack from "@mui/material/Stack";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
@@ -22,6 +21,7 @@ import {
 } from "@constants/url";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { Box } from "@mui/material";
+import { IconButton } from "@features/ui/component/IconButton";
 
 export type AccountMenuItem = {
   icon: React.ReactNode;
@@ -112,15 +112,13 @@ export const AccountMenu: React.FC = () => {
   return (
     <>
       <IconButton
+        icon={<AccountCircleIcon fontSize="large" />}
         onClick={handleClick}
         disableTouchRipple
         aria-controls={open ? "account-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
-      >
-        <AccountCircleIcon fontSize="large" />
-      </IconButton>
-
+      />
       <Menu
         anchorEl={anchorEl}
         id="account-menu"

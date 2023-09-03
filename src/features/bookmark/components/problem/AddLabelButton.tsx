@@ -4,13 +4,13 @@ import Box from "@mui/system/Box";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import Popover from "@mui/material/Popover";
-import IconButton from "@mui/material/IconButton";
 import StarIcon from "@mui/icons-material/Star";
 import { Link } from "react-router-dom";
 import { ColoredCircle } from "@features/color/components/ColoredCircle";
 import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
 import { _Button } from "@features/ui/component/Button";
 import type { ProblemLabel } from "@features/bookmark/problemLabel";
+import { IconButton } from "@features/ui/component/IconButton";
 
 type LabelRowProps = {
   readonly label: ProblemLabel;
@@ -130,6 +130,7 @@ export const AddLabelButton: React.FC<Props> = ({
   return (
     <Box>
       <IconButton
+        icon={<StarIcon fontSize="small" />}
         id="label-button"
         onClick={handleClick}
         disableRipple
@@ -138,9 +139,7 @@ export const AddLabelButton: React.FC<Props> = ({
           color: open ? "#FFB700" : "#93A1B0",
           backgroundColor: "#EFEFEF",
         }}
-      >
-        <StarIcon sx={{ fontSize: "1rem" }} />
-      </IconButton>
+      />
       {open && (
         <Popover
           id="label-popover"
