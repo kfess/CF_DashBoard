@@ -22,28 +22,33 @@ export const HeaderNavigationItems: React.FC<Props> = ({ setSelectedItem }) => {
 
   return (
     <Stack direction="row" alignItems="center" spacing={0.2}>
-      <IconButton
-        onClick={() => {
-          setSelectedItem("Problems");
-          navigate(generateUrlPath("/problems", userId));
-        }}
-        icon={<CreateOutlinedIcon />}
-      />
-      <IconButton
-        onClick={() => {
-          setSelectedItem("Submission");
-          navigate(generateUrlPath("/submission", userId));
-        }}
-        icon={<SendOutlinedIcon />}
-      />
+      <Tooltip title="problems" arrow>
+        <span>
+          <IconButton
+            onClick={() => {
+              setSelectedItem("Problems");
+              navigate(generateUrlPath("/problems", userId));
+            }}
+            icon={<CreateOutlinedIcon />}
+          />
+        </span>
+      </Tooltip>
+      <Tooltip title="submissions" arrow>
+        <span>
+          <IconButton
+            onClick={() => {
+              setSelectedItem("Submission");
+              navigate(generateUrlPath("/submission", userId));
+            }}
+            icon={<SendOutlinedIcon />}
+          />
+        </span>
+      </Tooltip>
       <Tooltip
-        title={
-          <Typography variant="body2">
-            "To view the Achievement page, you must first enter the codeforces
-            user ID in the navigation bar.""
-          </Typography>
-        }
+        title="To view the Achievement page, you must first enter the codeforces
+            user ID in the navigation bar."
         disableHoverListener={!!userId}
+        arrow
       >
         <span>
           <IconButton

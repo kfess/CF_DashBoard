@@ -1,3 +1,4 @@
+import { Tooltip } from "@mui/material";
 import { useThemeContext } from "@global/theme";
 import { IconButton } from "@features/ui/component/IconButton";
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -7,12 +8,20 @@ export const ThemeSelector = () => {
   const { theme, toggleTheme } = useThemeContext();
 
   return (
-    <IconButton
-      onClick={toggleTheme}
-      icon={
-        theme.palette.mode === "light" ? <ModeNightIcon /> : <LightModeIcon />
-      }
-      aria-label="Toggle color theme"
-    />
+    <Tooltip title="Toggle color theme" arrow>
+      <span>
+        <IconButton
+          onClick={toggleTheme}
+          icon={
+            theme.palette.mode === "light" ? (
+              <ModeNightIcon />
+            ) : (
+              <LightModeIcon />
+            )
+          }
+          aria-label="Toggle color theme"
+        />
+      </span>
+    </Tooltip>
   );
 };
