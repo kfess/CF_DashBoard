@@ -7,6 +7,7 @@ import { useToggle } from "@hooks/index";
 import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
 import {
   generateRandomHexaColor,
+  generateHighContrastColor,
   isValidHexaColor,
 } from "@features/color/labelColor";
 import {
@@ -19,14 +20,20 @@ import { Name } from "@features/bookmark/components/problem/Name";
 import { Description } from "@features/bookmark/components/problem/Description";
 import { Color } from "@features/bookmark/components/problem/Color";
 import { trimFullWhiteSpace } from "@helpers/format";
+import { useTheme } from "@mui/material";
 
-const getDefaultValues = (): ProblemLabelForm => ({
-  name: "",
-  description: "",
-  color: generateRandomHexaColor(),
-});
+const getDefaultValues = (isDarkMode: boolean): ProblemLabelForm => {
+  return {
+    name: "",
+    description: "",
+    // color: generateRandomHexaColor(),
+    color: generateHighContrastColor(),
+  };
+};
 
 export const Creator: React.FC = () => {
+  const theme = useTheme();
+
   const { createLabel, allLabelNames } = useIndexedDBForProblemLabel();
   const [showBlock, toggleShowBlock] = useToggle(false, true);
 
@@ -39,7 +46,7 @@ export const Creator: React.FC = () => {
     reset,
   } = useForm<ProblemLabelForm>({
     resolver: zodResolver(problemLabelFormSchema),
-    defaultValues: getDefaultValues(),
+    defaultValues: getDefaultValues(theme.palette.mode === "dark"),
   });
   const watchedName = watch("name");
   const watchedColor = watch("color");
@@ -88,30 +95,21 @@ export const Creator: React.FC = () => {
               border: 1,
               borderColor: "divider",
               borderRadius: "4px",
-              backgroundColor: "white",
-              mb: 1,
+              backgroundColor: theme.palette.background.paper,
+              mb: 1.5,
             }}
           >
             <LabelNameChip
               name={trimFullWhiteSpace(watchedName)}
-              color={isValidHexaColor(watchedColor) ? watchedColor : "#000000"}
+              color={watchedColor ?? "#000000"}
               mode="Preview"
             />
             <Stack
-              direction={{
-                xs: "column",
-                md: "row",
-              }}
+              direction={{ xs: "column", md: "row" }}
               sx={{ justifyContent: "space-between" }}
               spacing={1}
             >
-              <Stack
-                direction={{
-                  xs: "column",
-                  md: "row",
-                }}
-                spacing={2}
-              >
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                 <div>
                   <Name
                     control={control}

@@ -13,6 +13,7 @@ import { ColorPalette } from "@features/color/components/ColorPalette";
 import {
   HexaColor,
   generateRandomHexaColor,
+  generateHighContrastColor,
   isValidHexaColor,
 } from "@features/color/labelColor";
 
@@ -38,7 +39,8 @@ export const Color: React.FC<Props> = ({ control, errors }) => {
             <IconButton
               aria-label="generate"
               onClick={() => {
-                field.onChange(generateRandomHexaColor());
+                // field.onChange(generateRandomHexaColor());
+                field.onChange(generateHighContrastColor());
               }}
               size="small"
               disableTouchRipple

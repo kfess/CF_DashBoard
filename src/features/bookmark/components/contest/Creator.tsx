@@ -19,6 +19,7 @@ import { Name } from "@features/bookmark/components/contest/Name";
 import { Description } from "@features/bookmark/components/contest/Description";
 import { Color } from "@features/bookmark/components/contest/Color";
 import { trimFullWhiteSpace } from "@helpers/format";
+import { useTheme } from "@mui/material";
 
 const getDefaultValues = (): ContestLabelForm => ({
   name: "",
@@ -27,6 +28,8 @@ const getDefaultValues = (): ContestLabelForm => ({
 });
 
 export const Creator: React.FC = () => {
+  const theme = useTheme();
+
   const { createLabel, allLabelNames } = useIndexedDBForContestLabel();
   const [showBlock, toggleShowBlock] = useToggle(false, true);
 
@@ -88,8 +91,8 @@ export const Creator: React.FC = () => {
               border: 1,
               borderColor: "divider",
               borderRadius: "4px",
-              backgroundColor: "white",
-              mb: 1,
+              backgroundColor: theme.palette.background.paper,
+              mb: 1.5,
             }}
           >
             <LabelNameChip
