@@ -21,6 +21,7 @@ import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 import { Classification } from "@features/contests/contest";
 import { getClassification } from "@features/contests/utils/getClassification";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
+import { Link } from "@features/ui/component/Link";
 
 type Props = {
   readonly userId: string;
@@ -147,13 +148,10 @@ export const UserSubmission: React.FC<Props> = ({
                           </TableCell>
                           <TableCell>
                             <Typography variant="body2">
-                              <a
-                                target="_blank"
-                                rel="noopener noreferrer"
+                              <Link
                                 href={`https://codeforces.com/profile/${d.author.members[0].handle}`}
-                              >
-                                {d.author.members[0].handle}
-                              </a>
+                                label={d.author.members[0].handle}
+                              />
                             </Typography>
                           </TableCell>
                           <TableCell>
@@ -162,13 +160,10 @@ export const UserSubmission: React.FC<Props> = ({
                           <TableCell>{d.programmingLanguage}</TableCell>
                           <TableCell>
                             <Typography variant="body2">
-                              <a
-                                target="_blank"
-                                rel="noopener noreferrer"
+                              <Link
                                 href={`https://codeforces.com/contest/${d.contestId}/submission/${d.id}`}
-                              >
-                                detail
-                              </a>
+                                label="detail"
+                              />
                             </Typography>
                           </TableCell>
                         </TableRow>

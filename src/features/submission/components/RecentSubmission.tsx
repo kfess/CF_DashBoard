@@ -15,6 +15,7 @@ import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
 import { usePagination } from "@hooks/usePagination";
+import { Link } from "@features/ui/component/Link";
 
 export const RecentSubmission: React.FC = () => {
   const { data } = useFetchRecentSubmissions();
@@ -107,13 +108,10 @@ export const RecentSubmission: React.FC = () => {
                           />
                         </TableCell>
                         <TableCell>
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <Link
                             href={`https://codeforces.com/profile/${d.author.members[0].handle}`}
-                          >
-                            {d.author.members[0].handle}
-                          </a>
+                            label={d.author.members[0].handle}
+                          />
                         </TableCell>
                         <TableCell>
                           <VerdictChip verdict={d.verdict} />
@@ -125,13 +123,10 @@ export const RecentSubmission: React.FC = () => {
                         </TableCell>
                         <TableCell>
                           <Typography variant="body2">
-                            <a
-                              target="_blank"
-                              rel="noopener noreferrer"
+                            <Link
                               href={`https://codeforces.com/contest/${d.contestId}/submission/${d.id}`}
-                            >
-                              detail
-                            </a>
+                              label="detail"
+                            />
                           </Typography>
                         </TableCell>
                       </TableRow>

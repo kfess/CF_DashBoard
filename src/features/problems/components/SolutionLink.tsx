@@ -11,7 +11,7 @@ export const SolutionLink: React.FC<Props> = (props: Props) => {
       href=""
       target="_blank"
       rel="noopener noreferrer"
-      css={{ textDecoration: "underline" }}
+      css={{ textDecoration: "underline", color: "inherit" }}
     >
       <TaskIcon />
     </a>
