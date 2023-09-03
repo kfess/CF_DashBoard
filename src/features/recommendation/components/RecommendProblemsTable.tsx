@@ -43,7 +43,11 @@ export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
     <>
       <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
         <TableContainer component={Paper}>
-          <Table stickyHeader>
+          <Table
+            sx={{
+              border: (theme) => `0.5px solid ${theme.palette.divider}`,
+            }}
+          >
             <TableHead>
               <TableRow>
                 <TableCell>
