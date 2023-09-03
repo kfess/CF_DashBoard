@@ -9,6 +9,7 @@ import {
   valueToColor,
   maxDifficultyToColor,
 } from "@features/color/heatmapColor";
+import { useTheme } from "@mui/material";
 
 // constants for heatmap
 const DAY_NAMES_SHORT = ["Mon", "Wed", "Fri"] as const;
@@ -23,11 +24,12 @@ const height = yOffset + BLOCK_WIDTH * WEEKDAY;
 const getFillColor = (
   content: HeatMapContent,
   value?: number,
-  maxDifficulty?: number
+  maxDifficulty?: number,
+  isDarkMode?: boolean
 ) => {
   return content === "MaxDifficulty"
-    ? maxDifficultyToColor(maxDifficulty)
-    : valueToColor(value);
+    ? maxDifficultyToColor(maxDifficulty, isDarkMode)
+    : valueToColor(value, isDarkMode);
 };
 
 export type HeatMapData = {
@@ -42,6 +44,9 @@ type Props = {
 };
 
 export const HeatMap: React.FC<Props> = ({ heatMapData, heatMapContent }) => {
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === "dark";
+
   const totalSubmissions = useMemo(
     () => heatMapData.reduce((prev, curr) => (prev += curr.value ?? 0), 0),
     [heatMapData]
@@ -70,7 +75,12 @@ export const HeatMap: React.FC<Props> = ({ heatMapData, heatMapContent }) => {
               const week = Math.floor(i / WEEKDAY);
               const day = i % WEEKDAY;
               const d = dayjs(date);
-              const color = getFillColor(heatMapContent, value, maxDifficulty);
+              const color = getFillColor(
+                heatMapContent,
+                value,
+                maxDifficulty,
+                isDarkMode
+              );
 
               return (
                 <React.Fragment key={date}>
@@ -96,8 +106,8 @@ export const HeatMap: React.FC<Props> = ({ heatMapData, heatMapContent }) => {
                       id={`rect-${date}`}
                       x={xOffset + week * BLOCK_WIDTH}
                       y={yOffset + day * BLOCK_WIDTH}
-                      width={BLOCK_WIDTH * 0.9}
-                      height={BLOCK_WIDTH * 0.9}
+                      width={BLOCK_WIDTH * 0.8}
+                      height={BLOCK_WIDTH * 0.8}
                       fill={color}
                       rx={2}
                       ry={2}

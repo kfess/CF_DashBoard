@@ -1,7 +1,9 @@
 import { getColorCodeFromRating } from "@features/color/ratingColor";
 
+const noActivityColor = (isDarkMode: boolean) =>
+  isDarkMode ? "#2d333b" : "#ebedf0";
+
 export const heatmapColors = [
-  "#ebedf0", // アクティビティのない日の色
   "#c6e48b", // 最も薄い緑
   "#7bc96f", // 中間の緑
   "#239a3b", // 暗い緑
@@ -14,22 +16,30 @@ type ValueToColorMapping = {
 };
 
 const valueToColorMappings: ValueToColorMapping[] = [
-  { maxVal: 1, color: heatmapColors[1] }, // Light green
-  { maxVal: 3, color: heatmapColors[2] }, // Medium green
-  { maxVal: 5, color: heatmapColors[3] }, // Dark green
-  { color: heatmapColors[4] }, // Very dark green
+  { maxVal: 1, color: heatmapColors[0] }, // Light green
+  { maxVal: 3, color: heatmapColors[1] }, // Medium green
+  { maxVal: 5, color: heatmapColors[2] }, // Dark green
+  { color: heatmapColors[3] }, // Very dark green
 ];
 
-export const valueToColor = (value?: number): string => {
-  if (value === undefined) return heatmapColors[0];
+export const valueToColor = (
+  value?: number,
+  isDarkMode: boolean = false
+): string => {
+  if (value === undefined) return noActivityColor(isDarkMode);
   for (const mapping of valueToColorMappings) {
     if (!mapping.maxVal || value < mapping.maxVal) {
       return mapping.color;
     }
   }
-  return heatmapColors[4];
+  return heatmapColors[3];
 };
 
-export const maxDifficultyToColor = (value?: number): string => {
-  return value === undefined ? heatmapColors[0] : getColorCodeFromRating(value);
+export const maxDifficultyToColor = (
+  value?: number,
+  isDarkMode = false
+): string => {
+  return value === undefined
+    ? noActivityColor(isDarkMode)
+    : getColorCodeFromRating(value);
 };

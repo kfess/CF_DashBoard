@@ -1,6 +1,7 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import { useParams } from "react-router-dom";
 import { LabeledProblems } from "@features/bookmark/components/problem/LabeledProblems";
@@ -16,47 +17,33 @@ export const ProblemLabelPage: React.FC = () => {
   const label = fetchLabelAndProblemsByName(labelName ?? "");
 
   return (
-    <>
-      <Container maxWidth="lg">
-        <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
-          <HeadLine title={`${labelName}`} />
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              {label && (
-                <>
-                  <Box
-                    sx={{
-                      p: 2,
-                      marginTop: "20px",
-                      marginBottom: "20px",
-                      display: "flex",
-                      flexWrap: "wrap",
-                      fontSize: "1.1rem",
-                      backgroundColor: "#ffffff",
-                      borderStyle: "solid",
-                      borderRadius: "4px",
-                      borderColor: "#c0c0c0",
-                      borderWidth: "0.8px",
-                      borderLeftColor: label.color,
-                      borderLeftWidth: "5px",
-                    }}
-                  >
-                    {label.description ? (
-                      <Typography>{label.description}</Typography>
-                    ) : (
-                      <Typography color="text.secondary">
-                        No description provided
-                      </Typography>
-                    )}
-                  </Box>
-                  <LabeledProblems label={label} />
-                </>
-              )}
-            </Grid>
+    <Container maxWidth="lg">
+      <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+        <HeadLine title={`${labelName}`} />
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            {label && (
+              <>
+                <Paper
+                  elevation={0}
+                  sx={{
+                    my: 2,
+                    p: 2,
+                    border: (theme) => `1px solid ${theme.palette.divider}`,
+                    borderLeft: `5px solid ${label.color}`,
+                  }}
+                >
+                  <Typography variant="body1" color="text.main">
+                    {label?.description || "No description provided."}
+                  </Typography>
+                </Paper>
+                <LabeledProblems label={label} />
+              </>
+            )}
           </Grid>
-        </Box>
-      </Container>
-    </>
+        </Grid>
+      </Box>
+    </Container>
   );
 };
 
@@ -66,42 +53,32 @@ export const ContestLabelPage: React.FC = () => {
   const label = fetchLabelAndContestsByName(labelName ?? "");
 
   return (
-    <>
-      <Container maxWidth="lg">
-        <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
-          <HeadLine title={`${labelName}`} />
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              {label && (
-                <>
-                  <Box
-                    sx={{
-                      p: 2,
-                      marginTop: "20px",
-                      marginBottom: "20px",
-                      display: "flex",
-                      flexWrap: "wrap",
-                      fontSize: "1.1rem",
-                      backgroundColor: "#ffffff",
-                      borderStyle: "solid",
-                      borderRadius: "4px",
-                      borderColor: "#c0c0c0",
-                      borderWidth: "0.8px",
-                      borderLeftColor: "green",
-                      borderLeftWidth: "5px",
-                    }}
-                  >
-                    <Typography variant="body1" color="text.main">
-                      {label?.description || "No description provided."}
-                    </Typography>
-                  </Box>
-                  <LabeledContests label={label} />
-                </>
-              )}
-            </Grid>
+    <Container maxWidth="lg">
+      <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+        <HeadLine title={`${labelName}`} />
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            {label && (
+              <>
+                <Paper
+                  elevation={0}
+                  sx={{
+                    my: 2,
+                    p: 2,
+                    border: (theme) => `1px solid ${theme.palette.divider}`,
+                    borderLeft: `5px solid ${label.color}`,
+                  }}
+                >
+                  <Typography variant="body1" color="text.main">
+                    {label?.description || "No description provided."}
+                  </Typography>
+                </Paper>
+                <LabeledContests label={label} />
+              </>
+            )}
           </Grid>
-        </Box>
-      </Container>
-    </>
+        </Grid>
+      </Box>
+    </Container>
   );
 };

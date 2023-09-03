@@ -34,7 +34,16 @@ export const SideNavigationBar: React.FC<Props> = ({
 
   return (
     <Box role="presentation">
-      <Drawer anchor="left" open={isOpenSideBar} onClose={toggleSideBar}>
+      <Drawer
+        anchor="left"
+        open={isOpenSideBar}
+        onClose={toggleSideBar}
+        PaperProps={{
+          sx: {
+            backgroundColor: theme.palette.background.default,
+          },
+        }}
+      >
         <Toolbar variant="dense">
           <IconButton
             edge="start"
