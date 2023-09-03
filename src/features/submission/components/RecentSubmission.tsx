@@ -16,6 +16,7 @@ import { TablePagination } from "@features/ui/component/TablePagination";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
 import { usePagination } from "@hooks/usePagination";
 import { Link } from "@features/ui/component/Link";
+import { Chip_ } from "@features/ui/component/Chip";
 
 export const RecentSubmission: React.FC = () => {
   const { data } = useFetchRecentSubmissions();
@@ -34,7 +35,7 @@ export const RecentSubmission: React.FC = () => {
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
           />
-          <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
             <TableContainer component={Paper}>
               <Table stickyHeader>
                 <TableHead>
@@ -117,9 +118,7 @@ export const RecentSubmission: React.FC = () => {
                           <VerdictChip verdict={d.verdict} />
                         </TableCell>
                         <TableCell>
-                          <Typography variant="body2">
-                            {d.programmingLanguage}
-                          </Typography>
+                          <Chip_ label={d.programmingLanguage} />
                         </TableCell>
                         <TableCell>
                           <Typography variant="body2">

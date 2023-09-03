@@ -86,14 +86,19 @@ export const ProblemsTableRow: React.FC<Props> = ({
         </span>
       </TableCell>
       <TableCell>
-        {problem.solvedCount ? (
-          <Link
-            href={`${CF_CONTEST_URL}/${problem.contestId}/status`}
-            label={problem.solvedCount.toLocaleString()}
-          />
-        ) : (
-          <div>no data</div>
-        )}
+        <Chip_
+          onClick={() => {}}
+          label={
+            problem.solvedCount ? (
+              <Link
+                href={`${CF_CONTEST_URL}/${problem.contestId}/status`}
+                label={problem.solvedCount.toLocaleString()}
+              />
+            ) : (
+              <div>no data</div>
+            )
+          }
+        />
       </TableCell>
       <TableCell>
         <SolutionLink />

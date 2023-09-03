@@ -87,12 +87,12 @@ export const Creator: React.FC = () => {
         {showBlock && (
           <Stack
             padding={2}
+            mb={1.5}
             sx={{
               border: 1,
               borderColor: "divider",
               borderRadius: "4px",
               backgroundColor: (theme) => theme.palette.background.paper,
-              mb: 1.5,
             }}
           >
             <LabelNameChip

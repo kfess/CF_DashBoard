@@ -103,9 +103,14 @@ export const ProblemsTable: React.FC<Props> = ({
         rowsPerPage={rowsPerPage}
         setRowsPerPage={setRowsPerPage}
       />
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
         <TableContainer component={Paper}>
-          <Table stickyHeader css={{ height: "100%" }}>
+          <Table
+            sx={{
+              height: "100%",
+              border: (theme) => `0.5px solid ${theme.palette.divider}`,
+            }}
+          >
             <TableHead>
               <TableRow>
                 <TableCell>

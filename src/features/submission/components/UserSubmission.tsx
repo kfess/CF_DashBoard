@@ -22,6 +22,7 @@ import { Classification } from "@features/contests/contest";
 import { getClassification } from "@features/contests/utils/getClassification";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 import { Link } from "@features/ui/component/Link";
+import { Chip_ } from "@features/ui/component/Chip";
 
 type Props = {
   readonly userId: string;
@@ -71,7 +72,7 @@ export const UserSubmission: React.FC<Props> = ({
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
           />
-          <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
             <TableContainer component={Paper}>
               <Table stickyHeader>
                 <TableHead>
@@ -157,7 +158,9 @@ export const UserSubmission: React.FC<Props> = ({
                           <TableCell>
                             <VerdictChip verdict={d.verdict} />
                           </TableCell>
-                          <TableCell>{d.programmingLanguage}</TableCell>
+                          <TableCell>
+                            <Chip_ label={d.programmingLanguage} />
+                          </TableCell>
                           <TableCell>
                             <Typography variant="body2">
                               <Link

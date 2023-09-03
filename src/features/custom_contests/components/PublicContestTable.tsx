@@ -46,7 +46,7 @@ export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
         rowsPerPage={rowsPerPage}
         setRowsPerPage={setRowsPerPage}
       />
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
         <TableContainer component={Paper}>
           <Table stickyHeader>
             <TableHead>
