@@ -77,15 +77,8 @@ export const LabelsTable: React.FC = () => {
 
   return (
     <Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          paddingBottom: 1.5,
-        }}
-        gap={2}
-      >
-        <Box sx={{ flexGrow: 1 }}>
+      <Stack direction="row" justifyContent="flex-end" pb={1.5} gap={2}>
+        <Box flexGrow={1}>
           <FuzzySearch query={query} setQuery={setQuery} />
         </Box>
         <DropDownMenuButton
@@ -96,15 +89,12 @@ export const LabelsTable: React.FC = () => {
           selectedItem={order}
           onSelect={setOrder}
         />
-      </Box>
-      <TableContainer
-        component={Paper}
-        sx={{
-          borderColor: "divider",
-        }}
-      >
+      </Stack>
+      <TableContainer component={Paper} elevation={0}>
         <Table
-          sx={{ border: (theme) => `0.5px solid ${theme.palette.divider}` }}
+          sx={{
+            border: (theme) => `0.5px solid ${theme.palette.divider}`,
+          }}
         >
           <TableHead>
             <TableRow>
