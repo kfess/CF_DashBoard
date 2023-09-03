@@ -9,13 +9,14 @@ import {
   Typography,
   Stack,
 } from "@mui/material";
+import Divider from "@mui/material/Divider";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useTheme } from "@mui/material/styles";
 import { isMainField } from "@features/layout/helper";
 import { SearchBar } from "@features/layout/components/Search";
 import { AccountMenu } from "@features/layout/components/AccountMenu";
 import type { Field } from "@features/layout/components/SideNavigationItems";
 import { ThemeSelector } from "@features/layout/components/ThemeSelector";
+import { HeaderNavigationItems } from "./HeaderNavigationItems";
 
 // Without this offset, some part of the content to be invisible behind the header
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
@@ -33,7 +34,6 @@ export const HeaderBar: React.FC<Props> = ({
   selectedItem,
   setSelectedItem,
 }) => {
-  const theme = useTheme();
   const { pathname } = useLocation();
 
   return (
@@ -67,7 +67,8 @@ export const HeaderBar: React.FC<Props> = ({
                 noWrap
                 sx={{
                   display: { xs: "none", sm: "block" },
-                  color: theme.palette.mode === "light" ? "#000000" : "#ffffff",
+                  color: (theme) =>
+                    theme.palette.mode === "light" ? "#000000" : "#ffffff",
                 }}
               >
                 CF-DashBoard
@@ -77,6 +78,15 @@ export const HeaderBar: React.FC<Props> = ({
           <Stack direction="row" spacing={2} flexGrow={1} px={2}>
             <SearchBar visible={isMainField(pathname)} />
           </Stack>
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <HeaderNavigationItems setSelectedItem={setSelectedItem} />
+          </Box>
+          <Divider
+            orientation="vertical"
+            variant="middle"
+            flexItem
+            sx={{ mx: 1 }}
+          />
           <ThemeSelector />
           <AccountMenu />
         </Toolbar>

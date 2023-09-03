@@ -1,13 +1,11 @@
 import React, { Dispatch, SetStateAction } from "react";
-import Box from "@mui/material/Box";
-import { styled } from "@mui/system";
 import {
   ListItem,
   ListItemText,
   ListItemButton,
   ListItemIcon,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import HomeIcon from "@mui/icons-material/Home";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
@@ -31,7 +29,6 @@ import PrivacyTipOutlinedIcon from "@mui/icons-material/PrivacyTipOutlined";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useURLQuery } from "@hooks/useQueryParams";
-import { useTheme } from "@mui/material/styles";
 
 const mainField = [
   "Contests",
@@ -156,40 +153,22 @@ export const SideNavigationItem: React.FC<Props> = ({
   setSelected,
   toggleSideBar,
 }) => {
+  const navigate = useNavigate();
+
   const { queryParams } = useURLQuery();
   const userId = queryParams["userId"];
 
-  const theme = useTheme();
-
-  if (field === "Achievement" && !userId) {
-    return (
-      <Tooltip
-        title={
-          <Typography variant="body2">
-            To view the Achievement page, you must first enter the codeforces
-            user ID in the navigation bar.
-          </Typography>
-        }
-      >
-        <ListItem key={field} disablePadding>
-          <ListItemButton disabled selected={isSelected}>
-            <ListItemIcon sx={{ pr: 2 }}>
-              {isSelected ? selectedIcon : notSelectedIcon}
-            </ListItemIcon>
-            <ListItemText primary={field} sx={{ ml: "-10px" }} />
-          </ListItemButton>
-        </ListItem>
-      </Tooltip>
-    );
-  }
-
   return (
-    <NavLink
-      to={link}
-      css={{
-        color: isSelected ? theme.palette.primary.main : "inherit",
-        "&:hover": { color: theme.palette.primary.main },
-      }}
+    <Tooltip
+      title={
+        <Typography variant="body2">
+          To view the Achievement page, you must first enter the codeforces user
+          ID in the navigation bar.
+        </Typography>
+      }
+      disableHoverListener={
+        field !== "Achievement" || (field === "Achievement" && !!userId)
+      }
     >
       <ListItem key={field} disablePadding>
         <ListItemButton
@@ -197,16 +176,27 @@ export const SideNavigationItem: React.FC<Props> = ({
           onClick={() => {
             setSelected(field);
             toggleSideBar();
+            navigate(link);
           }}
+          disabled={field === "Achievement" && !userId}
         >
-          <ListItemIcon sx={{ pr: 2 }}>
-            <div css={{ color: theme.palette.primary.main }}>
-              {isSelected ? selectedIcon : notSelectedIcon}
-            </div>
+          <ListItemIcon
+            sx={{ pr: 2, color: (theme) => theme.palette.primary.main }}
+          >
+            <div>{isSelected ? selectedIcon : notSelectedIcon}</div>
           </ListItemIcon>
-          <ListItemText primary={field} sx={{ ml: "-10px" }} />
+          <ListItemText
+            primary={field}
+            sx={{
+              ml: "-10px",
+              color: isSelected
+                ? (theme) => theme.palette.primary.main
+                : "inherit",
+              "&:hover": { color: (theme) => theme.palette.primary.main },
+            }}
+          />
         </ListItemButton>
       </ListItem>
-    </NavLink>
+    </Tooltip>
   );
 };
