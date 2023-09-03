@@ -1,28 +1,21 @@
 import React from "react";
 import { IconButton as MuiIconButton } from "@mui/material";
 
-type Props = {
-  icon: React.ReactNode;
-  onClick?: () => void;
-  isRound?: boolean;
-  disabled?: boolean;
-  ariaLabel?: string;
-};
+interface Props extends React.ComponentProps<typeof MuiIconButton> {
+  readonly icon: React.ReactNode;
+  readonly isRound?: boolean;
+}
 
 export const IconButton: React.FC<Props> = ({
   icon,
-  onClick,
   isRound = false,
-  disabled = false,
-  ariaLabel,
+  ...restProps
 }) => {
   return (
     <MuiIconButton
-      onClick={onClick}
       sx={{ borderRadius: isRound ? "50%" : "4px" }}
-      aria-label={ariaLabel}
-      disabled={disabled}
       disableTouchRipple
+      {...restProps}
     >
       {icon}
     </MuiIconButton>
