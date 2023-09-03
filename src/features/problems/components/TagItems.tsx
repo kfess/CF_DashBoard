@@ -67,18 +67,18 @@ export const TagItems: React.FC<Props> = ({
           }}
         >
           {tagItems.map((tagItem) => (
-            <Box
+            <Stack
               key={tagItem.tag}
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
               sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
                 cursor: "pointer",
                 color: selectedTags.includes(tagItem.tag)
-                  ? "#9246FF"
+                  ? (theme) => theme.palette.primary.main
                   : "inherit",
                 "&:hover": {
-                  color: "#9246FF",
+                  color: (theme) => theme.palette.primary.main,
                 },
               }}
             >
@@ -89,7 +89,7 @@ export const TagItems: React.FC<Props> = ({
               >
                 {tagItem.tag} <Chip_ label={tagItem.count} />
               </span>
-            </Box>
+            </Stack>
           ))}
         </Stack>
       </Box>

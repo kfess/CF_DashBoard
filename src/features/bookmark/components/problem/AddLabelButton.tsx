@@ -151,7 +151,7 @@ export const AddLabelButton: React.FC<Props> = ({
             horizontal: "left",
           }}
         >
-          <Typography variant="body2" sx={{ p: 1.5, color: "#9246FF" }}>
+          <Typography variant="body2" p={1.5}>
             Add or Remove problem
           </Typography>
           <Divider />
@@ -164,8 +164,12 @@ export const AddLabelButton: React.FC<Props> = ({
               handleAdd={handleAdd}
             />
           ))}
-          <Typography variant="body2" sx={{ p: 1, textAlign: "center" }}>
-            <Link to="/labels">view all labels</Link>
+          <Typography variant="body2" p={1} textAlign="center">
+            <Link to="/labels">
+              <Typography sx={{ color: (theme) => theme.palette.primary.main }}>
+                view all labels
+              </Typography>
+            </Link>
           </Typography>
         </Popover>
       )}

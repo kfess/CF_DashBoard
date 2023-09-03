@@ -92,9 +92,9 @@ export const CreateContest: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Typography
         variant="h6"
+        my={2}
         sx={{
           fontWeight: "bold",
-          my: 2,
           color: "#9246FF",
           boxSizing: "border-box",
         }}
@@ -116,7 +116,7 @@ export const CreateContest: React.FC = () => {
           border: 1,
           borderColor: "divider",
           borderRadius: "4px",
-          backgroundColor: "white",
+          backgroundColor: (theme) => theme.palette.background.paper,
         }}
       >
         <Stack direction="row" alignItems="center" spacing={1}>
@@ -158,7 +158,7 @@ export const CreateContest: React.FC = () => {
           border: 1,
           borderColor: "divider",
           borderRadius: "4px",
-          backgroundColor: "white",
+          backgroundColor: (theme) => theme.palette.background.paper,
         }}
       >
         <Typography variant="h5" fontWeight="fontWeightBold">

@@ -4,7 +4,6 @@ import Box from "@mui/system/Box";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import Popover from "@mui/material/Popover";
-// import IconButton from "@mui/material/IconButton";
 import StarIcon from "@mui/icons-material/Star";
 import { Link } from "react-router-dom";
 import { ColoredCircle } from "@features/color/components/ColoredCircle";
@@ -146,7 +145,7 @@ export const AddLabelButton: React.FC<Props> = ({
             horizontal: "left",
           }}
         >
-          <Typography variant="body2" sx={{ p: 1.5, color: "#9246FF" }}>
+          <Typography variant="body2" p={1.5}>
             Add or Remove contest
           </Typography>
           <Divider />
@@ -159,8 +158,12 @@ export const AddLabelButton: React.FC<Props> = ({
               handleAdd={handleAdd}
             />
           ))}
-          <Typography variant="body2" sx={{ p: 1, textAlign: "center" }}>
-            <Link to="/labels">view all labels</Link>
+          <Typography variant="body2" p={1} textAlign="center">
+            <Link to="/labels">
+              <Typography sx={{ color: (theme) => theme.palette.primary.main }}>
+                view all labels
+              </Typography>
+            </Link>
           </Typography>
         </Popover>
       )}
