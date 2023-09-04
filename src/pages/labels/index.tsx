@@ -10,7 +10,7 @@ import { Creator as ContestLabelCreator } from "@features/bookmark/components/co
 import { LabelsTable as ContestLabelsTable } from "@features/bookmark/components/contest/LabelsTable";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel_ } from "@features/ui/component/Tabs";
+import { TabPanel } from "@features/ui/component/Tabs";
 
 export const LabelsPage: React.FC = () => {
   const [tabValue, setTabValue] = React.useState(0);
@@ -54,14 +54,14 @@ export const LabelsPage: React.FC = () => {
                 disableTouchRipple
               />
             </Tabs>
-            <TabPanel_ value={tabValue} index={0}>
+            <TabPanel value={tabValue} index={0}>
               <ProblemLabelCreator />
               <ProblemLabelsTable />
-            </TabPanel_>
-            <TabPanel_ value={tabValue} index={1}>
+            </TabPanel>
+            <TabPanel value={tabValue} index={1}>
               <ContestLabelCreator />
               <ContestLabelsTable />
-            </TabPanel_>
+            </TabPanel>
           </Grid>
         </Grid>
       </Box>

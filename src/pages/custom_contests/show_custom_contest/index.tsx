@@ -22,7 +22,7 @@ import { SocialShare } from "@features/custom_contests/components/SocialShare";
 import { TrainingStandings } from "@features/custom_contests/components/TrainingStandings";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel_ } from "@features/ui/component/Tabs";
+import { TabPanel } from "@features/ui/component/Tabs";
 
 export const ShowCustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
@@ -152,10 +152,10 @@ export const ShowCustomContestPage: React.FC = () => {
                 disableTouchRipple
               />
             </Tabs>
-            <TabPanel_ value={tabValue} index={0}>
+            <TabPanel value={tabValue} index={0}>
               <Problems problems={data.problems} />
-            </TabPanel_>
-            <TabPanel_ value={tabValue} index={1}>
+            </TabPanel>
+            <TabPanel value={tabValue} index={1}>
               <Suspense fallback={<CircularProgress />}>
                 {data.mode === "Normal" && (
                   <Standings
@@ -175,7 +175,7 @@ export const ShowCustomContestPage: React.FC = () => {
                   />
                 )}
               </Suspense>
-            </TabPanel_>
+            </TabPanel>
           </Box>
         </Container>
       )}

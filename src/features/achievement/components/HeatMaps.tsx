@@ -7,11 +7,10 @@ import { useURLQuery } from "@hooks/useQueryParams";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { HeatMap, HeatMapData } from "@features/achievement/components/HeatMap";
-// import { TabItem, Tabs } from "@features/ui/component/Tabs";
 import { List } from "@features/ui/component/List";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel_ } from "@features/ui/component/Tabs";
+import { TabPanel } from "@features/ui/component/Tabs";
 
 type Props = {
   submissions: Submission[];
@@ -191,24 +190,24 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
           disabled={!userId}
         />
       </Tabs>
-      <TabPanel_ value={tabValue} index={0}>
+      <TabPanel value={tabValue} index={0}>
         <HeatMap
           heatMapData={allSubsHeatMapData}
           heatMapContent="AllSubmissions"
         />
-      </TabPanel_>
-      <TabPanel_ value={tabValue} index={1}>
+      </TabPanel>
+      <TabPanel value={tabValue} index={1}>
         <HeatMap
           heatMapData={allACSubsHeatMapData}
           heatMapContent="AllACSubmissions"
         />
-      </TabPanel_>
-      <TabPanel_ value={tabValue} index={2}>
+      </TabPanel>
+      <TabPanel value={tabValue} index={2}>
         <HeatMap
           heatMapData={maxDifficultyHeatMapData}
           heatMapContent="MaxDifficulty"
         />
-      </TabPanel_>
+      </TabPanel>
     </Box>
   );
 };

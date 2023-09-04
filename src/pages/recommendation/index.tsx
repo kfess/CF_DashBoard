@@ -11,7 +11,7 @@ import { HeadLine } from "@features/layout/components/HeadLine";
 import { useURLQuery } from "@hooks/useQueryParams";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel_ } from "@features/ui/component/Tabs";
+import { TabPanel } from "@features/ui/component/Tabs";
 
 export const RecommendationPage: React.FC = () => {
   const { queryParams } = useURLQuery();
@@ -55,14 +55,14 @@ export const RecommendationPage: React.FC = () => {
             {data &&
               recommendLevels.map((level, index) => {
                 return (
-                  <TabPanel_ key={level} value={tabValue} index={index}>
+                  <TabPanel key={level} value={tabValue} index={index}>
                     <RecommendProblemsTable
                       key={level}
                       level={level}
                       userRating={userRating}
                       problems={data}
                     />
-                  </TabPanel_>
+                  </TabPanel>
                 );
               })}
           </Grid>

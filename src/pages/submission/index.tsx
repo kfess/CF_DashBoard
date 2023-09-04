@@ -11,7 +11,7 @@ import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { useURLQuery } from "@hooks/useQueryParams";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel_ } from "@features/ui/component/Tabs";
+import { TabPanel } from "@features/ui/component/Tabs";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 export const SubmissionPage: React.FC = () => {
@@ -79,21 +79,21 @@ export const SubmissionPage: React.FC = () => {
                 disabled={!loggedIn || !codeforcesUsername}
               />
             </Tabs>
-            <TabPanel_ value={tabValue} index={0}>
+            <TabPanel value={tabValue} index={0}>
               <Suspense fallback={<CircularProgress />}>
                 <RecentSubmissionPage />
               </Suspense>
-            </TabPanel_>
-            <TabPanel_ value={tabValue} index={1}>
+            </TabPanel>
+            <TabPanel value={tabValue} index={1}>
               <Suspense fallback={<CircularProgress />}>
                 <UserSubmissionPage userId={userId} />
               </Suspense>
-            </TabPanel_>
-            <TabPanel_ value={tabValue} index={2}>
+            </TabPanel>
+            <TabPanel value={tabValue} index={2}>
               <Suspense fallback={<CircularProgress />}>
                 <UserSubmissionPage userId={codeforcesUsername} />
               </Suspense>
-            </TabPanel_>
+            </TabPanel>
           </Grid>
         </Grid>
       </Box>

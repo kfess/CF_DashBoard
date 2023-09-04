@@ -13,7 +13,7 @@ import { AlertMessage } from "@features/ui/component/AlertDialog";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel_ } from "@features/ui/component/Tabs";
+import { TabPanel } from "@features/ui/component/Tabs";
 
 export const CustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
@@ -79,14 +79,14 @@ export const CustomContestPage: React.FC = () => {
             </Tabs>
             {createdContestTypes.map((contestType, index) => {
               return (
-                <TabPanel_ value={tabValue} index={index}>
+                <TabPanel value={tabValue} index={index}>
                   <PublicContestTable contestType={contestType} />
-                </TabPanel_>
+                </TabPanel>
               );
             })}
-            <TabPanel_ value={tabValue} index={3}>
+            <TabPanel value={tabValue} index={3}>
               <MyContestTable />
-            </TabPanel_>
+            </TabPanel>
           </Grid>
         </Grid>
       </Box>

@@ -25,7 +25,7 @@ import { isACSubmission } from "@features/achievement/processSubmission";
 import { Accuracy } from "@features/achievement/components/Accuracy";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel_ } from "@features/ui/component/Tabs";
+import { TabPanel } from "@features/ui/component/Tabs";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 export const AchievementPage: React.FC = () => {
@@ -104,7 +104,7 @@ export const AchievementPage: React.FC = () => {
                 disabled={!userId}
               />
             </Tabs>
-            <TabPanel_ value={tabValue} index={0}>
+            <TabPanel value={tabValue} index={0}>
               <Suspense fallback={<CircularProgress />}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={4}>
@@ -192,8 +192,8 @@ export const AchievementPage: React.FC = () => {
                   </Grid>
                 </Grid>
               </Suspense>
-            </TabPanel_>
-            <TabPanel_ value={tabValue} index={1}>
+            </TabPanel>
+            <TabPanel value={tabValue} index={1}>
               <Suspense fallback={<CircularProgress />}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
@@ -212,8 +212,8 @@ export const AchievementPage: React.FC = () => {
                   </Grid>
                 </Grid>
               </Suspense>
-            </TabPanel_>
-            <TabPanel_ value={tabValue} index={2}>
+            </TabPanel>
+            <TabPanel value={tabValue} index={2}>
               <Suspense fallback={<CircularProgress />}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
@@ -234,15 +234,15 @@ export const AchievementPage: React.FC = () => {
                   </Grid>
                 </Grid>
               </Suspense>
-            </TabPanel_>
+            </TabPanel>
             <Suspense fallback={<CircularProgress />}>
-              <TabPanel_ value={tabValue} index={3}>
+              <TabPanel value={tabValue} index={3}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <UserSubmissionPage userId={userId} />
                   </Grid>
                 </Grid>
-              </TabPanel_>
+              </TabPanel>
             </Suspense>
           </Grid>
         </Grid>
