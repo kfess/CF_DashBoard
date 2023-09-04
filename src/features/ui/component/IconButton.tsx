@@ -1,7 +1,7 @@
 import React from "react";
-import { IconButton as MuiIconButton } from "@mui/material";
+import { IconButton as MuiIconButton, IconButtonProps } from "@mui/material";
 
-interface Props extends React.ComponentProps<typeof MuiIconButton> {
+interface Props extends IconButtonProps {
   readonly icon: React.ReactNode;
   readonly isRound?: boolean;
 }

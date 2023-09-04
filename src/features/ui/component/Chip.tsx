@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from "react";
+import React from "react";
 import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
 
 export const Chip: React.FC<MuiChipProps> = (props: MuiChipProps) => {

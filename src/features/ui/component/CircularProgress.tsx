@@ -1,18 +1,17 @@
 import React from "react";
-import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import { CircularProgress as MUICircularProgress } from "@mui/material";
 
 export const CircularProgress: React.FC = () => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "10vh",
-      }}
+    <Stack
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
+      height="10vh"
+      color={(theme) => theme.palette.primary.main}
     >
-      <MUICircularProgress sx={{color:"#9246FF"}} />
-    </Box>
+      <MUICircularProgress />
+    </Stack>
   );
 };
