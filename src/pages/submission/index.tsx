@@ -1,14 +1,18 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { RecentSubmissionPage } from "@pages/submission/recent";
 import { UserSubmissionPage } from "@pages/submission/user/index";
-import { TabItem, Tabs } from "@features/ui/component/Tabs";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { useURLQuery } from "@hooks/useQueryParams";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import { TabPanel_ } from "@features/ui/component/Tabs";
+import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 export const SubmissionPage: React.FC = () => {
   const { queryParams } = useURLQuery();
@@ -17,26 +21,10 @@ export const SubmissionPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
   const { codeforcesUsername } = useUserProfile();
 
-  const tabItems: TabItem[] = [
-    {
-      label: "Recent Submission",
-      children: <RecentSubmissionPage />,
-      disabled: false,
-    },
-    {
-      label: `${userId ? userId : "User"}'s Submission`,
-      children: <UserSubmissionPage userId={userId} />,
-      disabled: !userId,
-    },
-    {
-      label:
-        !loggedIn || !codeforcesUsername
-          ? "My Submission"
-          : `My Submission (${codeforcesUsername})`,
-      children: <UserSubmissionPage userId={codeforcesUsername} />,
-      disabled: !loggedIn || !codeforcesUsername,
-    },
-  ];
+  const [tabValue, setTabValue] = React.useState(0);
+  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
+    setTabValue(newValue);
+  };
 
   return (
     <Container maxWidth="lg">
@@ -44,7 +32,68 @@ export const SubmissionPage: React.FC = () => {
         <HeadLine title="Submissions" />
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Tabs tabItems={tabItems} />
+            <Tabs
+              value={tabValue}
+              onChange={handleChange}
+              variant="scrollable"
+              scrollButtons="auto"
+              allowScrollButtonsMobile
+              sx={{
+                ".MuiTabs-scrollButtons.Mui-disabled": {
+                  opacity: 0.3,
+                },
+              }}
+              aria-label="Problems and Standings Tabs"
+            >
+              <Tab
+                value={0}
+                label={
+                  <Typography fontWeight="bold">Recent Submission</Typography>
+                }
+                sx={{ textTransform: "none" }}
+                disableTouchRipple
+              />
+              <Tab
+                value={1}
+                label={
+                  <Typography fontWeight="bold">
+                    {userId ? userId : "User"}'s Submission
+                  </Typography>
+                }
+                sx={{ textTransform: "none" }}
+                disableTouchRipple
+                disabled={!userId}
+              />
+              <Tab
+                value={2}
+                label={
+                  <Typography fontWeight="bold">
+                    {!loggedIn || !codeforcesUsername
+                      ? "My Submission"
+                      : `My
+                    Submission (${codeforcesUsername})`}
+                  </Typography>
+                }
+                sx={{ textTransform: "none" }}
+                disableTouchRipple
+                disabled={!loggedIn || !codeforcesUsername}
+              />
+            </Tabs>
+            <TabPanel_ value={tabValue} index={0}>
+              <Suspense fallback={<CircularProgress />}>
+                <RecentSubmissionPage />
+              </Suspense>
+            </TabPanel_>
+            <TabPanel_ value={tabValue} index={1}>
+              <Suspense fallback={<CircularProgress />}>
+                <UserSubmissionPage userId={userId} />
+              </Suspense>
+            </TabPanel_>
+            <TabPanel_ value={tabValue} index={2}>
+              <Suspense fallback={<CircularProgress />}>
+                <UserSubmissionPage userId={codeforcesUsername} />
+              </Suspense>
+            </TabPanel_>
           </Grid>
         </Grid>
       </Box>

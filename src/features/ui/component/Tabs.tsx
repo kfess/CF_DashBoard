@@ -164,7 +164,7 @@ export const TabPanel_ = (props: TabPanelProps) => {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box px={1} py={3}>
           <Typography>{children}</Typography>
         </Box>
       )}

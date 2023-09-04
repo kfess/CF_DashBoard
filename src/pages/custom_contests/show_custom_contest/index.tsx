@@ -30,7 +30,7 @@ export const ShowCustomContestPage: React.FC = () => {
 
   const params = useParams();
   const contestId = params.contestId ?? "";
-  const { data, isLoading, isError, error } = useFetchCustomContestByContestId({
+  const { data, isError, error } = useFetchCustomContestByContestId({
     contestId,
   });
 
