@@ -12,10 +12,8 @@ export const NoDataMessage: React.FC<Props> = ({ title, message }) => (
     direction="column"
     alignItems="center"
     justifyContent="center"
-    sx={{
-      minHeight: "200px",
-      color: "grey.600",
-    }}
+    minHeight="200px"
+    color="grey.600"
   >
     <Typography variant="h5" align="center">
       {title}

@@ -1,22 +1,17 @@
 import React from "react";
-import { Link as MUILink } from "@mui/material";
+import { Link as MUILink, LinkProps } from "@mui/material";
 import { useTheme } from "@mui/material";
 
-// type Props = {
-//   readonly href: string;
-//   readonly label: string;
-//   readonly color?: string;
-//   readonly backgroundColor?: string;
-// };
-
-interface Props extends React.ComponentProps<typeof MUILink> {
+interface Props extends LinkProps {
   label: React.ReactNode;
   color?: string;
+  target?: string;
 }
 
 export const ExternalLink: React.FC<Props> = ({
   label,
   color,
+  target = "_blank",
   ...restProps
 }) => {
   const theme = useTheme();
@@ -28,7 +23,7 @@ export const ExternalLink: React.FC<Props> = ({
 
   return (
     <MUILink
-      target="_blank"
+      target={target}
       rel="noopener noreferrer"
       underline="none"
       sx={{

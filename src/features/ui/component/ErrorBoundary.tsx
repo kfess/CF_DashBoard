@@ -1,5 +1,5 @@
 import React from "react";
-import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { FallbackProps } from "react-error-boundary";
@@ -12,15 +12,8 @@ export const ErrorFallback: React.FC<FallbackProps> = ({
 }: FallbackProps) => {
   return (
     <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          mt: 8,
-        }}
-      >
-        <ErrorOutlineIcon color="error" style={{ fontSize: 40 }} />
+      <Stack direction="column" alignItems="center" m={8}>
+        <ErrorOutlineIcon color="error" sx={{ fontSize: 40 }} />
         <Typography variant="h5" gutterBottom>
           Something went wrong...
         </Typography>
@@ -28,7 +21,7 @@ export const ErrorFallback: React.FC<FallbackProps> = ({
           {error.message}
         </Typography>
         <_Button onClick={resetErrorBoundary}>Try Again</_Button>
-      </Box>
+      </Stack>
     </Container>
   );
 };
