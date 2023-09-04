@@ -21,12 +21,10 @@ import type { Contest, ReshapedContest } from "@features/contests/contest";
 import { useURLQuery } from "@hooks/useQueryParams";
 
 export const ContestsPage: React.FC = () => {
-  const { queryParams } = useURLQuery();
+  const { queryParams, setURLQuery } = useURLQuery();
   const userId = queryParams["userId"];
 
   const isSmallScreen = useMediaQuery("(max-width: 600px)");
-
-  const { setURLQuery } = useURLQuery();
 
   const { data } = useFetchContests();
   const { solvedSet, attemptedSet } = useSolvedStatus();

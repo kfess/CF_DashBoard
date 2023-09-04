@@ -7,6 +7,7 @@ import type { SolvedStatus as ContestSolvedStatus } from "@features/contests/com
 import type { PeriodWord } from "@features/contests/components/PeriodFilter";
 import type { LanguageFilter } from "@features/submission/components/LanguageFilter";
 import type { VerdictFilter } from "@features/submission/submission";
+import type { RecommendLevel } from "@features/recommendation/recommend";
 
 type KnownQueryParams = {
   userId?: string;
@@ -19,6 +20,7 @@ type KnownQueryParams = {
   tags?: Tag[];
   problemSolvedStatus?: ProblemSolvedStatus;
   contestSolvedStatus?: ContestSolvedStatus;
+  level?: RecommendLevel;
 };
 
 type _QueryParams = KnownQueryParams & {
@@ -39,6 +41,7 @@ const castToQueryParams = (params: Record<string, string>): _QueryParams => {
     tags: params.tags ? (params.tags.split(",") as Tag[]) : undefined,
     problemSolvedStatus: params.solvedStatus as ProblemSolvedStatus,
     contestSolvedStatus: params.solvedStatus as ContestSolvedStatus,
+    level: params.level as RecommendLevel,
   };
 };
 

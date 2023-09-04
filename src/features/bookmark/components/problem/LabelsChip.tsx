@@ -10,11 +10,11 @@ export const LabelsChip: React.FC = () => {
 
   return (
     <Chip
+      icon={<StarBorderOutlined fontSize="small" />}
       label={<div>{labelsCount || 0} Labels</div>}
       onClick={() => {
         navigate("/labels");
       }}
-      icon={<StarBorderOutlined fontSize="small" />}
     />
   );
 };

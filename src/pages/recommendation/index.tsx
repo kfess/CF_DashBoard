@@ -11,7 +11,7 @@ import { useURLQuery } from "@hooks/useQueryParams";
 import { TabPanel, Tabs, Tab } from "@features/ui/component/Tabs";
 
 export const RecommendationPage: React.FC = () => {
-  const { queryParams } = useURLQuery();
+  const { queryParams, setURLQuery } = useURLQuery();
   const queryUserId = queryParams["userId"];
 
   const { data: userData } = useFetchUserInfo({
@@ -21,14 +21,18 @@ export const RecommendationPage: React.FC = () => {
 
   const { data } = useFetchProblems();
 
-  const [tabValue, setTabValue] = React.useState(0);
+  const index = recommendLevels.findIndex(
+    (level) => level === queryParams["level"]
+  );
+  const [tabValue, setTabValue] = React.useState(index === -1 ? 0 : index);
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
+    setURLQuery({ level: recommendLevels[newValue] });
   };
 
   return (
     <Container maxWidth="lg">
-      <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+      <Box p={{ xs: 2, md: 4 }}>
         <HeadLine title="Recommend" />
         <Grid container spacing={2}>
           <Grid item xs={12}>
