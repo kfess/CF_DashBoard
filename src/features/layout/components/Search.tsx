@@ -13,7 +13,7 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const { queryParams, setURLQuery } = useURLQuery();
+  const { queryParams, setURLQuery } = useURLQuery(pathname);
   const queryUserId = queryParams["userId"];
   const [searchUserId, setSearchUserId] = useState(queryUserId);
 
@@ -44,7 +44,7 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
         setURLQuery({ userId: normalizeSearchUser(searchUserId) });
       }
     },
-    [navigate, pathname, searchUserId]
+    [searchUserId]
   );
 
   return visible ? (

@@ -71,7 +71,7 @@ export const useURLQuery = (basePath: string = "") => {
       }
       navigate(`${basePath}?${updatedQueries.toString()}`);
     },
-    [getQueryParams]
+    [getQueryParams, basePath]
   );
 
   return {
