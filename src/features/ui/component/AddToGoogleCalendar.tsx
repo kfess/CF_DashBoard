@@ -1,19 +1,7 @@
 import React, { useMemo } from "react";
-import { css } from "@emotion/react";
+import Stack from "@mui/material/Stack";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-
-const linkStyles = css({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color: "#9246FF",
-  ":hover": {
-    color: "#9246FF",
-    textDecoration: "underline",
-  },
-});
-
-const iconStyle = css({ marginLeft: "6px", marginRight: "6px" });
+import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 type Props = {
   readonly title: string;
@@ -37,19 +25,14 @@ export const AddToGoogleCalendarLink: React.FC<Props> = ({
   }, [title, description, startDate, endDate]);
 
   return (
-    <div>
-      <a
-        href={googleCalendarUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        css={linkStyles}
-      >
-        <CalendarMonthIcon
-          css={iconStyle}
-          aria-label="Add to Google Calendar"
-        />
-        <span>Add to Google Calendar</span>
-      </a>
-    </div>
+    <ExternalLink
+      href={googleCalendarUrl}
+      label={
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <CalendarMonthIcon aria-label="Add to Google Calendar" />
+          <span>Add to Google Calendar</span>
+        </Stack>
+      }
+    />
   );
 };

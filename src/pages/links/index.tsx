@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useTheme } from "@mui/material";
-import { Link } from "@features/ui/component/Link";
+import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 type Resource = {
   readonly title: string;
@@ -112,7 +112,7 @@ const LinksPage: React.FC = () => {
             >
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography variant="h5" gutterBottom>
-                  <Link
+                  <ExternalLink
                     href={resource.url}
                     label={resource.title}
                     color={theme.palette.primary.main}
@@ -148,7 +148,7 @@ const LinksPage: React.FC = () => {
             >
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography variant="h5" gutterBottom>
-                  <Link
+                  <ExternalLink
                     href={resource.url}
                     label={resource.title}
                     color={theme.palette.primary.main}

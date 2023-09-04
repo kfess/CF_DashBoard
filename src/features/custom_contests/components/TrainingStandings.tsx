@@ -17,6 +17,7 @@ import { pluralize } from "@helpers/format";
 import { getProblemKey } from "@features/problems/utils";
 import { calculateAllUsersStats } from "@features/custom_contests/utils/calculateTrainingStandings";
 import { Chip_ } from "@features/ui/component/Chip";
+import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 const BLOCK_WIDTH = 14;
 
@@ -74,7 +75,6 @@ export const TrainingStandings: React.FC<Props> = ({
                     border: (theme) => `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
-                    padding: "0px",
                   }}
                 >
                   rank
@@ -84,7 +84,6 @@ export const TrainingStandings: React.FC<Props> = ({
                     border: (theme) => `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
-                    padding: "0px",
                   }}
                 >
                   Participants
@@ -94,7 +93,6 @@ export const TrainingStandings: React.FC<Props> = ({
                     border: (theme) => `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
-                    padding: "0px",
                   }}
                 >
                   Score
@@ -132,16 +130,10 @@ export const TrainingStandings: React.FC<Props> = ({
                         padding: "6px",
                       }}
                     >
-                      <a
+                      <ExternalLink
                         href={`${CF_PROFILE_URL}/${participant}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        css={{
-                          textDecoration: "none",
-                        }}
-                      >
-                        {participant}
-                      </a>
+                        label={participant}
+                      />
                     </TableCell>
                     <TableCell
                       sx={{
@@ -183,7 +175,7 @@ export const TrainingStandings: React.FC<Props> = ({
                               arrow
                               enterTouchDelay={0}
                             >
-                              <a
+                              <ExternalLink
                                 href={`${
                                   problem.contestId! >= 100001
                                     ? CF_GYM_URL
@@ -191,23 +183,22 @@ export const TrainingStandings: React.FC<Props> = ({
                                 }/${problem.contestId}/problem/${
                                   problem.index
                                 }`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <rect
-                                  x={j * (BLOCK_WIDTH + 1)}
-                                  y={0}
-                                  width={BLOCK_WIDTH}
-                                  height={BLOCK_WIDTH}
-                                  fill={
-                                    isAC
-                                      ? "#4caf50"
-                                      : isAttempted
-                                      ? "#EFA41C"
-                                      : "#e0e0e0"
-                                  }
-                                />
-                              </a>
+                                label={
+                                  <rect
+                                    x={j * (BLOCK_WIDTH + 1)}
+                                    y={0}
+                                    width={BLOCK_WIDTH}
+                                    height={BLOCK_WIDTH}
+                                    fill={
+                                      isAC
+                                        ? "#4caf50"
+                                        : isAttempted
+                                        ? "#EFA41C"
+                                        : "#e0e0e0"
+                                    }
+                                  />
+                                }
+                              />
                             </Tooltip>
                           );
                         })}

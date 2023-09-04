@@ -13,7 +13,7 @@ import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { Chip_ } from "@features/ui/component/Chip";
 import { useTheme } from "@mui/material";
 import { CF_CONTEST_URL } from "@constants/url";
-import { Link } from "@features/ui/component/Link";
+import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 type Props = {
   readonly problem: Problem;
@@ -90,7 +90,7 @@ export const ProblemsTableRow: React.FC<Props> = ({
           onClick={() => {}}
           label={
             problem.solvedCount ? (
-              <Link
+              <ExternalLink
                 href={`${CF_CONTEST_URL}/${problem.contestId}/status`}
                 label={problem.solvedCount.toLocaleString()}
               />

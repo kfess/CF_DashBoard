@@ -9,6 +9,7 @@ import {
 } from "@features/color/ratingColor";
 import { UserInfo } from "@features/layout/userInfo";
 import { CF_PROFILE_URL } from "@constants/url";
+import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 type Props = {
   userInfo?: UserInfo;
@@ -19,7 +20,7 @@ export const Profile: React.FC<Props> = ({ userInfo }) => {
   const userColor = getColorCodeFromRating(userInfo?.rating);
 
   return (
-    <Box sx={{ p: 1, marginBottom: 1 }}>
+    <Box mb={1}>
       <Box sx={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
         <ProfileIcon avatarUrl={userInfo?.avatar} />
         <Box sx={{ marginLeft: 2 }}>
@@ -32,18 +33,12 @@ export const Profile: React.FC<Props> = ({ userInfo }) => {
                 color={userColor}
                 fillPercent={calcFillPercent(userInfo?.rating)}
               />
-              <Box sx={{ marginLeft: 1 }}>
-                <a
+              <Box ml={1}>
+                <ExternalLink
                   href={`${CF_PROFILE_URL}/${userInfo?.handle}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  css={{
-                    textDecoration: "none",
-                    color: userColor,
-                  }}
-                >
-                  {userInfo?.handle}
-                </a>
+                  label={userInfo?.handle}
+                  color={userColor}
+                />
               </Box>
             </Box>
           </Typography>

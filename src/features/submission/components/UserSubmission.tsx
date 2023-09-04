@@ -21,7 +21,7 @@ import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 import { Classification } from "@features/contests/contest";
 import { getClassification } from "@features/contests/utils/getClassification";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
-import { Link } from "@features/ui/component/Link";
+import { ExternalLink } from "@features/ui/component/ExternalLink";
 import { Chip_ } from "@features/ui/component/Chip";
 
 type Props = {
@@ -153,7 +153,7 @@ export const UserSubmission: React.FC<Props> = ({
                           </TableCell>
                           <TableCell>
                             <Typography variant="body2">
-                              <Link
+                              <ExternalLink
                                 href={`https://codeforces.com/profile/${d.author.members[0].handle}`}
                                 label={d.author.members[0].handle}
                               />
@@ -167,7 +167,7 @@ export const UserSubmission: React.FC<Props> = ({
                           </TableCell>
                           <TableCell>
                             <Typography variant="body2">
-                              <Link
+                              <ExternalLink
                                 href={`https://codeforces.com/contest/${d.contestId}/submission/${d.id}`}
                                 label="detail"
                               />

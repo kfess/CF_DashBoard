@@ -5,7 +5,7 @@ import { TopcoderLikeCircle } from "@features/color/components/TopCoderLikeCircl
 import { CF_CONTEST_URL, CF_GYM_URL } from "@constants/url";
 import { useTheme } from "@mui/material";
 import { AddLabelButton } from "@features/bookmark/components/problem/AddLabelButton";
-import { Link } from "@features/ui/component/Link";
+import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 type Props = {
   readonly showDifficulty: boolean;
@@ -43,7 +43,7 @@ export const ProblemLink: React.FC<Props> = ({
           solvedCount={solvedCount}
         />
       )}
-      <Link
+      <ExternalLink
         href={problemUrl}
         label={`${problemId}. ${problemName}`}
         color={

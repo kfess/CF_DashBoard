@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Menu from "@mui/material/Menu";
@@ -22,6 +22,7 @@ import {
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { Box } from "@mui/material";
 import { IconButton } from "@features/ui/component/IconButton";
+import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 export type AccountMenuItem = {
   icon: React.ReactNode;
@@ -161,26 +162,16 @@ export const AccountMenu: React.FC = () => {
             component="div"
           >
             {item.isExternal ? (
-              <a
+              <ExternalLink
                 href={item.to}
-                target="_blank"
-                rel="noopener noreferrer"
-                css={{
-                  display: "flex",
-                  alignItems: "center",
-                  textDecoration: "none",
-                  color: "inherit",
-                  "&:hover": {
-                    color: "#9246FF",
-                  },
-                }}
-              >
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <Stack direction="row" alignItems="center" spacing={0.5}>
-                  <Box>{item.title}</Box>
-                  <LaunchIcon fontSize="small" />
-                </Stack>
-              </a>
+                label={
+                  <Stack direction="row" alignItems="center">
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <Box pr={0.5}>{item.title}</Box>
+                    <LaunchIcon fontSize="small" />
+                  </Stack>
+                }
+              />
             ) : (
               <NavLink
                 to={item.to}

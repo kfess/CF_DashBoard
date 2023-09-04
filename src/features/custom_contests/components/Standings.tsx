@@ -21,6 +21,7 @@ import { CF_CONTEST_URL, CF_PROFILE_URL } from "@constants/url";
 import { getProblemKey } from "@features/problems/utils";
 import { secondsToHms } from "@helpers/date";
 import { pluralize } from "@helpers/format";
+import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 type Props = {
   readonly participants: string[];
@@ -130,14 +131,10 @@ export const Standings: React.FC<Props> = ({
                       padding: "0px",
                     }}
                   >
-                    <a
-                      rel="noopener noreferrer"
-                      target="_blank"
+                    <ExternalLink
                       href={`${CF_CONTEST_URL}/${problem.contestId}/problem/${problem.index}`}
-                    >
-                      {idx + 1}
-                    </a>
-
+                      label={idx + 1}
+                    />
                     <Typography variant="body2" color="text.secondary">
                       {problem.rating}
                     </Typography>
@@ -180,16 +177,10 @@ export const Standings: React.FC<Props> = ({
                         }}
                       >
                         <Typography variant="body1" fontWeight="fontWeightBold">
-                          <a
+                          <ExternalLink
                             href={`${CF_PROFILE_URL}/${participant}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            css={{
-                              textDecoration: "none",
-                            }}
-                          >
-                            {participant}
-                          </a>
+                            label={participant}
+                          />
                         </Typography>
                       </TableCell>
                       <TableCell

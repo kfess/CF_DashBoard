@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import type { Classification } from "@features/contests/contest";
 import { CF_CONTEST_URL } from "@constants/url";
 import { AddLabelButton } from "@features/bookmark/components/contest/AddLabelButton";
-import { Link } from "@features/ui/component/Link";
+import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 type Props = {
   readonly contestId: number;
@@ -20,7 +20,10 @@ export const ContestLink: React.FC<Props> = ({
 }) => {
   return (
     <Stack direction="row" spacing={1} alignItems="center">
-      <Link href={`${CF_CONTEST_URL}/${contestId}`} label={contestName} />
+      <ExternalLink
+        href={`${CF_CONTEST_URL}/${contestId}`}
+        label={contestName}
+      />
       {showBookmarked && (
         <AddLabelButton
           contestId={contestId}

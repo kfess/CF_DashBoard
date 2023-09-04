@@ -12,6 +12,7 @@ import {
 import { generateUrlPath } from "@features/layout/helper";
 import { useURLQuery } from "@hooks/useQueryParams";
 import { IconButton } from "@features/ui/component/IconButton";
+import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 type Props = {
   isOpenSideBar: boolean;
@@ -49,25 +50,23 @@ export const SideNavigationBar: React.FC<Props> = ({
             aria-label="menu"
             sx={{ mr: 1 }}
           />
-
-          <a href="/" rel="noopener noreferrer">
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              onClick={() => {
-                setSelectedItem("Contests");
-                toggleSideBar();
-              }}
-              sx={{
-                display: { xs: "none", sm: "block" },
-                color: (theme) =>
-                  theme.palette.mode === "light" ? "#000000" : "#ffffff",
-              }}
-            >
-              CF-DashBoard
-            </Typography>
-          </a>
+          <ExternalLink
+            href="/"
+            label={<Typography variant="h6">CF-DashBoard</Typography>}
+            noWrap
+            onClick={() => {
+              setSelectedItem("Contests");
+            }}
+            sx={{
+              display: { xs: "none", sm: "block" },
+              color: (theme) =>
+                theme.palette.mode === "light" ? "#000000" : "#ffffff",
+              "&:hover": {
+                textDecoration: "none",
+                color: (theme) => theme.palette.primary.main,
+              },
+            }}
+          />
         </Toolbar>
         <Divider />
         <List>

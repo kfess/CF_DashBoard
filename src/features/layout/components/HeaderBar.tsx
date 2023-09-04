@@ -11,6 +11,7 @@ import type { Field } from "@features/layout/components/SideNavigationItems";
 import { ThemeSelector } from "@features/layout/components/ThemeSelector";
 import { HeaderNavigationItems } from "./HeaderNavigationItems";
 import { IconButton } from "@features/ui/component/IconButton";
+import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 // Without this offset, some part of the content to be invisible behind the header
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
@@ -50,23 +51,23 @@ export const HeaderBar: React.FC<Props> = ({
               onClick={() => toggleSideBar(!isOpenSideBar)}
               sx={{ mr: 1 }}
             />
-            <a href="/" rel="noopener noreferrer">
-              <Typography
-                variant="h6"
-                component="div"
-                onClick={() => {
-                  setSelectedItem("Contests");
-                }}
-                noWrap
-                sx={{
-                  display: { xs: "none", sm: "block" },
-                  color: (theme) =>
-                    theme.palette.mode === "light" ? "#000000" : "#ffffff",
-                }}
-              >
-                CF-DashBoard
-              </Typography>
-            </a>
+            <ExternalLink
+              href="/"
+              label={<Typography variant="h6">CF-DashBoard</Typography>}
+              noWrap
+              onClick={() => {
+                setSelectedItem("Contests");
+              }}
+              sx={{
+                display: { xs: "none", sm: "block" },
+                color: (theme) =>
+                  theme.palette.mode === "light" ? "#000000" : "#ffffff",
+                "&:hover": {
+                  textDecoration: "none",
+                  color: (theme) => theme.palette.primary.main,
+                },
+              }}
+            />
           </Box>
           <Stack direction="row" spacing={2} flexGrow={1} px={2}>
             <SearchBar visible={isMainField(pathname)} />
