@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { alpha } from "@mui/material";
 import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
+import { Chip } from "@features/ui/component/Chip";
 
 type Mode = "Preview" | "View";
 type Props = {
@@ -23,7 +23,6 @@ export const LabelNameChip: React.FC<Props> = ({
       {mode === "Preview" ? (
         <Chip
           label={<div>{name.trim().length > 0 ? name : "Label Preview"}</div>}
-          size="small"
           css={{
             color: color,
             borderColor: "black",
@@ -34,7 +33,6 @@ export const LabelNameChip: React.FC<Props> = ({
       ) : (
         <Chip
           label={<div>{name.trim().length > 0 ? name : "Label Preview"}</div>}
-          size="small"
           css={{
             color: color,
             borderColor: "black",

@@ -1,5 +1,5 @@
 import React from "react";
-import Chip from "@mui/material/Chip";
+import { Chip } from "@features/ui/component/Chip";
 import type { Verdict } from "@features/submission/submission";
 import { verdicts } from "@features/submission/submission";
 
@@ -18,9 +18,6 @@ export const VerdictChip: React.FC<Props> = ({ verdict }) => {
             : "warning"
           : "default"
       }
-      variant="filled"
-      size="small"
-      onClick={() => {}}
     />
   );
 };
