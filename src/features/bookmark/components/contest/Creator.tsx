@@ -80,7 +80,7 @@ export const Creator: React.FC = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ py: 1, display: "flex", justifyContent: "flex-end" }}>
-          <_Button onClick={toggleShowBlock} color={theme.palette.primary.main}>
+          <_Button onClick={toggleShowBlock} color={theme.palette.primary.dark}>
             New Label
           </_Button>
         </Box>
