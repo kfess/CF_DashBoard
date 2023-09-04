@@ -7,8 +7,11 @@ import { useURLQuery } from "@hooks/useQueryParams";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { HeatMap, HeatMapData } from "@features/achievement/components/HeatMap";
-import { TabItem, Tabs } from "@features/ui/component/Tabs";
+// import { TabItem, Tabs } from "@features/ui/component/Tabs";
 import { List } from "@features/ui/component/List";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import { TabPanel_ } from "@features/ui/component/Tabs";
 
 type Props = {
   submissions: Submission[];
@@ -133,41 +136,13 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
     [submissions, yearMode, selectedYear]
   );
 
-  const tabItems: TabItem[] = [
-    {
-      label: "All Submission",
-      children: (
-        <HeatMap
-          heatMapData={allSubsHeatMapData}
-          heatMapContent="AllSubmissions"
-        />
-      ),
-      disabled: false,
-    },
-    {
-      label: "All AC Submission",
-      children: (
-        <HeatMap
-          heatMapData={allACSubsHeatMapData}
-          heatMapContent="AllACSubmissions"
-        />
-      ),
-      disabled: false,
-    },
-    {
-      label: "Max Difficulty",
-      children: (
-        <HeatMap
-          heatMapData={maxDifficultyHeatMapData}
-          heatMapContent="MaxDifficulty"
-        />
-      ),
-      disabled: false,
-    },
-  ];
+  const [tabValue, setTabValue] = React.useState(0);
+  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
+    setTabValue(newValue);
+  };
 
   return (
-    <Box sx={{ p: 1 }}>
+    <Box p={1}>
       <Typography variant="h6" gutterBottom>
         Heat Map
       </Typography>
@@ -181,7 +156,59 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
           selected: year === selectedYear,
         }))}
       />
-      <Tabs tabItems={tabItems} />
+      <Tabs
+        value={tabValue}
+        onChange={handleChange}
+        variant="scrollable"
+        scrollButtons="auto"
+        allowScrollButtonsMobile
+        sx={{
+          ".MuiTabs-scrollButtons.Mui-disabled": {
+            opacity: 0.3,
+          },
+        }}
+        aria-label="Problems and Standings Tabs"
+      >
+        <Tab
+          value={0}
+          label={<Typography fontWeight="bold">All Submission</Typography>}
+          sx={{ textTransform: "none" }}
+          disableTouchRipple
+          disabled={!userId}
+        />
+        <Tab
+          value={1}
+          label={<Typography fontWeight="bold">All AC Submission</Typography>}
+          sx={{ textTransform: "none" }}
+          disableTouchRipple
+          disabled={!userId}
+        />
+        <Tab
+          value={2}
+          label={<Typography fontWeight="bold">Max Difficulty</Typography>}
+          sx={{ textTransform: "none" }}
+          disableTouchRipple
+          disabled={!userId}
+        />
+      </Tabs>
+      <TabPanel_ value={tabValue} index={0}>
+        <HeatMap
+          heatMapData={allSubsHeatMapData}
+          heatMapContent="AllSubmissions"
+        />
+      </TabPanel_>
+      <TabPanel_ value={tabValue} index={1}>
+        <HeatMap
+          heatMapData={allACSubsHeatMapData}
+          heatMapContent="AllACSubmissions"
+        />
+      </TabPanel_>
+      <TabPanel_ value={tabValue} index={2}>
+        <HeatMap
+          heatMapData={maxDifficultyHeatMapData}
+          heatMapContent="MaxDifficulty"
+        />
+      </TabPanel_>
     </Box>
   );
 };
