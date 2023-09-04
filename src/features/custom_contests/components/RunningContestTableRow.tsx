@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React from "react";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { alpha } from "@mui/material";
 import { utcISOStringToLocal } from "@helpers/date";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -28,9 +29,11 @@ export const RunningContestTableRow: React.FC<Props> = ({ customContest }) => {
   return (
     <TableRow hover>
       <TableCell>
-        <Stack direction="row" spacing={0.5} >
+        <Stack direction="row" spacing={0.5}>
           <NavLink to={`/custom-contest/show/${customContest.contestId}`}>
-            {customContest.title}
+            <Typography sx={{ color: (theme) => theme.palette.text.secondary }}>
+              {customContest.title}
+            </Typography>
           </NavLink>
           <Chip_
             label={customContest.visibility}

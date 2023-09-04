@@ -21,8 +21,12 @@ export const LabeledContests: React.FC<Props> = ({ label }) => {
   const { deleteContestFromLabel } = useIndexedDBForContestLabel();
 
   return (
-    <TableContainer component={Paper}>
-      <Table>
+    <TableContainer component={Paper} elevation={0}>
+      <Table
+        sx={{
+          border: (theme) => `0.5px solid ${theme.palette.divider}`,
+        }}
+      >
         <TableHead>
           <TableRow>
             <TableCell>
