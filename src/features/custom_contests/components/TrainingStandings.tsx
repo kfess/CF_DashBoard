@@ -52,8 +52,6 @@ export const TrainingStandings: React.FC<Props> = ({
     return calculateAllUsersStats(submissionsByUser, problems);
   }, [submissionsByUser]);
 
-  console.log(submissionsByUser);
-
   return (
     <>
       <Typography variant="subtitle1" component="div" gutterBottom>
@@ -61,15 +59,19 @@ export const TrainingStandings: React.FC<Props> = ({
         {numParticipants > 1 ? "are " : "is "}
         participating in this contest.
       </Typography>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
         <TableContainer component={Paper}>
-          <Table stickyHeader>
+          <Table
+            sx={{
+              height: "100%",
+              border: (theme) => `0.5px solid ${theme.palette.divider}`,
+            }}
+          >
             <TableHead>
               <TableRow hover>
                 <TableCell
                   sx={{
-                    borderRight: "1px solid rgba(224, 224, 224, 1)",
-                    borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
                     padding: "0px",
@@ -79,8 +81,7 @@ export const TrainingStandings: React.FC<Props> = ({
                 </TableCell>
                 <TableCell
                   sx={{
-                    borderRight: "1px solid rgba(224, 224, 224, 1)",
-                    borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
                     padding: "0px",
@@ -90,8 +91,7 @@ export const TrainingStandings: React.FC<Props> = ({
                 </TableCell>
                 <TableCell
                   sx={{
-                    borderRight: "1px solid rgba(224, 224, 224, 1)",
-                    borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
                     padding: "0px",
@@ -101,8 +101,7 @@ export const TrainingStandings: React.FC<Props> = ({
                 </TableCell>
                 <TableCell
                   sx={{
-                    borderRight: "1px solid rgba(224, 224, 224, 1)",
-                    borderBottom: "2px solid rgba(224, 224, 224, 1)",
+                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
                     padding: "0px",
@@ -118,7 +117,8 @@ export const TrainingStandings: React.FC<Props> = ({
                   <TableRow hover key={participant}>
                     <TableCell
                       sx={{
-                        borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        border: (theme) =>
+                          `0.5px solid ${theme.palette.divider}`,
                         textAlign: "center",
                         padding: "0px",
                       }}
@@ -127,7 +127,8 @@ export const TrainingStandings: React.FC<Props> = ({
                     </TableCell>
                     <TableCell
                       sx={{
-                        borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        border: (theme) =>
+                          `0.5px solid ${theme.palette.divider}`,
                         padding: "6px",
                       }}
                     >
@@ -144,7 +145,8 @@ export const TrainingStandings: React.FC<Props> = ({
                     </TableCell>
                     <TableCell
                       sx={{
-                        borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        border: (theme) =>
+                          `0.5px solid ${theme.palette.divider}`,
                         textAlign: "center",
                         padding: "2px",
                       }}
@@ -160,7 +162,8 @@ export const TrainingStandings: React.FC<Props> = ({
                     </TableCell>
                     <TableCell
                       sx={{
-                        borderRight: "1px solid rgba(224, 224, 224, 1)",
+                        border: (theme) =>
+                          `0.5px solid ${theme.palette.divider}`,
                         padding: "8px",
                       }}
                     >

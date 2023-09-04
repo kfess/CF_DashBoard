@@ -40,9 +40,14 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
           />
-          <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
             <TableContainer component={Paper}>
-              <Table stickyHeader>
+              <Table
+                sx={{
+                  height: "100%",
+                  border: (theme) => `0.5px solid ${theme.palette.divider}`,
+                }}
+              >
                 <TableHead>
                   <TableRow hover>
                     <TableCell>Problem</TableCell>

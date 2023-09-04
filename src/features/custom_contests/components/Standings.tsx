@@ -81,9 +81,14 @@ export const Standings: React.FC<Props> = ({
         {numParticipants > 1 ? "are " : "is "}
         participating in this contest.
       </Typography>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
         <TableContainer component={Paper}>
-          <Table stickyHeader>
+          <Table
+            sx={{
+              height: "100%",
+              border: (theme) => `0.5px solid ${theme.palette.divider}`,
+            }}
+          >
             <TableHead>
               <TableRow hover>
                 <TableCell
@@ -296,9 +301,7 @@ export const Standings: React.FC<Props> = ({
                         <Typography
                           variant="body2"
                           color="text.secondary"
-                          css={{
-                            textAlign: "center",
-                          }}
+                          textAlign="center"
                         >
                           -
                         </Typography>

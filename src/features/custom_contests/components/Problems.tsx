@@ -17,7 +17,12 @@ export const Problems: React.FC<Props> = ({ problems }) => {
     <>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer component={Paper}>
-          <Table stickyHeader>
+          <Table
+            sx={{
+              height: "100%",
+              border: (theme) => `0.5px solid ${theme.palette.divider}`,
+            }}
+          >
             <TableHead>
               <TableRow hover>
                 <TableCell>
