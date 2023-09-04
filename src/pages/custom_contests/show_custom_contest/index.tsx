@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { useParams } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -38,10 +38,6 @@ export const ShowCustomContestPage: React.FC = () => {
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
-
-  if (isLoading) {
-    return <CircularProgress />;
-  }
 
   if (isError) {
     return (
@@ -160,22 +156,25 @@ export const ShowCustomContestPage: React.FC = () => {
               <Problems problems={data.problems} />
             </TabPanel_>
             <TabPanel_ value={tabValue} index={1}>
-              {data.mode === "Normal" ? (
-                <Standings
-                  participants={data.participants}
-                  problems={data.problems}
-                  startDate={data.startDate}
-                  endDate={data.endDate}
-                  penalty={data.penalty}
-                />
-              ) : (
-                <TrainingStandings
-                  participants={data.participants}
-                  problems={data.problems}
-                  startDate={data.startDate}
-                  endDate={data.endDate}
-                />
-              )}
+              <Suspense fallback={<CircularProgress />}>
+                {data.mode === "Normal" && (
+                  <Standings
+                    participants={data.participants}
+                    problems={data.problems}
+                    startDate={data.startDate}
+                    endDate={data.endDate}
+                    penalty={data.penalty}
+                  />
+                )}
+                {data.mode === "Training" && (
+                  <TrainingStandings
+                    participants={data.participants}
+                    problems={data.problems}
+                    startDate={data.startDate}
+                    endDate={data.endDate}
+                  />
+                )}
+              </Suspense>
             </TabPanel_>
           </Box>
         </Container>
