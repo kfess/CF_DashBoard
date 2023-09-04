@@ -23,9 +23,8 @@ import { UserSubmissionPage } from "@pages/submission/user/index";
 import { HeatMaps } from "@features/achievement/components/HeatMaps";
 import { isACSubmission } from "@features/achievement/processSubmission";
 import { Accuracy } from "@features/achievement/components/Accuracy";
-import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel } from "@features/ui/component/Tabs";
+import { TabPanel, Tabs } from "@features/ui/component/Tabs";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 export const AchievementPage: React.FC = () => {
@@ -63,14 +62,6 @@ export const AchievementPage: React.FC = () => {
             <Tabs
               value={tabValue}
               onChange={handleChange}
-              variant="scrollable"
-              scrollButtons="auto"
-              allowScrollButtonsMobile
-              sx={{
-                ".MuiTabs-scrollButtons.Mui-disabled": {
-                  opacity: 0.3,
-                },
-              }}
               aria-label="Problems and Standings Tabs"
             >
               <Tab

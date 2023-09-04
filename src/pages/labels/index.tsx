@@ -8,9 +8,8 @@ import { Creator as ProblemLabelCreator } from "@features/bookmark/components/pr
 import { LabelsTable as ProblemLabelsTable } from "@features/bookmark/components/problem/LabelsTable";
 import { Creator as ContestLabelCreator } from "@features/bookmark/components/contest/Creator";
 import { LabelsTable as ContestLabelsTable } from "@features/bookmark/components/contest/LabelsTable";
-import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel } from "@features/ui/component/Tabs";
+import { TabPanel, Tabs } from "@features/ui/component/Tabs";
 
 export const LabelsPage: React.FC = () => {
   const [tabValue, setTabValue] = React.useState(0);
@@ -27,14 +26,6 @@ export const LabelsPage: React.FC = () => {
             <Tabs
               value={tabValue}
               onChange={handleChange}
-              variant="scrollable"
-              scrollButtons="auto"
-              allowScrollButtonsMobile
-              sx={{
-                ".MuiTabs-scrollButtons.Mui-disabled": {
-                  opacity: 0.3,
-                },
-              }}
               aria-label="Problems and Standings Tabs"
             >
               <Tab

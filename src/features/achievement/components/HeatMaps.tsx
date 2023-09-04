@@ -8,9 +8,8 @@ import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { HeatMap, HeatMapData } from "@features/achievement/components/HeatMap";
 import { List } from "@features/ui/component/List";
-import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel } from "@features/ui/component/Tabs";
+import { TabPanel, Tabs } from "@features/ui/component/Tabs";
 
 type Props = {
   submissions: Submission[];
@@ -158,14 +157,7 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
       <Tabs
         value={tabValue}
         onChange={handleChange}
-        variant="scrollable"
-        scrollButtons="auto"
-        allowScrollButtonsMobile
-        sx={{
-          ".MuiTabs-scrollButtons.Mui-disabled": {
-            opacity: 0.3,
-          },
-        }}
+        addScrollButtons={true}
         aria-label="Problems and Standings Tabs"
       >
         <Tab

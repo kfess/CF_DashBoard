@@ -9,9 +9,8 @@ import { recommendLevels } from "@features/recommendation/recommend";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { useURLQuery } from "@hooks/useQueryParams";
-import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel } from "@features/ui/component/Tabs";
+import { TabPanel, Tabs } from "@features/ui/component/Tabs";
 
 export const RecommendationPage: React.FC = () => {
   const { queryParams } = useURLQuery();

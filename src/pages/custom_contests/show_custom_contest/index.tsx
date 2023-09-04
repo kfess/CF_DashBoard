@@ -20,9 +20,8 @@ import { HeadLine } from "@features/layout/components/HeadLine";
 import { utcISOStringToLocal } from "@helpers/date";
 import { SocialShare } from "@features/custom_contests/components/SocialShare";
 import { TrainingStandings } from "@features/custom_contests/components/TrainingStandings";
-import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel } from "@features/ui/component/Tabs";
+import { TabPanel, Tabs } from "@features/ui/component/Tabs";
 
 export const ShowCustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();

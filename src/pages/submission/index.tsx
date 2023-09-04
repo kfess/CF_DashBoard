@@ -9,9 +9,8 @@ import { HeadLine } from "@features/layout/components/HeadLine";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { useURLQuery } from "@hooks/useQueryParams";
-import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { TabPanel } from "@features/ui/component/Tabs";
+import { TabPanel, Tabs } from "@features/ui/component/Tabs";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 export const SubmissionPage: React.FC = () => {
@@ -35,14 +34,6 @@ export const SubmissionPage: React.FC = () => {
             <Tabs
               value={tabValue}
               onChange={handleChange}
-              variant="scrollable"
-              scrollButtons="auto"
-              allowScrollButtonsMobile
-              sx={{
-                ".MuiTabs-scrollButtons.Mui-disabled": {
-                  opacity: 0.3,
-                },
-              }}
               aria-label="Problems and Standings Tabs"
             >
               <Tab

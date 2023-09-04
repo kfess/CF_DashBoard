@@ -1,5 +1,30 @@
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { Tabs as MUITabs, TabsProps as MUITabsProps } from "@mui/material";
+
+interface TabsProps extends MUITabsProps {
+  addScrollButtons?: boolean;
+}
+
+export const Tabs = ({ addScrollButtons = false, ...props }: TabsProps) => {
+  return (
+    <MUITabs
+      variant={addScrollButtons ? "scrollable" : "standard"}
+      scrollButtons={addScrollButtons ? "auto" : undefined}
+      allowScrollButtonsMobile={addScrollButtons}
+      sx={
+        addScrollButtons
+          ? {
+              ".MuiTabs-scrollButtons.Mui-disabled": {
+                opacity: 0.3,
+              },
+            }
+          : undefined
+      }
+      {...props}
+    />
+  );
+};
 
 type TabPanelProps = {
   children?: React.ReactNode;
