@@ -114,8 +114,8 @@ export const AccountMenu: React.FC = () => {
     <>
       <IconButton
         icon={<AccountCircleIcon fontSize="large" />}
+        isRound={true}
         onClick={handleClick}
-        disableTouchRipple
         aria-controls={open ? "account-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}

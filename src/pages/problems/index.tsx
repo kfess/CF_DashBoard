@@ -48,7 +48,7 @@ export const ProblemsPage: React.FC = () => {
       <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
         <HeadLine title="Difficulty Table" />
         {problems && (
-          <Grid container spacing={2}>
+          <Grid container spacing={2} mb={3}>
             <Grid item xs={12}>
               <DifficultyStatus problems={problems} />
             </Grid>

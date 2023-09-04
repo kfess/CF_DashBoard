@@ -103,11 +103,12 @@ const LinksPage: React.FC = () => {
         {contestResources.map((resource, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Card
+              elevation={0}
               sx={{
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                borderRadius: 2,
+                border: `1px solid ${theme.palette.divider}`,
               }}
             >
               <CardContent sx={{ flexGrow: 1 }}>
@@ -129,21 +130,16 @@ const LinksPage: React.FC = () => {
           Useful Resources
         </Typography>
       </Box>
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          marginBottom: "2rem",
-        }}
-      >
+      <Grid container spacing={2} mb={2}>
         {usefulResources.map((resource, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Card
+              elevation={0}
               sx={{
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                borderRadius: 2,
+                border: `1px solid ${theme.palette.divider}`,
               }}
             >
               <CardContent sx={{ flexGrow: 1 }}>
