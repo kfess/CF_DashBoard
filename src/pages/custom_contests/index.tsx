@@ -2,7 +2,6 @@ import React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { _Button } from "@features/ui/component/Button";
 import { createdContestTypes } from "@features/custom_contests/customContest";
 import { PublicContestTable } from "@features/custom_contests/components/PublicContestTable";
@@ -11,8 +10,7 @@ import { NavLink } from "react-router-dom";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { AlertMessage } from "@features/ui/component/AlertDialog";
 import { HeadLine } from "@features/layout/components/HeadLine";
-import Tab from "@mui/material/Tab";
-import { TabPanel, Tabs } from "@features/ui/component/Tabs";
+import { TabPanel, Tabs, Tab } from "@features/ui/component/Tabs";
 
 export const CustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
@@ -50,24 +48,9 @@ export const CustomContestPage: React.FC = () => {
               aria-label="Problems and Standings Tabs"
             >
               {createdContestTypes.map((contestType, index) => {
-                return (
-                  <Tab
-                    value={index}
-                    label={
-                      <Typography fontWeight="bold">{contestType}</Typography>
-                    }
-                    sx={{ textTransform: "none" }}
-                    disableTouchRipple
-                  />
-                );
+                return <Tab value={index} label={contestType} />;
               })}
-              <Tab
-                value={3}
-                label={<Typography fontWeight="bold">My Contest</Typography>}
-                sx={{ textTransform: "none" }}
-                disableTouchRipple
-                disabled={!loggedIn}
-              />
+              <Tab value={3} label="My Contest" disabled={!loggedIn} />
             </Tabs>
             {createdContestTypes.map((contestType, index) => {
               return (

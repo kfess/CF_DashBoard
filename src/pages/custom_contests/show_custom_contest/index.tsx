@@ -20,8 +20,7 @@ import { HeadLine } from "@features/layout/components/HeadLine";
 import { utcISOStringToLocal } from "@helpers/date";
 import { SocialShare } from "@features/custom_contests/components/SocialShare";
 import { TrainingStandings } from "@features/custom_contests/components/TrainingStandings";
-import Tab from "@mui/material/Tab";
-import { TabPanel, Tabs } from "@features/ui/component/Tabs";
+import { TabPanel, Tabs, Tab } from "@features/ui/component/Tabs";
 
 export const ShowCustomContestPage: React.FC = () => {
   const { loggedIn } = useLoggedIn();
@@ -141,14 +140,10 @@ export const ShowCustomContestPage: React.FC = () => {
               <Tab
                 value={0}
                 label={<Typography fontWeight="bold">Problem</Typography>}
-                sx={{ textTransform: "none" }}
-                disableTouchRipple
               />
               <Tab
                 value={1}
                 label={<Typography fontWeight="bold">Standing</Typography>}
-                sx={{ textTransform: "none" }}
-                disableTouchRipple
               />
             </Tabs>
             <TabPanel value={tabValue} index={0}>

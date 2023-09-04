@@ -1,7 +1,13 @@
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { Tabs as MUITabs, TabsProps as MUITabsProps } from "@mui/material";
+import {
+  Tabs as MUITabs,
+  Tab as MUITab,
+  TabProps as MUITabProps,
+  TabsProps as MUITabsProps,
+} from "@mui/material";
 
+// Tabs
 interface TabsProps extends MUITabsProps {
   addScrollButtons?: boolean;
 }
@@ -26,6 +32,20 @@ export const Tabs = ({ addScrollButtons = false, ...props }: TabsProps) => {
   );
 };
 
+// Tab
+interface TabProps extends MUITabProps {}
+
+export const Tab = (props: TabProps) => {
+  return (
+    <MUITab
+      label={<Typography fontWeight="bold">{props.label}</Typography>}
+      sx={{ textTransform: "none" }}
+      disableTouchRipple
+    />
+  );
+};
+
+// TabPanel
 type TabPanelProps = {
   children?: React.ReactNode;
   index: number;

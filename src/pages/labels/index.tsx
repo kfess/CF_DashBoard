@@ -2,14 +2,12 @@ import React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { Creator as ProblemLabelCreator } from "@features/bookmark/components/problem/Creator";
 import { LabelsTable as ProblemLabelsTable } from "@features/bookmark/components/problem/LabelsTable";
 import { Creator as ContestLabelCreator } from "@features/bookmark/components/contest/Creator";
 import { LabelsTable as ContestLabelsTable } from "@features/bookmark/components/contest/LabelsTable";
-import Tab from "@mui/material/Tab";
-import { TabPanel, Tabs } from "@features/ui/component/Tabs";
+import { TabPanel, Tabs, Tab } from "@features/ui/component/Tabs";
 
 export const LabelsPage: React.FC = () => {
   const [tabValue, setTabValue] = React.useState(0);
@@ -28,22 +26,8 @@ export const LabelsPage: React.FC = () => {
               onChange={handleChange}
               aria-label="Problems and Standings Tabs"
             >
-              <Tab
-                value={0}
-                label={
-                  <Typography fontWeight="bold">Problem Labels</Typography>
-                }
-                sx={{ textTransform: "none" }}
-                disableTouchRipple
-              />
-              <Tab
-                value={1}
-                label={
-                  <Typography fontWeight="bold">Contest Labels</Typography>
-                }
-                sx={{ textTransform: "none" }}
-                disableTouchRipple
-              />
+              <Tab value={0} label="Problem Labels" />
+              <Tab value={1} label="Contest Labels" />
             </Tabs>
             <TabPanel value={tabValue} index={0}>
               <ProblemLabelCreator />

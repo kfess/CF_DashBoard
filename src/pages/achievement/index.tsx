@@ -23,8 +23,7 @@ import { UserSubmissionPage } from "@pages/submission/user/index";
 import { HeatMaps } from "@features/achievement/components/HeatMaps";
 import { isACSubmission } from "@features/achievement/processSubmission";
 import { Accuracy } from "@features/achievement/components/Accuracy";
-import Tab from "@mui/material/Tab";
-import { TabPanel, Tabs } from "@features/ui/component/Tabs";
+import { TabPanel, Tabs, Tab } from "@features/ui/component/Tabs";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 export const AchievementPage: React.FC = () => {
@@ -64,36 +63,10 @@ export const AchievementPage: React.FC = () => {
               onChange={handleChange}
               aria-label="Problems and Standings Tabs"
             >
-              <Tab
-                value={0}
-                label={<Typography fontWeight="bold">Summary</Typography>}
-                sx={{ textTransform: "none" }}
-                disableTouchRipple
-                disabled={!userId}
-              />
-              <Tab
-                value={1}
-                label={<Typography fontWeight="bold">Pie Charts</Typography>}
-                sx={{ textTransform: "none" }}
-                disableTouchRipple
-                disabled={!userId}
-              />
-              <Tab
-                value={2}
-                label={
-                  <Typography fontWeight="bold">Progress Charts</Typography>
-                }
-                sx={{ textTransform: "none" }}
-                disableTouchRipple
-                disabled={!userId}
-              />
-              <Tab
-                value={3}
-                label={<Typography fontWeight="bold">Submissions</Typography>}
-                sx={{ textTransform: "none" }}
-                disableTouchRipple
-                disabled={!userId}
-              />
+              <Tab value={0} label="Summary" disabled={!userId} />
+              <Tab value={1} label="Pie Charts" disabled={!userId} />
+              <Tab value={2} label="Progress Charts" disabled={!userId} />
+              <Tab value={3} label="Submissions" disabled={!userId} />
             </Tabs>
             <TabPanel value={tabValue} index={0}>
               <Suspense fallback={<CircularProgress />}>

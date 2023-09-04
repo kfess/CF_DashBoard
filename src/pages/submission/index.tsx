@@ -2,15 +2,13 @@ import React, { Suspense } from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { RecentSubmissionPage } from "@pages/submission/recent";
 import { UserSubmissionPage } from "@pages/submission/user/index";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { useURLQuery } from "@hooks/useQueryParams";
-import Tab from "@mui/material/Tab";
-import { TabPanel, Tabs } from "@features/ui/component/Tabs";
+import { TabPanel, Tabs, Tab } from "@features/ui/component/Tabs";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 export const SubmissionPage: React.FC = () => {
@@ -36,37 +34,17 @@ export const SubmissionPage: React.FC = () => {
               onChange={handleChange}
               aria-label="Problems and Standings Tabs"
             >
-              <Tab
-                value={0}
-                label={
-                  <Typography fontWeight="bold">Recent Submission</Typography>
-                }
-                sx={{ textTransform: "none" }}
-                disableTouchRipple
-              />
+              <Tab value={0} label="Recent Submission" />
               <Tab
                 value={1}
-                label={
-                  <Typography fontWeight="bold">
-                    {userId ? userId : "User"}'s Submission
-                  </Typography>
-                }
-                sx={{ textTransform: "none" }}
-                disableTouchRipple
+                label={`
+                  ${userId ? userId : "User"}'s Submission`}
                 disabled={!userId}
               />
               <Tab
                 value={2}
-                label={
-                  <Typography fontWeight="bold">
-                    {!loggedIn || !codeforcesUsername
-                      ? "My Submission"
-                      : `My
-                    Submission (${codeforcesUsername})`}
-                  </Typography>
-                }
-                sx={{ textTransform: "none" }}
-                disableTouchRipple
+                label={`
+                  ${codeforcesUsername ? codeforcesUsername : "My"} Submission`}
                 disabled={!loggedIn || !codeforcesUsername}
               />
             </Tabs>

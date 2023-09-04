@@ -8,8 +8,7 @@ import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { HeatMap, HeatMapData } from "@features/achievement/components/HeatMap";
 import { List } from "@features/ui/component/List";
-import Tab from "@mui/material/Tab";
-import { TabPanel, Tabs } from "@features/ui/component/Tabs";
+import { TabPanel, Tabs, Tab } from "@features/ui/component/Tabs";
 
 type Props = {
   submissions: Submission[];
@@ -160,27 +159,9 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
         addScrollButtons={true}
         aria-label="Problems and Standings Tabs"
       >
-        <Tab
-          value={0}
-          label={<Typography fontWeight="bold">All Submission</Typography>}
-          sx={{ textTransform: "none" }}
-          disableTouchRipple
-          disabled={!userId}
-        />
-        <Tab
-          value={1}
-          label={<Typography fontWeight="bold">All AC Submission</Typography>}
-          sx={{ textTransform: "none" }}
-          disableTouchRipple
-          disabled={!userId}
-        />
-        <Tab
-          value={2}
-          label={<Typography fontWeight="bold">Max Difficulty</Typography>}
-          sx={{ textTransform: "none" }}
-          disableTouchRipple
-          disabled={!userId}
-        />
+        <Tab value={0} label="All Submission" disabled={!userId} />
+        <Tab value={1} label="All AC Submission" disabled={!userId} />
+        <Tab value={2} label="Max Difficulty" disabled={!userId} />
       </Tabs>
       <TabPanel value={tabValue} index={0}>
         <HeatMap
