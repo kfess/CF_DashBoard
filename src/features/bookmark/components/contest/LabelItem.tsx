@@ -15,7 +15,8 @@ import {
   ContestLabel,
 } from "@features/bookmark/contestLabel";
 import { pluralize } from "@helpers/format";
-import { _Button } from "@features/ui/component/Button";
+import { __Button } from "@features/ui/component/Button";
+import Button from "@mui/material/Button";
 
 type Props = {
   label: ContestLabel;
@@ -127,7 +128,9 @@ const DefaultView: React.FC<{
     </TableCell>
     <TableCell sx={{ py: 1 }}>
       <Stack direction="row" spacing={1}>
-        <_Button onClick={onEdit}>Edit</_Button>
+        <__Button onClick={onEdit} color="secondary" size="small">
+          Edit
+        </__Button>
         <ButtonWithAlertDialog
           title="Delete"
           dialogText="Are you sure? Deleting a label will remove it from relevant problems."

@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import { TableCell } from "@mui/material";
 import { Control, FieldErrors } from "react-hook-form";
 import { isValidHexaColor } from "@features/color/labelColor";
-import { _Button } from "@features/ui/component/Button";
+import { __Button } from "@features/ui/component/Button";
 import { LabelNameChip } from "@features/bookmark/components/contest/LabelNameChip";
 import { ContestLabelForm } from "@features/bookmark/contestLabel";
 import { Name } from "@features/bookmark/components/contest/Name";
@@ -45,27 +45,18 @@ export const Editor: React.FC<Props> = ({
               mode="Preview"
             />
             <div>
-              <_Button onClick={onDelete} color="#E55B66">
+              <__Button onClick={onDelete} color="secondary">
                 Delete
-              </_Button>
+              </__Button>
             </div>
           </Stack>
 
           <Stack
-            direction={{
-              xs: "column",
-              md: "row",
-            }}
+            direction={{ xs: "column", md: "row" }}
             sx={{ justifyContent: "space-between" }}
             spacing={2}
           >
-            <Stack
-              direction={{
-                xs: "column",
-                md: "row",
-              }}
-              spacing={1}
-            >
+            <Stack direction={{ xs: "column", md: "row" }} spacing={1}>
               <div>
                 <Name
                   control={control}
@@ -85,10 +76,12 @@ export const Editor: React.FC<Props> = ({
               <Box sx={{ height: { xs: "0px", md: "1.8rem" } }} />
               <Stack direction="row" spacing={1} justifyContent="flex-end">
                 <div>
-                  <_Button onClick={onCancel}>Cancel</_Button>
+                  <__Button onClick={onCancel} color="secondary">
+                    Cancel
+                  </__Button>
                 </div>
                 <div>
-                  <_Button
+                  <__Button
                     type="submit"
                     css={{ whiteSpace: "nowrap" }}
                     disabled={
@@ -96,10 +89,10 @@ export const Editor: React.FC<Props> = ({
                       watchedColor === "" ||
                       Object.keys(errors).length > 0
                     }
-                    color="#9246FF"
+                    color="info"
                   >
                     Save Changes
-                  </_Button>
+                  </__Button>
                 </div>
               </Stack>
             </Stack>

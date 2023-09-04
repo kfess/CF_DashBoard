@@ -13,7 +13,7 @@ import {
   ContestLabelForm,
   contestLabelFormSchema,
 } from "@features/bookmark/contestLabel";
-import { _Button } from "@features/ui/component/Button";
+import { __Button } from "@features/ui/component/Button";
 import { LabelNameChip } from "@features/bookmark/components/contest/LabelNameChip";
 import { Name } from "@features/bookmark/components/contest/Name";
 import { Description } from "@features/bookmark/components/contest/Description";
@@ -80,9 +80,9 @@ export const Creator: React.FC = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ py: 1, display: "flex", justifyContent: "flex-end" }}>
-          <_Button onClick={toggleShowBlock} color={theme.palette.primary.dark}>
+          <__Button onClick={toggleShowBlock} color="info">
             New Label
-          </_Button>
+          </__Button>
         </Box>
         {showBlock && (
           <Stack
@@ -105,7 +105,10 @@ export const Creator: React.FC = () => {
               justifyContent="space-between"
               spacing={1}
             >
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+              <Stack
+                direction={{ xs: "column", md: "row" }}
+                spacing={{ xs: 0.5, md: 1.5 }}
+              >
                 <div>
                   <Name
                     control={control}
@@ -125,13 +128,14 @@ export const Creator: React.FC = () => {
                 <Box sx={{ height: { xs: "0px", md: "1.8rem" } }} />
                 <Stack direction="row" spacing={1} justifyContent="flex-end">
                   <div>
-                    <_Button onClick={onCancel}>Cancel</_Button>
+                    <__Button onClick={onCancel} color="secondary">
+                      Cancel
+                    </__Button>
                   </div>
                   <div>
-                    <_Button
+                    <__Button
                       type="submit"
-                      css={{ whiteSpace: "nowrap" }}
-                      color={theme.palette.primary.main}
+                      color="info"
                       disabled={
                         watchedName === "" ||
                         watchedColor === "" ||
@@ -139,7 +143,7 @@ export const Creator: React.FC = () => {
                       }
                     >
                       Create label
-                    </_Button>
+                    </__Button>
                   </div>
                 </Stack>
               </Stack>

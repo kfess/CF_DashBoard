@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Button } from "@features/ui/component/Button";
 import { Switch } from "@features/ui/component/Switch";
+import { __Button } from "@features/ui/component/Button";
 
 const ITEM_HEIGHT = 48;
 
@@ -32,9 +32,9 @@ export const ViewFilter: React.FC<Props> = ({
 
   return (
     <>
-      <Button onClick={handleClick}>
+      <__Button onClick={handleClick} color="secondary">
         <SettingsIcon css={{ color: !open ? "inherit" : "#3170B9" }} />
-      </Button>
+      </__Button>
       <Menu
         open={open}
         anchorEl={anchorEl}

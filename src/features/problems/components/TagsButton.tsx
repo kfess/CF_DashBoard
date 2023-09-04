@@ -9,7 +9,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { tags } from "@features/problems/problem";
 import type { Tag } from "@features/problems/problem";
-import { Button } from "@features/ui/component/Button";
+import { __Button } from "@features/ui/component/Button";
 import { Chip } from "@features/ui/component/Chip";
 
 const ITEM_HEIGHT = 48;
@@ -37,13 +37,14 @@ export const TagsButton: React.FC<Props> = ({
 
   return (
     <>
-      <Button
+      <__Button
         onClick={handleClick}
         endIcon={open ? <ArrowDropDownIcon /> : <ArrowLeftIcon />}
+        color="secondary"
       >
         Tags{" "}
         {selectedTags.length > 0 && <Chip label={`${selectedTags.length}`} />}
-      </Button>
+      </__Button>
       <Menu
         anchorEl={anchorEl}
         open={open}

@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { FallbackProps } from "react-error-boundary";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { _Button } from "./Button";
+import { __Button } from "./Button";
 
 export const ErrorFallback: React.FC<FallbackProps> = ({
   error,
@@ -20,7 +20,7 @@ export const ErrorFallback: React.FC<FallbackProps> = ({
         <Typography variant="body2" paragraph>
           {error.message}
         </Typography>
-        <_Button onClick={resetErrorBoundary}>Try Again</_Button>
+        <__Button onClick={resetErrorBoundary}>Try Again</__Button>
       </Stack>
     </Container>
   );

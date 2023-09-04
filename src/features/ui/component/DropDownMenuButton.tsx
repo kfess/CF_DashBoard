@@ -5,7 +5,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import SvgIcon from "@mui/material/SvgIcon";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Button } from "@features/ui/component/Button";
+import { __Button } from "@features/ui/component/Button";
 
 const ITEM_HEIGHT = 48;
 
@@ -46,13 +46,14 @@ export const DropDownMenuButton = <T extends string | number>(
 
   return (
     <>
-      <Button
+      <__Button
         onClick={handleClick}
         endIcon={open ? <ArrowDropDownIcon /> : <ArrowLeftIcon />}
         disabled={disabled}
+        color="secondary"
       >
         {title}
-      </Button>
+      </__Button>
       <Menu
         open={open}
         anchorEl={anchorEl}
