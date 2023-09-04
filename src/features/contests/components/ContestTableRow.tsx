@@ -91,8 +91,8 @@ export const ContestTableRow: React.FC<Props> = React.memo(
         <TableCell
           component="th"
           scope="row"
-          css={{
-            borderRight: "1px solid rgba(224, 224, 224, 1)",
+          sx={{
+            border: (theme) => `1px solid ${theme.palette.divider}`,
             backgroundColor: rowColor,
           }}
         >
@@ -109,9 +109,9 @@ export const ContestTableRow: React.FC<Props> = React.memo(
           return (
             <TableCell
               key={idx}
-              css={{
+              sx={{
                 padding: 0,
-                borderRight: "1px solid rgba(224, 224, 224, 1)",
+                border: (theme) => `1px solid ${theme.palette.divider}`,
               }}
             >
               <div
