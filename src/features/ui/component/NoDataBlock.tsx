@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 
 type Props = {
   readonly title: string;
-  readonly message: string;
+  readonly message: React.ReactNode;
 };
 
 export const NoDataMessage: React.FC<Props> = ({ title, message }) => (

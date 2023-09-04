@@ -72,89 +72,100 @@ export const MyContestTable: React.FC = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {createdContests
-                    .slice(
-                      createdPage * createdRowsPerPage,
-                      (createdPage + 1) * createdRowsPerPage
-                    )
-                    .map((contest) => {
-                      const length = dayjs(
-                        utcISOStringToLocal(contest.endDate)
-                      ).diff(utcISOStringToLocal(contest.startDate), "minutes");
+                  {createdContests.length > 0 &&
+                    createdContests
+                      .slice(
+                        createdPage * createdRowsPerPage,
+                        (createdPage + 1) * createdRowsPerPage
+                      )
+                      .map((contest) => {
+                        const length = dayjs(
+                          utcISOStringToLocal(contest.endDate)
+                        ).diff(
+                          utcISOStringToLocal(contest.startDate),
+                          "minutes"
+                        );
 
-                      const daysToStart = dayjs(
-                        utcISOStringToLocal(contest.startDate)
-                      ).diff(dayjs(), "days");
+                        const daysToStart = dayjs(
+                          utcISOStringToLocal(contest.startDate)
+                        ).diff(dayjs(), "days");
 
-                      return (
-                        <TableRow hover key={contest.contestId}>
-                          <TableCell>
-                            <Stack direction="row" spacing={0.5}>
-                              <NavLink
-                                to={`/custom-contest/show/${contest.contestId}`}
-                              >
-                                {contest.title}
-                              </NavLink>
+                        return (
+                          <TableRow hover key={contest.contestId}>
+                            <TableCell>
+                              <Stack direction="row" spacing={0.5}>
+                                <NavLink
+                                  to={`/custom-contest/show/${contest.contestId}`}
+                                >
+                                  {contest.title}
+                                </NavLink>
+                                <Chip_
+                                  label={contest.visibility}
+                                  sx={{
+                                    color: "#9246FF",
+                                    borderColor: "black",
+                                    backgroundColor: alpha("#9246FF", 0.15),
+                                  }}
+                                />
+                              </Stack>
+                            </TableCell>
+                            <TableCell>{contest.description}</TableCell>
+                            <TableCell>
+                              {utcISOStringToLocal(contest.startDate)}
+                            </TableCell>
+                            <TableCell>
+                              {utcISOStringToLocal(contest.endDate)}
+                            </TableCell>
+                            <TableCell>
+                              {Math.floor(length / 60)
+                                .toString()
+                                .padStart(2, "0")}
+                              :{(length % 60).toString().padStart(2, "0")}
+                            </TableCell>
+                            <TableCell>
                               <Chip_
-                                label={contest.visibility}
+                                label={judgeContestType(contest)}
                                 sx={{
-                                  color: "#9246FF",
-                                  borderColor: "black",
-                                  backgroundColor: alpha("#9246FF", 0.15),
+                                  color:
+                                    judgeContestType(contest) === "Running"
+                                      ? "#9246FF"
+                                      : "",
+                                  backgroundColor:
+                                    judgeContestType(contest) === "Running"
+                                      ? alpha("#9246FF", 0.15)
+                                      : "",
                                 }}
                               />
-                            </Stack>
-                          </TableCell>
-                          <TableCell>{contest.description}</TableCell>
-                          <TableCell>
-                            {utcISOStringToLocal(contest.startDate)}
-                          </TableCell>
-                          <TableCell>
-                            {utcISOStringToLocal(contest.endDate)}
-                          </TableCell>
-                          <TableCell>
-                            {Math.floor(length / 60)
-                              .toString()
-                              .padStart(2, "0")}
-                            :{(length % 60).toString().padStart(2, "0")}
-                          </TableCell>
-                          <TableCell>
-                            <Chip_
-                              label={judgeContestType(contest)}
-                              sx={{
-                                color:
-                                  judgeContestType(contest) === "Running"
-                                    ? "#9246FF"
-                                    : "",
-                                backgroundColor:
-                                  judgeContestType(contest) === "Running"
-                                    ? alpha("#9246FF", 0.15)
-                                    : "",
-                              }}
-                            />
-                            {judgeContestType(contest) === "Running" && (
-                              <Timer toDate={contest.endDate} />
-                            )}
-                            {judgeContestType(contest) === "Upcoming" && (
-                              <>
-                                <div>Before Start</div>
-                                <div>
-                                  {daysToStart > 1 && (
-                                    <span>{daysToStart} days</span>
-                                  )}
-                                  {daysToStart === 1 && (
-                                    <span>{daysToStart} day</span>
-                                  )}
-                                  {daysToStart === 0 && (
-                                    <Timer toDate={contest.endDate} />
-                                  )}
-                                </div>
-                              </>
-                            )}
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
+                              {judgeContestType(contest) === "Running" && (
+                                <Timer toDate={contest.endDate} />
+                              )}
+                              {judgeContestType(contest) === "Upcoming" && (
+                                <>
+                                  <div>Before Start</div>
+                                  <div>
+                                    {daysToStart > 1 && (
+                                      <span>{daysToStart} days</span>
+                                    )}
+                                    {daysToStart === 1 && (
+                                      <span>{daysToStart} day</span>
+                                    )}
+                                    {daysToStart === 0 && (
+                                      <Timer toDate={contest.endDate} />
+                                    )}
+                                  </div>
+                                </>
+                              )}
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                  {createdContestsLen === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={6} align="center">
+                        No created contests
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -187,90 +198,101 @@ export const MyContestTable: React.FC = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {participatedContests
-                    .slice(
-                      participatedPage * participatedRowsPerPage,
-                      (participatedPage + 1) * participatedRowsPerPage
-                    )
-                    .map((contest) => {
-                      const length = dayjs(
-                        utcISOStringToLocal(contest.endDate)
-                      ).diff(utcISOStringToLocal(contest.startDate), "minutes");
+                  {participatedContests.length > 0 &&
+                    participatedContests
+                      .slice(
+                        participatedPage * participatedRowsPerPage,
+                        (participatedPage + 1) * participatedRowsPerPage
+                      )
+                      .map((contest) => {
+                        const length = dayjs(
+                          utcISOStringToLocal(contest.endDate)
+                        ).diff(
+                          utcISOStringToLocal(contest.startDate),
+                          "minutes"
+                        );
 
-                      const daysToStart = dayjs(
-                        utcISOStringToLocal(contest.startDate)
-                      ).diff(dayjs(), "days");
+                        const daysToStart = dayjs(
+                          utcISOStringToLocal(contest.startDate)
+                        ).diff(dayjs(), "days");
 
-                      return (
-                        <TableRow hover key={contest.contestId}>
-                          <TableCell>
-                            <Stack direction="row" spacing={0.5}>
-                              <NavLink
-                                to={`/custom-contest/show/${contest.contestId}`}
-                              >
-                                {contest.title}
-                              </NavLink>
+                        return (
+                          <TableRow hover key={contest.contestId}>
+                            <TableCell>
+                              <Stack direction="row" spacing={0.5}>
+                                <NavLink
+                                  to={`/custom-contest/show/${contest.contestId}`}
+                                >
+                                  {contest.title}
+                                </NavLink>
+                                <Chip_
+                                  label={contest.visibility}
+                                  sx={{
+                                    color: "#9246FF",
+                                    borderColor: "black",
+                                    backgroundColor: alpha("#9246FF", 0.15),
+                                  }}
+                                />
+                              </Stack>
+                            </TableCell>
+                            <TableCell>{contest.owner}</TableCell>
+                            <TableCell>{contest.description}</TableCell>
+                            <TableCell>
+                              {utcISOStringToLocal(contest.startDate)}
+                            </TableCell>
+                            <TableCell>
+                              {utcISOStringToLocal(contest.endDate)}
+                            </TableCell>
+                            <TableCell>
+                              {Math.floor(length / 60)
+                                .toString()
+                                .padStart(2, "0")}
+                              :{(length % 60).toString().padStart(2, "0")}
+                            </TableCell>
+                            <TableCell>
                               <Chip_
-                                label={contest.visibility}
+                                label={judgeContestType(contest)}
                                 sx={{
-                                  color: "#9246FF",
-                                  borderColor: "black",
-                                  backgroundColor: alpha("#9246FF", 0.15),
+                                  color:
+                                    judgeContestType(contest) === "Running"
+                                      ? "#9246FF"
+                                      : "",
+                                  backgroundColor:
+                                    judgeContestType(contest) === "Running"
+                                      ? alpha("#9246FF", 0.15)
+                                      : "",
                                 }}
                               />
-                            </Stack>
-                          </TableCell>
-                          <TableCell>{contest.owner}</TableCell>
-                          <TableCell>{contest.description}</TableCell>
-                          <TableCell>
-                            {utcISOStringToLocal(contest.startDate)}
-                          </TableCell>
-                          <TableCell>
-                            {utcISOStringToLocal(contest.endDate)}
-                          </TableCell>
-                          <TableCell>
-                            {Math.floor(length / 60)
-                              .toString()
-                              .padStart(2, "0")}
-                            :{(length % 60).toString().padStart(2, "0")}
-                          </TableCell>
-                          <TableCell>
-                            <Chip_
-                              label={judgeContestType(contest)}
-                              sx={{
-                                color:
-                                  judgeContestType(contest) === "Running"
-                                    ? "#9246FF"
-                                    : "",
-                                backgroundColor:
-                                  judgeContestType(contest) === "Running"
-                                    ? alpha("#9246FF", 0.15)
-                                    : "",
-                              }}
-                            />
-                            {judgeContestType(contest) === "Running" && (
-                              <Timer toDate={contest.endDate} />
-                            )}
-                            {judgeContestType(contest) === "Upcoming" && (
-                              <>
-                                <div>Before Start</div>
-                                <div>
-                                  {daysToStart > 1 && (
-                                    <span>{daysToStart} days</span>
-                                  )}
-                                  {daysToStart === 1 && (
-                                    <span>{daysToStart} day</span>
-                                  )}
-                                  {daysToStart === 0 && (
-                                    <Timer toDate={contest.endDate} />
-                                  )}
-                                </div>
-                              </>
-                            )}
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
+                              {judgeContestType(contest) === "Running" && (
+                                <Timer toDate={contest.endDate} />
+                              )}
+                              {judgeContestType(contest) === "Upcoming" && (
+                                <>
+                                  <div>Before Start</div>
+                                  <div>
+                                    {daysToStart > 1 && (
+                                      <span>{daysToStart} days</span>
+                                    )}
+                                    {daysToStart === 1 && (
+                                      <span>{daysToStart} day</span>
+                                    )}
+                                    {daysToStart === 0 && (
+                                      <Timer toDate={contest.endDate} />
+                                    )}
+                                  </div>
+                                </>
+                              )}
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                  {participatedContestsLen === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={7} align="center">
+                        No participated contests
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>

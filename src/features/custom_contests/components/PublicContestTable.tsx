@@ -14,6 +14,7 @@ import { usePagination } from "@hooks/index";
 import { RunningContestTableRow } from "@features/custom_contests/components/RunningContestTableRow";
 import { UpcomingContestTableRow } from "./UpcomingContestTableRow";
 import { FinishedContestTableRow } from "./FinishedContestTableRow";
+import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 
 type Props = { contestType: CreatedContestType };
 
@@ -111,8 +112,17 @@ export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
             ) : (
               <TableBody>
                 <TableRow>
-                  <TableCell colSpan={6}>
-                    There is no Data to display.
+                  <TableCell colSpan={8}>
+                    <NoDataMessage
+                      title="No Custom Contest Found"
+                      message={
+                        <>
+                          There are no custom contests available. <br />
+                          You can create a new custom contest by clicking on the
+                          "Create Custom Contest" button.
+                        </>
+                      }
+                    />
                   </TableCell>
                 </TableRow>
               </TableBody>
