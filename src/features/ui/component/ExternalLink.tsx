@@ -23,6 +23,7 @@ export const ExternalLink: React.FC<Props> = ({
 
   return (
     <MUILink
+      component="a"
       target={target}
       rel="noopener noreferrer"
       underline="none"

@@ -33,14 +33,18 @@ export const Tabs = ({ addScrollButtons = false, ...props }: TabsProps) => {
 };
 
 // Tab
-interface TabProps extends MUITabProps {}
 
-export const Tab = (props: TabProps) => {
+export const Tab = ({ label, ...props }: MUITabProps) => {
   return (
     <MUITab
-      label={<Typography fontWeight="bold">{props.label}</Typography>}
+      label={
+        <Typography component="div" fontWeight="bold">
+          {label}
+        </Typography>
+      }
       sx={{ textTransform: "none" }}
       disableTouchRipple
+      {...props}
     />
   );
 };
@@ -65,7 +69,9 @@ export const TabPanel = (props: TabPanelProps) => {
     >
       {value === index && (
         <Box px={1} py={3}>
-          <Typography>{children}</Typography>
+          <Typography component="div" variant="inherit">
+            {children}
+          </Typography>
         </Box>
       )}
     </div>

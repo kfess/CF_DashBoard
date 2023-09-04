@@ -86,7 +86,7 @@ export const ContestsPage: React.FC = () => {
 
   return (
     <Container maxWidth="lg">
-      <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }}>
+      <Box p={{ xs: 2, md: 4 }}>
         <HeadLine
           title={`Contest${
             classification !== "All" ? " - " + classification : ""

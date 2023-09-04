@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { useMemo, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -31,6 +31,11 @@ export const ShowCustomContestPage: React.FC = () => {
   const { data, isError, error } = useFetchCustomContestByContestId({
     contestId,
   });
+  const problems = useMemo(
+    () =>
+      data?.problems.sort((a, b) => (a?.rating ?? 0) - (b?.rating ?? 0)) ?? [],
+    [data?.problems]
+  );
 
   const [tabValue, setTabValue] = React.useState(0);
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -137,14 +142,8 @@ export const ShowCustomContestPage: React.FC = () => {
               onChange={handleChange}
               aria-label="Problems and Standings Tabs"
             >
-              <Tab
-                value={0}
-                label={<Typography fontWeight="bold">Problem</Typography>}
-              />
-              <Tab
-                value={1}
-                label={<Typography fontWeight="bold">Standing</Typography>}
-              />
+              <Tab value={0} label="Problems" />
+              <Tab value={1} label="Standings" />
             </Tabs>
             <TabPanel value={tabValue} index={0}>
               <Problems problems={data.problems} />
@@ -154,7 +153,7 @@ export const ShowCustomContestPage: React.FC = () => {
                 {data.mode === "Normal" && (
                   <Standings
                     participants={data.participants}
-                    problems={data.problems}
+                    problems={problems}
                     startDate={data.startDate}
                     endDate={data.endDate}
                     penalty={data.penalty}
@@ -163,7 +162,7 @@ export const ShowCustomContestPage: React.FC = () => {
                 {data.mode === "Training" && (
                   <TrainingStandings
                     participants={data.participants}
-                    problems={data.problems}
+                    problems={problems}
                     startDate={data.startDate}
                     endDate={data.endDate}
                   />

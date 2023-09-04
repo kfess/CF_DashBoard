@@ -9,7 +9,9 @@ type Props = {
 export const HelpToolTip: React.FC<Props> = ({ title }) => {
   return (
     <Tooltip title={title} enterTouchDelay={0} arrow>
-      <Chip label="?" />
+      <span>
+        <Chip label="?" />
+      </span>
     </Tooltip>
   );
 };

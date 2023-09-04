@@ -87,7 +87,7 @@ const RunningContestMessage: React.FC<Pick<Props, "endDate">> = ({
     <Typography color="text.secondary">
       The contest has started. It will end in
     </Typography>
-    <Typography fontWeight="fontWeightBold">
+    <Typography fontWeight="fontWeightBold" component="div">
       <Timer toDate={endDate} />
     </Typography>
   </Stack>

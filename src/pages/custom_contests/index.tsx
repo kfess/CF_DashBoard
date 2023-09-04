@@ -48,13 +48,15 @@ export const CustomContestPage: React.FC = () => {
               aria-label="Problems and Standings Tabs"
             >
               {createdContestTypes.map((contestType, index) => {
-                return <Tab value={index} label={contestType} />;
+                return (
+                  <Tab key={contestType} value={index} label={contestType} />
+                );
               })}
               <Tab value={3} label="My Contest" disabled={!loggedIn} />
             </Tabs>
             {createdContestTypes.map((contestType, index) => {
               return (
-                <TabPanel value={tabValue} index={index}>
+                <TabPanel key={contestType} value={tabValue} index={index}>
                   <PublicContestTable contestType={contestType} />
                 </TabPanel>
               );

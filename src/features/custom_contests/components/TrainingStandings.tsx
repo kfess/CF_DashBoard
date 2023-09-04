@@ -175,34 +175,37 @@ export const TrainingStandings: React.FC<Props> = ({
                             userStats[participant].attemptedSet.has(key);
                           return (
                             <Tooltip
+                              key={key}
                               title={problem.index + "." + problem.name}
                               arrow
                               enterTouchDelay={0}
                             >
-                              <ExternalLink
-                                href={`${
-                                  problem.contestId! >= 100001
-                                    ? CF_GYM_URL
-                                    : CF_CONTEST_URL
-                                }/${problem.contestId}/problem/${
-                                  problem.index
-                                }`}
-                                label={
-                                  <rect
-                                    x={j * (BLOCK_WIDTH + 1)}
-                                    y={0}
-                                    width={BLOCK_WIDTH}
-                                    height={BLOCK_WIDTH}
-                                    fill={
-                                      isAC
-                                        ? "#4caf50"
-                                        : isAttempted
-                                        ? "#EFA41C"
-                                        : "#e0e0e0"
-                                    }
-                                  />
-                                }
-                              />
+                              <div>
+                                <ExternalLink
+                                  href={`${
+                                    problem.contestId! >= 100001
+                                      ? CF_GYM_URL
+                                      : CF_CONTEST_URL
+                                  }/${problem.contestId}/problem/${
+                                    problem.index
+                                  }`}
+                                  label={
+                                    <rect
+                                      x={j * (BLOCK_WIDTH + 1)}
+                                      y={0}
+                                      width={BLOCK_WIDTH}
+                                      height={BLOCK_WIDTH}
+                                      fill={
+                                        isAC
+                                          ? "#4caf50"
+                                          : isAttempted
+                                          ? "#EFA41C"
+                                          : "#e0e0e0"
+                                      }
+                                    />
+                                  }
+                                />
+                              </div>
                             </Tooltip>
                           );
                         })}
