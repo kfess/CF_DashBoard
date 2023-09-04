@@ -28,7 +28,8 @@ const LabelRow: React.FC<LabelRowProps> = React.memo(
       </Stack>
       <Stack direction="row" alignItems="center" px={1} py={0.75} spacing={2}>
         <Typography
-          variant="body2"
+          variant="inherit"
+          component="div"
           color={label.description ? "initial" : "text.secondary"}
           sx={{ flex: 1, ml: 1, mr: 1, maxWidth: 300 }}
         >
@@ -151,7 +152,7 @@ export const AddLabelButton: React.FC<Props> = ({
             horizontal: "left",
           }}
         >
-          <Typography variant="body2" p={1.5}>
+          <Typography variant="inherit" p={1.5}>
             Add or Remove problem
           </Typography>
           <Divider />
@@ -164,9 +165,18 @@ export const AddLabelButton: React.FC<Props> = ({
               handleAdd={handleAdd}
             />
           ))}
-          <Typography variant="body2" p={1} textAlign="center">
+          <Typography
+            variant="inherit"
+            component="div"
+            p={1}
+            textAlign="center"
+          >
             <Link to="/labels">
-              <Typography sx={{ color: (theme) => theme.palette.primary.main }}>
+              <Typography
+                variant="inherit"
+                component="div"
+                sx={{ color: (theme) => theme.palette.primary.main }}
+              >
                 view all labels
               </Typography>
             </Link>
