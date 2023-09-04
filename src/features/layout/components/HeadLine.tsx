@@ -5,8 +5,7 @@ import Divider from "@mui/material/Divider";
 import { useLocation } from "react-router-dom";
 import { LabelsChip } from "@features/bookmark/components/problem/LabelsChip";
 import { useURLQuery } from "@hooks/useQueryParams";
-import { DeletableChip } from "@features/ui/component/Chip";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip, DeletableChip } from "@features/ui/component/Chip";
 
 type Props = { readonly title: string };
 
@@ -37,10 +36,9 @@ export const HeadLine: React.FC<Props> = ({ title }) => {
                   onDelete={() => {
                     setURLQuery({ userId: undefined });
                   }}
-                  onClick={() => {}}
                 />
               ) : (
-                <Chip_ label={`userId: ${queryUserId}`} onClick={() => {}} />
+                <Chip label={`userId: ${queryUserId}`} />
               )}
             </>
           )}

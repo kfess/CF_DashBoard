@@ -10,7 +10,7 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import { tags } from "@features/problems/problem";
 import type { Tag } from "@features/problems/problem";
 import { Button } from "@features/ui/component/Button";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 
 const ITEM_HEIGHT = 48;
 
@@ -42,7 +42,7 @@ export const TagsButton: React.FC<Props> = ({
         endIcon={open ? <ArrowDropDownIcon /> : <ArrowLeftIcon />}
       >
         Tags{" "}
-        {selectedTags.length > 0 && <Chip_ label={`${selectedTags.length}`} />}
+        {selectedTags.length > 0 && <Chip label={`${selectedTags.length}`} />}
       </Button>
       <Menu
         anchorEl={anchorEl}

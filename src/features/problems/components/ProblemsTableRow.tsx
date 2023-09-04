@@ -10,7 +10,7 @@ import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { SolutionLink } from "./SolutionLink";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 import { useTheme } from "@mui/material";
 import { CF_CONTEST_URL } from "@constants/url";
 import { ExternalLink } from "@features/ui/component/ExternalLink";
@@ -69,7 +69,7 @@ export const ProblemsTableRow: React.FC<Props> = ({
           {showTags &&
             problem.tags.length > 0 &&
             problem.tags.map((tag) => (
-              <Chip_ key={tag} label={tag} onClick={() => {}} />
+              <Chip key={tag} label={tag} onClick={() => {}} />
             ))}
         </Stack>
       </TableCell>
@@ -86,8 +86,7 @@ export const ProblemsTableRow: React.FC<Props> = ({
         </span>
       </TableCell>
       <TableCell>
-        <Chip_
-          onClick={() => {}}
+        <Chip
           label={
             problem.solvedCount ? (
               <ExternalLink

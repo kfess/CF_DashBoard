@@ -22,7 +22,7 @@ import { Classification } from "@features/contests/contest";
 import { getClassification } from "@features/contests/utils/getClassification";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 import { ExternalLink } from "@features/ui/component/ExternalLink";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 
 type Props = {
   readonly userId: string;
@@ -163,7 +163,7 @@ export const UserSubmission: React.FC<Props> = ({
                             <VerdictChip verdict={d.verdict} />
                           </TableCell>
                           <TableCell>
-                            <Chip_ label={d.programmingLanguage} />
+                            <Chip label={d.programmingLanguage} />
                           </TableCell>
                           <TableCell>
                             <Typography variant="body2">

@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { Submission } from "@features/submission/submission";
 import { getACTagMap } from "@features/achievement/processSubmission";
 import { tags } from "@features/problems/problem";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 import { useToggle } from "@hooks/index";
 import { TagACCountPie } from "@features/achievement/components/TagACCountPie";
 import { ReadMoreLess } from "@features/ui/component/ReadMoreLess";
@@ -19,7 +19,7 @@ export type Count = {
 const TagStats: React.FC<Count> = ({ name, count }) => {
   return (
     <Stack direction="row" spacing={1} alignItems="center">
-      <Chip_ label={name} onClick={() => {}} />
+      <Chip label={name} />
       <Typography variant="body2" color="text.secondary">
         ×
       </Typography>

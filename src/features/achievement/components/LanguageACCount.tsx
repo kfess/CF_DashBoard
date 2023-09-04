@@ -9,7 +9,7 @@ import {
   filterUniqueSubmissions,
 } from "@features/achievement/processSubmission";
 import { formatUnixTime } from "@helpers/date";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 import { useToggle } from "@hooks/index";
 import { pluralize } from "@helpers/index";
 import { LanguageACCountPie } from "@features/achievement/components/LanguageACCountPie";
@@ -25,7 +25,7 @@ const LanguageStat: React.FC<Count> = ({ language, count, lastACDate }) => {
   return (
     <Stack key={language}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <Chip_ label={language} onClick={() => {}} />
+        <Chip label={language} />
         <Stack direction="row" alignItems="center">
           <Typography
             variant="body1"

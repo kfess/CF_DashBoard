@@ -11,7 +11,7 @@ import type { TabItem } from "@features/ui/component/Tabs";
 import { Tabs } from "@features/ui/component/Tabs";
 import { useFetchCustomContestByContestId } from "@features/custom_contests/hooks/useFetchCustomContestByContestId";
 import { CountdownScheduler } from "@features/custom_contests/components/CountdownScheduler";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 import { Standings } from "@features/custom_contests/components/Standings";
 import { Problems } from "@features/custom_contests/components/Problems";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
@@ -96,9 +96,9 @@ export const ShowCustomContestPage: React.FC = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Stack direction="row" spacing={1} py={1}>
-                  <Chip_ label={data.visibility} />
-                  <Chip_ label={data.mode} />
-                  <Chip_ label={"Created by: " + data.owner} />
+                  <Chip label={data.visibility} />
+                  <Chip label={data.mode} />
+                  <Chip label={"Created by: " + data.owner} />
                 </Stack>
               </Grid>
               <Grid item xs={12}>

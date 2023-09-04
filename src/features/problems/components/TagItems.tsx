@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import type { Problem } from "@features/problems/problem";
 import { tags } from "@features/problems/problem";
 import type { Tag } from "@features/problems/problem";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 import { ReadMoreLess } from "@features/ui/component/ReadMoreLess";
 import { useURLQuery } from "@hooks/useQueryParams";
 
@@ -87,7 +87,7 @@ export const TagItems: React.FC<Props> = ({
                   addOrRemoveTag(tagItem.tag);
                 }}
               >
-                {tagItem.tag} <Chip_ label={tagItem.count} />
+                {tagItem.tag} <Chip label={tagItem.count} />
               </span>
             </Stack>
           ))}

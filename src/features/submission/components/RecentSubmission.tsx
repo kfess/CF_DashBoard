@@ -16,7 +16,7 @@ import { TablePagination } from "@features/ui/component/TablePagination";
 import { VerdictChip } from "@features/submission/components/VerdictChip";
 import { usePagination } from "@hooks/usePagination";
 import { ExternalLink } from "@features/ui/component/ExternalLink";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 
 export const RecentSubmission: React.FC = () => {
   const { data } = useFetchRecentSubmissions();
@@ -122,7 +122,7 @@ export const RecentSubmission: React.FC = () => {
                           <VerdictChip verdict={d.verdict} />
                         </TableCell>
                         <TableCell>
-                          <Chip_ label={d.programmingLanguage} />
+                          <Chip label={d.programmingLanguage} />
                         </TableCell>
                         <TableCell>
                           <Typography variant="body2">

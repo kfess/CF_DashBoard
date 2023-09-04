@@ -52,6 +52,7 @@ export const SideNavigationBar: React.FC<Props> = ({
           />
           <ExternalLink
             href="/"
+            target="" // Do not open in new tab
             label={<Typography variant="h6">CF-DashBoard</Typography>}
             noWrap
             onClick={() => {

@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { CustomContest } from "@features/custom_contests/customContest";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 
 type Props = {
   customContest: CustomContest;
@@ -29,7 +29,7 @@ export const FinishedContestTableRow: React.FC<Props> = ({ customContest }) => {
           <NavLink to={`/custom-contest/show/${customContest.contestId}`}>
             {customContest.title}
           </NavLink>
-          <Chip_
+          <Chip
             label={customContest.visibility}
             sx={{
               color: "#9246FF",

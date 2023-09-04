@@ -13,7 +13,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { alpha } from "@mui/material";
 import { Timer } from "@features/ui/component/Timer";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { usePagination } from "@hooks/index";
 import { utcISOStringToLocal } from "@helpers/date";
@@ -99,7 +99,7 @@ export const MyContestTable: React.FC = () => {
                                 >
                                   {contest.title}
                                 </NavLink>
-                                <Chip_
+                                <Chip
                                   label={contest.visibility}
                                   sx={{
                                     color: "#9246FF",
@@ -123,7 +123,7 @@ export const MyContestTable: React.FC = () => {
                               :{(length % 60).toString().padStart(2, "0")}
                             </TableCell>
                             <TableCell>
-                              <Chip_
+                              <Chip
                                 label={judgeContestType(contest)}
                                 sx={{
                                   color:
@@ -225,7 +225,7 @@ export const MyContestTable: React.FC = () => {
                                 >
                                   {contest.title}
                                 </NavLink>
-                                <Chip_
+                                <Chip
                                   label={contest.visibility}
                                   sx={{
                                     color: "#9246FF",
@@ -250,7 +250,7 @@ export const MyContestTable: React.FC = () => {
                               :{(length % 60).toString().padStart(2, "0")}
                             </TableCell>
                             <TableCell>
-                              <Chip_
+                              <Chip
                                 label={judgeContestType(contest)}
                                 sx={{
                                   color:

@@ -16,7 +16,7 @@ import type { Problem } from "@features/problems/problem";
 import { pluralize } from "@helpers/format";
 import { getProblemKey } from "@features/problems/utils";
 import { calculateAllUsersStats } from "@features/custom_contests/utils/calculateTrainingStandings";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 const BLOCK_WIDTH = 14;
@@ -143,12 +143,16 @@ export const TrainingStandings: React.FC<Props> = ({
                         padding: "2px",
                       }}
                     >
-                      <Chip_
+                      <Chip
                         label={`${userStats[participant].totalScore} / ${numProblems}`}
                         sx={{
-                          color: "#9246FF",
-                          borderColor: "black",
-                          backgroundColor: alpha("#9246FF", 0.15),
+                          color: (theme) => theme.palette.primary.dark,
+                          backgroundColor: (theme) =>
+                            alpha(theme.palette.primary.light, 0.2),
+                          "&:hover": {
+                            backgroundColor: (theme) =>
+                              alpha(theme.palette.primary.main, 0.25),
+                          },
                         }}
                       />
                     </TableCell>

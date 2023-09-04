@@ -9,7 +9,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { CustomContest } from "@features/custom_contests/customContest";
 import { Timer } from "@features/ui/component/Timer";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 
 type Props = {
   customContest: CustomContest;
@@ -35,12 +35,16 @@ export const RunningContestTableRow: React.FC<Props> = ({ customContest }) => {
               {customContest.title}
             </Typography>
           </NavLink>
-          <Chip_
+          <Chip
             label={customContest.visibility}
             sx={{
-              color: "#9246FF",
-              borderColor: "black",
-              backgroundColor: alpha("#9246FF", 0.15),
+              color: (theme) => theme.palette.primary.dark,
+              backgroundColor: (theme) =>
+                alpha(theme.palette.primary.light, 0.2),
+              "&:hover": {
+                backgroundColor: (theme) =>
+                  alpha(theme.palette.primary.main, 0.25),
+              },
             }}
           />
         </Stack>
@@ -59,7 +63,7 @@ export const RunningContestTableRow: React.FC<Props> = ({ customContest }) => {
         <Timer toDate={customContest.endDate} />
       </TableCell>
       <TableCell>
-        <Chip_
+        <Chip
           label="Register"
           onClick={() => {
             navigate(`/custom-contest/show/${customContest.contestId}`);

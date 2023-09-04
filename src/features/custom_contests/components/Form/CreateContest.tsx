@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Typography } from "@mui/material";
 import { _Button } from "@features/ui/component/Button";
-import { Chip_ } from "@features/ui/component/Chip";
+import { Chip } from "@features/ui/component/Chip";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import {
   CreateCustomContest,
@@ -103,18 +103,15 @@ export const CreateContest: React.FC = () => {
       </Typography>
 
       <div css={{ marginTop: "1rem", marginBottom: "1rem" }}>
-        Organize Custom Contest as{" "}
-        <Chip_ label={codeforcesUsername} onClick={() => {}} />
+        Organize Custom Contest as <Chip label={codeforcesUsername} />
         <_Button onClick={() => {}}>Change CF user</_Button>
       </div>
 
       <Box
         sx={{
           p: { xs: 2 },
-          mx: { sm: 0, md: 2 },
           my: 2,
-          border: 1,
-          borderColor: "divider",
+          border: (theme) => `1px solid ${theme.palette.divider}`,
           borderRadius: "4px",
           backgroundColor: (theme) => theme.palette.background.paper,
         }}
@@ -123,7 +120,7 @@ export const CreateContest: React.FC = () => {
           <Typography variant="h5" fontWeight="fontWeightBold">
             Contest Details
           </Typography>
-          <Chip_
+          <Chip
             label={watchedVisibility}
             sx={{
               color: "#9246FF",
@@ -131,7 +128,7 @@ export const CreateContest: React.FC = () => {
               backgroundColor: alpha("#9246FF", 0.15),
             }}
           />
-          <Chip_
+          <Chip
             label={watchedMode}
             sx={{
               color: "#9246FF",
@@ -153,10 +150,8 @@ export const CreateContest: React.FC = () => {
       <Box
         sx={{
           p: { xs: 2 },
-          mx: { sm: 0, md: 2 },
           my: 2,
-          border: 1,
-          borderColor: "divider",
+          border: (theme) => `1px solid ${theme.palette.divider}`,
           borderRadius: "4px",
           backgroundColor: (theme) => theme.palette.background.paper,
         }}
