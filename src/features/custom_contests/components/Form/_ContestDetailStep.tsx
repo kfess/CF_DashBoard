@@ -72,7 +72,7 @@ export const _ContestDetailStep: React.FC<Props> = ({
               />
             </Stack>
             <Box ml={2}>
-              <Button variant="outlined" size="small">
+              <Button size="small" color="secondary">
                 Change User
               </Button>
             </Box>

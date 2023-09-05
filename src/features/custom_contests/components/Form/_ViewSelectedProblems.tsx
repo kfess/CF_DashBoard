@@ -1,5 +1,4 @@
 import React from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -12,35 +11,20 @@ import { TablePagination } from "@features/ui/component/TablePagination";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
-import { ControllerRenderProps } from "react-hook-form";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
-import { IconButton } from "@features/ui/component/IconButton";
 import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 
 type Props = {
-  field: ControllerRenderProps<CreateCustomContest, "problems">;
+  problems: CreateCustomContest["problems"];
 };
 
-export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
-  const selectedProblems = field.value;
-  const removeProblem = (index: number) => {
-    field.onChange(selectedProblems.filter((_, idx) => index !== idx));
-  };
-
-  const [page, setPage, rowsPerPage, setRowsPerPage] =
-    usePagination(selectedProblems);
+export const _ViewSelectedProblems: React.FC<Props> = ({ problems }) => {
+  const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(problems);
 
   return (
     <>
-      {selectedProblems.length > 0 && (
+      {problems.length > 0 && (
         <>
-          <TablePagination
-            size={selectedProblems.length}
-            page={page}
-            setPage={setPage}
-            rowsPerPage={rowsPerPage}
-            setRowsPerPage={setRowsPerPage}
-          />
           <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
             <TableContainer component={Paper}>
               <Table
@@ -51,18 +35,19 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
               >
                 <TableHead>
                   <TableRow hover>
+                    <TableCell>#</TableCell>
                     <TableCell>Problem</TableCell>
                     <TableCell>Contest</TableCell>
                     <TableCell>Difficulty</TableCell>
-                    <TableCell>Delete</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {selectedProblems
+                  {problems
                     .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                     .sort((a, b) => (a.rating || 0) - (b.rating || 0))
                     .map((p, index) => (
                       <TableRow key={p.name} hover>
+                        <TableCell>{index + 1}</TableCell>
                         <TableCell>
                           <ProblemLink
                             contestId={p.contestId ?? 0}
@@ -87,25 +72,22 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
                             <HelpToolTip title="No data available" />
                           )}
                         </TableCell>
-                        <TableCell>
-                          <IconButton
-                            icon={<DeleteIcon />}
-                            onClick={() => {
-                              removeProblem(index);
-                            }}
-                            size="small"
-                            aria-label="delete problems"
-                          />
-                        </TableCell>
                       </TableRow>
                     ))}
                 </TableBody>
               </Table>
             </TableContainer>
           </Paper>
+          <TablePagination
+            size={problems.length}
+            page={page}
+            setPage={setPage}
+            rowsPerPage={rowsPerPage}
+            setRowsPerPage={setRowsPerPage}
+          />
         </>
       )}
-      {selectedProblems.length === 0 && (
+      {problems.length === 0 && (
         <TableContainer component={Paper} elevation={0}>
           <Table
             sx={{
