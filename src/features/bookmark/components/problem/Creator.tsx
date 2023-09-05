@@ -83,7 +83,7 @@ export const Creator: React.FC = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Box sx={{ py: 1, display: "flex", justifyContent: "flex-end" }}>
+        <Box sx={{ py: 2, display: "flex", justifyContent: "flex-end" }}>
           <__Button onClick={toggleShowBlock} color="info">
             New Label
           </__Button>
@@ -91,12 +91,12 @@ export const Creator: React.FC = () => {
         {showBlock && (
           <Stack
             padding={2}
+            mb={1.5}
             sx={{
               border: 1,
               borderColor: "divider",
               borderRadius: "4px",
               backgroundColor: theme.palette.background.paper,
-              mb: 1.5,
             }}
           >
             <LabelNameChip

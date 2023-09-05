@@ -16,7 +16,6 @@ import {
 } from "@features/bookmark/contestLabel";
 import { pluralize } from "@helpers/format";
 import { __Button } from "@features/ui/component/Button";
-import Button from "@mui/material/Button";
 
 type Props = {
   label: ContestLabel;

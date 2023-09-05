@@ -45,7 +45,12 @@ export const Editor: React.FC<Props> = ({
               mode="Preview"
             />
             <div>
-              <__Button onClick={onDelete} color="secondary">
+              <__Button
+                onClick={onDelete}
+                color="error"
+                variant="outlined"
+                size="small"
+              >
                 Delete
               </__Button>
             </div>
@@ -76,7 +81,7 @@ export const Editor: React.FC<Props> = ({
               <Box sx={{ height: { xs: "0px", md: "1.8rem" } }} />
               <Stack direction="row" spacing={1} justifyContent="flex-end">
                 <div>
-                  <__Button onClick={onCancel} color="secondary">
+                  <__Button onClick={onCancel} color="secondary" size="small">
                     Cancel
                   </__Button>
                 </div>
@@ -90,6 +95,7 @@ export const Editor: React.FC<Props> = ({
                       Object.keys(errors).length > 0
                     }
                     color="info"
+                    size="small"
                   >
                     Save Changes
                   </__Button>

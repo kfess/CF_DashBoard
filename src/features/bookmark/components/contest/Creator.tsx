@@ -79,7 +79,7 @@ export const Creator: React.FC = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Box sx={{ py: 1, display: "flex", justifyContent: "flex-end" }}>
+        <Box sx={{ py: 2, display: "flex", justifyContent: "flex-end" }}>
           <__Button onClick={toggleShowBlock} color="info">
             New Label
           </__Button>
@@ -107,7 +107,7 @@ export const Creator: React.FC = () => {
             >
               <Stack
                 direction={{ xs: "column", md: "row" }}
-                spacing={{ xs: 0.5, md: 1.5 }}
+                spacing={{ xs: 0, md: 1.5 }}
               >
                 <div>
                   <Name
@@ -128,7 +128,7 @@ export const Creator: React.FC = () => {
                 <Box sx={{ height: { xs: "0px", md: "1.8rem" } }} />
                 <Stack direction="row" spacing={1} justifyContent="flex-end">
                   <div>
-                    <__Button onClick={onCancel} color="secondary">
+                    <__Button onClick={onCancel} color="secondary" size="small">
                       Cancel
                     </__Button>
                   </div>
@@ -136,6 +136,7 @@ export const Creator: React.FC = () => {
                     <__Button
                       type="submit"
                       color="info"
+                      size="small"
                       disabled={
                         watchedName === "" ||
                         watchedColor === "" ||

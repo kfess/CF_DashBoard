@@ -52,7 +52,7 @@ const darkTheme = createTheme({
     secondary: {
       main: "#E5E5E5",
       light: "#eaeaea",
-      dark: "#DCDCDC",
+      dark: "#CACACA",
     },
     info: {
       main: "#9246FF",
