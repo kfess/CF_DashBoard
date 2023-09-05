@@ -1,5 +1,5 @@
 import React from "react";
-import { __Button } from "@features/ui/component/Button";
+import { Button } from "@features/ui/component/Button";
 import ReplayIcon from "@mui/icons-material/Replay";
 import type { Classification } from "@features/contests/contest";
 import { SolvedStatus } from "@features/problems/components/SolvedStatusFilter";
@@ -41,12 +41,8 @@ export const ResetFilterButton: React.FC<Props> = ({
   };
 
   return (
-    <__Button
-      onClick={onClickReset}
-      startIcon={<ReplayIcon />}
-      color="secondary"
-    >
+    <Button onClick={onClickReset} startIcon={<ReplayIcon />} color="secondary">
       Reset
-    </__Button>
+    </Button>
   );
 };

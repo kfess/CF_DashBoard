@@ -2,7 +2,7 @@ import React from "react";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import { CF_CONTEST_URL } from "@constants/url";
 import { Problem } from "@features/problems/problem";
-import { __Button } from "@features/ui/component/Button";
+import { Button } from "@features/ui/component/Button";
 import { ExternalLink } from "@features/ui/component/ExternalLink";
 
 type Props = {
@@ -16,9 +16,9 @@ export const PickOneButton: React.FC<Props> = ({ problem }) => {
     <ExternalLink
       href={problemUrl}
       label={
-        <__Button color="secondary" startIcon={<ShuffleIcon />}>
+        <Button color="secondary" startIcon={<ShuffleIcon />}>
           Pick One
-        </__Button>
+        </Button>
       }
     />
   );

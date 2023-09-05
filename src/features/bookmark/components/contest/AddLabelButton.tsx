@@ -8,7 +8,7 @@ import StarIcon from "@mui/icons-material/Star";
 import { Link } from "react-router-dom";
 import { ColoredCircle } from "@features/color/components/ColoredCircle";
 import { useIndexedDBForContestLabel } from "@features/bookmark/hooks/useIndexedDBForContestLabel";
-import { __Button } from "@features/ui/component/Button";
+import { Button } from "@features/ui/component/Button";
 import { Classification } from "@features/contests/contest";
 import type { ContestLabel } from "@features/bookmark/contestLabel";
 import { IconButton } from "@features/ui/component/IconButton";
@@ -36,7 +36,7 @@ const LabelRow: React.FC<LabelRowProps> = React.memo(
         >
           {label.description || "No description provided"}
         </Typography>
-        <__Button
+        <Button
           color={isAdded ? "error" : "secondary"}
           size="small"
           onClick={() => {
@@ -48,7 +48,7 @@ const LabelRow: React.FC<LabelRowProps> = React.memo(
           }}
         >
           {isAdded ? "Delete" : "Add"}
-        </__Button>
+        </Button>
       </Stack>
       <Divider />
     </Box>

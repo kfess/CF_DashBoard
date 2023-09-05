@@ -14,7 +14,7 @@ import {
   ProblemLabelForm,
   problemLabelFormSchema,
 } from "@features/bookmark/problemLabel";
-import { __Button } from "@features/ui/component/Button";
+import { Button } from "@features/ui/component/Button";
 import { LabelNameChip } from "@features/bookmark/components/problem/LabelNameChip";
 import { Name } from "@features/bookmark/components/problem/Name";
 import { Description } from "@features/bookmark/components/problem/Description";
@@ -84,9 +84,7 @@ export const Creator: React.FC = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ py: 2, display: "flex", justifyContent: "flex-end" }}>
-          <__Button onClick={toggleShowBlock} color="info">
-            New Label
-          </__Button>
+          <Button onClick={toggleShowBlock}>New Label</Button>
         </Box>
         {showBlock && (
           <Stack
@@ -129,14 +127,13 @@ export const Creator: React.FC = () => {
                 <Box sx={{ height: { xs: "0px", md: "1.8rem" } }} />
                 <Stack direction="row" spacing={1} justifyContent="flex-end">
                   <div>
-                    <__Button onClick={onCancel} color="secondary">
+                    <Button onClick={onCancel} color="secondary">
                       Cancel
-                    </__Button>
+                    </Button>
                   </div>
                   <div>
-                    <__Button
+                    <Button
                       type="submit"
-                      color="info"
                       disabled={
                         watchedName === "" ||
                         watchedColor === "" ||
@@ -144,7 +141,7 @@ export const Creator: React.FC = () => {
                       }
                     >
                       Create label
-                    </__Button>
+                    </Button>
                   </div>
                 </Stack>
               </Stack>

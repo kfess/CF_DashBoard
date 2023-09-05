@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Typography } from "@mui/material";
-import { __Button } from "@features/ui/component/Button";
+import { Button } from "@features/ui/component/Button";
 import { Chip } from "@features/ui/component/Chip";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import {
@@ -104,9 +104,9 @@ export const CreateContest: React.FC = () => {
 
       <div css={{ marginTop: "1rem", marginBottom: "1rem" }}>
         Organize Custom Contest as <Chip label={codeforcesUsername} />
-        <__Button onClick={() => {}} color="secondary">
+        <Button onClick={() => {}} color="secondary">
           Change CF user
-        </__Button>
+        </Button>
       </div>
 
       <Box
@@ -165,9 +165,7 @@ export const CreateContest: React.FC = () => {
       </Box>
 
       <Stack direction="row" justifyContent="flex-end">
-        <__Button type="submit" color="info">
-          Create Contest
-        </__Button>
+        <Button type="submit">Create Contest</Button>
       </Stack>
     </form>
   );

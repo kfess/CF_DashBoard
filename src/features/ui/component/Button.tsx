@@ -3,11 +3,11 @@ import { ButtonProps as MUIButtonProps } from "@mui/material/Button";
 import { SxProps } from "@mui/system";
 import { Theme } from "@mui/material/styles";
 
-interface __ButtonProps extends MUIButtonProps {
+interface ButtonProps extends MUIButtonProps {
   sx?: SxProps<Theme>;
 }
 
-export const __Button: React.FC<__ButtonProps> = (props) => {
+export const Button: React.FC<ButtonProps> = (props) => {
   return (
     <MUIButton
       color="info"

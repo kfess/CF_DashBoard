@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
-import { __Button } from "@features/ui/component/Button";
+import { Button } from "@features/ui/component/Button";
 
 type Props<T extends string | number> = {
   title: string;
@@ -31,9 +31,9 @@ export const ButtonWithAlertDialog = <T extends string | number>(
 
   return (
     <>
-      <__Button onClick={handleClickOpen} size="small" color="error">
+      <Button onClick={handleClickOpen} size="small" color="error">
         {title}
-      </__Button>
+      </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <DialogContentText fontWeight="fontWeightBold" sx={{ color: "red" }}>
@@ -41,19 +41,15 @@ export const ButtonWithAlertDialog = <T extends string | number>(
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <__Button onClick={handleClose} css={{ textTransform: "none" }}>
-            Cancel
-          </__Button>
-          <__Button
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button
             onClick={() => {
               deleteFn(deleteTarget);
               setOpen(false);
             }}
-            // color="#E55B66"
-            css={{ textTransform: "none" }}
           >
             OK
-          </__Button>
+          </Button>
         </DialogActions>
       </Dialog>
     </>

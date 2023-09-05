@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 import { Control, Controller, FieldErrors, useWatch } from "react-hook-form";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
@@ -12,7 +11,7 @@ import { ProblemsDifficulty } from "@features/custom_contests/components/Form/Pr
 import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsTag";
 import { ExpectedParticipants } from "@features/custom_contests/components/Form/ExpectedParticipants";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
-import { __Button } from "@features/ui/component/Button";
+import { Button } from "@features/ui/component/Button";
 
 type Props = {
   control: Control<CreateCustomContest>;
@@ -86,15 +85,14 @@ export const SelectProblems: React.FC<Props> = ({
         />
       </Stack>
       <Stack direction="row" justifyContent="flex-end" sx={{ my: 2 }}>
-        <__Button
+        <Button
           onClick={() => {
             data && setValue("problems", selectProblems(data));
           }}
           disabled={!data}
-          color="info"
         >
           Generate Problems
-        </__Button>
+        </Button>
       </Stack>
       <Controller
         name="problems"

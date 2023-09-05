@@ -8,7 +8,7 @@ import StarIcon from "@mui/icons-material/Star";
 import { Link } from "react-router-dom";
 import { ColoredCircle } from "@features/color/components/ColoredCircle";
 import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
-import { __Button } from "@features/ui/component/Button";
+import { Button } from "@features/ui/component/Button";
 import type { ProblemLabel } from "@features/bookmark/problemLabel";
 import { IconButton } from "@features/ui/component/IconButton";
 
@@ -35,7 +35,7 @@ const LabelRow: React.FC<LabelRowProps> = React.memo(
         >
           {label.description || "No description provided"}
         </Typography>
-        <__Button
+        <Button
           color={isAdded ? "error" : "secondary"}
           size="small"
           onClick={() => {
@@ -47,7 +47,7 @@ const LabelRow: React.FC<LabelRowProps> = React.memo(
           }}
         >
           {isAdded ? "Delete" : "Add"}
-        </__Button>
+        </Button>
       </Stack>
       <Divider />
     </Box>

@@ -15,7 +15,7 @@ import {
   ProblemLabel,
 } from "@features/bookmark/problemLabel";
 import { pluralize } from "@helpers/format";
-import { __Button } from "@features/ui/component/Button";
+import { Button } from "@features/ui/component/Button";
 import { trimFullWhiteSpace } from "@helpers/format";
 
 type Props = {
@@ -132,9 +132,9 @@ const DefaultView: React.FC<{
     </TableCell>
     <TableCell sx={{ py: 1 }}>
       <Stack direction="row" spacing={1}>
-        <__Button onClick={onEdit} color="secondary" size="small">
+        <Button onClick={onEdit} color="secondary" size="small">
           Edit
-        </__Button>
+        </Button>
         <ButtonWithAlertDialog
           title="Delete"
           dialogText="Are you sure? Deleting a label will remove it from relevant problems."
