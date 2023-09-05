@@ -16,7 +16,7 @@ export const PickOneButton: React.FC<Props> = ({ problem }) => {
     <ExternalLink
       href={problemUrl}
       label={
-        <Button color="secondary" startIcon={<ShuffleIcon />}>
+        <Button startIcon={<ShuffleIcon />} color="primary" variant="outlined">
           Pick One
         </Button>
       }

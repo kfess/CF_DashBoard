@@ -8,35 +8,33 @@ interface Props extends LinkProps {
   target?: string;
 }
 
-export const ExternalLink: React.FC<Props> = ({
-  label,
-  color,
-  target = "_blank",
-  ...restProps
-}) => {
-  const theme = useTheme();
-  const textColor = color
-    ? color
-    : theme.palette.mode === "light"
-    ? "#000000"
-    : "#ffffff";
+export const ExternalLink = React.forwardRef<HTMLAnchorElement, Props>(
+  ({ label, color, target = "_blank", ...restProps }, ref) => {
+    const theme = useTheme();
+    const textColor = color
+      ? color
+      : theme.palette.mode === "light"
+      ? "#000000"
+      : "#ffffff";
 
-  return (
-    <MUILink
-      component="a"
-      target={target}
-      rel="noopener noreferrer"
-      underline="none"
-      sx={{
-        color: textColor,
-        "&:hover": {
-          color: theme.palette.primary.main,
-          textDecoration: "underline",
-        },
-      }}
-      {...restProps}
-    >
-      {label}
-    </MUILink>
-  );
-};
+    return (
+      <MUILink
+        ref={ref}
+        component="a"
+        target={target}
+        rel="noopener noreferrer"
+        underline="none"
+        sx={{
+          color: textColor,
+          "&:hover": {
+            color: theme.palette.primary.main,
+            textDecoration: "underline",
+          },
+        }}
+        {...restProps}
+      >
+        {label}
+      </MUILink>
+    );
+  }
+);

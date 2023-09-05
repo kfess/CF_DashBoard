@@ -107,7 +107,10 @@ export const Creator: React.FC = () => {
               sx={{ justifyContent: "space-between" }}
               spacing={1}
             >
-              <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+              <Stack
+                direction={{ xs: "column", md: "row" }}
+                spacing={{ xs: 0, md: 1.5 }}
+              >
                 <div>
                   <Name
                     control={control}
@@ -127,7 +130,7 @@ export const Creator: React.FC = () => {
                 <Box sx={{ height: { xs: "0px", md: "1.8rem" } }} />
                 <Stack direction="row" spacing={1} justifyContent="flex-end">
                   <div>
-                    <Button onClick={onCancel} color="secondary">
+                    <Button onClick={onCancel} color="secondary" size="small">
                       Cancel
                     </Button>
                   </div>
@@ -139,6 +142,7 @@ export const Creator: React.FC = () => {
                         watchedColor === "" ||
                         Object.keys(errors).length > 0
                       }
+                      size="small"
                     >
                       Create label
                     </Button>

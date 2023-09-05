@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { Problem } from "@features/problems/problem";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
+import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 
 type Props = { problems: Problem[] };
 
@@ -57,7 +58,11 @@ export const Problems: React.FC<Props> = ({ problems }) => {
                       solvedCount={0}
                     />
                   </TableCell>
-                  <TableCell>{problem.rating}</TableCell>
+                  <TableCell>
+                    {problem.rating ?? (
+                      <HelpToolTip title="No data available" />
+                    )}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

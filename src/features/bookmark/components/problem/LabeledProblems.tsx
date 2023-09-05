@@ -17,6 +17,7 @@ import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexed
 import { getProblemKey } from "@features/problems/utils";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
+import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 
 type Props = { label: ProblemLabel };
 
@@ -78,7 +79,9 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
                 </TableCell>
                 <TableCell>
                   <span css={{ color: getColorCodeFromRating(p.rating) }}>
-                    {p.rating ?? "no data"}
+                    {p.rating?.toLocaleString() ?? (
+                      <HelpToolTip title="No data available" />
+                    )}
                   </span>
                 </TableCell>
                 <TableCell>
