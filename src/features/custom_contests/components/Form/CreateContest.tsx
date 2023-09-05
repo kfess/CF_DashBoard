@@ -90,18 +90,6 @@ export const CreateContest: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Typography
-        variant="h6"
-        my={2}
-        sx={{
-          fontWeight: "bold",
-          color: "#9246FF",
-          boxSizing: "border-box",
-        }}
-      >
-        Create your own contest with your own problems.
-      </Typography>
-
       <div css={{ marginTop: "1rem", marginBottom: "1rem" }}>
         Organize Custom Contest as <Chip label={codeforcesUsername} />
         <Button onClick={() => {}} color="secondary">

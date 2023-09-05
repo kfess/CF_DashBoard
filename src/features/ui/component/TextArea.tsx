@@ -6,6 +6,7 @@ import { styled } from "@mui/system";
 const StyledTextareaElement = styled("textarea")(({ theme }) => ({
   resize: "vertical",
   minHeight: "60px",
+  maxHeight: "200px",
   width: "100%",
   boxSizing: "border-box",
   fontSize: "1rem",
@@ -19,9 +20,7 @@ const StyledTextareaElement = styled("textarea")(({ theme }) => ({
     theme.palette.mode === "dark" ? theme.palette.grey[800] : "#fff",
   "&::placeholder": {
     color: theme.palette.grey[500],
-    opacity: 1,
   },
-
   border: `1px solid ${theme.palette.mode === "dark" ? "#1f272e" : "#E0E3E7"}`,
   "&:focus": {
     boxShadow: `0 0 0 0.12rem ${theme.palette.primary.main}`,
