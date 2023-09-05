@@ -2,7 +2,7 @@ import React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { _Button } from "@features/ui/component/Button";
+import { __Button } from "@features/ui/component/Button";
 import { createdContestTypes } from "@features/custom_contests/customContest";
 import { PublicContestTable } from "@features/custom_contests/components/PublicContestTable";
 import { MyContestTable } from "@features/custom_contests/components/MyContestTable";
@@ -28,9 +28,9 @@ export const CustomContestPage: React.FC = () => {
           <Grid item xs={12}>
             <Box py={1} display="flex" justifyContent="flex-end">
               <NavLink to={loggedIn ? "/custom-contest/create" : "#"}>
-                <_Button color="#9246FF" disabled={!loggedIn}>
+                <__Button disabled={!loggedIn} color="info">
                   Create New Contest
-                </_Button>
+                </__Button>
               </NavLink>
             </Box>
             {!loggedIn && (

@@ -6,7 +6,7 @@ import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { useAddParticipantToContest } from "@features/custom_contests/hooks/useAddParticipantToContest";
 import { useFetchCustomContestByContestId } from "@features/custom_contests/hooks/useFetchCustomContestByContestId";
-import { _Button } from "@features/ui/component/Button";
+import { __Button } from "@features/ui/component/Button";
 
 type RouteParams = {
   readonly contestId?: string;
@@ -36,9 +36,7 @@ export const RegisterButton: React.FC = () => {
     <>
       {isUserRegistered === false && isBeforeContestEnd && (
         <Box sx={{ m: 1, textAlign: "right" }}>
-          <_Button
-            size="small"
-            color="#9246FF"
+          <__Button
             disabled={
               !loggedIn ||
               !codeforcesUsername ||
@@ -48,9 +46,11 @@ export const RegisterButton: React.FC = () => {
             onClick={() => {
               mutate(contestId, codeforcesUsername);
             }}
+            size="small"
+            color="info"
           >
             Register to Participate
-          </_Button>
+          </__Button>
         </Box>
       )}
     </>

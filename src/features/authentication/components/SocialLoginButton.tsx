@@ -1,7 +1,7 @@
 import React from "react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
-import { _Button } from "@features/ui/component/Button";
+import { __Button } from "@features/ui/component/Button";
 
 const GITHUB_CLIENT_ID = import.meta.env.VITE_GITHUB_CLIENT_ID;
 
@@ -29,7 +29,7 @@ export const SocialLoginButton: React.FC<Props> = ({ provider }) => {
   return (
     <>
       {!loggedIn && (
-        <_Button
+        <__Button
           onClick={handleLogin}
           startIcon={provider === "github" ? <GitHubIcon /> : null}
           css={{
@@ -44,7 +44,7 @@ export const SocialLoginButton: React.FC<Props> = ({ provider }) => {
           }}
         >
           Sign in with {provider}
-        </_Button>
+        </__Button>
       )}
     </>
   );

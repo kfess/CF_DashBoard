@@ -3,7 +3,7 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import type { Classification } from "@features/contests/contest";
 import { SolvedStatus } from "./SolvedStatusFilter";
 import { PeriodWord } from "./PeriodFilter";
-import { Button } from "@features/ui/component/Button";
+import { __Button } from "@features/ui/component/Button";
 import { useURLQuery } from "@hooks/useQueryParams";
 
 type Props = {
@@ -31,8 +31,12 @@ export const ResetFilterButton: React.FC<Props> = ({
   };
 
   return (
-    <Button onClick={onClickReset} startIcon={<ReplayIcon />}>
+    <__Button
+      onClick={onClickReset}
+      startIcon={<ReplayIcon />}
+      color="secondary"
+    >
       Reset
-    </Button>
+    </__Button>
   );
 };

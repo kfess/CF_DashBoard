@@ -12,7 +12,7 @@ import { ProblemsDifficulty } from "@features/custom_contests/components/Form/Pr
 import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsTag";
 import { ExpectedParticipants } from "@features/custom_contests/components/Form/ExpectedParticipants";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
-import { _Button } from "@features/ui/component/Button";
+import { __Button } from "@features/ui/component/Button";
 
 type Props = {
   control: Control<CreateCustomContest>;
@@ -86,15 +86,15 @@ export const SelectProblems: React.FC<Props> = ({
         />
       </Stack>
       <Stack direction="row" justifyContent="flex-end" sx={{ my: 2 }}>
-        <_Button
+        <__Button
           onClick={() => {
             data && setValue("problems", selectProblems(data));
           }}
           disabled={!data}
-          color="#9246FF"
+          color="info"
         >
           Generate Problems
-        </_Button>
+        </__Button>
       </Stack>
       <Controller
         name="problems"

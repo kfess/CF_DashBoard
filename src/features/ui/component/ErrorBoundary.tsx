@@ -20,7 +20,9 @@ export const ErrorFallback: React.FC<FallbackProps> = ({
         <Typography variant="body2" paragraph>
           {error.message}
         </Typography>
-        <__Button onClick={resetErrorBoundary}>Try Again</__Button>
+        <__Button onClick={resetErrorBoundary} color="secondary">
+          Try Again
+        </__Button>
       </Stack>
     </Container>
   );

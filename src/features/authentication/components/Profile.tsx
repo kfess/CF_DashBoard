@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import { Input } from "@features/ui/component/Input";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { HeadLine } from "@features/layout/components/HeadLine";
-import { _Button } from "@features/ui/component/Button";
+import { __Button } from "@features/ui/component/Button";
 
 export const Profile: React.FC = () => {
   const { githubId, githubUserName, codeforcesUsername, updateUsername } =
@@ -52,9 +52,9 @@ export const Profile: React.FC = () => {
             value={newUsername}
             onChange={handleChange}
           />
-          <_Button type="submit" color="#9246FF">
+          <__Button type="submit" color="info">
             Update
-          </_Button>
+          </__Button>
         </Stack>
       </form>
     </>
