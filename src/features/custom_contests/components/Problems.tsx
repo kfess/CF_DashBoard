@@ -59,7 +59,7 @@ export const Problems: React.FC<Props> = ({ problems }) => {
                     />
                   </TableCell>
                   <TableCell>
-                    {problem.rating ?? (
+                    {problem.rating?.toLocaleString() ?? (
                       <HelpToolTip title="No data available" />
                     )}
                   </TableCell>

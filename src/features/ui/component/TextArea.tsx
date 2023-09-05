@@ -3,45 +3,40 @@ import { InputUnstyledProps } from "@mui/base/InputUnstyled";
 import InputUnstyled from "@mui/base/InputUnstyled";
 import { styled } from "@mui/system";
 
-const grey = {
-  50: "#F3F6F9",
-  100: "#E7EBF0",
-  200: "#E0E3E7",
-  300: "#CDD2D7",
-  400: "#B2BAC2",
-  500: "#A0AAB4",
-  600: "#6F7E8C",
-  700: "#3E5060",
-  800: "#2D3843",
-  900: "#1A2027",
-};
+const StyledTextareaElement = styled("textarea")(({ theme }) => ({
+  resize: "vertical",
+  minHeight: "60px",
+  width: "100%",
+  boxSizing: "border-box",
+  fontSize: "1rem",
+  borderRadius: theme.shape.borderRadius,
+  padding: theme.spacing(1, 1.2),
+  color:
+    theme.palette.mode === "dark"
+      ? theme.palette.grey[200]
+      : theme.palette.grey[900],
+  backgroundColor:
+    theme.palette.mode === "dark" ? theme.palette.grey[800] : "#fff",
+  "&::placeholder": {
+    color: theme.palette.grey[500],
+    opacity: 1,
+  },
 
-const StyledTextareaElement = styled("textarea")<InputUnstyledProps>(
-  ({ theme }) => `
-  resize: vertical;
-  min-height: 50px;
-  width: 100%;
-  box-sizing: border-box;
-  font-size: 1rem;
-  padding: ${theme.spacing(1, 1.2)};
-  border-radius: 0.375rem;
-  color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
-  background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
-  border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-  box-shadow: 0px 2px 2px ${
-    theme.palette.mode === "dark" ? grey[900] : grey[50]
-  };
-
-  &:focus {
-    box-shadow: 0 0 0 0.2rem #9246FF;
-  }
-
+  border: `1px solid ${theme.palette.mode === "dark" ? "#1f272e" : "#E0E3E7"}`,
+  "&:focus": {
+    boxShadow: `0 0 0 0.12rem ${theme.palette.primary.main}`,
+  },
+  "&.Mui-error": {
+    borderColor: theme.palette.error.main,
+    "&:hover": {
+      borderColor: theme.palette.error.main,
+    },
+  },
   // firefox
-  &:focus-visible {
-    outline: 0;
-  }
-`
-);
+  "&:focus-visible": {
+    outline: 0,
+  },
+}));
 
 export const TextArea = React.forwardRef(function CustomInput(
   props: InputUnstyledProps,
