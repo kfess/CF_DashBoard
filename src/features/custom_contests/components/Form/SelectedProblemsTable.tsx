@@ -15,6 +15,7 @@ import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 import { ControllerRenderProps } from "react-hook-form";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { IconButton } from "@features/ui/component/IconButton";
+import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 
 type Props = {
   field: ControllerRenderProps<CreateCustomContest, "problems">;
@@ -81,7 +82,11 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
                             showBookmarked={false}
                           />
                         </TableCell>
-                        <TableCell>{p.rating || "no data"}</TableCell>
+                        <TableCell>
+                          {p.rating?.toLocaleString() || (
+                            <HelpToolTip title="No data available" />
+                          )}
+                        </TableCell>
                         <TableCell>
                           <IconButton
                             icon={<DeleteIcon />}
