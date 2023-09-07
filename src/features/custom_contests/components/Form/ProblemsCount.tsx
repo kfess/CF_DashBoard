@@ -28,7 +28,7 @@ export const ProblemsCount: React.FC<Props> = ({ control, errors }) => {
             type="number"
             value={field.value.count}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              const val = e.target.value === "" ? 0 : e.target.valueAsNumber;
+              const val = e.target.value === "" ? null : e.target.valueAsNumber;
               field.onChange({ ...field.value, count: val });
             }}
           />

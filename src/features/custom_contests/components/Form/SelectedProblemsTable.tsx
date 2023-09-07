@@ -34,13 +34,6 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
     <>
       {selectedProblems.length > 0 && (
         <>
-          <TablePagination
-            size={selectedProblems.length}
-            page={page}
-            setPage={setPage}
-            rowsPerPage={rowsPerPage}
-            setRowsPerPage={setRowsPerPage}
-          />
           <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
             <TableContainer component={Paper}>
               <Table
@@ -103,6 +96,13 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
               </Table>
             </TableContainer>
           </Paper>
+          <TablePagination
+            size={selectedProblems.length}
+            page={page}
+            setPage={setPage}
+            rowsPerPage={rowsPerPage}
+            setRowsPerPage={setRowsPerPage}
+          />
         </>
       )}
       {selectedProblems.length === 0 && (

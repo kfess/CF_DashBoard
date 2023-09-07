@@ -56,27 +56,64 @@ export const _ViewStep: React.FC<Props> = ({ setActiveStep, formData }) => {
             <Divider light sx={{ mb: 0.5 }}>
               Details
             </Divider>
-            <Typography variant="body2" gutterBottom noWrap>
+            <Typography
+              variant="body2"
+              gutterBottom
+              noWrap
+              color="text.secondary"
+            >
               Title : {formData.title}
             </Typography>
-            <Typography variant="body2" gutterBottom noWrap>
+            <Typography
+              variant="body2"
+              gutterBottom
+              noWrap
+              color="text.secondary"
+            >
               Description : {formData.description || "No Description Provided"}
             </Typography>
-            <Typography variant="body2" gutterBottom noWrap>
+            <Typography
+              variant="body2"
+              gutterBottom
+              noWrap
+              color="text.secondary"
+            >
               Start : {formData.startDate}
             </Typography>
-            <Typography variant="body2" gutterBottom noWrap>
+            <Typography
+              variant="body2"
+              gutterBottom
+              noWrap
+              color="text.secondary"
+            >
               End : {formData.endDate}
             </Typography>
             <Divider light sx={{ mt: 2, mb: 0.5 }}>
               problems
             </Divider>
-            <Typography variant="body2" gutterBottom noWrap>
+            <Typography
+              variant="body2"
+              gutterBottom
+              noWrap
+              color="text.secondary"
+            >
               Penalty : {formData.penalty}
             </Typography>
-            <Typography variant="body2" gutterBottom noWrap>
+            <Typography
+              variant="body2"
+              gutterBottom
+              noWrap
+              color="text.secondary"
+            >
               Problems : {formData.problems.length}
             </Typography>
+            <Divider light sx={{ mt: 2, mb: 0.5 }}>
+              Expected Users
+            </Divider>
+
+            <Divider light sx={{ mt: 2, mb: 0.5 }}>
+              Related Tags
+            </Divider>
           </Box>
         </Grid>
       </Grid>

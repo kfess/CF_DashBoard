@@ -25,11 +25,10 @@ export const _ViewSelectedProblems: React.FC<Props> = ({ problems }) => {
     <>
       {problems.length > 0 && (
         <>
-          <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
+          <Paper elevation={0}>
             <TableContainer component={Paper}>
               <Table
                 sx={{
-                  height: "100%",
                   border: (theme) => `0.5px solid ${theme.palette.divider}`,
                 }}
               >
