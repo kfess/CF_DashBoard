@@ -96,13 +96,6 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
               </Table>
             </TableContainer>
           </Paper>
-          <TablePagination
-            size={selectedProblems.length}
-            page={page}
-            setPage={setPage}
-            rowsPerPage={rowsPerPage}
-            setRowsPerPage={setRowsPerPage}
-          />
         </>
       )}
       {selectedProblems.length === 0 && (

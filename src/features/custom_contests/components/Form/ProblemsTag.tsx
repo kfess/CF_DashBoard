@@ -39,7 +39,7 @@ const TagSection: React.FC<TagSectionProps> = ({
             </span>
             <TagsButton
               selectedTags={field.value}
-              addOrRemoveTag={(tag: Tag) => {
+              onSelectTag={(tag: Tag) => {
                 const updatedTags = field.value.includes(tag)
                   ? field.value.filter((t: Tag) => t !== tag)
                   : [...field.value, tag];
@@ -51,7 +51,7 @@ const TagSection: React.FC<TagSectionProps> = ({
               {hintText}
             </div>
           </div>
-          <Stack direction="row" sx={{ flexWrap: "wrap" }}>
+          <Stack direction="row" sx={{ flexWrap: "wrap" }} spacing={1}>
             {field.value.length > 0 &&
               field.value.map((tag: Tag) => (
                 <DeletableChip

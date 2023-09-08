@@ -22,7 +22,7 @@ export const Penalty: React.FC<Props> = ({ control, errors }) => {
               htmlFor="penalty-input"
               css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
             >
-              Penalty
+              Penalty (seconds)
             </label>
             <Input
               {...field}

@@ -8,6 +8,7 @@ import { Button } from "@features/ui/component/Button";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Chip } from "@features/ui/component/Chip";
 import { _ViewSelectedProblems } from "./_ViewSelectedProblems";
+import { Select } from "@features/ui/component/Select";
 
 type Props = {
   setActiveStep(step: number): void;
@@ -16,8 +17,29 @@ type Props = {
 export const _ViewStep: React.FC<Props> = ({ setActiveStep, formData }) => {
   return (
     <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+      <Stack direction={"row"} spacing={0.5}>
+        <Select
+          label="a"
+          value={0}
+          options={[
+            { value: 0, label: "a" },
+            { value: 1, label: "b" },
+          ]}
+          onChange={() => {}}
+        />
+        <Select
+          label="a"
+          value={0}
+          options={[
+            { value: 0, label: "a" },
+            { value: 1, label: "b" },
+          ]}
+          onChange={() => {}}
+        />
+      </Stack>
+
       <Grid container spacing={3}>
-        <Grid item xs={12} md={8} order={{ xs: 2, md: 1 }}>
+        <Grid item xs={12} md={8} order={{ xs: 2, md: 1 }} pr={1}>
           <Typography variant="h6" fontWeight="bold">
             About Problems
           </Typography>
@@ -26,95 +48,93 @@ export const _ViewStep: React.FC<Props> = ({ setActiveStep, formData }) => {
           </Box>
         </Grid>
         <Grid item xs={12} md={4} order={{ xs: 1, md: 2 }}>
-          <Box>
-            <Typography variant="h6" fontWeight="bold">
-              About this Contest
-            </Typography>
-            <Stack direction="row" flexWrap="wrap" flexGrow={1} gap={1} my={2}>
-              <Chip
-                label={`Scope: ${formData.visibility}`}
-                sx={{
-                  color: (theme) => theme.palette.primary.main,
-                  backgroundColor: alpha("#9246FF", 0.15),
-                }}
-              />
-              <Chip
-                label={`Type: ${formData.mode}`}
-                sx={{
-                  color: (theme) => theme.palette.primary.main,
-                  backgroundColor: alpha("#9246FF", 0.15),
-                }}
-              />
-              <Chip
-                label={`Hosted By: ${formData.owner}`}
-                sx={{
-                  color: (theme) => theme.palette.primary.main,
-                  backgroundColor: alpha("#9246FF", 0.15),
-                }}
-              />
-            </Stack>
-            <Divider light sx={{ mb: 0.5 }}>
-              Details
-            </Divider>
-            <Typography
-              variant="body2"
-              gutterBottom
-              noWrap
-              color="text.secondary"
-            >
-              Title : {formData.title}
-            </Typography>
-            <Typography
-              variant="body2"
-              gutterBottom
-              noWrap
-              color="text.secondary"
-            >
-              Description : {formData.description || "No Description Provided"}
-            </Typography>
-            <Typography
-              variant="body2"
-              gutterBottom
-              noWrap
-              color="text.secondary"
-            >
-              Start : {formData.startDate}
-            </Typography>
-            <Typography
-              variant="body2"
-              gutterBottom
-              noWrap
-              color="text.secondary"
-            >
-              End : {formData.endDate}
-            </Typography>
-            <Divider light sx={{ mt: 2, mb: 0.5 }}>
-              problems
-            </Divider>
-            <Typography
-              variant="body2"
-              gutterBottom
-              noWrap
-              color="text.secondary"
-            >
-              Penalty : {formData.penalty}
-            </Typography>
-            <Typography
-              variant="body2"
-              gutterBottom
-              noWrap
-              color="text.secondary"
-            >
-              Problems : {formData.problems.length}
-            </Typography>
-            <Divider light sx={{ mt: 2, mb: 0.5 }}>
-              Expected Users
-            </Divider>
+          <Typography variant="h6" fontWeight="bold">
+            About this Contest
+          </Typography>
+          <Stack direction="row" flexWrap="wrap" flexGrow={1} gap={1} my={2}>
+            <Chip
+              label={`Scope: ${formData.visibility}`}
+              sx={{
+                color: (theme) => theme.palette.primary.main,
+                backgroundColor: alpha("#9246FF", 0.15),
+              }}
+            />
+            <Chip
+              label={`Type: ${formData.mode}`}
+              sx={{
+                color: (theme) => theme.palette.primary.main,
+                backgroundColor: alpha("#9246FF", 0.15),
+              }}
+            />
+            <Chip
+              label={`Hosted By: ${formData.owner}`}
+              sx={{
+                color: (theme) => theme.palette.primary.main,
+                backgroundColor: alpha("#9246FF", 0.15),
+              }}
+            />
+          </Stack>
+          <Divider light sx={{ mb: 0.5 }}>
+            Details
+          </Divider>
+          <Typography
+            variant="body2"
+            gutterBottom
+            noWrap
+            color="text.secondary"
+          >
+            Title : {formData.title}
+          </Typography>
+          <Typography
+            variant="body2"
+            gutterBottom
+            noWrap
+            color="text.secondary"
+          >
+            Description : {formData.description || "No Description Provided"}
+          </Typography>
+          <Typography
+            variant="body2"
+            gutterBottom
+            noWrap
+            color="text.secondary"
+          >
+            Start : {formData.startDate}
+          </Typography>
+          <Typography
+            variant="body2"
+            gutterBottom
+            noWrap
+            color="text.secondary"
+          >
+            End : {formData.endDate}
+          </Typography>
+          <Divider light sx={{ mt: 2, mb: 0.5 }}>
+            problems
+          </Divider>
+          <Typography
+            variant="body2"
+            gutterBottom
+            noWrap
+            color="text.secondary"
+          >
+            Penalty : {formData.penalty}
+          </Typography>
+          <Typography
+            variant="body2"
+            gutterBottom
+            noWrap
+            color="text.secondary"
+          >
+            Problems : {formData.problems.length}
+          </Typography>
+          <Divider light sx={{ mt: 2, mb: 0.5 }}>
+            Expected Users
+          </Divider>
 
-            <Divider light sx={{ mt: 2, mb: 0.5 }}>
-              Related Tags
-            </Divider>
-          </Box>
+          <Divider light sx={{ mt: 2, mb: 0.5 }}>
+            Related Tags
+          </Divider>
         </Grid>
       </Grid>
       <Stack
@@ -125,7 +145,7 @@ export const _ViewStep: React.FC<Props> = ({ setActiveStep, formData }) => {
         justifyContent="flex-end"
       >
         <Button onClick={() => setActiveStep(1)} color="secondary">
-          Previous
+          Back
         </Button>
         <Button type="submit">Create Contest</Button>
       </Stack>

@@ -31,16 +31,8 @@ export const _ContestDetailStep: React.FC<Props> = ({
   errors,
 }) => {
   return (
-    <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }}>
-      <Box
-        sx={{
-          px: { xs: 2, md: 4 },
-          py: 3,
-          backgroundColor: (theme) => theme.palette.background.paper,
-          border: (theme) => `0.5px solid ${theme.palette.divider}`,
-          borderRadius: 3,
-        }}
-      >
+    <Box pt={2} pb={{ xs: 2, md: 4 }}>
+      <Box sx={{ px: { xs: 2, md: 4 }, py: 3 }}>
         <Box>
           <Stack
             direction="row"

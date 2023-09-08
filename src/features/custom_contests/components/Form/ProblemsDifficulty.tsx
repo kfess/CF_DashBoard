@@ -31,7 +31,7 @@ export const ProblemsDifficulty: React.FC<Props> = ({ control, errors }) => {
                 value={field.value.difficultyFrom}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   const val =
-                    e.target.value === "" ? 0 : e.target.valueAsNumber;
+                    e.target.value === "" ? null : e.target.valueAsNumber;
                   field.onChange({ ...field.value, difficultyFrom: val });
                 }}
               />
@@ -61,7 +61,7 @@ export const ProblemsDifficulty: React.FC<Props> = ({ control, errors }) => {
                 value={field.value.difficultyTo}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   const val =
-                    e.target.value === "" ? 0 : e.target.valueAsNumber;
+                    e.target.value === "" ? null : e.target.valueAsNumber;
                   field.onChange({ ...field.value, difficultyTo: val });
                 }}
               />
