@@ -1,11 +1,21 @@
 import * as React from "react";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { Select as MUISelect } from "@mui/material";
+import { Select as MUISelect, SelectProps } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { styled } from "@mui/system";
 import InputBase from "@mui/material/InputBase";
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 const StyledInputElement = styled(InputBase)(({ theme }) => ({
   padding: theme.spacing(0.1, 1.2),
@@ -24,32 +34,39 @@ const StyledInputElement = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-type StyledSelectProps = {
+interface StyledSelectProps<T> extends Omit<SelectProps, "onChange"> {
   label: string;
-  value: any;
-  options: { value: any; label: string }[];
-  onChange: (value: any) => void;
-};
+  options: T[];
+  onChange: (value: T) => void;
+}
 
-export const Select: React.FC<StyledSelectProps> = ({
-  value,
+export const Select = <T extends string | number>({
+  label,
   options,
   onChange,
-}) => {
-  const handleChange = (event: SelectChangeEvent) => {
-    onChange(event.target.value);
+  ...props
+}: StyledSelectProps<T>) => {
+  const handleChange = (event: SelectChangeEvent<unknown>) => {
+    const value = options.find(
+      (option) => option.toString() === (event.target.value as string)
+    );
+    if (value !== undefined) {
+      onChange(value);
+    }
   };
 
   return (
     <FormControl fullWidth>
       <MUISelect
-        value={value}
+        label={label}
         onChange={handleChange}
         input={<StyledInputElement />}
+        MenuProps={MenuProps}
+        {...props}
       >
-        {options.map((option, index) => (
-          <MenuItem key={index} value={option.value}>
-            {option.label}
+        {options.map((option) => (
+          <MenuItem key={option.toString()} value={option.toString()}>
+            {option}
           </MenuItem>
         ))}
       </MUISelect>

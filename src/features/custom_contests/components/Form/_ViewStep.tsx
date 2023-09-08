@@ -8,7 +8,6 @@ import { Button } from "@features/ui/component/Button";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Chip } from "@features/ui/component/Chip";
 import { _ViewSelectedProblems } from "./_ViewSelectedProblems";
-import { Select } from "@features/ui/component/Select";
 
 type Props = {
   setActiveStep(step: number): void;
@@ -17,27 +16,6 @@ type Props = {
 export const _ViewStep: React.FC<Props> = ({ setActiveStep, formData }) => {
   return (
     <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
-      <Stack direction={"row"} spacing={0.5}>
-        <Select
-          label="a"
-          value={0}
-          options={[
-            { value: 0, label: "a" },
-            { value: 1, label: "b" },
-          ]}
-          onChange={() => {}}
-        />
-        <Select
-          label="a"
-          value={0}
-          options={[
-            { value: 0, label: "a" },
-            { value: 1, label: "b" },
-          ]}
-          onChange={() => {}}
-        />
-      </Stack>
-
       <Grid container spacing={3}>
         <Grid item xs={12} md={8} order={{ xs: 2, md: 1 }} pr={1}>
           <Typography variant="h6" fontWeight="bold">

@@ -5,9 +5,8 @@ import Stack from "@mui/material/Stack";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@features/ui/component/DatePicker";
+import { Select } from "@features/ui/component/Select";
 
 type Props = {
   control: Control<CreateCustomContest>;
@@ -16,8 +15,8 @@ type Props = {
 
 export const ContestDate: React.FC<Props> = ({ control, errors }) => {
   return (
-    <Stack direction="row" spacing={2}>
-      <Box width="50%">
+    <>
+      <Box>
         <Controller
           name="startDate"
           control={control}
@@ -25,27 +24,55 @@ export const ContestDate: React.FC<Props> = ({ control, errors }) => {
             <>
               <label
                 htmlFor="description-input"
-                css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
+                css={{ fontWeight: "bold", paddingBottom: "0.5rem" }}
               >
-                Start Date
+                Start Date {field.value}
               </label>
-              <div>
-                <DatePicker
-                  {...field}
-                  value={field.value ? dayjs.utc(field.value).local() : null}
-                  onChange={(newValue) => {
-                    const utcValue = dayjs(newValue).utc().toISOString();
-                    field.onChange(utcValue);
-                  }}
-                  format="YYYY/MM/DD HH:mm"
-                />
+              <Stack direction="row" spacing={1} pt={0.5}>
+                <Box flexGrow="2">
+                  <DatePicker
+                    {...field}
+                    value={field.value ? dayjs.utc(field.value).local() : null}
+                    onChange={(newValue) => {
+                      const utcValue = dayjs(newValue).utc().toISOString();
+                      field.onChange(utcValue);
+                    }}
+                    format="YYYY/MM/DD"
+                  />
+                </Box>
+                <Box flexGrow="1">
+                  <Select
+                    label="Start Time"
+                    options={Array.from({ length: 24 }, (_, i) => i)}
+                    onChange={(value) => {
+                      const currentDateTime = dayjs.utc(field.value);
+                      const updatedDateTime = currentDateTime.hour(value);
+                      field.onChange(updatedDateTime.toISOString());
+                    }}
+                    defaultValue={0}
+                    autoWidth
+                  />
+                </Box>
+                <Box flexGrow="1">
+                  <Select
+                    label="Start Time"
+                    options={Array.from({ length: 12 }, (_, i) => i * 5)}
+                    onChange={(value) => {
+                      const currentDateTime = dayjs.utc(field.value);
+                      const updatedDateTime = currentDateTime.minute(value);
+                      field.onChange(updatedDateTime.toISOString());
+                    }}
+                    defaultValue={0}
+                    autoWidth
+                  />
+                </Box>
                 <ErrorMessage message={errors.startDate?.message} />
-              </div>
+              </Stack>
             </>
           )}
         />
       </Box>
-      <Box>
+      <Box py={2}>
         <Controller
           name="endDate"
           control={control}
@@ -57,8 +84,8 @@ export const ContestDate: React.FC<Props> = ({ control, errors }) => {
               >
                 End Date
               </label>
-              <div>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Stack direction="row" spacing={1} pt={0.5}>
+                <Box flexGrow="2">
                   <DatePicker
                     {...field}
                     value={field.value ? dayjs.utc(field.value).local() : null}
@@ -66,15 +93,41 @@ export const ContestDate: React.FC<Props> = ({ control, errors }) => {
                       const utcValue = dayjs(newValue).utc().toISOString();
                       field.onChange(utcValue);
                     }}
-                    format="YYYY/MM/DD HH:mm"
+                    format="YYYY/MM/DD"
                   />
-                </LocalizationProvider>
-                <ErrorMessage message={errors.endDate?.message} />
-              </div>
+                </Box>
+                <Box flexGrow="1">
+                  <Select
+                    label="Start Time"
+                    options={Array.from({ length: 24 }, (_, i) => i)}
+                    onChange={(value) => {
+                      const currentDateTime = dayjs.utc(field.value);
+                      const updatedDateTime = currentDateTime.hour(value);
+                      field.onChange(updatedDateTime.toISOString());
+                    }}
+                    defaultValue={0}
+                    autoWidth
+                  />
+                </Box>
+                <Box flexGrow="1">
+                  <Select
+                    label="Start Time"
+                    options={Array.from({ length: 12 }, (_, i) => i * 5)}
+                    onChange={(value) => {
+                      const currentDateTime = dayjs.utc(field.value);
+                      const updatedDateTime = currentDateTime.minute(value);
+                      field.onChange(updatedDateTime.toISOString());
+                    }}
+                    defaultValue={0}
+                    autoWidth
+                  />
+                </Box>
+                <ErrorMessage message={errors.startDate?.message} />
+              </Stack>
             </>
           )}
         />
       </Box>
-    </Stack>
+    </>
   );
 };

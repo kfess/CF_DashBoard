@@ -9,22 +9,26 @@ import {
 
 interface Props extends DatePickerProps<Dayjs | string> {}
 
-export const DatePicker: React.FC<Props> = (props) => {
-  return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <MUIDatePicker
-        {...props}
-        sx={{
-          "& .MuiInputBase-root": {
-            height: "2.5rem",
-            "&:hover": {
+export const DatePicker = React.forwardRef(
+  (props: Props, ref: React.ForwardedRef<any>) => {
+    return (
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <MUIDatePicker
+          {...props}
+          ref={ref}
+          sx={{
+            "& .MuiInputBase-root": {
+              height: "2.2rem",
               borderColor: "transparent",
+              backgroundColor: (theme) =>
+                theme.palette.mode === "dark"
+                  ? theme.palette.grey[800]
+                  : "#fff",
             },
-            backgroundColor: (theme) =>
-              theme.palette.mode === "dark" ? theme.palette.grey[800] : "#fff",
-          },
-        }}
-      />
-    </LocalizationProvider>
-  );
-};
+          }}
+          slotProps={{ textField: { fullWidth: true } }} // to make the input field full width
+        />
+      </LocalizationProvider>
+    );
+  }
+);
