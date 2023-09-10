@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Divider, alpha } from "@mui/material";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { Button } from "@features/ui/component/Button";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Chip } from "@features/ui/component/Chip";
@@ -122,7 +123,11 @@ export const _ViewStep: React.FC<Props> = ({ setActiveStep, formData }) => {
         spacing={1}
         justifyContent="flex-end"
       >
-        <Button onClick={() => setActiveStep(1)} color="secondary">
+        <Button
+          onClick={() => setActiveStep(1)}
+          color="secondary"
+          startIcon={<KeyboardDoubleArrowLeftIcon />}
+        >
           Back
         </Button>
         <Button type="submit">Create Contest</Button>

@@ -1,6 +1,8 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Control, FieldErrors } from "react-hook-form";
 import { Button } from "@features/ui/component/Button";
@@ -39,10 +41,18 @@ export const _ProblemStep: React.FC<Props> = ({
         spacing={1}
         justifyContent="flex-end"
       >
-        <Button onClick={() => setActiveStep(0)} color="secondary">
+        <Button
+          onClick={() => setActiveStep(0)}
+          color="secondary"
+          startIcon={<KeyboardDoubleArrowLeftIcon />}
+        >
           Previous
         </Button>
-        <Button onClick={() => setActiveStep(2)} color="secondary">
+        <Button
+          onClick={() => setActiveStep(2)}
+          color="secondary"
+          endIcon={<KeyboardDoubleArrowRightIcon />}
+        >
           Next
         </Button>
       </Stack>

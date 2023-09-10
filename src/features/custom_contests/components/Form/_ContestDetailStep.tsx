@@ -1,6 +1,7 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { alpha } from "@mui/material";
 import { Chip } from "@features/ui/component/Chip";
 import { Visibility } from "@features/custom_contests/components/Form/Visibility";
@@ -80,7 +81,11 @@ export const _ContestDetailStep: React.FC<Props> = ({
         </Stack>
       </Box>
       <Stack direction="row" mt={2} mr={2} justifyContent="flex-end">
-        <Button onClick={() => setActiveStep(1)} color="secondary">
+        <Button
+          onClick={() => setActiveStep(1)}
+          color="secondary"
+          endIcon={<KeyboardDoubleArrowRightIcon />}
+        >
           Next
         </Button>
       </Stack>

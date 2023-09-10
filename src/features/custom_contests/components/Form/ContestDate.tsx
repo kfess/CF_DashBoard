@@ -26,10 +26,7 @@ export const ContestDate: React.FC<Props> = ({ control, errors }) => {
                 htmlFor="description-input"
                 css={{ fontWeight: "bold", paddingBottom: "0.5rem" }}
               >
-                Start Date{" "}
-                {field.value
-                  ? dayjs(field.value).local().format("YYYY-MM-DD HH:mm:ss")
-                  : ""}
+                Start Date
               </label>
               <Stack direction="row" spacing={1} pt={0.5}>
                 <Box flexGrow="2">
@@ -84,10 +81,7 @@ export const ContestDate: React.FC<Props> = ({ control, errors }) => {
                 htmlFor="description-input"
                 css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
               >
-                End Date{" "}
-                {field.value
-                  ? dayjs(field.value).local().format("YYYY-MM-DD HH:mm:ss")
-                  : ""}
+                End Date
               </label>
               <Stack direction="row" spacing={1} pt={0.5}>
                 <Box flexGrow="2">
