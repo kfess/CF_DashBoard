@@ -1,11 +1,13 @@
 import React from "react";
-import { Control, Controller, FieldErrors } from "react-hook-form";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 import { TagsButton } from "@features/problems/components/TagsButton";
 import { DeletableChip } from "@features/ui/component/Chip";
 import { Tag } from "@features/problems/problem";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
+import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 
 type Props = {
   control: Control<CreateCustomContest>;
@@ -34,9 +36,11 @@ const TagSection: React.FC<TagSectionProps> = ({
       render={({ field }) => (
         <>
           <div css={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
-            <span css={{ fontWeight: "bold", marginRight: "1rem" }}>
-              {label}
-            </span>
+            <Box my={0.5} fontWeight="bold">
+              <label>
+                {label} <HelpToolTip title={hintText} />
+              </label>
+            </Box>
             <TagsButton
               selectedTags={field.value}
               onSelectTag={(tag: Tag) => {
@@ -47,11 +51,8 @@ const TagSection: React.FC<TagSectionProps> = ({
               }}
               removeAllTags={() => field.onChange([])}
             />
-            <div css={{ fontSize: 14, color: "gray", marginLeft: "20px" }}>
-              {hintText}
-            </div>
           </div>
-          <Stack direction="row" sx={{ flexWrap: "wrap" }} spacing={1}>
+          <Stack direction="row" sx={{ flexWrap: "wrap" }} gap={1}>
             {field.value.length > 0 &&
               field.value.map((tag: Tag) => (
                 <DeletableChip
@@ -78,21 +79,25 @@ const TagSection: React.FC<TagSectionProps> = ({
 
 export const ProblemsTag: React.FC<Props> = ({ control, errors }) => {
   return (
-    <>
-      <TagSection
-        label="Include tags"
-        name="problemsFilter.includeTags"
-        control={control}
-        hintText="When you select tags, suggested problems are related to the topic."
-        errors={errors}
-      />
-      <TagSection
-        label="Exclude tags"
-        name="problemsFilter.excludeTags"
-        control={control}
-        hintText="When you select tags, problems related to the tags will be excluded."
-        errors={errors}
-      />
-    </>
+    <Stack direction={{ xs: "column", sm: "row" }} gap={1}>
+      <Box width={{ xs: "100%", sm: "50%" }}>
+        <TagSection
+          label="Include tags"
+          name="problemsFilter.includeTags"
+          control={control}
+          hintText="When you select tags, suggested problems are related to the topic."
+          errors={errors}
+        />
+      </Box>
+      <Box width={{ xs: "100%", sm: "50%" }}>
+        <TagSection
+          label="Exclude tags"
+          name="problemsFilter.excludeTags"
+          control={control}
+          hintText="When you select tags, problems related to the tags will be excluded."
+          errors={errors}
+        />
+      </Box>
+    </Stack>
   );
 };
