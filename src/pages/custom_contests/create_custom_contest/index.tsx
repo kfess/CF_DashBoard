@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -19,6 +20,7 @@ import { useAddCustomContest } from "@features/custom_contests/hooks/useAddCusto
 import { _ContestDetailStep } from "@features/custom_contests/components/Form/_ContestDetailStep";
 import { _ProblemStep } from "@features/custom_contests/components/Form/_ProblemStep";
 import { _ViewStep } from "@features/custom_contests/components/Form/_ViewStep";
+import { getDefaultStartDate, getDefaultEndDate } from "@helpers/date";
 
 const getDefaultValues = (
   codeforcesUsername?: string,
@@ -31,8 +33,8 @@ const getDefaultValues = (
   title: "",
   description: "",
   penalty: 300,
-  startDate: localToUtcISOString(new Date()),
-  endDate: localToUtcISOString(new Date()),
+  startDate: getDefaultStartDate(),
+  endDate: getDefaultEndDate(),
   participants: [codeforcesUsername ?? ""],
   problems: [],
   problemsFilter: {
@@ -80,6 +82,11 @@ export const CreateCustomContestPage: React.FC = () => {
 
   const onSubmit = async () => {
     const values = getValues();
+
+    // Convert local time to UTC
+    values.startDate = dayjs(values.startDate).utc().toISOString();
+    values.endDate = dayjs(values.endDate).utc().toISOString();
+
     const { problemsFilter, ...submitValues } = values;
     const createdContest = await create(submitValues);
     if (createdContest) {
