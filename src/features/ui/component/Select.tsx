@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { Select as MUISelect, SelectProps } from "@mui/material";
@@ -18,7 +18,7 @@ const MenuProps = {
 };
 
 const StyledInputElement = styled(InputBase)(({ theme }) => ({
-  padding: theme.spacing(0.1, 1.2),
+  padding: theme.spacing(0.2, 1.2),
   borderRadius: theme.shape.borderRadius,
   border: `1px solid ${theme.palette.mode === "dark" ? "#1f272e" : "#E0E3E7"}`,
   backgroundColor:
@@ -33,10 +33,9 @@ const StyledInputElement = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-
 interface StyledSelectProps<T> extends Omit<SelectProps, "onChange"> {
   label: string;
-  options: T[];
+  options: { value: T; label: React.ReactNode }[];
   onChange: (value: T) => void;
 }
 
@@ -48,10 +47,10 @@ export const Select = <T extends string | number>({
 }: StyledSelectProps<T>) => {
   const handleChange = (event: SelectChangeEvent<unknown>) => {
     const value = options.find(
-      (option) => option.toString() === (event.target.value as string)
+      (option) => option.value.toString() === (event.target.value as string)
     );
     if (value !== undefined) {
-      onChange(value);
+      onChange(value.value);
     }
   };
 
@@ -65,8 +64,11 @@ export const Select = <T extends string | number>({
         {...props}
       >
         {options.map((option) => (
-          <MenuItem key={option.toString()} value={option.toString()}>
-            {option}
+          <MenuItem
+            key={option.value.toString()}
+            value={option.value.toString()}
+          >
+            {option.label}
           </MenuItem>
         ))}
       </MUISelect>
