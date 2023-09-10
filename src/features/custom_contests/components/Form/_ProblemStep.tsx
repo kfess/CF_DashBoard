@@ -23,15 +23,7 @@ export const _ProblemStep: React.FC<Props> = ({
 }) => {
   return (
     <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }}>
-      <Box
-        sx={{
-          px: { xs: 2, md: 4 },
-          py: 3,
-          backgroundColor: (theme) => theme.palette.background.paper,
-          border: (theme) => `0.5px solid ${theme.palette.divider}`,
-          borderRadius: 3,
-        }}
-      >
+      <Box sx={{ px: { xs: 2, md: 4 }, py: 3 }}>
         <SelectProblems control={control} setValue={setValue} errors={errors} />
       </Box>
       <Stack

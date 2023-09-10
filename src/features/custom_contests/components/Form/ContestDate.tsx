@@ -42,7 +42,10 @@ export const ContestDate: React.FC<Props> = ({ control, errors }) => {
                 <Box flexGrow="1">
                   <Select
                     label="Start Date"
-                    options={Array.from({ length: 24 }, (_, i) => i)}
+                    options={Array.from({ length: 24 }, (_, i) => ({
+                      value: i,
+                      label: i,
+                    }))}
                     onChange={(value) => {
                       const currentDateTime = dayjs(field.value).local();
                       const updatedDateTime = currentDateTime.hour(value);
@@ -55,7 +58,10 @@ export const ContestDate: React.FC<Props> = ({ control, errors }) => {
                 <Box flexGrow="1">
                   <Select
                     label="Start Date"
-                    options={Array.from({ length: 12 }, (_, i) => i * 5)}
+                    options={Array.from({ length: 12 }, (_, i) => ({
+                      value: i * 5,
+                      label: i * 5,
+                    }))}
                     onChange={(value) => {
                       const currentDateTime = dayjs(field.value).local();
                       const updatedDateTime = currentDateTime.minute(value);
@@ -97,7 +103,10 @@ export const ContestDate: React.FC<Props> = ({ control, errors }) => {
                 <Box flexGrow="1">
                   <Select
                     label="End Date"
-                    options={Array.from({ length: 24 }, (_, i) => i)}
+                    options={Array.from({ length: 24 }, (_, i) => ({
+                      value: i,
+                      label: i,
+                    }))}
                     onChange={(value) => {
                       const currentDateTime = dayjs(field.value).local();
                       const updatedDateTime = currentDateTime.hour(value);
@@ -110,7 +119,10 @@ export const ContestDate: React.FC<Props> = ({ control, errors }) => {
                 <Box flexGrow="1">
                   <Select
                     label="End Date"
-                    options={Array.from({ length: 12 }, (_, i) => i * 5)}
+                    options={Array.from({ length: 12 }, (_, i) => ({
+                      value: i * 5,
+                      label: i * 5,
+                    }))}
                     onChange={(value) => {
                       const currentDateTime = dayjs(field.value).local();
                       const updatedDateTime = currentDateTime.minute(value);

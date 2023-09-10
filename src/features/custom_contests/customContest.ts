@@ -64,14 +64,12 @@ export const problemSuggestOptionSchema = z.object({
   difficultyFrom: z
     .number()
     .nonnegative({ message: "Difficulty must be non negative value" })
-    .nullable()
     .refine((value) => value !== null, {
       message: "Difficulty cannot be empty",
     }),
   difficultyTo: z
     .number()
     .nonnegative({ message: "Difficulty must be non negative value" })
-    .nullable()
     .refine((value) => value !== null, {
       message: "Difficulty cannot be empty",
     }),

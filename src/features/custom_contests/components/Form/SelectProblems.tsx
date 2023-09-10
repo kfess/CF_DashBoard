@@ -12,6 +12,7 @@ import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsT
 import { ExpectedParticipants } from "@features/custom_contests/components/Form/ExpectedParticipants";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { Button } from "@features/ui/component/Button";
+import { _Difficulty } from "./_Difficulty";
 
 type Props = {
   control: Control<CreateCustomContest>;
@@ -75,7 +76,7 @@ export const SelectProblems: React.FC<Props> = ({
     <>
       <Stack direction="column">
         <ProblemsCount control={control} errors={errors} />
-        <ProblemsDifficulty control={control} errors={errors} />
+        <_Difficulty control={control} errors={errors} />
         <ProblemsTag control={control} errors={errors} />
         <ExpectedParticipants
           control={control}
