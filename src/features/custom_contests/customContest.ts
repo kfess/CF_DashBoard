@@ -76,7 +76,9 @@ export const problemSuggestOptionSchema = z.object({
   includeTags: z.array(tagSchema),
   excludeTags: z.array(tagSchema),
   excludeSolved: z.boolean(),
-  expectedParticipants: z.array(z.string()),
+  expectedParticipants: z.array(
+    z.object({ name: z.string().min(1, { message: "Name cannot be empty" }) })
+  ),
 });
 export type ProblemSuggestOption = z.infer<typeof problemSuggestOptionSchema>;
 

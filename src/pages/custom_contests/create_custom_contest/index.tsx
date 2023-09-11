@@ -7,7 +7,6 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { SubNavigation } from "@features/ui/component/SubNavigation";
-import { localToUtcISOString } from "@helpers/date";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -70,6 +69,7 @@ export const CreateCustomContestPage: React.FC = () => {
     resolver: zodResolver(createCustomContestSchema),
     defaultValues: defaultValues,
   });
+
   const watchedVisibility = watch("visibility");
   const watchedMode = watch("mode");
 
