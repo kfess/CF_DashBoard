@@ -71,7 +71,7 @@ export const _ContestDetailStep: React.FC<Props> = ({
             </Box>
           </Stack>
         </Box>
-        <Stack>
+        <Stack spacing={2}>
           <Title control={control} errors={errors} />
           <Description control={control} errors={errors} />
           <ContestDate control={control} errors={errors} />

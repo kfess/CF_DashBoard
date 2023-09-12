@@ -1,12 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Stack from "@mui/material/Stack";
-import {
-  Control,
-  Controller,
-  FieldErrors,
-  set,
-  useWatch,
-} from "react-hook-form";
+import { Control, Controller, FieldErrors, useWatch } from "react-hook-form";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import { Problem, Tag } from "@features/problems/problem";
