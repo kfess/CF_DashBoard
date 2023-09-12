@@ -19,7 +19,7 @@ export const Description: React.FC<Props> = ({ control, errors }) => {
         <Box>
           <Box
             component="label"
-            display="block" // to make it behave like a block element
+            display="block"
             htmlFor="title-input"
             fontWeight="bold"
             mb={0.5}

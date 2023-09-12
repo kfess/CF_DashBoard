@@ -1,7 +1,7 @@
 import React from "react";
+import Box from "@mui/material/Box";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { Input } from "@features/ui/component/Input";
-import { FormControl } from "@features/ui/component/FormControl";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 
@@ -16,29 +16,31 @@ export const Penalty: React.FC<Props> = ({ control, errors }) => {
       name="penalty"
       control={control}
       render={({ field }) => (
-        <div>
-          <FormControl>
-            <label
-              htmlFor="penalty-input"
-              css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
-            >
-              Penalty (seconds)
-            </label>
-            <Input
-              {...field}
-              value={field.value}
-              id="penalty-input"
-              placeholder="300"
-              type="number"
-              onChange={(e) => {
-                const val =
-                  e.target.value === "" ? null : e.target.valueAsNumber;
-                field.onChange(val);
-              }}
-            />
-            <ErrorMessage message={errors.penalty?.message} />
-          </FormControl>
-        </div>
+        <Box>
+          <Box
+            component="label"
+            display="block"
+            htmlFor="penalty-input"
+            fontWeight="bold"
+            mb={0.5}
+          >
+            Penalty (seconds)
+          </Box>
+          <Input
+            {...field}
+            value={field.value ?? ""}
+            id="penalty-input"
+            type="number"
+            placeholder="300"
+            aria-label="Penalty (seconds)"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              const val =
+                event.target.value === "" ? null : event.target.valueAsNumber;
+              field.onChange(val);
+            }}
+          />
+          {errors.penalty && <ErrorMessage message={errors.penalty.message} />}
+        </Box>
       )}
     />
   );
