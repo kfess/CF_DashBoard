@@ -6,7 +6,6 @@ import { Control, Controller, FieldErrors } from "react-hook-form";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { DatePicker } from "@features/ui/component/DatePicker";
-import { Select } from "@features/ui/component/Select";
 import { TimeSelect } from "@features/ui/component/Select";
 
 type Props = {

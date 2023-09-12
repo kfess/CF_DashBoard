@@ -24,8 +24,9 @@ export const Visibility: React.FC<Props> = ({ control, errors }) => {
             }}
             description="Private Contest is invisible to everyone except you."
           />
-
-          <ErrorMessage message={errors.visibility?.message} />
+          {errors.visibility && (
+            <ErrorMessage message={errors.visibility.message} />
+          )}
         </>
       )}
     />
