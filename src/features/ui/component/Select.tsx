@@ -75,3 +75,30 @@ export const Select = <T extends string | number>({
     </FormControl>
   );
 };
+
+// for time select
+const generateOptions = (length: number, step: number = 1) =>
+  Array.from({ length }, (_, i) => ({
+    value: i * step,
+    label: `${i * step}`.padStart(2, "0"),
+  }));
+
+export const TimeSelect: React.FC<{
+  label: string;
+  unit: "hour" | "minute";
+  step: number;
+  onChange: (value: number) => void;
+  defaultValue: number;
+}> = ({ label, unit, step, onChange, defaultValue }) => {
+  const options = generateOptions(unit === "hour" ? 24 : 60 / step, step);
+
+  return (
+    <Select
+      label={label}
+      options={options}
+      onChange={onChange}
+      defaultValue={defaultValue}
+      autoWidth
+    />
+  );
+};
