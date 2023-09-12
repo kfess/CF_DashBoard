@@ -1,7 +1,7 @@
 import React from "react";
+import Box from "@mui/material/Box";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { TextArea } from "@features/ui/component/TextArea";
-import { FormControl } from "@features/ui/component/FormControl";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 
@@ -16,16 +16,26 @@ export const Description: React.FC<Props> = ({ control, errors }) => {
       name="description"
       control={control}
       render={({ field }) => (
-        <FormControl>
-          <label
-            htmlFor="description-input"
-            css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
+        <Box>
+          <Box
+            component="label"
+            display="block" // to make it behave like a block element
+            htmlFor="title-input"
+            fontWeight="bold"
+            mb={0.5}
           >
             Description
-          </label>
-          <TextArea {...field} placeholder="Description" />
-          <ErrorMessage message={errors.description?.message} />
-        </FormControl>
+          </Box>
+          <TextArea
+            {...field}
+            type="text"
+            placeholder="Description"
+            aria-label="Custom Contest Description"
+          />
+          {errors.description && (
+            <ErrorMessage message={errors.description.message} />
+          )}
+        </Box>
       )}
     />
   );
