@@ -48,7 +48,10 @@ export const SelectProblems: React.FC<Props> = ({
     name: "problemsFilter.excludeTags",
   });
 
-  const [excludeSolved, toggleExcludeSolved] = useToggle(false, true);
+  const excludeSolved = useWatch({
+    control,
+    name: "problemsFilter.excludeSolved",
+  });
 
   const selectProblems = useCallback(
     (problems: Problem[]) => {
@@ -81,7 +84,6 @@ export const SelectProblems: React.FC<Props> = ({
           control={control}
           errors={errors}
           excludeSolved={excludeSolved}
-          toggleExcludeSolved={toggleExcludeSolved}
         />
       </Stack>
       <Stack direction="row" justifyContent="flex-end" sx={{ my: 2 }}>

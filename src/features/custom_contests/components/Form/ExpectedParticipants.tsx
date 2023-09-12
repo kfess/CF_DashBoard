@@ -19,14 +19,12 @@ type Props = {
   control: Control<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
   excludeSolved: boolean;
-  toggleExcludeSolved: () => void;
 };
 
 export const ExpectedParticipants: React.FC<Props> = ({
   control,
   errors,
   excludeSolved,
-  toggleExcludeSolved,
 }) => {
   const { fields, append, remove } = useFieldArray({
     control,
@@ -35,11 +33,21 @@ export const ExpectedParticipants: React.FC<Props> = ({
 
   return (
     <>
-      <Checkbox
-        title="Restriction "
-        label="Don't suggest problems solved by expected participants"
-        toggle={toggleExcludeSolved}
-        description="When you check this, problems solved by expected participants are excluded"
+      <Controller
+        control={control}
+        name="problemsFilter.excludeSolved"
+        render={({ field }) => (
+          <>
+            <Checkbox
+              title="Restriction"
+              label="Don't suggest problems solved by expected participants"
+              toggle={() => {
+                field.onChange(!field.value);
+              }}
+              description="When you check this, problems solved by expected participants are excluded"
+            />
+          </>
+        )}
       />
       {excludeSolved && (
         <>
