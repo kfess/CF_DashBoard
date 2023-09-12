@@ -1,9 +1,14 @@
-import React, { useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Stack from "@mui/material/Stack";
-import { Control, Controller, FieldErrors, useWatch } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldErrors,
+  set,
+  useWatch,
+} from "react-hook-form";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
-import { useToggle } from "@hooks/index";
 import { Problem, Tag } from "@features/problems/problem";
 import { SelectedProblemsTable } from "./SelectedProblemsTable";
 import { ProblemsCount } from "@features/custom_contests/components/Form/ProblemsCount";
@@ -12,6 +17,7 @@ import { ExpectedParticipants } from "@features/custom_contests/components/Form/
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { Button } from "@features/ui/component/Button";
 import { _Difficulty } from "./_Difficulty";
+import { useFetchExpectedParticipantsSolvedProblems } from "@features/custom_contests/hooks/useFetchSubmissions";
 
 type Props = {
   control: Control<CreateCustomContest>;
@@ -53,6 +59,20 @@ export const SelectProblems: React.FC<Props> = ({
     name: "problemsFilter.excludeSolved",
   });
 
+  const expectedParticipants = useWatch({
+    control,
+    name: "problemsFilter.expectedParticipants",
+  }).map((obj) => obj.name);
+
+  // const [shouldFetch, setShouldFetch] = useState(false);
+  // const { solvedSet } = useFetchExpectedParticipantsSolvedProblems(
+  //   expectedParticipants,
+  //   shouldFetch
+  // );
+  // useEffect(() => {
+  //   setShouldFetch(false);
+  // }, [solvedSet]);
+
   const selectProblems = useCallback(
     (problems: Problem[]) => {
       return problems
@@ -89,6 +109,7 @@ export const SelectProblems: React.FC<Props> = ({
       <Stack direction="row" justifyContent="flex-end" sx={{ my: 2 }}>
         <Button
           onClick={() => {
+            // setShouldFetch(true);
             data && setValue("problems", selectProblems(data));
           }}
           disabled={!data}

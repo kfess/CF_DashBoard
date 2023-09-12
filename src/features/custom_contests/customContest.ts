@@ -2,6 +2,7 @@ import { z } from "zod";
 import dayjs from "dayjs";
 import { tagSchema } from "@features/problems/problem";
 import { problemsSchema } from "@features/problems/problem";
+import { normalizeSearchUser } from "@features/layout/searchUser";
 
 export const apiFilterTypes = [
   "public",
@@ -77,7 +78,12 @@ export const problemSuggestOptionSchema = z.object({
   excludeTags: z.array(tagSchema),
   excludeSolved: z.boolean(),
   expectedParticipants: z.array(
-    z.object({ name: z.string().min(1, { message: "Name cannot be empty" }) })
+    z.object({
+      name: z
+        .string()
+        .min(1, { message: "Name cannot be empty" })
+        .refine((val) => normalizeSearchUser(val), { message: "Invalid name" }),
+    })
   ),
 });
 export type ProblemSuggestOption = z.infer<typeof problemSuggestOptionSchema>;

@@ -96,3 +96,40 @@ export const useFetchSubmissions = (
 
   return { submissionsByUser: data, isError, error, isLoading };
 };
+
+// for fetching expected participants submissions
+const fetchExpectedParticipantsSolvedProblems = async (
+  users: string[]
+): Promise<Set<string>> => {
+  try {
+    const solvedSet = new Set<string>();
+    await Promise.all(
+      users.map(async (userId) => {
+        const submissionsForUser = await fetchUserSubmissions(userId);
+        submissionsForUser.forEach((submission) => {
+          if (submission.verdict === "OK") {
+            solvedSet.add(getProblemKey(submission));
+          }
+        });
+      })
+    );
+    console.log(solvedSet);
+    return solvedSet;
+  } catch (error) {
+    throw new Error("Error fetching submissions");
+  }
+};
+
+export const useFetchExpectedParticipantsSolvedProblems = (
+  users: string[],
+  shouldFetch: boolean
+) => {
+  const { data, isError, error, isLoading } = useQuery<Set<string>>({
+    queryKey: ["expected-users-submissions", users],
+    queryFn: () => fetchExpectedParticipantsSolvedProblems(users),
+    enabled: !!users.length && shouldFetch,
+    refetchInterval: false,
+  });
+
+  return { solvedSet: data, isError, error, isLoading };
+};
