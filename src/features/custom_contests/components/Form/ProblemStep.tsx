@@ -8,7 +8,7 @@ import { Controller, Control, FieldErrors, useWatch } from "react-hook-form";
 import { Button } from "@features/ui/component/Button";
 import { Problem, Tag } from "@features/problems/problem";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
-import { ProblemsCount } from "@features/custom_contests/components/Form/ProblemsCount";
+import { NumberOfProblems } from "@features/custom_contests/components/Form/NumberOfProblems";
 import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsTag";
 import { ExpectedParticipants } from "@features/custom_contests/components/Form/ExpectedParticipants";
 import { Difficulty } from "@features/custom_contests/components/Form/Difficulty";
@@ -96,7 +96,7 @@ export const ProblemStep: React.FC<Props> = ({
     <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }}>
       <Box sx={{ px: { xs: 2, md: 4 }, py: 3 }}>
         <Stack direction="column" spacing={2}>
-          <ProblemsCount control={control} errors={errors} />
+          <NumberOfProblems control={control} errors={errors} />
           <Difficulty control={control} errors={errors} />
           <ProblemsTag control={control} errors={errors} />
           <ExpectedParticipants

@@ -10,7 +10,7 @@ type Props = {
   errors: FieldErrors<CreateCustomContest>;
 };
 
-export const ProblemsCount: React.FC<Props> = ({ control, errors }) => {
+export const NumberOfProblems: React.FC<Props> = ({ control, errors }) => {
   return (
     <Controller
       name="problemsFilter"

@@ -8,7 +8,7 @@ import { Visibility } from "@features/custom_contests/components/Form/Visibility
 import { Mode } from "@features/custom_contests/components/Form/Mode";
 import { Title } from "@features/custom_contests/components/Form/Title";
 import { Description } from "@features/custom_contests/components/Form/Description";
-import { ContestDate } from "@features/custom_contests/components/Form/ContestDate";
+import { Date } from "@features/custom_contests/components/Form/Date";
 import { Penalty } from "@features/custom_contests/components/Form/Penalty";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Control, FieldErrors } from "react-hook-form";
@@ -74,7 +74,7 @@ export const ContestDetailStep: React.FC<Props> = ({
         <Stack spacing={2}>
           <Title control={control} errors={errors} />
           <Description control={control} errors={errors} />
-          <ContestDate control={control} errors={errors} />
+          <Date control={control} errors={errors} />
           <Visibility control={control} errors={errors} />
           <Penalty control={control} errors={errors} />
           <Mode control={control} errors={errors} />

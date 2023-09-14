@@ -81,7 +81,7 @@ const DateTimePicker: React.FC<{
   );
 };
 
-export const ContestDate: React.FC<Props> = ({ control, errors }) => {
+export const Date: React.FC<Props> = ({ control, errors }) => {
   return (
     <>
       <DateTimePicker
