@@ -7,6 +7,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Controller } from "react-hook-form";
 import { usePagination } from "@hooks/usePagination";
 import { TablePagination } from "@features/ui/component/TablePagination";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
@@ -18,10 +19,14 @@ import { IconButton } from "@features/ui/component/IconButton";
 import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 
 type Props = {
+  isEdit?: boolean;
   field: ControllerRenderProps<CreateCustomContest, "problems">;
 };
 
-export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
+export const SelectedProblemsTable: React.FC<Props> = ({
+  isEdit = true,
+  field,
+}) => {
   const selectedProblems = field.value;
   const removeProblem = (index: number) => {
     field.onChange(selectedProblems.filter((_, idx) => index !== idx));
@@ -44,10 +49,11 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
               >
                 <TableHead>
                   <TableRow hover>
+                    <TableCell>#</TableCell>
                     <TableCell>Problem</TableCell>
                     <TableCell>Contest</TableCell>
                     <TableCell>Difficulty</TableCell>
-                    <TableCell>Delete</TableCell>
+                    {isEdit && <TableCell>Delete</TableCell>}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -56,6 +62,7 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
                     .sort((a, b) => (a.rating || 0) - (b.rating || 0))
                     .map((p, index) => (
                       <TableRow key={p.name} hover>
+                        <TableCell>{index + 1}</TableCell>
                         <TableCell>
                           <ProblemLink
                             contestId={p.contestId ?? 0}
@@ -80,16 +87,18 @@ export const SelectedProblemsTable: React.FC<Props> = ({ field }) => {
                             <HelpToolTip title="No data available" />
                           )}
                         </TableCell>
-                        <TableCell>
-                          <IconButton
-                            icon={<DeleteIcon />}
-                            onClick={() => {
-                              removeProblem(index);
-                            }}
-                            size="small"
-                            aria-label="delete problems"
-                          />
-                        </TableCell>
+                        {isEdit && (
+                          <TableCell>
+                            <IconButton
+                              icon={<DeleteIcon />}
+                              onClick={() => {
+                                removeProblem(index);
+                              }}
+                              size="small"
+                              aria-label="delete problems"
+                            />
+                          </TableCell>
+                        )}
                       </TableRow>
                     ))}
                 </TableBody>

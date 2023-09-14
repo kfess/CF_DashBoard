@@ -119,7 +119,9 @@ export const ProblemStep: React.FC<Props> = ({
         <Controller
           name="problems"
           control={control}
-          render={({ field }) => <SelectedProblemsTable field={field} />}
+          render={({ field }) => (
+            <SelectedProblemsTable isEdit={true} field={field} />
+          )}
         />
         {errors.problems && <ErrorMessage message={errors.problems.message} />}
       </Box>

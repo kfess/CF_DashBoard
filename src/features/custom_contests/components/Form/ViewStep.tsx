@@ -4,17 +4,25 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Divider, alpha } from "@mui/material";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { Button } from "@features/ui/component/Button";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Chip } from "@features/ui/component/Chip";
-import { _ViewSelectedProblems } from "./_ViewSelectedProblems";
+import { SelectedProblemsTable } from "@features/custom_contests/components/Form/SelectedProblemsTable";
 
 type Props = {
   setActiveStep(step: number): void;
   formData: CreateCustomContest;
+  control: Control<CreateCustomContest>;
+  errors: FieldErrors<CreateCustomContest>;
 };
-export const ViewStep: React.FC<Props> = ({ setActiveStep, formData }) => {
+export const ViewStep: React.FC<Props> = ({
+  setActiveStep,
+  formData,
+  control,
+  errors,
+}) => {
   return (
     <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
       <Grid container spacing={3}>
@@ -23,7 +31,13 @@ export const ViewStep: React.FC<Props> = ({ setActiveStep, formData }) => {
             About Problems
           </Typography>
           <Box my={2}>
-            <_ViewSelectedProblems problems={formData.problems} />
+            <Controller
+              name="problems"
+              control={control}
+              render={({ field }) => (
+                <SelectedProblemsTable isEdit={false} field={field} />
+              )}
+            />
           </Box>
         </Grid>
         <Grid item xs={12} md={4} order={{ xs: 1, md: 2 }}>
