@@ -32,8 +32,8 @@ export const ContestDetailStep: React.FC<Props> = ({
   errors,
 }) => {
   return (
-    <Box pt={2} pb={{ xs: 2, md: 4 }}>
-      <Box sx={{ px: { xs: 2, md: 4 }, py: 3 }}>
+    <Box pb={{ xs: 2, md: 4 }}>
+      <Box sx={{ px: { xs: 1, md: 4 }, py: 3 }}>
         <Box>
           <Stack
             direction="row"

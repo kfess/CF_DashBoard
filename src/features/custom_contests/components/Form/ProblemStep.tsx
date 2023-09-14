@@ -93,7 +93,7 @@ export const ProblemStep: React.FC<Props> = ({
   );
 
   return (
-    <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }}>
+    <Box pb={{ xs: 2, md: 4 }}>
       <Box sx={{ px: { xs: 1, md: 4 }, py: 3 }}>
         <Stack direction="column" spacing={2}>
           <NumberOfProblems control={control} errors={errors} />

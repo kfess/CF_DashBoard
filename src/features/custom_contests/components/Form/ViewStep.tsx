@@ -26,7 +26,7 @@ export const ViewStep: React.FC<Props> = ({
   errors,
 }) => {
   return (
-    <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+    <Box pt={3} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={8} order={{ xs: 2, md: 1 }} pr={0.5}>
           <Typography variant="h6" fontWeight="bold">
