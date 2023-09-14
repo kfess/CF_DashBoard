@@ -28,7 +28,7 @@ export const ViewStep: React.FC<Props> = ({
   return (
     <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={8} order={{ xs: 2, md: 1 }} pr={1}>
+        <Grid item xs={12} md={8} order={{ xs: 2, md: 1 }} pr={0.5}>
           <Typography variant="h6" fontWeight="bold">
             About Problems
           </Typography>
@@ -124,7 +124,7 @@ export const ViewStep: React.FC<Props> = ({
           >
             Problems : {formData.problems.length}
           </Typography>
-          <Divider light sx={{ mt: 2, mb: 0.5 }}>
+          <Divider light sx={{ mt: 2, mb: 1 }}>
             Expected Users
           </Divider>
           {formData.problemsFilter.expectedParticipants.length > 0 &&
@@ -151,6 +151,14 @@ export const ViewStep: React.FC<Props> = ({
           <Divider light sx={{ mt: 2, mb: 0.5 }}>
             Related Tags
           </Divider>
+          <Typography
+            variant="body2"
+            gutterBottom
+            noWrap
+            color="text.secondary"
+          >
+            No tags specified
+          </Typography>
         </Grid>
       </Grid>
       <Divider sx={{ my: 2 }} />
