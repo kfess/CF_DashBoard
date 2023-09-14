@@ -1,6 +1,6 @@
 import React from "react";
+import Box from "@mui/material/Box";
 import { Control, Controller, FieldErrors } from "react-hook-form";
-import { FormControl } from "@features/ui/component/FormControl";
 import { Input } from "@features/ui/component/Input";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
@@ -16,13 +16,16 @@ export const ProblemsCount: React.FC<Props> = ({ control, errors }) => {
       name="problemsFilter"
       control={control}
       render={({ field }) => (
-        <FormControl>
-          <label
+        <Box>
+          <Box
+            component="label"
+            display="block"
             htmlFor="problems-number-input"
-            css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
+            fontWeight="bold"
+            mb={0.5}
           >
             Number of Problems
-          </label>
+          </Box>
           <Input
             id="problems-number-input"
             type="number"
@@ -32,8 +35,10 @@ export const ProblemsCount: React.FC<Props> = ({ control, errors }) => {
               field.onChange({ ...field.value, count: val });
             }}
           />
-          <ErrorMessage message={errors.problemsFilter?.count?.message} />
-        </FormControl>
+          {errors.problemsFilter?.count && (
+            <ErrorMessage message={errors.problemsFilter.count.message} />
+          )}
+        </Box>
       )}
     />
   );

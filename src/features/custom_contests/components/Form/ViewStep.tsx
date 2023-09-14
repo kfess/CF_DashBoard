@@ -14,7 +14,7 @@ type Props = {
   setActiveStep(step: number): void;
   formData: CreateCustomContest;
 };
-export const _ViewStep: React.FC<Props> = ({ setActiveStep, formData }) => {
+export const ViewStep: React.FC<Props> = ({ setActiveStep, formData }) => {
   return (
     <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
       <Grid container spacing={3}>

@@ -17,7 +17,7 @@ type Props = {
   errors: FieldErrors<CreateCustomContest>;
 };
 
-export const _Difficulty: React.FC<Props> = ({ control, errors }) => {
+export const Difficulty: React.FC<Props> = ({ control, errors }) => {
   const lowerDifficulties = ratingColor.map(
     (color) => ratingColorInfo[color].lowerBound
   );

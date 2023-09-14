@@ -23,7 +23,7 @@ type Props = {
   errors: FieldErrors<CreateCustomContest>;
 };
 
-export const _ContestDetailStep: React.FC<Props> = ({
+export const ContestDetailStep: React.FC<Props> = ({
   setActiveStep,
   codeforcesUsername,
   watchedVisibility,

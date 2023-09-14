@@ -1,27 +1,31 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import Stack from "@mui/material/Stack";
-import { Control, Controller, FieldErrors, useWatch } from "react-hook-form";
+import Box from "@mui/material/Box";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
-import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
+import { Controller, Control, FieldErrors, useWatch } from "react-hook-form";
+import { Button } from "@features/ui/component/Button";
 import { Problem, Tag } from "@features/problems/problem";
-import { SelectedProblemsTable } from "./SelectedProblemsTable";
+import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import { ProblemsCount } from "@features/custom_contests/components/Form/ProblemsCount";
 import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsTag";
 import { ExpectedParticipants } from "@features/custom_contests/components/Form/ExpectedParticipants";
+import { Difficulty } from "@features/custom_contests/components/Form/Difficulty";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
-import { Button } from "@features/ui/component/Button";
-import { _Difficulty } from "./_Difficulty";
-import { useFetchExpectedParticipantsSolvedProblems } from "@features/custom_contests/hooks/useFetchSubmissions";
+import { SelectedProblemsTable } from "./SelectedProblemsTable";
 
 type Props = {
-  control: Control<CreateCustomContest>;
+  setActiveStep(step: number): void;
   setValue: (name: keyof CreateCustomContest, value: any) => void;
+  control: Control<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
 };
 
-export const SelectProblems: React.FC<Props> = ({
-  control,
+export const ProblemStep: React.FC<Props> = ({
+  setActiveStep,
   setValue,
+  control,
   errors,
 }) => {
   const { data } = useFetchProblems();
@@ -89,34 +93,58 @@ export const SelectProblems: React.FC<Props> = ({
   );
 
   return (
-    <>
-      <Stack direction="column">
-        <ProblemsCount control={control} errors={errors} />
-        <_Difficulty control={control} errors={errors} />
-        <ProblemsTag control={control} errors={errors} />
-        <ExpectedParticipants
+    <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }}>
+      <Box sx={{ px: { xs: 2, md: 4 }, py: 3 }}>
+        <Stack direction="column" spacing={2}>
+          <ProblemsCount control={control} errors={errors} />
+          <Difficulty control={control} errors={errors} />
+          <ProblemsTag control={control} errors={errors} />
+          <ExpectedParticipants
+            control={control}
+            errors={errors}
+            excludeSolved={excludeSolved}
+          />
+        </Stack>
+        <Stack direction="row" justifyContent="flex-end" sx={{ my: 2 }}>
+          <Button
+            onClick={() => {
+              // setShouldFetch(true);
+              data && setValue("problems", selectProblems(data));
+            }}
+            disabled={!data}
+          >
+            Generate Problems
+          </Button>
+        </Stack>
+        <Controller
+          name="problems"
           control={control}
-          errors={errors}
-          excludeSolved={excludeSolved}
+          render={({ field }) => <SelectedProblemsTable field={field} />}
         />
-      </Stack>
-      <Stack direction="row" justifyContent="flex-end" sx={{ my: 2 }}>
+        {errors.problems && <ErrorMessage message={errors.problems.message} />}
+      </Box>
+      <Stack
+        direction="row"
+        mt={2}
+        mr={2}
+        spacing={1}
+        justifyContent="flex-end"
+      >
         <Button
-          onClick={() => {
-            // setShouldFetch(true);
-            data && setValue("problems", selectProblems(data));
-          }}
-          disabled={!data}
+          onClick={() => setActiveStep(0)}
+          color="secondary"
+          startIcon={<KeyboardDoubleArrowLeftIcon />}
         >
-          Generate Problems
+          Previous
+        </Button>
+        <Button
+          onClick={() => setActiveStep(2)}
+          color="secondary"
+          endIcon={<KeyboardDoubleArrowRightIcon />}
+        >
+          Next
         </Button>
       </Stack>
-      <Controller
-        name="problems"
-        control={control}
-        render={({ field }) => <SelectedProblemsTable field={field} />}
-      />
-      <ErrorMessage message={errors.problems?.message} />
-    </>
+    </Box>
   );
 };
