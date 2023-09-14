@@ -7,9 +7,11 @@ import { Divider, alpha } from "@mui/material";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { Button } from "@features/ui/component/Button";
-import { CreateCustomContest } from "@features/custom_contests/customContest";
+import type { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Chip } from "@features/ui/component/Chip";
 import { SelectedProblemsTable } from "@features/custom_contests/components/Form/SelectedProblemsTable";
+import { ErrorMessage } from "@features/ui/component/ErrorMessage";
+import dayjs from "dayjs";
 
 type Props = {
   setActiveStep(step: number): void;
@@ -92,7 +94,8 @@ export const ViewStep: React.FC<Props> = ({
             noWrap
             color="text.secondary"
           >
-            Start : {formData.startDate}
+            Start :{" "}
+            {dayjs(formData.startDate).local().format("YYYY-MM-DD HH:mm")}
           </Typography>
           <Typography
             variant="body2"
@@ -100,7 +103,7 @@ export const ViewStep: React.FC<Props> = ({
             noWrap
             color="text.secondary"
           >
-            End : {formData.endDate}
+            End : {dayjs(formData.endDate).local().format("YYYY-MM-DD HH:mm")}
           </Typography>
           <Divider light sx={{ mt: 2, mb: 0.5 }}>
             problems
@@ -111,7 +114,7 @@ export const ViewStep: React.FC<Props> = ({
             noWrap
             color="text.secondary"
           >
-            Penalty : {formData.penalty}
+            Penalty : {formData.penalty} seconds
           </Typography>
           <Typography
             variant="body2"
@@ -124,12 +127,40 @@ export const ViewStep: React.FC<Props> = ({
           <Divider light sx={{ mt: 2, mb: 0.5 }}>
             Expected Users
           </Divider>
-
+          {formData.problemsFilter.expectedParticipants.length > 0 &&
+            formData.problemsFilter.expectedParticipants.map((participant) => (
+              <Typography
+                variant="body2"
+                gutterBottom
+                noWrap
+                color="text.secondary"
+              >
+                {participant.name}
+              </Typography>
+            ))}
+          {formData.problemsFilter.expectedParticipants.length === 0 && (
+            <Typography
+              variant="body2"
+              gutterBottom
+              noWrap
+              color="text.secondary"
+            >
+              No users specified
+            </Typography>
+          )}
           <Divider light sx={{ mt: 2, mb: 0.5 }}>
             Related Tags
           </Divider>
         </Grid>
       </Grid>
+      <Divider sx={{ my: 2 }} />
+      {Object.keys(errors).length > 0 &&
+        Object.keys(errors).map((key) => (
+          <ErrorMessage
+            key={key}
+            message={errors[key as keyof CreateCustomContest]?.message}
+          />
+        ))}
       <Stack
         direction="row"
         mt={2}
