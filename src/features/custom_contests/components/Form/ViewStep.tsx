@@ -4,8 +4,13 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Divider, alpha } from "@mui/material";
-import { Control, Controller, FieldErrors } from "react-hook-form";
+import ScheduleIcon from "@mui/icons-material/Schedule";
+import NotesIcon from "@mui/icons-material/Notes";
+import DescriptionIcon from "@mui/icons-material/Description";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import ReportIcon from "@mui/icons-material/Report";
+import QuizIcon from "@mui/icons-material/Quiz";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 import { Button } from "@features/ui/component/Button";
 import type { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Chip } from "@features/ui/component/Chip";
@@ -44,7 +49,7 @@ export const ViewStep: React.FC<Props> = ({
         </Grid>
         <Grid item xs={12} md={4} order={{ xs: 1, md: 2 }}>
           <Typography variant="h6" fontWeight="bold">
-            About this Contest
+            About Contest
           </Typography>
           <Stack direction="row" flexWrap="wrap" flexGrow={1} gap={1} my={2}>
             <Chip
@@ -72,58 +77,82 @@ export const ViewStep: React.FC<Props> = ({
           <Divider light sx={{ mb: 0.5 }}>
             Details
           </Divider>
-          <Typography
-            variant="body2"
-            gutterBottom
-            noWrap
-            color="text.secondary"
-          >
-            Title : {formData.title}
-          </Typography>
-          <Typography
-            variant="body2"
-            gutterBottom
-            noWrap
-            color="text.secondary"
-          >
-            Description : {formData.description || "No Description Provided"}
-          </Typography>
-          <Typography
-            variant="body2"
-            gutterBottom
-            noWrap
-            color="text.secondary"
-          >
-            Start :{" "}
-            {dayjs(formData.startDate).local().format("YYYY-MM-DD HH:mm")}
-          </Typography>
-          <Typography
-            variant="body2"
-            gutterBottom
-            noWrap
-            color="text.secondary"
-          >
-            End : {dayjs(formData.endDate).local().format("YYYY-MM-DD HH:mm")}
-          </Typography>
+          <Stack direction="column" spacing={1}>
+            <Stack
+              direction="row"
+              alignContent="center"
+              color="text.secondary"
+              spacing={0.5}
+            >
+              <NotesIcon fontSize="small" />
+              <Typography variant="body2" gutterBottom noWrap>
+                Title : {formData.title}
+              </Typography>
+            </Stack>
+            <Stack
+              direction="row"
+              alignContent="center"
+              color="text.secondary"
+              spacing={0.5}
+            >
+              <DescriptionIcon fontSize="small" />
+              <Typography variant="body2" gutterBottom noWrap>
+                Description :{" "}
+                {formData.description || "No Description Provided"}
+              </Typography>
+            </Stack>
+            <Stack
+              direction="row"
+              alignContent="center"
+              color="text.secondary"
+              spacing={0.5}
+            >
+              <ScheduleIcon fontSize="small" />
+              <Typography variant="body2" gutterBottom noWrap>
+                Start :{" "}
+                {dayjs(formData.startDate).local().format("YYYY-MM-DD HH:mm")}
+              </Typography>
+            </Stack>
+            <Stack
+              direction="row"
+              alignContent="center"
+              color="text.secondary"
+              spacing={0.5}
+            >
+              <ScheduleIcon fontSize="small" />
+              <Typography variant="body2" gutterBottom noWrap>
+                End :{" "}
+                {dayjs(formData.endDate).local().format("YYYY-MM-DD HH:mm")}
+              </Typography>
+            </Stack>
+          </Stack>
           <Divider light sx={{ mt: 2, mb: 0.5 }}>
             problems
           </Divider>
-          <Typography
-            variant="body2"
-            gutterBottom
-            noWrap
-            color="text.secondary"
-          >
-            Penalty : {formData.penalty} seconds
-          </Typography>
-          <Typography
-            variant="body2"
-            gutterBottom
-            noWrap
-            color="text.secondary"
-          >
-            Problems : {formData.problems.length}
-          </Typography>
+          <Stack direction="column" spacing={1}>
+            <Stack
+              direction="row"
+              alignContent="center"
+              color="text.secondary"
+              spacing={0.5}
+            >
+              <ReportIcon fontSize="small" />
+              <Typography variant="body2" gutterBottom noWrap>
+                Penalty : {formData.penalty} seconds
+              </Typography>
+            </Stack>
+            <Stack
+              direction="row"
+              alignContent="center"
+              color="text.secondary"
+              spacing={0.5}
+            >
+              <QuizIcon fontSize="small" />
+              <Typography variant="body2" gutterBottom noWrap>
+                Problems : {formData.problems.length}
+              </Typography>
+            </Stack>
+          </Stack>
           <Divider light sx={{ mt: 2, mb: 1 }}>
             Expected Users
           </Divider>
