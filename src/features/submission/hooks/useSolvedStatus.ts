@@ -5,10 +5,11 @@ import { getProblemKey } from "@features/problems/utils";
 import { Submission } from "@features/submission/submission";
 
 export const useSolvedStatus = (
-  filterFn: (submission: Submission) => boolean = () => true // filterFn must be inside of useCallback
+  filterFn: (submission: Submission) => boolean = () => true, // filterFn must be inside of useCallback
+  userId?: string
 ) => {
   const { queryParams } = useURLQuery();
-  const searchUserId = queryParams["userId"];
+  const searchUserId = userId || queryParams["userId"];
 
   const { data: submissions } = useFetchUserSubmission({
     userId: searchUserId,
