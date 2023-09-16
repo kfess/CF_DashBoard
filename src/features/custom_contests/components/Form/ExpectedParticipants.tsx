@@ -4,11 +4,11 @@ import Stack from "@mui/material/Stack";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import {
-  type Control,
-  type FieldErrors,
+  Control,
+  FieldErrors,
   Controller,
   useFieldArray,
-FieldArrayWithId
+  FieldArrayWithId,
 } from "react-hook-form";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
@@ -28,62 +28,69 @@ export const ExpectedParticipants: React.FC<Props> = ({ control, errors }) => {
   });
 
   return (
-      <Controller
-        control={control}
-        name="problemsFilter.excludeSolved"
-        render={({ field }) => (
-          <>
-            <Checkbox
-              title="Restriction"
-              label="Don't suggest problems solved by expected participants"
-              toggle={() => {
-                field.onChange(!field.value);
-              }}
-              description="When you check this, problems solved by expected participants are excluded"
-            />
-            {field.value && (
-              <>
-                <span>
-                  <Box
-                    component="label"
-                    htmlFor="expected-participants-input"
-                    fontWeight="bold"
-                    mb={0.5}
-                  >
-                    Expected Participants
-                  </Box>
-                  <Button
-                    onClick={() => append({ name: "" })}
-                    sx={{ ml: 1 }}
-                    size="small"
-                  >
-                    <AddIcon />
-                  </Button>
-                </span>
-                <ParticipantsList
-                  control={control}
-                  fields={fields}
-                  errors={errors}
-                  remove={remove}
-                />
-              </>
-            )}
-          </>
-        )}
-      />
+    <Controller
+      control={control}
+      name="problemsFilter.excludeSolved"
+      render={({ field }) => (
+        <>
+          <Checkbox
+            title="Restriction"
+            label="Don't suggest problems solved by expected participants"
+            toggle={() => {
+              field.onChange(!field.value);
+            }}
+            description="When you check this, problems solved by expected participants are excluded"
+          />
+          {field.value && (
+            <>
+              <span>
+                <Box
+                  component="label"
+                  htmlFor="expected-participants-input"
+                  fontWeight="bold"
+                  mb={0.5}
+                >
+                  Expected Participants
+                </Box>
+                <Button
+                  onClick={() => append({ name: "" })}
+                  sx={{ ml: 1 }}
+                  size="small"
+                >
+                  <AddIcon />
+                </Button>
+              </span>
+              <ParticipantsList
+                control={control}
+                fields={fields}
+                errors={errors}
+                remove={remove}
+              />
+            </>
+          )}
+        </>
+      )}
+    />
   );
 };
-
-
 
 type ParticipantsListProps = {
   control: Control<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
-  fields: FieldArrayWithId<CreateCustomContest, "problemsFilter.expectedParticipants", "id">[];
+  fields: FieldArrayWithId<
+    CreateCustomContest,
+    "problemsFilter.expectedParticipants",
+    "id"
+  >[];
   remove: (index: number) => void;
-}
+};
 
-const ParticipantsList: React.FC<ParticipantsListProps> = ({ control, fields, errors, remove }) => {
+const ParticipantsList: React.FC<ParticipantsListProps> = ({
+  control,
+  fields,
+  errors,
+  remove,
+}) => {
   return (
     <>
       {fields.map((field, index) => (
@@ -108,7 +115,8 @@ const ParticipantsList: React.FC<ParticipantsListProps> = ({ control, fields, er
                 {errors.problemsFilter?.expectedParticipants?.[index] && (
                   <ErrorMessage
                     message={
-                      errors.problemsFilter?.expectedParticipants?.[index]?.name?.message
+                      errors.problemsFilter?.expectedParticipants?.[index]?.name
+                        ?.message
                     }
                   />
                 )}

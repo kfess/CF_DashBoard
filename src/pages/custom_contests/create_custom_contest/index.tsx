@@ -16,9 +16,9 @@ import {
   createCustomContestSchema,
 } from "@features/custom_contests/customContest";
 import { useAddCustomContest } from "@features/custom_contests/hooks/useAddCustomContest";
-import { _ContestDetailStep } from "@features/custom_contests/components/Form/_ContestDetailStep";
-import { _ProblemStep } from "@features/custom_contests/components/Form/_ProblemStep";
-import { _ViewStep } from "@features/custom_contests/components/Form/_ViewStep";
+import { ContestDetailStep } from "@features/custom_contests/components/Form/ContestDetailStep";
+import { ProblemStep } from "@features/custom_contests/components/Form/ProblemStep";
+import { ViewStep } from "@features/custom_contests/components/Form/ViewStep";
 import { getDefaultStartDate, getDefaultEndDate } from "@helpers/date";
 
 const getDefaultValues = (
@@ -121,7 +121,7 @@ export const CreateCustomContestPage: React.FC = () => {
       <Container maxWidth="lg">
         <form onSubmit={handleSubmit(onSubmit)}>
           {activeStep === 0 && (
-            <_ContestDetailStep
+            <ContestDetailStep
               setActiveStep={setActiveStep}
               codeforcesUsername={codeforcesUsername}
               watchedVisibility={watchedVisibility}
@@ -131,15 +131,21 @@ export const CreateCustomContestPage: React.FC = () => {
             />
           )}
           {activeStep === 1 && (
-            <_ProblemStep
+            <ProblemStep
               setActiveStep={setActiveStep}
               setValue={setValue}
               control={control}
               errors={errors}
+              getValues={getValues}
             />
           )}
           {activeStep === 2 && (
-            <_ViewStep setActiveStep={setActiveStep} formData={getValues()} />
+            <ViewStep
+              setActiveStep={setActiveStep}
+              formData={getValues()}
+              control={control}
+              errors={errors}
+            />
           )}
         </form>
       </Container>
