@@ -31,27 +31,34 @@ export const SelectProblems: React.FC<Props> = ({
   const selectProblems = useCallback(
     (problems: Problem[]) => {
       const values = getValues();
-      return problems
-        .filter(
-          (problem) =>
-            (problem.rating ?? 0) >=
-              (values.problemsFilter.difficultyFrom ?? 0) &&
-            (problem.rating ?? 0) <=
-              (values.problemsFilter.difficultyTo ?? 0) &&
-            values.problemsFilter.includeTags.every((includeTag) =>
-              (problem.tags as Tag[]).includes(includeTag)
-            ) &&
-            values.problemsFilter.excludeTags.every(
-              (excludeTag) => !(problem.tags as Tag[]).includes(excludeTag)
-            ) &&
-            (!values.problemsFilter.excludeSolved ||
-              !solvedSet.has(getProblemKey(problem)))
-        )
+      const {
+        difficultyFrom,
+        difficultyTo,
+        includeTags,
+        excludeTags,
+        excludeSolved,
+        count,
+      } = values.problemsFilter;
+
+      const filteredProblems = problems.filter((problem) => {
+        const tags = problem.tags as Tag[];
+        const rating = problem.rating ?? 0;
+
+        return (
+          rating >= (difficultyFrom ?? 0) &&
+          rating <= (difficultyTo ?? 0) &&
+          includeTags.every((includeTag) => tags.includes(includeTag)) &&
+          excludeTags.every((excludeTag) => !tags.includes(excludeTag)) &&
+          (!excludeSolved || !solvedSet.has(getProblemKey(problem)))
+        );
+      });
+
+      return filteredProblems
         .sort(() => Math.random() - 0.5)
-        .slice(0, values.problemsFilter.count ?? 0)
+        .slice(0, count ?? 0)
         .sort((a, b) => (a.rating ?? 0) - (b.rating ?? 0));
     },
-    [getValues]
+    [getValues, solvedSet]
   );
 
   return (
