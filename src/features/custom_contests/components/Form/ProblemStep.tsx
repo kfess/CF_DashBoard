@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useState, useEffect, useCallback, Suspense } from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
@@ -14,6 +14,9 @@ import { ExpectedParticipants } from "@features/custom_contests/components/Form/
 import { Difficulty } from "@features/custom_contests/components/Form/Difficulty";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { SelectedProblemsTable } from "./SelectedProblemsTable";
+import { useFetchExpectedParticipantsSolvedProblems } from "@features/custom_contests/hooks/useFetchSubmissions";
+import { getProblemKey } from "@features/problems/utils";
+import { CircularProgress } from "@features/ui/component/CircularProgress";
 
 type Props = {
   setActiveStep(step: number): void;
@@ -32,6 +35,8 @@ export const ProblemStep: React.FC<Props> = ({
 }) => {
   const { data } = useFetchProblems();
 
+  // const expectedParticipants =
+  //   getValues().problemsFilter.expectedParticipants.map((v) => v.name);
   // const [shouldFetch, setShouldFetch] = useState(false);
   // const { solvedSet } = useFetchExpectedParticipantsSolvedProblems(
   //   expectedParticipants,
@@ -85,13 +90,15 @@ export const ProblemStep: React.FC<Props> = ({
             Generate Problems
           </Button>
         </Stack>
-        <Controller
-          name="problems"
-          control={control}
-          render={({ field }) => (
-            <SelectedProblemsTable isEdit={true} field={field} />
-          )}
-        />
+        <Suspense fallback={<CircularProgress />}>
+          <Controller
+            name="problems"
+            control={control}
+            render={({ field }) => (
+              <SelectedProblemsTable isEdit={true} field={field} />
+            )}
+          />
+        </Suspense>
         {errors.problems && <ErrorMessage message={errors.problems.message} />}
       </Box>
       <Stack

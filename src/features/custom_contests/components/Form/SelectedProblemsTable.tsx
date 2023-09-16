@@ -113,11 +113,15 @@ export const SelectedProblemsTable: React.FC<Props> = ({
               border: (theme) => `0.5px solid ${theme.palette.divider}`,
             }}
           >
-            <NoDataMessage
-              title="You have not added any problems yet."
-              message="Generated problems are listed here."
-              height="300px"
-            />
+            <TableRow>
+              <TableCell colSpan={5}>
+                <NoDataMessage
+                  title="You have not added any problems yet."
+                  message="Generated problems are listed here."
+                  height="300px"
+                />
+              </TableCell>
+            </TableRow>
           </Table>
         </TableContainer>
       )}
