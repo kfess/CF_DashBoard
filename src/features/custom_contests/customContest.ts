@@ -2,7 +2,6 @@ import { z } from "zod";
 import dayjs from "dayjs";
 import { tagSchema } from "@features/problems/problem";
 import { problemsSchema } from "@features/problems/problem";
-import { normalizeSearchUser } from "@features/layout/searchUser";
 
 export const apiFilterTypes = [
   "public",
@@ -78,16 +77,20 @@ export const problemSuggestOptionSchema = z.object({
   includeTags: z.array(tagSchema),
   excludeTags: z.array(tagSchema),
   excludeSolved: z.boolean(),
-  expectedParticipants: z.array(
-    z.object({
-      name: z
-        .string()
-        .min(1, { message: "Name cannot be empty" })
-        .refine((val) => normalizeSearchUser(val), { message: "Invalid name" }),
-    })
-  ),
 });
 export type ProblemSuggestOption = z.infer<typeof problemSuggestOptionSchema>;
+
+export const individualProblemAddFilterSchema = problemSuggestOptionSchema
+  .pick({
+    difficultyFrom: true,
+    difficultyTo: true,
+    includeTags: true,
+    excludeTags: true,
+  })
+  .partial();
+export type IndividualProblemAddFilter = z.infer<
+  typeof individualProblemAddFilterSchema
+>;
 
 // to create custom contest
 export const createCustomContestSchema = z.object({
@@ -127,6 +130,7 @@ export const createCustomContestSchema = z.object({
     message: "At least one problem is required.",
   }),
   problemsFilter: problemSuggestOptionSchema,
+  individualProblemAddFilter: individualProblemAddFilterSchema,
 });
 
 export type CreateCustomContest = z.infer<typeof createCustomContestSchema>;

@@ -43,7 +43,12 @@ const getDefaultValues = (
     includeTags: [],
     excludeTags: [],
     excludeSolved: false,
-    expectedParticipants: [],
+  },
+  individualProblemAddFilter: {
+    difficultyFrom: 0,
+    difficultyTo: 5000,
+    includeTags: [],
+    excludeTags: [],
   },
 });
 

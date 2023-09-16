@@ -1,19 +1,17 @@
-import React, { useCallback, Suspense } from "react";
+import React, { Suspense } from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
-import { Controller, Control, FieldErrors } from "react-hook-form";
+import { Control, FieldErrors } from "react-hook-form";
 import { Button } from "@features/ui/component/Button";
-import { Problem, Tag } from "@features/problems/problem";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import { NumberOfProblems } from "@features/custom_contests/components/Form/NumberOfProblems";
 import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsTag";
 import { ExcludeSolved } from "@features/custom_contests/components/Form/ExcludeSolved";
 import { Difficulty } from "@features/custom_contests/components/Form/Difficulty";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
-import { SelectedProblemsTable } from "./SelectedProblemsTable";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { SelectProblems } from "./SelectProblems";
 

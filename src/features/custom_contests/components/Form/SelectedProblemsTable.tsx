@@ -1,4 +1,5 @@
 import React from "react";
+import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -16,6 +17,7 @@ import { ControllerRenderProps } from "react-hook-form";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { IconButton } from "@features/ui/component/IconButton";
 import { HelpToolTip } from "@features/ui/component/HelpToolTip";
+import { Button } from "@features/ui/component/Button";
 
 type Props = {
   isEdit?: boolean;
@@ -107,6 +109,15 @@ export const SelectedProblemsTable: React.FC<Props> = ({
                         )}
                       </TableRow>
                     ))}
+                  <TableRow>
+                    {isEdit && (
+                      <TableCell colSpan={5}>
+                        <Button startIcon={<AddIcon />} color="secondary">
+                          Add problem
+                        </Button>
+                      </TableCell>
+                    )}
+                  </TableRow>
                 </TableBody>
               </Table>
             </TableContainer>
