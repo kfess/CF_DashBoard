@@ -1,14 +1,15 @@
 import React from "react";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import {
-  Control,
+  type Control,
+  type FieldErrors,
   Controller,
-  FieldErrors,
   useFieldArray,
+FieldArrayWithId
 } from "react-hook-form";
-import { FormControl } from "@features/ui/component/FormControl";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Checkbox } from "@features/ui/component/Checkbox";
@@ -18,21 +19,15 @@ import { Button } from "@features/ui/component/Button";
 type Props = {
   control: Control<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
-  excludeSolved: boolean;
 };
 
-export const ExpectedParticipants: React.FC<Props> = ({
-  control,
-  errors,
-  excludeSolved,
-}) => {
+export const ExpectedParticipants: React.FC<Props> = ({ control, errors }) => {
   const { fields, append, remove } = useFieldArray({
     control,
     name: "problemsFilter.expectedParticipants",
   });
 
   return (
-    <>
       <Controller
         control={control}
         name="problemsFilter.excludeSolved"
@@ -46,61 +41,85 @@ export const ExpectedParticipants: React.FC<Props> = ({
               }}
               description="When you check this, problems solved by expected participants are excluded"
             />
+            {field.value && (
+              <>
+                <span>
+                  <Box
+                    component="label"
+                    htmlFor="expected-participants-input"
+                    fontWeight="bold"
+                    mb={0.5}
+                  >
+                    Expected Participants
+                  </Box>
+                  <Button
+                    onClick={() => append({ name: "" })}
+                    sx={{ ml: 1 }}
+                    size="small"
+                  >
+                    <AddIcon />
+                  </Button>
+                </span>
+                <ParticipantsList
+                  control={control}
+                  fields={fields}
+                  errors={errors}
+                  remove={remove}
+                />
+              </>
+            )}
           </>
         )}
       />
-      {excludeSolved && (
-        <>
-          <span>
-            <label
-              htmlFor="title-input"
-              css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
-            >
-              Expected Participants
-            </label>
-            <Button
-              onClick={() => append({ name: "" })}
-              sx={{ ml: 1 }}
-              size="small"
-            >
-              <AddIcon />
-            </Button>
-          </span>
-          {fields.map((field, index) => (
-            <Stack
-              key={field.id}
-              direction="row"
-              alignItems="flex-start"
-              gap={1}
-              my={0.5}
-            >
-              <Controller
-                name={`problemsFilter.expectedParticipants.${index}.name`}
-                control={control}
-                render={({ field }) => (
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="User ID"
-                      id="user-name-input"
-                      type="text"
-                    />
-                    <ErrorMessage
-                      message={
-                        errors.problemsFilter?.expectedParticipants?.[index]
-                          ?.name?.message
-                      }
-                    />
-                  </FormControl>
+  );
+};
+
+
+
+type ParticipantsListProps = {
+  control: Control<CreateCustomContest>;
+  errors: FieldErrors<CreateCustomContest>;
+  fields: FieldArrayWithId<CreateCustomContest, "problemsFilter.expectedParticipants", "id">[];
+  remove: (index: number) => void;
+}
+
+const ParticipantsList: React.FC<ParticipantsListProps> = ({ control, fields, errors, remove }) => {
+  return (
+    <>
+      {fields.map((field, index) => (
+        <Stack
+          key={field.id}
+          direction="row"
+          alignItems="flex-start"
+          gap={1}
+          my={0.5}
+        >
+          <Controller
+            name={`problemsFilter.expectedParticipants.${index}.name`}
+            control={control}
+            render={({ field }) => (
+              <Box flexGrow="1">
+                <Input
+                  {...field}
+                  placeholder="User ID"
+                  id="user-name-input"
+                  type="text"
+                />
+                {errors.problemsFilter?.expectedParticipants?.[index] && (
+                  <ErrorMessage
+                    message={
+                      errors.problemsFilter?.expectedParticipants?.[index]?.name?.message
+                    }
+                  />
                 )}
-              />
-              <Button onClick={() => remove(index)}>
-                <RemoveIcon />
-              </Button>
-            </Stack>
-          ))}
-        </>
-      )}
+              </Box>
+            )}
+          />
+          <Button onClick={() => remove(index)}>
+            <RemoveIcon />
+          </Button>
+        </Stack>
+      ))}
     </>
   );
 };

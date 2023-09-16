@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
-import { Controller, Control, FieldErrors, useWatch } from "react-hook-form";
+import { Controller, Control, FieldErrors } from "react-hook-form";
 import { Button } from "@features/ui/component/Button";
 import { Problem, Tag } from "@features/problems/problem";
 import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
@@ -20,6 +20,7 @@ type Props = {
   setValue: (name: keyof CreateCustomContest, value: any) => void;
   control: Control<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
+  getValues: () => CreateCustomContest;
 };
 
 export const ProblemStep: React.FC<Props> = ({
@@ -27,40 +28,9 @@ export const ProblemStep: React.FC<Props> = ({
   setValue,
   control,
   errors,
+  getValues,
 }) => {
   const { data } = useFetchProblems();
-
-  const count = useWatch({ control, name: "problemsFilter.count" });
-
-  const difficultyFrom = useWatch({
-    control,
-    name: "problemsFilter.difficultyFrom",
-  });
-
-  const difficultyTo = useWatch({
-    control,
-    name: "problemsFilter.difficultyTo",
-  });
-
-  const includeTags = useWatch({
-    control,
-    name: "problemsFilter.includeTags",
-  });
-
-  const excludeTags = useWatch({
-    control,
-    name: "problemsFilter.excludeTags",
-  });
-
-  const excludeSolved = useWatch({
-    control,
-    name: "problemsFilter.excludeSolved",
-  });
-
-  const expectedParticipants = useWatch({
-    control,
-    name: "problemsFilter.expectedParticipants",
-  }).map((obj) => obj.name);
 
   // const [shouldFetch, setShouldFetch] = useState(false);
   // const { solvedSet } = useFetchExpectedParticipantsSolvedProblems(
@@ -73,23 +43,26 @@ export const ProblemStep: React.FC<Props> = ({
 
   const selectProblems = useCallback(
     (problems: Problem[]) => {
+      const values = getValues();
       return problems
         .filter(
           (problem) =>
-            (problem.rating ?? 0) >= (difficultyFrom ?? 0) &&
-            (problem.rating ?? 0) <= (difficultyTo ?? 0) &&
-            includeTags.every((includeTag) =>
+            (problem.rating ?? 0) >=
+              (values.problemsFilter.difficultyFrom ?? 0) &&
+            (problem.rating ?? 0) <=
+              (values.problemsFilter.difficultyTo ?? 0) &&
+            values.problemsFilter.includeTags.every((includeTag) =>
               (problem.tags as Tag[]).includes(includeTag)
             ) &&
-            excludeTags.every(
+            values.problemsFilter.excludeTags.every(
               (excludeTag) => !(problem.tags as Tag[]).includes(excludeTag)
             )
         )
         .sort(() => Math.random() - 0.5)
-        .slice(0, count ?? 0)
+        .slice(0, values.problemsFilter.count ?? 0)
         .sort((a, b) => (a.rating ?? 0) - (b.rating ?? 0));
     },
-    [difficultyFrom, difficultyTo, includeTags, excludeTags, count]
+    [getValues]
   );
 
   return (
@@ -99,11 +72,7 @@ export const ProblemStep: React.FC<Props> = ({
           <NumberOfProblems control={control} errors={errors} />
           <Difficulty control={control} errors={errors} />
           <ProblemsTag control={control} errors={errors} />
-          <ExpectedParticipants
-            control={control}
-            errors={errors}
-            excludeSolved={excludeSolved}
-          />
+          <ExpectedParticipants control={control} errors={errors} />
         </Stack>
         <Stack direction="row" justifyContent="flex-end" sx={{ my: 2 }}>
           <Button

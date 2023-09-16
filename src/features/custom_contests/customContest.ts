@@ -60,6 +60,7 @@ export type CustomContest = z.infer<typeof customContestSchema>;
 export const problemSuggestOptionSchema = z.object({
   count: z
     .number()
+    .max(100, { message: "Number of Problems cannot be more than 100" })
     .nonnegative({ message: "Count must be non negative value" })
     .nullable(),
   difficultyFrom: z
