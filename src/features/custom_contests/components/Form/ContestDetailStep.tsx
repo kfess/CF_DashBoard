@@ -39,7 +39,7 @@ export const ContestDetailStep: React.FC<Props> = ({
             direction="row"
             justifyContent="space-between"
             alignItems="center"
-            sx={{ mb: 1 }}
+            mb={1}
           >
             <Stack direction="row" flexWrap="wrap" flexGrow={1} gap={1}>
               <Chip

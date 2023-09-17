@@ -42,8 +42,18 @@ export const customContestSchema = z.object({
   description: z.string(),
   penalty: z.number(),
   mode: modeSchema,
-  startDate: z.string().datetime(),
-  endDate: z.string().datetime(),
+  startDate: z
+    .string()
+    .datetime()
+    .refine((val) => dayjs(val).isValid() && dayjs(val).isAfter(dayjs()), {
+      message: "Invalid start Date",
+    }),
+  endDate: z
+    .string()
+    .datetime()
+    .refine((val) => dayjs(val).isValid() && dayjs(val).isAfter(dayjs()), {
+      message: "Invalid end Date",
+    }),
   visibility: visibilitySchema,
   participants: z
     .array(z.string())
@@ -82,6 +92,7 @@ export const problemSuggestOptionSchema = z.object({
 });
 export type ProblemSuggestOption = z.infer<typeof problemSuggestOptionSchema>;
 
+// options for individual problem add
 export const individualProblemAddFilterSchema = problemSuggestOptionSchema.pick(
   {
     difficultyFrom: true,
@@ -95,47 +106,68 @@ export type IndividualProblemAddFilter = z.infer<
 >;
 
 // to create custom contest
-export const createCustomContestSchema = z.object({
-  title: z
-    .string()
-    .min(1, { message: "Title cannot be empty" })
-    .max(100, { message: "Title cannot be more than 100 characters" })
-    .refine((val) => val.trim().length > 0, {
-      message: "Title cannot be only whitespace",
-    }),
-  owner: z.string().min(1, { message: "Codeforces username have to be set." }), // codeforces account username
-  ownerId: z.string().min(1, { message: "GitHub username have to be set." }), // github account username
-  description: z
-    .string()
-    .min(1, { message: "Description cannot be empty" })
-    .max(1000, { message: "Description cannot be more than 1000 characters" })
-    .refine((val) => val.trim().length > 0, {
-      message: "Description cannot be only whitespace",
-    }),
-  penalty: z
-    .number()
-    .nonnegative({ message: "Penalty must be non negative value" })
-    .nullable()
-    .refine((value) => value !== null, { message: "Penalty cannot be empty" }),
-  mode: modeSchema,
-  startDate: z
-    .string()
-    .refine((val) => dayjs(val).isValid(), { message: "Invalid start Date" }),
-  endDate: z
-    .string()
-    .refine((val) => dayjs(val).isValid(), { message: "Invalid end Date" }),
-  visibility: visibilitySchema,
-  participants: z
-    .array(z.string())
-    .min(1, { message: "Participants required" }),
-  problems: problemsSchema
-    .min(1, {
-      message: "At least one problem is required.",
-    })
-    .max(100, { message: "The number of problems cannot be more than 100" }),
-  problemsFilter: problemSuggestOptionSchema,
-  individualProblemAddFilter: individualProblemAddFilterSchema,
-});
+export const createCustomContestSchema = z
+  .object({
+    title: z
+      .string()
+      .min(1, { message: "Title cannot be empty" })
+      .max(100, { message: "Title cannot be more than 100 characters" })
+      .refine((val) => val.trim().length > 0, {
+        message: "Title cannot be only whitespace",
+      }),
+    owner: z
+      .string()
+      .min(1, { message: "Codeforces username have to be set." }), // codeforces account username
+    ownerId: z.string().min(1, { message: "GitHub username have to be set." }), // github account username
+    description: z
+      .string()
+      .min(1, { message: "Description cannot be empty" })
+      .max(250, { message: "Description cannot be more than 250 characters" })
+      .refine((val) => val.trim().length > 0, {
+        message: "Description cannot be only whitespace",
+      }),
+    penalty: z
+      .number()
+      .nonnegative({ message: "Penalty must be non negative value" })
+      .refine((value) => value !== null, {
+        message: "Penalty cannot be empty",
+      }),
+    mode: modeSchema,
+    startDate: z
+      .string()
+      .refine((val) => dayjs(val).isValid(), {
+        message: "Invalid start Date",
+      })
+      .refine((val) => dayjs(val).isAfter(dayjs()), {
+        message: "Start Date should be after current Date",
+      }),
+    endDate: z
+      .string()
+      .refine((val) => dayjs(val).isValid(), {
+        message: "Invalid end Date",
+      })
+      .refine((val) => dayjs(val).isAfter(dayjs()), {
+        message: "End Date should be after current Date",
+      }),
+    visibility: visibilitySchema,
+    participants: z
+      .array(z.string())
+      .min(1, { message: "Participants required" }),
+    problems: problemsSchema
+      .min(1, {
+        message: "At least one problem is required.",
+      })
+      .max(100, { message: "The number of problems cannot be more than 100" }),
+    problemsFilter: problemSuggestOptionSchema,
+    individualProblemAddFilter: individualProblemAddFilterSchema,
+  })
+  .refine(
+    ({ startDate, endDate }) => dayjs(endDate).isAfter(dayjs(startDate)),
+    {
+      message: "End Date should be after Start Date",
+      path: ["endDate"],
+    }
+  );
 
 export type CreateCustomContest = z.infer<typeof createCustomContestSchema>;
 
