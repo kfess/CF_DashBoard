@@ -141,11 +141,11 @@ export const ProblemsTable: React.FC<Props> = ({
                     Solved
                   </Typography>
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <Typography variant="body2" fontWeight="fontWeightBold">
                     Solution
                   </Typography>
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             </TableHead>
             {problemsLen > 0 ? (

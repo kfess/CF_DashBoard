@@ -8,7 +8,7 @@ import HourglassEmptyOutlinedIcon from "@mui/icons-material/HourglassEmptyOutlin
 import Tooltip from "@mui/material/Tooltip";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
-import { SolutionLink } from "./SolutionLink";
+// import { SolutionLink } from "./SolutionLink";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { Chip } from "@features/ui/component/Chip";
 import { useTheme } from "@mui/material";
@@ -102,9 +102,9 @@ export const ProblemsTableRow: React.FC<Props> = ({
           }
         />
       </TableCell>
-      <TableCell>
+      {/* <TableCell>
         <SolutionLink />
-      </TableCell>
+      </TableCell> */}
     </TableRow>
   );
 };

@@ -42,18 +42,8 @@ export const customContestSchema = z.object({
   description: z.string(),
   penalty: z.number(),
   mode: modeSchema,
-  startDate: z
-    .string()
-    .datetime()
-    .refine((val) => dayjs(val).isValid() && dayjs(val).isAfter(dayjs()), {
-      message: "Invalid start Date",
-    }),
-  endDate: z
-    .string()
-    .datetime()
-    .refine((val) => dayjs(val).isValid() && dayjs(val).isAfter(dayjs()), {
-      message: "Invalid end Date",
-    }),
+  startDate: z.string().datetime(),
+  endDate: z.string().datetime(),
   visibility: visibilitySchema,
   participants: z
     .array(z.string())

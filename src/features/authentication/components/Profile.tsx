@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { Input } from "@features/ui/component/Input";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { Button } from "@features/ui/component/Button";
+import { Snackbar } from "@features/ui/component/Snackbar";
 
 export const Profile: React.FC = () => {
   const { githubId, githubUserName, codeforcesUsername, updateUsername } =
@@ -13,6 +13,12 @@ export const Profile: React.FC = () => {
 
   const [newUsername, setNewUsername] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+
+  // for error snackbar
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const handleCloseSnackbar = () => {
+    setIsSnackbarOpen(false);
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewUsername(event.target.value);
@@ -25,6 +31,7 @@ export const Profile: React.FC = () => {
       await updateUsername(newUsername);
       setNewUsername("");
     } catch (error) {
+      setIsSnackbarOpen(true);
       if (error instanceof Error) {
         setError(error.message);
       } else {
@@ -36,13 +43,13 @@ export const Profile: React.FC = () => {
   return (
     <>
       <HeadLine title="Profile" />
-      <Box sx={{ my: 3 }}>
+      <Stack sx={{ my: 3 }} spacing={0.5}>
         <Typography variant="body1">GitHub ID: {githubId}</Typography>
         <Typography variant="body1">GitHub Name: {githubUserName}</Typography>
         <Typography variant="body1">
           Codeforces Username: {codeforcesUsername}
         </Typography>
-      </Box>
+      </Stack>
       <form onSubmit={handleSubmit}>
         <Stack direction="row" spacing={1}>
           <Input
@@ -55,6 +62,13 @@ export const Profile: React.FC = () => {
           <Button type="submit">Update</Button>
         </Stack>
       </form>
+      {error && (
+        <Snackbar
+          open={isSnackbarOpen}
+          message={"An error occurred during updating codeforces username"}
+          onClose={handleCloseSnackbar}
+        />
+      )}
     </>
   );
 };
