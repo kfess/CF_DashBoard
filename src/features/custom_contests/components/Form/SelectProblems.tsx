@@ -1,7 +1,12 @@
 import React, { useCallback } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { Control, FieldErrors, useFieldArray } from "react-hook-form";
+import {
+  Control,
+  FieldErrors,
+  useFieldArray,
+  UseFormSetValue,
+} from "react-hook-form";
 import type { CreateCustomContest } from "@features/custom_contests/customContest";
 import type { Problem } from "@features/problems/problem";
 import type { Tag } from "@features/problems/problem";
@@ -16,12 +21,14 @@ import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 type Props = {
   control: Control<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
+  setValue: UseFormSetValue<CreateCustomContest>;
   getValues: () => CreateCustomContest;
 };
 
 export const SelectProblems: React.FC<Props> = ({
   control,
   errors,
+  setValue,
   getValues,
 }) => {
   const { data } = useFetchProblems();
@@ -91,6 +98,7 @@ export const SelectProblems: React.FC<Props> = ({
             control={control}
             append={append}
             errors={errors}
+            setValue={setValue}
             getValues={getValues}
           />
         </Box>
@@ -99,14 +107,3 @@ export const SelectProblems: React.FC<Props> = ({
     </>
   );
 };
-
-// append({
-//   contestId: 1111111111,
-//   contestName: "Contest Name",
-//   classification: "Others",
-//   name: "Problem Name",
-//   type: "PROGRAMMING",
-//   rating: Math.round(Math.random() * 5000),
-//   index: "A",
-//   tags: [],
-// });

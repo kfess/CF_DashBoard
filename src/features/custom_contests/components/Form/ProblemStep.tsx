@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
-import { Control, FieldErrors } from "react-hook-form";
+import { Control, FieldErrors, UseFormSetValue } from "react-hook-form";
 import { Button } from "@features/ui/component/Button";
 import { NumberOfProblems } from "@features/custom_contests/components/Form/NumberOfProblems";
 import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsTag";
@@ -17,6 +17,7 @@ import { SelectProblems } from "./SelectProblems";
 type Props = {
   setActiveStep(step: number): void;
   control: Control<CreateCustomContest>;
+  setValue: UseFormSetValue<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
   getValues: () => CreateCustomContest;
 };
@@ -24,6 +25,7 @@ type Props = {
 export const ProblemStep: React.FC<Props> = ({
   setActiveStep,
   control,
+  setValue,
   errors,
   getValues,
 }) => {
@@ -44,6 +46,7 @@ export const ProblemStep: React.FC<Props> = ({
           <SelectProblems
             control={control}
             errors={errors}
+            setValue={setValue}
             getValues={getValues}
           />
         </Suspense>

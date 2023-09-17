@@ -8,6 +8,7 @@ import {
   FieldErrors,
   useWatch,
   UseFieldArrayAppend,
+  UseFormSetValue,
 } from "react-hook-form";
 import { Difficulty } from "@features/custom_contests/components/Form/Difficulty";
 import { ProblemsTagForIndividualBlock } from "@features/custom_contests/components/Form/ProblemsTagForIndividualBlock";
@@ -23,6 +24,7 @@ type Props = {
   control: Control<CreateCustomContest>;
   append: UseFieldArrayAppend<CreateCustomContest, "problems">;
   errors: FieldErrors<CreateCustomContest>;
+  setValue: UseFormSetValue<CreateCustomContest>;
   getValues: () => CreateCustomContest;
 };
 
@@ -31,6 +33,7 @@ export const AddProblemBlock: React.FC<Props> = ({
   control,
   append,
   errors,
+  setValue,
   getValues,
 }) => {
   const [isAddBlockOpen, toggleAddBlockOpen] = useToggle(false, true);
@@ -76,16 +79,26 @@ export const AddProblemBlock: React.FC<Props> = ({
     [difficultyFrom, difficultyTo, includeTags, excludeTags, isAddBlockOpen]
   );
 
-  const hit = useMemo(
+  const hitCount = useMemo(
     () => notAddedProblems.length,
     [notAddedProblems, isAddBlockOpen]
   );
+
+  const reset = () => {
+    setValue("individualProblemAddFilter", {
+      difficultyFrom: 0,
+      difficultyTo: 5000,
+      includeTags: [],
+      excludeTags: [],
+    });
+  };
 
   const addProblem = () => {
     const selectedProblem =
       notAddedProblems[Math.floor(Math.random() * notAddedProblems.length)];
     append(selectedProblem);
     toggleAddBlockOpen();
+    reset();
   };
 
   return (
@@ -93,6 +106,9 @@ export const AddProblemBlock: React.FC<Props> = ({
       <Button
         onClick={() => {
           toggleAddBlockOpen();
+          if (!isAddBlockOpen) {
+            reset();
+          }
         }}
         startIcon={<AddIcon />}
         color="secondary"
@@ -114,7 +130,7 @@ export const AddProblemBlock: React.FC<Props> = ({
             <Typography gutterBottom fontWeight="bold" fontSize="large">
               Optionally add problem
             </Typography>
-            <Chip label={`${hit} problems found`} />
+            <Chip label={`${hitCount} problems found`} />
           </Stack>
           <Difficulty
             control={control}
@@ -126,6 +142,7 @@ export const AddProblemBlock: React.FC<Props> = ({
             <Button
               onClick={() => {
                 toggleAddBlockOpen();
+                reset();
               }}
               color="secondary"
             >
