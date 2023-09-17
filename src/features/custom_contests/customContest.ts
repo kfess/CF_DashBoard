@@ -48,9 +48,11 @@ export const customContestSchema = z.object({
   participants: z
     .array(z.string())
     .min(1, { message: "Participants required" }),
-  problems: problemsSchema.min(1, {
-    message: "At least one problem is required.",
-  }),
+  problems: problemsSchema
+    .min(1, {
+      message: "At least one problem is required.",
+    })
+    .max(100, { message: "Number of Problems cannot be more than 100" }),
 });
 export const customContestsSchema = z.array(customContestSchema);
 export type CustomContest = z.infer<typeof customContestSchema>;
@@ -126,9 +128,11 @@ export const createCustomContestSchema = z.object({
   participants: z
     .array(z.string())
     .min(1, { message: "Participants required" }),
-  problems: problemsSchema.min(1, {
-    message: "At least one problem is required.",
-  }),
+  problems: problemsSchema
+    .min(1, {
+      message: "At least one problem is required.",
+    })
+    .max(100, { message: "The number of problems cannot be more than 100" }),
   problemsFilter: problemSuggestOptionSchema,
   individualProblemAddFilter: individualProblemAddFilterSchema,
 });

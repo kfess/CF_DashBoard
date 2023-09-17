@@ -91,6 +91,7 @@ export const SelectProblems: React.FC<Props> = ({
         </Button>
       </Stack>
       <SelectedProblemsTable isEdit={true} fields={fields} remove={remove} />
+      {errors.problems && <ErrorMessage message={errors.problems.message} />}
       {fields.length > 0 && (
         <Box mt={1.5}>
           <AddProblemBlock
@@ -103,7 +104,6 @@ export const SelectProblems: React.FC<Props> = ({
           />
         </Box>
       )}
-      {errors.problems && <ErrorMessage message={errors.problems.message} />}
     </>
   );
 };

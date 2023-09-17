@@ -50,7 +50,6 @@ export const ProblemStep: React.FC<Props> = ({
             getValues={getValues}
           />
         </Suspense>
-        {errors.problems && <ErrorMessage message={errors.problems.message} />}
       </Box>
       <Stack
         direction="row"
