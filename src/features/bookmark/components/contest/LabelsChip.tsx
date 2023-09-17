@@ -10,7 +10,7 @@ export const LabelsChip: React.FC = () => {
 
   return (
     <Chip
-      label={<div>{labelsCount || 0} Labels</div>}
+      label={<div>{labelsCount || 0} Contest Labels</div>}
       onClick={() => {
         navigate("/labels");
       }}

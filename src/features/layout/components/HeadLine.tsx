@@ -3,7 +3,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { useLocation } from "react-router-dom";
-import { LabelsChip } from "@features/bookmark/components/problem/LabelsChip";
+import { LabelsChip as ProblemLabelsChip } from "@features/bookmark/components/problem/LabelsChip";
+import { LabelsChip as ContestLabelsChip } from "@features/bookmark/components/contest/LabelsChip";
 import { useURLQuery } from "@hooks/useQueryParams";
 import { Chip, DeletableChip } from "@features/ui/component/Chip";
 
@@ -42,7 +43,8 @@ export const HeadLine: React.FC<Props> = ({ title }) => {
               )}
             </>
           )}
-          <LabelsChip />
+          <ProblemLabelsChip />
+          <ContestLabelsChip />
         </Stack>
       </Stack>
       <Divider />

@@ -125,14 +125,13 @@ export const AddLabelButton: React.FC<Props> = ({
   return (
     <Box>
       <IconButton
-        icon={<StarIcon sx={{ fontSize: "1.0rem" }} />}
+        icon={<StarIcon sx={{ fontSize: "1.2rem" }} />}
         id="label-button"
+        isRound={false}
         onClick={handleClick}
-        disableRipple
         sx={{
-          padding: "0.2rem",
+          p: "0.2rem",
           color: open ? "#FFB700" : "#93A1B0",
-          backgroundColor: "#EFEFEF",
         }}
       />
       {open && (

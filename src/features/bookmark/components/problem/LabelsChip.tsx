@@ -11,7 +11,7 @@ export const LabelsChip: React.FC = () => {
   return (
     <Chip
       icon={<StarBorderOutlined fontSize="small" />}
-      label={<div>{labelsCount || 0} Labels</div>}
+      label={<div>{labelsCount || 0} Problem Labels</div>}
       onClick={() => {
         navigate("/labels");
       }}
