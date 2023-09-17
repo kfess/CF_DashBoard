@@ -11,6 +11,7 @@ import {
   UseFormSetValue,
 } from "react-hook-form";
 import { Difficulty } from "@features/custom_contests/components/Form/Difficulty";
+import { Classification } from "@features/custom_contests/components/Form/Classification";
 import { ProblemsTagForIndividualBlock } from "@features/custom_contests/components/Form/ProblemsTagForIndividualBlock";
 import { Button } from "@features/ui/component/Button";
 import type { Tag } from "@features/problems/problem";
@@ -52,6 +53,11 @@ export const AddProblemBlock: React.FC<Props> = ({
     name: "individualProblemAddFilter.difficultyTo",
   });
 
+  const classification = useWatch({
+    control,
+    name: "individualProblemAddFilter.classifization",
+  });
+
   const includeTags = useWatch({
     control,
     name: "individualProblemAddFilter.includeTags",
@@ -71,12 +77,21 @@ export const AddProblemBlock: React.FC<Props> = ({
         return (
           rating >= difficultyFrom &&
           rating <= difficultyTo &&
+          (classification === "All" ||
+            classification === problem.classification) &&
           includeTags.every((includeTag) => tags.includes(includeTag)) &&
           excludeTags.every((excludeTag) => !tags.includes(excludeTag)) &&
           !alreadyAddedSet.has(getProblemKey(problem))
         );
       }),
-    [difficultyFrom, difficultyTo, includeTags, excludeTags, isAddBlockOpen]
+    [
+      difficultyFrom,
+      difficultyTo,
+      classification,
+      includeTags,
+      excludeTags,
+      isAddBlockOpen,
+    ]
   );
 
   const hitCount = useMemo(
@@ -90,6 +105,7 @@ export const AddProblemBlock: React.FC<Props> = ({
       difficultyTo: 5000,
       includeTags: [],
       excludeTags: [],
+      classifization: "All",
     });
   };
 
@@ -132,12 +148,19 @@ export const AddProblemBlock: React.FC<Props> = ({
             </Typography>
             <Chip label={`${hitCount} problems found`} />
           </Stack>
-          <Difficulty
-            control={control}
-            errors={errors}
-            fieldName="individualProblemAddFilter"
-          />
-          <ProblemsTagForIndividualBlock control={control} errors={errors} />
+          <Stack direction="column" spacing={2}>
+            <Difficulty
+              control={control}
+              errors={errors}
+              fieldName="individualProblemAddFilter"
+            />
+            <Classification
+              control={control}
+              errors={errors}
+              fieldName="individualProblemAddFilter"
+            />
+            <ProblemsTagForIndividualBlock control={control} errors={errors} />
+          </Stack>
           <Stack direction="row" justifyContent="flex-end" spacing={1} mt={3}>
             <Button
               onClick={() => {

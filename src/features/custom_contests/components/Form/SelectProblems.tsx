@@ -45,6 +45,7 @@ export const SelectProblems: React.FC<Props> = ({
       const {
         difficultyFrom,
         difficultyTo,
+        classifization,
         includeTags,
         excludeTags,
         excludeSolved,
@@ -58,6 +59,8 @@ export const SelectProblems: React.FC<Props> = ({
         return (
           rating >= difficultyFrom &&
           rating <= difficultyTo &&
+          (classifization === "All" ||
+            classifization === problem.classification) &&
           includeTags.every((includeTag) => tags.includes(includeTag)) &&
           excludeTags.every((excludeTag) => !tags.includes(excludeTag)) &&
           (!excludeSolved || !solvedSet.has(getProblemKey(problem)))
