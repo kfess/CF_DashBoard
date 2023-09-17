@@ -16,14 +16,16 @@ type Props = { problems: Problem[] };
 export const Problems: React.FC<Props> = ({ problems }) => {
   return (
     <>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <Paper
+        sx={{
+          overflow: "hidden",
+          border: 1,
+          borderColor: "divider",
+        }}
+        elevation={0}
+      >
         <TableContainer component={Paper}>
-          <Table
-            sx={{
-              height: "100%",
-              border: (theme) => `0.5px solid ${theme.palette.divider}`,
-            }}
-          >
+          <Table>
             <TableHead>
               <TableRow hover>
                 <TableCell>

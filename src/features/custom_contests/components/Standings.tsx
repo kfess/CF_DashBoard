@@ -82,42 +82,45 @@ export const Standings: React.FC<Props> = ({
         {numParticipants > 1 ? "are " : "is "}
         participating in this contest.
       </Typography>
-      <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
+      <Paper
+        sx={{
+          width: "100%",
+          overflow: "hidden",
+          border: 1,
+          borderColor: "divider",
+        }}
+        elevation={0}
+      >
         <TableContainer component={Paper}>
-          <Table
-            sx={{
-              height: "100%",
-              border: (theme) => `0.5px solid ${theme.palette.divider}`,
-            }}
-          >
+          <Table>
             <TableHead>
               <TableRow hover>
                 <TableCell
                   sx={{
-                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
+                    borderRight: (theme) =>
+                      `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
-                    padding: "0px",
                   }}
                 >
                   rank
                 </TableCell>
                 <TableCell
                   sx={{
-                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
+                    borderRight: (theme) =>
+                      `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
-                    padding: "0px",
                   }}
                 >
                   Participants
                 </TableCell>
                 <TableCell
                   sx={{
-                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
+                    borderRight: (theme) =>
+                      `0.5px solid ${theme.palette.divider}`,
                     textAlign: "center",
                     fontWeight: "600",
-                    padding: "0px",
                   }}
                 >
                   Score
@@ -126,9 +129,9 @@ export const Standings: React.FC<Props> = ({
                   <TableCell
                     key={getProblemKey(problem)}
                     sx={{
-                      border: (theme) => `0.5px solid ${theme.palette.divider}`,
+                      borderRight: (theme) =>
+                        `0.5px solid ${theme.palette.divider}`,
                       textAlign: "center",
-                      padding: "0px",
                     }}
                   >
                     <ExternalLink
@@ -161,7 +164,7 @@ export const Standings: React.FC<Props> = ({
                     <TableRow hover key={participant}>
                       <TableCell
                         sx={{
-                          border: (theme) =>
+                          borderRight: (theme) =>
                             `0.5px solid ${theme.palette.divider}`,
                           textAlign: "center",
                           padding: "2px",
@@ -171,7 +174,7 @@ export const Standings: React.FC<Props> = ({
                       </TableCell>
                       <TableCell
                         sx={{
-                          border: (theme) =>
+                          borderRight: (theme) =>
                             `0.5px solid ${theme.palette.divider}`,
                           padding: "8px",
                         }}
@@ -185,7 +188,7 @@ export const Standings: React.FC<Props> = ({
                       </TableCell>
                       <TableCell
                         sx={{
-                          border: (theme) =>
+                          borderRight: (theme) =>
                             `0.5px solid ${theme.palette.divider}`,
                           padding: "2px",
                         }}
@@ -235,7 +238,7 @@ export const Standings: React.FC<Props> = ({
                         <TableCell
                           key={getProblemKey(problem)}
                           sx={{
-                            border: (theme) =>
+                            borderRight: (theme) =>
                               `0.5px solid ${theme.palette.divider}`,
                             padding: "2px",
                           }}
@@ -250,7 +253,8 @@ export const Standings: React.FC<Props> = ({
                 <TableCell
                   colSpan={3}
                   sx={{
-                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
+                    borderRight: (theme) =>
+                      `0.5px solid ${theme.palette.divider}`,
                     padding: "8px",
                   }}
                 >
@@ -264,7 +268,7 @@ export const Standings: React.FC<Props> = ({
                     <TableCell
                       key={key}
                       sx={{
-                        border: (theme) =>
+                        borderRight: (theme) =>
                           `0.5px solid ${theme.palette.divider}`,
                         padding: "8px",
                       }}
@@ -305,7 +309,8 @@ export const Standings: React.FC<Props> = ({
                 <TableCell
                   colSpan={3}
                   sx={{
-                    border: (theme) => `0.5px solid ${theme.palette.divider}`,
+                    borderRight: (theme) =>
+                      `0.5px solid ${theme.palette.divider}`,
                     padding: "8px",
                   }}
                 >
@@ -319,7 +324,7 @@ export const Standings: React.FC<Props> = ({
                     <TableCell
                       key={key}
                       sx={{
-                        border: (theme) =>
+                        borderRight: (theme) =>
                           `0.5px solid ${theme.palette.divider}`,
                         padding: "8px",
                       }}

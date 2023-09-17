@@ -43,7 +43,11 @@ export const VerticalContestTable: React.FC<Props> = ({
         rowsPerPage={rowsPerPage}
         setRowsPerPage={setRowsPerPage}
       />
-      <TableContainer component={Paper}>
+      <TableContainer
+        component={Paper}
+        sx={{ border: 1, borderColor: "divider" }}
+        elevation={0}
+      >
         <Table>
           <TableBody>
             {slicedContests.map((c) => (

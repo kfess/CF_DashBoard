@@ -50,22 +50,20 @@ export const ContestsTable: React.FC<Props> = ({
         rowsPerPage={rowsPerPage}
         setRowsPerPage={setRowsPerPage}
       />
-      <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
+      <Paper
+        sx={{
+          width: "100%",
+          overflow: "hidden",
+          border: 1,
+          borderColor: "divider",
+        }}
+        elevation={0}
+      >
         <TableContainer component={Paper}>
-          <Table
-            sx={{
-              height: "100%",
-              border: (theme) => `0.5px solid ${theme.palette.divider}`,
-            }}
-          >
+          <Table sx={{ height: "100%" }}>
             <TableHead>
               <TableRow>
-                <TableCell
-                  align="center"
-                  sx={{
-                    border: (theme) => `1px solid ${theme.palette.divider}`,
-                  }}
-                >
+                <TableCell align="center">
                   <Typography variant="body1" fontWeight="fontWeightBold">
                     Contest
                   </Typography>

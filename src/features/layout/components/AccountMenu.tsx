@@ -51,12 +51,12 @@ export const commonItems: AccountMenuItem[] = [
     to: GITHUB_SPONSOR_URL,
     isExternal: true,
   },
-  {
-    icon: <SettingsOutlinedIcon sx={{ color: "#9246FF" }} />,
-    title: "Setting",
-    to: "/setting",
-    isExternal: false,
-  },
+  // {
+  //   icon: <SettingsOutlinedIcon sx={{ color: "#9246FF" }} />,
+  //   title: "Setting",
+  //   to: "/setting",
+  //   isExternal: false,
+  // },
 ];
 
 export const profileItem: AccountMenuItem = {

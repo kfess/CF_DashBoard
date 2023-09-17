@@ -55,13 +55,17 @@ export const MyContestTable: React.FC = () => {
             rowsPerPage={createdRowsPerPage}
             setRowsPerPage={createdSetRowsPerPage}
           />
-          <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
+          <Paper
+            sx={{
+              width: "100%",
+              overflow: "hidden",
+              border: 1,
+              borderColor: "divider",
+            }}
+            elevation={0}
+          >
             <TableContainer component={Paper}>
-              <Table
-                sx={{
-                  border: (theme) => `0.5px solid ${theme.palette.divider}`,
-                }}
-              >
+              <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell align="center">Title</TableCell>

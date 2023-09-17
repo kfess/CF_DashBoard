@@ -25,12 +25,12 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
   const { deleteProblemFromLabel } = useIndexedDBForProblemLabel();
 
   return (
-    <TableContainer component={Paper} elevation={0}>
-      <Table
-        sx={{
-          border: (theme) => `0.5px solid ${theme.palette.divider}`,
-        }}
-      >
+    <TableContainer
+      component={Paper}
+      sx={{ border: 1, borderColor: "divider" }}
+      elevation={0}
+    >
+      <Table>
         <TableHead>
           <TableRow>
             <TableCell>
