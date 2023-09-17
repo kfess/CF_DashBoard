@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -8,7 +7,6 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
@@ -20,7 +18,6 @@ import {
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { IconButton } from "@features/ui/component/IconButton";
 import { HelpToolTip } from "@features/ui/component/HelpToolTip";
-import { Button } from "@features/ui/component/Button";
 
 type Props = {
   isEdit?: boolean;
@@ -38,8 +35,6 @@ export const SelectedProblemsTable: React.FC<Props> = ({
   formData,
 }) => {
   const problems = isEdit ? fields : formData?.problems ?? [];
-
-  const [isOpenAddProblemRow, setIsOpenAddProblemRow] = useState(false);
 
   return (
     <>
@@ -112,11 +107,6 @@ export const SelectedProblemsTable: React.FC<Props> = ({
                         )}
                       </TableRow>
                     ))}
-                  {isEdit && isOpenAddProblemRow && (
-                    <TableRow>
-                      <TableCell colSpan={5}></TableCell>
-                    </TableRow>
-                  )}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -141,29 +131,6 @@ export const SelectedProblemsTable: React.FC<Props> = ({
             </TableRow>
           </Table>
         </TableContainer>
-      )}
-      {isEdit && problems.length > 0 && (
-        <Box mt={1.5} mx={1}>
-          <Button
-            onClick={() => {
-              append({
-                contestId: 1111111111,
-                contestName: "Contest Name",
-                classification: "Others",
-                name: "Problem Name",
-                type: "PROGRAMMING",
-                rating: Math.round(Math.random() * 5000),
-                index: "A",
-                tags: [],
-              });
-              // setIsOpenAddProblemRow(!isOpenAddProblemRow);
-            }}
-            startIcon={<AddIcon />}
-            color="secondary"
-          >
-            Add problem
-          </Button>
-        </Box>
       )}
     </>
   );

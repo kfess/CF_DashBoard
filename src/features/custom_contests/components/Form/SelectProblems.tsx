@@ -1,5 +1,7 @@
 import React, { useCallback } from "react";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import AddIcon from "@mui/icons-material/Add";
 import { Control, FieldErrors, useFieldArray } from "react-hook-form";
 import type { CreateCustomContest } from "@features/custom_contests/customContest";
 import type { Problem } from "@features/problems/problem";
@@ -9,6 +11,8 @@ import { SelectedProblemsTable } from "@features/custom_contests/components/Form
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
 import { getProblemKey } from "@features/problems/utils";
+import { AddProblemBlock } from "@features/custom_contests/components/Form/AddProblemBlock";
+import { useToggle } from "@hooks/useToggle";
 
 type Props = {
   data?: Problem[];
@@ -69,6 +73,8 @@ export const SelectProblems: React.FC<Props> = ({
     [getValues, solvedSet, append, remove]
   );
 
+  const [isAddBlockOpen, toggleAddBlockOpen] = useToggle(false, true);
+
   return (
     <>
       <Stack direction="row" justifyContent="flex-end" sx={{ my: 2 }}>
@@ -87,7 +93,32 @@ export const SelectProblems: React.FC<Props> = ({
         remove={remove}
         append={append}
       />
+      {fields.length > 0 && (
+        <Box mt={1.5} mx={1}>
+          <Button
+            onClick={() => {
+              toggleAddBlockOpen();
+            }}
+            startIcon={<AddIcon />}
+            color="secondary"
+          >
+            Add problem
+          </Button>
+          {isAddBlockOpen && <AddProblemBlock />}
+        </Box>
+      )}
       {errors.problems && <ErrorMessage message={errors.problems.message} />}
     </>
   );
 };
+
+// append({
+//   contestId: 1111111111,
+//   contestName: "Contest Name",
+//   classification: "Others",
+//   name: "Problem Name",
+//   type: "PROGRAMMING",
+//   rating: Math.round(Math.random() * 5000),
+//   index: "A",
+//   tags: [],
+// });
