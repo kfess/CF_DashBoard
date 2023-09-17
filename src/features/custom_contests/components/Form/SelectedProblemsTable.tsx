@@ -14,6 +14,7 @@ import { FieldArrayWithId, UseFieldArrayRemove } from "react-hook-form";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { IconButton } from "@features/ui/component/IconButton";
 import { HelpToolTip } from "@features/ui/component/HelpToolTip";
+import { getColorCodeFromRating } from "@features/color/ratingColor";
 
 type Props = {
   isEdit?: boolean;
@@ -81,9 +82,13 @@ export const SelectedProblemsTable: React.FC<Props> = ({
                           />
                         </TableCell>
                         <TableCell>
-                          {p.rating?.toLocaleString() || (
-                            <HelpToolTip title="No data available" />
-                          )}
+                          <span
+                            css={{ color: getColorCodeFromRating(p.rating) }}
+                          >
+                            {p.rating?.toLocaleString() || (
+                              <HelpToolTip title="No data available" />
+                            )}
+                          </span>
                         </TableCell>
                         {isEdit && (
                           <TableCell>
