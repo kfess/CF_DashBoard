@@ -6,7 +6,6 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Control, FieldErrors } from "react-hook-form";
 import { Button } from "@features/ui/component/Button";
-import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import { NumberOfProblems } from "@features/custom_contests/components/Form/NumberOfProblems";
 import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsTag";
 import { ExcludeSolved } from "@features/custom_contests/components/Form/ExcludeSolved";
@@ -28,8 +27,6 @@ export const ProblemStep: React.FC<Props> = ({
   errors,
   getValues,
 }) => {
-  const { data } = useFetchProblems();
-
   return (
     <Box pb={{ xs: 2, md: 4 }}>
       <Box sx={{ px: { xs: 1, md: 4 }, py: 3 }}>
@@ -45,7 +42,6 @@ export const ProblemStep: React.FC<Props> = ({
         </Stack>
         <Suspense fallback={<CircularProgress />}>
           <SelectProblems
-            data={data}
             control={control}
             errors={errors}
             getValues={getValues}

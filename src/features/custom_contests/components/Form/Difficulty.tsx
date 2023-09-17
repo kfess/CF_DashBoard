@@ -62,6 +62,7 @@ export const Difficulty: React.FC<Props> = ({
               onChange={(value) => {
                 field.onChange({ ...field.value, difficultyFrom: value });
               }}
+              value={field.value.difficultyFrom}
               defaultValue={0}
             />
             {errors.problemsFilter?.difficultyFrom && (
@@ -101,6 +102,7 @@ export const Difficulty: React.FC<Props> = ({
               onChange={(value) => {
                 field.onChange({ ...field.value, difficultyTo: value });
               }}
+              value={field.value.difficultyTo}
               defaultValue={5000}
             />
             {errors.problemsFilter?.difficultyTo && (

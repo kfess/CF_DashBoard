@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import AddIcon from "@mui/icons-material/Add";
 import { Control, FieldErrors, useFieldArray } from "react-hook-form";
 import type { CreateCustomContest } from "@features/custom_contests/customContest";
 import type { Problem } from "@features/problems/problem";
@@ -12,21 +11,20 @@ import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
 import { getProblemKey } from "@features/problems/utils";
 import { AddProblemBlock } from "@features/custom_contests/components/Form/AddProblemBlock";
-import { useToggle } from "@hooks/useToggle";
+import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 
 type Props = {
-  data?: Problem[];
   control: Control<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
   getValues: () => CreateCustomContest;
 };
 
 export const SelectProblems: React.FC<Props> = ({
-  data,
   control,
   errors,
   getValues,
 }) => {
+  const { data } = useFetchProblems();
   const { solvedSet } = useSolvedStatus(() => true, getValues().owner);
 
   const { fields, append, remove } = useFieldArray({
@@ -73,8 +71,6 @@ export const SelectProblems: React.FC<Props> = ({
     [getValues, solvedSet, append, remove]
   );
 
-  const [isAddBlockOpen, toggleAddBlockOpen] = useToggle(false, true);
-
   return (
     <>
       <Stack direction="row" justifyContent="flex-end" sx={{ my: 2 }}>
@@ -90,18 +86,13 @@ export const SelectProblems: React.FC<Props> = ({
       <SelectedProblemsTable isEdit={true} fields={fields} remove={remove} />
       {fields.length > 0 && (
         <Box mt={1.5}>
-          <Button
-            onClick={() => {
-              toggleAddBlockOpen();
-            }}
-            startIcon={<AddIcon />}
-            color="secondary"
-          >
-            Add problem
-          </Button>
-          {isAddBlockOpen && (
-            <AddProblemBlock control={control} errors={errors} />
-          )}
+          <AddProblemBlock
+            data={data ?? []}
+            control={control}
+            append={append}
+            errors={errors}
+            getValues={getValues}
+          />
         </Box>
       )}
       {errors.problems && <ErrorMessage message={errors.problems.message} />}
