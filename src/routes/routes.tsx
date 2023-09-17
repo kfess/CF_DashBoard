@@ -168,7 +168,7 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      { path: "/setting", element: <SettingPage /> },
+      // { path: "/setting", element: <SettingPage /> },
       { path: "/login", element: <LoginPage /> },
       {
         path: "/callback",
