@@ -10,7 +10,7 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import ReportIcon from "@mui/icons-material/Report";
 import QuizIcon from "@mui/icons-material/Quiz";
-import { Control, Controller, FieldErrors } from "react-hook-form";
+import { Control, FieldErrors } from "react-hook-form";
 import { Button } from "@features/ui/component/Button";
 import type { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Chip } from "@features/ui/component/Chip";
@@ -27,7 +27,6 @@ type Props = {
 export const ViewStep: React.FC<Props> = ({
   setActiveStep,
   formData,
-  control,
   errors,
 }) => {
   return (
@@ -38,13 +37,7 @@ export const ViewStep: React.FC<Props> = ({
             About Problems
           </Typography>
           <Box my={2}>
-            <Controller
-              name="problems"
-              control={control}
-              render={({ field }) => (
-                <SelectedProblemsTable isEdit={false} field={field} />
-              )}
-            />
+            <SelectedProblemsTable isEdit={false} formData={formData} />
           </Box>
         </Grid>
         <Grid item xs={12} md={4} order={{ xs: 1, md: 2 }}>
@@ -153,30 +146,6 @@ export const ViewStep: React.FC<Props> = ({
               </Typography>
             </Stack>
           </Stack>
-          <Divider light sx={{ mt: 2, mb: 1 }}>
-            Expected Users
-          </Divider>
-          {formData.problemsFilter.expectedParticipants.length > 0 &&
-            formData.problemsFilter.expectedParticipants.map((participant) => (
-              <Typography
-                variant="body2"
-                gutterBottom
-                noWrap
-                color="text.secondary"
-              >
-                {participant.name}
-              </Typography>
-            ))}
-          {formData.problemsFilter.expectedParticipants.length === 0 && (
-            <Typography
-              variant="body2"
-              gutterBottom
-              noWrap
-              color="text.secondary"
-            >
-              No users specified
-            </Typography>
-          )}
           <Divider light sx={{ mt: 2, mb: 0.5 }}>
             Related Tags
           </Divider>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TableContainer from "@mui/material/TableContainer";
@@ -8,12 +8,15 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { usePagination } from "@hooks/usePagination";
-import { TablePagination } from "@features/ui/component/TablePagination";
+import Box from "@mui/material/Box";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
-import { ControllerRenderProps } from "react-hook-form";
+import {
+  FieldArrayWithId,
+  UseFieldArrayAppend,
+  UseFieldArrayRemove,
+} from "react-hook-form";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { IconButton } from "@features/ui/component/IconButton";
 import { HelpToolTip } from "@features/ui/component/HelpToolTip";
@@ -21,32 +24,27 @@ import { Button } from "@features/ui/component/Button";
 
 type Props = {
   isEdit?: boolean;
-  field: ControllerRenderProps<CreateCustomContest, "problems">;
+  fields?: FieldArrayWithId<CreateCustomContest, "problems", "id">[];
+  remove?: UseFieldArrayRemove;
+  append?: UseFieldArrayAppend<CreateCustomContest, "problems">;
+  formData?: CreateCustomContest; // for ViewStep in non-edit mode
 };
 
 export const SelectedProblemsTable: React.FC<Props> = ({
   isEdit = true,
-  field,
+  fields = [],
+  remove = () => {},
+  append = () => {},
+  formData,
 }) => {
-  const selectedProblems = field.value;
-  const removeProblem = (index: number) => {
-    field.onChange(selectedProblems.filter((_, idx) => index !== idx));
-  };
+  const problems = isEdit ? fields : formData?.problems ?? [];
 
-  const [page, setPage, rowsPerPage, setRowsPerPage] =
-    usePagination(selectedProblems);
+  const [isOpenAddProblemRow, setIsOpenAddProblemRow] = useState(false);
 
   return (
     <>
-      {selectedProblems.length > 0 && (
+      {problems.length > 0 && (
         <>
-          <TablePagination
-            size={selectedProblems.length}
-            page={page}
-            setPage={setPage}
-            rowsPerPage={rowsPerPage}
-            setRowsPerPage={setRowsPerPage}
-          />
           <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
             <TableContainer component={Paper}>
               <Table
@@ -65,11 +63,13 @@ export const SelectedProblemsTable: React.FC<Props> = ({
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {selectedProblems
-                    .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-                    .sort((a, b) => (a.rating || 0) - (b.rating || 0))
+                  {problems
+                    .sort((a, b) =>
+                      !isEdit && (a.rating || 0) > (b.rating || 0) ? 1 : -1
+                    )
                     .map((p, index) => (
-                      <TableRow key={p.name} hover>
+                      // <TableRow key={p.name} hover>
+                      <TableRow key={index} hover>
                         <TableCell>{index + 1}</TableCell>
                         <TableCell>
                           <ProblemLink
@@ -98,9 +98,13 @@ export const SelectedProblemsTable: React.FC<Props> = ({
                         {isEdit && (
                           <TableCell>
                             <IconButton
-                              icon={<DeleteIcon />}
+                              icon={
+                                <>
+                                  {index} <DeleteIcon />
+                                </>
+                              }
                               onClick={() => {
-                                removeProblem(index);
+                                remove(index);
                               }}
                               size="small"
                               aria-label="delete problems"
@@ -109,22 +113,18 @@ export const SelectedProblemsTable: React.FC<Props> = ({
                         )}
                       </TableRow>
                     ))}
-                  <TableRow>
-                    {isEdit && (
-                      <TableCell colSpan={5}>
-                        <Button startIcon={<AddIcon />} color="secondary">
-                          Add problem
-                        </Button>
-                      </TableCell>
-                    )}
-                  </TableRow>
+                  {isEdit && isOpenAddProblemRow && (
+                    <TableRow>
+                      <TableCell colSpan={5}></TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
           </Paper>
         </>
       )}
-      {selectedProblems.length === 0 && (
+      {problems.length === 0 && (
         <TableContainer component={Paper} elevation={0}>
           <Table
             sx={{
@@ -142,6 +142,29 @@ export const SelectedProblemsTable: React.FC<Props> = ({
             </TableRow>
           </Table>
         </TableContainer>
+      )}
+      {isEdit && problems.length > 0 && (
+        <Box mt={1.5} mx={1}>
+          <Button
+            onClick={() => {
+              append({
+                contestId: 1111111111,
+                contestName: "Contest Name",
+                classification: "Others",
+                name: "Problem Name",
+                type: "PROGRAMMING",
+                rating: Math.round(Math.random() * 5000),
+                index: "A",
+                tags: [],
+              });
+              // setIsOpenAddProblemRow(!isOpenAddProblemRow);
+            }}
+            startIcon={<AddIcon />}
+            color="secondary"
+          >
+            Add problem
+          </Button>
+        </Box>
       )}
     </>
   );

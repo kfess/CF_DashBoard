@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import Stack from "@mui/material/Stack";
-import { Controller, Control, FieldErrors } from "react-hook-form";
+import { Control, FieldErrors, useFieldArray } from "react-hook-form";
 import type { CreateCustomContest } from "@features/custom_contests/customContest";
 import type { Problem } from "@features/problems/problem";
 import type { Tag } from "@features/problems/problem";
@@ -15,7 +15,6 @@ type Props = {
   control: Control<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
   getValues: () => CreateCustomContest;
-  setValue: (name: keyof CreateCustomContest, value: any) => void;
 };
 
 export const SelectProblems: React.FC<Props> = ({
@@ -23,13 +22,16 @@ export const SelectProblems: React.FC<Props> = ({
   control,
   errors,
   getValues,
-  setValue,
 }) => {
-  const owner = getValues().owner;
-  const { solvedSet } = useSolvedStatus(() => true, owner);
+  const { solvedSet } = useSolvedStatus(() => true, getValues().owner);
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "problems",
+  });
 
   const selectProblems = useCallback(
-    (problems: Problem[]) => {
+    async (problems: Problem[]) => {
       const values = getValues();
       const {
         difficultyFrom,
@@ -53,12 +55,18 @@ export const SelectProblems: React.FC<Props> = ({
         );
       });
 
-      return filteredProblems
+      const selectedProblems = filteredProblems
         .sort(() => Math.random() - 0.5)
         .slice(0, count ?? 0)
         .sort((a, b) => (a.rating ?? 0) - (b.rating ?? 0));
+
+      const update = async () => {
+        await remove();
+        await append(selectedProblems);
+      };
+      update();
     },
-    [getValues, solvedSet]
+    [getValues, solvedSet, append, remove]
   );
 
   return (
@@ -66,19 +74,18 @@ export const SelectProblems: React.FC<Props> = ({
       <Stack direction="row" justifyContent="flex-end" sx={{ my: 2 }}>
         <Button
           onClick={() => {
-            data && setValue("problems", selectProblems(data));
+            selectProblems(data ?? []);
           }}
           disabled={!data}
         >
           Generate Problems
         </Button>
       </Stack>
-      <Controller
-        name="problems"
-        control={control}
-        render={({ field }) => (
-          <SelectedProblemsTable isEdit={true} field={field} />
-        )}
+      <SelectedProblemsTable
+        isEdit={true}
+        fields={fields}
+        remove={remove}
+        append={append}
       />
       {errors.problems && <ErrorMessage message={errors.problems.message} />}
     </>

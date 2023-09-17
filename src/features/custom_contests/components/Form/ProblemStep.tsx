@@ -51,7 +51,6 @@ export const ProblemStep: React.FC<Props> = ({
             control={control}
             errors={errors}
             getValues={getValues}
-            setValue={setValue}
           />
         </Suspense>
         {errors.problems && <ErrorMessage message={errors.problems.message} />}

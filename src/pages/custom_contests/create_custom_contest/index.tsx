@@ -8,7 +8,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { SubNavigation } from "@features/ui/component/SubNavigation";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import {
@@ -67,7 +67,6 @@ export const CreateCustomContestPage: React.FC = () => {
     getValues,
     setValue,
     handleSubmit,
-    watch,
     formState: { errors },
     reset,
   } = useForm<CreateCustomContest>({
@@ -75,8 +74,14 @@ export const CreateCustomContestPage: React.FC = () => {
     defaultValues: defaultValues,
   });
 
-  const watchedVisibility = watch("visibility");
-  const watchedMode = watch("mode");
+  const watchedMode = useWatch({
+    control,
+    name: "mode",
+  });
+  const watchedVisibility = useWatch({
+    control,
+    name: "visibility",
+  });
 
   useEffect(() => {
     reset(defaultValues);
