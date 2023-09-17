@@ -159,8 +159,9 @@ export const DifficultyPie: React.FC<Props> = ({
         {ACProblemCount} / {problemsCount}
       </Typography>
       <Typography variant="h6">
-        {" "}
-        {colorInfo.lowerBound} ~ {colorInfo.upperBound}
+        {colorInfo.lowerBound === -1 && colorInfo.upperBound === -1
+          ? "No Category Available"
+          : colorInfo.lowerBound + " ~ " + colorInfo.upperBound}
       </Typography>
     </Box>
   );

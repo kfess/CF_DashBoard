@@ -112,15 +112,17 @@ export const SelectedProblemsTable: React.FC<Props> = ({
           elevation={0}
         >
           <Table>
-            <TableRow>
-              <TableCell colSpan={5}>
-                <NoDataMessage
-                  title="You have not added any problems yet."
-                  message="Generated problems are listed here."
-                  height="300px"
-                />
-              </TableCell>
-            </TableRow>
+            <TableBody>
+              <TableRow>
+                <TableCell colSpan={5}>
+                  <NoDataMessage
+                    title="You have not added any problems yet."
+                    message="Generated problems are listed here."
+                    height="300px"
+                  />
+                </TableCell>
+              </TableRow>
+            </TableBody>
           </Table>
         </TableContainer>
       )}

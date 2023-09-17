@@ -62,6 +62,8 @@ export const useUserProfile = () => {
     queryKey: ["userProfile"],
     queryFn: fetchUserProfile,
     retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
     useErrorBoundary: false, // For now, we don't want to use ErrorBoundary
   });
 

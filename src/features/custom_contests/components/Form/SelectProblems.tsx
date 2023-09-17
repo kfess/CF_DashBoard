@@ -53,11 +53,11 @@ export const SelectProblems: React.FC<Props> = ({
 
       const filteredProblems = problems.filter((problem) => {
         const tags = problem.tags as Tag[];
-        const rating = problem.rating ?? 0;
+        const rating = problem.rating ?? -1;
 
         return (
-          rating >= (difficultyFrom ?? 0) &&
-          rating <= (difficultyTo ?? 0) &&
+          rating >= difficultyFrom &&
+          rating <= difficultyTo &&
           includeTags.every((includeTag) => tags.includes(includeTag)) &&
           excludeTags.every((excludeTag) => !tags.includes(excludeTag)) &&
           (!excludeSolved || !solvedSet.has(getProblemKey(problem)))

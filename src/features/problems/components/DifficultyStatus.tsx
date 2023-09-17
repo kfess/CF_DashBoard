@@ -33,11 +33,7 @@ export const DifficultyStatus: React.FC<Props> = ({ problems }) => {
   const { queryParams } = useURLQuery();
   const searchUserId = queryParams["userId"];
 
-  const {
-    data: submission,
-    isError,
-    isLoading,
-  } = useFetchUserSubmission({
+  const { data: submission } = useFetchUserSubmission({
     userId: searchUserId,
   });
 
@@ -59,7 +55,6 @@ export const DifficultyStatus: React.FC<Props> = ({ problems }) => {
     <Box sx={{ display: "flex", justifyContent: "center", mt: 2, mb: 2 }}>
       <Paper
         sx={{
-          width: "98%",
           overflow: "hidden",
           border: 1,
           borderColor: "divider",
@@ -81,7 +76,9 @@ export const DifficultyStatus: React.FC<Props> = ({ problems }) => {
                       }}
                     >
                       <ColoredCircle color={ratingColorInfo[color].colorCode} />{" "}
-                      {ratingColorInfo[color].lowerBound} -
+                      {ratingColorInfo[color].lowerBound !== -1
+                        ? ratingColorInfo[color].lowerBound + " ~"
+                        : "No Category"}
                     </div>
                   </TableCell>
                 ))}

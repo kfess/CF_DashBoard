@@ -98,6 +98,7 @@ export const ContestDetailStep: React.FC<Props> = ({
           onClick={() => setActiveStep(1)}
           color="secondary"
           endIcon={<KeyboardDoubleArrowRightIcon />}
+          disabled={!codeforcesUsername}
         >
           Next
         </Button>

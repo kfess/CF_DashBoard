@@ -37,7 +37,7 @@ export const Difficulty: React.FC<Props> = ({
         name={fieldName}
         control={control}
         render={({ field }) => (
-          <Box flexGrow="1">
+          <Box width="50%">
             <Box
               component="label"
               display="block"
@@ -54,7 +54,8 @@ export const Difficulty: React.FC<Props> = ({
                   value: ld,
                   label: (
                     <>
-                      <ColoredCircle color={getColorCodeFromRating(ld)} /> {ld}
+                      <ColoredCircle color={getColorCodeFromRating(ld)} />{" "}
+                      {ld !== -1 ? ld : "No Category Available"}
                     </>
                   ),
                 };
@@ -77,7 +78,7 @@ export const Difficulty: React.FC<Props> = ({
         name={fieldName}
         control={control}
         render={({ field }) => (
-          <Box flexGrow="1">
+          <Box width="50%">
             <Box
               component="label"
               display="block"
@@ -94,7 +95,8 @@ export const Difficulty: React.FC<Props> = ({
                   value: ud,
                   label: (
                     <>
-                      <ColoredCircle color={getColorCodeFromRating(ud)} /> {ud}
+                      <ColoredCircle color={getColorCodeFromRating(ud)} />{" "}
+                      {ud !== -1 ? ud : "No Category Available"}
                     </>
                   ),
                 };

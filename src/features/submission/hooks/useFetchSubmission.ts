@@ -46,6 +46,7 @@ export const useFetchUserSubmission = ({
       }
     }, []),
     enabled: !!userId,
+    refetchOnWindowFocus: false,
     useErrorBoundary: false, // For now, we don't want to use ErrorBoundary
   });
 
