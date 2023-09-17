@@ -65,7 +65,6 @@ export const CreateCustomContestPage: React.FC = () => {
   const {
     control,
     getValues,
-    setValue,
     handleSubmit,
     formState: { errors },
     reset,
@@ -143,7 +142,6 @@ export const CreateCustomContestPage: React.FC = () => {
           {activeStep === 1 && (
             <ProblemStep
               setActiveStep={setActiveStep}
-              setValue={setValue}
               control={control}
               errors={errors}
               getValues={getValues}
