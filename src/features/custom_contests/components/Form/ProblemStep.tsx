@@ -17,7 +17,6 @@ import { SelectProblems } from "./SelectProblems";
 
 type Props = {
   setActiveStep(step: number): void;
-  setValue: (name: keyof CreateCustomContest, value: any) => void;
   control: Control<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
   getValues: () => CreateCustomContest;
@@ -25,7 +24,6 @@ type Props = {
 
 export const ProblemStep: React.FC<Props> = ({
   setActiveStep,
-  setValue,
   control,
   errors,
   getValues,

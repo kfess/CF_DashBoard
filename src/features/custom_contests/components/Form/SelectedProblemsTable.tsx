@@ -68,7 +68,6 @@ export const SelectedProblemsTable: React.FC<Props> = ({
                       !isEdit && (a.rating || 0) > (b.rating || 0) ? 1 : -1
                     )
                     .map((p, index) => (
-                      // <TableRow key={p.name} hover>
                       <TableRow key={index} hover>
                         <TableCell>{index + 1}</TableCell>
                         <TableCell>
