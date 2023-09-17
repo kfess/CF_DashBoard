@@ -3,8 +3,8 @@ import { FormControl as MUIFormControl } from "@mui/material";
 import { styled } from "@mui/system";
 
 const CustomFormControl = styled(MUIFormControl)`
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  // margin-top: 0.5rem;
+  // margin-bottom: 0.5rem;
 `;
 
 type Props = { children: ReactNode };

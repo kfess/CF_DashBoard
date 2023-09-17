@@ -14,6 +14,7 @@ import { Chip } from "@features/ui/component/Chip";
 import { useTheme } from "@mui/material";
 import { CF_CONTEST_URL } from "@constants/url";
 import { ExternalLink } from "@features/ui/component/ExternalLink";
+import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 
 type Props = {
   readonly problem: Problem;
@@ -82,7 +83,9 @@ export const ProblemsTableRow: React.FC<Props> = ({
       </TableCell>
       <TableCell>
         <span css={{ color: getColorCodeFromRating(problem.rating) }}>
-          {problem.rating ?? "no data"}
+          {problem.rating?.toLocaleString() ?? (
+            <HelpToolTip title="No data available" />
+          )}
         </span>
       </TableCell>
       <TableCell>
@@ -94,7 +97,7 @@ export const ProblemsTableRow: React.FC<Props> = ({
                 label={problem.solvedCount.toLocaleString()}
               />
             ) : (
-              <div>no data</div>
+              <div>?</div>
             )
           }
         />

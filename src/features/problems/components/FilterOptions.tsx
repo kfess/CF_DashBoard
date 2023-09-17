@@ -7,7 +7,10 @@ import { TagsButton } from "@features/problems/components/TagsButton";
 import { ContestTypeFilter } from "@features/contests/components/ContestTypeFilter";
 import { SolvedStatusFilter } from "@features/problems/components/SolvedStatusFilter";
 import { ResetFilterButton } from "@features/problems/components/ResetFilter";
-import { DifficultyButton } from "@features/problems/components/DifficultyButton";
+import {
+  FromDifficultyButton,
+  ToDifficultyButton,
+} from "@features/problems/components/DifficultyButton";
 import { FilterChips } from "@features/problems/components/FilterChips";
 import { ViewFilter } from "./ViewFilter";
 import { Problem } from "@features/problems/problem";
@@ -125,11 +128,13 @@ export const FilterOptions: React.FC<Props> = ({
           classification={classification}
           onSelectClassification={onSelectClassification}
         />
-        <DifficultyButton
-          lowerDifficulty={lowerDifficulty}
-          onSelectFromDifficulty={onSelectFromDifficulty}
+        <FromDifficultyButton
           upperDifficulty={upperDifficulty}
           onSelectToDifficulty={onSelectToDifficulty}
+        />
+        <ToDifficultyButton
+          lowerDifficulty={lowerDifficulty}
+          onSelectFromDifficulty={onSelectFromDifficulty}
         />
         <TagsButton
           selectedTags={selectedTags}

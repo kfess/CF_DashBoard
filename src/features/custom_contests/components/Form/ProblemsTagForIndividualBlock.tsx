@@ -14,13 +14,16 @@ type Props = {
   errors: FieldErrors<CreateCustomContest>;
 };
 
-export const ProblemsTag: React.FC<Props> = ({ control, errors }) => {
+export const ProblemsTagForIndividualBlock: React.FC<Props> = ({
+  control,
+  errors,
+}) => {
   return (
     <Stack direction={{ xs: "column", sm: "row" }} gap={1}>
       <Box width={{ xs: "100%", sm: "50%" }}>
         <TagSection
           label="Include tags"
-          name="problemsFilter.includeTags"
+          name="individualProblemAddFilter.includeTags"
           control={control}
           hintText="When you select tags, suggested problems are related to the topic."
           errors={errors}
@@ -29,7 +32,7 @@ export const ProblemsTag: React.FC<Props> = ({ control, errors }) => {
       <Box width={{ xs: "100%", sm: "50%" }}>
         <TagSection
           label="Exclude tags"
-          name="problemsFilter.excludeTags"
+          name="individualProblemAddFilter.excludeTags"
           control={control}
           hintText="When you select tags, problems related to the tags will be excluded."
           errors={errors}
@@ -41,7 +44,7 @@ export const ProblemsTag: React.FC<Props> = ({ control, errors }) => {
 
 type TagSectionProps = {
   label: string;
-  name: `problemsFilter.${"includeTags" | "excludeTags"}`;
+  name: `individualProblemAddFilter.${"includeTags" | "excludeTags"}`;
   control: Control<CreateCustomContest>;
   hintText: string;
   errors?: FieldErrors<CreateCustomContest>;
@@ -91,7 +94,7 @@ const TagSection: React.FC<TagSectionProps> = ({
           </Stack>
           <ErrorMessage
             message={
-              name === "problemsFilter.includeTags"
+              name === "individualProblemAddFilter.includeTags"
                 ? errors?.problemsFilter?.includeTags?.message
                 : errors?.problemsFilter?.excludeTags?.message
             }

@@ -1,15 +1,15 @@
 import dayjs from "dayjs";
 import React from "react";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import { alpha } from "@mui/material";
 import { utcISOStringToLocal } from "@helpers/date";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { CustomContest } from "@features/custom_contests/customContest";
 import { Timer } from "@features/ui/component/Timer";
 import { Chip } from "@features/ui/component/Chip";
+import { InternalLink } from "@features/ui/component/InternalLink";
 
 type Props = {
   customContest: CustomContest;
@@ -30,11 +30,10 @@ export const RunningContestTableRow: React.FC<Props> = ({ customContest }) => {
     <TableRow hover>
       <TableCell>
         <Stack direction="row" spacing={0.5}>
-          <NavLink to={`/custom-contest/show/${customContest.contestId}`}>
-            <Typography sx={{ color: (theme) => theme.palette.text.secondary }}>
-              {customContest.title}
-            </Typography>
-          </NavLink>
+          <InternalLink
+            to={`/custom-contest/show/${customContest.contestId}`}
+            title={customContest.title}
+          />
           <Chip
             label={customContest.visibility}
             sx={{

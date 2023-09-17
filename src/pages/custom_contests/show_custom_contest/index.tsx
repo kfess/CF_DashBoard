@@ -61,114 +61,123 @@ export const ShowCustomContestPage: React.FC = () => {
       )}
       {data && (
         <Container maxWidth="lg">
-          <HeadLine title={data.title} />
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Stack direction="row" spacing={1} pt={2}>
-                <Chip label={data.visibility} />
-                <Chip label={data.mode} />
-                <Chip label={"Created by: " + data.owner} />
-              </Stack>
-            </Grid>
-            <Grid item xs={12}>
-              <CountdownScheduler
-                title={data.title}
-                description={utcISOStringToLocal(data.description)}
-                startDate={utcISOStringToLocal(data.startDate)}
-                endDate={data.endDate}
-              />
-              <Stack
-                direction="row-reverse"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <RegisterButton />
-                <SocialShare />
-              </Stack>
-              <Stack
-                p={1}
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                flexWrap="wrap"
-              >
-                <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
-                  Description
-                </Typography>
-                <Typography sx={{ mt: 2, flex: 8 }}>
-                  {data.description}
-                </Typography>
-              </Stack>
-              <Divider />
-              <Stack
-                p={1}
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                flexWrap="wrap"
-              >
-                <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
-                  Period
-                </Typography>
-                <Typography sx={{ mt: 2, flex: 8 }}>
-                  {utcISOStringToLocal(data.startDate)} ~{" "}
-                  {utcISOStringToLocal(data.endDate)}
-                </Typography>
-              </Stack>
-              <Divider />
-              <Stack
-                p={1}
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                flexWrap="wrap"
-              >
-                <Typography fontWeight="fontWeightBold" sx={{ mt: 2, flex: 4 }}>
-                  Penalty
-                </Typography>
-                <Typography sx={{ mt: 2, flex: 8 }}>
-                  {data.penalty} seconds per wrong submission
-                </Typography>
-              </Stack>
-            </Grid>
-          </Grid>
           <Box
             pt={{ xs: 2, md: 4 }}
             pb={{ xs: 2, md: 4 }}
             px={{ xs: 0, md: 2 }}
           >
-            <Tabs
-              value={tabValue}
-              onChange={handleChange}
-              aria-label="Problems and Standings Tabs"
+            <HeadLine title={data.title} />
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Stack direction="row" spacing={1} pt={2}>
+                  <Chip label={data.visibility} />
+                  <Chip label={data.mode} />
+                  <Chip label={"Created by: " + data.owner} />
+                </Stack>
+              </Grid>
+              <Grid item xs={12}>
+                <CountdownScheduler
+                  title={data.title}
+                  description={utcISOStringToLocal(data.description)}
+                  startDate={utcISOStringToLocal(data.startDate)}
+                  endDate={data.endDate}
+                />
+                <Stack
+                  direction="row-reverse"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <RegisterButton />
+                  <SocialShare />
+                </Stack>
+                <Stack
+                  p={1}
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  flexWrap="wrap"
+                >
+                  <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
+                    Description
+                  </Typography>
+                  <Typography sx={{ mt: 2, flex: 8 }}>
+                    {data.description}
+                  </Typography>
+                </Stack>
+                <Divider />
+                <Stack
+                  p={1}
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  flexWrap="wrap"
+                >
+                  <Typography sx={{ mt: 2, flex: 4, fontWeight: "bold" }}>
+                    Period
+                  </Typography>
+                  <Typography sx={{ mt: 2, flex: 8 }}>
+                    {utcISOStringToLocal(data.startDate)} ~{" "}
+                    {utcISOStringToLocal(data.endDate)}
+                  </Typography>
+                </Stack>
+                <Divider />
+                <Stack
+                  p={1}
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  flexWrap="wrap"
+                >
+                  <Typography
+                    fontWeight="fontWeightBold"
+                    sx={{ mt: 2, flex: 4 }}
+                  >
+                    Penalty
+                  </Typography>
+                  <Typography sx={{ mt: 2, flex: 8 }}>
+                    {data.penalty} seconds per wrong submission
+                  </Typography>
+                </Stack>
+              </Grid>
+            </Grid>
+            <Box
+              pt={{ xs: 2, md: 4 }}
+              pb={{ xs: 2, md: 4 }}
+              px={{ xs: 0, md: 2 }}
             >
-              <Tab value={0} label="Problems" />
-              <Tab value={1} label="Standings" />
-            </Tabs>
-            <TabPanel value={tabValue} index={0}>
-              <Problems problems={data.problems} />
-            </TabPanel>
-            <TabPanel value={tabValue} index={1}>
-              <Suspense fallback={<CircularProgress />}>
-                {data.mode === "Normal" && (
-                  <Standings
-                    participants={data.participants}
-                    problems={problems}
-                    startDate={data.startDate}
-                    endDate={data.endDate}
-                    penalty={data.penalty}
-                  />
-                )}
-                {data.mode === "Training" && (
-                  <TrainingStandings
-                    participants={data.participants}
-                    problems={problems}
-                    startDate={data.startDate}
-                    endDate={data.endDate}
-                  />
-                )}
-              </Suspense>
-            </TabPanel>
+              <Tabs
+                value={tabValue}
+                onChange={handleChange}
+                aria-label="Problems and Standings Tabs"
+              >
+                <Tab value={0} label="Problems" />
+                <Tab value={1} label="Standings" />
+              </Tabs>
+              <TabPanel value={tabValue} index={0}>
+                <Problems problems={data.problems} />
+              </TabPanel>
+              <TabPanel value={tabValue} index={1}>
+                <Suspense fallback={<CircularProgress />}>
+                  {data.mode === "Normal" && (
+                    <Standings
+                      participants={data.participants}
+                      problems={problems}
+                      startDate={data.startDate}
+                      endDate={data.endDate}
+                      penalty={data.penalty}
+                    />
+                  )}
+                  {data.mode === "Training" && (
+                    <TrainingStandings
+                      participants={data.participants}
+                      problems={problems}
+                      startDate={data.startDate}
+                      endDate={data.endDate}
+                    />
+                  )}
+                </Suspense>
+              </TabPanel>
+            </Box>
           </Box>
         </Container>
       )}

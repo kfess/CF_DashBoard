@@ -8,6 +8,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { CustomContest } from "@features/custom_contests/customContest";
 import { Chip } from "@features/ui/component/Chip";
+import { InternalLink } from "@features/ui/component/InternalLink";
 
 type Props = {
   customContest: CustomContest;
@@ -26,9 +27,10 @@ export const FinishedContestTableRow: React.FC<Props> = ({ customContest }) => {
     <TableRow hover>
       <TableCell>
         <Stack direction="row" spacing={0.5}>
-          <NavLink to={`/custom-contest/show/${customContest.contestId}`}>
-            {customContest.title}
-          </NavLink>
+          <InternalLink
+            to={`/custom-contest/show/${customContest.contestId}`}
+            title={customContest.title}
+          />
           <Chip
             label={customContest.visibility}
             sx={{

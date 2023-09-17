@@ -47,3 +47,20 @@ export const secondsToHms = (d: number) => {
   const sDisplay = s.toString().padStart(2, "0");
   return hDisplay + mDisplay + sDisplay;
 };
+
+// 10分単位で丸める
+// for custom contest
+export const getDefaultStartDate = () => {
+  const now = dayjs();
+  const nextInterval = Math.ceil((now.minute() + 1) / 30) * 30;
+  const startDate = now.minute(nextInterval).second(0).millisecond(0);
+  return startDate.toISOString();
+};
+
+export const getDefaultEndDate = () => {
+  const now = dayjs();
+  const nextInterval = Math.ceil((now.minute() + 1) / 30) * 30;
+  const startDate = now.minute(nextInterval).second(0).millisecond(0);
+  const endDate = startDate.add(2, "hour");
+  return endDate.toISOString();
+};

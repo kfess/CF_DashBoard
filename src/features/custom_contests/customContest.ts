@@ -48,9 +48,11 @@ export const customContestSchema = z.object({
   participants: z
     .array(z.string())
     .min(1, { message: "Participants required" }),
-  problems: problemsSchema.min(1, {
-    message: "At least one problem is required.",
-  }),
+  problems: problemsSchema
+    .min(1, {
+      message: "At least one problem is required.",
+    })
+    .max(100, { message: "Number of Problems cannot be more than 100" }),
 });
 export const customContestsSchema = z.array(customContestSchema);
 export type CustomContest = z.infer<typeof customContestSchema>;
@@ -59,28 +61,38 @@ export type CustomContest = z.infer<typeof customContestSchema>;
 export const problemSuggestOptionSchema = z.object({
   count: z
     .number()
+    .max(100, { message: "Number of Problems cannot be more than 100" })
     .nonnegative({ message: "Count must be non negative value" })
     .nullable(),
   difficultyFrom: z
     .number()
     .nonnegative({ message: "Difficulty must be non negative value" })
-    .nullable()
     .refine((value) => value !== null, {
       message: "Difficulty cannot be empty",
     }),
   difficultyTo: z
     .number()
     .nonnegative({ message: "Difficulty must be non negative value" })
-    .nullable()
     .refine((value) => value !== null, {
       message: "Difficulty cannot be empty",
     }),
   includeTags: z.array(tagSchema),
   excludeTags: z.array(tagSchema),
   excludeSolved: z.boolean(),
-  expectedParticipants: z.array(z.string()),
 });
 export type ProblemSuggestOption = z.infer<typeof problemSuggestOptionSchema>;
+
+export const individualProblemAddFilterSchema = problemSuggestOptionSchema.pick(
+  {
+    difficultyFrom: true,
+    difficultyTo: true,
+    includeTags: true,
+    excludeTags: true,
+  }
+);
+export type IndividualProblemAddFilter = z.infer<
+  typeof individualProblemAddFilterSchema
+>;
 
 // to create custom contest
 export const createCustomContestSchema = z.object({
@@ -116,10 +128,13 @@ export const createCustomContestSchema = z.object({
   participants: z
     .array(z.string())
     .min(1, { message: "Participants required" }),
-  problems: problemsSchema.min(1, {
-    message: "At least one problem is required.",
-  }),
+  problems: problemsSchema
+    .min(1, {
+      message: "At least one problem is required.",
+    })
+    .max(100, { message: "The number of problems cannot be more than 100" }),
   problemsFilter: problemSuggestOptionSchema,
+  individualProblemAddFilter: individualProblemAddFilterSchema,
 });
 
 export type CreateCustomContest = z.infer<typeof createCustomContestSchema>;

@@ -2,7 +2,6 @@ import React, { useMemo, useEffect, Suspense } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { useFetchUserInfo } from "@features/layout/useUserInfo";
 import { useFetchUserSubmission } from "@features/submission/hooks/useFetchSubmission";

@@ -19,6 +19,7 @@ import { usePagination } from "@hooks/index";
 import { utcISOStringToLocal } from "@helpers/date";
 import { useFetchMyCustomContests } from "@features/custom_contests/hooks/useFetchMyCustomContests";
 import { judgeContestType } from "@features/custom_contests/utils/judgeContestType";
+import { InternalLink } from "@features/ui/component/InternalLink";
 
 export const MyContestTable: React.FC = () => {
   const { data } = useFetchMyCustomContests();
@@ -44,7 +45,7 @@ export const MyContestTable: React.FC = () => {
 
   return (
     <>
-      <Typography variant="h6">Created Contests</Typography>
+      <Typography variant="h4">Created Contests</Typography>
       {data && (
         <>
           <TablePagination
@@ -94,11 +95,10 @@ export const MyContestTable: React.FC = () => {
                           <TableRow hover key={contest.contestId}>
                             <TableCell>
                               <Stack direction="row" spacing={0.5}>
-                                <NavLink
+                                <InternalLink
                                   to={`/custom-contest/show/${contest.contestId}`}
-                                >
-                                  {contest.title}
-                                </NavLink>
+                                  title={contest.title}
+                                />
                                 <Chip
                                   label={contest.visibility}
                                   sx={{
@@ -172,8 +172,8 @@ export const MyContestTable: React.FC = () => {
           </Paper>
         </>
       )}
-      <Divider />
-      <Typography variant="h6">Joined Contests</Typography>
+      <Divider sx={{ mt: 3, mb: 2 }} />
+      <Typography variant="h4">Joined Contests</Typography>
       {data && (
         <>
           <TablePagination
@@ -220,11 +220,10 @@ export const MyContestTable: React.FC = () => {
                           <TableRow hover key={contest.contestId}>
                             <TableCell>
                               <Stack direction="row" spacing={0.5}>
-                                <NavLink
+                                <InternalLink
                                   to={`/custom-contest/show/${contest.contestId}`}
-                                >
-                                  {contest.title}
-                                </NavLink>
+                                  title={contest.title}
+                                />
                                 <Chip
                                   label={contest.visibility}
                                   sx={{

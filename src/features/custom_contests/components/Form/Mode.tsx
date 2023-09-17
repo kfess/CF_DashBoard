@@ -25,7 +25,7 @@ export const Mode: React.FC<Props> = ({ control, errors }) => {
               field.onChange(selectedMode);
             }}
           />
-          <ErrorMessage message={errors.mode?.message} />
+          {errors.mode && <ErrorMessage message={errors.mode.message} />}
         </>
       )}
     />
