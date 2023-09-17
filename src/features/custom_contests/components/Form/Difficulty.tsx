@@ -15,9 +15,14 @@ import { ColoredCircle } from "@features/color/components/ColoredCircle";
 type Props = {
   control: Control<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
+  fieldName?: "problemsFilter" | "individualProblemAddFilter";
 };
 
-export const Difficulty: React.FC<Props> = ({ control, errors }) => {
+export const Difficulty: React.FC<Props> = ({
+  control,
+  errors,
+  fieldName = "problemsFilter",
+}) => {
   const lowerDifficulties = ratingColor.map(
     (color) => ratingColorInfo[color].lowerBound
   );
@@ -29,7 +34,7 @@ export const Difficulty: React.FC<Props> = ({ control, errors }) => {
   return (
     <Stack direction="row" gap={1}>
       <Controller
-        name="problemsFilter"
+        name={fieldName}
         control={control}
         render={({ field }) => (
           <Box flexGrow="1">
@@ -68,7 +73,7 @@ export const Difficulty: React.FC<Props> = ({ control, errors }) => {
         )}
       />
       <Controller
-        name="problemsFilter"
+        name={fieldName}
         control={control}
         render={({ field }) => (
           <Box flexGrow="1">

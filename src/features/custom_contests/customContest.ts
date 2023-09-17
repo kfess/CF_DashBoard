@@ -80,14 +80,14 @@ export const problemSuggestOptionSchema = z.object({
 });
 export type ProblemSuggestOption = z.infer<typeof problemSuggestOptionSchema>;
 
-export const individualProblemAddFilterSchema = problemSuggestOptionSchema
-  .pick({
+export const individualProblemAddFilterSchema = problemSuggestOptionSchema.pick(
+  {
     difficultyFrom: true,
     difficultyTo: true,
     includeTags: true,
     excludeTags: true,
-  })
-  .partial();
+  }
+);
 export type IndividualProblemAddFilter = z.infer<
   typeof individualProblemAddFilterSchema
 >;

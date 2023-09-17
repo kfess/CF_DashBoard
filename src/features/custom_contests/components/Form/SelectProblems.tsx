@@ -87,14 +87,9 @@ export const SelectProblems: React.FC<Props> = ({
           Generate Problems
         </Button>
       </Stack>
-      <SelectedProblemsTable
-        isEdit={true}
-        fields={fields}
-        remove={remove}
-        append={append}
-      />
+      <SelectedProblemsTable isEdit={true} fields={fields} remove={remove} />
       {fields.length > 0 && (
-        <Box mt={1.5} mx={1}>
+        <Box mt={1.5}>
           <Button
             onClick={() => {
               toggleAddBlockOpen();
@@ -104,7 +99,9 @@ export const SelectProblems: React.FC<Props> = ({
           >
             Add problem
           </Button>
-          {isAddBlockOpen && <AddProblemBlock />}
+          {isAddBlockOpen && (
+            <AddProblemBlock control={control} errors={errors} />
+          )}
         </Box>
       )}
       {errors.problems && <ErrorMessage message={errors.problems.message} />}

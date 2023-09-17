@@ -10,11 +10,7 @@ import Paper from "@mui/material/Paper";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
-import {
-  FieldArrayWithId,
-  UseFieldArrayAppend,
-  UseFieldArrayRemove,
-} from "react-hook-form";
+import { FieldArrayWithId, UseFieldArrayRemove } from "react-hook-form";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { IconButton } from "@features/ui/component/IconButton";
 import { HelpToolTip } from "@features/ui/component/HelpToolTip";
@@ -23,7 +19,6 @@ type Props = {
   isEdit?: boolean;
   fields?: FieldArrayWithId<CreateCustomContest, "problems", "id">[];
   remove?: UseFieldArrayRemove;
-  append?: UseFieldArrayAppend<CreateCustomContest, "problems">;
   formData?: CreateCustomContest; // for ViewStep in non-edit mode
 };
 
@@ -31,7 +26,6 @@ export const SelectedProblemsTable: React.FC<Props> = ({
   isEdit = true,
   fields = [],
   remove = () => {},
-  append = () => {},
   formData,
 }) => {
   const problems = isEdit ? fields : formData?.problems ?? [];
@@ -40,14 +34,16 @@ export const SelectedProblemsTable: React.FC<Props> = ({
     <>
       {problems.length > 0 && (
         <>
-          <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={0}>
+          <Paper
+            sx={{
+              overflow: "hidden",
+              border: 1,
+              borderColor: "divider",
+            }}
+            elevation={0}
+          >
             <TableContainer component={Paper}>
-              <Table
-                sx={{
-                  height: "100%",
-                  border: (theme) => `0.5px solid ${theme.palette.divider}`,
-                }}
-              >
+              <Table>
                 <TableHead>
                   <TableRow hover>
                     <TableCell>#</TableCell>
