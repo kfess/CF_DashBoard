@@ -66,11 +66,11 @@ export const AddProblemBlock: React.FC<Props> = ({
     () =>
       data.filter((problem) => {
         const tags = problem.tags as Tag[];
-        const rating = problem.rating ?? 0;
+        const rating = problem.rating ?? -1;
 
         return (
-          rating >= (difficultyFrom ?? 0) &&
-          rating <= (difficultyTo ?? 0) &&
+          rating >= difficultyFrom &&
+          rating <= difficultyTo &&
           includeTags.every((includeTag) => tags.includes(includeTag)) &&
           excludeTags.every((excludeTag) => !tags.includes(excludeTag)) &&
           !alreadyAddedSet.has(getProblemKey(problem))

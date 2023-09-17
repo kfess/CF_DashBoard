@@ -10,7 +10,6 @@ import { NumberOfProblems } from "@features/custom_contests/components/Form/Numb
 import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsTag";
 import { ExcludeSolved } from "@features/custom_contests/components/Form/ExcludeSolved";
 import { Difficulty } from "@features/custom_contests/components/Form/Difficulty";
-import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
 import { SelectProblems } from "./SelectProblems";
 

@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { alpha } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { Chip } from "@features/ui/component/Chip";
 import { Visibility } from "@features/custom_contests/components/Form/Visibility";
 import { Mode } from "@features/custom_contests/components/Form/Mode";
@@ -13,6 +14,7 @@ import { Penalty } from "@features/custom_contests/components/Form/Penalty";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Control, FieldErrors } from "react-hook-form";
 import { Button } from "@features/ui/component/Button";
+import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 
 type Props = {
   setActiveStep(step: number): void;
@@ -31,6 +33,8 @@ export const ContestDetailStep: React.FC<Props> = ({
   control,
   errors,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Box pb={{ xs: 2, md: 4 }}>
       <Box sx={{ px: { xs: 1, md: 4 }, py: 3 }}>
@@ -39,7 +43,7 @@ export const ContestDetailStep: React.FC<Props> = ({
             direction="row"
             justifyContent="space-between"
             alignItems="center"
-            sx={{ mb: 1 }}
+            mb={1}
           >
             <Stack direction="row" flexWrap="wrap" flexGrow={1} gap={1}>
               <Chip
@@ -57,18 +61,27 @@ export const ContestDetailStep: React.FC<Props> = ({
                 }}
               />
               <Chip
-                label={`Hosted By: ${codeforcesUsername}`}
+                label={`Hosted By: ${codeforcesUsername ?? "Not specified"}`}
                 sx={{
                   color: (theme) => theme.palette.primary.main,
                   backgroundColor: alpha("#9246FF", 0.15),
                 }}
               />
             </Stack>
-            <Box ml={2}>
-              <Button size="small" color="secondary">
+            <Stack direction="row" alignItems="center" ml={2} spacing={1}>
+              <Button
+                size="small"
+                color="secondary"
+                onClick={() => {
+                  navigate("/profile");
+                }}
+              >
                 Change User
               </Button>
-            </Box>
+              <Box>
+                <HelpToolTip title="If you have not set your Codeforces username, you can change it here" />
+              </Box>
+            </Stack>
           </Stack>
         </Box>
         <Stack spacing={2}>
@@ -85,6 +98,7 @@ export const ContestDetailStep: React.FC<Props> = ({
           onClick={() => setActiveStep(1)}
           color="secondary"
           endIcon={<KeyboardDoubleArrowRightIcon />}
+          disabled={!codeforcesUsername}
         >
           Next
         </Button>
