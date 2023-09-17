@@ -33,7 +33,11 @@ export const NumberOfProblems: React.FC<Props> = React.memo(
               value={field.value.count}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const val =
-                  e.target.value === "" ? null : e.target.valueAsNumber;
+                  e.target.value === ""
+                    ? null
+                    : e.target.valueAsNumber < 0
+                    ? 0
+                    : e.target.valueAsNumber;
                 field.onChange({ ...field.value, count: val });
               }}
             />

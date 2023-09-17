@@ -92,18 +92,16 @@ export const SelectProblems: React.FC<Props> = ({
       </Stack>
       <SelectedProblemsTable isEdit={true} fields={fields} remove={remove} />
       {errors.problems && <ErrorMessage message={errors.problems.message} />}
-      {fields.length > 0 && (
-        <Box mt={1.5}>
-          <AddProblemBlock
-            data={data ?? []}
-            control={control}
-            append={append}
-            errors={errors}
-            setValue={setValue}
-            getValues={getValues}
-          />
-        </Box>
-      )}
+      <Box mt={1.5}>
+        <AddProblemBlock
+          data={data ?? []}
+          control={control}
+          append={append}
+          errors={errors}
+          setValue={setValue}
+          getValues={getValues}
+        />
+      </Box>
     </>
   );
 };
