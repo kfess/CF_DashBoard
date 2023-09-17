@@ -88,11 +88,7 @@ export const SelectedProblemsTable: React.FC<Props> = ({
                         {isEdit && (
                           <TableCell>
                             <IconButton
-                              icon={
-                                <>
-                                  {index} <DeleteIcon />
-                                </>
-                              }
+                              icon={<DeleteIcon />}
                               onClick={() => {
                                 remove(index);
                               }}
