@@ -57,14 +57,17 @@ export const DifficultyStatus: React.FC<Props> = ({ problems }) => {
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 2, mb: 2 }}>
-      <Paper sx={{ width: "98%", overflow: "hidden" }} elevation={0}>
+      <Paper
+        sx={{
+          width: "98%",
+          overflow: "hidden",
+          border: 1,
+          borderColor: "divider",
+        }}
+        elevation={0}
+      >
         <TableContainer component={Paper}>
-          <Table
-            sx={{
-              height: "100%",
-              border: (theme) => `0.5px solid ${theme.palette.divider}`,
-            }}
-          >
+          <Table sx={{ height: "100%" }}>
             <TableHead>
               <TableRow hover>
                 <TableCell>Difficulty</TableCell>

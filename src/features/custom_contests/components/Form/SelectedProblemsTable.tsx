@@ -110,12 +110,12 @@ export const SelectedProblemsTable: React.FC<Props> = ({
         </>
       )}
       {problems.length === 0 && (
-        <TableContainer component={Paper} elevation={0}>
-          <Table
-            sx={{
-              border: (theme) => `0.5px solid ${theme.palette.divider}`,
-            }}
-          >
+        <TableContainer
+          component={Paper}
+          sx={{ border: 1, borderColor: "divider" }}
+          elevation={0}
+        >
+          <Table>
             <TableRow>
               <TableCell colSpan={5}>
                 <NoDataMessage
