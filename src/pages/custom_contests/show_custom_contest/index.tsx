@@ -83,7 +83,7 @@ export const ShowCustomContestPage: React.FC = () => {
                   endDate={data.endDate}
                 />
                 <Stack
-                  direction="row-reverse"
+                  direction="row"
                   alignItems="center"
                   justifyContent="space-between"
                 >
@@ -140,11 +140,7 @@ export const ShowCustomContestPage: React.FC = () => {
                 </Stack>
               </Grid>
             </Grid>
-            <Box
-              pt={{ xs: 2, md: 4 }}
-              pb={{ xs: 2, md: 4 }}
-              px={{ xs: 0, md: 2 }}
-            >
+            <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }}>
               <Tabs
                 value={tabValue}
                 onChange={handleChange}
