@@ -117,7 +117,7 @@ export const problemSchema = z.object({
     .array(tagSchema)
     .or(z.array(z.string())) // "tags" is sometimes empty array [], how can this situation be handled more elegantly?
     .transform((tags) =>
-      tags.length > 0 ? (tags as Tag[]) : (["no tags"] as const)
+      tags.length > 0 ? (tags as Tag[]) : (["no tags"] as Tag[])
     ),
   contestName: z.string().optional(), // need to remove optional in the future
   classification: z.optional(classificationSchema), // need to remove optional in the future

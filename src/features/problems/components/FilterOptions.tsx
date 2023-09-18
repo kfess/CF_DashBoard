@@ -129,12 +129,12 @@ export const FilterOptions: React.FC<Props> = ({
           onSelectClassification={onSelectClassification}
         />
         <FromDifficultyButton
-          upperDifficulty={upperDifficulty}
-          onSelectToDifficulty={onSelectToDifficulty}
-        />
-        <ToDifficultyButton
           lowerDifficulty={lowerDifficulty}
           onSelectFromDifficulty={onSelectFromDifficulty}
+        />
+        <ToDifficultyButton
+          upperDifficulty={upperDifficulty}
+          onSelectToDifficulty={onSelectToDifficulty}
         />
         <TagsButton
           selectedTags={selectedTags}
