@@ -63,7 +63,13 @@ export const ContestsTable: React.FC<Props> = ({
           <Table sx={{ height: "100%" }}>
             <TableHead>
               <TableRow>
-                <TableCell align="center">
+                <TableCell
+                  align="center"
+                  sx={{
+                    borderRight: (theme) =>
+                      `1px solid ${theme.palette.divider}`,
+                  }}
+                >
                   <Typography variant="body1" fontWeight="fontWeightBold">
                     Contest
                   </Typography>
@@ -73,7 +79,8 @@ export const ContestsTable: React.FC<Props> = ({
                     align="center"
                     key={idx}
                     sx={{
-                      border: (theme) => `1px solid ${theme.palette.divider}`,
+                      borderRight: (theme) =>
+                        `1px solid ${theme.palette.divider}`,
                     }}
                   >
                     <Typography variant="body1" fontWeight="fontWeightBold">
