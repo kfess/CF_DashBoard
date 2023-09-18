@@ -83,7 +83,7 @@ const classifications = [
 ] as const;
 type ClassificationTopics = typeof classifications[number];
 
-const contestType = ["CF", "IOI", "ICPC", "Other"] as const;
+const contestType = ["CF", "IOI", "Other"] as const;
 export type ContestType = typeof contestType[number];
 
 export type RelatedTopics =

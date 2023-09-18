@@ -1,8 +1,11 @@
+import dayjs from "dayjs";
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 import { Divider, alpha } from "@mui/material";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import NotesIcon from "@mui/icons-material/Notes";
@@ -16,7 +19,6 @@ import type { CreateCustomContest } from "@features/custom_contests/customContes
 import { Chip } from "@features/ui/component/Chip";
 import { SelectedProblemsTable } from "@features/custom_contests/components/Form/SelectedProblemsTable";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
-import dayjs from "dayjs";
 
 type Props = {
   setActiveStep(step: number): void;
@@ -167,14 +169,18 @@ export const ViewStep: React.FC<Props> = ({
           )}
         </Grid>
       </Grid>
-      <Divider sx={{ my: 2 }} />
-      {Object.keys(errors).length > 0 &&
-        Object.keys(errors).map((key) => (
-          <ErrorMessage
-            key={key}
-            message={errors[key as keyof CreateCustomContest]?.message}
-          />
-        ))}
+
+      {Object.keys(errors).length > 0 && (
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          {Object.keys(errors).map((key) => (
+            <ErrorMessage
+              key={key}
+              message={errors[key as keyof CreateCustomContest]?.message}
+            />
+          ))}
+        </Alert>
+      )}
       <Stack
         direction="row"
         mt={2}
