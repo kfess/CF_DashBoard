@@ -54,7 +54,9 @@ export const List: React.FC<Props> = ({ items }) => (
           disabled={item.disabled ?? false}
           sx={{
             backgroundColor: item.selected ? "#9246FF" : "transparent",
-            color: item.selected ? "#ffffff" : "#000000",
+            color: item.selected
+              ? "#ffffff"
+              : (theme) => theme.palette.text.primary,
             "&:hover": {
               backgroundColor: "#9246FF",
               color: "#ffffff",
