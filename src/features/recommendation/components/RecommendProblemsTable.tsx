@@ -11,18 +11,29 @@ import type { RecommendLevel } from "@features/recommendation/recommend";
 import { recommendDifficultyRange } from "@features/recommendation/helper";
 import type { Problem } from "@features/problems/problem";
 import { ProblemsTableRow } from "@features/problems/components/ProblemsTableRow";
-import { getRandomElements } from "@helpers/random";
+import { getRandomElements, seedBasedRandom } from "@helpers/random";
 import { getProblemKey } from "@features/problems/utils";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 
 type Props = {
-  level: RecommendLevel;
-  userRating?: number;
-  problems: Problem[];
+  readonly level: RecommendLevel;
+  readonly userRating?: number;
+  readonly problems: Problem[];
+  readonly solvedSet: Set<string>;
 };
 
-export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
-  const { userRating, level, problems } = props;
+export const RecommendProblemsTable: React.FC<Props> = ({
+  userRating,
+  level,
+  problems,
+  solvedSet,
+}) => {
+  const seed =
+    new Date().getFullYear() * 10000 +
+    (new Date().getMonth() + 1) * 100 +
+    new Date().getDate();
+  const rng = seedBasedRandom(seed);
+
   const [lowerDifficulty, upperDifficulty] = recommendDifficultyRange(
     userRating,
     level
@@ -35,8 +46,10 @@ export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
           (problem.rating ?? 0) >= lowerDifficulty &&
           (problem.rating ?? 0) <= upperDifficulty
       ),
-      20
-    );
+      50
+    )
+      .filter((problem) => !solvedSet.has(getProblemKey(problem)))
+      .slice(0, 50);
   }, [problems]);
 
   return (
@@ -95,7 +108,7 @@ export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
                       key={getProblemKey(problem)}
                       problem={problem}
                       showTags={false}
-                      backgroundColor=""
+                      // backgroundColor=""
                     />
                   ))
               ) : (
