@@ -22,6 +22,7 @@ import { getProblemKey } from "@features/problems/utils";
 import { secondsToHms } from "@helpers/date";
 import { pluralize } from "@helpers/format";
 import { ExternalLink } from "@features/ui/component/ExternalLink";
+import { getColorCodeFromRating } from "@features/color/ratingColor";
 
 type Props = {
   readonly participants: string[];
@@ -138,7 +139,12 @@ export const Standings: React.FC<Props> = ({
                       href={`${CF_CONTEST_URL}/${problem.contestId}/problem/${problem.index}`}
                       label={idx + 1}
                     />
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: getColorCodeFromRating(problem.rating ?? 0),
+                      }}
+                    >
                       {problem.rating}
                     </Typography>
                   </TableCell>

@@ -86,6 +86,7 @@ export const ShowCustomContestPage: React.FC = () => {
                   direction="row"
                   alignItems="center"
                   justifyContent="space-between"
+                  mt={0.5}
                 >
                   <RegisterButton />
                   <SocialShare />
