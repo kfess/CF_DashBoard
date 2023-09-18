@@ -64,13 +64,8 @@ export const DailyChart: React.FC<Props> = ({ submissions }) => {
   }
 
   return (
-    <>
-      <Box
-        sx={{
-          m: 1,
-          p: 1,
-        }}
-      >
+    <Box>
+      <Box mb={2}>
         <Typography variant="h5" gutterBottom>
           Daily Progress
         </Typography>
@@ -79,7 +74,7 @@ export const DailyChart: React.FC<Props> = ({ submissions }) => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          marginBottom: 2,
+          mb: 2,
         }}
       >
         <ToggleButtonGroup
@@ -149,6 +144,6 @@ export const DailyChart: React.FC<Props> = ({ submissions }) => {
           />
         </BarChart>
       </ResponsiveContainer>
-    </>
+    </Box>
   );
 };

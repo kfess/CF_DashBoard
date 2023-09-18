@@ -131,7 +131,7 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
   };
 
   return (
-    <Box p={1}>
+    <Box>
       <Typography variant="h6" gutterBottom>
         Heat Map
       </Typography>

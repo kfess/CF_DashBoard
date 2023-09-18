@@ -159,11 +159,12 @@ export const LanguageACCountPie: React.FC<Props> = ({ languageCounts }) => {
         <Box
           sx={{
             textAlign: "center",
-            backgroundColor: "white",
+            backgroundColor: "background.paper",
             border: "1px solid grey",
+            borderRadius: "10px",
             p: 2,
-            width: "80%",
-            height: "100%",
+            width: "90%",
+            height: "70%",
           }}
         >
           <div>

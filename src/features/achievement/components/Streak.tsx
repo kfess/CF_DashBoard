@@ -11,7 +11,7 @@ type Props = { allSubmissions: Submission[]; acSubmissions: Submission[] };
 
 export const Streak: React.FC<Props> = ({ allSubmissions, acSubmissions }) => {
   return (
-    <Box sx={{ p: 1 }}>
+    <Box>
       <Typography variant="h6" gutterBottom>
         Streak Count
       </Typography>
@@ -19,13 +19,20 @@ export const Streak: React.FC<Props> = ({ allSubmissions, acSubmissions }) => {
         direction="row"
         justifyContent="space-evenly"
         alignItems="center"
-        my={3}
+        mb={3}
+        spacing={2}
       >
         <StreakSum submissions={acSubmissions} title="AC Streak Sum" />
         <CurrentStreak submissions={acSubmissions} title="Current AC Streak" />
         <LongestStreak submissions={acSubmissions} title="Longest AC Streak" />
       </Stack>
-      <Stack direction="row" justifyContent="space-evenly" alignItems="center">
+      <Stack
+        direction="row"
+        justifyContent="space-evenly"
+        alignItems="center"
+        spacing={2}
+        my={2}
+      >
         <StreakSum submissions={allSubmissions} title="Streak Sum" />
         <CurrentStreak submissions={allSubmissions} title="Current Streak" />
         <LongestStreak submissions={allSubmissions} title="Longest Streak" />

@@ -17,11 +17,11 @@ export const Pies: React.FC<Props> = ({ submissions }) => {
   const [pieKind, setPieKind] = useState<PieKinds>("Difficulty");
 
   return (
-    <Box p={2}>
+    <Box>
       <Typography variant="h5" gutterBottom>
         Solved Pie Chart
       </Typography>
-      <Stack direction="row" justifyContent="center" mb={3}>
+      <Stack direction="row" justifyContent="center" my={2}>
         <ToggleButtonGroup
           value={pieKind}
           exclusive

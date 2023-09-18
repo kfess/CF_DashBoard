@@ -92,12 +92,7 @@ export const ClimbingChart: React.FC<Props> = ({ submissions }) => {
 
   return (
     <>
-      <Box
-        sx={{
-          m: 1,
-          p: 1,
-        }}
-      >
+      <Box my={2}>
         <Typography variant="h5" gutterBottom>
           Climbing Progress
         </Typography>

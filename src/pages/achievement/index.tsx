@@ -73,7 +73,7 @@ export const AchievementPage: React.FC = () => {
                   <Grid item xs={12} sm={12} md={4}>
                     <Box
                       sx={{
-                        p: 2,
+                        p: { xs: 1.5, sm: 2 },
                         backgroundColor: (theme) =>
                           theme.palette.background.paper,
                         border: (theme) =>
@@ -96,8 +96,8 @@ export const AchievementPage: React.FC = () => {
                   </Grid>
                   <Grid item xs={12} sm={12} md={8}>
                     <Box
-                      p={2}
                       sx={{
+                        p: { xs: 1.5, sm: 2 },
                         backgroundColor: (theme) =>
                           theme.palette.background.paper,
                         border: (theme) =>
@@ -111,9 +111,9 @@ export const AchievementPage: React.FC = () => {
                       </>
                     </Box>
                     <Box
-                      p={2}
                       mt={2}
                       sx={{
+                        p: { xs: 1.5, sm: 2 },
                         backgroundColor: (theme) =>
                           theme.palette.background.paper,
                         border: (theme) =>
@@ -124,9 +124,9 @@ export const AchievementPage: React.FC = () => {
                       <Accuracy allSubmissions={allSubmissions} />
                     </Box>
                     <Box
-                      p={2}
                       mt={2}
                       sx={{
+                        p: { xs: 1.5, sm: 2 },
                         backgroundColor: (theme) =>
                           theme.palette.background.paper,
                         border: (theme) =>
@@ -140,9 +140,9 @@ export const AchievementPage: React.FC = () => {
                       />
                     </Box>
                     <Box
-                      p={2}
                       mt={2}
                       sx={{
+                        p: { xs: 1.5, sm: 2 },
                         backgroundColor: (theme) =>
                           theme.palette.background.paper,
                         border: (theme) =>
@@ -161,8 +161,8 @@ export const AchievementPage: React.FC = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <Box
-                      p={1}
                       sx={{
+                        p: { xs: 1.5, sm: 2 },
                         backgroundColor: (theme) =>
                           theme.palette.background.paper,
                         border: (theme) =>
@@ -181,8 +181,8 @@ export const AchievementPage: React.FC = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <Box
-                      p={1}
                       sx={{
+                        p: { xs: 1.5, sm: 2 },
                         backgroundColor: (theme) =>
                           theme.palette.background.paper,
                         border: (theme) =>
@@ -191,7 +191,7 @@ export const AchievementPage: React.FC = () => {
                       }}
                     >
                       <DailyChart submissions={acSubmissions} />
-                      <Divider />
+                      <Divider sx={{ my: 2 }} />
                       <ClimbingChart submissions={acSubmissions} />
                     </Box>
                   </Grid>
