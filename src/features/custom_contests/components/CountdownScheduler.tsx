@@ -48,7 +48,10 @@ export const CountdownScheduler: React.FC<Props> = ({
         borderLeft: `5px solid ${borderColor}`,
       }}
     >
-      <Stack direction="row" justifyContent="space-between">
+      <Stack
+        direction={{ sm: "column", md: "row" }}
+        justifyContent="space-between"
+      >
         {isUpcoming && <UpcomingContestMessage startDate={startDate} />}
         {isRunning && <RunningContestMessage endDate={endDate} />}
         {isFinished && <FinishedContestMessage />}
@@ -85,7 +88,7 @@ const RunningContestMessage: React.FC<Pick<Props, "endDate">> = ({
     <Typography color="text.secondary">
       The contest has started. It will end in
     </Typography>
-    <Typography fontWeight="fontWeightBold" component="div">
+    <Typography fontWeight="fontWeightBold" component="div" sx={{ ml: 1 }}>
       <Timer toDate={endDate} />
     </Typography>
   </Stack>
