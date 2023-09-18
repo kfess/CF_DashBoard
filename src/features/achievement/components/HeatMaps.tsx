@@ -94,11 +94,9 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
 
   const { data: userInfo, isLoading } = useFetchUserInfo({ userId });
 
-  if (isLoading || !userInfo) {
-    return <CircularProgress />;
-  }
-
-  const regYear = dayjs.unix(userInfo.registrationTimeSeconds).year();
+  const regYear = dayjs
+    .unix(userInfo?.registrationTimeSeconds ?? dayjs().unix())
+    .year();
   const currYear = dayjs().year();
   const years = Array.from(
     { length: currYear - regYear + 1 },
@@ -125,10 +123,14 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
     [submissions, yearMode, selectedYear]
   );
 
-  const [tabValue, setTabValue] = React.useState(0);
+  const [tabValue, setTabValue] = useState(0);
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
+
+  if (isLoading || !userInfo) {
+    return <CircularProgress />;
+  }
 
   return (
     <Box>
