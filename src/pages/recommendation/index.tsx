@@ -22,7 +22,7 @@ export const RecommendationPage: React.FC = () => {
 
   const { data } = useFetchProblems();
 
-  const { solvedSet } = useSolvedStatus();
+  const { solvedSet, attemptedSet } = useSolvedStatus();
 
   const index = recommendLevels.findIndex(
     (level) => level === queryParams["level"]
@@ -58,6 +58,7 @@ export const RecommendationPage: React.FC = () => {
                       userRating={userRating}
                       problems={data}
                       solvedSet={solvedSet}
+                      attemptedSet={attemptedSet}
                     />
                   </TabPanel>
                 );

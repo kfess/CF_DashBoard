@@ -20,6 +20,7 @@ type Props = {
   readonly userRating?: number;
   readonly problems: Problem[];
   readonly solvedSet: Set<string>;
+  readonly attemptedSet: Set<string>;
 };
 
 export const RecommendProblemsTable: React.FC<Props> = ({
@@ -27,13 +28,8 @@ export const RecommendProblemsTable: React.FC<Props> = ({
   level,
   problems,
   solvedSet,
+  attemptedSet,
 }) => {
-  const seed =
-    new Date().getFullYear() * 10000 +
-    (new Date().getMonth() + 1) * 100 +
-    new Date().getDate();
-  const rng = seedBasedRandom(seed);
-
   const [lowerDifficulty, upperDifficulty] = recommendDifficultyRange(
     userRating,
     level
@@ -108,6 +104,8 @@ export const RecommendProblemsTable: React.FC<Props> = ({
                       key={getProblemKey(problem)}
                       problem={problem}
                       showTags={false}
+                      isSolved={false} // TODO: implement
+                      isAttempted={false} // TODO: implement
                       // backgroundColor=""
                     />
                   ))
