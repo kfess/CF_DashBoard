@@ -34,6 +34,7 @@ const getDefaultValues = (
   penalty: 300,
   startDate: getDefaultStartDate(),
   endDate: getDefaultEndDate(),
+  relatedTopics: [],
   participants: [codeforcesUsername ?? ""],
   problems: [],
   problemsFilter: {
@@ -43,12 +44,14 @@ const getDefaultValues = (
     includeTags: [],
     excludeTags: [],
     excludeSolved: false,
+    classifization: "All",
   },
   individualProblemAddFilter: {
     difficultyFrom: 0,
     difficultyTo: 5000,
     includeTags: [],
     excludeTags: [],
+    classifization: "All",
   },
 });
 

@@ -2,6 +2,8 @@ import { z } from "zod";
 import dayjs from "dayjs";
 import { tagSchema } from "@features/problems/problem";
 import { problemsSchema } from "@features/problems/problem";
+import { classificationSchema } from "@features/contests/contest";
+import { relatedTopicsSchema } from "@features/custom_contests/relatedTopics";
 
 export const apiFilterTypes = [
   "public",
@@ -76,6 +78,7 @@ export const problemSuggestOptionSchema = z.object({
     .refine((value) => value !== null, {
       message: "Difficulty cannot be empty",
     }),
+  classifization: classificationSchema,
   includeTags: z.array(tagSchema),
   excludeTags: z.array(tagSchema),
   excludeSolved: z.boolean(),
@@ -89,6 +92,7 @@ export const individualProblemAddFilterSchema = problemSuggestOptionSchema.pick(
     difficultyTo: true,
     includeTags: true,
     excludeTags: true,
+    classifization: true,
   }
 );
 export type IndividualProblemAddFilter = z.infer<
@@ -140,6 +144,7 @@ export const createCustomContestSchema = z
         message: "End Date should be after current Date",
       }),
     visibility: visibilitySchema,
+    relatedTopics: relatedTopicsSchema,
     participants: z
       .array(z.string())
       .min(1, { message: "Participants required" }),

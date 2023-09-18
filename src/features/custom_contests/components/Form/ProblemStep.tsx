@@ -11,7 +11,8 @@ import { ProblemsTag } from "@features/custom_contests/components/Form/ProblemsT
 import { ExcludeSolved } from "@features/custom_contests/components/Form/ExcludeSolved";
 import { Difficulty } from "@features/custom_contests/components/Form/Difficulty";
 import { CircularProgress } from "@features/ui/component/CircularProgress";
-import { SelectProblems } from "./SelectProblems";
+import { SelectProblems } from "@features/custom_contests/components/Form/SelectProblems";
+import { Classification } from "@features/custom_contests/components/Form/Classification";
 
 type Props = {
   setActiveStep(step: number): void;
@@ -34,6 +35,7 @@ export const ProblemStep: React.FC<Props> = ({
         <Stack direction="column" spacing={2}>
           <NumberOfProblems control={control} errors={errors} />
           <Difficulty control={control} errors={errors} />
+          <Classification control={control} errors={errors} />
           <ProblemsTag control={control} errors={errors} />
           <ExcludeSolved
             control={control}

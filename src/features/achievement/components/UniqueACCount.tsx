@@ -34,11 +34,7 @@ export const UniqueACCount: React.FC<Props> = ({ submissions }) => {
   );
 
   return (
-    <Box
-      sx={{
-        padding: 1,
-      }}
-    >
+    <Box mb={2}>
       <Typography variant="h6" gutterBottom>
         Accepted Count
       </Typography>

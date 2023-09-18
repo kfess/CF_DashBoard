@@ -15,6 +15,7 @@ import {
   getACProblemSet,
   getNonACProblemSet,
 } from "@features/achievement/processSubmission";
+import { useTheme } from "@mui/material";
 
 type RenderActiveShapeProps = {
   cx: number;
@@ -106,11 +107,20 @@ export const DifficultyPie: React.FC<Props> = ({
   problemsCount,
   submissions,
 }) => {
+  const theme = useTheme();
+
   const ACProblemCount = getACProblemSet(submissions).size;
   const nonACProblemCount = getNonACProblemSet(submissions).size;
 
   const pieData: PieData[] = [
-    { name: "AC", value: ACProblemCount, color: colorInfo.colorCode },
+    {
+      name: "AC",
+      value: ACProblemCount,
+      color:
+        theme.palette.mode === "light"
+          ? colorInfo.colorCode
+          : colorInfo.darkColorCode,
+    },
     { name: "Non-AC", value: nonACProblemCount, color: "#FFC653" },
     {
       name: "No-Sub",

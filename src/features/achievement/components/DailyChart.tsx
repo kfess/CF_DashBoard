@@ -64,13 +64,8 @@ export const DailyChart: React.FC<Props> = ({ submissions }) => {
   }
 
   return (
-    <>
-      <Box
-        sx={{
-          m: 1,
-          p: 1,
-        }}
-      >
+    <Box>
+      <Box mb={2}>
         <Typography variant="h5" gutterBottom>
           Daily Progress
         </Typography>
@@ -79,7 +74,7 @@ export const DailyChart: React.FC<Props> = ({ submissions }) => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          marginBottom: 2,
+          mb: 2,
         }}
       >
         <ToggleButtonGroup
@@ -89,14 +84,23 @@ export const DailyChart: React.FC<Props> = ({ submissions }) => {
           size="small"
           sx={{
             "& .MuiToggleButtonGroup-grouped": {
-              borderColor: "grey.500",
+              border: 1,
+              borderColor: "divider",
             },
           }}
         >
-          <ToggleButton value="No Color" disableRipple>
+          <ToggleButton
+            value="No Color"
+            disableRipple
+            sx={{ textTransform: "none" }}
+          >
             Simple
           </ToggleButton>
-          <ToggleButton value="Colored" disableRipple>
+          <ToggleButton
+            value="Colored"
+            disableRipple
+            sx={{ textTransform: "none" }}
+          >
             Color
           </ToggleButton>
         </ToggleButtonGroup>
@@ -140,6 +144,6 @@ export const DailyChart: React.FC<Props> = ({ submissions }) => {
           />
         </BarChart>
       </ResponsiveContainer>
-    </>
+    </Box>
   );
 };

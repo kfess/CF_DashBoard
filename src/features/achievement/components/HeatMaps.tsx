@@ -60,38 +60,30 @@ const makeHeatMapData = (
 
     let value: number | undefined;
     let maxDifficulty: number | undefined;
+    if (submissionsOnDate.length === 0) {
+      maxDifficulty = undefined;
+    } else {
+      maxDifficulty = Math.max(
+        ...submissionsOnDate.map((sub) => sub.problem.rating ?? -1)
+      );
+    }
 
     switch (heatMapContent) {
       case "AllSubmissions":
         value = submissionsOnDate.length;
-        maxDifficulty = Math.max(
-          ...submissionsOnDate.map((sub) => sub.problem.rating ?? 0),
-          0
-        );
         break;
       case "AllACSubmissions":
-        const acSubmissions = submissionsOnDate.filter(
-          (sub) => sub.verdict === "OK"
-        );
-        value = acSubmissions.length;
-        maxDifficulty = Math.max(
-          ...acSubmissions.map((sub) => sub.problem.rating ?? 0),
-          0
-        );
+        value = submissionsOnDate.filter((sub) => sub.verdict === "OK").length;
         break;
       case "MaxDifficulty":
-        maxDifficulty = Math.max(
-          ...submissionsOnDate.map((sub) => sub.problem.rating ?? 0),
-          0
-        );
-        value = maxDifficulty > 0 ? 1 : 0;
+        value = submissionsOnDate.length;
         break;
     }
 
     return {
       date: currentDate,
       value: value > 0 ? value : undefined,
-      maxDifficulty: maxDifficulty > 0 ? maxDifficulty : undefined,
+      maxDifficulty: maxDifficulty,
     };
   });
 };
@@ -102,11 +94,9 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
 
   const { data: userInfo, isLoading } = useFetchUserInfo({ userId });
 
-  if (isLoading || !userInfo) {
-    return <CircularProgress />;
-  }
-
-  const regYear = dayjs.unix(userInfo.registrationTimeSeconds).year();
+  const regYear = dayjs
+    .unix(userInfo?.registrationTimeSeconds ?? dayjs().unix())
+    .year();
   const currYear = dayjs().year();
   const years = Array.from(
     { length: currYear - regYear + 1 },
@@ -133,13 +123,17 @@ export const HeatMaps: React.FC<Props> = ({ submissions }) => {
     [submissions, yearMode, selectedYear]
   );
 
-  const [tabValue, setTabValue] = React.useState(0);
+  const [tabValue, setTabValue] = useState(0);
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
+  if (isLoading || !userInfo) {
+    return <CircularProgress />;
+  }
+
   return (
-    <Box p={1}>
+    <Box>
       <Typography variant="h6" gutterBottom>
         Heat Map
       </Typography>

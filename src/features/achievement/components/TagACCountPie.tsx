@@ -159,11 +159,11 @@ export const TagACCountPie: React.FC<Props> = ({ tagACCounts }) => {
         <Box
           sx={{
             textAlign: "center",
-            backgroundColor: "white",
+            backgroundColor: "background.paper",
             border: "1px solid grey",
-            p: 2,
+            borderRadius: "10px",
             width: "80%",
-            height: "100%",
+            height: "90%",
           }}
         >
           <div>

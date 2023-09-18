@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import { SocialIcon } from "react-social-icons";
+import { CopyToClipBoard } from "@features/ui/component/CopyToClipBoard";
 
 type SocialNetWork = {
   readonly network: string;
@@ -26,6 +27,7 @@ const socialNetworks: SocialNetWork[] = [
     network: "linkedin",
     urlTemplate: "https://www.linkedin.com/shareArticle?mini=true&url=",
   },
+  { network: "discord", urlTemplate: "https://discord.com/channels/@me/" },
 ];
 
 const DEFAULT_ICON_SIZE = { height: 30, width: 30 };
@@ -37,7 +39,8 @@ export const SocialShare: React.FC<SocialShareProps> = ({
   const url = `${window.location.origin}${location.pathname}${location.search}${location.hash}`;
 
   return (
-    <Stack direction="row" spacing={1}>
+    <Stack direction="row" alignItems="center" spacing={0.5}>
+      <CopyToClipBoard text={url} />
       {socialNetworks.map(({ network, urlTemplate }) => (
         <SocialIcon
           key={network}

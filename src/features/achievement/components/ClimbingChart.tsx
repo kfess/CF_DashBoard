@@ -92,12 +92,7 @@ export const ClimbingChart: React.FC<Props> = ({ submissions }) => {
 
   return (
     <>
-      <Box
-        sx={{
-          m: 1,
-          p: 1,
-        }}
-      >
+      <Box my={2}>
         <Typography variant="h5" gutterBottom>
           Climbing Progress
         </Typography>
@@ -110,14 +105,23 @@ export const ClimbingChart: React.FC<Props> = ({ submissions }) => {
           size="small"
           sx={{
             "& .MuiToggleButtonGroup-grouped": {
-              borderColor: "grey.500",
+              border: 1,
+              borderColor: "divider",
             },
           }}
         >
-          <ToggleButton value="No Color" disableRipple>
+          <ToggleButton
+            value="No Color"
+            disableRipple
+            sx={{ textTransform: "none" }}
+          >
             Simple
           </ToggleButton>
-          <ToggleButton value="Colored" disableRipple>
+          <ToggleButton
+            value="Colored"
+            disableRipple
+            sx={{ textTransform: "none" }}
+          >
             Color
           </ToggleButton>
         </ToggleButtonGroup>

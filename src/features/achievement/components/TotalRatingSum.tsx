@@ -19,12 +19,13 @@ export const TotalRatingSum: React.FC<Props> = ({ submissions }) => {
   const ratingSum = useMemo(() => _calcRatingSum(submissions), [submissions]);
 
   return (
-    <Box sx={{ p: 1 }}>
+    <Box>
       <Typography variant="h6" gutterBottom>
         Rated Point Sum
       </Typography>
       <Typography
         variant="h4"
+        ml={2}
         sx={{ color: (theme) => theme.palette.primary.main }}
       >
         {ratingSum.toLocaleString()}{" "}

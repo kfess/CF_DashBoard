@@ -7,6 +7,7 @@ import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { DatePicker } from "@features/ui/component/DatePicker";
 import { TimeSelect } from "@features/ui/component/Select";
+import { Typography } from "@mui/material";
 
 type Props = {
   control: Control<CreateCustomContest>;
@@ -19,6 +20,9 @@ const DateTimePicker: React.FC<{
   control: Control<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
 }> = ({ label, name, control, errors }) => {
+  const userTimezone = dayjs.tz.guess();
+  const userOffset = dayjs().tz(userTimezone).format("Z");
+
   return (
     <Box>
       <Controller
@@ -34,6 +38,13 @@ const DateTimePicker: React.FC<{
               mb={0.5}
             >
               {label}
+              <Typography
+                component="span"
+                color="text.secondary"
+                sx={{ ml: 1 }}
+              >
+                (UTC{userOffset})
+              </Typography>
             </Box>
             <Stack direction="row" spacing={1} pt={0.5}>
               <Box flexGrow={2}>

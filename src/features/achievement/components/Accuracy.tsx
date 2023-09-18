@@ -70,11 +70,16 @@ export const Accuracy: React.FC<Props> = ({ allSubmissions }) => {
   );
 
   return (
-    <Box p={1}>
+    <Box>
       <Typography variant="h6" gutterBottom>
         Accuracy
       </Typography>
-      <Stack direction="row" justifyContent="space-evenly" alignItems="center">
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        justifyContent="space-evenly"
+        alignItems="center"
+        spacing={2}
+      >
         <Box textAlign="center">
           <Typography variant="body1" color="text.secondary">
             Average Attempts

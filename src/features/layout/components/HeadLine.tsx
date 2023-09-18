@@ -25,10 +25,10 @@ export const HeadLine: React.FC<Props> = ({ title }) => {
         justifyContent="space-between"
         marginBottom="0.5rem"
       >
-        <Typography variant="h4" component="h1">
+        <Typography variant="h4" component="h1" mb={{ xs: 1, sm: 0 }}>
           {title}
         </Typography>
-        <Stack direction="row" spacing={1}>
+        <Stack direction="row" gap={1} flexWrap="wrap">
           {queryUserId && (
             <>
               {location.pathname !== "/achievement" ? (

@@ -79,11 +79,11 @@ export const RecommendProblemsTable: React.FC<Props> = (props: Props) => {
                     Solved
                   </Typography>
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <Typography variant="body2" fontWeight="fontWeightBold">
                     Solution
                   </Typography>
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>

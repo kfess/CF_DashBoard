@@ -15,6 +15,7 @@ import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { Control, FieldErrors } from "react-hook-form";
 import { Button } from "@features/ui/component/Button";
 import { HelpToolTip } from "@features/ui/component/HelpToolTip";
+import { Topics } from "@features/custom_contests/components/Form/Topics";
 
 type Props = {
   setActiveStep(step: number): void;
@@ -91,6 +92,7 @@ export const ContestDetailStep: React.FC<Props> = ({
           <Visibility control={control} errors={errors} />
           <Penalty control={control} errors={errors} />
           <Mode control={control} errors={errors} />
+          <Topics control={control} errors={errors} />
         </Stack>
       </Box>
       <Stack direction="row" mt={2} mr={2} justifyContent="flex-end">

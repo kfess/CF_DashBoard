@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import type { HeatMapContent } from "@features/achievement/components/HeatMaps";
 import { ratingColorInfo, ratingColor } from "@features/color/ratingColor";
 import { heatmapColors } from "@features/color/heatmapColor";
+import { useTheme } from "@mui/material";
 
 const BLOCK_WIDTH = 10;
 const WEEKS = 53;
@@ -15,6 +16,8 @@ type Props = {
 
 export const HeatMapColorSample: React.FC<Props> = memo(
   ({ heatMapContent }) => {
+    const theme = useTheme();
+
     return (
       <Stack direction="row" justifyContent="flex-end" my={1}>
         <div>
@@ -36,8 +39,9 @@ export const HeatMapColorSample: React.FC<Props> = memo(
                     x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 1.2) - 5}
                     y={20}
                     fontSize={9}
+                    fill={theme.palette.text.primary}
                   >
-                    {color === "#ebedf0" && "less"}
+                    {color === "#c6e48b" && "less"}
                     {color === "#196127" && "more"}
                   </text>
                 </g>
@@ -58,6 +62,7 @@ export const HeatMapColorSample: React.FC<Props> = memo(
                     x={WEEKS * BLOCK_WIDTH - i * (BLOCK_WIDTH * 1.2) - 5}
                     y={20}
                     fontSize={8}
+                    fill={theme.palette.text.primary}
                   >
                     {ratingColorInfo[color].name === "DeepRed" && "Hard"}
                     {ratingColorInfo[color].name === "Gray" && "Easy"}

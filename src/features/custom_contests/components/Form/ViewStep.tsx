@@ -147,16 +147,24 @@ export const ViewStep: React.FC<Props> = ({
             </Stack>
           </Stack>
           <Divider light sx={{ mt: 2, mb: 0.5 }}>
-            Related Tags
+            Related Topics
           </Divider>
-          <Typography
-            variant="body2"
-            gutterBottom
-            noWrap
-            color="text.secondary"
-          >
-            No tags specified
-          </Typography>
+          <Stack direction="row" gap={1}>
+            {formData.relatedTopics.length > 0 &&
+              formData.relatedTopics.map((topic) => (
+                <Chip key={topic} label={topic} />
+              ))}
+          </Stack>
+          {formData.relatedTopics.length === 0 && (
+            <Typography
+              variant="body2"
+              gutterBottom
+              noWrap
+              color="text.secondary"
+            >
+              No topics selected
+            </Typography>
+          )}
         </Grid>
       </Grid>
       <Divider sx={{ my: 2 }} />
