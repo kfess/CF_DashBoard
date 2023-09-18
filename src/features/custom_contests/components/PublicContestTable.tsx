@@ -123,7 +123,7 @@ export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
                         <>
                           There are no custom contests available. <br />
                           You can create a new custom contest by clicking on the
-                          "Create Custom Contest" button.
+                          "Create New Contest" button.
                         </>
                       }
                     />
