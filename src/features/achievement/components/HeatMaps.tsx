@@ -60,38 +60,30 @@ const makeHeatMapData = (
 
     let value: number | undefined;
     let maxDifficulty: number | undefined;
+    if (submissionsOnDate.length === 0) {
+      maxDifficulty = undefined;
+    } else {
+      maxDifficulty = Math.max(
+        ...submissionsOnDate.map((sub) => sub.problem.rating ?? -1)
+      );
+    }
 
     switch (heatMapContent) {
       case "AllSubmissions":
         value = submissionsOnDate.length;
-        maxDifficulty = Math.max(
-          ...submissionsOnDate.map((sub) => sub.problem.rating ?? 0),
-          0
-        );
         break;
       case "AllACSubmissions":
-        const acSubmissions = submissionsOnDate.filter(
-          (sub) => sub.verdict === "OK"
-        );
-        value = acSubmissions.length;
-        maxDifficulty = Math.max(
-          ...acSubmissions.map((sub) => sub.problem.rating ?? 0),
-          0
-        );
+        value = submissionsOnDate.filter((sub) => sub.verdict === "OK").length;
         break;
       case "MaxDifficulty":
-        maxDifficulty = Math.max(
-          ...submissionsOnDate.map((sub) => sub.problem.rating ?? 0),
-          0
-        );
-        value = maxDifficulty > 0 ? 1 : 0;
+        value = submissionsOnDate.length;
         break;
     }
 
     return {
       date: currentDate,
       value: value > 0 ? value : undefined,
-      maxDifficulty: maxDifficulty > 0 ? maxDifficulty : undefined,
+      maxDifficulty: maxDifficulty,
     };
   });
 };
