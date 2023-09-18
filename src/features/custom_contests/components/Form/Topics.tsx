@@ -42,7 +42,8 @@ export const Topics: React.FC<Props> = ({ control, errors }) => {
                 fontWeight="bold"
                 mb={1}
               >
-                Topics <HelpToolTip title="Select Topics" />
+                Topics{" "}
+                <HelpToolTip title="Attached Topics make it easier for users to find your contest" />
               </Box>
               <MultiSelectButton
                 options={[...relatedTopics]}
