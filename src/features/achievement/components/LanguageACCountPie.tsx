@@ -162,9 +162,8 @@ export const LanguageACCountPie: React.FC<Props> = ({ languageCounts }) => {
             backgroundColor: "background.paper",
             border: "1px solid grey",
             borderRadius: "10px",
-            p: 2,
-            width: "90%",
-            height: "70%",
+            width: "80%",
+            height: "90%",
           }}
         >
           <div>
