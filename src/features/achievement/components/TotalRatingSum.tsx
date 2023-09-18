@@ -25,6 +25,7 @@ export const TotalRatingSum: React.FC<Props> = ({ submissions }) => {
       </Typography>
       <Typography
         variant="h4"
+        ml={2}
         sx={{ color: (theme) => theme.palette.primary.main }}
       >
         {ratingSum.toLocaleString()}{" "}
