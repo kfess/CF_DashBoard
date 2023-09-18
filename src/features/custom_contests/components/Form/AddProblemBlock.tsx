@@ -161,7 +161,7 @@ export const AddProblemBlock: React.FC<Props> = ({
             />
             <ProblemsTagForIndividualBlock control={control} errors={errors} />
           </Stack>
-          <Stack direction="row" justifyContent="flex-end" spacing={1} mt={3}>
+          <Stack direction="row" justifyContent="flex-end" spacing={1} mt={2}>
             <Button
               onClick={() => {
                 toggleAddBlockOpen();
