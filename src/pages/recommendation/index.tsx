@@ -32,7 +32,7 @@ export const RecommendationPage: React.FC = () => {
 
   return (
     <Container maxWidth="lg">
-      <Box p={{ xs: 2, md: 4 }}>
+      <Box py={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
         <HeadLine title="Recommend" />
         <Grid container spacing={2}>
           <Grid item xs={12}>

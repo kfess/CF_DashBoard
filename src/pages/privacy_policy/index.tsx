@@ -8,7 +8,7 @@ import { ExternalLink } from "@features/ui/component/ExternalLink";
 const PrivacyPolicyPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
-      <Grid container spacing={2} my={2}>
+      <Grid container spacing={2} py={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
         <Grid item xs={12}>
           <Typography variant="h4" component="h1" gutterBottom>
             Privacy Policy
