@@ -28,6 +28,7 @@ export const CopyToClipBoard: React.FC<Props> = ({ text }) => {
   return (
     <Tooltip
       title="Copied!"
+      arrow
       placement="top"
       disableFocusListener
       open={isOpen}
