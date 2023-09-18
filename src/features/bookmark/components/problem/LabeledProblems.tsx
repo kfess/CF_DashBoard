@@ -18,11 +18,13 @@ import { getProblemKey } from "@features/problems/utils";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 import { getColorCodeFromRating } from "@features/color/ratingColor";
 import { HelpToolTip } from "@features/ui/component/HelpToolTip";
+import { useContestIdNameMap } from "@features/contests/hooks/useFetchContest";
 
 type Props = { label: ProblemLabel };
 
 export const LabeledProblems: React.FC<Props> = ({ label }) => {
   const { deleteProblemFromLabel } = useIndexedDBForProblemLabel();
+  const { contestIdClassificationMap } = useContestIdNameMap();
 
   return (
     <TableContainer
@@ -75,6 +77,9 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
                     contestId={p.contestId as number}
                     contestName={p.contestName}
                     showBookmarked={false}
+                    classification={
+                      contestIdClassificationMap[p.contestId as number]
+                    }
                   />
                 </TableCell>
                 <TableCell>

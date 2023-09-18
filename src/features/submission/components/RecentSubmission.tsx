@@ -22,7 +22,8 @@ export const RecentSubmission: React.FC = () => {
   const { data } = useFetchRecentSubmissions();
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(data);
 
-  const { contestIdNameMap } = useContestIdNameMap();
+  const { contestIdNameMap, contestIdClassificationMap } =
+    useContestIdNameMap();
 
   return (
     <>
@@ -98,6 +99,9 @@ export const RecentSubmission: React.FC = () => {
                             contestId={d.contestId as number}
                             contestName={
                               contestIdNameMap[d.contestId as number]
+                            }
+                            classification={
+                              contestIdClassificationMap[d.contestId as number]
                             }
                             showBookmarked={false}
                           />
