@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -9,6 +9,7 @@ import { useFetchProblems } from "@features/problems/hooks/useFetchProblem";
 import { HeadLine } from "@features/layout/components/HeadLine";
 import { useURLQuery } from "@hooks/useQueryParams";
 import { TabPanel, Tabs, Tab } from "@features/ui/component/Tabs";
+import { useSolvedStatus } from "@features/submission/hooks/useSolvedStatus";
 
 export const RecommendationPage: React.FC = () => {
   const { queryParams, setURLQuery } = useURLQuery();
@@ -21,10 +22,12 @@ export const RecommendationPage: React.FC = () => {
 
   const { data } = useFetchProblems();
 
+  const { solvedSet, attemptedSet } = useSolvedStatus();
+
   const index = recommendLevels.findIndex(
     (level) => level === queryParams["level"]
   );
-  const [tabValue, setTabValue] = React.useState(index === -1 ? 0 : index);
+  const [tabValue, setTabValue] = useState(index === -1 ? 0 : index);
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
     setURLQuery({ level: recommendLevels[newValue] });
@@ -32,8 +35,8 @@ export const RecommendationPage: React.FC = () => {
 
   return (
     <Container maxWidth="lg">
-      <Box p={{ xs: 2, md: 4 }}>
-        <HeadLine title="Recommend" />
+      <Box py={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
+        <HeadLine title={`Recommend`} />
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Tabs
@@ -54,6 +57,8 @@ export const RecommendationPage: React.FC = () => {
                       level={level}
                       userRating={userRating}
                       problems={data}
+                      solvedSet={solvedSet}
+                      attemptedSet={attemptedSet}
                     />
                   </TabPanel>
                 );

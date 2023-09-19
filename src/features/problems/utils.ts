@@ -2,7 +2,7 @@ import type { Submission } from "@features/submission/submission";
 import type { Problem } from "@features/problems/problem";
 
 // オーバーロードのシグネチャ
-export function getProblemKey(submissions: Submission): string;
+export function getProblemKey(submission: Submission): string;
 export function getProblemKey(problem: Problem): string;
 export function getProblemKey(
   contestId: number | undefined,

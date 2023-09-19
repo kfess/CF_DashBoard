@@ -93,8 +93,8 @@ const LinksPage: React.FC = () => {
   const theme = useTheme();
 
   return (
-    <Container maxWidth="md">
-      <Box my={4}>
+    <Container maxWidth="lg">
+      <Box py={{ xs: 2, md: 4 }} px={{ xs: 0, md: 2 }}>
         <Typography variant="h4" component="h1" gutterBottom>
           Competitive Programming Contests
         </Typography>

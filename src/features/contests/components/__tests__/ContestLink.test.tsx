@@ -8,7 +8,13 @@ describe("ContestLink", () => {
   const contestUrl = "https://codeforces.com/contest";
 
   beforeEach(() => {
-    render(<ContestLink contestId={contestId} contestName={contestName} />);
+    render(
+      <ContestLink
+        contestId={contestId}
+        contestName={contestName}
+        classification="Div. 1"
+      />
+    );
   });
 
   it("renders the correct contest link", () => {

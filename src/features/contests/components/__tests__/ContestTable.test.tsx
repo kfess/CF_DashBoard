@@ -26,6 +26,7 @@ describe("ContestsTable", () => {
         contests={mockContests}
         problemIdxes={problemIdxes}
         showDifficulty={false}
+        solvedStatus="All Contests"
       />
     );
   });

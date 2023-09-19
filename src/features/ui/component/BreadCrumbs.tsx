@@ -30,7 +30,7 @@ export const CustomBreadcrumbs: React.FC<Props> = (props: Props) => {
   return (
     <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
       {paths.map((p) => (
-        <NavLink color="inherit" to={p.to}>
+        <NavLink color="inherit" to={p.to} key={p.to}>
           {decodeURIComponent(p.name)}
         </NavLink>
       ))}

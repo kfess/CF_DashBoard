@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { contestsSchema } from "@features/contests/contest";
-import type { Contest } from "@features/contests/contest";
+import type { Classification, Contest } from "@features/contests/contest";
 import { INTERNAL_API_BASE_URL } from "@constants/url";
+import { getClassification } from "@features/contests/utils/getClassification";
 
 const fetchContests = async (): Promise<Contest[]> => {
   try {
@@ -42,9 +43,17 @@ export const useContestIdNameMap = () => {
   });
 
   const contestIdNameMap: Record<number, string> = {};
+  const contestIdClassificationMap: Record<number, Classification> = {};
   data?.forEach((contest) => {
     contestIdNameMap[contest.id] = contest.name;
+    contestIdClassificationMap[contest.id] = getClassification(contest.name);
   });
 
-  return { contestIdNameMap, isError, error, isLoading };
+  return {
+    contestIdNameMap,
+    contestIdClassificationMap,
+    isError,
+    error,
+    isLoading,
+  };
 };

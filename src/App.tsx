@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { RouterProvider } from "react-router-dom";
 import { router } from "@routes/routes";
@@ -14,7 +15,7 @@ const queryClient = new QueryClient({
   },
 });
 
-function App() {
+export const App: React.FC = () => {
   return (
     <HelmetProvider>
       <RecoilRoot>
@@ -26,6 +27,6 @@ function App() {
       </RecoilRoot>
     </HelmetProvider>
   );
-}
+};
 
 export default App;
