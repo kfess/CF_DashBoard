@@ -17,16 +17,10 @@
 /home/kita456/projects/CF_DashBoard/src/features/achievement/components/HeatMap.tsx
   60:12  error  Unknown property 'css' found  react/no-unknown-property
 
-/home/kita456/projects/CF_DashBoard/src/features/achievement/components/HeatMapColorSample.tsx
-  17:52  error  Component definition is missing display name  react/display-name
-
 /home/kita456/projects/CF_DashBoard/src/features/authentication/hooks/useUserProfile.ts
   61:17  error  'isLoading' is assigned a value but never used  @typescript-eslint/no-unused-vars
   61:28  error  'isError' is assigned a value but never used    @typescript-eslint/no-unused-vars
   78:17  error  'error' is defined but never used               @typescript-eslint/no-unused-vars
-
-/home/kita456/projects/CF_DashBoard/src/features/bookmark/components/contest/AddLabelButton.tsx
-  23:43  error  Component definition is missing display name  react/display-name
 
 /home/kita456/projects/CF_DashBoard/src/features/bookmark/components/contest/Color.tsx
   33:13  error  Unknown property 'css' found  react/no-unknown-property
@@ -43,9 +37,6 @@
 
 /home/kita456/projects/CF_DashBoard/src/features/bookmark/components/contest/Name.tsx
   29:13  error  Unknown property 'css' found  react/no-unknown-property
-
-/home/kita456/projects/CF_DashBoard/src/features/bookmark/components/problem/AddLabelButton.tsx
-  22:43  error  Component definition is missing display name  react/display-name
 
 /home/kita456/projects/CF_DashBoard/src/features/bookmark/components/problem/Color.tsx
   14:3   error  'generateRandomHexaColor' is defined but never used  @typescript-eslint/no-unused-vars
@@ -131,12 +122,6 @@
 /home/kita456/projects/CF_DashBoard/src/features/custom_contests/utils/calculateTrainingStandings.ts
   13:3  error  'problems' is defined but never used  @typescript-eslint/no-unused-vars
 
-/home/kita456/projects/CF_DashBoard/src/features/language/language.ts
-  82:11  error  '_' is defined but never used  @typescript-eslint/no-unused-vars
-
-/home/kita456/projects/CF_DashBoard/src/features/layout/components/AccountMenu.tsx
-  13:8  error  'SettingsOutlinedIcon' is defined but never used  @typescript-eslint/no-unused-vars
-
 /home/kita456/projects/CF_DashBoard/src/features/layout/components/HeaderBar.tsx
   29:3  error  'selectedItem' is defined but never used  @typescript-eslint/no-unused-vars
 
@@ -150,14 +135,6 @@
 
 /home/kita456/projects/CF_DashBoard/src/features/problems/components/ProblemsTableRow.tsx
   83:15  error  Unknown property 'css' found  react/no-unknown-property
-
-/home/kita456/projects/CF_DashBoard/src/features/problems/components/SolutionLink.tsx
-  5:14  error  Don't use `{}` as a type. `{}` actually means "any non-nullish value".
-- If you want a type meaning "any object", you probably want `object` instead.
-- If you want a type meaning "any value", you probably want `unknown` instead.
-- If you want a type meaning "empty object", you probably want `Record<string, never>` instead.
-- If you really want a type meaning "any non-nullish value", you probably want `NonNullable<unknown>` instead  @typescript-eslint/ban-types
-  7:47  error  Unexpected empty object pattern                                                                                                                                                                                                                                                                                                                                                                                                                     no-empty-pattern
 
 /home/kita456/projects/CF_DashBoard/src/features/problems/components/ViewFilter.tsx
   22:24  error  '_event' is defined but never used  @typescript-eslint/no-unused-vars
@@ -185,9 +162,6 @@
 
 /home/kita456/projects/CF_DashBoard/src/features/ui/component/Input.tsx
   38:18  error  'startAdornment' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-/home/kita456/projects/CF_DashBoard/src/features/ui/component/ProfileIcon.tsx
-  23:14  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/ui/component/RadioButton.tsx
   79:37  error  Unknown property 'css' found  react/no-unknown-property
@@ -233,9 +207,6 @@ If you are expecting the function to accept certain arguments, you should explic
 /home/kita456/projects/CF_DashBoard/src/pages/layout/index.tsx
   44:9  error  Unknown property 'css' found  react/no-unknown-property
 
-/home/kita456/projects/CF_DashBoard/src/routes/routes.tsx
-  20:10  error  'SettingPage' is defined but never used  @typescript-eslint/no-unused-vars
-
-✖ 92 problems (92 errors, 0 warnings)
+✖ 83 problems (83 errors, 0 warnings)
   1 error and 0 warnings potentially fixable with the `--fix` option.
 

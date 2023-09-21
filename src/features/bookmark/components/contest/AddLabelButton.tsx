@@ -55,6 +55,8 @@ const LabelRow: React.FC<LabelRowProps> = React.memo(
   )
 );
 
+LabelRow.displayName = "LabelRow";
+
 type Props = {
   contestId: number;
   contestName: string;
