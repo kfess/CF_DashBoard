@@ -28,8 +28,8 @@ export const SettingPage: React.FC = () => {
         </Typography>
       </Box>
       <Typography align="center">
-        We're working hard to bring you this content soon. Please check back
-        later.
+        We&apos;re working hard to bring you this content soon. Please check
+        back later.
       </Typography>
     </Container>
   );

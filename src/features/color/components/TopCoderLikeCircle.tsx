@@ -1,7 +1,6 @@
 import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import { useTheme } from "@mui/material";
-// import { useThemeContext } from "@features/color/themeColor.hook";
 import {
   getColorCodeFromRating,
   calcFillPercent,

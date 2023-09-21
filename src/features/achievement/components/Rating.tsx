@@ -104,6 +104,7 @@ export const Rating: React.FC = () => {
                   />
                   {ratingColor.map((color) => (
                     <ReferenceArea
+                      key={color}
                       y1={ratingColorInfo[color].lowerBound}
                       y2={ratingColorInfo[color].upperBound}
                       fill={ratingColorInfo[color].colorCode}
