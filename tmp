@@ -73,9 +73,6 @@
 /home/kita456/projects/CF_DashBoard/src/features/contests/utils/solvedStatus.ts
   12:3  error  'contestId' is defined but never used  @typescript-eslint/no-unused-vars
 
-/home/kita456/projects/CF_DashBoard/src/features/custom_contests/components/Form/ProblemsTag.tsx
-  63:16  error  Unknown property 'css' found  react/no-unknown-property
-
 /home/kita456/projects/CF_DashBoard/src/features/custom_contests/components/Form/ProblemsTagForIndividualBlock.tsx
   66:16  error  Unknown property 'css' found  react/no-unknown-property
 
@@ -130,9 +127,6 @@
 /home/kita456/projects/CF_DashBoard/src/features/ui/component/Checkbox.tsx
   84:12  error  Unknown property 'css' found  react/no-unknown-property
 
-/home/kita456/projects/CF_DashBoard/src/features/ui/component/DatePicker.tsx
-  13:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
 /home/kita456/projects/CF_DashBoard/src/features/ui/component/DropDownMenuButton.tsx
   37:24  error  '_event' is defined but never used  @typescript-eslint/no-unused-vars
 
@@ -178,5 +172,5 @@ If you are expecting the function to accept certain arguments, you should explic
    2:8  error  'Box' is defined but never used  @typescript-eslint/no-unused-vars
   45:9  error  Unknown property 'css' found     react/no-unknown-property
 
-✖ 72 problems (72 errors, 0 warnings)
+✖ 70 problems (70 errors, 0 warnings)
 
