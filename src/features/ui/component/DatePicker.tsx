@@ -32,3 +32,5 @@ export const DatePicker = React.forwardRef(
     );
   }
 );
+
+DatePicker.displayName = "DatePicker";

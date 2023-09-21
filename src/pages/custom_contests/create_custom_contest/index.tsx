@@ -100,7 +100,7 @@ export const CreateCustomContestPage: React.FC = () => {
     values.startDate = dayjs(values.startDate).utc().toISOString();
     values.endDate = dayjs(values.endDate).utc().toISOString();
 
-    const { problemsFilter, ...submitValues } = values;
+    const { problemsFilter: _, ...submitValues } = values;
     const createdContest = await create(submitValues);
     if (createdContest) {
       navigate(`/custom-contest/show/${createdContest.contestId}`);

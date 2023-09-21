@@ -1,186 +1,182 @@
+
 > cf_dashboard@0.1.0 lint
 > eslint --ext .js,.jsx,.ts,.tsx .
 
+
 /home/kita456/projects/CF_DashBoard/src/features/achievement/components/ClassificationPies.tsx
-15:55 error 'submissions' is defined but never used @typescript-eslint/no-unused-vars
-16:17 error 'isError' is assigned a value but never used @typescript-eslint/no-unused-vars
-16:26 error 'error' is assigned a value but never used @typescript-eslint/no-unused-vars
-16:33 error 'isLoading' is assigned a value but never used @typescript-eslint/no-unused-vars
+  15:55  error  'submissions' is defined but never used         @typescript-eslint/no-unused-vars
+  16:17  error  'isError' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  16:26  error  'error' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  16:33  error  'isLoading' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/achievement/components/DifficultyPies.tsx
-20:17 error 'isError' is assigned a value but never used @typescript-eslint/no-unused-vars
-20:26 error 'error' is assigned a value but never used @typescript-eslint/no-unused-vars
-20:33 error 'isLoading' is assigned a value but never used @typescript-eslint/no-unused-vars
+  20:17  error  'isError' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  20:26  error  'error' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  20:33  error  'isLoading' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/achievement/components/HeatMap.tsx
-60:12 error Unknown property 'css' found react/no-unknown-property
+  60:12  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/authentication/hooks/useUserProfile.ts
-61:17 error 'isLoading' is assigned a value but never used @typescript-eslint/no-unused-vars
-61:28 error 'isError' is assigned a value but never used @typescript-eslint/no-unused-vars
-78:17 error 'error' is defined but never used @typescript-eslint/no-unused-vars
+  61:17  error  'isLoading' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  61:28  error  'isError' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  78:17  error  'error' is defined but never used               @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/bookmark/components/contest/Color.tsx
-33:13 error Unknown property 'css' found react/no-unknown-property
-
-/home/kita456/projects/CF_DashBoard/src/features/bookmark/components/contest/Creator.tsx
-31:9 error 'theme' is assigned a value but never used @typescript-eslint/no-unused-vars
+  33:13  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/bookmark/components/contest/FuzzySearch.tsx
-11:10 error 'debouncedValue' is assigned a value but never used @typescript-eslint/no-unused-vars
-12:12 error 'cancel' is assigned a value but never used @typescript-eslint/no-unused-vars
+  11:10  error  'debouncedValue' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  12:12  error  'cancel' is assigned a value but never used          @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/bookmark/components/contest/Name.tsx
-29:13 error Unknown property 'css' found react/no-unknown-property
+  29:13  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/bookmark/components/problem/Color.tsx
-14:3 error 'generateRandomHexaColor' is defined but never used @typescript-eslint/no-unused-vars
-34:13 error Unknown property 'css' found react/no-unknown-property
+  14:3   error  'generateRandomHexaColor' is defined but never used  @typescript-eslint/no-unused-vars
+  34:13  error  Unknown property 'css' found                         react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/bookmark/components/problem/Creator.tsx
-9:3 error 'generateRandomHexaColor' is defined but never used @typescript-eslint/no-unused-vars
-11:3 error 'isValidHexaColor' is defined but never used @typescript-eslint/no-unused-vars
-25:27 error 'isDarkMode' is defined but never used @typescript-eslint/no-unused-vars
+   9:3   error  'generateRandomHexaColor' is defined but never used  @typescript-eslint/no-unused-vars
+  11:3   error  'isValidHexaColor' is defined but never used         @typescript-eslint/no-unused-vars
+  25:27  error  'isDarkMode' is defined but never used               @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/bookmark/components/problem/FuzzySearch.tsx
-11:10 error 'debouncedValue' is assigned a value but never used @typescript-eslint/no-unused-vars
-12:12 error 'cancel' is assigned a value but never used @typescript-eslint/no-unused-vars
+  11:10  error  'debouncedValue' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  12:12  error  'cancel' is assigned a value but never used          @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/bookmark/components/problem/LabeledProblems.tsx
-86:25 error Unknown property 'css' found react/no-unknown-property
+  86:25  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/bookmark/components/problem/Name.tsx
-29:13 error Unknown property 'css' found react/no-unknown-property
+  29:13  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/color/components/ColorPalette.tsx
-35:7 error Unknown property 'css' found react/no-unknown-property
-44:12 error Unknown property 'css' found react/no-unknown-property
+  35:7   error  Unknown property 'css' found  react/no-unknown-property
+  44:12  error  Unknown property 'css' found  react/no-unknown-property
 
-/home/kita456/projects/CF_DashBoard/src/features/color/components/**tests**/TopCoderLikeCircle.test.tsx
-2:8 error 'userEvent' is defined but never used @typescript-eslint/no-unused-vars
+/home/kita456/projects/CF_DashBoard/src/features/color/components/__tests__/TopCoderLikeCircle.test.tsx
+  2:8  error  'userEvent' is defined but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/contests/components/ContestTableRow.tsx
-26:49 error Component definition is missing display name react/display-name
-35:5 error 'solvedStatus' is defined but never used @typescript-eslint/no-unused-vars
-118:17 error Unknown property 'css' found react/no-unknown-property
-133:23 error Unknown property 'css' found react/no-unknown-property
+   26:49  error  Component definition is missing display name  react/display-name
+   35:5   error  'solvedStatus' is defined but never used      @typescript-eslint/no-unused-vars
+  118:17  error  Unknown property 'css' found                  react/no-unknown-property
+  133:23  error  Unknown property 'css' found                  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/contests/components/FilterOptions.tsx
-25:47 error Component definition is missing display name react/display-name
+  25:47  error  Component definition is missing display name  react/display-name
 
 /home/kita456/projects/CF_DashBoard/src/features/contests/components/ViewFilter.tsx
-29:24 error '\_event' is defined but never used @typescript-eslint/no-unused-vars
+  29:24  error  '_event' is defined but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/contests/utils/solvedStatus.ts
-12:3 error 'contestId' is defined but never used @typescript-eslint/no-unused-vars
+  12:3  error  'contestId' is defined but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/custom_contests/components/Form/ProblemsTag.tsx
-63:16 error Unknown property 'css' found react/no-unknown-property
+  63:16  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/custom_contests/components/Form/ProblemsTagForIndividualBlock.tsx
-66:16 error Unknown property 'css' found react/no-unknown-property
+  66:16  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/custom_contests/components/Form/SelectedProblemsTable.tsx
-86:29 error Unknown property 'css' found react/no-unknown-property
-
-/home/kita456/projects/CF_DashBoard/src/features/custom_contests/components/MyContestTable.tsx
-3:10 error 'NavLink' is defined but never used @typescript-eslint/no-unused-vars
+  86:29  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/custom_contests/components/PublicContestTable.tsx
-22:17 error 'error' is assigned a value but never used @typescript-eslint/no-unused-vars
-22:24 error 'isLoading' is assigned a value but never used @typescript-eslint/no-unused-vars
+  22:17  error  'error' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  22:24  error  'isLoading' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/custom_contests/components/Standings.tsx
-45:23 error 'toggleAutoRefetch' is assigned a value but never used @typescript-eslint/no-unused-vars
+  45:23  error  'toggleAutoRefetch' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/custom_contests/components/TrainingStandings.tsx
-39:23 error 'toggleAutoRefetch' is assigned a value but never used @typescript-eslint/no-unused-vars
+  39:23  error  'toggleAutoRefetch' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/custom_contests/hooks/useAddCustomContest.ts
-39:17 error 'error' is defined but never used @typescript-eslint/no-unused-vars
+  39:17  error  'error' is defined but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/custom_contests/hooks/useAddParticipantToContest.ts
-2:10 error 'ZodError' is defined but never used @typescript-eslint/no-unused-vars
-42:15 error 'error' is defined but never used @typescript-eslint/no-unused-vars
+   2:10  error  'ZodError' is defined but never used  @typescript-eslint/no-unused-vars
+  42:15  error  'error' is defined but never used     @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/custom_contests/hooks/useFetchSubmissions.ts
-87:3 error 'shouldRefetch' is defined but never used @typescript-eslint/no-unused-vars
+  87:3  error  'shouldRefetch' is defined but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/custom_contests/utils/calculateTrainingStandings.ts
-13:3 error 'problems' is defined but never used @typescript-eslint/no-unused-vars
+  13:3  error  'problems' is defined but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/layout/components/HeaderBar.tsx
-29:3 error 'selectedItem' is defined but never used @typescript-eslint/no-unused-vars
+  29:3  error  'selectedItem' is defined but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/problems/components/DifficultyStatus.tsx
-72:23 error Unknown property 'css' found react/no-unknown-property
-93:23 error Unknown property 'css' found react/no-unknown-property
-111:25 error Unknown property 'css' found react/no-unknown-property
+   72:23  error  Unknown property 'css' found  react/no-unknown-property
+   93:23  error  Unknown property 'css' found  react/no-unknown-property
+  111:25  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/problems/components/ProblemsTable.tsx
-9:8 error 'TableSortLabel' is defined but never used @typescript-eslint/no-unused-vars
+  9:8  error  'TableSortLabel' is defined but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/problems/components/ProblemsTableRow.tsx
-83:15 error Unknown property 'css' found react/no-unknown-property
+  83:15  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/recommendation/components/RecommendProblemsTable.tsx
-14:29 error 'seedBasedRandom' is defined but never used @typescript-eslint/no-unused-vars
-31:3 error 'attemptedSet' is defined but never used @typescript-eslint/no-unused-vars
+  14:29  error  'seedBasedRandom' is defined but never used  @typescript-eslint/no-unused-vars
+  31:3   error  'attemptedSet' is defined but never used     @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/submission/submission.ts
-30:6 error 'ParticipantType' is defined but never used @typescript-eslint/no-unused-vars
-124:6 error 'Testset' is defined but never used @typescript-eslint/no-unused-vars
+   30:6  error  'ParticipantType' is defined but never used  @typescript-eslint/no-unused-vars
+  124:6  error  'Testset' is defined but never used          @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/ui/component/Checkbox.tsx
-84:12 error Unknown property 'css' found react/no-unknown-property
+  84:12  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/features/ui/component/DatePicker.tsx
-12:27 error Component definition is missing display name react/display-name
-13:42 error Unexpected any. Specify a different type @typescript-eslint/no-explicit-any
+  13:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
 
 /home/kita456/projects/CF_DashBoard/src/features/ui/component/DropDownMenuButton.tsx
-37:24 error '\_event' is defined but never used @typescript-eslint/no-unused-vars
+  37:24  error  '_event' is defined but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/ui/component/Input.tsx
-38:18 error 'startAdornment' is assigned a value but never used @typescript-eslint/no-unused-vars
+  38:18  error  'startAdornment' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/features/ui/component/RadioButton.tsx
-79:37 error Unknown property 'css' found react/no-unknown-property
+  79:37  error  Unknown property 'css' found  react/no-unknown-property
 
 /home/kita456/projects/CF_DashBoard/src/helpers/uuid.ts
-2:70 error Unexpected any. Specify a different type @typescript-eslint/no-explicit-any
+  2:70  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
 
 /home/kita456/projects/CF_DashBoard/src/hooks/useDebounce.ts
-7:7 error Don't use `Function` as a type. The `Function` type accepts any function-like value.
+  7:7  error  Don't use `Function` as a type. The `Function` type accepts any function-like value.
 It provides no type safety when calling the function, which can be a common source of bugs.
 It also accepts things like class declarations, which will throw at runtime as they will not be called with `new`.
-If you are expecting the function to accept certain arguments, you should explicitly define the function shape @typescript-eslint/ban-types
+If you are expecting the function to accept certain arguments, you should explicitly define the function shape  @typescript-eslint/ban-types
 
 /home/kita456/projects/CF_DashBoard/src/hooks/useLocalStorage.ts
-36:17 error Unexpected any. Specify a different type @typescript-eslint/no-explicit-any
-75:29 error Don't use `Function` as a type. The `Function` type accepts any function-like value.
+  36:17  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-explicit-any
+  75:29  error  Don't use `Function` as a type. The `Function` type accepts any function-like value.
 It provides no type safety when calling the function, which can be a common source of bugs.
 It also accepts things like class declarations, which will throw at runtime as they will not be called with `new`.
-If you are expecting the function to accept certain arguments, you should explicitly define the function shape @typescript-eslint/ban-types
+If you are expecting the function to accept certain arguments, you should explicitly define the function shape  @typescript-eslint/ban-types
 
 /home/kita456/projects/CF_DashBoard/src/hooks/usePagination.ts
-3:41 error Unexpected any. Specify a different type @typescript-eslint/no-explicit-any
+  3:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
 
 /home/kita456/projects/CF_DashBoard/src/hooks/useTimeoutFn.ts
-5:42 error Don't use `Function` as a type. The `Function` type accepts any function-like value.
+  5:42  error  Don't use `Function` as a type. The `Function` type accepts any function-like value.
 It provides no type safety when calling the function, which can be a common source of bugs.
 It also accepts things like class declarations, which will throw at runtime as they will not be called with `new`.
-If you are expecting the function to accept certain arguments, you should explicitly define the function shape @typescript-eslint/ban-types
+If you are expecting the function to accept certain arguments, you should explicitly define the function shape  @typescript-eslint/ban-types
 
 /home/kita456/projects/CF_DashBoard/src/indexedDB/db.ts
-2:15 error 'Problem' is defined but never used @typescript-eslint/no-unused-vars
-3:15 error 'Contest' is defined but never used @typescript-eslint/no-unused-vars
+  2:15  error  'Problem' is defined but never used  @typescript-eslint/no-unused-vars
+  3:15  error  'Contest' is defined but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/pages/custom_contests/create_custom_contest/index.tsx
-103:13 error 'problemsFilter' is assigned a value but never used @typescript-eslint/no-unused-vars
+  103:29  error  '_' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 /home/kita456/projects/CF_DashBoard/src/pages/layout/index.tsx
-2:8 error 'Box' is defined but never used @typescript-eslint/no-unused-vars
-45:9 error Unknown property 'css' found react/no-unknown-property
+   2:8  error  'Box' is defined but never used  @typescript-eslint/no-unused-vars
+  45:9  error  Unknown property 'css' found     react/no-unknown-property
 
-✖ 75 problems (75 errors, 0 warnings)
+✖ 72 problems (72 errors, 0 warnings)
+
