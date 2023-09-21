@@ -10,43 +10,41 @@ type Props = {
   errors: FieldErrors<CreateCustomContest>;
 };
 
-export const NumberOfProblems: React.FC<Props> = React.memo(
-  ({ control, errors }) => {
-    return (
-      <Controller
-        name="problemsFilter"
-        control={control}
-        render={({ field }) => (
-          <Box>
-            <Box
-              component="label"
-              display="block"
-              htmlFor="problems-number-input"
-              fontWeight="bold"
-              mb={0.5}
-            >
-              Number of Problems
-            </Box>
-            <Input
-              id="problems-number-input"
-              type="number"
-              value={field.value.count}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                const val =
-                  e.target.value === ""
-                    ? null
-                    : e.target.valueAsNumber < 0
-                    ? 0
-                    : e.target.valueAsNumber;
-                field.onChange({ ...field.value, count: val });
-              }}
-            />
-            {errors.problemsFilter?.count && (
-              <ErrorMessage message={errors.problemsFilter.count.message} />
-            )}
+export const NumberOfProblems: React.FC<Props> = ({ control, errors }) => {
+  return (
+    <Controller
+      name="problemsFilter"
+      control={control}
+      render={({ field }) => (
+        <Box>
+          <Box
+            component="label"
+            display="block"
+            htmlFor="problems-number-input"
+            fontWeight="bold"
+            mb={0.5}
+          >
+            Number of Problems
           </Box>
-        )}
-      />
-    );
-  }
-);
+          <Input
+            id="problems-number-input"
+            type="number"
+            value={field.value.count}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              const val =
+                e.target.value === ""
+                  ? null
+                  : e.target.valueAsNumber < 0
+                  ? 0
+                  : e.target.valueAsNumber;
+              field.onChange({ ...field.value, count: val });
+            }}
+          />
+          {errors.problemsFilter?.count && (
+            <ErrorMessage message={errors.problemsFilter.count.message} />
+          )}
+        </Box>
+      )}
+    />
+  );
+};

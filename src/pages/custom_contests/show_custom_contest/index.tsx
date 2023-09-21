@@ -28,7 +28,7 @@ export const ShowCustomContestPage: React.FC = () => {
 
   const params = useParams();
   const contestId = params.contestId ?? "";
-  const { data, isError, error } = useFetchCustomContestByContestId({
+  const { data, isError } = useFetchCustomContestByContestId({
     contestId,
   });
   const problems = useMemo(

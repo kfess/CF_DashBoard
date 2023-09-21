@@ -38,3 +38,5 @@ export const ExternalLink = React.forwardRef<HTMLAnchorElement, Props>(
     );
   }
 );
+
+ExternalLink.displayName = "ExternalLink";

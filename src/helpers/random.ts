@@ -39,7 +39,7 @@ export class Random {
 }
 
 export const chooseRandomIndex = <T>(arr: T[]): T => {
-  let index = Math.floor(arr.length * Math.random());
+  const index = Math.floor(arr.length * Math.random());
   return arr[index];
 };
 
