@@ -7,6 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import { Problem } from "@features/problems/problem";
 import {
   ratingColor,
@@ -68,18 +69,15 @@ export const DifficultyStatus: React.FC<Props> = ({ problems }) => {
                 <TableCell>Difficulty</TableCell>
                 {ratingColor.map((color) => (
                   <TableCell key={color}>
-                    <div
-                      css={{
-                        display: "flex",
-                        alignItems: "center",
-                        whiteSpace: "nowrap",
-                      }}
+                    <Stack
+                      direction="row"
+                      sx={{ alignItems: "center", whiteSpace: "nowrap" }}
                     >
                       <ColoredCircle color={ratingColorInfo[color].colorCode} />{" "}
                       {ratingColorInfo[color].lowerBound !== -1
                         ? ratingColorInfo[color].lowerBound + " ~"
                         : "No Category"}
-                    </div>
+                    </Stack>
                   </TableCell>
                 ))}
               </TableRow>
@@ -89,16 +87,16 @@ export const DifficultyStatus: React.FC<Props> = ({ problems }) => {
                 <TableCell>Total ({problems.length})</TableCell>
                 {ratingColor.map((color) => (
                   <TableCell key={color}>
-                    <div
-                      css={{
-                        display: "flex",
+                    <Stack
+                    direction="row"
+                      sx={{
                         alignItems: "center",
                         justifyContent: "center",
                         whiteSpace: "nowrap",
                       }}
                     >
                       {coloredProblems[color]}
-                    </div>
+                    </Stack>
                   </TableCell>
                 ))}
               </TableRow>
@@ -107,16 +105,16 @@ export const DifficultyStatus: React.FC<Props> = ({ problems }) => {
                   <TableCell>{searchUserId}</TableCell>
                   {ratingColor.map((color) => (
                     <TableCell key={color}>
-                      <div
-                        css={{
-                          display: "flex",
+                      <Stack
+                        direction="row"
+                        sx={{
                           alignItems: "center",
                           justifyContent: "center",
                           whiteSpace: "nowrap",
                         }}
                       >
                         {coloredSubmission[color] || 0}
-                      </div>
+                      </Stack>
                     </TableCell>
                   ))}
                 </TableRow>

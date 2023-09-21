@@ -8,8 +8,8 @@ type Props = {
 };
 
 export const FuzzySearch: React.FC<Props> = ({ query, setQuery }) => {
-  const [debouncedValue, setDebouncedValue] = useState("");
-  const [, cancel] = useDebounce(
+  const [, setDebouncedValue] = useState("");
+  const [,] = useDebounce(
     () => {
       setDebouncedValue(query);
     },

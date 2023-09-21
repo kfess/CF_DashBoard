@@ -1,7 +1,7 @@
 import React from "react";
+import Box from "@mui/material/Box";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { Input } from "@features/ui/component/Input";
-import { FormControl } from "@features/ui/component/FormControl";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { ProblemLabelForm } from "@features/bookmark/problemLabel";
 
@@ -23,13 +23,16 @@ export const Name: React.FC<Props> = ({
       name="name"
       control={control}
       render={({ field }) => (
-        <FormControl>
-          <label
+        <Box>
+          <Box
+            component="label"
+            display="block"
             htmlFor="name-input"
-            css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
+            fontWeight="bold"
+            mb={0.5}
           >
             Name
-          </label>
+          </Box>
           <Input
             {...field}
             onChange={(e) => {
@@ -41,7 +44,7 @@ export const Name: React.FC<Props> = ({
             type="text"
           />
           <ErrorMessage message={errors.name?.message || customError} />
-        </FormControl>
+        </Box>
       )}
     />
   );

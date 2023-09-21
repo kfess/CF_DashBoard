@@ -5,7 +5,6 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import Tooltip from "@mui/material/Tooltip";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { Input } from "@features/ui/component/Input";
-import { FormControl } from "@features/ui/component/FormControl";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { ProblemLabelForm } from "@features/bookmark/problemLabel";
 import { ColorPalette } from "@features/color/components/ColorPalette";
@@ -28,13 +27,16 @@ export const Color: React.FC<Props> = ({ control, errors }) => {
       name="color"
       control={control}
       render={({ field }) => (
-        <FormControl>
-          <label
-            htmlFor="color-input"
-            css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
+        <Box>
+          <Box
+            component="label"
+            display="block"
+            htmlFor="generate-color-input"
+            fontWeight="bold"
+            mb={0.5}
           >
             Generate Color
-          </label>
+          </Box>
           <Stack direction="row" alignItems="center" spacing={1}>
             <IconButton
               icon={<ReplayIcon />}
@@ -80,7 +82,7 @@ export const Color: React.FC<Props> = ({ control, errors }) => {
             </Tooltip>
           </Stack>
           <ErrorMessage message={errors.color?.message} />
-        </FormControl>
+        </Box>
       )}
     />
   );

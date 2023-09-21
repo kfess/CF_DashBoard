@@ -19,7 +19,7 @@ import { NoDataMessage } from "@features/ui/component/NoDataBlock";
 type Props = { contestType: CreatedContestType };
 
 export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
-  const { data, error, isLoading } = useFetchAllCustomContests();
+  const { data } = useFetchAllCustomContests();
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(10);
 

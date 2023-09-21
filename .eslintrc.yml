@@ -13,7 +13,7 @@ plugins:
   - "@typescript-eslint"
   - react
 rules: { "react/react-in-jsx-scope": "off", "react/prop-types": 0 }
-ignorePatterns: ["node_modules/", "dist/"]
+ignorePatterns: ["node_modules/", "dist/", "__tests__/"] #
 settings:
   react:
     version: "detect"

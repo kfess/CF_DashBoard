@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
+import Box from "@mui/material/Box";
 import type { ReshapedProblem } from "@features/problems/problem";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
@@ -114,8 +115,8 @@ export const ContestTableRow: React.FC<Props> = React.memo(
                 borderRight: (theme) => `1px solid ${theme.palette.divider}`,
               }}
             >
-              <div
-                css={{
+              <Box
+                sx={{
                   display: "grid",
                   gridTemplateRows:
                     indexedProblems.length > 1
@@ -128,12 +129,12 @@ export const ContestTableRow: React.FC<Props> = React.memo(
                 {indexedProblems.map((p, index) => {
                   const backgroundColor = cellColors[cellIdx][index];
                   return (
-                    <div
+                    <Box
                       key={p.index}
-                      css={{
+                      sx={{
                         backgroundColor,
                         gridRow: index + 1,
-                        padding: theme.spacing(1),
+                        p: 1,
                         display: "flex",
                         alignItems: "center",
                       }}
@@ -147,10 +148,10 @@ export const ContestTableRow: React.FC<Props> = React.memo(
                         difficulty={p.rating}
                         solvedCount={p.solvedCount}
                       />
-                    </div>
+                    </Box>
                   );
                 })}
-              </div>
+              </Box>
             </TableCell>
           );
         })}
