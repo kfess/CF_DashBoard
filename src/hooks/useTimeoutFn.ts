@@ -1,8 +1,11 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from "react";
 
 export type UseTimeoutFnReturn = [() => boolean | null, () => void, () => void];
 
-export default function useTimeoutFn(fn: Function, ms: number = 0): UseTimeoutFnReturn {
+export default function useTimeoutFn(
+  fn: Function, // eslint-disable-line
+  ms: number = 0
+): UseTimeoutFnReturn {
   const ready = useRef<boolean | null>(false);
   const timeout = useRef<ReturnType<typeof setTimeout>>();
   const callback = useRef(fn);

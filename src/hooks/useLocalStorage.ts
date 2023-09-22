@@ -72,7 +72,7 @@ export const useLocalStorage = <T>(
       try {
         const newState =
           typeof valOrFunc === "function"
-            ? (valOrFunc as Function)(state)
+            ? (valOrFunc as Function)(state) // eslint-disable-line
             : valOrFunc;
         let value: string;
 
