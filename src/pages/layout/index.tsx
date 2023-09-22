@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
 import { Outlet, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import type { Field } from "@features/layout/components/SideNavigationItems";
@@ -30,7 +29,6 @@ export const LayoutPage: React.FC = () => {
       <HeaderBar
         isOpenSideBar={isOpenSideBar}
         toggleSideBar={toggleSideBar}
-        selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
       />
       {isOpenSideBar && (
