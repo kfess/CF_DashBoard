@@ -13,7 +13,8 @@ export const Profile: React.FC = () => {
     githubUserName,
     codeforcesUsername,
     updateUsername,
-    updateError,
+    isUpdateSuccess,
+    isUpdateError,
   } = useUserProfile();
 
   const [newUsername, setNewUsername] = useState<string>("");
@@ -33,6 +34,7 @@ export const Profile: React.FC = () => {
 
     try {
       await updateUsername(newUsername);
+      setIsSnackbarOpen(true);
       setNewUsername("");
     } catch (error) {
       setIsSnackbarOpen(true);
@@ -41,6 +43,7 @@ export const Profile: React.FC = () => {
 
   return (
     <>
+      {String(isUpdateSuccess)}
       <HeadLine title="Profile" />
       <Stack sx={{ my: 3 }} spacing={0.5}>
         <Typography variant="body1">GitHub ID: {githubId}</Typography>
@@ -61,7 +64,15 @@ export const Profile: React.FC = () => {
           <Button type="submit">Update</Button>
         </Stack>
       </form>
-      {updateError && (
+      {isUpdateSuccess && (
+        <Snackbar
+          open={isSnackbarOpen}
+          message={"Codeforces username updated successfully"}
+          onClose={handleCloseSnackbar}
+          color="success"
+        />
+      )}
+      {isUpdateError && (
         <Snackbar
           open={isSnackbarOpen}
           message={"An error occurred during updating codeforces username"}
