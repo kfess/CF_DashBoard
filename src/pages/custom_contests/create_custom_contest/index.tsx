@@ -20,6 +20,7 @@ import { ContestDetailStep } from "@features/custom_contests/components/Form/Con
 import { ProblemStep } from "@features/custom_contests/components/Form/ProblemStep";
 import { ViewStep } from "@features/custom_contests/components/Form/ViewStep";
 import { getDefaultStartDate, getDefaultEndDate } from "@helpers/date";
+import { Snackbar } from "@features/ui/component/Snackbar";
 
 const getDefaultValues = (
   codeforcesUsername?: string,
@@ -90,20 +91,26 @@ export const CreateCustomContestPage: React.FC = () => {
     reset(defaultValues);
   }, [codeforcesUsername, githubUserName]);
 
-  const { create } = useAddCustomContest();
-  const navigate = useNavigate();
+  const { create, isAddSuccess, isAddError } = useAddCustomContest();
 
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const handleCloseSnackbar = () => {
+    setIsSnackbarOpen(false);
+  };
+
+  const navigate = useNavigate();
   const onSubmit = async () => {
     const values = getValues();
-
     // Convert local time to UTC
     values.startDate = dayjs(values.startDate).utc().toISOString();
     values.endDate = dayjs(values.endDate).utc().toISOString();
-
-    const { problemsFilter: _, ...submitValues } = values;
+    const { problemsFilter, ...submitValues } = values;
     const createdContest = await create(submitValues);
     if (createdContest) {
-      navigate(`/custom-contest/show/${createdContest.contestId}`);
+      setIsSnackbarOpen(true);
+      setTimeout(() => {
+        navigate(`/custom-contest/show/${createdContest.contestId}`);
+      }, 2000);
     }
   };
 
@@ -162,6 +169,14 @@ export const CreateCustomContestPage: React.FC = () => {
           )}
         </form>
       </Container>
+      {isAddSuccess && (
+        <Snackbar
+          open={isSnackbarOpen}
+          message={"You have successfully created a custom contest"}
+          onClose={handleCloseSnackbar}
+          color="success"
+        />
+      )}
     </>
   );
 };

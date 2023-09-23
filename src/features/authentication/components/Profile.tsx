@@ -19,7 +19,7 @@ export const Profile: React.FC = () => {
 
   const [newUsername, setNewUsername] = useState<string>("");
 
-  // for error snackbar
+  // for snackbar
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const handleCloseSnackbar = () => {
     setIsSnackbarOpen(false);
@@ -43,7 +43,6 @@ export const Profile: React.FC = () => {
 
   return (
     <>
-      {String(isUpdateSuccess)}
       <HeadLine title="Profile" />
       <Stack sx={{ my: 3 }} spacing={0.5}>
         <Typography variant="body1">GitHub ID: {githubId}</Typography>
