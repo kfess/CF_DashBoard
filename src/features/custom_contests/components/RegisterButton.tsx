@@ -42,7 +42,7 @@ export const RegisterButton: React.FC = () => {
   return (
     <>
       {isUserRegistered === false && isBeforeContestEnd && (
-        <Box m={1}>
+        <Box>
           <Button
             disabled={
               !loggedIn ||
@@ -57,16 +57,19 @@ export const RegisterButton: React.FC = () => {
                 navigate("/custom-contest/");
               }, 2000);
             }}
-            size="small"
           >
             Register to Participate
           </Button>
         </Box>
       )}
-      {isAddSuccess && (
+      {(isAddSuccess || isAddError) && (
         <Snackbar
           open={isSnackbarOpen}
-          message="You have successfully registered to participate in the contest."
+          message={
+            isAddSuccess
+              ? "You have successfully participated in the contest"
+              : "Failed to participate in the contest"
+          }
           onClose={handleClose}
         />
       )}
