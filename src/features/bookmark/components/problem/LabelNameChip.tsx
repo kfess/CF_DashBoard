@@ -28,7 +28,7 @@ export const LabelNameChip: React.FC<Props> = ({
       {mode === "Preview" ? (
         <Chip
           label={<div>{name.trim().length > 0 ? name : "Label Preview"}</div>}
-          css={{
+          sx={{
             color: textColor,
             borderColor: "black",
             backgroundColor: alpha(color, backgroundColorAlpha),
@@ -38,7 +38,7 @@ export const LabelNameChip: React.FC<Props> = ({
       ) : (
         <Chip
           label={<div>{name.trim().length > 0 ? name : "Label Preview"}</div>}
-          css={{
+          sx={{
             color: textColor,
             borderColor: "black",
             backgroundColor: alpha(color, backgroundColorAlpha),
