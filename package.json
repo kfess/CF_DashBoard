@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc && vite build --mode production",
+    "cypress-open": "cypress open",
+    "cypress-run": "cypress run",
     "dev": "vite",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint-staged": "lint-staged",
