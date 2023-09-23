@@ -33,7 +33,7 @@ export const useLocalStorage = <T>(
 
   const deserializer = options
     ? options.raw
-      ? (value: any) => value
+      ? (value: any) => value // eslint-disable-line
       : options.deserializer
     : JSON.parse;
 

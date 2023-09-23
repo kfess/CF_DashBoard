@@ -1,3 +1,4 @@
+import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { CF_USER_INFO_URL, INTERNAL_API_BASE_URL } from "@constants/url";
@@ -68,6 +69,8 @@ export const useUserProfile = () => {
   });
 
   // mutate user codeforces username
+  const [updateError, setUpdateError] = useState<Error | null>(null);
+
   const updateUsernameMutation = useMutation<void, Error, string>(
     (codeforcesUsername: string) =>
       updateCodeforcesUsernameIfExists(codeforcesUsername),
@@ -76,8 +79,8 @@ export const useUserProfile = () => {
         queryClient.invalidateQueries(["userProfile"]); // update usename immediately
       },
       onError: (error) => {
+        setUpdateError(error);
         console.log("An error occurred during updating codeforces username");
-        // add Toast in the future
       },
       retry: false,
     }
@@ -96,5 +99,8 @@ export const useUserProfile = () => {
     githubUserName: data?.githubUsername,
     codeforcesUsername: data?.codeforcesUsername,
     updateUsername,
+    isFetchLoading: isLoading,
+    isFetchError: isError,
+    updateError,
   };
 };
