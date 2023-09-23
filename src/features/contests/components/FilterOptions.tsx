@@ -22,70 +22,68 @@ type Props = {
   toggleReverse: () => void;
 };
 
-export const FilterOptions: React.FC<Props> = React.memo(
-  ({
-    showDifficulty,
-    reverse,
-    classification,
-    period,
-    solvedStatus,
-    setClassification,
-    setPeriod,
-    setSolvedStatus,
-    toggleShowDifficulty,
-    toggleReverse,
-  }) => {
-    const { setURLQuery } = useURLQuery();
+export const FilterOptions: React.FC<Props> = ({
+  showDifficulty,
+  reverse,
+  classification,
+  period,
+  solvedStatus,
+  setClassification,
+  setPeriod,
+  setSolvedStatus,
+  toggleShowDifficulty,
+  toggleReverse,
+}) => {
+  const { setURLQuery } = useURLQuery();
 
-    const onSelectClassification = (classification: Classification) => {
-      setClassification(classification);
-      setURLQuery({ classification: classification });
-    };
+  const onSelectClassification = (classification: Classification) => {
+    setClassification(classification);
+    setURLQuery({ classification: classification });
+  };
 
-    const onSelectPeriod = (period: PeriodWord) => {
-      setPeriod(period);
-      setURLQuery({ period: period });
-    };
+  const onSelectPeriod = (period: PeriodWord) => {
+    setPeriod(period);
+    setURLQuery({ period: period });
+  };
 
-    const onSelectSolvedStatus = (solvedStatus: SolvedStatus) => {
-      setSolvedStatus(solvedStatus);
-      setURLQuery({ contestSolvedStatus: solvedStatus });
-    };
+  const onSelectSolvedStatus = (solvedStatus: SolvedStatus) => {
+    setSolvedStatus(solvedStatus);
+    setURLQuery({ contestSolvedStatus: solvedStatus });
+  };
 
-    return (
-      <Stack direction="row" flexWrap="wrap" sx={{ py: 1, gap: "0.5rem" }}>
-        <Box>
-          <ContestTypeFilter
-            classification={classification}
-            onSelectClassification={onSelectClassification}
-          />
-        </Box>
-        <Box>
-          <PeriodFilterButton period={period} onSelectPeriod={onSelectPeriod} />
-        </Box>
+  return (
+    <Stack direction="row" flexWrap="wrap" sx={{ py: 1, gap: "0.5rem" }}>
+      <Box>
+        <ContestTypeFilter
+          classification={classification}
+          onSelectClassification={onSelectClassification}
+        />
+      </Box>
+      <Box>
+        <PeriodFilterButton period={period} onSelectPeriod={onSelectPeriod} />
+      </Box>
 
-        <Box>
-          <SolvedStatusFilter
-            solvedStatus={solvedStatus}
-            onSelectSolvedStatus={onSelectSolvedStatus}
-          />
-        </Box>
-        <Box>
-          <ViewFilter
-            showDifficulty={showDifficulty}
-            reverse={reverse}
-            toggleShowDifficulty={toggleShowDifficulty}
-            toggleReverse={toggleReverse}
-          />
-        </Box>
-        <Box>
-          <ResetFilterButton
-            setClassification={setClassification}
-            setPeriod={setPeriod}
-            setSolvedStatus={setSolvedStatus}
-          />
-        </Box>
-      </Stack>
-    );
-  }
-);
+      <Box>
+        <SolvedStatusFilter
+          solvedStatus={solvedStatus}
+          onSelectSolvedStatus={onSelectSolvedStatus}
+        />
+      </Box>
+      <Box>
+        <ViewFilter
+          showDifficulty={showDifficulty}
+          reverse={reverse}
+          toggleShowDifficulty={toggleShowDifficulty}
+          toggleReverse={toggleReverse}
+        />
+      </Box>
+      <Box>
+        <ResetFilterButton
+          setClassification={setClassification}
+          setPeriod={setPeriod}
+          setSolvedStatus={setSolvedStatus}
+        />
+      </Box>
+    </Stack>
+  );
+};

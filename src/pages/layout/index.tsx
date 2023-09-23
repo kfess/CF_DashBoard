@@ -29,7 +29,6 @@ export const LayoutPage: React.FC = () => {
       <HeaderBar
         isOpenSideBar={isOpenSideBar}
         toggleSideBar={toggleSideBar}
-        selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
       />
       {isOpenSideBar && (

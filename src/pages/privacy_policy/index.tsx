@@ -16,12 +16,12 @@ const PrivacyPolicyPage: React.FC = () => {
         </Grid>
         <Grid item xs={12}>
           <Typography paragraph variant="body1" my={2}>
-            By using our service, CF DashBoard, you're agreeing to our privacy
-            policy. To improve our service, we use cookies for access analysis.
-            We employ Google Analytics for this analysis. Google Analytics uses
-            cookies to gather information that does not identify you personally.
-            For more information on how this data is collected and processed,
-            please refer to{" "}
+            By using our service, CF DashBoard, you&apos;re agreeing to our
+            privacy policy. To improve our service, we use cookies for access
+            analysis. We employ Google Analytics for this analysis. Google
+            Analytics uses cookies to gather information that does not identify
+            you personally. For more information on how this data is collected
+            and processed, please refer to{" "}
             <ExternalLink
               href="https://policies.google.com/technologies/partner-sites"
               label="this"

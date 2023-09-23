@@ -30,8 +30,8 @@ export const TermsPage: React.FC = () => {
           </Typography>
           <Typography paragraph>
             We may modify the Terms at any time, in our sole discretion. If we
-            do so, we'll let you know either by posting the modified Terms on
-            the Site or through other communications.
+            do so, we&apos;ll let you know either by posting the modified Terms
+            on the Site or through other communications.
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -81,16 +81,17 @@ export const TermsPage: React.FC = () => {
             6. Disclaimer of Warranties and Limitation of Liability
           </Typography>
           <Typography paragraph>
-            Our app is provided on an "as is" and "as available" basis. We make
-            no representations or warranties of any kind, express or implied, as
-            to the operation of our app, the accuracy or completeness of the
-            content, or the suitability of the services for any particular
-            purpose. To the fullest extent permitted by law, we disclaim all
-            warranties, express or implied, including but not limited to,
-            implied warranties of merchantability and fitness for a particular
-            purpose. We will not be liable for any damages of any kind arising
-            from the use of our app, including but not limited to, direct,
-            indirect, incidental, punitive, and consequential damages.
+            Our app is provided on an &quot;as is&quot; and &quot;as
+            available&quot; basis. We make no representations or warranties of
+            any kind, express or implied, as to the operation of our app, the
+            accuracy or completeness of the content, or the suitability of the
+            services for any particular purpose. To the fullest extent permitted
+            by law, we disclaim all warranties, express or implied, including
+            but not limited to, implied warranties of merchantability and
+            fitness for a particular purpose. We will not be liable for any
+            damages of any kind arising from the use of our app, including but
+            not limited to, direct, indirect, incidental, punitive, and
+            consequential damages.
           </Typography>
         </Grid>
         <Grid item xs={12}>

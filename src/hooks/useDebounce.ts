@@ -4,7 +4,7 @@ import useTimeoutFn from "@hooks/useTimeoutFn";
 export type UseDebounceReturn = [() => boolean | null, () => void];
 
 export default function useDebounce(
-  fn: Function,
+  fn: Function, // eslint-disable-line
   ms: number = 0,
   deps: DependencyList = []
 ): UseDebounceReturn {

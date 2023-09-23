@@ -80,15 +80,15 @@ export const Checkbox: React.FC<Props> = (props: Props) => {
   const { title, toggle, label, description } = props;
 
   return (
-    <Box sx={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-      <div css={{ fontWeight: "bold" }}>{title}</div>
+    <Box>
+      <Box fontWeight="bold">{title}</Box>
       <FormControlLabel
         control={<BpCheckbox />}
         label={<div>{label}</div>}
         onChange={toggle}
       />
       {description && (
-        <Box sx={{ paddingLeft: "26px", fontSize: 14, color: "gray" }}>
+        <Box sx={{ pl: "24px", fontSize: 14, color: "gray" }}>
           {description}
         </Box>
       )}

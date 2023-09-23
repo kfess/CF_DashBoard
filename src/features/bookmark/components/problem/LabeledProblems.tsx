@@ -8,6 +8,7 @@ import {
   TableContainer,
   Paper,
 } from "@mui/material";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
@@ -83,11 +84,14 @@ export const LabeledProblems: React.FC<Props> = ({ label }) => {
                   />
                 </TableCell>
                 <TableCell>
-                  <span css={{ color: getColorCodeFromRating(p.rating) }}>
+                  <Box
+                    component="span"
+                    sx={{ color: getColorCodeFromRating(p.rating) }}
+                  >
                     {p.rating?.toLocaleString() ?? (
                       <HelpToolTip title="No data available" />
                     )}
-                  </span>
+                  </Box>
                 </TableCell>
                 <TableCell>
                   <ButtonWithAlertDialog

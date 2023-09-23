@@ -33,7 +33,7 @@ export const useLocalStorage = <T>(
 
   const deserializer = options
     ? options.raw
-      ? (value: any) => value
+      ? (value: any) => value // eslint-disable-line
       : options.deserializer
     : JSON.parse;
 
@@ -72,7 +72,7 @@ export const useLocalStorage = <T>(
       try {
         const newState =
           typeof valOrFunc === "function"
-            ? (valOrFunc as Function)(state)
+            ? (valOrFunc as Function)(state) // eslint-disable-line
             : valOrFunc;
         let value: string;
 

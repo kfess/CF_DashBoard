@@ -1,5 +1,6 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import { Problem } from "@features/problems/problem";
@@ -80,11 +81,14 @@ export const ProblemsTableRow: React.FC<Props> = ({
         />
       </TableCell>
       <TableCell>
-        <span css={{ color: getColorCodeFromRating(problem.rating) }}>
+        <Box
+          component="span"
+          sx={{ color: getColorCodeFromRating(problem.rating) }}
+        >
           {problem.rating?.toLocaleString() ?? (
             <HelpToolTip title="No data available" />
           )}
-        </span>
+        </Box>
       </TableCell>
       <TableCell>
         <Chip

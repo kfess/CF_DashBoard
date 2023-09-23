@@ -17,7 +17,7 @@ type Props = {
 type ColorCount = { [C in RatingColor]: number };
 
 export const DifficultyPies: React.FC<Props> = ({ submissions }) => {
-  const { data, isError, error, isLoading } = useFetchProblems(); // all problems
+  const { data } = useFetchProblems(); // all problems
 
   const coloredProblems: ColorCount | undefined = data?.reduce((obj, d) => {
     const color: RatingColor = getColorNameFromRating(d.rating);

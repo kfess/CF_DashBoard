@@ -1,7 +1,7 @@
 import React from "react";
+import Box from "@mui/material/Box";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { Input } from "@features/ui/component/Input";
-import { FormControl } from "@features/ui/component/FormControl";
 import { ErrorMessage } from "@features/ui/component/ErrorMessage";
 import { ContestLabelForm } from "@features/bookmark/contestLabel";
 
@@ -16,13 +16,16 @@ export const Description: React.FC<Props> = ({ control, errors }) => {
       name="description"
       control={control}
       render={({ field }) => (
-        <FormControl>
-          <label
+        <Box>
+          <Box
+            component="label"
+            display="block"
             htmlFor="description-input"
-            css={{ fontWeight: "bold", paddingBottom: "0.3rem" }}
+            fontWeight="bold"
+            mb={0.5}
           >
             Description
-          </label>
+          </Box>
           <Input
             {...field}
             placeholder="Description (optional)"
@@ -30,7 +33,7 @@ export const Description: React.FC<Props> = ({ control, errors }) => {
             type="text"
           />
           <ErrorMessage message={errors.description?.message} />
-        </FormControl>
+        </Box>
       )}
     />
   );

@@ -19,14 +19,12 @@ const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 type Props = {
   isOpenSideBar: boolean;
   toggleSideBar: Dispatch<SetStateAction<boolean>>;
-  selectedItem: Field;
   setSelectedItem: Dispatch<SetStateAction<Field>>;
 };
 
 export const HeaderBar: React.FC<Props> = ({
   isOpenSideBar,
   toggleSideBar,
-  selectedItem,
   setSelectedItem,
 }) => {
   const { pathname } = useLocation();
@@ -37,7 +35,7 @@ export const HeaderBar: React.FC<Props> = ({
         color="default"
         position="fixed"
         elevation={0}
-        sx={{ borderBottom: "1px solid", borderColor: "divider" }}
+        sx={{ mb: "1px solid", borderColor: "divider" }}
       >
         <Toolbar
           variant="dense"

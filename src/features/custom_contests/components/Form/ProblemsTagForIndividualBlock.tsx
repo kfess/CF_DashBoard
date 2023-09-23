@@ -63,11 +63,17 @@ const TagSection: React.FC<TagSectionProps> = ({
       control={control}
       render={({ field }) => (
         <>
-          <div css={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
+          <Box mb={1.5}>
             <Box my={0.5} fontWeight="bold">
-              <label>
+              <Box
+                component="label"
+                display="block"
+                htmlFor="problems-tags-input"
+                fontWeight="bold"
+                mb={0.5}
+              >
                 {label} <HelpToolTip title={hintText} />
-              </label>
+              </Box>
             </Box>
             <TagsButton
               selectedTags={field.value}
@@ -79,7 +85,7 @@ const TagSection: React.FC<TagSectionProps> = ({
               }}
               removeAllTags={() => field.onChange([])}
             />
-          </div>
+          </Box>
           <Stack direction="row" sx={{ flexWrap: "wrap" }} gap={1}>
             {field.value.length > 0 &&
               field.value.map((tag: Tag) => (

@@ -1,6 +1,10 @@
 import { z } from "zod";
 import { problemSchema } from "@features/problems/problem";
-import { normalizedLanguage, normalizeLanguage, type NormalizedLanguage } from "@features/language/language";
+import {
+  normalizedLanguage,
+  normalizeLanguage,
+  type NormalizedLanguage,
+} from "@features/language/language";
 
 // https://codeforces.com/apiHelp/objects#Member
 // https://codeforces.com/apiHelp/objects#Party
@@ -27,7 +31,7 @@ const participantType = [
   "MANAGER",
   "OUT_OF_COMPETITION",
 ] as const;
-type ParticipantType = typeof participantType[number];
+type ParticipantType = (typeof participantType)[number]; // eslint-disable-line
 
 // party
 const partySchema = z.object({
@@ -84,10 +88,10 @@ export const verdicts = {
 } as const;
 
 export type Verdict = keyof typeof verdicts;
-export type VerdictAbbr = typeof verdicts[Verdict];
+export type VerdictAbbr = (typeof verdicts)[Verdict];
 
 export const verdictAbbrFilter = ["All", ...Object.values(verdicts)] as const;
-export type VerdictFilter = typeof verdictAbbrFilter[number];
+export type VerdictFilter = (typeof verdictAbbrFilter)[number];
 
 // testset
 const testsetSchema = z.union([
@@ -121,13 +125,16 @@ const testset = [
   "TESTS9",
   "TESTS10",
 ] as const;
-type Testset = typeof testset[number];
+type Testset = (typeof testset)[number]; // eslint-disable-line
 
 // normalize language from string to NormalizedLanguage
-const normalizedLanguageSchema = z.string().transform(normalizeLanguage).refine(
-  (val: string) => normalizedLanguage.includes(val as NormalizedLanguage),   // I don't want to use "as" assertion...
-  { message: "Invalid language" }
-);
+const normalizedLanguageSchema = z
+  .string()
+  .transform(normalizeLanguage)
+  .refine(
+    (val: string) => normalizedLanguage.includes(val as NormalizedLanguage), // I don't want to use "as" assertion...
+    { message: "Invalid language" }
+  );
 
 // submission
 const submissionSchema = z.object({
