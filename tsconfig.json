@@ -35,11 +35,12 @@
     "types": [
       "@emotion/react/types/css-prop",
       "jest",
-      "@testing-library/jest-dom"
+      "@testing-library/jest-dom",
+      "@testing-library/cypress"
     ], // to make it possible to write css props in HTML tag
     "jsxImportSource": "@emotion/react" // to use @emotion's css props as JSX
   },
-  "include": ["src"],
+  "include": ["src", "cypress/"],
   "exclude": ["src/mock"], // for development
   "references": [{ "path": "./tsconfig.node.json" }]
 }
