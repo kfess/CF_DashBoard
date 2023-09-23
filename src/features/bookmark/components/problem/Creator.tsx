@@ -22,11 +22,10 @@ import { Color } from "@features/bookmark/components/problem/Color";
 import { trimFullWhiteSpace } from "@helpers/format";
 import { useTheme } from "@mui/material";
 
-const getDefaultValues = (isDarkMode: boolean): ProblemLabelForm => {
+const getDefaultValues = (): ProblemLabelForm => {
   return {
     name: "",
     description: "",
-    // color: generateRandomHexaColor(),
     color: generateHighContrastColor(),
   };
 };
@@ -46,7 +45,7 @@ export const Creator: React.FC = () => {
     reset,
   } = useForm<ProblemLabelForm>({
     resolver: zodResolver(problemLabelFormSchema),
-    defaultValues: getDefaultValues(theme.palette.mode === "dark"),
+    defaultValues: getDefaultValues(),
   });
   const watchedName = watch("name");
   const watchedColor = watch("color");
@@ -130,7 +129,7 @@ export const Creator: React.FC = () => {
                 <Box sx={{ height: { xs: "0px", md: "1.8rem" } }} />
                 <Stack direction="row" spacing={1} justifyContent="flex-end">
                   <div>
-                    <Button onClick={onCancel} color="secondary" size="small">
+                    <Button onClick={onCancel} color="secondary">
                       Cancel
                     </Button>
                   </div>
@@ -142,7 +141,6 @@ export const Creator: React.FC = () => {
                         watchedColor === "" ||
                         Object.keys(errors).length > 0
                       }
-                      size="small"
                     >
                       Create label
                     </Button>

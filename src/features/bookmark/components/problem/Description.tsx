@@ -25,7 +25,7 @@ export const Description: React.FC<Props> = ({ control, errors }) => {
           </label>
           <Input
             {...field}
-            placeholder="description (optional)"
+            placeholder="Description (optional)"
             id="description-input"
             type="text"
           />
