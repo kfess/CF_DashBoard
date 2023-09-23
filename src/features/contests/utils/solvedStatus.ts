@@ -8,8 +8,7 @@ import { Contest } from "../contest";
 export const calcSolvedStatusWithIdxes = (
   problemIdxes: string[],
   problemMap: Record<string, ReshapedProblem>,
-  solvedSet: Set<string> | undefined,
-  contestId: number
+  solvedSet: Set<string> | undefined
 ): SolvedStatus => {
   const hasValidProblem = problemIdxes.some(
     (idx) => problemMap[idx] !== undefined && problemMap[idx] !== null

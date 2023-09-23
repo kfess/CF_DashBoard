@@ -69,6 +69,7 @@ export const MyContestTable: React.FC = () => {
                   <TableRow>
                     <TableCell align="center">Title</TableCell>
                     <TableCell align="center">Description</TableCell>
+                    <TableCell align="center">Related Tags</TableCell>
                     <TableCell align="center">Start</TableCell>
                     <TableCell align="center">End</TableCell>
                     <TableCell align="center">Length</TableCell>
@@ -113,6 +114,17 @@ export const MyContestTable: React.FC = () => {
                               </Stack>
                             </TableCell>
                             <TableCell>{contest.description}</TableCell>
+                            <TableCell>
+                              <Stack
+                                direction="row"
+                                gap={1}
+                                sx={{ overflow: "auto" }}
+                              >
+                                {contest.relatedTopics.map((topic) => (
+                                  <Chip key={topic} label={topic} />
+                                ))}
+                              </Stack>
+                            </TableCell>
                             <TableCell>
                               {utcISOStringToLocal(contest.startDate)}
                             </TableCell>
@@ -208,6 +220,7 @@ export const MyContestTable: React.FC = () => {
                     <TableCell align="center">Title</TableCell>
                     <TableCell align="center">Owner</TableCell>
                     <TableCell align="center">Description</TableCell>
+                    <TableCell align="center">Related Tags</TableCell>
                     <TableCell align="center">Start</TableCell>
                     <TableCell align="center">End</TableCell>
                     <TableCell align="center">Length</TableCell>
@@ -253,6 +266,17 @@ export const MyContestTable: React.FC = () => {
                             </TableCell>
                             <TableCell>{contest.owner}</TableCell>
                             <TableCell>{contest.description}</TableCell>
+                            <TableCell>
+                              <Stack
+                                direction="row"
+                                gap={1}
+                                sx={{ overflow: "auto" }}
+                              >
+                                {contest.relatedTopics.map((topic) => (
+                                  <Chip key={topic} label={topic} />
+                                ))}
+                              </Stack>
+                            </TableCell>
                             <TableCell>
                               {utcISOStringToLocal(contest.startDate)}
                             </TableCell>

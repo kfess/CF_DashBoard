@@ -3,15 +3,10 @@
     "Hiragino Sans", Meiryo, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: #4a4a4a;
+  color: #737588;
   font-weight: 400;
   background-color: #f7f8f8;
-
   font-synthesis: none;
-  /* text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%; */
 }
 
 a {

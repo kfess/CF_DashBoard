@@ -1,4 +1,5 @@
 import React from "react";
+import { noop } from "@helpers/misc";
 import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
 
 export const Chip: React.FC<MuiChipProps> = (props: MuiChipProps) => {
@@ -6,7 +7,7 @@ export const Chip: React.FC<MuiChipProps> = (props: MuiChipProps) => {
     <MuiChip
       component="div"
       size="small"
-      onClick={props.onClick ?? (() => {})}
+      onClick={props.onClick ?? noop}
       {...props}
     />
   );
@@ -15,10 +16,10 @@ export const Chip: React.FC<MuiChipProps> = (props: MuiChipProps) => {
 export const DeletableChip: React.FC<MuiChipProps> = (props: MuiChipProps) => {
   return (
     <MuiChip
-      size="small"
       component="div"
-      onClick={props.onClick ?? (() => {})}
-      onDelete={props.onDelete ?? (() => {})}
+      size="small"
+      onClick={props.onClick ?? noop}
+      onDelete={props.onDelete ?? noop}
       {...props}
     />
   );

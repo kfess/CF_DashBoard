@@ -270,3 +270,10 @@ export class CFDashboardDB extends Dexie {
 }
 
 export const db = new CFDashboardDB();
+
+export const deleteAllData = async () => {
+  await db.problemLabels.clear();
+  await db.labelProblemMapping.clear();
+  await db.contestLabels.clear();
+  await db.labelContestMapping.clear();
+};

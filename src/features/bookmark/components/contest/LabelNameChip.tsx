@@ -24,14 +24,14 @@ export const LabelNameChip: React.FC<Props> = ({
   const backgroundColorAlpha = theme.palette.mode === "dark" ? 0.9 : 0.6;
 
   return (
-    <Box sx={{ p: 1, textAlign: "left" }}>
+    <Box p={1}>
       {mode === "Preview" ? (
         <Chip
           label={<div>{name.trim().length > 0 ? name : "Label Preview"}</div>}
           sx={{
             color: textColor,
-            borderColor: "black",
             backgroundColor: alpha(color, backgroundColorAlpha),
+            ":hover": { backgroundColor: alpha(color, backgroundColorAlpha) },
             fontWeight: "bold",
           }}
         />
@@ -40,8 +40,8 @@ export const LabelNameChip: React.FC<Props> = ({
           label={<div>{name.trim().length > 0 ? name : "Label Preview"}</div>}
           sx={{
             color: textColor,
-            borderColor: "black",
             backgroundColor: alpha(color, backgroundColorAlpha),
+            ":hover": { backgroundColor: alpha(color, backgroundColorAlpha) },
             fontWeight: "bold",
           }}
           onClick={() => {

@@ -5,11 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToggle } from "@hooks/index";
 import { useIndexedDBForProblemLabel } from "@features/bookmark/hooks/useIndexedDBForProblemLabel";
-import {
-  generateRandomHexaColor,
-  generateHighContrastColor,
-  isValidHexaColor,
-} from "@features/color/labelColor";
+import { generateHighContrastColor } from "@features/color/labelColor";
 import {
   ProblemLabelForm,
   problemLabelFormSchema,
