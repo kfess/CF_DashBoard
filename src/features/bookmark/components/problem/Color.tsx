@@ -10,9 +10,8 @@ import { ProblemLabelForm } from "@features/bookmark/problemLabel";
 import { ColorPalette } from "@features/color/components/ColorPalette";
 import {
   HexaColor,
-  generateRandomHexaColor,
-  generateHighContrastColor,
   isValidHexaColor,
+  generateRandomHexaColor,
 } from "@features/color/labelColor";
 import { IconButton } from "@features/ui/component/IconButton";
 
@@ -42,8 +41,7 @@ export const Color: React.FC<Props> = ({ control, errors }) => {
               icon={<ReplayIcon />}
               aria-label="generate"
               onClick={() => {
-                // field.onChange(generateRandomHexaColor());
-                field.onChange(generateHighContrastColor());
+                field.onChange(generateRandomHexaColor());
               }}
               size="small"
               sx={{

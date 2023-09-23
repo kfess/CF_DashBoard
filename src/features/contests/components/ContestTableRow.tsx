@@ -49,13 +49,8 @@ export const ContestTableRow: React.FC<Props> = React.memo(
 
     const userSolvedStatus: SolvedStatus = useMemo(() => {
       if (!userId) return "All Contests";
-      return calcSolvedStatusWithIdxes(
-        problemIdxes,
-        problemMap,
-        solvedSet,
-        contestId
-      );
-    }, [problemIdxes, problemMap, solvedSet, contestId]);
+      return calcSolvedStatusWithIdxes(problemIdxes, problemMap, solvedSet);
+    }, [problemIdxes, problemMap, solvedSet]);
 
     const rowColor = useMemo(() => {
       return userSolvedStatus === "Completed" ? theme.colors.acColor : "";
