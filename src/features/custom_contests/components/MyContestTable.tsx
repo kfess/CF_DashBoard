@@ -1,6 +1,5 @@
 import dayjs from "dayjs";
 import React from "react";
-import { NavLink } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import TableContainer from "@mui/material/TableContainer";
@@ -127,38 +126,44 @@ export const MyContestTable: React.FC = () => {
                               :{(length % 60).toString().padStart(2, "0")}
                             </TableCell>
                             <TableCell>
-                              <Chip
-                                label={judgeContestType(contest)}
-                                sx={{
-                                  color:
-                                    judgeContestType(contest) === "Running"
-                                      ? "#9246FF"
-                                      : "",
-                                  backgroundColor:
-                                    judgeContestType(contest) === "Running"
-                                      ? alpha("#9246FF", 0.15)
-                                      : "",
-                                }}
-                              />
-                              {judgeContestType(contest) === "Running" && (
-                                <Timer toDate={contest.endDate} />
-                              )}
-                              {judgeContestType(contest) === "Upcoming" && (
-                                <>
-                                  <div>Before Start</div>
-                                  <div>
-                                    {daysToStart > 1 && (
-                                      <span>{daysToStart} days</span>
-                                    )}
-                                    {daysToStart === 1 && (
-                                      <span>{daysToStart} day</span>
-                                    )}
-                                    {daysToStart === 0 && (
-                                      <Timer toDate={contest.endDate} />
-                                    )}
-                                  </div>
-                                </>
-                              )}
+                              <Stack
+                                direction="column"
+                                spacing={0.5}
+                                alignItems="center"
+                              >
+                                <Chip
+                                  label={judgeContestType(contest)}
+                                  sx={{
+                                    color:
+                                      judgeContestType(contest) === "Running"
+                                        ? "#9246FF"
+                                        : "",
+                                    backgroundColor:
+                                      judgeContestType(contest) === "Running"
+                                        ? alpha("#9246FF", 0.15)
+                                        : "",
+                                  }}
+                                />
+                                {judgeContestType(contest) === "Running" && (
+                                  <Timer toDate={contest.endDate} />
+                                )}
+                                {judgeContestType(contest) === "Upcoming" && (
+                                  <>
+                                    <div>Before Start</div>
+                                    <div>
+                                      {daysToStart > 1 && (
+                                        <span>{daysToStart} days</span>
+                                      )}
+                                      {daysToStart === 1 && (
+                                        <span>{daysToStart} day</span>
+                                      )}
+                                      {daysToStart === 0 && (
+                                        <Timer toDate={contest.endDate} />
+                                      )}
+                                    </div>
+                                  </>
+                                )}
+                              </Stack>
                             </TableCell>
                           </TableRow>
                         );
@@ -187,7 +192,15 @@ export const MyContestTable: React.FC = () => {
             rowsPerPage={participatedRowsPerPage}
             setRowsPerPage={participatedSetRowsPerPage}
           />
-          <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <Paper
+            sx={{
+              width: "100%",
+              overflow: "hidden",
+              border: 1,
+              borderColor: "divider",
+            }}
+            elevation={0}
+          >
             <TableContainer component={Paper}>
               <Table stickyHeader>
                 <TableHead>
@@ -253,38 +266,44 @@ export const MyContestTable: React.FC = () => {
                               :{(length % 60).toString().padStart(2, "0")}
                             </TableCell>
                             <TableCell>
-                              <Chip
-                                label={judgeContestType(contest)}
-                                sx={{
-                                  color:
-                                    judgeContestType(contest) === "Running"
-                                      ? "#9246FF"
-                                      : "",
-                                  backgroundColor:
-                                    judgeContestType(contest) === "Running"
-                                      ? alpha("#9246FF", 0.15)
-                                      : "",
-                                }}
-                              />
-                              {judgeContestType(contest) === "Running" && (
-                                <Timer toDate={contest.endDate} />
-                              )}
-                              {judgeContestType(contest) === "Upcoming" && (
-                                <>
-                                  <div>Before Start</div>
-                                  <div>
-                                    {daysToStart > 1 && (
-                                      <span>{daysToStart} days</span>
-                                    )}
-                                    {daysToStart === 1 && (
-                                      <span>{daysToStart} day</span>
-                                    )}
-                                    {daysToStart === 0 && (
-                                      <Timer toDate={contest.endDate} />
-                                    )}
-                                  </div>
-                                </>
-                              )}
+                              <Stack
+                                direction="column"
+                                spacing={0.5}
+                                alignItems="center"
+                              >
+                                <Chip
+                                  label={judgeContestType(contest)}
+                                  sx={{
+                                    color:
+                                      judgeContestType(contest) === "Running"
+                                        ? "#9246FF"
+                                        : "",
+                                    backgroundColor:
+                                      judgeContestType(contest) === "Running"
+                                        ? alpha("#9246FF", 0.15)
+                                        : "",
+                                  }}
+                                />
+                                {judgeContestType(contest) === "Running" && (
+                                  <Timer toDate={contest.endDate} />
+                                )}
+                                {judgeContestType(contest) === "Upcoming" && (
+                                  <>
+                                    <div>Before Start</div>
+                                    <div>
+                                      {daysToStart > 1 && (
+                                        <span>{daysToStart} days</span>
+                                      )}
+                                      {daysToStart === 1 && (
+                                        <span>{daysToStart} day</span>
+                                      )}
+                                      {daysToStart === 0 && (
+                                        <Timer toDate={contest.endDate} />
+                                      )}
+                                    </div>
+                                  </>
+                                )}
+                              </Stack>
                             </TableCell>
                           </TableRow>
                         );

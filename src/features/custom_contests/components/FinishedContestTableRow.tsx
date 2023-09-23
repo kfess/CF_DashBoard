@@ -54,7 +54,7 @@ export const FinishedContestTableRow: React.FC<Props> = ({ customContest }) => {
       </TableCell>
       <TableCell>
         <NavLink to={`/custom-contest/show/${customContest.contestId}`}>
-          final standings
+          results
         </NavLink>
       </TableCell>
     </TableRow>

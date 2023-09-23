@@ -8,13 +8,18 @@ import { Button } from "@features/ui/component/Button";
 import { Snackbar } from "@features/ui/component/Snackbar";
 
 export const Profile: React.FC = () => {
-  const { githubId, githubUserName, codeforcesUsername, updateUsername } =
-    useUserProfile();
+  const {
+    githubId,
+    githubUserName,
+    codeforcesUsername,
+    updateUsername,
+    isUpdateSuccess,
+    isUpdateError,
+  } = useUserProfile();
 
   const [newUsername, setNewUsername] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
 
-  // for error snackbar
+  // for snackbar
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const handleCloseSnackbar = () => {
     setIsSnackbarOpen(false);
@@ -26,17 +31,13 @@ export const Profile: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setError(null);
+
     try {
       await updateUsername(newUsername);
+      setIsSnackbarOpen(true);
       setNewUsername("");
     } catch (error) {
       setIsSnackbarOpen(true);
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("An unknown error occurred.");
-      }
     }
   };
 
@@ -62,7 +63,15 @@ export const Profile: React.FC = () => {
           <Button type="submit">Update</Button>
         </Stack>
       </form>
-      {error && (
+      {isUpdateSuccess && (
+        <Snackbar
+          open={isSnackbarOpen}
+          message={"Codeforces username updated successfully"}
+          onClose={handleCloseSnackbar}
+          color="success"
+        />
+      )}
+      {isUpdateError && (
         <Snackbar
           open={isSnackbarOpen}
           message={"An error occurred during updating codeforces username"}

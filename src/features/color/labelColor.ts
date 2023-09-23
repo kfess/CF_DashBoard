@@ -6,7 +6,7 @@ export const isValidHexaColor = (value: string): boolean =>
 
 export const generateRandomHexaColor = (): HexaColor => {
   const highContrastColor = (): string => {
-    let value = Math.floor(Math.random() * 256);
+    const value = Math.floor(Math.random() * 256);
     return value < 220 ? value.toString(16).padStart(2, "0") : "00";
   };
   return `#${highContrastColor()}${highContrastColor()}${highContrastColor()}` as HexaColor;

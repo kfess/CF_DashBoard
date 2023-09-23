@@ -1,4 +1,5 @@
 import React from "react";
+import Box from "@mui/material/Box";
 import { HexaColor } from "@features/color/labelColor";
 import { ColoredCircle } from "@features/color//components/ColoredCircle";
 
@@ -30,18 +31,19 @@ type Props = {
 
 export const ColorPalette: React.FC<Props> = ({ setColor }) => {
   const renderColorSwitch = (color: string) => (
-    <span
+    <Box
+      component="span"
       key={color}
-      css={{ cursor: "pointer" }}
+      sx={{ cursor: "pointer" }}
       onClick={() => setColor(color as HexaColor)}
     >
       <ColoredCircle color={color} />
-    </span>
+    </Box>
   );
 
   return (
     <>
-      <div css={{ marginBottom: "0.3rem" }}>Choose from popular colors</div>
+      <Box mb="0.3rem">Choose from popular colors</Box>
       {vividColors.map(renderColorSwitch)}
       <div></div>
       {paleColors.map(renderColorSwitch)}

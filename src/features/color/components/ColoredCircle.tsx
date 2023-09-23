@@ -8,7 +8,7 @@ const StyledCircle = styled("span", {
   fillPercent?: number;
   width?: string;
   height?: string;
-}>(({ theme, color, fillPercent = 1 }) => ({
+}>(({ color, fillPercent = 1 }) => ({
   borderStyle: "solid",
   borderWidth: "thin",
   display: "inline-block",

@@ -28,7 +28,7 @@ export const ShowCustomContestPage: React.FC = () => {
 
   const params = useParams();
   const contestId = params.contestId ?? "";
-  const { data, isError, error } = useFetchCustomContestByContestId({
+  const { data, isError } = useFetchCustomContestByContestId({
     contestId,
   });
   const problems = useMemo(
@@ -86,7 +86,7 @@ export const ShowCustomContestPage: React.FC = () => {
                   direction="row"
                   alignItems="center"
                   justifyContent="space-between"
-                  mt={0.5}
+                  my={1}
                 >
                   <RegisterButton />
                   <SocialShare />

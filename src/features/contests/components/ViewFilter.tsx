@@ -26,7 +26,7 @@ export const ViewFilter: React.FC<Props> = ({
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = (_event: React.MouseEvent<HTMLElement>) => {
+  const handleClose = () => {
     setAnchorEl(null);
   };
 

@@ -19,7 +19,9 @@ export const ViewFilter: React.FC<Props> = ({ showTags, toggleShowTags }) => {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = (_event: React.MouseEvent<HTMLElement>) => {
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleClose = (_: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(null);
   };
 

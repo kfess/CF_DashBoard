@@ -7,6 +7,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
 import { ProblemLink } from "@features/problems/components/ProblemLink";
 import { ContestLink } from "@features/contests/components/ContestLink";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
@@ -82,13 +83,14 @@ export const SelectedProblemsTable: React.FC<Props> = ({
                           />
                         </TableCell>
                         <TableCell>
-                          <span
-                            css={{ color: getColorCodeFromRating(p.rating) }}
+                          <Box
+                            component="span"
+                            sx={{ color: getColorCodeFromRating(p.rating) }}
                           >
                             {p.rating?.toLocaleString() || (
                               <HelpToolTip title="No data available" />
                             )}
-                          </span>
+                          </Box>
                         </TableCell>
                         {isEdit && (
                           <TableCell>

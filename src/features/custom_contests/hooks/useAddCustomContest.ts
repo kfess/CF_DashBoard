@@ -29,18 +29,8 @@ export const useAddCustomContest = () => {
     CustomContest,
     Error,
     Omit<CreateCustomContest, "problemsFilter">
-  >(
-    (contest: Omit<CreateCustomContest, "problemsFilter">) =>
-      addContest(contest),
-    {
-      onSuccess: () => {
-        console.log("successfully added contest");
-      },
-      onError: (error) => {
-        console.log("An error occurred while adding custom contest.");
-        // add user notification
-      },
-    }
+  >((contest: Omit<CreateCustomContest, "problemsFilter">) =>
+    addContest(contest)
   );
 
   const create = async (
@@ -54,5 +44,9 @@ export const useAddCustomContest = () => {
     }
   };
 
-  return { create };
+  return {
+    create,
+    isAddSuccess: addContestMutation.isSuccess,
+    isAddError: addContestMutation.isError,
+  };
 };

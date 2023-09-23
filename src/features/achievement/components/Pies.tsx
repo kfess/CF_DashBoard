@@ -9,7 +9,7 @@ import { ClassificationPies } from "@features/achievement/components/Classificat
 import { Submission } from "@features/submission/submission";
 
 const pieKinds = ["Difficulty", "Contest Type"] as const;
-type PieKinds = typeof pieKinds[number];
+type PieKinds = (typeof pieKinds)[number];
 
 type Props = { submissions: Submission[] };
 
@@ -50,9 +50,7 @@ export const Pies: React.FC<Props> = ({ submissions }) => {
         </ToggleButtonGroup>
       </Stack>
       {pieKind === "Difficulty" && <DifficultyPies submissions={submissions} />}
-      {pieKind === "Contest Type" && (
-        <ClassificationPies submissions={submissions} />
-      )}
+      {pieKind === "Contest Type" && <ClassificationPies />}
     </Box>
   );
 };

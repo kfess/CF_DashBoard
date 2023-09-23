@@ -36,7 +36,7 @@ export const normalizedLanguage = [
   "Other",
 ] as const;
 
-export type NormalizedLanguage = typeof normalizedLanguage[number];
+export type NormalizedLanguage = (typeof normalizedLanguage)[number];
 export type LanguageDetector = {
   [key in NormalizedLanguage]: (lang: string) => boolean;
 };
@@ -79,7 +79,7 @@ const languageDetector: LanguageDetector = {
   J: (lang: string) => lang.includes("j") && lang.length === 1,
   Text: (lang: string) => lang.includes("text"),
   "Mysterious Language": (lang: string) => lang.includes("mysterious"),
-  Other: (_lang: string) => true,
+  Other: (_: string) => true, // eslint-disable-line @typescript-eslint/no-unused-vars
 };
 
 export const normalizeLanguage = (lang: string): NormalizedLanguage => {

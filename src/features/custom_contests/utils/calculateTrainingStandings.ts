@@ -1,4 +1,3 @@
-import type { Problem } from "@features/problems/problem";
 import type { Submission } from "@features/submission/submission";
 import { getProblemKey } from "@features/problems/utils";
 
@@ -8,10 +7,7 @@ type UserStats = {
   attemptedSet: Set<string>;
 };
 
-const calculateUserStats = (
-  submissions: Submission[],
-  problems: Problem[]
-): UserStats => {
+const calculateUserStats = (submissions: Submission[]): UserStats => {
   let totalScore = 0;
   const solvedSet = new Set<string>();
   const attemptedSet = new Set<string>();
@@ -41,14 +37,13 @@ const calculateUserStats = (
 };
 
 export const calculateAllUsersStats = (
-  submissionsByUser: Record<string, Submission[]>,
-  problems: Problem[]
+  submissionsByUser: Record<string, Submission[]>
 ): Record<string, UserStats> => {
   return Object.entries(submissionsByUser).reduce<Record<string, UserStats>>(
     (acc, [userId, submissions]) => {
       return {
         ...acc,
-        [userId]: calculateUserStats(submissions, problems),
+        [userId]: calculateUserStats(submissions),
       };
     },
     {}

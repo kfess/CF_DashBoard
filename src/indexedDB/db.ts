@@ -1,6 +1,6 @@
 import Dexie, { Table } from "dexie";
-import type { Problem } from "@features/problems/problem";
-import type { Contest } from "@features/contests/contest";
+import type { Problem } from "@features/problems/problem"; // eslint-disable-line
+import type { Contest } from "@features/contests/contest"; // eslint-disable-line
 import type { ProblemLabel } from "@features/bookmark/problemLabel";
 import type { ContestLabel } from "@features/bookmark/contestLabel";
 import type { Classification } from "@features/contests/contest";

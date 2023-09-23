@@ -75,10 +75,6 @@ export const useUserProfile = () => {
       onSuccess: () => {
         queryClient.invalidateQueries(["userProfile"]); // update usename immediately
       },
-      onError: (error) => {
-        console.log("An error occurred during updating codeforces username");
-        // add Toast in the future
-      },
       retry: false,
     }
   );
@@ -95,6 +91,10 @@ export const useUserProfile = () => {
     githubId: data?.githubId,
     githubUserName: data?.githubUsername,
     codeforcesUsername: data?.codeforcesUsername,
+    isFetchLoading: isLoading,
+    isFetchError: isError,
     updateUsername,
+    isUpdateSuccess: updateUsernameMutation.isSuccess,
+    isUpdateError: updateUsernameMutation.isError,
   };
 };

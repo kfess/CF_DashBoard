@@ -20,7 +20,7 @@ export const Description: React.FC<Props> = ({ control, errors }) => {
           <Box
             component="label"
             display="block"
-            htmlFor="title-input"
+            htmlFor="description-input"
             fontWeight="bold"
             mb={0.5}
           >

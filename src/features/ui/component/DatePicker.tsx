@@ -10,7 +10,7 @@ import {
 interface Props extends DatePickerProps<Dayjs | string> {}
 
 export const DatePicker = React.forwardRef(
-  (props: Props, ref: React.ForwardedRef<any>) => {
+  (props: Props, ref: React.ForwardedRef<HTMLInputElement>) => {
     return (
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <MUIDatePicker
@@ -32,3 +32,5 @@ export const DatePicker = React.forwardRef(
     );
   }
 );
+
+DatePicker.displayName = "DatePicker";
