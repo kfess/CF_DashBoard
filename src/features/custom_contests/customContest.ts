@@ -11,10 +11,10 @@ export const apiFilterTypes = [
   "createdbyme",
   "joined",
 ] as const;
-export type APIFilterType = typeof apiFilterTypes[number];
+export type APIFilterType = (typeof apiFilterTypes)[number];
 
 export const createdContestTypes = ["Running", "Upcoming", "Finished"] as const;
-export type CreatedContestType = typeof createdContestTypes[number];
+export type CreatedContestType = (typeof createdContestTypes)[number];
 
 // visibility of contest
 export const visibilities = ["Public", "Private"] as const;
@@ -23,7 +23,7 @@ const visibilitySchema = z
   .refine((val) => visibilities.includes(val), {
     message: "Visibility must be either 'Public' or 'Private'",
   });
-export type Visibility = typeof visibilities[number];
+export type Visibility = (typeof visibilities)[number];
 
 // mode of contest
 export const modes = ["Normal", "Training"] as const;
@@ -33,7 +33,7 @@ const modeSchema = z.enum(modes).refine(
   },
   { message: "Mode must be 'Normal' or 'Training'" }
 );
-export type Mode = typeof modes[number];
+export type Mode = (typeof modes)[number];
 
 // created custom contest
 export const customContestSchema = z.object({
@@ -47,6 +47,7 @@ export const customContestSchema = z.object({
   startDate: z.string().datetime(),
   endDate: z.string().datetime(),
   visibility: visibilitySchema,
+  relatedTopics: relatedTopicsSchema,
   participants: z
     .array(z.string())
     .min(1, { message: "Participants required" }),

@@ -43,6 +43,13 @@ export const FinishedContestTableRow: React.FC<Props> = ({ customContest }) => {
       </TableCell>
       <TableCell>{customContest.owner}</TableCell>
       <TableCell>{customContest.description}</TableCell>
+      <TableCell>
+        <Stack direction="row" gap={1} sx={{ overflow: "auto" }}>
+          {customContest.relatedTopics.map((topic) => (
+            <Chip key={topic} label={topic} />
+          ))}
+        </Stack>
+      </TableCell>
       <TableCell>{localStartDate}</TableCell>
       <TableCell>{localEndDate}</TableCell>
 

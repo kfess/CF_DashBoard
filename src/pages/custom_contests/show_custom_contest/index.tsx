@@ -139,6 +139,25 @@ export const ShowCustomContestPage: React.FC = () => {
                     {data.penalty} seconds per wrong submission
                   </Typography>
                 </Stack>
+                <Divider />
+                <Stack
+                  p={1}
+                  direction="row"
+                  alignItems="center"
+                  flexWrap="wrap"
+                >
+                  <Typography
+                    fontWeight="fontWeightBold"
+                    sx={{ mt: 2, flex: 4 }}
+                  >
+                    Related Topics
+                  </Typography>
+                  <Stack direction="row" spacing={1} pt={2} flex={8}>
+                    {data.relatedTopics.map((topic) => (
+                      <Chip label={topic} />
+                    ))}
+                  </Stack>
+                </Stack>
               </Grid>
             </Grid>
             <Box pt={{ xs: 2, md: 4 }} pb={{ xs: 2, md: 4 }}>

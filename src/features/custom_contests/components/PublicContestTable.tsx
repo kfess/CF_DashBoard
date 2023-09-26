@@ -63,6 +63,7 @@ export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
                 <TableCell align="center">Title</TableCell>
                 <TableCell align="center">Owner</TableCell>
                 <TableCell align="center">Description</TableCell>
+                <TableCell align="center">Related Tags</TableCell>
                 <TableCell align="center">Start</TableCell>
                 <TableCell align="center">End</TableCell>
                 <TableCell align="center">Length</TableCell>
@@ -116,7 +117,7 @@ export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
             ) : (
               <TableBody>
                 <TableRow>
-                  <TableCell colSpan={8}>
+                  <TableCell colSpan={9}>
                     <NoDataMessage
                       title="No Custom Contest Found"
                       message={

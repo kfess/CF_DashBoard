@@ -39,7 +39,7 @@ export const SocialShare: React.FC<SocialShareProps> = ({
   const url = `${window.location.origin}${location.pathname}${location.search}${location.hash}`;
 
   return (
-    <Stack direction="row" alignItems="center" spacing={0.5}>
+    <Stack direction="row" alignItems="center" spacing={1}>
       <CopyToClipBoard text={url} />
       {socialNetworks.map(({ network, urlTemplate }) => (
         <SocialIcon
