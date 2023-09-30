@@ -35,8 +35,11 @@ export const localToUtcISOString = (localDateTime: Date) => {
 };
 
 // UTC ISOString をローカルの時間に変換する関数
-export const utcISOStringToLocal = (utcISOString: string) => {
-  return dayjs.utc(utcISOString).local().format("YYYY-MM-DD HH:mm");
+export const utcISOStringToLocal = (
+  utcISOString: string,
+  timeZone?: string
+) => {
+  return dayjs.utc(utcISOString).tz(timeZone).format("YYYY-MM-DD HH:mm");
 };
 
 export const secondsToHms = (d: number) => {

@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import React from "react";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import TableContainer from "@mui/material/TableContainer";
@@ -19,6 +20,8 @@ import { utcISOStringToLocal } from "@helpers/date";
 import { useFetchMyCustomContests } from "@features/custom_contests/hooks/useFetchMyCustomContests";
 import { judgeContestType } from "@features/custom_contests/utils/judgeContestType";
 import { InternalLink } from "@features/ui/component/InternalLink";
+import { useLocalStorage } from "@hooks/useLocalStorage";
+import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 
 export const MyContestTable: React.FC = () => {
   const { data } = useFetchMyCustomContests();
@@ -41,6 +44,8 @@ export const MyContestTable: React.FC = () => {
     participatedRowsPerPage,
     participatedSetRowsPerPage,
   ] = usePagination(10);
+
+  const [usertimeZone] = useLocalStorage("timezone", dayjs.tz.guess());
 
   return (
     <>
@@ -79,6 +84,7 @@ export const MyContestTable: React.FC = () => {
                 <TableBody>
                   {createdContests.length > 0 &&
                     createdContests
+                      .sort((a, b) => b.startDate.localeCompare(a.startDate))
                       .slice(
                         createdPage * createdRowsPerPage,
                         (createdPage + 1) * createdRowsPerPage
@@ -221,8 +227,18 @@ export const MyContestTable: React.FC = () => {
                     <TableCell align="center">Owner</TableCell>
                     <TableCell align="center">Description</TableCell>
                     <TableCell align="center">Related Tags</TableCell>
-                    <TableCell align="center">Start</TableCell>
-                    <TableCell align="center">End</TableCell>
+                    <TableCell align="center">
+                      <Stack direction="row" spacing={0.5} alignItems="center">
+                        <Box component="span">Start</Box>
+                        <HelpToolTip title={`Time Zone: ${usertimeZone}`} />
+                      </Stack>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Stack direction="row" spacing={0.5} alignItems="center">
+                        <Box component="span">End</Box>
+                        <HelpToolTip title={`Time Zone: ${usertimeZone}`} />
+                      </Stack>
+                    </TableCell>
                     <TableCell align="center">Length</TableCell>
                     <TableCell align="center">State</TableCell>
                   </TableRow>
@@ -230,6 +246,7 @@ export const MyContestTable: React.FC = () => {
                 <TableBody>
                   {participatedContests.length > 0 &&
                     participatedContests
+                      .sort((a, b) => b.startDate.localeCompare(a.startDate))
                       .slice(
                         participatedPage * participatedRowsPerPage,
                         (participatedPage + 1) * participatedRowsPerPage

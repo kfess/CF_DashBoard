@@ -13,11 +13,15 @@ import { InternalLink } from "@features/ui/component/InternalLink";
 
 type Props = {
   customContest: CustomContest;
+  timeZone?: string;
 };
 
-export const RunningContestTableRow: React.FC<Props> = ({ customContest }) => {
-  const localStartDate = utcISOStringToLocal(customContest.startDate);
-  const localEndDate = utcISOStringToLocal(customContest.endDate);
+export const RunningContestTableRow: React.FC<Props> = ({
+  customContest,
+  timeZone,
+}) => {
+  const localStartDate = utcISOStringToLocal(customContest.startDate, timeZone);
+  const localEndDate = utcISOStringToLocal(customContest.endDate, timeZone);
 
   const length = dayjs(customContest.endDate).diff(
     customContest.startDate,

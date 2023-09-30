@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
 import React from "react";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -15,11 +17,14 @@ import { RunningContestTableRow } from "@features/custom_contests/components/Run
 import { UpcomingContestTableRow } from "./UpcomingContestTableRow";
 import { FinishedContestTableRow } from "./FinishedContestTableRow";
 import { NoDataMessage } from "@features/ui/component/NoDataBlock";
+import { useLocalStorage } from "@hooks/useLocalStorage";
+import { HelpToolTip } from "@features/ui/component/HelpToolTip";
 
 type Props = { contestType: CreatedContestType };
 
 export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
   const { data } = useFetchAllCustomContests();
+  const [usertimeZone] = useLocalStorage("timezone", dayjs.tz.guess());
 
   const [page, setPage, rowsPerPage, setRowsPerPage] = usePagination(10);
 
@@ -64,8 +69,18 @@ export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
                 <TableCell align="center">Owner</TableCell>
                 <TableCell align="center">Description</TableCell>
                 <TableCell align="center">Related Tags</TableCell>
-                <TableCell align="center">Start</TableCell>
-                <TableCell align="center">End</TableCell>
+                <TableCell align="center">
+                  <Stack direction="row" spacing={0.5} alignItems="center">
+                    <Box component="span">Start</Box>
+                    <HelpToolTip title={`Time Zone: ${usertimeZone}`} />
+                  </Stack>
+                </TableCell>
+                <TableCell align="center">
+                  <Stack direction="row" spacing={0.5} alignItems="center">
+                    <Box component="span">End</Box>
+                    <HelpToolTip title={`Time Zone: ${usertimeZone}`} />
+                  </Stack>
+                </TableCell>
                 <TableCell align="center">Length</TableCell>
                 {contestType === "Running" && (
                   <>
@@ -95,6 +110,7 @@ export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
                         <RunningContestTableRow
                           key={customContest.contestId}
                           customContest={customContest}
+                          timeZone={usertimeZone}
                         />
                       );
                     case "Upcoming":
@@ -102,6 +118,7 @@ export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
                         <UpcomingContestTableRow
                           key={customContest.contestId}
                           customContest={customContest}
+                          timeZone={usertimeZone}
                         />
                       );
                     case "Finished":
@@ -109,6 +126,7 @@ export const PublicContestTable: React.FC<Props> = ({ contestType }) => {
                         <FinishedContestTableRow
                           key={customContest.contestId}
                           customContest={customContest}
+                          timeZone={usertimeZone}
                         />
                       );
                   }
