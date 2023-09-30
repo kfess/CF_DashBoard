@@ -22,6 +22,12 @@
     }
   },
   "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write"
+    ],
+    ".eslintrc.yml": [
+      "prettier --write"
+    ],
     "package.json": [
       "prettier --write",
       "sort-package-json"
