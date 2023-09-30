@@ -11,6 +11,7 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint-staged": "lint-staged",
     "prepare": "husky install",
+    "prettier": "prettier --write .",
     "preview": "vite preview",
     "sort-package-json": "sort-package-json",
     "test": "jest --config ./jest.config.ts"
@@ -22,6 +23,7 @@
   },
   "lint-staged": {
     "package.json": [
+      "prettier --write",
       "sort-package-json"
     ]
   },
