@@ -1,0 +1,11 @@
+<svg height="16px" width="16px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 58 58" xml:space="preserve" fill="#000000">
+    <g id="bgCarrier" stroke-width="0"></g>
+    <g id="tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+    <g id="iconCarrier">
+        <g>
+            <polygon style="fill:#9246FF;" points="29,58 3,45 3,13 29,26 "></polygon>
+            <polygon style="fill:#512E5F;" points="29,58 55,45 55,13 29,26 "></polygon>
+            <polygon style="fill:#7D3C98;" points="3,13 28,0 55,13 29,26 "></polygon>
+        </g>
+    </g>
+</svg>
