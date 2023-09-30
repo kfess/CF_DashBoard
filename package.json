@@ -2,6 +2,7 @@
   "name": "cf_dashboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/kfess/CF_DashBoard",
   "type": "module",
   "scripts": {
     "build": "tsc && vite build --mode production",
@@ -34,6 +35,12 @@
       "sort-package-json"
     ]
   },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
