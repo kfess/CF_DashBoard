@@ -24,7 +24,7 @@ export const RemoveIndexedDB: React.FC = () => {
       <Box
         component="label"
         display="block"
-        htmlFor="difficulty-from-input"
+        htmlFor="delete-all-label-data"
         fontWeight="bold"
       >
         Delete All Label Data

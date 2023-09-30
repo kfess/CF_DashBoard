@@ -13,7 +13,7 @@ export const TimeZone: React.FC = () => {
       <Box
         component="label"
         display="block"
-        htmlFor="difficulty-from-input"
+        htmlFor="timezone"
         fontWeight="bold"
         mb={0.5}
       >
