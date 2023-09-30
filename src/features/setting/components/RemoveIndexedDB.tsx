@@ -43,7 +43,7 @@ export const RemoveIndexedDB: React.FC = () => {
           variant="outlined"
           color="error"
         >
-          Delete All Data
+          Delete All Label
         </Button>
       </Stack>
 
