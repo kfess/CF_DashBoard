@@ -50,7 +50,7 @@ export const TrainingStandings: React.FC<Props> = ({
     if (!submissionsByUser) {
       return {};
     }
-    return calculateAllUsersStats(submissionsByUser, problems);
+    return calculateAllUsersStats(submissionsByUser);
   }, [submissionsByUser]);
 
   return (
