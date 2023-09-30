@@ -94,7 +94,11 @@ export default {
     "^@constants/(.*)$": "<rootDir>/src/constants/$1",
     "^@hooks/(.*)$": "<rootDir>/src/hooks/$1",
     "^@recoil/(.*)$": "<rootDir>/src/recoil/$1",
+    "^@routes/(.*)$": "<rootDir>/src/routes/$1",
     "^@helpers/(.*)$": "<rootDir>/src/helpers/$1",
+    "^@pages/(.*)$": "<rootDir>/src/pages/$1",
+    "^@indexedDB/(.*)$": "<rootDir>/src/indexedDB/$1",
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -175,8 +179,8 @@ export default {
   // testRunner: "jest-circus/runner",
 
   // A map from regular expressions to paths to transformers
-  // transform: { "^.+\\.(ts|tsx)$": "ts-jest" },
-  transform: { "^.+\\.(ts|tsx)$": "esbuild-jest" },
+  transform: { "^.+\\.(ts|tsx)$": "ts-jest" },
+  // transform: { "^.+\\.(ts|tsx)$": "esbuild-jest" },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
