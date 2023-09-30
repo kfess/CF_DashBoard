@@ -19,7 +19,6 @@ const fetchCustomContestByContestId = async ({
     return contest;
   } catch (err) {
     if (err instanceof ZodError) {
-      console.log(err);
       throw new Error("validation error");
     }
     throw new Error("custom contest error");

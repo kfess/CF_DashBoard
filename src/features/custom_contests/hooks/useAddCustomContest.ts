@@ -17,7 +17,6 @@ const addContest = async (
         withCredentials: true,
       }
     );
-    console.log("Response data:", response.data);
     return response.data;
   } catch (error) {
     throw new Error("An error occurred while adding custom contest.");

@@ -65,7 +65,7 @@ const fetchRecentSubmissions = async (): Promise<Submission[]> => {
     return recentSubmission.result;
   } catch (err) {
     if (err instanceof ZodError) {
-      console.log(err);
+      throw new Error("validation error");
     }
     return [];
   }

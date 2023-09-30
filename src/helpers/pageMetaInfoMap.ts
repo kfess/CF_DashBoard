@@ -63,59 +63,59 @@ interface TitleMap {
 
 export const pageMetaInfoMap: TitleMap = {
   default: {
-    title: "CF DashBoard",
+    title: "CF-DashBoard",
     description: "description for pages not specified",
   },
   "/": {
-    title: "Home | CF DashBoard",
+    title: "Home | CF-DashBoard",
     description: "This is the contest page",
   },
   "/problems": {
-    title: "Problems | CF DashBoard",
+    title: "Problems | CF-DashBoard",
     description: "List of problems",
   },
   "/achievement": {
-    title: "Achievement | CF DashBoard",
+    title: "Achievement | CF-DashBoard",
     description: "Achievements",
   },
   "/recommend": {
-    title: "Recommend | CF DashBoard",
+    title: "Recommend | CF-DashBoard",
     description: "Recommendations",
   },
   "/labels": {
-    title: "Labels | CF DashBoard",
+    title: "Labels | CF-DashBoard",
     description: "Labels",
   },
   "/submission": {
-    title: "Submission | CF DashBoard",
+    title: "Submission | CF-DashBoard",
     description: "Submissions",
   },
   "/custom-contest": {
-    title: "Custom Contest | CF DashBoard",
+    title: "Custom Contest | CF-DashBoard",
     description: "Custom Contest",
   },
   "/profile": {
-    title: "Profile | CF DashBoard",
+    title: "Profile | CF-DashBoard",
     description: "Profile",
   },
   "/links": {
-    title: "Links | CF DashBoard",
+    title: "Links | CF-DashBoard",
     description: "Links",
   },
   "/api": {
-    title: "API | CF DashBoard",
+    title: "API | CF-DashBoard",
     description: "API",
   },
   "/terms": {
-    title: "Terms | CF DashBoard",
+    title: "Terms | CF-DashBoard",
     description: "Terms",
   },
   "/login": {
-    title: "Login | CF DashBoard",
+    title: "Login | CF-DashBoard",
     description: "Login",
   },
   "/setting": {
-    title: "Settings | CF DashBoard",
+    title: "Settings | CF-DashBoard",
     description: "Settings",
   },
 };

@@ -15,10 +15,8 @@ const fetchAllCustomContests = async (): Promise<CustomContest[]> => {
     return allCustomContests;
   } catch (err) {
     if (err instanceof ZodError) {
-      console.log(err);
       throw new Error("validation error");
     }
-    console.log(err);
     throw new Error("custom contest error");
   }
 };
