@@ -52,15 +52,15 @@ export const secondsToHms = (d: number) => {
 
 // 10分単位で丸める
 // for custom contest
-export const getDefaultStartDate = () => {
-  const now = dayjs();
+export const getDefaultStartDate = (timeZone?: string) => {
+  const now = dayjs().tz(timeZone);
   const nextInterval = Math.ceil((now.minute() + 1) / 30) * 30;
   const startDate = now.minute(nextInterval).second(0).millisecond(0);
   return startDate.toISOString();
 };
 
-export const getDefaultEndDate = () => {
-  const now = dayjs();
+export const getDefaultEndDate = (timeZone?: string) => {
+  const now = dayjs().tz(timeZone);
   const nextInterval = Math.ceil((now.minute() + 1) / 30) * 30;
   const startDate = now.minute(nextInterval).second(0).millisecond(0);
   const endDate = startDate.add(2, "hour");

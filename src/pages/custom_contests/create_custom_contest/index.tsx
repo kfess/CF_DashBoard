@@ -10,6 +10,7 @@ import { SubNavigation } from "@features/ui/component/SubNavigation";
 import { useNavigate } from "react-router-dom";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLocalStorage } from "@hooks/useLocalStorage";
 import { useUserProfile } from "@features/authentication/hooks/useUserProfile";
 import {
   CreateCustomContest,
@@ -24,7 +25,8 @@ import { Snackbar } from "@features/ui/component/Snackbar";
 
 const getDefaultValues = (
   codeforcesUsername?: string,
-  githubUserName?: string
+  githubUserName?: string,
+  userTimeZone?: string
 ): CreateCustomContest => ({
   owner: codeforcesUsername ?? "",
   ownerId: githubUserName ?? "",
@@ -33,8 +35,8 @@ const getDefaultValues = (
   title: "",
   description: "",
   penalty: 300,
-  startDate: getDefaultStartDate(),
-  endDate: getDefaultEndDate(),
+  startDate: getDefaultStartDate(userTimeZone),
+  endDate: getDefaultEndDate(userTimeZone),
   relatedTopics: [],
   participants: [codeforcesUsername ?? ""],
   problems: [],
@@ -61,9 +63,11 @@ const steps = ["Contest Details", "Select Problems", "Create Contest"];
 export const CreateCustomContestPage: React.FC = () => {
   const { codeforcesUsername, githubUserName } = useUserProfile();
 
+  const [userTimeZone] = useLocalStorage("timezone", dayjs.tz.guess());
   const defaultValues: CreateCustomContest = getDefaultValues(
     codeforcesUsername,
-    githubUserName
+    githubUserName,
+    userTimeZone
   );
 
   const {

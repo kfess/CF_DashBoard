@@ -8,6 +8,7 @@ import { CreateCustomContest } from "@features/custom_contests/customContest";
 import { DatePicker } from "@features/ui/component/DatePicker";
 import { TimeSelect } from "@features/ui/component/Select";
 import { Typography } from "@mui/material";
+import { useLocalStorage } from "@hooks/useLocalStorage";
 
 type Props = {
   control: Control<CreateCustomContest>;
@@ -20,7 +21,7 @@ const DateTimePicker: React.FC<{
   control: Control<CreateCustomContest>;
   errors: FieldErrors<CreateCustomContest>;
 }> = ({ label, name, control, errors }) => {
-  const userTimezone = dayjs.tz.guess();
+  const [userTimezone] = useLocalStorage("timezone", dayjs.tz.guess());
   const userOffset = dayjs().tz(userTimezone).format("Z");
 
   return (
@@ -50,9 +51,13 @@ const DateTimePicker: React.FC<{
               <Box flexGrow={2}>
                 <DatePicker
                   {...field}
-                  value={field.value ? dayjs(field.value).local() : null}
+                  value={
+                    field.value ? dayjs(field.value).tz(userTimezone) : null
+                  }
                   onChange={(newValue) =>
-                    field.onChange(dayjs(newValue).toString())
+                    field.onChange(
+                      dayjs(newValue).tz(userTimezone).toISOString()
+                    )
                   }
                   format="YYYY/MM/DD"
                 />
@@ -63,11 +68,11 @@ const DateTimePicker: React.FC<{
                   unit="hour"
                   step={1}
                   onChange={(value) => {
-                    const currentDateTime = dayjs(field.value).local();
+                    const currentDateTime = dayjs(field.value).tz(userTimezone);
                     const updatedDateTime = currentDateTime.hour(value);
                     field.onChange(updatedDateTime.toISOString());
                   }}
-                  defaultValue={dayjs(field.value).hour()}
+                  defaultValue={dayjs(field.value).tz(userTimezone).hour()}
                 />
               </Box>
               <Box flexGrow={1}>
@@ -76,11 +81,11 @@ const DateTimePicker: React.FC<{
                   unit="minute"
                   step={5}
                   onChange={(value) => {
-                    const currentDateTime = dayjs(field.value).local();
+                    const currentDateTime = dayjs(field.value).tz(userTimezone);
                     const updatedDateTime = currentDateTime.minute(value);
                     field.onChange(updatedDateTime.toISOString());
                   }}
-                  defaultValue={dayjs(field.value).minute()}
+                  defaultValue={dayjs(field.value).tz(userTimezone).minute()}
                 />
               </Box>
             </Stack>
