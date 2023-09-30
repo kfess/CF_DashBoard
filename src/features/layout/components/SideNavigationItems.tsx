@@ -37,13 +37,13 @@ const mainField = [
   "Achievement",
   "Submission",
 ] as const;
-type MainField = typeof mainField[number];
+type MainField = (typeof mainField)[number];
 
 const activityField = ["Labels", "Ranking", "Custom Contest (beta)"] as const;
-type ActivityField = typeof activityField[number];
+type ActivityField = (typeof activityField)[number];
 
 const otherField = ["Links", "FAQ", "Terms", "Privacy Policy"] as const;
-type OtherField = typeof otherField[number];
+type OtherField = (typeof otherField)[number];
 
 export type Field = MainField | ActivityField | OtherField;
 

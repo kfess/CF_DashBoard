@@ -13,7 +13,7 @@ export const typeSchema = z.union([
   z.literal("Other"),
 ]);
 const contestType = ["CF", "IOI", "ICPC", "Other"] as const;
-export type ContestType = typeof contestType[number];
+export type ContestType = (typeof contestType)[number];
 
 export const classificationSchema = z.union([
   z.literal("All"),
@@ -41,7 +41,7 @@ export const classifications = [
   "Educational",
   "Others",
 ] as const;
-export type Classification = typeof classifications[number];
+export type Classification = (typeof classifications)[number];
 
 export const phaseSchema = z.union([
   z.literal("BEFORE"),
@@ -57,7 +57,7 @@ const phase = [
   "SYSTEM_TEST",
   "FINISHED",
 ] as const;
-export type Phase = typeof phase[number];
+export type Phase = (typeof phase)[number];
 
 export const kindSchema = z
   .union([
@@ -80,7 +80,7 @@ const kind = [
   "Training Contest",
   "Unknown",
 ] as const;
-export type Kind = typeof kind[number];
+export type Kind = (typeof kind)[number];
 
 export const contestSchema = z.object({
   id: z.number(),

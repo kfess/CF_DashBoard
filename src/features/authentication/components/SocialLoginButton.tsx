@@ -6,7 +6,7 @@ import { Button } from "@features/ui/component/Button";
 const GITHUB_CLIENT_ID = import.meta.env.VITE_GITHUB_CLIENT_ID;
 
 const providers = ["github", "google", "facebook", "twitter"] as const;
-type Provider = typeof providers[number];
+type Provider = (typeof providers)[number];
 
 type Props = {
   provider: Provider;

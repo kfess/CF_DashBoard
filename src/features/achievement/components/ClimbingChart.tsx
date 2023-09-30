@@ -31,7 +31,7 @@ type ColoredCumulativeEffort = { date: number } & {
 };
 
 const displayColors = ["No Color", "Colored"] as const;
-type DisplayColor = typeof displayColors[number];
+type DisplayColor = (typeof displayColors)[number];
 
 type Props = { submissions: Submission[] };
 
@@ -67,22 +67,28 @@ export const ClimbingChart: React.FC<Props> = ({ submissions }) => {
     .map((g) => {
       const [date, submissions] = g;
       const gColorSubmissions = groupbyRatingColor(submissions);
-      const colorCount = gColorSubmissions.reduce((obj, g) => {
-        const [color, submissions] = g;
-        return { ...obj, [color]: submissions.length };
-      }, {} as { [C in RatingColor]: number });
+      const colorCount = gColorSubmissions.reduce(
+        (obj, g) => {
+          const [color, submissions] = g;
+          return { ...obj, [color]: submissions.length };
+        },
+        {} as { [C in RatingColor]: number }
+      );
       return { date: dayjs(date).unix() * 1000, ...colorCount };
     })
     .reduce((arr, g, index) => {
       if (index === 0) {
         return [...arr, { ...g }];
       } else {
-        const cumColor = ratingColor.reduce((obj, color) => {
-          return {
-            ...obj,
-            [color]: (g[color] ?? 0) + (arr[[...arr].length - 1][color] ?? 0),
-          };
-        }, {} as Omit<ColoredCumulativeEffort, "date">);
+        const cumColor = ratingColor.reduce(
+          (obj, color) => {
+            return {
+              ...obj,
+              [color]: (g[color] ?? 0) + (arr[[...arr].length - 1][color] ?? 0),
+            };
+          },
+          {} as Omit<ColoredCumulativeEffort, "date">
+        );
         return [
           ...arr,
           { date: g.date, ...cumColor } as ColoredCumulativeEffort,

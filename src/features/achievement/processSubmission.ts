@@ -15,11 +15,14 @@ export const isGymSubmission = (submission: Submission | undefined): boolean =>
 export const filterUniqueSubmissions = (
   submissions: Submission[]
 ): Submission[] => {
-  const uniqueMap = submissions.reduce((acc, submission) => {
-    const key = getProblemKey(submission);
-    acc[key] = submission;
-    return acc;
-  }, {} as Record<string, Submission>);
+  const uniqueMap = submissions.reduce(
+    (acc, submission) => {
+      const key = getProblemKey(submission);
+      acc[key] = submission;
+      return acc;
+    },
+    {} as Record<string, Submission>
+  );
 
   return Object.values(uniqueMap);
 };

@@ -29,7 +29,7 @@ type DailyEffort = {
 type ColoredDailyEffort = { date: number } & { [C in RatingColor]: number };
 
 const displayColors = ["No Color", "Colored"] as const;
-type DisplayColor = typeof displayColors[number];
+type DisplayColor = (typeof displayColors)[number];
 
 type Props = { submissions: Submission[] };
 
@@ -52,10 +52,13 @@ export const DailyChart: React.FC<Props> = ({ submissions }) => {
   const coloredCount: ColoredDailyEffort[] = gDateSubmissions.map((g) => {
     const [date, submissions] = g;
     const gColorSubmissions = groupbyRatingColor(submissions);
-    const colorCount = gColorSubmissions.reduce((obj, g) => {
-      const [color, submissions] = g;
-      return { ...obj, [color]: submissions.length };
-    }, {} as { [C in RatingColor]: number });
+    const colorCount = gColorSubmissions.reduce(
+      (obj, g) => {
+        const [color, submissions] = g;
+        return { ...obj, [color]: submissions.length };
+      },
+      {} as { [C in RatingColor]: number }
+    );
     return { date: dayjs(date).unix() * 1000, ...colorCount };
   });
 

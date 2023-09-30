@@ -21,7 +21,7 @@ const heatmapContents = [
   "AllACSubmissions",
   "MaxDifficulty",
 ] as const;
-export type HeatMapContent = typeof heatmapContents[number];
+export type HeatMapContent = (typeof heatmapContents)[number];
 
 const makeHeatMapData = (
   submissions: Submission[],

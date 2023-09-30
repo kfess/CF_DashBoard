@@ -25,7 +25,7 @@ export const typeSchema = z.union([
   z.literal("QUESTION"),
 ]);
 export const problemType = ["PROGRAMMING", "QUESTION"] as const;
-export type ProblemType = typeof problemType[number];
+export type ProblemType = (typeof problemType)[number];
 
 export const tagSchema = z.union([
   z.literal("implementation"),
@@ -103,7 +103,7 @@ export const tags = [
   "schedules",
   "no tags",
 ] as const;
-export type Tag = typeof tags[number];
+export type Tag = (typeof tags)[number];
 
 export const problemSchema = z.object({
   contestId: z.number().optional(),

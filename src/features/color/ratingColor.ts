@@ -14,7 +14,7 @@ export const ratingColor = [
   "Red",
   "DeepRed",
 ] as const;
-export type RatingColor = typeof ratingColor[number];
+export type RatingColor = (typeof ratingColor)[number];
 
 // for theme color (base, purple, green)
 export type ColorCode =

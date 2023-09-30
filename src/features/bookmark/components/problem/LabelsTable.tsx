@@ -37,7 +37,7 @@ const sortOrders = [
   "Fewest Problems",
 ] as const;
 
-type SortOrder = typeof sortOrders[number];
+type SortOrder = (typeof sortOrders)[number];
 
 const sortLabels = (labels: ProblemLabel[], order: SortOrder) => {
   return [...labels].sort((a, b) => {

@@ -6,7 +6,7 @@ const levelTopics = [
   "Hard-Level",
   "Typical",
 ] as const;
-type LevelTopics = typeof levelTopics[number];
+type LevelTopics = (typeof levelTopics)[number];
 
 const targetTopics = [
   "Beginner",
@@ -14,16 +14,16 @@ const targetTopics = [
   "Advanced",
   "Expert",
 ] as const;
-type TargetTopics = typeof targetTopics[number];
+type TargetTopics = (typeof targetTopics)[number];
 
 const difficultyTopics = Array.from(
   { length: 33 },
   (_, i) => 800 + i * 100
 ).map((val) => `Difficult-${val}` as const);
-type DifficultyTopics = typeof difficultyTopics[number];
+type DifficultyTopics = (typeof difficultyTopics)[number];
 
 const unknownTopics = ["Uncategorized"] as const;
-type UnknownTopics = typeof unknownTopics[number];
+type UnknownTopics = (typeof unknownTopics)[number];
 
 const tags = [
   "implementation",
@@ -63,10 +63,10 @@ const tags = [
   "schedules",
   "no tags",
 ] as const;
-export type AlgorithmTopics = typeof tags[number];
+export type AlgorithmTopics = (typeof tags)[number];
 
 const modes = ["Normal", "Training"] as const;
-type ModeTopics = typeof modes[number];
+type ModeTopics = (typeof modes)[number];
 
 const classifications = [
   "All",
@@ -81,10 +81,10 @@ const classifications = [
   "Educational",
   "Others",
 ] as const;
-type ClassificationTopics = typeof classifications[number];
+type ClassificationTopics = (typeof classifications)[number];
 
 const contestType = ["CF", "IOI", "Other"] as const;
-export type ContestType = typeof contestType[number];
+export type ContestType = (typeof contestType)[number];
 
 export type RelatedTopics =
   | LevelTopics

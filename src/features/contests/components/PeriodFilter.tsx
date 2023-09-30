@@ -13,7 +13,7 @@ const periodWords = [
   "Within 5 years",
   "Within 10 years",
 ] as const;
-export type PeriodWord = typeof periodWords[number];
+export type PeriodWord = (typeof periodWords)[number];
 
 type PeriodFilter = { [K in PeriodWord]: { from: number } };
 export const periodFilter: PeriodFilter = {

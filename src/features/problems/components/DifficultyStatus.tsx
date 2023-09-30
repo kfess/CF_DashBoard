@@ -88,7 +88,7 @@ export const DifficultyStatus: React.FC<Props> = ({ problems }) => {
                 {ratingColor.map((color) => (
                   <TableCell key={color}>
                     <Stack
-                    direction="row"
+                      direction="row"
                       sx={{
                         alignItems: "center",
                         justifyContent: "center",

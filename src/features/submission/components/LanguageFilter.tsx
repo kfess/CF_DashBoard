@@ -17,7 +17,7 @@ export const LanguageFilterButton: React.FC<Props> = (props: Props) => {
     <>
       <DropDownMenuButton
         title="Language"
-        items={(["All", ...normalizedLanguage]as const).map((lang) => {
+        items={(["All", ...normalizedLanguage] as const).map((lang) => {
           return { item: lang };
         })}
         selectedItem={language}

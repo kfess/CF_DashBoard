@@ -31,8 +31,9 @@ export const useLoggedIn = ({
   loginRedirectTo = "/",
   logoutRedirectTo = "/",
 }: UseLoginOptions = {}) => {
-  const [userProfile, setUserProfile] =
-    useRecoilState<UserProfile | null>(userProfileState);
+  const [userProfile, setUserProfile] = useRecoilState<UserProfile | null>(
+    userProfileState
+  );
   const loggedIn = userProfile !== null;
   const navigate = useNavigate();
 

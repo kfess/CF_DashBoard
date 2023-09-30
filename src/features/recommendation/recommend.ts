@@ -1,5 +1,5 @@
 export const recommendLevels = ["Easy", "Medium", "Hard"] as const;
-export type RecommendLevel = typeof recommendLevels[number];
+export type RecommendLevel = (typeof recommendLevels)[number];
 
 // Easy 60 ~ 80%, Normal 40~60%, Hard: 30~40%
 // 解ける程度の難易度の問題からランダムに選択

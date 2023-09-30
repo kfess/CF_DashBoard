@@ -9,7 +9,7 @@ const solvedStatuses = [
   "Attempting",
   "Not Solved yet",
 ] as const;
-export type SolvedStatus = typeof solvedStatuses[number];
+export type SolvedStatus = (typeof solvedStatuses)[number];
 
 type Props = {
   solvedStatus: SolvedStatus;
