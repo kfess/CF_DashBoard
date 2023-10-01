@@ -26,10 +26,12 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy to S3
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-region: "us-east-1"
           role-to-assume: "arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.AWS_IAM_ROLE_NAME }}"
+
+      - name: Deploy to S3
         run: |
           aws s3 cp --recursive --region ${AWS_DEFAULT_REGION} ./dist s3://${S3_BUCKET}
