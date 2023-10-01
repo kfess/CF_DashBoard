@@ -1,8 +1,18 @@
 {
-  "name": "cf_dashboard",
+  "name": "cf-dashboard-frontend",
   "version": "0.1.0",
   "private": true,
+  "description": "Codeforces Problems Dashboard Frontend",
   "homepage": "https://github.com/kfess/CF_DashBoard",
+  "bugs": {
+    "url": "https://github.com/kfess/CF_DashBoard/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kfess/Codeforces_Problems"
+  },
+  "license": "MIT",
+  "author": "kfess",
   "type": "module",
   "scripts": {
     "build": "tsc && vite build --mode production",
