@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcf_dashboard=self.webpackChunkcf_dashboard||[]).push([[8194],{7591:a=>{a.exports=JSON.parse('{"label":"facebook","permalink":"/cf-dashboard/blog/tags/facebook","allTagsPath":"/cf-dashboard/blog/tags","count":1}')}}]);
