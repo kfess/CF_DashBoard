@@ -1,6 +1,6 @@
 # CF-DashBoard
 
-[![CI](https://github.com/kfess/CF_DashBoard/actions/workflows/ci.yaml/badge.svg)](https://github.com/kfess/CF_DashBoard/actions/workflows/ci.yaml)
+[![CI](https://github.com/kfess/CF_DashBoard/actions/workflows/ci.yaml/badge.svg)](https://github.com/kfess/CF_DashBoard/actions/workflows/ci.yaml) [![Deploy](https://github.com/kfess/CF_DashBoard/actions/workflows/deploy.yaml/badge.svg)](https://github.com/kfess/CF_DashBoard/actions/workflows/deploy.yaml)
 
 [CF-DashBoard](https://github.com/kfess/CF_DashBoard) is a web application to help Codeforces users to solve problems and manage progress more efficiently.
 
