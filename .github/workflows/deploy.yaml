@@ -1,0 +1,35 @@
+name: Deploy to S3
+
+on:
+  push:
+    branches: [main]
+
+env:
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+  AWS_IAM_ROLE_NAME: ${{ secrets.AWS_IAM_ROLE_NAME }}
+  AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}}
+  S3_BUCKET: ${{ secrets.S3_BUCKET }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to S3
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: "us-east-1"
+          role-to-assume: "arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.AWS_IAM_ROLE_NAME }}"
+        run: |
+          aws s3 cp --recursive --region ${AWS_DEFAULT_REGION} ./dist s3://${S3_BUCKET}
