@@ -5,7 +5,7 @@ export const userProfileSchema = z.object({
   githubUsername: z.string(),
   codeforcesUsername: z.string().optional(),
   isLoggedIn: z.boolean(),
-  expirationTimeStamp: z.number(),
+  expirationTimeStamp: z.number().optional(),
 });
 
 export type UserProfile = z.infer<typeof userProfileSchema>;
