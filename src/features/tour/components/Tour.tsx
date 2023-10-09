@@ -5,6 +5,7 @@ import {
   ShepherdTourContext,
   ShepherdOptionsWithType,
 } from "react-shepherd";
+import { useLocation } from "react-router-dom";
 import { useLocalStorage } from "@hooks/useLocalStorage";
 
 const tourOptions = {
@@ -27,7 +28,7 @@ const tourSteps: ShepherdOptionsWithType[] = [
     },
     buttons: [
       {
-        classes: "shepherd-button-secondary",
+        classes: "shepherd-button-primary",
         text: "OK",
         type: "cancel",
       },
@@ -40,9 +41,10 @@ const tourSteps: ShepherdOptionsWithType[] = [
 const TourInstance = () => {
   const tour = useContext(ShepherdTourContext);
   const [isFirstVisit, setIsFirstVisit] = useLocalStorage("isFirstVisit", true);
+  const pathname = useLocation().pathname;
 
   useEffect(() => {
-    if (tour && isFirstVisit) {
+    if (tour && isFirstVisit && pathname === "/") {
       setTimeout(() => {
         tour.start();
         setIsFirstVisit(false);
