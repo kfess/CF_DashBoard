@@ -5,7 +5,8 @@ import type { UserProfile } from "@features/authentication/userProfile";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { INTERNAL_API_BASE_URL } from "@constants/url";
 
-const AUTHENTICATE_URL = `${INTERNAL_API_BASE_URL}/api/users/exchange`;
+const AUTHENTICATE_URL = `${INTERNAL_API_BASE_URL}/api/users/exchange-no-create`;
+const ADD_USER_URL = `${INTERNAL_API_BASE_URL}/api/users/login`;
 
 const exchangeCodeForSession = async ({
   code,
@@ -28,10 +29,21 @@ const exchangeCodeForSession = async ({
       { code },
       { withCredentials: true }
     );
+    if (response.status !== 200) {
+      throw new Error("Failed to exchange code for session");
+    }
+
+    // add the user to DB if they don't exist yet
+    const addUserResponse = await axios.get(ADD_USER_URL, {
+      withCredentials: true,
+    });
+    if (addUserResponse.status !== 200) {
+      throw new Error("Failed to add user to DB");
+    }
 
     return response.data;
   } catch (error) {
-    throw new Error("Failed to exchange code for session");
+    throw new Error("Failed to login");
   }
 };
 
