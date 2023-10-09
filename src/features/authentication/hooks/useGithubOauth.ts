@@ -5,7 +5,7 @@ import type { UserProfile } from "@features/authentication/userProfile";
 import { useLoggedIn } from "@features/authentication/hooks/useLoggedIn";
 import { INTERNAL_API_BASE_URL } from "@constants/url";
 
-const AUTHENTICATE_URL = `${INTERNAL_API_BASE_URL}/api/users/exchange-no-create`;
+const AUTHENTICATE_URL = `${INTERNAL_API_BASE_URL}/api/users/exchange`;
 const ADD_USER_URL = `${INTERNAL_API_BASE_URL}/api/users/login`;
 
 const exchangeCodeForSession = async ({
