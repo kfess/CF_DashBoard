@@ -7,6 +7,7 @@ import { HeaderBar } from "@features/layout/components/HeaderBar";
 import { SideNavigationBar } from "@features/layout/components/SideNavigationBar";
 import { pageMetaInfoMap } from "@helpers/pageMetaInfoMap";
 import { Footer } from "@features/layout/components/Footer";
+import { Tour } from "@features/tour/components/Tour";
 import { useToggle } from "@hooks/useToggle";
 
 export const LayoutPage: React.FC = () => {
@@ -31,6 +32,7 @@ export const LayoutPage: React.FC = () => {
         toggleSideBar={toggleSideBar}
         setSelectedItem={setSelectedItem}
       />
+      <Tour />
       {isOpenSideBar && (
         <SideNavigationBar
           isOpenSideBar={isOpenSideBar}

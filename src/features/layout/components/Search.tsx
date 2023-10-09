@@ -54,6 +54,7 @@ export const SearchBar: React.FC<Props> = ({ visible }) => {
           placeholder="Search User ID"
           value={searchUserId}
           onChange={onChange}
+          className="username-search-bar"
         />
       </form>
       <Snackbar
