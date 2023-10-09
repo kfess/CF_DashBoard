@@ -23,7 +23,7 @@ export const useLoggedIn = ({
   useEffect(() => {
     if (userProfile) {
       const now = dayjs().unix();
-      if (now > userProfile.expirationTimeStamp) {
+      if (now > (userProfile.expirationTimeStamp as number)) {
         setUserProfile(null);
       }
     }
@@ -31,7 +31,7 @@ export const useLoggedIn = ({
 
   const login = (info: UserProfile) => {
     const now = dayjs().unix();
-    if (now > info.expirationTimeStamp) {
+    if (now > (info.expirationTimeStamp as number)) {
       logout();
       return;
     }
