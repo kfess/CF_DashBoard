@@ -13,9 +13,7 @@ const addContest = async (
     const response = await axios.post(
       `${INTERNAL_API_BASE_URL}/api/custom-contests`,
       contest,
-      {
-        withCredentials: true,
-      }
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
