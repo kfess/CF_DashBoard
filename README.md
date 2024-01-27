@@ -23,4 +23,4 @@ Please note that unanticipated changes may occur without prior notice because th
 
 ## Contribution
 
-Any contribution is welcome.
+Any contribution is welcome. Please let me know if you have any questions or suggestions.
